@@ -1,0 +1,185 @@
+@charset "UTF-8";
+
+.mypageBox  {
+	background-color: white;
+	border: 1px solid #e0e0e0;
+	padding:50px;
+}
+
+#mypageDashBoard {
+	margin: 20px;	
+}
+
+#mypageContainer{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+#mypageSideMenu {
+	width: 150px;
+	margin: 0px 5px 5px 5px;
+}
+
+#menu {
+	
+	padding-top: 15px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #f0f0f0;	/*소매뉴 구분선*/
+}
+
+#none {
+	margin: 0px 20px 20px 0px;
+	flex: 1;
+	width: auto;
+	height: auto;
+}
+
+/*-------------------------------------------------*/
+
+#pageTitle{
+	margin-bottom: 20px;
+}
+
+.reservation_confirm_container {
+    align-items: center;
+}
+
+.reservation_confirm_term {
+	display: flex;
+    padding: 25px 48px;
+    margin-bottom: 25px;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+}
+
+#reservation_confirm_term_right {
+	flex: 1;
+	margin: auto;
+	
+    display: flex;
+    justify-content: flex-end;
+}
+
+#period {
+	margin: 0;
+	text-align: center;
+}
+
+.reservation_confirm_term input[type="button"] {
+	padding: 11px 20px;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #e0e0e0;
+    border-left: none;
+    background-color: #fff;
+}
+
+/*-------------------------------------------------*/
+
+.mypageContents { 
+ 		width: 70%; 
+        float: right; 
+ 		position: relative; 
+ 		margin-left: 100px; /**/
+ 	}
+
+#tr_top th {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/*--찜, 장바구니 -*/
+.item { 
+     margin-right: 30px;  
+ } 
+
+/* 화면 가로 길이가 768px 이하일 때 적용되는 스타일 */
+@media (max-width: 768px) {
+    th {
+        padding: 5px; /* 간격을 5px로 줄임 */
+    }
+    .item {
+        margin: 10px; /* 간격을 줄인다 */
+    }
+}
+
+/*마이페이지 공통 css*/
+#main_layout{ 
+	padding-top: 40px;  
+	width: 70%;  
+  	margin: auto; /* 중앙 정렬 */ 
+}  
+
+#mypage_side_menu li { 
+	margin-bottom: 10px;   
+}  
+
+#mypage_dashboard_info {
+	display: flex;  /* flexbox 레이아웃 사용 */
+    justify-content: space-between;
+}
+
+#col-1, #col-2 {
+	flex: 1;  /* 각 열이 동일한 너비를 가지게 함 */
+}
+
+#col-1 {
+	padding-left: 30px; 
+}
+
+#col-2 ul {
+    list-style-type: none;  /* 기본 목록 스타일 제거 */
+    padding: 0;  /* 기본 패딩 제거 */
+    display: flex;  /* ul 내부의 li 태그들을 가로로 배열 */
+    gap: 150px;  /* li 태그들 사이의 간격 조절 */
+}
+em {
+	font-weight: bold;  /* 볼드체로 텍스트 스타일링 */
+}
+
+div > hr{
+	margin: 20px;
+	border-width: 2px;
+	border-style: solid; 
+	border-color: #000;
+}
+.container {
+    display: flex;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 10px; /* 각 항목의 마진 */
+    font-size: 13px;
+    cursor: pointer;
+}
+.text {
+	text-align: center;
+}
+
+.passwd{
+	width: 456px;
+	height: 40px;
+	margin: 30px;
+	font-size: 20px;
+}
+.submit{
+	color: #fff;
+	background: #131922;
+	height: 48px;
+    font-size: 14px;
+    flex: initial;
+    width: 456px;
+    cursor: pointer;
+}
+
+/*****달력****/
+.calendar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+}
