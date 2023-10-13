@@ -22,9 +22,9 @@ table {
 	crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<jsp:include page="inc/admin_laout_top.jsp"></jsp:include>
+<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>
 	<div id="layoutSidenav">
-		<jsp:include page="inc/admin_laout_bottom.jsp"></jsp:include>
+		<jsp:include page="../inc/admin_laout_bottom.jsp"></jsp:include>
 			<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4 ">

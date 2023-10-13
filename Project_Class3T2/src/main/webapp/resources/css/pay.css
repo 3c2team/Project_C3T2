@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+/*body.backbody{*/
+/*	font-size: 13pt;*/
+/*	min-width: 1480;*/
+/*	width: 100%;*/
+/*	padding: 50px 0;*/
+/*	margin: 0 auto;*/
+/*}*/
+
+div#backbody{
+	background-color: #f5f5f0;
+	font-size: 13pt;
+	min-width: 1480;
+	width: 100%;
+	padding: 50px 0;
+}
+
+#frame{
+	width: 80%;
+	margin: 0 auto;
+	padding: 50px;
+	background-color: #fff;
+	border-bottom: solid 1px #e0e0eb;
+	padding-bottom: 20px 0;
+}
+
+#frame2{
+	border-bottom: solid 1px #e0e0eb;
+	padding-bottom: 20px 0;
+}
+
+.home{
+	float: right;
+/*	clear: both;*/
+}
+
+table.calculation1{
+	clear: both;
+	border: solid 1px #e0e0eb;
+	border-collapse: collapse;
+	background-color: #f5f5f0;
+	width: 100%;
+	font-size: 10pt;
+}
+
+table.calculation1 th{
+	border: solid 1px #e0e0eb;
+	padding: 10px 0;
+	text-align: center;
+}
+
+table.calculation1 td{
+	border : solid 1px #e0e0eb;
+	text-align: center;
+}
+
+table.calculation2{
+	border: solid 1px #e0e0eb;
+	border-collapse: collapse;
+	background-color: #f5f5f0;
+	width: 100%;
+/*	font-size: 10pt;*/
+}
+
+table.calculation2 th{
+	border: solid 1px #e0e0eb;
+	text-align: center;
+}
+
+table.calculation2 td{
+	border: solid 1px #e0e0eb;
+	text-align: center;
+}
+
+.price{
+/*	border: solid 1px #e0e0eb;*/
+	text-align: center;
+}
+
+.lifont{
+	font-size: 20pt;
+	color: gray;
+}
+
+.delivery{
+	border: solid 1px gray;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 12pt;
+}
+
+table.delivery th, td {
+	border: solid 1px #e0e0eb;
+	padding: 12px 10px;
+}
+
+.deliverytd{
+	font-size: 12pt;
+	background-color: #f5f5f0;
+}
+
+/* 결제 카드 */
+
+.payArea{
+	height: 218px;
+	position: relative;
+	padding: 0 245px 0 0;
+	border: 1px solid #777;
+	color: #353535;
+	line-height: 1.5;
+}
+
+.payment{
+	border: solid 1px gray;
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.total{
+	float: right;
+	width: 240px;
+	margin: 0 -240px 0 0;
+	text-align: right;
+	background: #fbfafa;
+	font-size: 11pt;
+}
+
+/*------------------------*/
+
+.btn{
+	border:none;
+	color: white;
+	padding: 5px 10px;
+	font-size: 13px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.default{
+	background-color: #264d73;
+	border: solid 1px gray;
+	color: #fff;
+}
+
+.default:hover{
+	background: #fff;
+	border: solid 1px gray;
+}
+
+.btnfloat{
+	float: left;
+}
+
+.btnfloat2{
+	float: right;
+}
+
+.clearboth{
+	clear: both;
+}
+
+
+
