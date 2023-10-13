@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품결제</title>
-<script src="${pageContext.request.contextPath }/js/pay.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
 
 </head>
 
@@ -54,7 +54,7 @@
 	<!-- 					<td style="text-align: left; text-align: center; border-right: none;"> -->
 	<!-- 						<input type="checkbox" name="checkbox"> -->
 	<!-- 					</td> -->
-						<td style="border-left: none; border-right: none;"><img style="width: 60%" src="./online_img/steak2.jpg"></td>
+						<td style="border-left: none; border-right: none;"><img style="width: 60%" src="resources/online_img/steak2.jpg"></td>
 						<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold; width: 40%">짱짱맛 스테이크</td>
 						<td><span style="padding-left: 10px;">0</span>원</td> <!-- 상품가격 -->
 						<td style="width: 80px;">
@@ -80,7 +80,7 @@
 				</table>
 				
 				<div style="border: solid 1px #e0e0eb; border-right: none; border-left: none; padding: 11 px 0; background-color: #fff;">
-					<img src="./img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
+					<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
 					<span style="font-size: 10pt; color: red">상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</span>
 				</div>
 				
@@ -189,9 +189,9 @@
 					</div>
 					
 					<div align="left">
-						<img src="./img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
+						<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
 						<span style="font-size: 10pt; color: gray;">최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.</span><br>
-						<img src="./img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
+						<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
 						<span style="font-size: 10pt; color: gray;">소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</span><br>
 					</div>
 				</div>
