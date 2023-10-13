@@ -1,0 +1,141 @@
+
+@charset "UTF-8";
+
+body
+{
+	font-family: 'Noto Serif KR', serif;
+	text-decoration: none;	 /*하이퍼링크 밑줄 제거 */
+	color: #464646;
+	background-color: rgb(255, 255, 255);
+}
+
+div.left 
+ {
+        width: 50%;
+        height: 600px;
+        float: left;
+        box-sizing: border-box;
+     
+}
+div.right 
+ {
+        width: 50%;
+        height: 600px;
+        float: right;
+        box-sizing: border-box;
+        padding-left: 4em;
+ }
+
+  
+input.indent
+ {
+ 	margin-left: 3em;	
+ 	width: 76%;
+	color: rgb(38, 50, 56);
+	font-weight: 700;
+	font-size: 14px;
+ 	letter-spacing: 1px; 
+	background: rgb(255, 255, 255);
+	padding: 10px 15px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	box-sizing: border-box;
+	border: 2px solid rgba(0, 0, 0, 0.02);
+	margin-bottom: 50px;
+	margin-left: 1px;
+/*	text-align: center;*/
+	margin-bottom: 27px;
+	font-family: 'Noto Serif KR', serif;
+ }
+
+ 
+textarea.center 
+{
+	margin-left: 25em;	
+	
+}
+
+
+/*div.center*/
+/* {*/
+/* 	text-align: left;*/
+/* }*/
+ 
+ div.mainLayout
+ {
+ 	text-align: center;
+ 	height: 700px;
+ }
+ 
+ p {
+	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+	color: rgb(184, 197, 201);
+	text-decoration: none;
+}
+.submit {
+	cursor: pointer;
+	border-radius: 5em;
+	color: #fff;
+	background: linear-gradient(to right, rgb(128, 128, 128), rgb(128, 128, 128));
+	border: 0;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Noto Serif KR', serif;
+	margin-left: 20%;
+	margin-right: 20%;
+	font-size: 13px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+table.resConfirm{
+	font-size: 13;
+	font-family: 'Noto Serif KR', serif;
+}
+
+h3{
+	font-family: 'Noto Serif KR', serif;
+	font-size: 14px;
+	
+}
+
+table {
+	font-size: 12pt;
+}
+
+.button
+{
+	border-radius: 95%;
+	background-color: rgb(128, 128, 128);
+ 	border: none;
+  	color: white;
+  	padding: 10px 25px;
+  	text-align: center;
+  	font-size: 15px;
+  	margin: 3px 1px;
+/*  opacity: 0.1;*/
+  	transition: 0.3s;
+  	display: inline-block;
+  	text-decoration: none;
+  	cursor: pointer;
+}
+
+.button1
+{
+	border-radius: 95%;
+	background-color: rgb(128, 128, 128);
+ 	border: none;
+  	color: white;
+  	padding: 10px 25px;
+  	text-align: center;
+  	font-size: 15px;
+  	margin: 3px 1px;
+/*  opacity: 0.1;*/
+  	transition: 0.3s;
+  	display: inline-block;
+  	text-decoration: none;
+  	cursor: pointer;
+}
+
