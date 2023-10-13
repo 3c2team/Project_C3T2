@@ -1,0 +1,167 @@
+.slideBox{
+    margin : 0;
+    padding : 0;
+    height : 550px;
+    display : flex; /* 자식 요소 정렬 */
+    justify-content : center; /* 주변의 공간 정렬 */
+    align-center : center; /* 자식 요소 교차축의 중앙에 정렬 */
+    background : white;
+}
+
+.slider{
+    width: 90%;
+    height: 550px;
+    overflow : hidden; /* 넘치는 부분을 자르고 보이지 않게 숨김 */
+}
+
+.slides{
+    width : 500%;
+    height : 550px;
+    display : flex;
+}
+
+.slides input{
+    display : none; /* 화면에 보이지 않게 숨김 */
+}
+
+.slide{
+    width : 20%;
+    transition: 2s; /* 애니메이션 속도 조절 */
+    
+}
+
+.slide img{
+    width : 100%;
+    height : 550px;
+}
+
+.navigationManual{
+    position : absolute; /* 다른 요소와 상호작용 X, 독립 */
+    width : 90%;
+    margin-top: -40px; /* top쪽으로 음수값만큼 이동 */
+    display : flex;
+    justify-content : center;
+}
+
+.manualBtn{
+    border: 1px solid white;
+    padding : 5px;
+    border-radius : 50px; /* 테두리 둥글게 */
+    cursor : pointer; /* 마우스 커서 모양 변경 */
+    transition : 1s;
+}
+
+.manualBtn:not(:last-child){
+    margin-right: 20px;
+}
+
+.manualBtn:hover{
+    background: white;
+}
+
+#radio1:checked ~ .first{
+    margin-left: 0;
+}
+#radio2:checked ~ .first{
+    margin-left: -20%;
+}
+#radio3:checked ~ .first{
+    margin-left: -40%;
+}
+#radio4:checked ~ .first{
+    margin-left: -60%;
+}
+
+.navigationAuto{
+    position : absolute;
+    display : flex;
+    width : 90%;
+    justify-content : center;
+    margin-top : 510px;
+}
+
+.navigationAuto div{
+    border : 1px solid white;
+    padding : 5px;
+    border-radius : 50px;
+    transition : 1s;
+}
+
+.navigationAuto div:not(:last-child){
+    margin-right: 20px;
+}
+
+#radio1:checked ~ .navigationAuto .autoBtn1{
+    background: white;
+}
+
+#radio2:checked ~ .navigationAuto .autoBtn2{
+    background: white;
+}
+
+#radio3:checked ~ .navigationAuto .autoBtn3{
+    background: white;
+}
+
+#radio4:checked ~ .navigationAuto .autoBtn4{
+    background: white;
+}
+
+/*--------------*/
+.container{
+  display:block;
+  width:100%;
+  margin:10px 0 10px 0;
+  overflow: hidden;
+  height:auto;
+}
+
+.links{
+	list-style-type: none;
+	margin: 20px 0 20px 100px;
+}
+
+.links li {
+	display: inline-block; /* inline + block */
+	/* inline : 요소끼리 한줄에 위치 */
+	/* block : 바로 옆에 다른 요소 X */
+	/* 즉, 한줄에 배치되지만 크기와 상하 간격 지정 가능 */
+	margin: 0 20px 0 0;
+	transition: .2s linear; /* 일정하게 유지 */
+}
+
+/*.links li:nth-child(2) {*/
+/*	opacity: .6;  불투명도 */
+/*}*/
+
+/*.links li:nth-child(2):hover {*/
+/*	opacity: 1;*/
+/*}*/
+
+/*.links li:nth-child(3) {*/
+/*	opacity: .6;*/
+/*	float: right;*/
+/*}*/
+
+/*.links li:nth-child(3):hover {*/
+/*	opacity: 1;*/
+/*}*/
+
+.links li a {
+	text-decoration:none;
+    color:#0f132a;
+    font-weight:bolder;
+    text-align:center;
+    cursor : pointer;
+}
+
+p {
+	width: 250px;
+	height: 100px;
+	overflow : hidden;
+}
+
+.notice li {
+	float: left;
+	margin-right: 30px;
+}
