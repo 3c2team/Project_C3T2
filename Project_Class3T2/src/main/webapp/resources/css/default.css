@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Noto+Serif+KR:wght@200&family=Sacramento&display=swap');
+/*
+font-family: 'Nanum Myeongjo', serif;
+font-family: 'Noto Serif KR', serif;
+font-family: 'Sacramento', cursive;
+*/
+*{
+	font-family: 'Noto Serif KR', serif;
+	text-decoration: none;	 /*하이퍼링크 밑줄 제거*/ 
+	color: #464646;
+}
+b{
+	font-weight: bold;
+	color: black;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mainLayout img {
+        max-width: 100%;
+        height: auto;
+}
+
+.mainLayout {
+    width: 1400px;
+    margin: 0 auto;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    overflow: visible;
+}
+
+.logo {
+	font-family: 'Sacramento', cursive;
+	font-size: 50px;	
+	font-style: normal;
+	color: .464646;
+}
+
+.footer {
+    background-color: #f8f8f8;
+    font-size: 0;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
