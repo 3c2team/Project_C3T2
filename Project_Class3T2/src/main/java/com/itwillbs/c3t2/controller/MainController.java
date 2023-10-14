@@ -8,6 +8,11 @@ public class MainController {
 
 	// 메인페이지 접속 컨트롤러
 	
+		@GetMapping("main")
+		public String main() {
+			return "other/main";
+		}
+	
 		@GetMapping("about")
 		public String about() {
 			return "other/about";

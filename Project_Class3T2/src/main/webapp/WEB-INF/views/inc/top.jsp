@@ -9,7 +9,7 @@
 <!-- 	<a href="">Logout</a> -->
 </div>
 <div class="logoArea">
-	<a class="logo" href="#main">J'ai Faim</a>
+	<a class="logo" href="main">J'ai Faim</a>
 </div>
 <div class="mainMenuArea">
 	<ul>
