@@ -5,30 +5,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/mypage.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
 </head>
+<body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 </header>	
-<body>
+	<main>
 	<div id="main_layout">
-		<div class="mypageBox" id="mypageDashBoard">
+		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
-				<span id="col-1">
+				<span id="col_1">
 					<span>
 						<jsp:include page="../inc/mypage_col_1.jsp" />
 					</span>	
 				</span>
-				<span id="col-2">
+				<span id="col_2">
 					<ul>
 						<jsp:include page="../inc/mypage_col_2.jsp" />
 					</ul>
 				</span>
 			</span>
 		</div>
-		<div id="mypageContainer">
-			<div class="mypageBox" id="mypageSideMenu">
+		<div id="mypage_container">
+			<div class="mypageBox" id="mypage_sideMenu">
 				<nav class="menu">
 					<jsp:include page="../inc/mypage_box.jsp" />
 				</nav>
@@ -49,9 +50,10 @@
 		}
 		</script>
 		</div>
-		</div>
-</body>
+	</div>
+	</main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 </footer>
+</body>
 </html>

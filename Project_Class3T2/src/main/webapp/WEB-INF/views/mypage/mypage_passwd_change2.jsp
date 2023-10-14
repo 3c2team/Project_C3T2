@@ -11,31 +11,31 @@
 	    margin-bottom: 10px;  /* 아래쪽 간격 추가 */
 	}
 </style>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/mypage.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
 </head>
+<body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
-</header>	
-<body>
+</header>
+	<main>	
 	<div id="main_layout">
-		<div class="mypageBox" id="mypageDashBoard">
+		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
-				<span id="col-1">
+				<span id="col_1">
 					<span>
 						<jsp:include page="../inc/mypage_col_1.jsp" />
 					</span>	
 				</span>
-				<span id="col-2">
+				<span id="col_2">
 					<ul>
 						<jsp:include page="../inc/mypage_col_2.jsp" />
 					</ul>
 				</span>
 			</span>
 		</div>
-<!-- 		<div id="mypageContainer"> -->
-			<div id="mypageContainer">
-			<div class="mypageBox" id="mypageSideMenu">
+		<div id="mypage_container">
+			<div class="mypageBox" id="mypage_sideMenu">
 				<nav class="menu">
 					<jsp:include page="../inc/mypage_box.jsp" />
 				</nav>
@@ -52,16 +52,17 @@
 				<br><input type="button" value="제출" class="submit" id="확인" onclick="out2()">
 			</div>
 		</div>
-		<script type="text/javascript">
-		function out2() {
-			alert("비밀번호 변경이 정상처리 되었습니다.")
-			window.location.href="mypage_dashboard.jsp"
-		}
-		</script>
+			<script type="text/javascript">
+			function out2() {
+				alert("비밀번호 변경이 정상처리 되었습니다.")
+				window.location.href="mypage_dashboard.jsp"
+			}
+			</script>
 		</div>
 	</div>
-</body>
+	</main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 </footer>
+</body>
 </html>

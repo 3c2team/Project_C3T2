@@ -5,80 +5,81 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/mypage.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
 </head>
+<body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
-</header>	
-<body>
+</header>
+	<main>	
 	<div id="main_layout">
-		<div class="mypageBox" id="mypageDashBoard">
+		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
-				<span id="col-1">
+				<span id="col_1">
 					<span>
 						<jsp:include page="../inc/mypage_col_1.jsp" />
 					</span>	
 				</span>
-				<span id="col-2">
+				<span id="col_2">
 					<ul>
 						<jsp:include page="../inc/mypage_col_2.jsp" />
 					</ul>
 				</span>
 			</span>
 		</div>
-		<div id="mypageContainer">
-			<div id="mypageContainer">
-				<div class="mypageBox" id="mypageSideMenu">
-					<nav class="menu">
-						<jsp:include page="../inc/mypage_box.jsp" />
-					</nav>
+		<div id="mypage_container">
+			<div class="mypageBox" id="mypage_sideMenu">
+				<nav class="menu">
+					<jsp:include page="../inc/mypage_box.jsp" />
+				</nav>
+			</div>
+			<div class ="mypageContents">
+				<div align="center">
+				<br><br>
+				<h1>상품 리뷰</h1><br>
 				</div>
-				<div class ="mypageContents">
-					<div align="center">
-					<br><br>
-					<h1>상품 리뷰</h1><br>
+				<h2>기간 조회</h2>
+				<div class="reservationConfirmContainer">
+				<div class="reservationConfirmTerm">
+					<div class="calendarContainer">
+					      <button onclick="setToday()">오늘</button>
+					      <button onclick="setMonths(-1)">1개월</button>
+					      <button onclick="setMonths(-3)">3개월</button>
+					      <button onclick="setMonths(-6)">6개월</button>
 					</div>
-					<h2>기간 조회</h2>
-					<div class="reservation_confirm_container">
-						<div class="reservation_confirm_term">
-							<div class="calendar-container">
-							      <button onclick="setToday()">오늘</button>
-							      <button onclick="setMonths(-1)">1개월</button>
-							      <button onclick="setMonths(-3)">3개월</button>
-							      <button onclick="setMonths(-6)">6개월</button>
-							</div>
-	    					<script src="script.js"></script>
-							<div id="reservation_confirm_term_right">
-								<div class="calander_wrap">
-									<input type="date" id="startDate">
-							         -  
-							        <input type="date" id="endDate"> 
-							        <button id="searchBtn">조회</button>
-								</div>
-							</div>
+   					<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
+					<div id="reservation_confirm_term_right">
+						<div class="calanderWrap">
+							<input type="date" id="startDate">
+					         -  
+					        <input type="date" id="endDate"> 
+					        <button id="search_btn">조회</button>
 						</div>
-						<br><br>
-						<article>
-							<section id="listForm">
-								<table>
-									<tr id="tr_top">
-										<th width="160px">order_num</th> <!-- 적립 or 소멸 -->
-										<th width="200">review_ref</th>
-										<th width="300px">review_title</th> <!-- 개별 유효기간 등 -->
-										<th width="150px">review_date</th>
-									</tr>
-								</table>
-							</section>
-						</article>
 					</div>
-					<br><br>
 				</div>
+				<br><br>
+				<article>
+					<section id="list_Form">
+						<table>
+							<tr id="tr_top">
+								<th width="120px">주문번호</th> <!-- 적립 or 소멸 -->
+								<th width="400px">상품명</th>
+								<th width="130px">수량</th> <!-- 개별 유효기간 등 -->
+								<th width="130px">결제상태</th>
+								<th width="130px">주문상태</th>
+							</tr>
+						</table>
+					</section>
+				</article>
+				</div>
+				<br><br>
 			</div>
 		</div>
 	</div>
-</body>
+	</main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 </footer>
+</body>
 </html>

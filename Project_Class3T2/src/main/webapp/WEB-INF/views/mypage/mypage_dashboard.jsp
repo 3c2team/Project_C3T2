@@ -5,23 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/mypage.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
 </head>
+<body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 </header>	
-<body>
+	<main>
 	<div id="main_layout">
-		<div class="mypageBox" id="mypageDashBoard">
+		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
-				<span id="col-1">
+				<span id="col_1">
 					<span>
 						<a>WELCOME</a><br>
 						<a><b>신혜리님</b></a>
 					</span>	
 				</span>
-				<span id="col-2">
+				<span id="col_2">
 					<ul>
 						<li>
 							<span>회원 등급</span><br>
@@ -39,8 +40,8 @@
 				</span>
 			</span>
 		</div>
-		<div id="mypageContainer">
-			<div class="mypageBox" id="mypageSideMenu">
+		<div id="mypage_container">
+			<div class="mypageBox" id="mypage_sideMenu">
 				<nav class="menu">
 					<div id="menu">
 						<ul>
@@ -95,8 +96,9 @@
 			</div>
 		</div>
 	</div>
-</body>
+	</main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 </footer>
+</body>
 </html>
