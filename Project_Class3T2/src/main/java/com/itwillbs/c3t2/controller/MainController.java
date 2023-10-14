@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-	// 메인페이지 접속 컨트롤러
+	// 硫붿씤�럹�씠吏� �젒�냽 而⑦듃濡ㅻ윭
 	
 		@GetMapping("main")
 		public String main() {
@@ -52,4 +52,21 @@ public class MainController {
 		public String join() {
 			return "other/join";
 		}
+		
+		//storeMapping
+		@GetMapping("store_best")
+		public String best() {
+			return "store/store_best";
+		}
+		
+		@GetMapping("store_new")
+		public String storeNew() {
+			return "store/store_new";
+		}
+		
+		@GetMapping("store_kit")
+		public String mealKit() {
+			return "store/store_kit";
+		}
+		
 }

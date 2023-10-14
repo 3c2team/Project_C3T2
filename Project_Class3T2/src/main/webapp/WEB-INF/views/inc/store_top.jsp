@@ -3,18 +3,18 @@
 
 <div class="mainLayout">
 	<div class="accountArea">
-		<a href="">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="">Join</a>
+		<a href="login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="join">Join</a>
 	</div>
 	<div class="logoArea">
-		<a class="logo" href="#main">J'ai Faim</a>
+		<a class="logo" href="main">J'ai Faim</a>
 	</div>
 	<div class="mainMenuArea">
 		<div class="mainMenuAreaLeft">
-			<div class="item"><a href="#online_store">ONLINE STORE</a></div>
-			<div class="item"><a href="#best">BEST</a></div>
-			<div class="item"><a href="#new">NEW</a></div>
-			<div class="item"><a href="#meal_kit">MEAL KIT</a></div>
+			<div class="item"><a href="onlineStore">ONLINE STORE</a></div>
+			<div class="item"><a href="store_best">BEST</a></div>
+			<div class="item"><a href="store_new">NEW</a></div>
+			<div class="item"><a href="store_kit">MEAL KIT</a></div>
 <!-- 				<div class="mealKitSubmenu"> -->
 <!-- 					<div class="mealKitItem"><a>All</a></div> -->
 <!-- 					<div class="mealKitItem"><a>Steak</a></div> -->
@@ -24,7 +24,7 @@
 <!-- 				</div> -->
 		</div>
 		<div class="mainMenuAreaRight">
-			<a class="offlineReservation" href="#offline_reservation">&nbsp;&nbsp;OFFLINE RESERVATION&nbsp;&nbsp;</a>
+			<a class="offlineReservation" href="reservation">&nbsp;&nbsp;OFFLINE RESERVATION&nbsp;&nbsp;</a>
 		</div>
 	</div>
 </div>
