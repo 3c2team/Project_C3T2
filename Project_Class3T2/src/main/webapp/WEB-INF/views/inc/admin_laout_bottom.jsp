@@ -67,10 +67,8 @@
 						</a>
 						<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="reviewDelete.jsp">리뷰삭제</a> <a
-									class="nav-link" href="404.html">답글</a> <a class="nav-link"
-									href="qna.jsp">문의사항
-								</a>
+								<a class="nav-link" href="reviewDelete.jsp">리뷰삭제</a>
+								<a class="nav-link" href="qna.jsp">문의사항</a>
 							</nav>
 						</div>
 					</nav>
@@ -79,7 +77,7 @@
 				<a class="nav-link" href="memberOutReason.jsp">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-chart-area"></i>
-					</div> 회원탈퇴사유
+					</div> 회원관리
 				</a> 
 				<a class="nav-link" href="reservation.jsp">
 					<div class="sb-nav-link-icon">
