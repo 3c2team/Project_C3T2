@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "store/store_best";
+		return "other/main";
 	}
 	
 }

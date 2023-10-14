@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/slide.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
-<script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/js/main.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 <style>
 img {
 	 -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 2% 98%, transparent 100%);
@@ -32,18 +32,18 @@ img {
                         <input type="radio" name="radio-btn" id="radio4">
                         
                         <div class="slide first">
-                            <img src="./img/main_1.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/img/main_1.jpg" alt="" style="height: 550px;">
                         </div>
                         <div class="slide">
-                            <img src="./img/main_1.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/img/main_1.jpg" alt="" style="height: 550px;">
                         </div>
                         
                         <div class="slide">
-                            <img src="./img/news_3.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/img/news_3.jpg" alt="" style="height: 550px;">
                         </div>
                         
                         <div class="slide">      
-                            <img src="./img/news_4.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/img/news_4.jpg" alt="" style="height: 550px;">
                         </div>
           
                         <div class="navigationAuto" style="margin-top : 510px;">
