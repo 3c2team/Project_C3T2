@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Dashboard - SB Admin</title>
+<title>연간매출</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
@@ -35,7 +35,7 @@
 									연간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="./"></a>
+									<a class="small text-white stretched-link" href="adminSalesYear"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -48,7 +48,7 @@
 									월간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_month.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesMonth"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -61,7 +61,7 @@
 									일별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_day.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesDay"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -74,7 +74,7 @@
 									상품별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_product.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesProduct"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -111,7 +111,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath }/resources/demo/admin_scripts.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 	crossorigin="anonymous"></script>

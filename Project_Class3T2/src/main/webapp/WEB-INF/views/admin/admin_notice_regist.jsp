@@ -41,7 +41,8 @@
 				<label class="col-sm-2">이미지파일</label>
 				
 				<div>
-					<input type="file" class="form-control"><button onclick="">+</button>
+					<div id="button_add_result"></div>
+					<input type="file" class="form-control">
 				</div>
 			</div>
 				

@@ -19,6 +19,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+
 </head>
 <body class="sb-nav-fixed">
 	<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>
@@ -52,7 +53,7 @@
 								<tr>
 									<th><input type="checkbox" class="custom-control-input"></th>
 									<th>1</th>
-									<th>스테이크<span><button class="btn btn-light btn-right">수정</button></span></th>
+									<th>스테이크<span><button id="button_open_update"class="btn btn-light btn-right">수정</button></span></th>
 									<th>맛잇음</th>
 									<th>1000000</th>
 									<th>1000000</th>
@@ -61,12 +62,14 @@
 							</tbody>
 						</table>
 						<button class="btn btn-primary">삭제</button>
-						<button class="btn btn-primary" onclick="window.open('productCorrectionDetail.jsp','', 'width=200', 'height=4100')">등록</button>
+						<button class="btn btn-primary" id="button_open">등록</button>
 					</div>
 				</div>
 			</main>
 		</div>
 	</div>
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/admin_product.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

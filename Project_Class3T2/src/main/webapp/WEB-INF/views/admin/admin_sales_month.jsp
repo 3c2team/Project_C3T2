@@ -9,7 +9,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Dashboard - SB Admin</title>
+<title>월별 매출</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
@@ -39,7 +39,7 @@
 									연간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="./"></a>
+									<a class="small text-white stretched-link" href="adminSalesYear"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -52,7 +52,7 @@
 									월간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_month.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesMonth"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -65,7 +65,7 @@
 									일별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_day.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesDay"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -78,7 +78,7 @@
 									상품별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="salas_product.jsp"></a>
+									<a class="small text-white stretched-link" href="adminSalesProduct"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -91,7 +91,7 @@
 					<div class="col-xl-6">
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-area me-1"></i> Area Chart Example
+								<i class="fas fa-chart-area me-1"></i> 월별 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myAreaChart" width="100%" height="40"></canvas>
@@ -101,7 +101,7 @@
 					<div class="col-xl-6">
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-bar me-1"></i> Bar Chart Example
+								<i class="fas fa-chart-bar me-1"></i> 월별 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myBarChart" width="100%" height="40"></canvas>

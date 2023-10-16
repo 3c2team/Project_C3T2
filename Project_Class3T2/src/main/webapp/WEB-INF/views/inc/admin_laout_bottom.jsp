@@ -7,30 +7,18 @@
 				<div class="sb-sidenav-menu-heading">
 					메인
 				</div>
-				<a class="nav-link" href="salas_years.jsp">
+				<a class="nav-link" href="adminSalesYear">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-tachometer-alt"></i>
 					</div> 매출정보
 				</a>
-				<div class="sb-sidenav-menu-heading">
-					상품
-				</div>
-				<a class="nav-link collapsed" href="adminboard.jsp" 
-				   data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-				   aria-expanded="false" aria-controls="collapseLayouts">
+				<a class="nav-link" href="adminNoticeBoard">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-columns"></i>
 					</div> 공지관리
-					<div class="sb-sidenav-collapse-arrow">
-						<i class="fas fa-angle-down"></i>
-					</div>
 				</a>
-				<div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-					<nav class="sb-sidenav-menu-nested nav">
-						<a class="nav-link" href="adminBoard.jsp">
-							공지등록
-						</a>
-					</nav>
+				<div class="sb-sidenav-menu-heading">
+					상품
 				</div>
 				<a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
 					data-bs-target="#collapsePages" aria-expanded="false"
@@ -39,7 +27,7 @@
 						<i class="fas fa-book-open"></i>
 					</div> 상품
 					<div class="sb-sidenav-collapse-arrow">
-						<i class="fas fa-angle-down"></i>
+						<i class="fas fa-angle-down">	</i>
 					</div>
 				</a>
 				<div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -53,7 +41,7 @@
 						</a>
 						<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="productCorrection.jsp">
+								<a class="nav-link" href="adminProductList">
 									상품목록
 								</a>
 							</nav>
@@ -67,19 +55,19 @@
 						</a>
 						<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
 							<nav class="sb-sidenav-menu-nested nav">
-								<a class="nav-link" href="reviewDelete.jsp">리뷰삭제</a>
-								<a class="nav-link" href="qna.jsp">문의사항</a>
+								<a class="nav-link" href="adminReviewDelete">리뷰삭제</a>
+								<a class="nav-link" href="adminQnaBoard">문의사항</a>
 							</nav>
 						</div>
 					</nav>
 				</div>
 				<div class="sb-sidenav-menu-heading">회원</div>
-				<a class="nav-link" href="memberOutReason.jsp">
+				<a class="nav-link" href="adminMember">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-chart-area"></i>
 					</div> 회원관리
 				</a> 
-				<a class="nav-link" href="reservation.jsp">
+				<a class="nav-link" href="adminReservationList">
 					<div class="sb-nav-link-icon">
 						<i class="fas fa-table"></i>
 					</div> 예약관리

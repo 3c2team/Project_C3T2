@@ -5,11 +5,7 @@
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
+
 <title>공지 관리</title>
 <style type="text/css">
 .body_gray {
@@ -35,7 +31,8 @@
 	<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>
 	<div id="layoutSidenav">
 		<jsp:include page="../inc/admin_laout_bottom.jsp"></jsp:include>
-		<main>
+		<div id="layoutSidenav_content">
+		<main >
 		<div class="white_box">
 			<div class="card mb-4">
 				<div class="card-body">
@@ -105,6 +102,8 @@
 		</div>
 	</main>
 	</div>
+	</div>
+	
 	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -115,7 +114,6 @@
 		crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath }/resources/demo/chart-pie-demo2.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/demo/chart-area-demo.js"></script>
-<script src="${pageContext.request.contextPath }/resources/demo/chart-bar-demo.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>

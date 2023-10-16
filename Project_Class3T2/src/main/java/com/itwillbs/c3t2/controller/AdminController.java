@@ -93,6 +93,12 @@ public class AdminController {
     public String adminQnaDetail() {
        return "admin/admin_qna_detail";
     }
+
+    //상품 수정 페이지 이동(관리자)
+    @GetMapping("adminProductUpdate")
+    public String adminProductUpdate() {
+    	return "admin/admin_product_update";
+    }
     
 
 }
