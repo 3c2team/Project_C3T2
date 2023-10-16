@@ -9,8 +9,10 @@
 
 <head>
 <meta charset="UTF-8">
-<title>상품결제</title>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
+<title>상품결제</title>
 
 </head>
 
@@ -54,7 +56,7 @@
 	<!-- 					<td style="text-align: left; text-align: center; border-right: none;"> -->
 	<!-- 						<input type="checkbox" name="checkbox"> -->
 	<!-- 					</td> -->
-						<td style="border-left: none; border-right: none;"><img style="width: 60%" src="resources/online_img/steak2.jpg"></td>
+						<td style="border-left: none; border-right: none;"><img style="width: 60%" src="resources/store_img/steak2.jpg"></td>
 						<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold; width: 40%">짱짱맛 스테이크</td>
 						<td><span style="padding-left: 10px;">0</span>원</td> <!-- 상품가격 -->
 						<td style="width: 80px;">
@@ -80,7 +82,7 @@
 				</table>
 				
 				<div style="border: solid 1px #e0e0eb; border-right: none; border-left: none; padding: 11 px 0; background-color: #fff;">
-					<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
+					<img src="resources/store_img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
 					<span style="font-size: 10pt; color: red">상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</span>
 				</div>
 				
@@ -130,6 +132,16 @@
 							<input style="margin-bottom: 10px;" type="text" id="addr1" size="50"><br>
 							<input type="text" id="addr2" size="50" />
 						</td>
+					</tr>
+					
+					<tr>
+						<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
+						<td>
+<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
+							<input type="text" name="phone" id="phone" placeholder="000-0000-0000">
+							<span id="checkPhoneResult"></span><br>
+						</td>
+					
 					</tr>
 					
 					<tr>
