@@ -141,7 +141,6 @@
 								<option value="gmail.com">gmail.com</option>
 								<option value="daum.net">daum.net</option>
 								<option value="nate.com">nate.com</option>
-								<option value="hotmail.net">hotmail.net</option>
 							</select>
 							<span style="font-size: 10pt; color:gray;">
 								<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
@@ -197,7 +196,7 @@
 				</div>
 				
 				<div class="total">
-					<span style="display:inline-block; padding: 20px 10px;">카드결제 최종결제 금액</span><br>
+					<span style="display:inline-block; padding: 20px 10px;">최종결제 금액</span><br>
 					<span style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">0원</span><br><br>
 					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
 				</div>
@@ -207,13 +206,12 @@
 			<%--이용안내 --%>
 			
 			
-			
-			
-			
-			
-			
+			<footer id="footer">
+				<jsp:include page="../inc/bottom.jsp"></jsp:include>
+			</footer>
 		
 		</div>
+
 	</form>	
 </body>
 </html>
