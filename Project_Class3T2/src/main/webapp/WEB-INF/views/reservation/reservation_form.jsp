@@ -22,12 +22,12 @@
 	
 	
 	<!-- 메인 레이아웃 -->
-		<div class="mainLayout">
 	<main>
+		<div class="mainLayout">
 			<h1 id="title">Reservation</h1>
 
 		<!-- 왼쪽 레이아웃 -->
-			<form action="${pageContext.request.contextPath }/reservation/reservation_success.jsp">
+			<form action="reservationSuccess">
 				<div class="left">
 					<h3 class="indent">예약일시</h3> 
 		 
@@ -89,8 +89,8 @@
 					<p class="submit" align="center">예약하기</p>
 				</div>
 			</form>	
-	</main>
 		</div>
+	</main>
 	
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>

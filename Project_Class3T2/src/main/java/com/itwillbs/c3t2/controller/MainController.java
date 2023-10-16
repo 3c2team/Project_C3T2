@@ -33,9 +33,10 @@ public class MainController {
 			return "other/location";
 		}
 		
-		@GetMapping("reservation")
-		public String reservation() {
-			return "reservation/reservation";
+		// 예약 클릭 시 예약 폼으로 이동
+		@GetMapping("reservationForm")
+		public String reservationForm() {
+			return "reservation/reservation_form";
 		}
 		
 		@GetMapping("onlineStore")
@@ -51,16 +52,6 @@ public class MainController {
 		@GetMapping("join")
 		public String join() {
 			return "other/join";
-		}
-		
-		@GetMapping("idForgot")
-		public String idForgot() {
-			return "other/id_forgot";
-		}
-		
-		@GetMapping("passForgot")
-		public String passForgot() {
-			return "other/pass_forgot";
 		}
 		
 		//=============================
