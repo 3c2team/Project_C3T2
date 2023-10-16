@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Tables - SB Admin</title>
+<title>문의 내역</title>
 <style type="text/css">
 .btn-right {
 	float: right;
@@ -18,7 +18,7 @@ table {
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }resources/css/admin_style.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 </head>
