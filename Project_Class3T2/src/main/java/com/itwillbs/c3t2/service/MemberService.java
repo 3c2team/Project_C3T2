@@ -10,4 +10,6 @@ public class MemberService {
 	
 	@Autowired
 	private MemberMapper mapper;
+	
+
 }
