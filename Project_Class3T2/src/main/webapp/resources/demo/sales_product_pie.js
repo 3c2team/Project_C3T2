@@ -7,10 +7,10 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["red", "black", "Yellow", "Green","White"],
+    labels: ["stake", "pasta", "soup", "etc"],
     datasets: [{
-      data: [12.21, 15.58, 11.25, 8.32,10],
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#000'],
+      data: [20, 25, 30, 30],
+      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
     }],
   },
 });
