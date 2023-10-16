@@ -21,11 +21,11 @@
 	margin: 0px 5px 5px 5px;
 }
 
-/*마이페이지 공통 css*/
-#main_layout{ 
+/*----------------마이페이지 공통 css-------------------*/
+#main_layout{ 			/*---바디 영역 전체---*/
 	padding-top: 40px;  
 	width: 70%;  
-  	margin: auto; /* 중앙 정렬 */ 
+  	margin: auto;  
 }  
 
 #mypage_side_menu li { 

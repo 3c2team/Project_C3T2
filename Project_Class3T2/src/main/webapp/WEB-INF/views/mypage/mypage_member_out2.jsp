@@ -58,6 +58,8 @@
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 </head>
 <body>
 <header>

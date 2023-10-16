@@ -57,12 +57,14 @@ window.onload = function() {
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 </head>
 <body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 </header>
-	<main>	
+<main>	
 	<div id="main_layout">
 		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
