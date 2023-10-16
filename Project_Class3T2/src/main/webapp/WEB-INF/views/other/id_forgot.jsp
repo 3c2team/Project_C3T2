@@ -19,11 +19,11 @@
 		<div class="main">
 			<p class="sign" align="center">아이디 찾기</p>
 			<form class="form1">
-				<input class="user" type="text" align="center" placeholder="아이디">
-				<input class="phone" type="text" align="center" placeholder="전화번호">
+				<input class="user" type="text" style="align-content: center" placeholder="아이디">
+				<input class="phone" type="text" style="align-content: center" placeholder="전화번호">
 				<p class="submit" align="center">전화번호 인증</p>
-				<a href="${pageContext.request.contextPath }/join.jsp" class="join" align="center">회원가입</a>
-				<a href="${pageContext.request.contextPath }/pass_forgot.jsp"  class="passForgot" align="center" style="margin-left: 15%">비밀번호찾기</a>
+				<a href="join" class="join" style="align-content: center; margin:15%">회원가입</a>
+				<a href="passForgot" class="passForgot" style="margin-left: 15%">비밀번호찾기</a>
 			</form>
 	    </div>
 		</main>

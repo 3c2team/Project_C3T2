@@ -17,8 +17,8 @@
 		</header>
 	</div>
 	<main>
-	     <img src="./resources/img/about.jpg" style="max-width: 100%; height: auto;">
-	     <img src="./resources/img/about2.jpg" style="max-width: 100%; height: auto;">
+	     <img src="./resources/main_img/about.jpg" style="max-width: 100%; height: auto;">
+	     <img src="./resources/maon_img/about2.jpg" style="max-width: 100%; height: auto;">
 	</main>
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>

@@ -108,10 +108,7 @@ p {
 	color: rgb(184, 197, 201);
 	text-decoration: none;
 }
-a{
-	margin: 15%;
-}
-    
+
 @media (max-width: 600px) {
 	.main {
 		border-radius: 0px;

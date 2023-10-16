@@ -53,6 +53,16 @@ public class MainController {
 			return "other/join";
 		}
 		
+		@GetMapping("idForgot")
+		public String idForgot() {
+			return "other/id_forgot";
+		}
+		
+		@GetMapping("passForgot")
+		public String passForgot() {
+			return "other/pass_forgot";
+		}
+		
 		//=============================
 		//storeMapping
 		@GetMapping("storeBest")

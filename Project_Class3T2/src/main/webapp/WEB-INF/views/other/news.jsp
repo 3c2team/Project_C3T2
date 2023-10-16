@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
-<script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/js/news.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/news.js"></script>
 <style>
 .links li:nth-child(2) {
 	opacity: .6; /* 불투명도 */

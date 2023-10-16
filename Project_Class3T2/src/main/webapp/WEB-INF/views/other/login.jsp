@@ -25,9 +25,9 @@
 				<input class="pass" type="password" style="align-content: center" placeholder="비밀번호">
 				<p class="submit" align="center">로그인</p>
 				<div class="aTag" align="center">
-					<a href="${pageContext.request.contextPath }/join.jsp" class="join" style="align-content: center">회원가입</a>
-					<a href="${pageContext.request.contextPath }/id_forgot.jsp"  class="idForgot" style="align-content: center">아이디찾기</a>
-					<a href="${pageContext.request.contextPath }/pass_forgot.jsp"  class="passForgot" style="align-content: center">비밀번호찾기</a>
+					<a href="join" class="join" style="align-content: center">회원가입</a>
+					<a href="idForgot"  class="idForgot" style="align-content: center">아이디찾기</a>
+					<a href="passForgot"  class="passForgot" style="align-content: center">비밀번호찾기</a>
 				</div>
 			</form>
 	    </div>

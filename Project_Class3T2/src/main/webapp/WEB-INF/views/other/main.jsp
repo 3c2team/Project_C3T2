@@ -32,19 +32,19 @@ img {
 						<input type="radio" name="radio-btn" id="radio4">
 						
 						<div class="slide first">
-							<img src="./resources/main_img/main_info.jpg" alt="" style="height: 550px;">
+							<img src="./resources/main_img/main.jpg" alt="" style="height: 550px;">
 						</div>
 						
 						<div class="slide">
-							<img src="./resources/main_img/main_info.jpg" alt="" style="height: 550px;">
+							<img src="./resources/main_img/kitchen.jpg" alt="" style="height: 550px;">
 						</div>
                         
 						<div class="slide">
-							<img src="./resources/main_img/main_info.jpg" alt="" style="height: 550px;">
+							<img src="./resources/main_img/platter1.jpg" alt="" style="height: 550px;">
 						</div>
 						
 						<div class="slide">
-							<img src="./resources/main_img/main_info.jpg" alt="" style="height: 550px;">
+							<img src="./resources/main_img/platter2.jpg" alt="" style="height: 550px;">
 						</div>
 						
 						<div class="navigationAuto" style="margin-top : 510px;">

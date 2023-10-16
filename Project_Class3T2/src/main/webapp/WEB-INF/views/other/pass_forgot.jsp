@@ -24,8 +24,8 @@
 			<input class="user" type="text" style="margin-left:40%" placeholder="아이디">
 			<input class="phone" type="text" placeholder="전화번호">
 			<p class="submit" align="center">전화번호 인증</p>
-			<a href="${pageContext.request.contextPath }/join.jsp" class="join" style="margin-left:46%">회원가입</a>
-			<a href="${pageContext.request.contextPath }/id_forgot.jsp" class="idForgot" style="margin-left: 1%">아이디찾기</a>
+			<a href="join" class="join" style="margin-left:46%">회원가입</a>
+			<a href="idForgot" class="idForgot" style="margin-left: 1%">아이디찾기</a>
 		</form>
     </div>
 	</main>
