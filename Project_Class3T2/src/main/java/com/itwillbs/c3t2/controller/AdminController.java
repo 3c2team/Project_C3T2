@@ -1,7 +1,10 @@
 package com.itwillbs.c3t2.controller;
 
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 @Controller
 public class AdminController {
@@ -62,7 +65,7 @@ public class AdminController {
     
     //회원 정보 페이지 이동(관리자)
     @GetMapping("adminMember")
-    public String adminMember() {
+    public String adminMember(Model model) {
        return "admin/admin_member";
     }
     
