@@ -32,6 +32,8 @@ font-family: 'Sacramento', cursive;
 .mainMenuArea a {
 	display: inline-flex;
 	height: 25px;
+	font-size: 20px;
+    align-items: center;
 }
 
 .item {

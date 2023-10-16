@@ -31,44 +31,56 @@
 			<ul class="productList">
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 				<li class="productListLi">
 					<div class="product">
-						<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
-						<a>어쩌고저쩌고짱맛있는스테이크</a>
-						<a>23,000원</a>
+						<a class="productClick" href="productDetail">
+							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
+							<strong><span>23,000</span><span>원</span></strong>
+						</a>
 					</div>
 				</li>
 			</ul>

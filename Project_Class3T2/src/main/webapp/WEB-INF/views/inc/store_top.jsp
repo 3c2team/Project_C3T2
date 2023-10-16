@@ -12,9 +12,9 @@
 	<div class="mainMenuArea">
 		<div class="mainMenuAreaLeft">
 			<div class="item"><a href="onlineStore">ONLINE STORE</a></div>
-			<div class="item"><a href="store_best">BEST</a></div>
-			<div class="item"><a href="store_new">NEW</a></div>
-			<div class="item"><a href="store_kit">MEAL KIT</a></div>
+			<div class="item"><a href="storeBest">BEST</a></div>
+			<div class="item"><a href="storeNew">NEW</a></div>
+			<div class="item"><a href="storeKit">MEAL KIT</a></div>
 <!-- 				<div class="mealKitSubmenu"> -->
 <!-- 					<div class="mealKitItem"><a>All</a></div> -->
 <!-- 					<div class="mealKitItem"><a>Steak</a></div> -->

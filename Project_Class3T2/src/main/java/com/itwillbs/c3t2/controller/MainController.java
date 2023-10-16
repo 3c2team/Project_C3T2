@@ -54,19 +54,24 @@ public class MainController {
 		}
 		
 		//storeMapping
-		@GetMapping("store_best")
+		@GetMapping("storeBest")
 		public String best() {
 			return "store/store_best";
 		}
 		
-		@GetMapping("store_new")
+		@GetMapping("storeNew")
 		public String storeNew() {
 			return "store/store_new";
 		}
 		
-		@GetMapping("store_kit")
+		@GetMapping("storeKit")
 		public String mealKit() {
 			return "store/store_kit";
+		}
+		
+		@GetMapping("productDetail")
+		public String productDetail() {
+			return "store/product_detail";
 		}
 		
 }
