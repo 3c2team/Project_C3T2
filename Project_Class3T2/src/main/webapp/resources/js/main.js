@@ -1,3 +1,6 @@
+/**
+ * main.js 
+ */
 let counter = 1;
 
 setInterval(function(){

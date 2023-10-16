@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/event.js"></script>
 <style>
 .links li:nth-child(1) {
 	opacity: .6; /* 불투명도 */
@@ -33,7 +35,6 @@
 </style>
 </head>
 <body>
-<script src="http://localhost:8080/T2/js/jquery-3.7.0.js"></script>
 	<div>
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
@@ -79,18 +80,6 @@
                     </div>
                 </div>
     		</div>
-			
-			<script type="text/javascript">
-			let counter = 1;
-			setInterval(function(){
-				document.getElementById('radio' + counter).checked = true;
-				counter++;
-				if(counter > 4) {
-					counter = 1;
-				}
-			}, 5000);
-			</script>
-			
 			<div class="container">
 				<ul class="links">
 					<li>
@@ -128,7 +117,6 @@
 				</ul>
 			</div>
 		</main>
-		
 	</div>
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
