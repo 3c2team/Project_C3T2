@@ -52,7 +52,7 @@ table {
 								<tr>
 									<th>1</th>
 									<th>
-										강석진<button class="btn btn-light btn-right"onclick="window.open('readMore.jsp','','width=200','height=500')">자세히보기</button>
+										강석진<button class="btn btn-light btn-right" id="open_ditail">자세히보기</button>
 									</th>
 									<th>이것은 뭔가요?</th>
 									<th>2023-10-11</th>
@@ -68,7 +68,9 @@ table {
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/admin_qna.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>

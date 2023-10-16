@@ -83,15 +83,11 @@ public class AdminController {
     public String adminQnaBoard() {
        return "admin/admin_qna_board";
     }
+    
     //문의 답변 페이지 이동(관리자)
     @GetMapping("adminQnaAnswer")
     public String adminQnaAnswer() {
        return "admin/admin_qna_answer";
-    }
-    //문의내역 자세히보기 페이지 이동(관리자)
-    @GetMapping("adminQnaDetail")
-    public String adminQnaDetail() {
-       return "admin/admin_qna_detail";
     }
 
     //상품 수정 페이지 이동(관리자)

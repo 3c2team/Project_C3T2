@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <style type="text/css">
 	body{
 		font-family: 'Noto Serif KR', serif;		
@@ -16,18 +18,12 @@
 	}
 </style>
 </head>
+<body>
 	<header>
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</header>
-<body>
 	<h2>LOCATION</h2>
 	<h2>지팜 J'ai Faim</h2>
-<html>
-<head>
-	<meta charset="utf-8"/>
-	<title>Kakao 지도 시작하기</title>
-</head>
-<body>
 	<div id="map" style="margin:auto; width:1300px; height:800px;"></div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d79e4be802855b8c8c9dc38e9b02f6d"></script>
 		<script>

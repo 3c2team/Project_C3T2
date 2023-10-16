@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
 <script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/js/news.js"></script>
 <style>
 .links li:nth-child(2) {
 	opacity: .6; /* 불투명도 */
@@ -29,68 +30,8 @@
 	opacity: 1;
 }
 </style>
-<script type="text/javascript">
-// 화면로딩전
-let counter = 1;
-
-setInterval(function(){
-	document.getElementById('radio' + counter).checked = true;
-	counter++;
-	if(counter > 4) {
-		counter = 1;
-	}
-}, 4000);
-
-
-
-$(function(){
-	
-	// 보이기 | 숨기기 
-	$(window).scroll(scrollEvent);
-	
-	// popup event
-// 	$(".popupBox").draggable({containment:'parent', scroll:false}); 
-// 	let disp = document.cookie.indexOf("popToday=close") < 0 ? 'block' : 'none';
-// 	document.getElementById("popup_layer").style.display = disp;
-	
-	// 슬라이드 counter 동기화
-	$('.manualBtn').on('click', (e) => counter = $(e.target).attr('for').replace("radio", ""));
-});
-
-
-// functions
-function scrollEvent() {
-	let scroll = $(this).scrollTop();
-	if(scroll == 0){
-		$('#topBtn').fadeOut();
-		$('#bottomBtn').fadeIn();
-	} else if(scroll > 270){
-		$('#topBtn').fadeIn();
-		$('#bottomBtn').fadeOut();
-	} else {
-		$('#topBtn').fadeIn();
-		$('#bottomBtn').fadeIn();
-	}
-}
-
-function setCookie(name, value, expiredays) {
-	var todayDate = new Date();
-	todayDate.setDate( todayDate.getDate() + expiredays ); 
-	document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
-} 
-
-function closeToday() { 
-	setCookie( "popToday", "close" , 1); 
-	$("#popup_layer").css("display", "none");
-	closePop();
-}
-function closePop() { 
-	document.getElementById("popup_layer").style.display = "none";
-} 
-</script>
 </head>
 <body>
-
 	<div>
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
@@ -188,82 +129,9 @@ function closePop() {
 						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</a>
 					</li>
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_3"> -->
-<!-- 						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  -->
-<!-- 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa  -->
-<!-- 						qui officia deserunt mollit anim id est laborum.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_1"> -->
-<!-- 						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  -->
-<!-- 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  -->
-<!-- 						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_3"> -->
-<!-- 						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  -->
-<!-- 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa  -->
-<!-- 						qui officia deserunt mollit anim id est laborum.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_1"> -->
-<!-- 						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  -->
-<!-- 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  -->
-<!-- 						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_3"> -->
-<!-- 						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  -->
-<!-- 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa  -->
-<!-- 						qui officia deserunt mollit anim id est laborum.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_1"> -->
-<!-- 						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  -->
-<!-- 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  -->
-<!-- 						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_3"> -->
-<!-- 						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  -->
-<!-- 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa  -->
-<!-- 						qui officia deserunt mollit anim id est laborum.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_1"> -->
-<!-- 						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  -->
-<!-- 						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  -->
-<!-- 						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
-<!-- 					<li> -->
-<!-- 						<a href="" id="notice_3"> -->
-<!-- 						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;"> -->
-<!-- 						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  -->
-<!-- 						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa  -->
-<!-- 						qui officia deserunt mollit anim id est laborum.</p> -->
-<!-- 						</a> -->
-<!-- 					</li> -->
 				</ul>
 			</div>
 		</main>
-		
 	</div>
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>

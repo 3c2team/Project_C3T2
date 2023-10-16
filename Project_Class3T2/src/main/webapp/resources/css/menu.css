@@ -1,0 +1,26 @@
+@charset "EUC-KR";
+table{
+ 	font-family: 'Sacramento', cursive;
+ 	margin: 150px;
+ 	margin-top: 100px;
+ }
+ td{
+ 	font-size: 30px;
+ }
+ .categori{
+ 	font-size: 25px;
+ 	text-align: center;
+	 margin-top: 40px;
+ }
+ .categori > a{
+	 margin-left: 15px;
+ }
+ .bottom{
+ 	background-color: #f8f8f8;
+ }
+ img {
+ 	width: 600px;
+ 	height: 550px;
+ 	margin-left: 60px;
+ 	margin-right: 60px;
+ }

@@ -91,7 +91,7 @@
 					<div class="col-xl-6">
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-area me-1"></i> 일별 매출
+								<i class="fas fa-chart-area me-1"></i> 시간별 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myAreaChart" width="100%" height="40"></canvas>
@@ -101,7 +101,7 @@
 					<div class="col-xl-6">
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-bar me-1"></i> 일별 매출
+								<i class="fas fa-chart-bar me-1"></i> 시간별 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myBarChart" width="100%" height="40"></canvas>
@@ -119,11 +119,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 	crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath }/resources/demo/chart-area-demo.js"></script>
-<script src="${pageContext.request.contextPath }/resources/demo/chart-bar-demo.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-	crossorigin="anonymous"></script>
-<script src="${pageContext.request.contextPath }/resources/js/admin_datatable.js"></script>
+<script src="${pageContext.request.contextPath }/resources/demo/sales_time_bar.js"></script>
+<script src="${pageContext.request.contextPath }/resources/demo/sales_time_chart.js"></script>
 </body>
 </html>
