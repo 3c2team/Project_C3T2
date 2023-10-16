@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/slide.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/event_popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
 <script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
 <style>
 .links li:nth-child(2) {

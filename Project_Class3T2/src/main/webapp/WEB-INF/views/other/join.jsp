@@ -8,10 +8,10 @@
 <!-- 공통 메소드들 정리해논 파일 -->
 </head>
 <script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
-<link href="${pageContext.request.contextPath }/css/join.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/css/join.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 	window.onload = function() {

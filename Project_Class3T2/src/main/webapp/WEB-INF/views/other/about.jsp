@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
 </head>
-<link href="${pageContext.request.contextPath }/css/about.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/css/about.css" rel="stylesheet" type="text/css">
 <body>
 	<div id="aboutLayout">
 		<header>

@@ -7,10 +7,10 @@
 <title>J'ai Faim</title>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link href="${pageContext.request.contextPath }/css/login_temp.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/css/login_temp.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <body>
 	<div id="mainLayout">
 		<header>

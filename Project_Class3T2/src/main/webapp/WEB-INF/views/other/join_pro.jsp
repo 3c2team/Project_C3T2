@@ -6,11 +6,11 @@
 <meta charset="utf-8">
 <title>J'ai Faim</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <script src="${pageContext.request.contextPath }/js/jquery-3.7.0.js"></script>
-<link href="${pageContext.request.contextPath }/css/join_pro.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/join_pro.css" rel="stylesheet" type="text/css">
  <!-- accordion 접히는 Script 선언 -->
   <script>
   $(function() {

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <style type="text/css">
 	 table{
 	 	font-family: 'Sacramento', cursive;

@@ -19,10 +19,10 @@
 			<div class="categoryName"><h1>BEST</h1></div>
 			<div class="categoryMenu">
 				<a href="">All</a>
-				<a href="">Steak</a>
+				<a href="Steak">Steak</a>
 				<a href="">Pasta</a>
 				<a href="">Soup</a>
-				<a href="">ets</a>
+				<a href="">etc</a>
 			</div>	
 		</div>
 		
