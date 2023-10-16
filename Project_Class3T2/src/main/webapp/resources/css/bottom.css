@@ -9,9 +9,6 @@ font-family: 'Sacramento', cursive;
 
 .company li{
 	font-size: 12px;
-    bottom: 0;
-    height: 50px;
-	margin-top: -50px;
 }
 .bottomArea {
 	width: 1400px;

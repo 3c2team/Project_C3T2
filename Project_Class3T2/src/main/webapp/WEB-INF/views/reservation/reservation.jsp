@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/store_main.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -20,8 +22,8 @@
 	
 	
 	<!-- 메인 레이아웃 -->
-	<main>
 		<div class="mainLayout">
+	<main>
 			<h1 id="title">Reservation</h1>
 
 		<!-- 왼쪽 레이아웃 -->
@@ -87,8 +89,8 @@
 					<p class="submit" align="center">예약하기</p>
 				</div>
 			</form>	
-		</div>
 	</main>
+		</div>
 	
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
