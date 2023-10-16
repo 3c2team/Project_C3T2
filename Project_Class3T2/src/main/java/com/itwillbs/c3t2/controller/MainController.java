@@ -53,6 +53,7 @@ public class MainController {
 			return "other/join";
 		}
 		
+		//=============================
 		//storeMapping
 		@GetMapping("storeBest")
 		public String best() {

@@ -32,18 +32,18 @@ img {
                         <input type="radio" name="radio-btn" id="radio4">
                         
                         <div class="slide first">
-                            <img src="${pageContext.request.contextPath }/resources/img/main_1.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/main.jpg" alt="" style="height: 550px;">
                         </div>
                         <div class="slide">
-                            <img src="${pageContext.request.contextPath }/resources/img/main_1.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/directed_img1.jpg" alt="" style="height: 550px;">
                         </div>
                         
                         <div class="slide">
-                            <img src="${pageContext.request.contextPath }/resources/img/news_3.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/kitchen.jpg" alt="" style="height: 550px;">
                         </div>
                         
                         <div class="slide">      
-                            <img src="${pageContext.request.contextPath }/resources/img/news_4.jpg" alt="" style="height: 550px;">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/directed_img2.jpg" alt="" style="height: 550px;">
                         </div>
           
                         <div class="navigationAuto" style="margin-top : 510px;">
