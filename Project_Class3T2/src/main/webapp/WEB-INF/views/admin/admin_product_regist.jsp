@@ -8,8 +8,8 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <title>상품 등록</title>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/admin_product.js"></script>
+<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/resources/js/admin_product.js"></script>
 	
 </head>
 <body>

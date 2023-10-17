@@ -11,10 +11,10 @@
 	    margin-bottom: 10px;  /* 아래쪽 간격 추가 */
 	}
 </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
 </head>
 <body>
 <header>

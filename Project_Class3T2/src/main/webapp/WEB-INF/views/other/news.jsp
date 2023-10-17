@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/news.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/event_popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/slide.css">
+<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/resources/js/news.js"></script>
 <style>
 .links li:nth-child(2) {
 	opacity: .6; /* 불투명도 */
@@ -98,10 +98,10 @@
 			<div class="container">
 				<ul class="links">
 					<li>
-						<a href="${pageContext.request.contextPath }/news.jsp" id="notice">운영공지</a>
+						<a href="${pageContext.request.contextPath }/resources/news.jsp" id="notice">운영공지</a>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/event.jsp" id="event">이벤트</a>
+						<a href="${pageContext.request.contextPath }/resources/event.jsp" id="event">이벤트</a>
 					</li>
 				</ul>
 				<ul class="notice" style="margin: 5px 0 5px 100px;">

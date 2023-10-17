@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link href="${pageContext.request.contextPath }/resources/css/reservation.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/resources/css/reservation.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>

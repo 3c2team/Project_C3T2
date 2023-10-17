@@ -3,6 +3,29 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-    <mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
-    
-    </mapper>
+<mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
+  	
+	<insert id="insertReservation">
+		INSERT INTO RESERVATION
+		VALUES (
+			null
+			, #{date}
+			, #{time}
+			, #{person_name}
+			, #{person_count}
+			, #{person_phone}
+			, 0
+			, #{ismember}
+			, #{dinning_num}
+			, #{restaurant_num}
+		)
+	</insert>
+	
+	<select id="selectReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT * FROM RESERVATION WHERE name = #{name} and phone = #{phone}
+	</select>
+	
+	<select id="selectReservationList" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT * FROM RESERVATION
+	</select>
+</mapper>

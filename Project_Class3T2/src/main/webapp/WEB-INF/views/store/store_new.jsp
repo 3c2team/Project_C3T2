@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/online_store.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/resources/css/online_store.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/resources/css/bottom.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
@@ -32,7 +32,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>
@@ -41,7 +41,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>
@@ -50,7 +50,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>
@@ -59,7 +59,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>
@@ -68,7 +68,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>
@@ -77,7 +77,7 @@
 				<li class="productListLi">
 					<div class="product">
 						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resources/online_img/soup1.jpg">
+							<img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg">
 							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
 							<strong><span>23,000</span><span>원</span></strong>
 						</a>

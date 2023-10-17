@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
 </head>
 <body>
 <header>
@@ -50,7 +50,7 @@
 					      <button onclick="setMonths(-3)">3개월</button>
 					      <button onclick="setMonths(-6)">6개월</button>
 					</div>
-   					<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
+   					<script src="${pageContext.request.contextPath }/resources/resources/js/mypage_calender.js"></script>
 					<div id="reservation_confirm_term_right">
 						<div class="calanderWrap">
 							<input type="date" id="startDate">
