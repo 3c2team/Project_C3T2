@@ -17,7 +17,7 @@
 		<li><a href="menu">MENU</a></li>
 		<li><a href="newsEvent">NEWS/EVENT</a></li>
 		<li><a href="location">LOCATION</a></li>
-		<li><a href="reservation">RESERVATION</a></li>
+		<li><a href="reservationForm">RESERVATION</a></li>
 		<li><a href="onlineStore">ONLINE STORE</a></li>
 	</ul>
 </div>
