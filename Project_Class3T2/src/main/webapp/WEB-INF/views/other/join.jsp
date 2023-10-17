@@ -7,12 +7,12 @@
 <title>J'ai Faim</title>
 <!-- 공통 메소드들 정리해논 파일 -->
 </head>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/join.css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/join.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/join.css">
+<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/resources/js/join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
@@ -51,15 +51,6 @@
 					</td>
 				</tr>
 				<tr>
-					<th>성별</th>
-					<td>
-						<div class="select">
-    						<input type="radio" id="select" name="gender"><label for="select">남</label>
-     						<input type="radio" id="select2" name="gender"><label for="select2">여</label>
-						</div>
-					</td>
-				</tr>
-				<tr>
 					<th>주소</th>
 					<td>
 						<input type="text" name="address1" placeholder="기본주소" required size="25" onclick="searchAddress()">
@@ -81,14 +72,20 @@
 					</td>
 				</tr>
 				<tr>
-					<th>직업</th>
+					<th>전화번호</th>
+					<td><input type="text" name="phone" placeholder="000-0000-0000" required size="20"></td>
+				</tr>
+				<tr>
+					<th>생일</th>
+					<td><input type="date" name="birth" required size="20"></td>
+				</tr>
+				<tr>
+					<th>성별</th>
 					<td>
-						<select name="job">
-							<option value="">항목을 선택하세요</option>
-							<option value="개발자">개발자</option>
-							<option value="DB엔지니어">DB엔지니어</option>
-							<option value="아르바이트">아르바이트</option>
-						</select>
+						<div class="select">
+    						<input type="radio" id="select" name="gender"><label for="select">남</label>
+     						<input type="radio" id="select2" name="gender"><label for="select2">여</label>
+						</div>
 					</td>
 				</tr>
 				<tr>
