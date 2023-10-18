@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/event_popup.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/slide.css">
-<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/news.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/slide.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/news.js"></script>
 <style>
 .links li:nth-child(2) {
 	opacity: .6; /* 불투명도 */

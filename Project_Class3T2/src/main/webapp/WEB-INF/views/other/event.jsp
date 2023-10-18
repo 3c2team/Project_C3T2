@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/slide.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
-<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/event.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/event.js"></script>
 <style>
 .links li:nth-child(1) {
 	opacity: .6; /* 불투명도 */

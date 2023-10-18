@@ -5,11 +5,12 @@
 <head>
 <meta charset="utf-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
-<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<link href="${pageContext.request.contextPath }/resource/js/join_pro.js" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/join_pro.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<link href="${pageContext.request.contextPath }/resources/js/join_pro.js" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
