@@ -14,6 +14,10 @@
     display: flex;
     align-items: flex-start;
     flex-direction: row;
+    /*테스트------------------------------*/
+    flex-wrap: wrap;
+    justify-content: center; /* 아이템들을 가운데 정렬합니다 */
+    gap: 16px; /* 아이템 간 간격을 조정합니다 */
 }
 
 #mypage_sideMenu {
@@ -142,17 +146,14 @@ div > hr{
 }
 
 /*--찜, 장바구니 -*/
-.item { 
-     margin-right: 30px;  
- } 
+/* .item {  */
+/*      margin-right: 30px;  */
+/*  }  */
 
 /* 화면 가로 길이가 768px 이하일 때 적용되는 스타일 */
 @media (max-width: 768px) {
     th {
         padding: 5px; /* 간격을 5px로 줄임 */
-    }
-    .item {
-        margin: 10px; /* 간격을 줄인다 */
     }
 }
 

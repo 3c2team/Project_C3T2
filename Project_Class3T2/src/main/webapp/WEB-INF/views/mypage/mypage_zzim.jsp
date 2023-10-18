@@ -5,10 +5,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.container2 {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; /* 이미지가 빨간 선을 넘으면 다음 줄로 내려갑니다. */
+}
+
+.container2 img {
+    max-width: 30%; /* 이미지의 최대 가로 크기를 제한합니다. 선의 위치에 따라 조정이 필요합니다. */
+    margin: 10px; /* 이미지 간 간격을 주기 위한 마진 */
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%; /* 빨간 선의 위치를 화면의 70% 지점에 놓습니다. */
+    width: 1px; /* 선의 너비 */
+    background-color: white;
+    z-index: 100; /* 선을 이미지 위에 위치시킵니다. */
+}
+.item {
+    display: inline-block;
+    margin: 10px;
+    vertical-align: top;
+}
+
+.item img {
+    display: block;
+    max-width: 100%;
+}
+
+.itemDesc {
+    text-align: left;
+    font-family: 'Noto Serif KR', serif;
+    line-height: 0.3;
+}
+
+.itemDesc.bold {
+    font-weight: bold;
+}
+</style>
 </head>
 <body>
 <header>
@@ -37,38 +80,48 @@
 				</nav>
 			</div>
 			<div class ="mypageContents">
-			<div align="center">
-			<br><br>
-			<h1>찜</h1><br>
-			</div>
+				<div align="center">
+					<br><br>
+					<h1>찜</h1><br>
+				</div>
 			<h2>총 0개 상품</h2>
 			<br><br><br><br>
-			<div class="container" align="center">
-			    <div class="item">
-			        <img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg" width="200" height="200">
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif; font-weight: bold;">20,000원</p>
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif; font-weight: 100;">함박 스테이크 (2인분) 밀키트</p>
-			        
-			    </div>
-			    <div class="item">
-			        <img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg" width="200" height="200">
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">가격</p>
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">상품설명</p>
-			    </div>
-			    <div class="item">
-			        <img src="${pageContext.request.contextPath }/resource/online_img/steak1.jpg" width="200" height="200">
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">가격</p>
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">상품설명</p>
-			    </div>
-			    <div class="item">
-			        <img src="${pageContext.request.contextPath }/resource/online_img/etc1.jpg" width="200" height="200">
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">가격</p>
-			        <p style="line-height: 0.3; text-align: left; font-family: 'Noto Serif KR', serif;">상품설명</p>
-			    </div>
+				<div class="container2" align="center">
+			    	<div class="line"></div>
+			        <div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+		        	<div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+		        	<div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+		        	<div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+		        	<div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+				    <div class="item">
+				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
+				        <p class="itemDesc bold">가격</p>
+				        <p class="itemDesc">상품설명</p>
+				    </div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
