@@ -98,6 +98,11 @@ public class AdminController {
     public String adminProductUpdate() {
     	return "admin/admin_product_update";
     }
+    //로그인 페이지 이동(관리자)
+    @GetMapping("adminLogin")
+    public String adminLogin() {
+    	return "admin/admin_login";
+    }
     
 
 }
