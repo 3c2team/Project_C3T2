@@ -43,7 +43,7 @@
 					<h2 >고객님의 개인정보 보호를 위해<br>
 					비밀번호를 다시 한번 입력해 주세요.</h2>
 					<input type="text" class="passwd" placeholder="비밀번호를 입력해 주세요">
-					<br><input type="button" value="제출" class="submit" id="확인" onclick="out2()">
+					<br><input type="button" value="제출" class="submit" id="확인" onclick="location.href='mypage_reservation_change2'">
 				</div>
 			</div>
 		<script type="text/javascript">

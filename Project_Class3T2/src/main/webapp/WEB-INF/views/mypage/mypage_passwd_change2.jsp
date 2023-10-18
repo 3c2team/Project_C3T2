@@ -20,7 +20,7 @@
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 </header>
-	<main>	
+<main>
 	<div id="main_layout">
 		<div class="mypageBox" id="mypage_dashboard">
 			<span id="mypage_dashboard_info">
@@ -62,7 +62,7 @@
 			</script>
 		</div>
 	</div>
-	</main>
+</main>
 <footer id="footer">
 	<jsp:include page="../inc/bottom.jsp"></jsp:include>
 </footer>
