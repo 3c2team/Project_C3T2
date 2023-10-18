@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/online_store.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/online_store.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header>
@@ -29,60 +30,18 @@
 		<%-- ================================================ --%>
 		<div class="productListAll">
 			<ul class="productList">
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
-				<li class="productListLi">
-					<div class="product">
-						<a class="productClick" href="productDetail">
-							<img src="${pageContext.request.contextPath }/resource/online_img/soup1.jpg">
-							<strong>어쩌고저쩌고짱맛있는스테이크</strong><br>
-							<strong><span>23,000</span><span>원</span></strong>
-						</a>
-					</div>
-				</li>
+				<c:forEach var="product" items="${newList }">
+					<li class="productListLi">
+						<div class="product">
+							<a class="productClick" href="productDetail?proNum=${product.product_num }">
+								<img src="${product.product_main_img_real_file}">
+								<strong>${product.product_name }</strong><br>
+								<strong><span>${product.product_price }</span><span>원</span></strong>
+<%-- 								<strong>${product.product_info }</strong> --%>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 		

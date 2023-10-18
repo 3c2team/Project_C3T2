@@ -3,7 +3,7 @@
     
 <div class="bottomArea">
 	<div class="bottomLogoArea">
-		<a class="logo">J'ai faim</a>
+		<a class="logo">J'ai Faim</a>
 	</div>
 	<div class="company">
 		<ul>

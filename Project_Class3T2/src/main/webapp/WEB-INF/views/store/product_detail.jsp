@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/bottom.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/order_detail.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resource/js/order_detail.js"></script>
 <body>
 	<header>

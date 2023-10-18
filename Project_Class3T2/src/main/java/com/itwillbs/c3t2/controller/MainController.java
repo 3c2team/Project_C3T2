@@ -80,26 +80,4 @@ public class MainController {
 			return "other/join_pro";
 		}
 		
-		//=============================
-		//storeMapping
-		@GetMapping("StoreBest")
-		public String best() {
-			return "store/store_best";
-		}
-		
-		@GetMapping("StoreNew")
-		public String storeNew() {
-			return "store/store_new";
-		}
-		
-		@GetMapping("StoreKit")
-		public String mealKit() {
-			return "store/store_kit";
-		}
-		
-		@GetMapping("ProductDetail")
-		public String productDetail() {
-			return "store/product_detail";
-		}
-		
 }
