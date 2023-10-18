@@ -33,7 +33,7 @@
 				<c:forEach var="product" items="${newList }">
 					<li class="productListLi">
 						<div class="product">
-							<a class="productClick" href="productDetail?proNum=${product.product_num }">
+							<a class="productClick" href="ProductDetail?proNum=${product.product_num }">
 								<img src="${product.product_main_img_real_file}">
 								<strong>${product.product_name }</strong><br>
 								<strong><span>${product.product_price }</span><span>원</span></strong>
