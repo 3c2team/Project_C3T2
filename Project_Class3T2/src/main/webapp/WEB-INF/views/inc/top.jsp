@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <div class="accountArea">
-	<a href="login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="join">Join</a>
+	<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="Join">Join</a>
 	
 <!-- 	<a href="">ㅁㅁ님</a> -->
 <!-- 	<a href="">Logout</a> -->
@@ -13,11 +13,11 @@
 </div>
 <div class="mainMenuArea">
 	<ul>
-		<li><a href="about">ABOUT</a></li>
-		<li><a href="menu">MENU</a></li>
-		<li><a href="newsEvent">NEWS/EVENT</a></li>
-		<li><a href="location">LOCATION</a></li>
-		<li><a href="reservationForm">RESERVATION</a></li>
-		<li><a href="onlineStore">ONLINE STORE</a></li>
+		<li><a href="About">ABOUT</a></li>
+		<li><a href="Menu">MENU</a></li>
+		<li><a href="NewsEvent">NEWS/EVENT</a></li>
+		<li><a href="Location">LOCATION</a></li>
+		<li><a href="ReservationForm">RESERVATION</a></li>
+		<li><a href="OnlineStore">ONLINE STORE</a></li>
 	</ul>
 </div>
