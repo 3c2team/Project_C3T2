@@ -5,8 +5,10 @@
 <head>
 <meta charset="utf-8" />
 <title>관리자 로그인</title>
-<link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+<link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin_login.js"></script>
 <style type="text/css">
 	body{
 		background-image: url("${pageContext.request.contextPath }/resources/main_img/main.jpg");
@@ -43,16 +45,16 @@
 								<div class="card-body">
 									<form>
 										<div class="form-floating mb-3">
-											<input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" /> 
-											<label for="inputEmail">관리자아이디</label>
+											<input class="form-control" id="id" type="text" placeholder="name@example.com" /> 
+											<label for="inputEmail">관리자 아이디</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" id="inputPassword" type="password" placeholder="Password" /> 
+											<input class="form-control" id="passwd" type="password" placeholder="Password" /> 
 											<label for="inputPassword">관리자 비밀번호</label>
 										</div>
 										<div
 											class="d-flex align-items-center justify-content-between mt-4 mb-0">
-											<a class="btn btn-primary" href="adminSalesYear">Login</a>
+											<a class="btn btn-primary" id="btn_login">Login</a>
 										</div>
 									</form>
 								</div>
