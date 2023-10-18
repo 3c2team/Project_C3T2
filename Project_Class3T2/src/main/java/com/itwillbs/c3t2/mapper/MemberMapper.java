@@ -31,6 +31,8 @@ public interface MemberMapper {
 	void updateMailAuthStatus(String id);
 
 	void deleteAuthInfo(String id);
-
+	
+	MemberVO selectMember(MemberVO member);
+	
 
 }

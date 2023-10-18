@@ -75,4 +75,10 @@
 		DELETE FROM auth_info
 		WHERE member_id = #{member_id}
 	</delete>
+	<select id="selectMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_id = #{member_id}
+	</select>
+	
 </mapper>

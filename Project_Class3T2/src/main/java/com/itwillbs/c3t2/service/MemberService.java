@@ -73,6 +73,10 @@ public class MemberService {
 		
 		return isAuthSuccess;
 	}
+	public MemberVO getMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return mapper.selectMember(member);
+	}
 	
 
 }
