@@ -21,7 +21,6 @@ public class MemberVO {
 	private int member_point;
 	private String member_phone_num;
 	private Date member_birth;
-	private String member_gender; 
-	private int member_private_info_agree;
+	private String member_gender;
 
 }

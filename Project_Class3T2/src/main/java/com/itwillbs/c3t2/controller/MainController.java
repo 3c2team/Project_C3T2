@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
+import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.Member_AgreeVO;
 
@@ -63,12 +64,30 @@ public class MainController {
 			return "other/login";
 		}
 		
+		@GetMapping("JoinAgree")
+		public String joinSuccess() {
+			return "other/join_pro";
+		}
+		
+		@PostMapping("JoinFirst")
+		public String joinAgree(Member_AgreeVO memberAgree, Model model) {
+			System.out.println(memberAgree);
+			int insertCount = service.registAgreeMember(memberAgree);
+			
+			if(insertCount > 0) {
+				return "redirect:/Join";
+			} else {
+				model.addAttribute("msg", "정보 동의 실패!");
+				return "fail_back";
+			}
+		}
+		
 		@GetMapping("Join")
 		public String join() {
 			return "other/join";
 		}
 		
-		@PostMapping("/MemberJoinPro")
+		@PostMapping("/JoinPro")
 		public String joinPro(MemberVO member, Model model) {
 			System.out.println(member);
 			
@@ -114,7 +133,7 @@ public class MainController {
 				service.registAuthInfo(member.getMember_id(), authCode);
 				
 				// ------------------------------------------------
-				return "redirect:/MemberJoinSuccess";
+				return "redirect:/Main";
 			} else { // 실패
 				// 실패 시 메세지 출력 후 이전페이지로 돌아가는 기능을
 				// 하나의 jsp 페이지로 모듈화하여 공통된 방식으로 처리
@@ -124,23 +143,28 @@ public class MainController {
 			
 		}
 		
-		@GetMapping("JoinAgree")
-		public String joinSuccess() {
-			return "other/join_pro";
-		}
-		
-		@PostMapping("JoinEnd")
-		public String joinAgree(Member_AgreeVO memberAgree, Model model) {
-			System.out.println(memberAgree);
-			int insertCount = service.registAgreeMember(memberAgree);
+		@GetMapping("/MemberEmailAuth")
+		public String emailAuth(AuthInfoVO authInfo, Model model) {
+//			System.out.println("이메일에 포함된 인증정보 : " + authInfo);
 			
-			if(insertCount > 0) {
-				return "redirect:/Main";
-			} else {
-				model.addAttribute("msg", "정보 동의 실패!");
+			// MemberService - emailAuth() 메서드를 호출하여 인증 요청
+			// => 파라미터 : AuthInfoVO 객체   리턴타입 : boolean(isAuthSuccess)
+			boolean isAuthSuccess = service.emailAuth(authInfo);
+			
+			// 인증 수행 결과 판별
+			// 성공 시 인증 성공 메세지, 로그인폼 URL 을 포함하여 "forward.jsp" 페이지로 포워딩
+			// 실패 시 인증 실패 메세지를 포함하여 "fail_back.jsp" 페이지로 포워딩
+			if(isAuthSuccess) { // 성공
+				model.addAttribute("msg", "인증 성공! 로그인 페이지로 이동합니다!"); // 출력할 메세지
+				model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+				return "forward";
+			} else { // 실패
+				model.addAttribute("msg", "인증 실패!");
 				return "fail_back";
 			}
 		}
+		
+		
 		
 		//=============================
 		//storeMapping

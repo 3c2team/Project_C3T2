@@ -19,7 +19,60 @@
 				, #{member_phone_num}
 				, #{member_birth}
 				, #{member_gender}
-				, 1
+				, 'N'
 			)
 	</insert>
+	
+	<insert id="insertAgreeMember">
+		INSERT
+			INTO MEMBER_AGREE
+			VALUES (
+				1
+				,#{c1}
+				,#{c2}
+				,#{c3}
+				,#{c4}
+			)
+	</insert>
+	
+	<!-- 기존 인증정보 조회 - SELECT -->
+	<!-- 전달받은 아이디(id)에 해당하는 auth_info 테이블의 레코드 조회 -->
+	<select id="selectAuthInfo" resultType="com.itwillbs.c3t2.vo.AuthInfoVO">
+		SELECT *
+		FROM auth_info
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<!-- 인증정보 등록 - INSERT -->
+	<insert id="insertAuthInfo">
+		INSERT
+		INTO auth_info
+		VALUES (
+			#{member_id}
+			, #{authCode}
+		)
+	</insert>
+	
+	<!-- 기존 인증정보 갱신 - UPDATE -->
+	<!-- 아이디에 해당하는 레코드의 인증코드를 수정 -->
+	<update id="updateAuthInfo">
+		UPDATE auth_info
+		SET auth_code = #{authCode}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<!-- 회원 인증상태 변경 - UPDATE -->
+	<!-- member 테이블의 아이디에 해당하는 레코드의 인증상태(member_auth_status) 컬럼값 "Y" 로 변경 -->
+	<update id="updateMailAuthStatus">
+		UPDATE MEMBER
+		SET mail_auth_status = 'Y'
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<!-- 인증정보 삭제 - DELETE -->
+	<!-- auth_info 테이블의 아이디에 해당하는 레코드의 인증정보 삭제 -->
+	<delete id="deleteAuthInfo">
+		DELETE FROM auth_info
+		WHERE member_id = #{member_id}
+	</delete>
 </mapper>

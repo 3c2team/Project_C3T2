@@ -3,13 +3,13 @@
 
 <div class="accountArea">
 	<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="Join">Join</a>
+	<a href="JoinAgree">Join</a>
 	
 <!-- 	<a href="">ㅁㅁ님</a> -->
 <!-- 	<a href="">Logout</a> -->
 </div>
 <div class="logoArea">
-	<a class="logo" href="Main">J'ai Faim</a>
+	<a class="logo" href="main">J'ai Faim</a>
 </div>
 <div class="mainMenuArea">
 	<ul>

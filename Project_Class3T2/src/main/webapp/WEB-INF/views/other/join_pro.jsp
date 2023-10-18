@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/join_pro.css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-<link href="${pageContext.request.contextPath }/resources/js/join_pro.js" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/join_pro.js"></script>
 </head>
 <body>
 	<div id="mainLayout">
@@ -19,7 +19,7 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 	</div>
-<form action="./join.jsp" method="get" id="form1">
+<form action="JoinFirst" method="post" id="form1">
 	<div id="d1">
 		<h1 align="center" style="margin-top:-8%">이용약관</h1><br>
 		<table>
@@ -35,7 +35,7 @@
 		<div id="accordion">
 			<h4>
 				<font size="2">이용약관 동의(필수)</font>
-				<input type="checkbox" name="c1" id="c1">
+				<input type="checkbox" name="c1" id="c1" onchange="check(this);">
 			</h4>
 			<textarea readonly="readonly" rows="5" cols="66">
 제 1 조 (목적)

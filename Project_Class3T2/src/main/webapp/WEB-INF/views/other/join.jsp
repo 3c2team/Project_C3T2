@@ -83,8 +83,8 @@
 					<th>성별</th>
 					<td>
 						<div class="select">
-    						<input type="radio" id="select" name="member_gender"><label for="select">남</label>
-     						<input type="radio" id="select2" name="member_gender"><label for="select2">여</label>
+    						<input type="radio" id="select" name="member_gender" value="남"><label for="select">남</label>
+     						<input type="radio" id="select2" name="member_gender" value="여"><label for="select2">여</label>
 						</div>
 					</td>
 				</tr>
