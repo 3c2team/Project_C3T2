@@ -91,6 +91,40 @@
 		    <version>1.18.30</version>
 		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- 6. 암호화에 사용될 BCryptPasswordEncoder 클래스가 포함된 Spring-Security-Web 라이브러리 -->
+		<!-- 주의! JDK 11(class file version 55) 기준 Spring-Security-Web 5.x.x 버전까지만 사용 가능 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.8.7</version>
+		</dependency>
+		
+		<!-- 7. 자바 메일 발송 라이브러리-->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+		<dependency>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>activation</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		<!-- 8. 난수 생성등의 다양한 작업을 제공하는 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.13.0</version>
+		</dependency>
+		
+
 				
 				
 		<!-- AspectJ -->
@@ -225,4 +259,3 @@
         </plugins>
     </build>
 </project>
-
