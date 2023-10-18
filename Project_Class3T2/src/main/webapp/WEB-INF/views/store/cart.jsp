@@ -2,13 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link href="${pageContext.request.contextPath }/resource/css/cart.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/cart.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
-<script type="text/javascript" src="./js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -20,16 +20,16 @@
 				<jsp:include page="../inc/store_top.jsp"></jsp:include>
 		</header>
 		
-		<form>
+		
 			<div id="frame2">
-				<span style="font-size: 18pt;, font-weight: bold; text-align: left;">장바구니</span>
+				<span style="font-size: 18pt;, font-weight: bold; text-align: left;" onclick="fnPageChange('/')">장바구니</span>
 				<span class="home"> 홈 > 장바구니</span>
 				<span> </span>
 			</div>
 			<br>
 									
 			<!-- 상품 정보 테이블 -->
-			
+		<form action="Pay" method="post">	
 			<div >
 				<table class="calculation1"  style="width: 100%; border-collapse : collapse;">
 				
@@ -57,7 +57,7 @@
 						<td style="text-align: left; text-align: center; border-right: none;">
 							<input type="checkbox" name="checkbox"/>
 						</td>
-						<td style="border-left: none; border-right: none"><img style="width: 60%" src="resources/online_img/steak2.jpg"></td>	
+						<td style="border-left: none; border-right: none"><img style="width: 60%" src="${pageContext.request.contextPath }/resources/store_img/steak2.jpg"></td>	
 						
 						<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">짱짱맛 스테이크</td>
 						
@@ -74,7 +74,7 @@
 						<td><span>0</span>원</td> <!-- 합계 -->
 									
 						<td>
-							<button type="button" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" onclick="location.href='pay.jsp'">주문하기</button><br>
+							<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
 							<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
 							<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">삭제</button><br>
 						</td>
@@ -94,11 +94,11 @@
 				</table>
 				
 				<div style="border: solid 1px #e0e0eb; padding: 15px 0; text-align: left; width: 100%;	">
-					<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
+					<img src="${pageContext.request.contextPath }/resources/store_img/warning.png" style="margin-left: 5px; position: relative; top: 4.5px;" width="15">
 					<span style="font-size: 10pt; color:gray;">할인 적용 금액은 주문서작성의 결제 금액에서 확인이 가능합니다.</span>
 				</div>
 			</div>
-			
+		</form>	
 			<div style="margin: 10px 0; text-align: left;">
 				<span style="margin: 0 10px;" class = "btnfloat">선택 상품을 </span>
 				<button class="btn default btnfloat" style=" color: black;">삭제하기</button>&nbsp;
@@ -132,6 +132,7 @@
 				<button class="btn default footerbtn" id="footerBtn" style="color: black;" onclick="location.href='store_main.jsp'">쇼핑계속하기</button>			
 				<span class="clearboth"></span>
 			</div>
+			
 			<br><br>
 			
 			<div style="border: solid 1px #e0e0eb; padding: 10px 0; font-size: 12pt; background-color: #f5f5f0; padding-left: 10px;">
@@ -154,7 +155,7 @@
 					</li>
 				</ol>		
 			</div>
-		</form>
+		
 		<br>	
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>

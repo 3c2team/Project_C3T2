@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itwillbs.c3t2.service.StoreService;
 import com.itwillbs.c3t2.vo.ProductVO;
@@ -45,5 +46,11 @@ public class StoreController {
 //		model.addAttribute("productDetail", productDetail);
 		
 		return "store/product_detail";
+	}
+	
+	@PostMapping("Pay")
+	public String Pay() {
+		
+		return "store/pay";
 	}
 }

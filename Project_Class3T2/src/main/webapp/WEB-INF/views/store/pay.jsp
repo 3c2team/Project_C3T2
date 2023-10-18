@@ -2,16 +2,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link href="${pageContext.request.contextPath }/resource/css/pay.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/pay.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <head>
 <meta charset="UTF-8">
-<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/pay.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/pay_phone_num.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
 <title>상품결제</title>
 
 </head>
@@ -200,9 +200,9 @@
 					</div>
 					
 					<div align="left">
-						<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
+						<img src="${pageContext.request.contextPath }/resources/store_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
 						<span style="font-size: 10pt; color: gray;">최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.</span><br>
-						<img src="resources/online_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
+						<img src="${pageContext.request.contextPath }/resources/store_img/warning.png" style="margin-left: 5px; position: relative; top: 6px;" width="15">
 						<span style="font-size: 10pt; color: gray;">소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</span><br>
 					</div>
 				</div>
