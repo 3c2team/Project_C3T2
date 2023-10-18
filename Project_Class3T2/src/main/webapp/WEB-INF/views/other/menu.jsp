@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
 </head>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>

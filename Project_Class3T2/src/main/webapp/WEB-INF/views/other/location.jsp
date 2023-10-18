@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
-<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
+<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
 <style type="text/css">
 	body{
 		font-family: 'Noto Serif KR', serif;		

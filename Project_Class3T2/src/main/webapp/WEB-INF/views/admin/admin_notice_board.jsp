@@ -38,10 +38,10 @@
 	rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
-<link href="${pageContext.request.contextPath }/resources/resources/css/admin_style.css" rel="stylesheet" />
-<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/admin_notice.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/admin_scripts.js"></script>
+<link href="${pageContext.request.contextPath }/resource/css/admin_style.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/admin_notice.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/admin_scripts.js"></script>
 </head>
 <body class="body_gray">
 	<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>

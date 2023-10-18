@@ -2,16 +2,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<link href="${pageContext.request.contextPath }/resources/resources/css/pay.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/pay.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <head>
 <meta charset="UTF-8">
-<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/pay.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/pay_phone_num.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/pay.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/pay_phone_num.js"></script>
 <title>상품결제</title>
 
 </head>

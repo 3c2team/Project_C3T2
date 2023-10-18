@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link href="${pageContext.request.contextPath }/resources/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/bottom.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/order_detail.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/resources/js/order_detail.js"></script>
+<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/order_detail.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resource/js/order_detail.js"></script>
 <body>
 	<header>
 		<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -22,7 +22,7 @@
 				<%-- 왼쪽 시작 --%>
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
-						<img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta1.jpg" id="main_img">
+						<img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg" id="main_img">
 						<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
 							<div class="orderAveStar">
 								<strong>
@@ -33,7 +33,7 @@
 							</div>
 							<ul>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -41,7 +41,7 @@
 									</div>
 								</li>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/resources/online_img//pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img//pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -49,7 +49,7 @@
 									</div>
 								</li>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -63,11 +63,11 @@
 					<div class="detailTopMiniImg">
 						<ul>
 						<!-- 이미지 업로드 수 만큼 조절해야함 -->
-							<li><a><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta2.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta3.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta4.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta5.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resources/resources/online_img/pasta5.jpg" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta2.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta3.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta4.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta5.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta5.jpg" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>

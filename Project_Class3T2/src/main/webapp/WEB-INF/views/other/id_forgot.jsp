@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
 </head>
-<link href="${pageContext.request.contextPath }/resources/resources/css/top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/buttom.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/resources/css/id_forgot.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/buttom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resource/css/id_forgot.css" rel="stylesheet" type="text/css">
 <body>
 	<div id="mainLayout">
 		<header>

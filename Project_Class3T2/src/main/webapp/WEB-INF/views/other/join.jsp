@@ -7,12 +7,12 @@
 <title>J'ai Faim</title>
 <!-- 공통 메소드들 정리해논 파일 -->
 </head>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/join.css">
-<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/join.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/join.css">
+<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>

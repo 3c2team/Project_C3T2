@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/slide.css">
-<script src="${pageContext.request.contextPath }/resources/resources/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resources/resources/js/main.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 <style>
 img {
 	 -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 2% 98%, transparent 100%);

@@ -22,7 +22,7 @@ table {
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/resources/resources/css/admin_style.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/resource/css/admin_style.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
 
@@ -78,6 +78,6 @@ table {
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath }/resources/resources/js/admin_datatable.js"></script>
+	<script src="${pageContext.request.contextPath }/resource/js/admin_datatable.js"></script>
 </body>
 </html>

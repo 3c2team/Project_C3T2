@@ -56,10 +56,10 @@
         top: 10%;
 	}
 </style>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/resources/css/bottom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/mypage.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/top.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resource/css/bottom.css">
 </head>
 <body>
 <header>
