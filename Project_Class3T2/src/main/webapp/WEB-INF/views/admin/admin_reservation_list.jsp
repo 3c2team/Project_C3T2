@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,13 +50,16 @@ table {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th>1</th>
-									<th>마이쪙</th>
-									<th>맛잇음</th>
-									<th>1000000</th>
-									<th>답변완료</th>
-								</tr>
+								<c:forEach var="ReservationList" items="${ReservationList }">
+									<tr>
+										<th>${ReservationList.reservation_num }</th>
+										<th>${ReservationList.reservation_person_name }</th>
+										<th>${ReservationList.reservation_date }/${ReservationList.reservation_time } </th>
+										<th>${ReservationList.reservation_person_name }</th>
+										<th>${ReservationList.reservation_person_phone }</th>
+										
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

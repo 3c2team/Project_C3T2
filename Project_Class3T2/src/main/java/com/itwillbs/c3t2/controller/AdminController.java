@@ -1,13 +1,21 @@
 package com.itwillbs.c3t2.controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.itwillbs.c3t2.service.AdminService;
+import com.itwillbs.c3t2.vo.ReservationVO;
+
 
 @Controller
 public class AdminController {
+	@Autowired
+	private AdminService service;
 	
 	//연매출 페이지 이동(관리자)
     @GetMapping("adminSalesYear")
@@ -47,7 +55,10 @@ public class AdminController {
     
     //예약 리스트 페이지 이동(관리자)
     @GetMapping("adminReservationList")
-    public String adminReservationList() {
+    public String adminReservationList(Model model) {
+//    	List<ReservationVO> ReservationList = service.getReservationList();
+//    	System.out.println(ReservationList);
+//    	model.addAttribute("ReservationList",ReservationList);
        return "admin/admin_reservation_list";
     }
     
