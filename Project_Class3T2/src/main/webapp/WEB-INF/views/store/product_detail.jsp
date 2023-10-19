@@ -10,7 +10,8 @@
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resource/js/order_detail.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/product_detail.js"></script>
 <body>
 	<header>
 		<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -87,13 +88,13 @@
 						</button>
 					</div>
 					<div class="productNum">
-						<p>온라인상품코드 @제품코드00@ ${product_number }</p>
+						<p>온라인상품코드 ${productDetail.product_num }</p>
 					</div>
 					<div class="detailTopTitle">
-						<p class="productName">어쩌고저쩌고개짱맛있는스테이크 ${product_name }</p>
+						<p class="productName">${productDetail.product_name }</p>
 					</div>
 					<div class="productPrice">
-						<b>20,000 ${product_price }</b>
+						<b>${productDetail.product_price }</b>
 						<span>원</span>
 					</div>
 					<table class="detailTopInfo">
@@ -110,9 +111,9 @@
 								<th>수량</th>
 								<td>
 									<div class="formAmount">
-										<button onclick="del()">-</button>
-										<input type="number" name="amounts" value="1">
-										<button onclick="add()">+</button>
+										<button id="delBtn">-</button>
+										<input type="number" id="amounts" value="1">
+										<button id="addBtn">+</button>
 									</div>
 								</td>
 							</tr>
@@ -120,11 +121,11 @@
 					</table>
 					<div class="detailTopSum">
 						<p class="detailTopSumTitle">판매가</p>
-						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">20,000</span>&nbsp;원</p>
+						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white">장바구니</button>
-						<button class="btn_black">구매하기</button>
+						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
+						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
 <!-- 						<button>일시 판매종료</button> -->
