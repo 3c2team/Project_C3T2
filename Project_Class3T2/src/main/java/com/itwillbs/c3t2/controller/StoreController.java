@@ -40,10 +40,10 @@ public class StoreController {
 	
 	@GetMapping("ProductDetail")
 	public String productDetail(int proNum, Model model) {
-//		ProductVO productDetail = service.getProductDetail(proNum);
-//		System.out.println(productDetail);
-//		
-//		model.addAttribute("productDetail", productDetail);
+		ProductVO productDetail = service.getProductDetail(proNum);
+		System.out.println("디테일 : " + productDetail);
+		
+		model.addAttribute("productDetail", productDetail);
 		
 		return "store/product_detail";
 	}

@@ -17,6 +17,10 @@ public class StoreService {
 	public List<ProductVO> getProductNewList() {
 		return mapper.selectProductNewList();
 	}
+
+	public ProductVO getProductDetail(int proNum) {
+		return mapper.selectProductDetail(proNum);
+	}
 	
 	
 	

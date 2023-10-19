@@ -10,4 +10,6 @@ import com.itwillbs.c3t2.vo.ProductVO;
 public interface ProductMapper {
 
 	public List<ProductVO> selectProductNewList();
+
+	public ProductVO selectProductDetail(int proNum);
 }
