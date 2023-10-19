@@ -19,7 +19,7 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 	</div>
-<form action="JoinFirst" method="post" id="form1">
+<form action="Join" method="post" id="form1">
 	<div id="d1">
 		<h1 align="center" style="margin-top:-8%">이용약관</h1><br>
 		<table>
@@ -35,7 +35,7 @@
 		<div id="accordion">
 			<h4>
 				<font size="2">이용약관 동의(필수)</font>
-				<input type="checkbox" name="c1" id="c1" onchange="check(this);">
+				<input type="checkbox" name="c1" id="c1" value="1">
 			</h4>
 			<textarea readonly="readonly" rows="5" cols="66">
 제 1 조 (목적)
@@ -56,7 +56,7 @@
 			</textarea>
 			<h4>
 				<font size="2">개인정보 수집 및 이용에 대한 안내(필수)</font>
-				<input type="checkbox" name="c2" id="c2">
+				<input type="checkbox" name="c2" id="c2" value="1">
 			</h4>
 			<div>
 				<textarea readonly="readonly" rows="5" cols="66">
@@ -72,7 +72,7 @@
 			</div>
 			<h4>
 				<font size="2">위치정보 이용약관 동의(선택)</font>
-				<input type="checkbox" name="c3" id="c3">
+				<input type="checkbox" name="c3" id="c3" value="1">
 			</h4>
 			<div>
 				<textarea readonly="readonly" rows="5" cols="66">
@@ -105,7 +105,7 @@
 					<font size="2">이벤트 등 프로모션 알림 메일 수신(선택)</font>
 				</td>
 				<td>
-					<input type="checkbox" name="c4" id="c4">
+					<input type="checkbox" name="c4" id="c4" value="1">
 				</td>
 			<tr>
 			</table>
@@ -113,7 +113,7 @@
 		</div>
 	
 		<div align="center"><br>
-			<input type="submit" value="동의" onclick=""><br>
+			<input type="submit" value="동의"><br>
 		</div>
 	</div>
 </form>

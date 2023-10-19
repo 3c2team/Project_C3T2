@@ -17,6 +17,7 @@
 </head>
 <body>
 	<header>
+	
 		<!-- top.jsp 페이지를 현재 페이지에 삽입 -->
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</header>
@@ -24,6 +25,10 @@
 		<p class="sign" align="center">회원가입</p>
 		<%-- MemberJoinPro.me 서블릿 주소 요청 --%>
 		<form action="JoinPro" name="joinForm" method="post">
+			<input type="hidden" name="c1" id="c1" value="${member.c1}">
+			<input type="hidden" name="c2" id="c2" value="${member.c2}">
+			<input type="hidden" name="c3" id="c3" value="${member.c3}">
+			<input type="hidden" name="c4" id="c4" value="${member.c4}">
 			<table>
 				<tr>
 					<th>이름</th>

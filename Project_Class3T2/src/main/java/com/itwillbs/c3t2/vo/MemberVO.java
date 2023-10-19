@@ -22,5 +22,8 @@ public class MemberVO {
 	private String member_phone_num;
 	private Date member_birth;
 	private String member_gender;
-
+	private int c1;
+	private int c2;
+	private int c3;
+	private int c4;
 }

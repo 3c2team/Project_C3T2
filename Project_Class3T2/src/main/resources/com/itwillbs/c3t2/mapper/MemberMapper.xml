@@ -7,27 +7,19 @@
 	<insert id="insertMember">
 		INSERT
 			INTO MEMBER
+			(member_name, member_id, member_passwd, member_address, member_e_mail, member_insert_date, member_point, member_phone_num, member_birth_day, member_gender, mail_auth_status, member_private_info_agree_1, member_private_info_agree_2, member_private_info_agree_3, member_private_info_agree_4)
 			VALUES (
-				null
-				, #{member_name}
+				  #{member_name}
 				, #{member_id}
 				, #{member_passwd}
 				, CONCAT(#{member_address1}, ' ', #{member_address2})
 				, CONCAT(#{member_email1}, '@', #{member_email2})
 				, now()
-				, 0
+				, 3000
 				, #{member_phone_num}
 				, #{member_birth}
 				, #{member_gender}
 				, 'N'
-			)
-	</insert>
-	
-	<insert id="insertAgreeMember">
-		INSERT
-			INTO MEMBER_AGREE
-			VALUES (
-				1
 				,#{c1}
 				,#{c2}
 				,#{c3}
@@ -75,10 +67,4 @@
 		DELETE FROM auth_info
 		WHERE member_id = #{member_id}
 	</delete>
-	<select id="selectMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
-		SELECT *
-		FROM MEMBER
-		WHERE member_id = #{member_id}
-	</select>
-	
 </mapper>
