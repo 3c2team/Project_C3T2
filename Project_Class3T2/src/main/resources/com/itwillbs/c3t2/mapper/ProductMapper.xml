@@ -9,4 +9,9 @@
 		FROM PRODUCT
 		ORDER BY product_release ASC
 	</select>
+	<select id="selectProductDetail" resultType="com.itwillbs.c3t2.vo.ProductVO">
+		SELECT *
+		FROM PRODUCT
+		WHERE product_num = #{proNum}
+	</select>
 </mapper>
