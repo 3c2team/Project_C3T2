@@ -6,11 +6,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/store_main.js"></script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -20,19 +18,14 @@
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</header>
 	
-	
 	<!-- 메인 레이아웃 -->
 	<main>
 		<div class="mainLayout">
 			<h1 id="title">Reservation</h1>
+			<div id="calendarForm"></div>
 
 		<!-- 왼쪽 레이아웃 -->
-			<form action="reservationSuccess">
 				<div class="left">
-					<h3 class="indent">예약일시</h3> 
-		 
-					<jsp:include page="calendar.jsp"></jsp:include>
-		  
 					<h3 class="indent">예약시간</h3>
 					<div class="center">
 						<button class="button1">10:00 </button> 
@@ -49,18 +42,19 @@
 					</div>
 					<h3 class="indent">예약인원</h3>
 					<div class="center">
-						<button class="button">1 </button> 
-						<button class="button">2 </button>
-						<button class="button">3 </button>
-						<button class="button">4 </button>
-						<button class="button">5 </button>
-						<button class="button">6 </button>
-						<button class="button">7 </button>
-						<button class="button">8 </button>
+						<button class="button" onclick="showPopup()">1 </button> 
+						<button class="button" onclick="showPopup()">2 </button>
+						<button class="button" onclick="showPopup()">3 </button>
+						<button class="button" onclick="showPopup()">4 </button>
+						<button class="button" onclick="showPopup()">5 </button>
+						<button class="button" onclick="showPopup()">6 </button>
+						<button class="button" onclick="showPopup()">7 </button>
+						<button class="button" onclick="showPopup()">8 </button>
 					</div>
 				</div>
 		
 			<!-- 오른쪽 레이아웃 -->
+			<form action="reservationSuccess">
 				<div class="right">
 					<h3 class="indent">예약자 성함 </h3>
 					<input type="text" class="reservationInput" name="reservation_person_name" id="reservation_person_name">
