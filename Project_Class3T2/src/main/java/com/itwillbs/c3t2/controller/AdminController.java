@@ -51,9 +51,9 @@ public class AdminController {
     @GetMapping("AdminProductList")
     public String adminProductList(Model model) {
     	
-    	List<ProductVO> productList = service.getproductList();
-    	System.out.println(productList);
-    	model.addAttribute("ReservationList",productList);
+//    	List<ProductVO> productList = service.getproductList();
+//    	System.out.println(productList);
+//    	model.addAttribute("ReservationList",productList);
     	return "admin/admin_product_list";
     }
     

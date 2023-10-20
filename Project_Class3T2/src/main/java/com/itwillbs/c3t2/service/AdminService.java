@@ -19,7 +19,7 @@ public class AdminService {
 	private AdminMapper mapper;
 
 	public List<MemberVO> selectMemberList() {
-		
+		System.out.println("selectMemberList : 들어옴");
 		return mapper.selectMemberList();
 	}
 	public List<ReservationVO> getReservationList() {
