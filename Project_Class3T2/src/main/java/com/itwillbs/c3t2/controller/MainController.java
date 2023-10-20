@@ -1,11 +1,14 @@
 package com.itwillbs.c3t2.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
@@ -61,6 +64,56 @@ public class MainController {
 		@GetMapping("Login")
 		public String login() {
 			return "other/login";
+		}
+		
+		@PostMapping("LoginPro")
+		public String loginPro(
+				MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, Model model) {
+			String securePasswd = service.getPasswd(member);
+//			System.out.println("입력받은 아이디 : " + member.getMember_id());
+//			System.out.println("DB 에 저장된 패스워드 : " + securePasswd);
+//			System.out.println("입력받은 패스워드 : " + member.getMember_passwd());
+			
+			// BCryptPasswordEncoder 객체를 활용한 패스워드 비교
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//			if(securePasswd == null || !passwordEncoder.matches(member.getPasswd(), securePasswd)) {
+//				model.addAttribute("msg", "인증 실패!");
+//				return "fail_back";
+//			} else { // 로그인 성공
+//				// 이메일 인증 여부 확인
+//			}
+			// ------------------------------------------------------------
+			MemberVO dbMember = service.getMember(member);
+			if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
+				model.addAttribute("msg", "인증 실패!");
+				return "fail_back";
+			} else { // 로그인 성공
+				if(dbMember.getMail_auth_status().equals("N")) { // 이메일 미인증 회원
+					model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다!");
+					return "fail_back";
+				} else { // 이메일 인증 회원
+					session.setAttribute("sId", member.getMember_id());
+					return "redirect:/Main";
+				}
+			}
+		}
+		
+		@GetMapping("IdForgot")
+		public String idForgot() {
+			return "other/id_forgot";
+		}
+		
+		@GetMapping("PassForgot")
+		public String passForgot() {
+			return "other/pass_forgot";
+		}
+		
+		@GetMapping("Logout")
+		public String logout(HttpSession session) {
+			session.invalidate();
+			
+			// 메인페이지로 리다이렉트
+			return "redirect:/Main";
 		}
 		
 		@GetMapping("JoinAgree")
@@ -170,29 +223,4 @@ public class MainController {
 				return "fail_back";
 			}
 		}
-		
-		
-		
-//		//=============================
-//		//storeMapping
-//		@GetMapping("StoreBest")
-//		public String best() {
-//			return "store/store_best";
-//		}
-//		
-//		@GetMapping("StoreNew")
-//		public String storeNew() {
-//			return "store/store_new";
-//		}
-//		
-//		@GetMapping("StoreKit")
-//		public String mealKit() {
-//			return "store/store_kit";
-//		}
-//		
-//		@GetMapping("ProductDetail")
-//		public String productDetail() {
-//			return "store/product_detail";
-//		}
-		
 }

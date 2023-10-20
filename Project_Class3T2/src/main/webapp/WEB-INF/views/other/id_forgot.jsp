@@ -18,12 +18,12 @@
 		<main>
 		<div class="main">
 			<p class="sign" align="center">아이디 찾기</p>
-			<form class="form1">
+			<form  class="form1">
 				<input class="user" type="text" style="align-content: center" placeholder="아이디">
-				<input class="phone" type="text" style="align-content: center" placeholder="전화번호">
-				<p class="submit" align="center">전화번호 인증</p>
-				<a href="join" class="join" style="align-content: center; margin:15%">회원가입</a>
-				<a href="passForgot" class="passForgot" style="margin-left: 15%">비밀번호찾기</a>
+				<input class="phone" type="text" style="align-content: center" placeholder="메일">
+				<p class="submit" align="center">메일 인증</p>
+				<a href="JoinAgree" class="join" style="align-content: center; margin:15%">회원가입</a>
+				<a href="PassForgot" class="passForgot" style="margin-left: 15%">비밀번호찾기</a>
 			</form>
 	    </div>
 		</main>

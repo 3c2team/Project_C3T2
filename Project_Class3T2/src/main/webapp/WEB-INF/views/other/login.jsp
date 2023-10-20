@@ -34,14 +34,15 @@
 	<main>
 		<div class="main">
 			<p class="sign" align="center">로그인</p>
-			<form action="${pageContext.request.contextPath }/resources/main.jsp" class="form1">
-				<input class="user" type="text" id="id" style="align-content: center" placeholder="아이디">
-				<input class="pass" type="password" id="passwd"style="align-content: center" placeholder="비밀번호">
-				<p class="submit" id="btn_submit"align="center">로그인</p>
+			<form action="LoginPro" method="post" class="form1">
+				<input class="user" type="text" name="member_id" id="id" style="align-content: center" placeholder="아이디">
+				<input class="pass" type="password" name="member_passwd" id="passwd"style="align-content: center" placeholder="비밀번호">
+<!-- 				<p class="submit" id="btn_submit"align="center">로그인</p> -->
+				<input type="submit" class="submit" id="btn_submit" style="margin-left: 35%" value="로그인">
 				<div class="aTag" align="center">
-					<a href="join" class="join" style="align-content: center">회원가입</a>
-					<a href="idForgot"  class="idForgot" style="align-content: center">아이디찾기</a>
-					<a href="passForgot"  class="passForgot" style="align-content: center">비밀번호찾기</a>
+					<a href="JoinAgree" class="join" style="align-content: center">회원가입</a>
+					<a href="IdForgot"  class="idForgot" style="align-content: center">아이디찾기</a>
+					<a href="PassForgot"  class="passForgot" style="align-content: center">비밀번호찾기</a>
 				</div>
 			</form>
 	    </div>

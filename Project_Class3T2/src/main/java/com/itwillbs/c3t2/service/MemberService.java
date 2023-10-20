@@ -69,6 +69,14 @@ public class MemberService {
 		
 		return isAuthSuccess;
 	}
-	
+
+	// 암호화 된 패스워드 조회 요청
+	public String getPasswd(MemberVO member) {
+		return mapper.selectPasswd(member);
+	}
+
+	public MemberVO getMember(MemberVO member) {
+		return mapper.selectMember(member);
+	}
 
 }

@@ -1,9 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+	function logout() {
+		// "로그아웃하시겠습니까?" 질문을 수행할 다이얼로그 표시
+		let result = confirm("로그아웃하시겠습니까?");
+		
+		// 만약, result 값이 true 일 경우 "MemberLogout" 서블릿 주소 요청
+		if(result) {
+			location.href = "Logout";
+		}
+	}
+</script>
 <div class="accountArea">
-	<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="JoinAgree">Join</a>
+<c:choose>
+	<c:when test="${empty sessionScope.sId }">
+		<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="JoinAgree">Join</a>
+	</c:when>
+	<c:otherwise>
+		<%-- 아이디 클릭 - MemberInfo 서블릿 주소 요청 --%>
+		<a href="MemberInfo?id=${sessionScope.sId }">${sessionScope.sId }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
+		<a href="javascript:logout()">LogOut</a>
+		<%-- 만약, 세션 아이디가 관리자("admin")일 경우 --%>
+		<%-- 관리자페이지 클릭 - MemberAdminMain 서블릿 주소 요청 --%>
+<%-- 		<c:if test="${sessionScope.sId eq 'admin' }"> --%>
+<!-- 			| <a href="MemberAdminMain">관리자페이지</a> -->
+<%-- 		</c:if> --%>
+	</c:otherwise>
+</c:choose>
+<!-- 	<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 	<a href="JoinAgree">Join</a> -->
 	
 <!-- 	<a href="">ㅁㅁ님</a> -->
 <!-- 	<a href="">Logout</a> -->

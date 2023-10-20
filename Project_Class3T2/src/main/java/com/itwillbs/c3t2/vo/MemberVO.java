@@ -22,6 +22,7 @@ public class MemberVO {
 	private String member_phone_num;
 	private Date member_birth;
 	private String member_gender;
+	private String mail_auth_status;
 	private int c1;
 	private int c2;
 	private int c3;

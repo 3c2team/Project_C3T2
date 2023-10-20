@@ -28,6 +28,9 @@ public interface MemberMapper {
 	void updateMailAuthStatus(String id);
 
 	void deleteAuthInfo(String id);
+	
+	String selectPasswd(MemberVO member);
 
+	MemberVO selectMember(MemberVO member);
 
 }
