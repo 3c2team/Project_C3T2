@@ -4,12 +4,12 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="com.itwillbs.c3t2.mapper.AdminMapper">
-     <select id="selectMemberList" resultType="com.itwi,llbs.c3t2.vo.MemberVO">
-			SELECT * FROM MEMBER
-		</select>
-		<select id="selectReservationList" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-			SELECT * FROM RESERVATION
-		</select>
+<!--      <select id="selectMemberList" resultType="com.itwi,llbs.c3t2.vo.MemberVO"> -->
+<!-- 			SELECT * FROM MEMBER -->
+<!-- 		</select> -->
+<!-- 		<select id="	" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
+<!-- 			SELECT * FROM RESERVATION -->
+<!-- 		</select> -->
 		<select id="selectAdmin" resultType="com.itwillbs.c3t2.vo.AdminVO">
 			SELECT *
 			FROM ADMIN
