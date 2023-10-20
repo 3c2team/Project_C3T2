@@ -1,6 +1,4 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css?family=Sree+Krushnadevaraya&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Catamaran&display=swap");
 :root {
   --margin: 110px;
   --background: #e2e2f5;
@@ -692,21 +690,21 @@ body .pages_page:nth-of-type(odd) .pages_page__inner {
   transform: rotateY(180deg);
 }
 body .pages_page:nth-of-type(1) .pages_page__inner {
-  background-size: 880px !important;
+  background-size: cover;
   background-position: center !important;
-  background: url("https://cdnfl01.viewbug.com/media/mediafiles/2017/10/16/75667840_large.jpg");
+  background: url("../menu_img/menu1.jpg");
 }
 body .pages_page:nth-of-type(2) .pages_page__inner {
-  background-size: 870px !important;
+  background-size: cover;
   background-position: center !important;
-  background: url("https://data.whicdn.com/images/86911589/original.jpg");
+  background: url("../menu_img/menu1.jpg");
 }
 body .pages_page:nth-of-type(2) .pages_page__inner h4 {
   color: black;
   z-index: 3;
 }
 body .pages_page:nth-of-type(3) .pages_page__inner {
-  background: url("https://iso.500px.com/wp-content/uploads/2014/12/fashion_1.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-position: 0 0;
 }
 body .pages_page:nth-of-type(3) .pages_page__inner .content {
@@ -734,17 +732,17 @@ body .pages_page:nth-of-type(4) .pages_page__inner .bg {
   height: 100%;
   width: 200%;
   position: relative;
-  background: url("https://iso.500px.com/wp-content/uploads/2014/12/fashion_1.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-size: 1400px !important;
   left: -100%;
 }
 body .pages_page:nth-of-type(5) .pages_page__inner {
-  background: url("http://cdn.lightgalleries.net/4d80d92265da9/images/Tayna16-12_90574-2.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-size: 870px !important;
   background-position: center !important;
 }
 body .pages_page:nth-of-type(7) .pages_page__inner {
-  background: url("http://ruthrose.co.uk/wp-content/uploads/2018/04/lingerie-fashion-photographer-photography-shoot-fitness-swimwear-shoot180317_POCKET9661-f1.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-position: 0 0;
   background-size: 1400px !important;
 }
@@ -777,7 +775,7 @@ body .pages_page:nth-of-type(7) .pages_page__inner .content_section:nth-of-type(
   width: 260px;
 }
 body .pages_page:nth-of-type(8) .pages_page__inner {
-  background: url("http://ruthrose.co.uk/wp-content/uploads/2018/04/lingerie-fashion-photographer-photography-shoot-fitness-swimwear-shoot180317_POCKET9661-f1.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-position: 0 0;
 }
 body .pages_page:nth-of-type(8) .pages_page__inner .content {
@@ -794,12 +792,12 @@ body .pages_page:nth-of-type(8) .pages_page__inner .bg {
   height: 100%;
   width: 200%;
   position: relative;
-  background: url("http://ruthrose.co.uk/wp-content/uploads/2018/04/lingerie-fashion-photographer-photography-shoot-fitness-swimwear-shoot180317_POCKET9661-f1.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-size: 1400px !important;
   left: -100%;
 }
 body .pages_page__inner {
-  background: url("https://www.colorfusionstudio.com/wp-content/uploads/2015/07/cfs-models-003-683x1024.jpg");
+  background: url("../menu_img/menu1.jpg");
   background-size: 1400px !important;
   height: 100%;
   transform-style: preserve-3d;

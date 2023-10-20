@@ -54,7 +54,7 @@
       </div>
       <div class='content'>
         <div class='content_picture'>
-          <img src='https://i.pinimg.com/originals/1f/bc/f1/1fbcf1c55e839cd7b4aa28c4902669be.jpg'>
+          <img src='${pageContext.request.contextPath }/resources/menu_img/menu1.jpg'>
         </div>
         <div class='content_offset'>
           <h2>Subtitle</h2>
@@ -136,7 +136,7 @@
           </h5>
         </div>
         <div class='content_picture'>
-          <img src='https://i.pinimg.com/originals/1f/bc/f1/1fbcf1c55e839cd7b4aa28c4902669be.jpg'>
+          <img src='${pageContext.request.contextPath }/resources/menu_img/menu2.jpg'>
         </div>
         <h1>
           <span>L</span>
@@ -210,7 +210,7 @@
       </div>
       <div class='bg'></div>
       <div class='content_centerimage'>
-        <img src='https://www.slrlounge.com/wp-content/uploads/2017/09/2brittany-smith-rachelbw6911-800x533.jpg'>
+        <img src='${pageContext.request.contextPath }/resources/menu_img/menu3.jpg'>
       </div>
       <div class='content'>
         <div class='content_center right'>
