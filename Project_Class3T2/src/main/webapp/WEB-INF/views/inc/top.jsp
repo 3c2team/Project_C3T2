@@ -20,7 +20,7 @@
 	</c:when>
 	<c:otherwise>
 		<%-- 아이디 클릭 - MemberInfo 서블릿 주소 요청 --%>
-		<a href="MemberInfo?id=${sessionScope.sId }">${sessionScope.sId }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
+		<a href="MypageDashboard?id=${sessionScope.sId }">${sessionScope.sId }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
 		<a href="javascript:logout()">LogOut</a>
 		<%-- 만약, 세션 아이디가 관리자("admin")일 경우 --%>
 		<%-- 관리자페이지 클릭 - MemberAdminMain 서블릿 주소 요청 --%>
