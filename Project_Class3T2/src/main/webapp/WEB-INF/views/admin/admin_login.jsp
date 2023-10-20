@@ -43,18 +43,18 @@
 									<h3 class="text-center font-weight-light my-4">관리자 로그인</h3>
 								</div>
 								<div class="card-body">
-									<form>
+									<form action="AdminLoginPro">
 										<div class="form-floating mb-3">
-											<input class="form-control" id="id" type="text" placeholder="name@example.com" /> 
-											<label for="inputEmail">관리자 아이디</label>
+											<input class="form-control" type="text" name="admin_id" placeholder="name@example.com" /> 
+											<label for="admin_id">관리자 아이디</label>
 										</div>
 										<div class="form-floating mb-3">
-											<input class="form-control" id="passwd" type="password" placeholder="Password" /> 
-											<label for="inputPassword">관리자 비밀번호</label>
+											<input class="form-control" name="admin_passwd" type="password" placeholder="Password" /> 
+											<label for="admin_passwd">관리자 비밀번호</label>
 										</div>
 										<div
 											class="d-flex align-items-center justify-content-between mt-4 mb-0">
-											<a class="btn btn-primary" id="btn_login">Login</a>
+											<input type="submit" class="btn btn-primary" value="로그인" >
 										</div>
 									</form>
 								</div>

@@ -35,7 +35,7 @@
 									연간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="adminSalesYear"></a>
+									<a class="small text-white stretched-link" href="AdminSalesYear"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -48,7 +48,7 @@
 									월간 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="adminSalesMonth"></a>
+									<a class="small text-white stretched-link" href="AdminSalesMonth"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -61,7 +61,7 @@
 									일별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="adminSalesDay"></a>
+									<a class="small text-white stretched-link" href="AdminSalesDay"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>
@@ -74,7 +74,7 @@
 									상품별 매출
 								</div>
 								<div class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="adminSalesProduct"></a>
+									<a class="small text-white stretched-link" href="AdminSalesProduct"></a>
 									<div class="small text-white">
 										<i class="fas fa-angle-right"></i>
 									</div>

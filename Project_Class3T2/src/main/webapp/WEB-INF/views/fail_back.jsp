@@ -5,6 +5,10 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript">
+	alert("${msg}");
+	history.back();
+</script>
 </head>
 <body>
 

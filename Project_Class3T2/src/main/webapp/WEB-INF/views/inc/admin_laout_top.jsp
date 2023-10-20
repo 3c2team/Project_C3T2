@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-	<a class="navbar-brand ps-3" href="./">J'ai Faim</a>
+	<a class="navbar-brand ps-3" href="AdminSalesYear">J'ai Faim</a>
 	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="/">
 		<i class="fas fa-bars"></i>
 	</button>
@@ -22,7 +22,7 @@
 				<li><a class="dropdown-item" href="#!">Settings</a></li>
 				<li><a class="dropdown-item" href="#!">Activity Log</a></li>
 				<li><hr class="dropdown-divider" /></li>
-				<li><a class="dropdown-item" href="#!">Logout</a></li>
+				<li><a class="dropdown-item" href="AdminLogout">Logout</a></li>
 			</ul>
 		</li>
 	</ul>

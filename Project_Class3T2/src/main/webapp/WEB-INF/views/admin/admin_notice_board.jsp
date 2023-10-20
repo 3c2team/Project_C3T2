@@ -38,10 +38,13 @@
 	rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
 <link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
+<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/admin_notice.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 </head>
 <body class="body_gray">
 	<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>
