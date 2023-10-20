@@ -124,8 +124,8 @@
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
-						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
+						<button class="btn_white" onclick="location.href='Cart?proNum=${productDetail.product_num }'">장바구니</button>
+						<button class="btn_black" onclick="location.href='Pay?proNum=${productDetail.product_num }'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
 <!-- 						<button>일시 판매종료</button> -->

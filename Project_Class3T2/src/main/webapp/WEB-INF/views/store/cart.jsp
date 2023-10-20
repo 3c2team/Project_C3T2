@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <link href="${pageContext.request.contextPath }/resources/css/cart.css" rel="stylesheet" type="text/css">
@@ -10,15 +11,27 @@
 <title>장바구니</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script type="text/javascript">
+	$(function() {
+		$("#check_all").click(function() {
+			if($("#check_all").is(":checked")) { // 전체선택 체크박스 체크 시
+				// 체크박스 모두 체크
+				$(":checkbox").prop("checked", true);
+			} else { // 전체선택 체크박스 체크해제 시
+				// 체크박스 모두 체크해제
+				$(":checkbox").prop("checked", false);
+			}
+		});
+	});
+</script>
 </head>
 		
 <body >
-		
+	<header>
+			<jsp:include page="../inc/store_top.jsp"></jsp:include>
+	</header>
+
 	<div class="cartBody" id="frame" >
-		<header>
-				<jsp:include page="../inc/store_top.jsp"></jsp:include>
-		</header>
 		
 		
 			<div id="frame2">
@@ -39,7 +52,7 @@
 					</tr>
 					
 					<tr style="border-collapse: collapse;">
-						<th><input type="checkbox" name="checkbox" id="check"/></th>
+						<th><input type="checkbox" name="checkbox" id="check_all"/></th>
 						<th><span>이미지</span></th>
 						<th style="width:450px"><span>상품정보</span></th>
 						<th style="width: 100px;">판매가</th>
@@ -53,32 +66,34 @@
 				</thead>
 				
 				<tbody> 
-					<tr style="height: 90px; background-color: #fff;">
-						<td style="text-align: left; text-align: center; border-right: none;">
-							<input type="checkbox" name="checkbox"/>
-						</td>
-						<td style="border-left: none; border-right: none"><img style="width: 60%" src="${pageContext.request.contextPath }/resources/store_img/steak2.jpg"></td>	
-						
-						<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">짱짱맛 스테이크</td>
-						
-						<td><span style="padding-left: 10px;">35,000</span>원</td> <!-- 상품가격 -->
-						
-						<td style="width:80px;">
-							<input type="number" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="99" step="1" value="1">
-							<button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> <!-- 수량 변경 -->
-						</td>
-						
-						<td>-</td>
-						<td>기본배송</td>
-						<td>고정</td>
-						<td><span>0</span>원</td> <!-- 합계 -->
-									
-						<td>
-							<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
-							<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
-							<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">삭제</button><br>
-						</td>
-					</tr>
+					<c:forEach var="productList" items="${productList}">
+						<tr style="height: 90px; background-color: #fff;">
+							<td style="text-align: left; text-align: center; border-right: none;">
+								<input type="checkbox" name="checkbox"/>
+							</td>
+							<td style="border-left: none; border-right: none"><img style="width: 60%" src="${productList.product_main_img_real_file }"></td>	
+							
+							<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;" >${productList.product_name }</td>
+							
+							<td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 -->
+							
+							<td style="width:80px;">
+								<input type="number" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="99" step="1" value="1">
+								<button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> 
+							</td>
+							
+							<td>-</td>
+							<td>기본배송</td>
+							<td>고정</td>
+							<td><span>0</span>원</td>
+							<td>
+								<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
+								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
+								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">삭제</button><br>
+							</td>
+						</tr>
+					</c:forEach>
+					
 				</tbody>
 				
 				<tfoot> <!-- 상품 총 금액 -->
@@ -157,6 +172,7 @@
 			</div>
 		
 		<br>	
+		
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>
 		</footer>

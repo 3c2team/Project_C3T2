@@ -12,4 +12,6 @@ public interface ProductMapper {
 	public List<ProductVO> selectProductNewList();
 
 	public ProductVO selectProductDetail(int proNum);
+
+	public List<ProductVO> selectProductCartList(int proNum);
 }

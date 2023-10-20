@@ -48,8 +48,21 @@ public class StoreController {
 		return "store/product_detail";
 	}
 	
-	@PostMapping("Pay")
-	public String Pay() {
+	@GetMapping("Cart")
+	public String cart(int proNum, Model model) {
+		
+		System.out.println(proNum);
+		List<ProductVO> productList = service.getProductCartList(proNum);
+		
+		System.out.println("주문 상품 : " + productList);
+		
+		model.addAttribute("productList", productList);
+		
+		return "store/cart";
+	}
+	
+	@GetMapping("Pay")
+	public String pay() {
 		
 		return "store/pay";
 	}

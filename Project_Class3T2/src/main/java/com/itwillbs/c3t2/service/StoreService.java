@@ -21,6 +21,11 @@ public class StoreService {
 	public ProductVO getProductDetail(int proNum) {
 		return mapper.selectProductDetail(proNum);
 	}
+
+	public List<ProductVO> getProductCartList(int proNum) {
+		// TODO Auto-generated method stub
+		return mapper.selectProductCartList(proNum);
+	}
 	
 	
 	
