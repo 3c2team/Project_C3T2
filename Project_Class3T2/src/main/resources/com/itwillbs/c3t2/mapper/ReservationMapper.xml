@@ -5,15 +5,25 @@
     
 <mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
   	
+	<select id="available" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT #{time} FROM SCHEDULE WHERE date = #{date}
+	</select>
+	
+<!-- 	<select id="isMember" resultType="ReservationIsMember"> -->
+<!-- 		SELECT #{member_name}, #{member_phone}  -->
+<!-- 		FROM MEMBER  -->
+<!-- 		WHERE id = (SELECT id FROM Reservation WHERE reservation_is_member = #{reservation_is_member} -->
+<!-- 	</select> 서브쿼리 or 체크박스 세션아이디 불러오기 --> 
+	
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION
 		VALUES (
 			null
 			, #{date}
 			, #{time}
-			, #{person_name}
-			, #{person_count}
-			, #{person_phone}
+			, #{reservation_person_name}
+			, #{reservation_person_count}
+			, #{reservation_person_phone}
 			, 0
 			, #{ismember}
 			, #{dinning_num}
@@ -21,11 +31,14 @@
 		)
 	</insert>
 	
-	<select id="selectReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-		SELECT * FROM RESERVATION WHERE name = #{name} and phone = #{phone}
+	<select id="selectReservation" resultType="SelectReservation">
+		SELECT * FROM RESERVATION WHERE is_member = #{is_member}
 	</select>
 	
-	<select id="selectReservationList" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-		SELECT * FROM RESERVATION
-	</select>
+<!-- 	<typeAliases> -->
+<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="ReservationIsMember"/> -->
+<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="insertReservation"/> -->
+<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="SelectReservation"/> -->
+<!-- 	</typeAliases> -->
+	
 </mapper>

@@ -1,40 +1,36 @@
 
 @charset "UTF-8";
 
-body
-{
+body {
 	font-family: 'Noto Serif KR', serif;
 	text-decoration: none;	 /*하이퍼링크 밑줄 제거 */
 	color: #464646;
 	background-color: rgb(255, 255, 255);
 }
 
-div.left 
- {
-        width: 50%;
-        height: 600px;
-        float: left;
-        box-sizing: border-box;
+div.left {
+	width: 50%;
+	height: 600px;
+	float: left;
+	box-sizing: border-box;
      
 }
-div.right 
- {
-        width: 50%;
-        height: 600px;
-        float: right;
-        box-sizing: border-box;
-        padding-left: 4em;
- }
 
-  
-input.indent, .reservationInput
- {
- 	margin-left: 3em;	
- 	width: 76%;
+div.right {
+	width: 50%;
+	height: 600px;
+	float: right;
+	box-sizing: border-box;
+	padding-left: 4em;
+}
+
+input.indent, .reservationInput {
+	margin-left: 3em;	
+	width: 76%;
 	color: rgb(38, 50, 56);
 	font-weight: 700;
 	font-size: 14px;
- 	letter-spacing: 1px; 
+	letter-spacing: 1px; 
 	background: rgb(255, 255, 255);
 	padding: 10px 15px;
 	border: none;
@@ -44,34 +40,31 @@ input.indent, .reservationInput
 	border: 2px solid rgba(0, 0, 0, 0.02);
 	margin-bottom: 50px;
 	margin-left: 1px;
-/*	text-align: center;*/
+	/*	text-align: center;*/
 	margin-bottom: 27px;
 	font-family: 'Noto Serif KR', serif;
- }
+}
 
- 
-textarea.center 
-{
+textarea.center {
 	margin-left: 25em;	
 	
 }
-
 
 /*div.center*/
 /* {*/
 /* 	text-align: left;*/
 /* }*/
  
- div.mainLayout
- {
+div.mainLayout{
  	height: 1500px;
- }
+}
  
- p {
+p{
 	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
 	color: rgb(184, 197, 201);
 	text-decoration: none;
 }
+
 .submit {
 	cursor: pointer;
 	border-radius: 5em;
@@ -107,8 +100,7 @@ table {
 	font-size: 12pt;
 }
 
-.button
-{
+.button{
 	border-radius: 95%;
 	background-color: rgb(128, 128, 128);
  	border: none;
@@ -124,8 +116,7 @@ table {
   	cursor: pointer;
 }
 
-.button1
-{
+.button1{
 	border-radius: 95%;
 	background-color: rgb(128, 128, 128);
  	border: none;

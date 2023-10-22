@@ -28,17 +28,17 @@
 				<div class="left">
 					<h3 class="indent">예약시간</h3>
 					<div class="center">
-						<button class="button1">10:00 </button> 
-						<button class="button1">11:00 </button>
-						<button class="button1">12:00 </button>
-						<button class="button1">13:00 </button>
-						<button class="button1">14:00 </button>
-						<button class="button1">15:00 </button>
-						<button class="button1">16:00 </button>
-						<button class="button1">17:00 </button>
-						<button class="button1">18:00 </button>
-						<button class="button1">19:00 </button>
-						<button class="button1">20:00 </button>
+						<input type="button" class="button1" value="10:00">
+						<input type="button" class="button1" value="11:00">
+						<input type="button" class="button1" value="12:00">
+						<input type="button" class="button1" value="13:00">
+						<input type="button" class="button1" value="14:00">
+						<input type="button" class="button1" value="15:00">
+						<input type="button" class="button1" value="16:00">
+						<input type="button" class="button1" value="17:00">
+						<input type="button" class="button1" value="18:00">
+						<input type="button" class="button1" value="19:00">
+						<input type="button" class="button1" value="20:00">
 					</div>
 					<h3 class="indent">예약인원</h3>
 					<div class="center">
@@ -54,29 +54,30 @@
 				</div>
 		
 			<!-- 오른쪽 레이아웃 -->
-			<form action="reservationSuccess">
+			<form action="ReservationPro" name="reservationForm" method="post">
 				<div class="right">
+					<input type="checkbox" class="reservationInput" value="회원" name="reservation_is_member" id="reservation_is_member">
 					<h3 class="indent">예약자 성함 </h3>
 					<input type="text" class="reservationInput" name="reservation_person_name" id="reservation_person_name">
-					<h3 class="indent">안내 받으실 전화번호</h3>
+					<h3 class="indent">안내 받으실 전화번호</h3> <!-- 예약번호 받을 수단 이메일로 생각해보기 -->
 					<input type="text" class="reservationInput" name="reservation_person_phone" id="reservation_person_phone">
 		 		
 					<!-- 선택 확인창 -->
-		 			<table class="resConfirm" >
+		 			<table class="reservationConfirm" >
 		 				<tr>
 							<th colspan="2" width="300">예약확인</th>     		
 				 		</tr>
 				 		<tr>
 				 			<th>예약일시</th>
-				 			<td><span class="result" id="reservation_date"></span></td>
+				 			<td><span class="result" name="reservation_date"></span></td>
 				 		</tr>
 				 		<tr>
 				 			<th>예약시간</th>
-				 			<td><span class="result" id="reservation_time"></span></td>
+				 			<td><span class="result" name="reservation_time"></span></td>
 				 		</tr>
 				 		<tr>
 				 			<th>예약인원</th>
-				 			<td><span class="result" id="reservation_person_count"></span></td>
+				 			<td><span class="result" name="reservation_person_count"></span></td>
 				 		</tr>
 					</table>
 					<button class="submit" >예약하기</button>

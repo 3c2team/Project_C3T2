@@ -8,10 +8,10 @@ import com.itwillbs.c3t2.vo.ReservationVO;
 public interface ReservationMapper {
 	
 	// 예약 폼에서 레코드 작성
-	int insertReservation(ReservationVO student);
+	int insertReservation(ReservationVO reservation);
 	
-	// 예약 상세정보 조회
-	ReservationVO selectReservation();
+	// 비회원 예약 상세정보 조회
+	ReservationVO selectReservation(String is_member);
 	
 	
 }
