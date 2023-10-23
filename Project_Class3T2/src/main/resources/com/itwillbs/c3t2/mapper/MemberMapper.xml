@@ -77,11 +77,46 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
-	<!-- 회원 상세정보 조회 - SELECT -->
-	<!-- member 테이블의 아이디에 해당하는 레코드 조회 -->
-	<select id="selectMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+<!-- 	<select id="selectMember" resultType="string"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM MEMBER -->
+<!-- 		WHERE member_name = #{member_name} -->
+<!-- 	</select> -->
+	
+	<select id="selectMemberLogin" resultType="com.itwillbs.c3t2.vo.MemberVO">
 		SELECT *
 		FROM MEMBER
 		WHERE member_id = #{member_id}
 	</select>
+
+	<select id="selectMember" resultType="string">
+		SELECT member_id
+		FROM MEMBER
+		WHERE member_name = #{member_name}
+	</select>
+	
+	<select id="selectMemberId" resultType="string">
+		SELECT member_id
+		FROM MEMBER
+		WHERE member_phone_num = #{member_phone_num}
+	</select>
+	
+	<update id="updateMemberPasswd">
+		UPDATE MEMBER
+		SET member_passwd = #{securePasswd}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<select id="selectMemberEmail" resultType="string">
+		SELECT member_e_mail
+		FROM MEMBER
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="selectCheckId" resultType="int">
+		SELECT count(*)
+		FROM MEMBER
+		WHERE member_id=#{member_id}
+	</select>
+	
 </mapper>
