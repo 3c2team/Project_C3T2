@@ -18,10 +18,11 @@
 		<main>
 		<div class="main">
 			<p class="sign" align="center">아이디 찾기</p>
-			<form  class="form1">
-				<input class="user" type="text" style="align-content: center" placeholder="아이디">
-				<input class="phone" type="text" style="align-content: center" placeholder="메일">
-				<p class="submit" align="center">메일 인증</p>
+			<form action="IdForgotPro" method="post" class="form1">
+				<input class="user" name="member_name" id="member_name" type="text" style="align-content: center" placeholder="이름">
+				<input class="phone" name="member_phone_num" id="member_phone_num" type="text" style="align-content: center" placeholder="전화번호">
+				<input type="submit" class="submit" id="btn_submit" style="margin-left: 38%; margin-top: 5%" value="확인">
+<!-- 				<p class="submit" align="center">메일 인증</p> -->
 				<a href="JoinAgree" class="join" style="align-content: center; margin:15%">회원가입</a>
 				<a href="PassForgot" class="passForgot" style="margin-left: 15%">비밀번호찾기</a>
 			</form>

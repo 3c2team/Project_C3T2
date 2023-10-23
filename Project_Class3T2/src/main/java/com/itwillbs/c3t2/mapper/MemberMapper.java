@@ -31,6 +31,18 @@ public interface MemberMapper {
 	
 	String selectPasswd(MemberVO member);
 
-	MemberVO selectMember(MemberVO member);
+//	MemberVO selectMember(MemberVO member);
+
+	String selectMember(String member_name);
+
+	String selectMemberId(String member_phone_num);
+
+	int updateMemberPasswd(@Param("member_id") String member_id, @Param("securePasswd") String securePasswd);
+
+	String selectMemberEmail(String member_id);
+
+	MemberVO selectMemberLogin(String member_id);
+
+	int selectCheckId(String member_id);
 
 }

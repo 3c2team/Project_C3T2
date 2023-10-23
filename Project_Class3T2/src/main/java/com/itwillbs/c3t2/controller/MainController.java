@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
@@ -40,9 +42,32 @@ public class MainController {
 			return "other/menu";
 		}
 		
-		@GetMapping("NewsEvent")
-		public String newsEvent() {
+		@GetMapping("News")
+		public String news(
+//			@RequestParam(defaultValue = "") String searchType,
+//			@RequestParam(defaultValue = "") String searchKeyword,
+//			@RequestParam(defaultValue = "1") int pageNum,
+//			Model model
+				) {
+//	//		System.out.println("검색타입 : " + searchType);
+//	//		System.out.println("검색어 : " + searchKeyword);
+//	//		System.out.println("페이지번호 : " + pageNum);
+//			// --------------------------------------------------------------------
+//			// 페이징 처리를 위해 조회 목록 갯수 조절 시 사용될 변수 선언
+//			int listLimit = 10; // 한 페이지에서 표시할 글 목록 갯수
+//			int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
+//			// --------------------------------------------------------------------
+//			// BoardService - getBoardList() 메서드를 호출하여 게시물 목록 조회 요청
+//			// => 파라미터 : 검색타입, 검색어, 시작행번호, 목록갯수
+//			// => 리턴타입 : List<BoardVO>(boardList)
+//			List<NewsVO> newsList = service.getNewsList(searchType, searchKeyword, startRow, listLimit);
+//			System.out.println(newsList);
 			return "other/news";
+		}
+		
+		@GetMapping("Event")
+		public String event() {
+			return "other/event";
 		}
 		
 		@GetMapping("Location")
@@ -56,10 +81,10 @@ public class MainController {
 			return "reservation/reservation_form";
 		}
 		
-		@GetMapping("OnlineStore")
-		public String onlineStore() {
-			return "store/store_main";
-		}
+//		@GetMapping("OnlineStore")
+//		public String onlineStore() {
+//			return "store/store_main";
+//		}
 		
 		@GetMapping("Login")
 		public String login() {
@@ -68,8 +93,8 @@ public class MainController {
 		
 		@PostMapping("LoginPro")
 		public String loginPro(
-				MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, Model model) {
-			String securePasswd = service.getPasswd(member);
+				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, Model model) {
+//			String securePasswd = service.getPasswd(member);
 //			System.out.println("입력받은 아이디 : " + member.getMember_id());
 //			System.out.println("DB 에 저장된 패스워드 : " + securePasswd);
 //			System.out.println("입력받은 패스워드 : " + member.getMember_passwd());
@@ -83,9 +108,10 @@ public class MainController {
 //				// 이메일 인증 여부 확인
 //			}
 			// ------------------------------------------------------------
-			MemberVO dbMember = service.getMember(member);
+			MemberVO dbMember = service.getMemberLogin(member_id);
+			System.out.println(dbMember.getMember_passwd());
 			if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
-				model.addAttribute("msg", "인증 실패!");
+				model.addAttribute("msg", "로그인 실패!");
 				return "fail_back";
 			} else { // 로그인 성공
 				if(dbMember.getMail_auth_status().equals("N")) { // 이메일 미인증 회원
@@ -93,6 +119,7 @@ public class MainController {
 					return "fail_back";
 				} else { // 이메일 인증 회원
 					session.setAttribute("sId", member.getMember_id());
+					session.setAttribute("sName", dbMember.getMember_name());
 					return "redirect:/Main";
 				}
 			}
@@ -103,9 +130,58 @@ public class MainController {
 			return "other/id_forgot";
 		}
 		
+		@PostMapping("IdForgotPro")
+		public String idForgotPro(String member_name, String member_phone_num, MemberVO member, Model model, HttpSession session) {
+			String member_id = service.getMember(member_name);
+			String member_id_2 = service.getMemberId(member_phone_num);
+			System.out.println("입력받은 이름 : " + member.getMember_name());
+			System.out.println("입력받은 번호 : " + member.getMember_phone_num());
+			System.out.println("아이디 : " + member_id);
+			System.out.println("아이디2 : " + member_id_2);
+			
+			if(member_id.equals(member_id_2)) { // 성공
+				session.setAttribute("sName", member.getMember_name());
+				session.setAttribute("sId", member_id);
+				System.out.println("세션 아이디 : " + member_id);
+				return "other/id_found";
+			} else { // 실패
+				model.addAttribute("msg", "정보에 해당하는 회원이 없습니다.");
+				return "fail_back";
+			}
+		}
+		
 		@GetMapping("PassForgot")
 		public String passForgot() {
 			return "other/pass_forgot";
+		}
+		
+		@PostMapping("PassForgotPro")
+		public String passForgotPro(String member_id, String member_phone_num, MemberVO member, Model model) {
+			String member_id_2 = service.getMemberId(member_phone_num);
+			System.out.println("1 : " + member_id);
+			System.out.println("2 : " + member_id_2);
+			if(member_id.equals(member_id_2)) {
+				String email = service.getMemberEmail(member_id);
+				String authCode = mailService.sendAuthMail_passwd(member_id, email);
+				System.out.println(email);
+				System.out.println(authCode);
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+				String securePasswd = passwordEncoder.encode(authCode);
+				
+				int updatePasswdCount = service.updateMemberPasswd(member_id, securePasswd);
+				System.out.println("updatepasswd : " + updatePasswdCount);
+				if(updatePasswdCount > 0) {
+					model.addAttribute("msg", "입력한 메일로 변경 비밀번호 전송했습니다. 로그인 페이지로 이동합니다."); // 출력할 메세지
+					model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+					return "forward";
+				} else {
+					model.addAttribute("msg", "비밀번호 변경에 오류가 생겼습니다. 다시 시도해주세요.");
+					return "fail_back";
+				}
+			} else { // 실패
+				model.addAttribute("msg", "정보에 해당하는 회원이 없습니다.");
+				return "fail_back";
+			}
 		}
 		
 		@GetMapping("Logout")
@@ -133,75 +209,43 @@ public class MainController {
 //			model.addAttribute("c4", member.getC4());
 			
 			return "other/join";
-			
-			
-//			if(insertCount > 0) {
-//				return "redirect:/Join";
-//			} else {
-//				model.addAttribute("msg", "정보 동의 실패!");
-//				return "fail_back";
-//			}
 		}
-		
-//		@GetMapping("Join")
-//		public String join() {
-//			return "other/join";
-//		}
 		
 		@PostMapping("/JoinPro")
 		public String joinPro(MemberVO member, Model model) {
 			System.out.println(member);
-			// ----- BCryptPasswordEncoder 객체 활용한 패스워드 암호화(= 해싱) -----
-			// 입력받은 패스워드는 암호화 필요 => 복호화가 불가능하도록 단방향 암호화(해싱) 수행
-			// => 평문을 해싱 후 MemberVO 객체의 passwd 에 덮어쓰기
-			// => org.springframework.security.crypto.bcrypt 패키지의 BCryptPasswordEncoder 클래스 활용
-			//    (spring-security-crypto 라이브러리 추가 또는 spring-security-web 라이브러리 추가)
-			//    => 주의! spring-security-web 버전에 따른 컴파일러 버전 오류 발생할 수 있음
-			//       (java.lang.UnsupportedClassVersionError: org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0 (클래스 [org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder]을(를) 로드할 수 없습니다)
-			//       (class file version 이 55.0 일 경우 JDK 11, 61.0 일 경우 JDK 17 을 의미함)
-			//       해결방법 : JDK 11 기준 spring-security-web 라이브러리 5.x.x 사용
-			// => BCryptPasswordEncoder 활용한 해싱은 Salting(솔팅) 기능을 통해
-			//    동일한 평문(원본 암호)이라도 매번 다른 결과값(암호문)을 얻을 수 있다!
-			// 1. BcryptPasswordEncoder 클래스 인스턴스 생성
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			// 2. BcryptPasswordEncoder 객체의 encode() 메서드를 호출하여 
-			//    원문(평문) 패스워드에 대한 해싱(= 암호화) 수행 후 결과값 저장
-			//    => 파라미터 : Member 객체의 패스워드(평문 암호)   리턴타입 : String(암호문)
 			String securePasswd = passwordEncoder.encode(member.getMember_passwd());
-			// 3. 암호화 된 패스워드를 MemberVO 객체에 저장
 			member.setMember_passwd(securePasswd);
 			// ---------------------------------------------------------------------
-			// MemberService - registMember() 메서드 호출하여 회원가입 작업 요청
-			// => 파라미터 : MemberVO 객체   리턴타입 : int(insertCount)
 			int insertCount = service.registMember(member);
 			
-			// 회원가입 성공/실패에 따른 페이지 처리
-			// => 성공 시 "MemberJoinSuccess" 리다이렉트
-			// => 실패 시 "fail_back.jsp" 포워딩(Model 객체의 "msg" 속성값으로 "회원 가입 실패!" 저장)
 			if(insertCount > 0) { // 성공
 				// ------------------------------------------------
-				// 회원 가입 성공 시 인증 메일 발송 기능 추가
-				// => SendMailService - sendAuthMail() 메서드 호출하여 인증 메일 발송 요청
-				// => 파라미터 : 아이디, 이메일(= 회원 가입 시 입력한 정보)
-				// => 리턴타입 : String(인증코드)
 				String email = member.getMember_email1() + "@" + member.getMember_email2();
 				String authCode = mailService.sendAuthMail(member.getMember_id(), email);
 				
-				// MemberService - registAuthCode() 메서드 호출하여
-				// 인증 메일 발송에 사용된 아이디 및 인증 정보를 DB 에 등록
-				// => 파라미터 : 아이디, 인증코드
 				service.registAuthInfo(member.getMember_id(), authCode);
 				
 				// ------------------------------------------------
-				return "redirect:/Main";
+				model.addAttribute("msg", "인증 메일을 전송했습니다. 인증 확인 후 회원가입이 완료됩니다."); // 출력할 메세지
+				model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+				return "forward";
 			} else { // 실패
-				// 실패 시 메세지 출력 후 이전페이지로 돌아가는 기능을
-				// 하나의 jsp 페이지로 모듈화하여 공통된 방식으로 처리
 				model.addAttribute("msg", "회원 가입 실패!");
 				return "fail_back";
 			}
-			
 		}
+		
+		@ResponseBody
+		@PostMapping("CheckId")
+		public String checkId(String member_id) {
+	        String result="N";
+	        int flag = service.checkId(member_id);
+	        System.out.println(flag);
+	        if(flag == 1) result ="Y"; 
+	        return result;
+	    }
 		
 		@GetMapping("/MemberEmailAuth")
 		public String emailAuth(AuthInfoVO authInfo, Model model) {

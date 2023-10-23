@@ -98,10 +98,10 @@
 			<div class="container">
 				<ul class="links">
 					<li>
-						<a href="${pageContext.request.contextPath }/resources/news.jsp" id="notice">운영공지</a>
+						<a href="News" id="notice">운영공지</a>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/resources/event.jsp" id="event">이벤트</a>
+						<a href="Event" id="event">이벤트</a>
 					</li>
 				</ul>
 				<ul class="notice" style="margin: 5px 0 5px 100px;">

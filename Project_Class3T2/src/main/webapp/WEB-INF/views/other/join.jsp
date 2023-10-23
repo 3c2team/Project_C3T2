@@ -29,7 +29,7 @@
 			<input type="hidden" name="c2" id="c2" value="${member.c2}">
 			<input type="hidden" name="c3" id="c3" value="${member.c3}">
 			<input type="hidden" name="c4" id="c4" value="${member.c4}">
-			<table>
+			<table style="margin-top: -9%">
 				<tr>
 					<th>이름</th>
 					<td><input type="text" name="member_name" id="member_name" required size="20"></td>
@@ -38,21 +38,22 @@
 					<th>ID</th>
 					<td>
 						<input type="text" name="member_id" id="member_id" placeholder="4 ~ 8글자 사이 입력" required size="20">
-						<span id="checkIdResult1"></span>
+						<input type="button" id="checkId" value="중복검사"><br>
+						<span id="checkIdResult1" style="margin-left: 5%; font-size: 0.8em;"></span>
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
 					<td>
 						<input type="password" name="member_passwd" id="member_passwd" placeholder="8 ~ 16글자 사이 입력" required size="20">
-						<span id="checkPasswdResult"></span>
+						<span id="checkPasswdResult" style="font-size: 0.8em;"></span>
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
 					<td>
 						<input type="password" name="member_passwd2" id="member_passwd2" required size="20">
-						<span id="checkPasswd2Result"></span>
+						<span id="checkPasswd2Result" style="font-size: 0.8em;"></span>
 					</td>
 				</tr>
 				<tr>
@@ -97,7 +98,7 @@
 					<td colspan="2" align="center" >
 						<input type="submit" value="가입">
 						<input type="reset" value="초기화">
-						<input type="button" value="돌아가기" onclick="">
+<!-- 						<input type="button" value="돌아가기" onclick=""> -->
 					</td>
 				</tr>
 			</table>

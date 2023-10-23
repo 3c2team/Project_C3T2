@@ -35,7 +35,7 @@
 		<div id="accordion">
 			<h4>
 				<font size="2">이용약관 동의(필수)</font>
-				<input type="checkbox" name="c1" id="c1" value="1">
+				<input type="checkbox" name="c1" id="c1" value="1" required="required">
 			</h4>
 			<textarea readonly="readonly" rows="5" cols="66">
 제 1 조 (목적)
@@ -56,7 +56,7 @@
 			</textarea>
 			<h4>
 				<font size="2">개인정보 수집 및 이용에 대한 안내(필수)</font>
-				<input type="checkbox" name="c2" id="c2" value="1">
+				<input type="checkbox" name="c2" id="c2" value="1" required="required">
 			</h4>
 			<div>
 				<textarea readonly="readonly" rows="5" cols="66">

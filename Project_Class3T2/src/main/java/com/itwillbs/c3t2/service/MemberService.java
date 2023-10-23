@@ -75,8 +75,34 @@ public class MemberService {
 		return mapper.selectPasswd(member);
 	}
 
-	public MemberVO getMember(MemberVO member) {
-		return mapper.selectMember(member);
+//	public MemberVO getMember(MemberVO member) {
+//		return mapper.selectMember(member);
+//	}
+
+	public String getMember(String member_name) {
+		return mapper.selectMember(member_name);
+	}
+
+	public String getMemberId(String member_phone_num) {
+		return mapper.selectMemberId(member_phone_num);
+	}
+
+	public int updateMemberPasswd(String member_id, String securePasswd) {
+		return mapper.updateMemberPasswd(member_id, securePasswd);
+	}
+
+
+	public String getMemberEmail(String member_id) {
+		return mapper.selectMemberEmail(member_id);
+	}
+
+	public MemberVO getMemberLogin(String member_id) {
+		return mapper.selectMemberLogin(member_id);
+	}
+
+
+	public int checkId(String member_id) {
+		return mapper.selectCheckId(member_id);
 	}
 
 }

@@ -18,11 +18,11 @@
 		<main>
 		<div class="main">
 			<p class="sign" align="center">아이디를 찾았습니다</p>
-			<form action="IdForgotPro" method="post" class="form1">
-				<input class="user" name="member_id" type="text" style="align-content: center" placeholder="아이디">
-				<input class="mail" name="member_mail" type="text" style="align-content: center" placeholder="메일">
-				<p class="submit" align="center">메일 인증</p>
-				<a href="JoinAgree" class="join" style="align-content: center; margin:15%">회원가입</a>
+			<form action="" method="" class="form1">
+				<p class="user" name="member_name" type="text" style="align-content: center">${sessionScope.sName }</p>
+				<p class="phone" name="member_id" type="text" style="align-content: center">${sessionScope.sId }</p>
+<!-- 				<p class="submit" align="center">메일 인증 -->
+				<a href="Login" class="join" style="align-content: center; margin:18%">로그인</a>
 				<a href="PassForgot" class="passForgot" style="margin-left: 15%">비밀번호찾기</a>
 			</form>
 	    </div>
