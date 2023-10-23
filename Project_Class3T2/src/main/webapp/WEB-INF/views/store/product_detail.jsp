@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function productCount() {
+		let product_count = $("#amounts").val();
+		
+		alert("주문 수량 : " + product_count);
+		
+		location.href="CartPro?proNum=${productDetail.product_num }&proCount=" + product_count;
+	}
+</script>
 </head>
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
@@ -124,7 +133,7 @@
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="location.href='Cart?proNum=${paroductDetail.product_num }&proAmounts='">장바구니</button>
+						<button class="btn_white" onclick="productCount()">장바구니</button>
 						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->

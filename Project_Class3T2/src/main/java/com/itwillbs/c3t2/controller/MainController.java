@@ -81,10 +81,10 @@ public class MainController {
 			return "reservation/reservation_form";
 		}
 		
-//		@GetMapping("OnlineStore")
-//		public String onlineStore() {
-//			return "store/store_main";
-//		}
+		@GetMapping("OnlineStore")
+		public String onlineStore() {
+			return "store/store_main";
+		}
 		
 		@GetMapping("Login")
 		public String login() {

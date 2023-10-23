@@ -12,8 +12,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript">
+
 	$(function() {
 		$("#check_all").click(function() {
+			
 			if($("#check_all").is(":checked")) { // 전체선택 체크박스 체크 시
 				// 체크박스 모두 체크
 				$(":checkbox").prop("checked", true);
@@ -21,8 +23,23 @@
 				// 체크박스 모두 체크해제
 				$(":checkbox").prop("checked", false);
 			}
+			
+			//체크값 얻기
+			var chk = $(this).is(":checked");
+			console.log(chk);
+			
+			//전체를 각 글앞의 체크에 일괄 전달
+            //prop()을 통해서는 element가 가지는 실제적인 상태(활성화, 체크, 선택여부)를 제어하는 업무에 적절하고 
+            //attr()는 속성값이나 정보를 조회하는 업무에 적절하다
+			$(".checkbox").prop("checked",chk);
+
 		});
+		
 	});
+	
+
+
+
 </script>
 </head>
 		
@@ -37,12 +54,12 @@
 			<div id="frame2">
 				<span style="font-size: 18pt;, font-weight: bold; text-align: left;" onclick="fnPageChange('/')">장바구니</span>
 				<span class="home"> 홈 > 장바구니</span>
-				<span> </span>
+				<span>${sessionScope.sId} </span>
 			</div>
 			<br>
 									
 			<!-- 상품 정보 테이블 -->
-		<form action="Pay" method="post">	
+		
 			<div >
 				<table class="calculation1"  style="width: 100%; border-collapse : collapse;">
 				
@@ -52,7 +69,7 @@
 					</tr>
 					
 					<tr style="border-collapse: collapse;">
-						<th><input type="checkbox" name="checkbox" id="check_all"/></th>
+						<th><input type="checkbox" name="checkbox" id="check_all" /></th>
 						<th><span>이미지</span></th>
 						<th style="width:450px"><span>상품정보</span></th>
 						<th style="width: 100px;">판매가</th>
@@ -69,7 +86,7 @@
 					<c:forEach var="productList" items="${productList}">
 						<tr style="height: 90px; background-color: #fff;">
 							<td style="text-align: left; text-align: center; border-right: none;">
-								<input type="checkbox" name="checkbox"/>
+								<input type="checkbox" name="checkbox" class="checkbox" />
 							</td>
 							<td style="border-left: none; border-right: none"><img style="width: 60%" src="${productList.product_main_img_real_file }"></td>	
 							
@@ -78,7 +95,7 @@
 							<td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 -->
 							
 							<td style="width:80px;">
-								<input type="number" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="99" step="1" value="1">
+								<input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" value="${productList.product_count }">
 								<button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> 
 							</td>
 							
@@ -89,7 +106,19 @@
 							<td>
 								<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
-								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">삭제</button><br>
+								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br>
+<!-- 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete()">삭제</button><br> -->
+<!-- 								<script type="text/javascript"> -->
+<!-- 								function confirmDelete() { -->
+<!--  									 "삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시 -->
+<%-- 									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num}); --%>
+									
+<!-- 									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청 -->
+<!-- 										if(result) { -->
+<%-- 											location.href="DeleteCartProduct?proNum=${productList.product_num}"; --%>
+<!--  										}  -->
+<!--  								}  -->
+<!--  								</script> -->
 							</td>
 						</tr>
 					</c:forEach>
@@ -113,10 +142,10 @@
 					<span style="font-size: 10pt; color:gray;">할인 적용 금액은 주문서작성의 결제 금액에서 확인이 가능합니다.</span>
 				</div>
 			</div>
-		</form>	
+	
 			<div style="margin: 10px 0; text-align: left;">
 				<span style="margin: 0 10px;" class = "btnfloat">선택 상품을 </span>
-				<button class="btn default btnfloat" style=" color: black;">삭제하기</button>&nbsp;
+				<button class="btn default btnfloat" style=" color: black;" id="btnmemberdel">삭제하기</button>&nbsp;
 				
 				<button class="btn default backBtn btnfloat2" style="color: black; float: right;">장바구니 비우기</button>
 <!-- 				<span class="clearboth"></span> -->
