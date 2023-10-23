@@ -9,4 +9,4 @@ public class AdminVO {
 	private String admin_name;
 	private String admin_business_num;
 	private int member_num;
-	}
+}

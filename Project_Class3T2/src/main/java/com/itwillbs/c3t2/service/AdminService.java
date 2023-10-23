@@ -20,7 +20,7 @@ public class AdminService {
 	private AdminMapper mapper;
 
 	public List<MemberVO> selectMemberList() {
-		System.out.println("selectMemberList : 들어옴");
+
 		return mapper.selectMemberList();
 	}
 	public List<ReservationVO> getReservationList() {
@@ -34,9 +34,13 @@ public class AdminService {
 
 		return mapper.selectProduct();
 	}
-	public ProductVO getProduct(int product_num) {
+	public ProductVO getproductList(int product_num) {
 		// TODO Auto-generated method stub
-		return mapper.selectProduct(product_num);
+		return  mapper.selectProduct(product_num);
+	}
+	public List<Map<String,Object>> getproductImg(int product_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectProductImg(product_num);
 	}
 	
 

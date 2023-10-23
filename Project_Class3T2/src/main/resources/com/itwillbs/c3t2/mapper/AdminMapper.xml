@@ -25,4 +25,26 @@
 				WHERE product_num = ${product_num}
 			</if>
 		</select>
+		<select id="selectProductImg" resultType="map">
+			SELECT *
+			FROM PRODUCT_IMG
+			WHERE product_num = ${product_num}
+		</select>
+<!-- 		<select id="selectProductByImg" resultType="map"> -->
+<!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
+<!-- 				, p.product_name -->
+<!-- 				, p.product_price -->
+<!-- 				, p.product_info -->
+<!-- 				, p.product_release -->
+<!-- 				, p.product_category_num -->
+<!-- 				, p.product_main_img -->
+<!-- 				, p.product_main_img_real_file -->
+<!-- 				 , i.product_image_num -->
+<!-- 			     , i.product_image -->
+<!-- 			     , i.product_image_real_file -->
+<!-- 			  FROM PRODUCT p -->
+<!-- 			  JOIN PRODUCT_IMG i -->
+<!-- 				ON p.product_num = i.product_num -->
+<!-- 			 WHERE p.product_num = ${product_num} -->
+<!-- 		</select> -->
     </mapper>

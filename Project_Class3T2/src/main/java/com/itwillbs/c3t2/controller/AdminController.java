@@ -3,6 +3,7 @@ package com.itwillbs.c3t2.controller;
 
 import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.itwillbs.c3t2.service.AdminService;
 import com.itwillbs.c3t2.vo.AdminVO;
@@ -52,7 +54,6 @@ public class AdminController {
     public String adminProductList(Model model) {
     	
     	List<ProductVO> productList = service.getproductList();
-    	System.out.println(productList);
     	model.addAttribute("productList",productList);
     	return "admin/admin_product_list";
     }
@@ -62,12 +63,16 @@ public class AdminController {
     public String adminProductRegist() {
     	return "admin/admin_product_regist";
     }
+    @PostMapping("AdminProductRagistPro")
+    public String adminProductRagistPro(Model model,ProductVO product) {
+    	System.out.println(product);
+    	return "";
+    }
     
     //예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
     public String adminReservationList(Model model) {
     	List<ReservationVO> ReservationList = service.getReservationList();
-    	System.out.println(ReservationList);
     	model.addAttribute("ReservationList",ReservationList);
     	return "admin/admin_reservation_list";
     }
@@ -121,10 +126,13 @@ public class AdminController {
     @GetMapping("AdminProductUpdate")
     public String adminProductUpdate(Model model,int product_num) {
 //    	System.out.println("번호:" + product.getProduct_num());
-    	ProductVO dbProduct = service.getProduct(product_num);
-    	System.out.println("번호 : " + dbProduct.getProduct_num());
-    	System.out.println("이름 : " + dbProduct.getProduct_name());
+    	ProductVO dbProduct = service.getproductList(product_num);
+    	List<Map<String,Object>> dbProductImg = service.getproductImg(product_num);
+    	System.out.println(dbProductImg);
+    	System.out.println(dbProductImg.get(1).get("product_image"));
+    	System.out.println(dbProductImg.get(2).get("product_image"));
     	model.addAttribute("dbProduct",dbProduct);
+    	model.addAttribute("dbProductImg",dbProductImg);
     	return "admin/admin_product_update";
     }
     //로그인 페이지 이동(관리자)

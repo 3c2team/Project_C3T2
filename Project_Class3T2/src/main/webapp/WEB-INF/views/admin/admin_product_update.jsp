@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet"
@@ -77,24 +77,25 @@ $(function() {
 				<c:choose>
 					<c:when test="${!empty dbProduct.product_main_img }">
 						<div id="main_file">
-							${dbProduct.product_main_img }
-							<input type="button" value="삭제" id="delete_btn"><br>
+							<c:forEach var="dbProductImg" items="${dbProductImg }">
+								<div>
+									${dbProductImg.product_image}
+									<input type="button" value="삭제" id="delete_btn"><br>
+								</div>
+							</c:forEach>
+							<div id="button_add_result"></div>
+							<input type="button" id="button_add" value="+">
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div>
-							<input type="file" class="form-control">
-						</div>
 					</c:otherwise>
-						<input type="file" class="form-control">
-						<div id="button_add_result"></div>
-						<input type="button" id="button_add" value="+">
 				</c:choose>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="button" class="btn btn-primary" value="취소">
 					<input type="submit" class="btn btn-primary" value="등록">
+						
 				</div>
 			</div>
 		</form>

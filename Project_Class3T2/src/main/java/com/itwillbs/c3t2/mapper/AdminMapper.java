@@ -18,5 +18,6 @@ public interface AdminMapper {
 	AdminVO selectAdmin(AdminVO admin);
 	List<ProductVO> selectProduct();
 	ProductVO selectProduct(int product_num);
+	List<Map<String,Object>> selectProductImg(int product_num);
 
 }

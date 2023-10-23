@@ -10,7 +10,12 @@
 <title>상품 등록</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/admin_product.js"></script>
+<script type="text/javascript">
+$(function() {
+	let category_num = $("input[name=category]:checked").val();
 	
+});
+</script>	
 </head>
 <body>
 	<div class="jumbotron">
@@ -19,44 +24,38 @@
 		</div>
 	</div>
 	<div class="container">
-		<form name="newProduct" action="" class="form-horizontal"method="post" enctype="multipart/form-data">
+		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
-					<input type="radio" name="category" >스테이크
-					<input type="radio" name="category" >드링크 
-					<input type="radio" name="category" >밥 
-					<input type="radio" name="category" >배고파
+					<input type="radio" value="1" name="category" >스테이크
+					<input type="radio" value="2" name="category" >드링크 
+					<input type="radio" value="3" name="category" >밥 
+					<input type="radio" value="4" name="category" >배고파
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" id="name" name="name" class="form-control">
+					<input type="text" id="product_name" name="product_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" id="unitPrice" name="unitPrice" class="form-control">
+					<input type="text" id="product_price" name="unitPrice" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="description" cols="50" rows="2" class="form-control"></textarea>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2">재고 수</label>
-				<div class="com-sm-3">
-					<input type="text" name="unitsInStock" class="form-control">
+					<textarea name="description" id="product_info" cols="50" rows="2" class="form-control"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 메인 이미지</label>
 				<div>
-					<input type="file" class="form-control">
+					<input id="product_main_img" type="file" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -69,7 +68,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" class="btn btn-primary" value="등록">
+					<input id="product_image"type="submit" class="btn btn-primary" value="등록">
 				</div>
 			</div>
 		</form>
