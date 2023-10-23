@@ -4,16 +4,50 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.itwillbs.c3t2.mapper.ProductMapper">
+	<!-- Best 조회 -->
+	<select id="selectProductBestList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+		SELECT P.*, COUNT(OD.product_num) AS 'product_count'
+		FROM PRODUCT P
+		LEFT JOIN ORDER_DETAIL OD ON P.product_num = OD.product_num
+		GROUP BY P.product_num
+		ORDER BY product_count DESC;
+	</select>
+	<!-- Hot 조회 -->
+	<select id="selectProductHotList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+		SELECT P.*, COUNT(F.product_num) AS favorite_count
+		FROM PRODUCT P
+		LEFT JOIN FAVORITE F ON P.product_num = F.product_num
+		GROUP BY P.product_num
+		ORDER BY favorite_count DESC
+	</select>
+	<!-- New 조회 -->
 	<select id="selectProductNewList" resultType="com.itwillbs.c3t2.vo.ProductVO">
 		SELECT *
 		FROM PRODUCT
 		ORDER BY product_release ASC
 	</select>
+	<!-- Category별 조회 -->
+	<!-- 
+	<select id="selectCategoryList" parameterType="String" resultType="com.itwillbs.c3t2.vo.ProductImgVO">
+    SELECT * FROM PRODUCT
+    WHERE product_category_num = (
+        SELECT product_category_num FROM PRODUCT_CATEGORY WHERE product_category_name = #{categoryName}
+    )
+	</select>
+	-->
+	<!-- 상품상세 조회 -->
 	<select id="selectProductDetail" resultType="com.itwillbs.c3t2.vo.ProductVO">
 		SELECT *
 		FROM PRODUCT
 		WHERE product_num = #{proNum}
 	</select>
+	<!-- 상품상세 이미지 조회 -->
+	<select id="selectProductImg" resultType="com.itwillbs.c3t2.vo.ProductImgVO">
+		SELECT *
+		FROM PRODUCT_IMG
+		WHERE product_num = #{proNum};
+	</select>
+	
 	<select id="selectProductCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
 		SELECT *
 		FROM PRODUCT
