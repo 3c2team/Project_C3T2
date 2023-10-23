@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/product_detail.js"></script>
+<script src="${pageContext.request.contextPath }/resource/js/order_detail.js"></script>
 <body>
 	<header>
 		<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -23,7 +24,7 @@
 				<%-- 왼쪽 시작 --%>
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
-						<img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg" id="main_img">
+						<img src="${productDetail.product_main_img_real_file}" id="main_img">
 						<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
 							<div class="orderAveStar">
 								<strong>
@@ -64,11 +65,10 @@
 					<div class="detailTopMiniImg">
 						<ul>
 						<!-- 이미지 업로드 수 만큼 조절해야함 -->
-							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta2.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta3.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta4.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta5.jpg" id="mini_img" onmouseover="changeImg(this)"></a></li>
-							<li><a><img src="${pageContext.request.contextPath }/resource/online_img/pasta5.jpg" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<c:forEach var="product_img" items="${productMiniImgList }">
+								<li><a><img src="${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
+							</c:forEach>
+							<li><a><img src="/store_img/review_mini_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
@@ -124,8 +124,8 @@
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="location.href='Cart?proNum=${productDetail.product_num }'">장바구니</button>
-						<button class="btn_black" onclick="location.href='Pay?proNum=${productDetail.product_num }'">구매하기</button>
+						<button class="btn_white" onclick="location.href='Cart?proNum=${paroductDetail.product_num }&proAmounts='">장바구니</button>
+						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
 <!-- 						<button>일시 판매종료</button> -->
@@ -145,7 +145,123 @@
 				<button name="productRaw" onclick="">상품정보제공고시</button>
 			</div>
 			<div class="detailInfoImgArea">
-				<img class="detailInfoImg" >
+				<%-- 경로 변경하기 --%>
+				<img class="detailInfoImg" src="${pageContext.request.contextPath }/resources/store_img/pasta1_info.png">
+			</div>
+		</section>
+		
+		<section class="reviewContainer">
+			<div>
+				<div class="reviewTatle">
+					<a>상품리뷰</a>
+				</div>
+				<hr>
+				<div>
+					<div>
+						<div class="reviewAve">
+							<strong class="reviewAveStr">상품 총 평점</strong>
+							<div class="reviewAveDashboard">
+								<div class="reviewAveStar">
+									<a>★★★★★</a>
+									<span class="reviewAveScore"> 4.2</span><span class="reviewMaxScore">/  5</span>
+									<span class="reviewCount">총 4건의 리뷰</span>
+								</div>
+								<div>
+									<button class="reviewWrite">리뷰 쓰기</button>
+								</div>
+							</div>
+						</div>
+						
+					</div>	
+				</div>
+			</div>
+			<div>
+				<div>
+					<ul class="">
+<%-- 						<c:forEach var="" items=""> --%>
+							<li>
+								<div class="reviewBox">
+									<div class="reviewStar">
+										<a>★★★★★ | 5</a>
+									</div>
+									<div class="reviewInfo">
+										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
+										<div class="reviewImg">
+											<img src="../store_img/steak7 (4).jpg">
+										</div>
+										<div class="reviewContent">
+											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+											리뷰내용리뷰내용리뷰내용리뷰내용
+										</div>
+									</div>
+									<div class="reviewIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reviewBox">
+									<div class="reviewStar">
+										<a>★★★★★ | 5</a>
+									</div>
+									<div class="reviewInfo">
+										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
+										<div class="reviewImg">
+											<img src="../store_img/steak7 (4).jpg">
+										</div>
+										<div class="reviewContent">
+											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+											리뷰내용리뷰내용리뷰내용리뷰내용
+										</div>
+									</div>
+									<div class="reviewIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reviewBox">
+									<div class="reviewStar">
+										<a>★★★★★ | 5</a>
+									</div>
+									<div class="reviewInfo">
+										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
+										<div class="reviewImg">
+											<img src="../store_img/steak7 (4).jpg">
+										</div>
+										<div class="reviewContent">
+											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+											리뷰내용리뷰내용리뷰내용리뷰내용
+										</div>
+									</div>
+									<div class="reviewIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="reviewBox">
+									<div class="reviewStar">
+										<a>★★★★★ | 5</a>
+									</div>
+									<div class="reviewInfo">
+										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
+										<div class="reviewImg">
+											<img src="../store_img/steak7 (4).jpg">
+										</div>
+										<div class="reviewContent">
+											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
+											리뷰내용리뷰내용리뷰내용리뷰내용
+										</div>
+									</div>
+									<div class="reviewIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
+<%-- 						</c:forEach> --%>
+					</ul>
+				</div>
 			</div>
 		</section>
 		

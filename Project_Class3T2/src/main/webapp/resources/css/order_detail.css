@@ -307,5 +307,87 @@ input[type='number']::-webkit-inner-spin-button {
 	line-height: 0;
 }
 
+.detailInfoImgArea {
+    display: flex;
+    justify-content: center;
+    padding-block: 10%;
+}
 
+/*============= < 리뷰 > =============*/
+.reviewTatle {
+    margin: 15px;
+}
 
+.reviewTatle a {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.reviewAve {
+    margin: 20px;
+}
+
+strong.reviewAveStr {
+    font-size: 18px;
+}
+
+.reviewAveDashboard {
+    display: flex;
+    font-size: 30px;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.reviewAveStar a {
+    color: #FE2E2E;
+}
+
+span.reviewAveScore {
+    font-weight: bold;
+}
+
+.reviewMaxScore, .reviewCount {
+    color: #BDBDBD;
+}
+
+.reviewCount {
+    font-size: 20px;
+}
+
+.reviewBox {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding-inline: 10%;
+    height: 200px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.reviewStar {
+    font-size: 19px;
+    text-align: center;
+    width: 15%;
+}
+
+.reviewInfo {
+    display: flex;
+    text-align: left;
+    width: 65%;
+}
+
+.reviewImg {
+    padding: 10px;
+    width: 20%;
+    height: auto;
+    text-align: center;
+}
+
+.mainLayout img {
+    max-width: 100%;
+    height: auto;
+}
+
+.reviewIdDate {
+    text-align: right;
+    width: 20%;
+}

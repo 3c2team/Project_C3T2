@@ -18,13 +18,13 @@
 	<main class="mainLayout">
 		<div class="categoryMenuArea">
 			<div class="categoryName"><h1>NEW</h1></div>
-			<div class="categoryMenu">
-				<a href="">All</a>
-				<a href="">Steak</a>
-				<a href="">Pasta</a>
-				<a href="">Soup</a>
-				<a href="">ets</a>
-			</div>	
+<!-- 			<div class="categoryMenu" style="visibility:hidden"> -->
+<!-- 				<a href="">All</a> -->
+<!-- 				<a href="">Steak</a> -->
+<!-- 				<a href="">Pasta</a> -->
+<!-- 				<a href="">Soup</a> -->
+<!-- 				<a href="">ets</a> -->
+<!-- 			</div>	 -->
 		</div>
 		
 		<%-- ================================================ --%>
