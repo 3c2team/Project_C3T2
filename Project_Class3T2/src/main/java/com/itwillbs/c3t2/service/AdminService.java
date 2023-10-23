@@ -1,6 +1,7 @@
 package com.itwillbs.c3t2.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,12 @@ public class AdminService {
 		return mapper.selectAdmin(admin);
 	}
 	public List<ProductVO> getproductList() {
+
+		return mapper.selectProduct();
+	}
+	public ProductVO getProduct(int product_num) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectProduct(product_num);
 	}
 	
 

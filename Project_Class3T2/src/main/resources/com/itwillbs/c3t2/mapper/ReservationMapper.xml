@@ -31,7 +31,7 @@
 		)
 	</insert>
 	
-	<select id="selectReservation" resultType="SelectReservation">
+	<select id="selectReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT * FROM RESERVATION WHERE is_member = #{is_member}
 	</select>
 	

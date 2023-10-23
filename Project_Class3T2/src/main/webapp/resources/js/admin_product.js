@@ -5,9 +5,6 @@ $(function() {
 			);
 		});
 		$("#button_open").on("click",function() {
-			window.open('adminProductRegist','', 'width=200', 'height=4100');
-		});
-		$("#button_open_update").on("click",function() {
-			window.open('adminProductUpdate','', 'width=200', 'height=4100');
+			window.open('AdminProductRegist','', 'width=200', 'height=4100');
 		});
 	});

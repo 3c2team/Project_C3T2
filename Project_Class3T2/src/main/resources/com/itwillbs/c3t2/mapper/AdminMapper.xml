@@ -18,5 +18,11 @@
 			FROM ADMIN
 			WHERE admin_id = #{admin_id}
 		</select>
-			
+		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
+			SELECT  *
+			FROM PRODUCT
+			<if test="product_num != null">
+				WHERE product_num = ${product_num}
+			</if>
+		</select>
     </mapper>

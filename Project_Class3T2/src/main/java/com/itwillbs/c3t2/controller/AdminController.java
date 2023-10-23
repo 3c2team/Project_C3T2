@@ -51,9 +51,9 @@ public class AdminController {
     @GetMapping("AdminProductList")
     public String adminProductList(Model model) {
     	
-//    	List<ProductVO> productList = service.getproductList();
-//    	System.out.println(productList);
-//    	model.addAttribute("ReservationList",productList);
+    	List<ProductVO> productList = service.getproductList();
+    	System.out.println(productList);
+    	model.addAttribute("productList",productList);
     	return "admin/admin_product_list";
     }
     
@@ -119,7 +119,12 @@ public class AdminController {
 
     //상품 수정 페이지 이동(관리자)
     @GetMapping("AdminProductUpdate")
-    public String adminProductUpdate() {
+    public String adminProductUpdate(Model model,int product_num) {
+//    	System.out.println("번호:" + product.getProduct_num());
+    	ProductVO dbProduct = service.getProduct(product_num);
+    	System.out.println("번호 : " + dbProduct.getProduct_num());
+    	System.out.println("이름 : " + dbProduct.getProduct_name());
+    	model.addAttribute("dbProduct",dbProduct);
     	return "admin/admin_product_update";
     }
     //로그인 페이지 이동(관리자)

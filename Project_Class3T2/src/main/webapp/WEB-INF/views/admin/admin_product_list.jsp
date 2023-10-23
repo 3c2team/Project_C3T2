@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,25 +44,24 @@
 									<th>#</th>
 									<th>상품번호</th>
 									<th>상품이름</th>
-									<th>상품설명</th>
 									<th>찜갯수</th>
 									<th>판매가</th>
-									<th>재고</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th><input type="checkbox" class="custom-control-input"></th>
-									<th>1</th>
-									<th>스테이크<span><button id="button_open_update"class="btn btn-light btn-right">수정</button></span></th>
-									<th>맛잇음</th>
-									<th>1000000</th>
-									<th>1000000</th>
-									<th>2000000</th>
-								</tr>
+								<c:forEach var="productList" items="${productList }">
+									<tr>
+										<th><input type="checkbox" value="${productList.product_num }" class="custom-control-input"></th>
+										<th>${productList.product_num}</th>
+										<th>${productList.product_name }<span>
+											<button id="button_open_update"class="btn btn-light btn-right" onclick="window.open('AdminProductUpdate?product_num=${productList.product_num}','', 'width=200', 'height=600')">수정</button></span></th>
+										<th>10</th>
+										<th>${productList.product_price }</th>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-						<button class="btn btn-primary">삭제</button>
+						<button class="btn btn-primary" id="button_delete">삭제</button>
 						<button class="btn btn-primary" id="button_open">등록</button>
 					</div>
 				</div>
