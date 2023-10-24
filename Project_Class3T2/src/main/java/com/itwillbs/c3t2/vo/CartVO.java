@@ -8,4 +8,5 @@ public class CartVO {
 	private String member_id;
 	private int product_num;
 	private int product_count;
+	private int product_price;
 }
