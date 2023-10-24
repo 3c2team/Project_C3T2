@@ -112,8 +112,8 @@ public class MemberService {
 		return mapper.getOrderList();
 	}
 	//회원 상세내역
-	public MemberVO getMemberDetails(MemberVO member) {
-		return mapper.getMemberDetails(member);
+	public MemberVO getMemberDetails(String member_id) {
+		return mapper.selectMemberDetails(member_id);
 	}
 
 }

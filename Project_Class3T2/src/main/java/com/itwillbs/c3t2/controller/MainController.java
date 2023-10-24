@@ -283,10 +283,11 @@ public class MainController {
 			return "mypage/mypage_reservation_check";
 		}
 		@GetMapping("MypagePoint")				//회원 상새내역
-		public String mypagePoint(MemberVO member, Model model) {
-			
-			MemberVO dbMember = service.getMemberDetails(member);
+		public String mypagePoint(MemberVO member, Model model, HttpSession session) {
+			String member_id = (String)session.getAttribute("sId");
+			MemberVO dbMember = service.getMemberDetails(member_id);
 			model.addAttribute("Member", dbMember);
+			System.out.println(dbMember);
 			
 			return "mypage/mypage_point";
 		}
