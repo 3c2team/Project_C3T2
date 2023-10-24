@@ -11,7 +11,7 @@ public interface ReservationMapper {
 	int insertReservation(ReservationVO reservation);
 	
 	// 비회원 예약 상세정보 조회
-	ReservationVO selectReservation(String is_member);
+//	ReservationVO selectReservation(ReservationVO reservation);
 	
 	
 }
