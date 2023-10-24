@@ -73,11 +73,11 @@
 						<th><span>이미지</span></th>
 						<th style="width:450px"><span>상품정보</span></th>
 						<th style="width: 100px;">판매가</th>
-						<th>수량</th>
-						<th style="width: 70px;"><span>포인트</span></th>
-						<th style="width: 70px;">배송구분</th>
-						<th style="width: 70px;">배송비</th>
-						<th style="width: 70px;">합계</th>
+						<th style="width: 100px;">수량</th>
+<!-- 						<th style="width: 70px;"><span>포인트</span></th> -->
+						<th style="width: 100px;">배송구분</th>
+						<th style="width: 100px;">배송비</th>
+						<th style="width: 100px;">합계</th>
 						<th>선택</th>
 					</tr>
 				</thead>
@@ -86,7 +86,7 @@
 					<c:forEach var="productList" items="${productList}">
 						<tr style="height: 90px; background-color: #fff;">
 							<td style="text-align: left; text-align: center; border-right: none;">
-								<input type="checkbox" name="checkbox" class="checkbox" />
+								<input type="checkbox" name="checkbox" class="checkbox" proNum="${productList.product_num}"/>
 							</td>
 							<td style="border-left: none; border-right: none"><img style="width: 60%" src="${productList.product_main_img_real_file }"></td>	
 							
@@ -99,26 +99,25 @@
 								<button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> 
 							</td>
 							
-							<td>-</td>
+<!-- 							<td>-</td> -->
 							<td>기본배송</td>
 							<td>고정</td>
 							<td><span>0</span>원</td>
 							<td>
 								<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
-								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br>
-<!-- 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete()">삭제</button><br> -->
-<!-- 								<script type="text/javascript"> -->
-<!-- 								function confirmDelete() { -->
-<!--  									 "삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시 -->
-<%-- 									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num}); --%>
+								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete()">삭제</button><br>
+								<script type="text/javascript">
+								function confirmDelete() {
+									// "삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시
+									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num});
 									
-<!-- 									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청 -->
-<!-- 										if(result) { -->
-<%-- 											location.href="DeleteCartProduct?proNum=${productList.product_num}"; --%>
-<!--  										}  -->
-<!--  								}  -->
-<!--  								</script> -->
+//									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청
+										if(result) {
+											location.href="DeleteCartProduct?proNum=${productList.product_num}";
+										}
+								}
+								</script>
 							</td>
 						</tr>
 					</c:forEach>
