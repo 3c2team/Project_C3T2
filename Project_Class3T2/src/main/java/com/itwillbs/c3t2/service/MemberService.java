@@ -109,11 +109,11 @@ public class MemberService {
 
 	// 상품 구매 내역
 	public List<UserOrderVO> getOrderList() {
-		return mapper.selectOrder();
+		return mapper.getOrderList();
 	}
 	//회원 상세내역
-	public MemberVO getMemberr(MemberVO member) {
-		return mapper.selectMemberr(member);
+	public MemberVO getMemberDetails(MemberVO member) {
+		return mapper.getMemberDetails(member);
 	}
 
 }

@@ -40,53 +40,47 @@
 				</div>
 				<div class ="mypageContents">
 					<div align="center">
-					<br><br>
-					<h1>포인트 내역</h1><br>
+					<h2>회원 상세정보</h2><br><br>
 					</div>
-					<h2>기간 조회</h2>
-					<form action="MypagePoint" method="Get">
+					<article>
 					    <table border="1">
 					        <thead>
-					           <tr>
-					            	<th>회원 이름</th>
-					                <td>${member.member_name}</td>
-					           </tr>
-					           <tr>
+					            <tr>
+					                <th>회원 이름</th>
+					                <td>${Member.member_name}</td>
+					            </tr>
+					            <tr>
 					                <th>회원 ID</th>
-					                <td>${member.member_id}</td>
+					                <td>${Member.member_id}</td>
 					            </tr>
 					            <tr>
 					                <th>주소</th>
-					                <td>${MemberDetails.member_address}</td>
+					                <td>${Member.member_address}</td>
 					            </tr>
 					            <tr>
 					                <th>이메일</th>
-					                <td>${MemberDetails.member_email}</td>
+					                <td>${Member.member_email}</td>
 					            </tr>
 					            <tr>
 					                <th>가입 날짜</th>
-					                <td>${MemberDetails.member_insert_date}</td>
-					      		</tr>
+					                <td>${Member.member_insert_date}</td>
+					            </tr> 
 					            <tr>
 					                <th>전화번호</th>
-					                <td>${MemberDetails.member_phone_num}</td>
-					            </tr>
-					            <tr>
+					                <td>${Member.member_phone_num}</td>
+					             </tr>
+					             <tr>
 					                <th>생일</th>
-					                <td>${MemberDetails.member_birth}</td>
-					            </tr>
-					            <tr>
+					                <td>${Member.member_birth}</td>
+					              </tr>
+					              <tr>
 					                <th>성별</th>
-					                <td>${MemberDetails.member_gender}</td>
-					            </tr>
-					        </thead>
-					        <tbody>
-					            <tr>
-					            </tr>
-					        </tbody>
-					    </table>
-					    <input type="submit" value="정보 수정">
-					</form>
+					                <td>${Member.member_gender}</td>
+					              </tr>
+					        	</thead>
+					    	</table>
+					    </article>
+					   <input type="submit" value="정보 수정">
 				<br><br>
 			</div>
 		</div>

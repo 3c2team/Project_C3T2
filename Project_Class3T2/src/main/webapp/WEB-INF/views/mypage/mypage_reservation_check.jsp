@@ -43,7 +43,7 @@
 				<h1>상품 구매 확인</h1><br>
 				</div>
 				<h2>기간 조회</h2>
-				<form action="MypageReservationCheck" method="Get">
+<!-- 				<form action="MypageReservationCheck" method="Get"> -->
 				    <table border="1">
 				        <thead>
 				            <tr>
@@ -71,7 +71,7 @@
 				        </tbody>
 				    </table>
 				    <input type="submit" value="예약 확인">
-				</form>
+<!-- 				</form> -->
 				<br><br>
 			</div>
 		</div>

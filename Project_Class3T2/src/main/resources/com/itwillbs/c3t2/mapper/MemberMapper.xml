@@ -119,16 +119,15 @@
 		WHERE member_id=#{member_id}
 	</select>
 	
-	<!-- 예약 조회 -->
-	<select id = "selectOrder" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
+	<!-- 예약내역 조회 -->
+	<select id = "getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
 		SELECT * FROM USER_ORDER
-		WHERE member_num = #{member_num}
 	</select>
 	
 	<!-- 회원상세정보 조회 -->
-	<select id = "selectMemberr" resultType="com.itwillbs.c3t2.vo.MemberVO">
+	<select id = "getMemberDetails" resultType="com.itwillbs.c3t2.vo.MemberVO">
 		SELECT*FROM MEMBER 
-		WHERE member_num = #{member_num}
+		WHERE member_id = #{member_id}
 	</select>
 	
 	

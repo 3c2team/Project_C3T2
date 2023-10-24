@@ -51,10 +51,10 @@ public interface MemberMapper {
 
 	int selectCheckId(String member_id);
 	
-	//예약내역
-	List<UserOrderVO> selectOrder();
+	//상품 구매내역
+	List<UserOrderVO> getOrderList();
 	
 	// 회원 상세정보 조회
-	MemberVO selectMemberr(MemberVO member);
+	MemberVO getMemberDetails(MemberVO member);
 	
 }

@@ -277,21 +277,16 @@ public class MainController {
 			
 			//상품 구매 내역을 가져옴
 			List<UserOrderVO> OrderList = service.getOrderList();
+			System.out.println(OrderList);
 			model.addAttribute("OrderList", OrderList);
 			
 			return "mypage/mypage_reservation_check";
 		}
-		@GetMapping("MypagePoint")				//상새내역
-		public String mypagePoint(MemberVO member, HttpSession session, Model model) {
-			String sId = (String)session.getAttribute("sId");
-			if(sId == null) {
-				model.addAttribute("msg", "잘못된 접근입니다!");
-				return "fail_back";
-			}
-			MemberVO dbMember = service.getMemberr(member);
+		@GetMapping("MypagePoint")				//회원 상새내역
+		public String mypagePoint(MemberVO member, Model model) {
 			
-			model.addAttribute("member", dbMember);
-			
+			MemberVO dbMember = service.getMemberDetails(member);
+			model.addAttribute("Member", dbMember);
 			
 			return "mypage/mypage_point";
 		}
