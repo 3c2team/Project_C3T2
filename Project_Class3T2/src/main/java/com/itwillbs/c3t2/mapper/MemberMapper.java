@@ -1,13 +1,19 @@
 package com.itwillbs.c3t2.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.ReservationVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Mapper
 public interface MemberMapper {
+
+	
 
 	int insertMember(MemberVO member);
 
@@ -44,5 +50,11 @@ public interface MemberMapper {
 	MemberVO selectMemberLogin(String member_id);
 
 	int selectCheckId(String member_id);
-
+	
+	//예약내역
+	List<UserOrderVO> selectOrder();
+	
+	// 회원 상세정보 조회
+	MemberVO selectMemberr(MemberVO member);
+	
 }

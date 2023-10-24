@@ -1,11 +1,15 @@
 package com.itwillbs.c3t2.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.MemberMapper;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.ReservationVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Service
 public class MemberService {
@@ -79,9 +83,6 @@ public class MemberService {
 //		return mapper.selectMember(member);
 //	}
 
-	public String getMember(String member_name) {
-		return mapper.selectMember(member_name);
-	}
 
 	public String getMemberId(String member_phone_num) {
 		return mapper.selectMemberId(member_phone_num);
@@ -103,6 +104,16 @@ public class MemberService {
 
 	public int checkId(String member_id) {
 		return mapper.selectCheckId(member_id);
+	}
+
+
+	// 상품 구매 내역
+	public List<UserOrderVO> getOrderList() {
+		return mapper.selectOrder();
+	}
+	//회원 상세내역
+	public MemberVO getMemberr(MemberVO member) {
+		return mapper.selectMemberr(member);
 	}
 
 }

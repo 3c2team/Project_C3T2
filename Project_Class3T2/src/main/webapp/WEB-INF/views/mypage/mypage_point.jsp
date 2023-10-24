@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,39 +44,49 @@
 					<h1>포인트 내역</h1><br>
 					</div>
 					<h2>기간 조회</h2>
-					<div class="reservationConfirmContainer">
-					<div class="reservationConfirmTerm">
-						<div class="calendarContainer">
-						      <button onclick="setToday()">오늘</button>
-						      <button onclick="setMonths(-1)">1개월</button>
-						      <button onclick="setMonths(-3)">3개월</button>
-						      <button onclick="setMonths(-6)">6개월</button>
-						</div>
-    					<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
-						<div id="reservation_confirm_term_right">
-							<div class="calanderWrap">
-								<input type="date" id="startDate">
-						         -  
-						        <input type="date" id="endDate"> 
-						        <button id="search_btn">조회</button>
-							</div>
-						</div>
-					</div>
-					<br><br>
-					<article>
-						<section id="list_Form">
-							<table>
-								<tr id="tr_top">
-									<th width="120px">주문번호</th> <!-- 적립 or 소멸 -->
-									<th width="400px">상품명</th>
-									<th width="130px">수량</th> <!-- 개별 유효기간 등 -->
-									<th width="130px">결제상태</th>
-									<th width="130px">주문상태</th>
-								</tr>
-							</table>
-						</section>
-					</article>
-				</div>
+					<form action="MypagePoint" method="Get">
+					    <table border="1">
+					        <thead>
+					           <tr>
+					            	<th>회원 이름</th>
+					                <td>${member.member_name}</td>
+					           </tr>
+					           <tr>
+					                <th>회원 ID</th>
+					                <td>${member.member_id}</td>
+					            </tr>
+					            <tr>
+					                <th>주소</th>
+					                <td>${MemberDetails.member_address}</td>
+					            </tr>
+					            <tr>
+					                <th>이메일</th>
+					                <td>${MemberDetails.member_email}</td>
+					            </tr>
+					            <tr>
+					                <th>가입 날짜</th>
+					                <td>${MemberDetails.member_insert_date}</td>
+					      		</tr>
+					            <tr>
+					                <th>전화번호</th>
+					                <td>${MemberDetails.member_phone_num}</td>
+					            </tr>
+					            <tr>
+					                <th>생일</th>
+					                <td>${MemberDetails.member_birth}</td>
+					            </tr>
+					            <tr>
+					                <th>성별</th>
+					                <td>${MemberDetails.member_gender}</td>
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <tr>
+					            </tr>
+					        </tbody>
+					    </table>
+					    <input type="submit" value="정보 수정">
+					</form>
 				<br><br>
 			</div>
 		</div>

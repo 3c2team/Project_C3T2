@@ -72,10 +72,6 @@ public class MyPageController {
 	public String mypageReservationAsk() {
 		return "mypage/mypage_reservation_ask";
 	}
-	@GetMapping("MypagePoint")					//나의 포인트정보 - 포인트 내역
-	public String mypagePoint() {
-		return "mypage/mypage_point";
-	}
 	@GetMapping("MypageReservationChange")	//나의 예약정보 - 예약 변경 전 비번입력
 	public String mypageReservationChange() {
 		return "mypage/mypage_reservation_change";
@@ -83,9 +79,5 @@ public class MyPageController {
 	@GetMapping("MypageReservationChange2")	//나의 예약정보 - 예약 변경
 	public String mypageReservationChange2() {
 		return "mypage/mypage_reservation_change2";
-	}
-	@GetMapping("MypageReservationCheck")		//나의 예약정보 - 예약 확인
-	public String mypageReservationCheck() {
-		return "mypage/mypage_reservation_check";
 	}
 }

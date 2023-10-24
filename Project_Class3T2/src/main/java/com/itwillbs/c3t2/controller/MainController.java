@@ -1,5 +1,7 @@
 package com.itwillbs.c3t2.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.ReservationVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Controller
 public class MainController {
@@ -132,7 +136,7 @@ public class MainController {
 		
 		@PostMapping("IdForgotPro")
 		public String idForgotPro(String member_name, String member_phone_num, MemberVO member, Model model, HttpSession session) {
-			String member_id = service.getMember(member_name);
+			String member_id = service.getMemberId(member_phone_num);
 			String member_id_2 = service.getMemberId(member_phone_num);
 			System.out.println("입력받은 이름 : " + member.getMember_name());
 			System.out.println("입력받은 번호 : " + member.getMember_phone_num());
@@ -267,4 +271,29 @@ public class MainController {
 				return "fail_back";
 			}
 		}
+		
+		@GetMapping("/MypageReservationCheck")	//상품 구매 내역
+		public String mypageReservationCheck(Model model) {
+			
+			//상품 구매 내역을 가져옴
+			List<UserOrderVO> OrderList = service.getOrderList();
+			model.addAttribute("OrderList", OrderList);
+			
+			return "mypage/mypage_reservation_check";
+		}
+		@GetMapping("MypagePoint")				//상새내역
+		public String mypagePoint(MemberVO member, HttpSession session, Model model) {
+			String sId = (String)session.getAttribute("sId");
+			if(sId == null) {
+				model.addAttribute("msg", "잘못된 접근입니다!");
+				return "fail_back";
+			}
+			MemberVO dbMember = service.getMemberr(member);
+			
+			model.addAttribute("member", dbMember);
+			
+			
+			return "mypage/mypage_point";
+		}
+		
 }
