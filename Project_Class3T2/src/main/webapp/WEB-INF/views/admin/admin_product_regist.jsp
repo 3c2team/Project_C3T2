@@ -38,19 +38,25 @@
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" name="product_price" class="form-control">
+					<input type="number" name="product_price" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="product_info" cols="50" rows="2" class="form-control"></textarea>
+					<textarea name="product_info" cols="50" rows="15" class="form-control"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 메인 이미지</label>
 				<div>
-					<input id="product_main_img" type="file" class="form-control" name="product_main_image">
+					<input type="file" class="form-control" name="product_main_image" accept=".jpg, .png">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2">상품 내용 이미지</label>
+				<div>
+					<input type="file" class="form-control" name="product_info_image" accept=".jpg, .png">
 				</div>
 			</div>
 			
@@ -58,7 +64,7 @@
 				<label class="col-sm-2">상품 서브 이미지<br>
 				(다중 선택시 다중으로 들어감)</label>
 				<div>
-					<input type="file" class="form-control" id="product_image"name="product_image" multiple>
+					<input type="file" class="form-control" id="product_image"name="product_image" multiple accept=".jpg, .png">
 				</div>
 			</div>
 			<div class="form-group row">

@@ -37,6 +37,7 @@
 					<div class="card-header">
 						<i class="fas fa-table me-1"></i> 상품목록
 					</div>
+					<form action="DeleteProductPro" method="post">
 					<div class="card-body">
 						<table id="datatablesSimple">
 							<thead>
@@ -51,7 +52,7 @@
 							<tbody>
 								<c:forEach var="productList" items="${productList }">
 									<tr>
-										<th><input type="checkbox" value="${productList.product_num }" class="custom-control-input"></th>
+										<th><input type="checkbox" name="product_num" value="${productList.product_num }" class="custom-control-input"></th>
 										<th>${productList.product_num}</th>
 										<th>${productList.product_name }<span>
 											<button id="button_open_update"class="btn btn-light btn-right" onclick="window.open('AdminProductUpdate?product_num=${productList.product_num}','', 'width=200', 'height=600')">수정</button></span></th>
@@ -61,9 +62,10 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<button class="btn btn-primary" id="button_delete">삭제</button>
+						<input type="submit"class="btn btn-primary" id="button_delete" value="삭제">
 						<button class="btn btn-primary" id="button_open">등록</button>
 					</div>
+					</form>
 				</div>
 			</main>
 		</div>

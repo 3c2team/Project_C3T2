@@ -1,12 +1,15 @@
 $(function() {
 		$("#button_add").on("click",function(){
 			$("#button_add_result").append(
-				"<input type='file'  class='form-control'>"
+				"<input type='file'  class='form-control' accept='.jpg, .png'>"
 			)
 			
 		});
 		
 		$("#button_open").on("click",function() {
-			window.open('AdminProductRegist','', 'width=200', 'height=4100');
+			window.open('AdminProductRegist','', 'width=100', 'height=600');
+		});
+		$("#button_delete").on("click",function() {
+			location.href="DeleteProductPro";
 		});
 	});

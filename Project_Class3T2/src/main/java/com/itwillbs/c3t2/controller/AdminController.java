@@ -1,17 +1,31 @@
 package com.itwillbs.c3t2.controller;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.net.http.HttpRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.service.AdminService;
 import com.itwillbs.c3t2.vo.AdminVO;
@@ -24,6 +38,10 @@ import com.itwillbs.c3t2.vo.ReservationVO;
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	
+//		model.addAttribute("msg","로그인 하십시오");
+//		return "fail_back";
 	
 	//연매출 페이지 이동(관리자)
     @GetMapping("AdminSalesYear")
@@ -63,12 +81,108 @@ public class AdminController {
     public String adminProductRegist() {
     	return "admin/admin_product_regist";
     }
-    @PostMapping("AdminProductRagistPro")
-    public String adminProductRagistPro(Model model,ProductVO product) {
-    	System.out.println(product);
-    	return "";
-    }
+
     
+    @PostMapping("AdminProductRagistPro")
+    public String adminProductRagistPro(
+    		  @RequestParam Map<String, Object> map
+    		, @RequestParam(value = "product_main_image", required = false) MultipartFile mainFile
+    		, @RequestParam(value = "product_info_image", required = false) MultipartFile infoFile
+    		, @RequestParam(value = "product_image", required = false) List<MultipartFile> subFiles
+    		, Model model, HttpSession session
+    		, HttpServletRequest request) {
+    	
+    	String id = (String)session.getAttribute("sId");
+    	if(id==null||id.equals("")) {
+    		model.addAttribute("msg","로그인 하십시오");
+    		return "fail_back";
+    	}
+    	
+    	System.out.println(subFiles);
+//    	System.out.println(mainFile);
+    	String uploadDir = "/resources/store_img/";//가상 업로드 경로
+    	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
+    	
+		try {
+			
+			String uuid = UUID.randomUUID().toString(); //겹치지 않게 랜덤 선언
+			String mainFileName = uuid.substring(0, 3) + "_" + mainFile.getOriginalFilename();
+			//실제 파일 이름과 uuid랜덤합쳐서 겹치는걸 방지
+			map.put("main_file_name", mainFileName);
+			map.put("upload_dir", uploadDir +mainFileName);
+			// 맵에 이름과 경로 전달
+			//실제로는 saveDir을 넣어야하지만 차피 파일을 서버에 못올리고 있기때문에 내용이라도 맞추는용도
+			
+			System.out.println("실제 업로드 파일명 : " + mainFile.getOriginalFilename());
+			
+//			System.out.println(map);
+			
+			int insertProductCount = service.registProduct(map);
+			if(insertProductCount == 0) return "fail_back";
+			
+			//db등록
+			Path path = Paths.get(saveDir);//실제 업로드 경로
+			Files.createDirectories(path);//중간 경로 생성
+			System.out.println(saveDir);
+			mainFile.transferTo(new File(saveDir, mainFileName));
+			//업로드 진행 (메인 이미지 끝)
+			
+			//인포 이미지 업로드 시작
+			String infoFileName = uuid.substring(0, 3) + "_info" + infoFile.getOriginalFilename();
+			//겹치지않게 이름 생성
+			map.put("info_file_name", infoFileName);
+			map.put("upload_dir", uploadDir +infoFileName);
+			//맵에 경로 및 이름 추가
+			//실제로는 saveDir을 넣어야하지만 차피 파일을 서버에 못올리고 있기때문에 내용이라도 맞추는용도
+
+//			System.out.println(map);//확인작업
+//			service.registProductImg(map);
+
+			infoFile.transferTo(new File(saveDir, infoFileName));
+			//업로드 진행 (인포 이미지 끝)
+			
+			int insertProductImgCount = 0;
+			
+			for(MultipartFile subFile : subFiles) {
+				String subFileName = uuid.substring(0, 3) + "_" + subFile.getOriginalFilename();
+				
+				map.put("info_file_name", subFileName);
+				map.put("upload_dir", uploadDir +subFileName);
+				
+				insertProductImgCount = service.registProductImg(map);
+				
+				subFile.transferTo(new File(saveDir, subFileName));
+			if(insertProductImgCount > 0) return "admin/admin_product_list";//전체 성공시
+			
+			model.addAttribute("msg","상품등록은 성공했지만 이미지에서 실패함");	
+			return "fail_back";	//상풍등록만 성공시
+			}
+			model.addAttribute("msg","전부 실패!");//전부 실패시
+			return "fail_back";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+    	return "/";
+    }
+    //상품 삭제 메서드(관리자)
+    @GetMapping("DeleteProductPro")
+    	public String deleteProduct(@RequestParam List<String> product_num) {
+    		System.out.println("여긴 들어오나?");
+    		System.out.println(product_num);
+    		
+//    		int deleteProductImgCount = service.deleteProductImg(product_num);
+    		
+//    		if(deleteProductImgCount == 0) return "fail_back";
+//    		System.out.println("하나는 성공");
+//    		int deleteProductCount = service.deleteProduct(product_num);
+    		
+//    		if(deleteProductCount == 0) return "fail_back";
+    		
+    		
+    		return "/";
+    	}
     //예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
     public String adminReservationList(Model model) {
@@ -126,13 +240,12 @@ public class AdminController {
     @GetMapping("AdminProductUpdate")
     public String adminProductUpdate(Model model,int product_num) {
 //    	System.out.println("번호:" + product.getProduct_num());
-    	ProductVO dbProduct = service.getproductList(product_num);
-    	List<Map<String,Object>> dbProductImg = service.getproductImg(product_num);
-    	System.out.println(dbProductImg);
-    	System.out.println(dbProductImg.get(1).get("product_image"));
-    	System.out.println(dbProductImg.get(2).get("product_image"));
-    	model.addAttribute("dbProduct",dbProduct);
-    	model.addAttribute("dbProductImg",dbProductImg);
+    	ProductVO dbProduct = service.getproductList(product_num);//하나 들고옴
+    	
+    	List<Map<String,Object>> dbProductImg = service.getproductImg(product_num);//이미지다들고옴
+    	
+    	model.addAttribute("dbProduct",dbProduct);//저장후 들고가기
+    	model.addAttribute("dbProductImg",dbProductImg);//저장후 들고가기
     	return "admin/admin_product_update";
     }
     //로그인 페이지 이동(관리자)
@@ -165,3 +278,4 @@ public class AdminController {
     
 
 }
+

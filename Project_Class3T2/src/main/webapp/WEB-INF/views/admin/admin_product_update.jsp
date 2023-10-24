@@ -14,9 +14,8 @@
 $(function() {
 	$("#${dbProduct.product_category_num }").prop("checked",true);
 	
-	$("#delete_btn").on("click",function(){
-		console.log($("#main_file").html());
-		$("#main_file").html("<input type='file' class='form-control'>") ;
+	$("#delete_btn").on("click",function (){
+		$("#main_file").html("<input type='file' class='form-control' accept='.jpg, .png'>") ;
 	});
 });
 </script>
@@ -47,13 +46,13 @@ $(function() {
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="text" value="${dbProduct.product_price }"id="unitPrice" name="unitPrice" class="form-control">
+					<input type="number" value="${dbProduct.product_price }"id="unitPrice" name="unitPrice" class="form-control" >
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="description"  cols="50" rows="2" class="form-control">${dbProduct.product_info }</textarea>
+					<textarea name="description"  cols="50" rows="15" class="form-control">${dbProduct.product_info }</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -73,22 +72,21 @@ $(function() {
 				</c:choose>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2">상품 서브 이미지</label>
+				<label class="col-sm-2">상품 서브(내용) 이미지</label>
 				<c:choose>
 					<c:when test="${!empty dbProduct.product_main_img }">
 						<div id="main_file">
-							<c:forEach var="dbProductImg" items="${dbProductImg }">
-								<div>
+							<c:forEach var="dbProductImg" items="${dbProductImg }" varStatus="i">
+								<div id="sub_file${i.index }">
 									${dbProductImg.product_image}
-									<input type="button" value="삭제" id="delete_btn"><br>
+									<input type="button" value="삭제" 
+									onclick="$('#sub_file${i.index}').html('<input type=file class=form-control accept=.jpg, .png>')"><br>
 								</div>
 							</c:forEach>
 							<div id="button_add_result"></div>
 							<input type="button" id="button_add" value="+">
 						</div>
 					</c:when>
-					<c:otherwise>
-					</c:otherwise>
 				</c:choose>
 			</div>
 			<div class="form-group row">

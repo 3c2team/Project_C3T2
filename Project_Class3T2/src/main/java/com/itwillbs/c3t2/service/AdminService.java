@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.mapper.AdminMapper;
 import com.itwillbs.c3t2.mapper.MemberMapper;
@@ -41,6 +43,21 @@ public class AdminService {
 	public List<Map<String,Object>> getproductImg(int product_num) {
 		// TODO Auto-generated method stub
 		return mapper.selectProductImg(product_num);
+	}
+	public int registProduct(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertProduct(map);
+	}
+	public int registProductImg(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertProductImg(map);
+	}
+	public int deleteProduct(List<String> product_num) {
+		return mapper.deleteProduct(product_num);
+	}
+	public int deleteProductImg(List<String> product_num) {
+		// TODO Auto-generated method stub
+		return mapper.deleteProductImg(product_num);
 	}
 	
 

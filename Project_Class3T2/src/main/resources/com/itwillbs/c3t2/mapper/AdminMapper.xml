@@ -30,6 +30,40 @@
 			FROM PRODUCT_IMG
 			WHERE product_num = ${product_num}
 		</select>
+		<insert id="insertProduct">
+			INSERT INTO PRODUCT
+			VALUES(	null
+				   ,#{product_name}
+				   ,#{product_price}
+				   ,#{product_info}
+				   ,now()
+				   ,#{product_category_num}
+				   ,#{main_file_name}
+				   ,#{upload_dir}
+				  )
+		</insert>
+		<insert id="insertProductImg">
+			<selectKey keyProperty="product_num" resultType="int" order="BEFORE">
+				SELECT MAX(product_num)
+				FROM PRODUCT
+			</selectKey>
+			INSERT INTO PRODUCT_IMG
+			VALUES(	null
+				   ,#{product_num}
+				   ,#{info_file_name}
+				   ,#{upload_dir}
+				  )
+		</insert>
+		
+		<delete id="deleteProductImg">
+			DELETE FROM PRODUCT_IMG
+			WHERE product_num = #{product_num};
+		</delete>
+
+		<delete id="deleteProduct">
+			DELETE FROM PRODUCT
+			WHERE product_num = #{product_num};
+		</delete>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->
