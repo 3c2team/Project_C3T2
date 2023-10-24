@@ -4,8 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/product_detail.js"></script>
 <script type="text/javascript">
 	function productCount() {
 		let product_count = $("#amounts").val();
@@ -16,12 +22,6 @@
 	}
 </script>
 </head>
-<link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resource/js/jquery-3.7.0.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/order_detail.js"></script>
 <body>
 	<header>
 		<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -44,7 +44,7 @@
 							</div>
 							<ul>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img/pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -52,7 +52,7 @@
 									</div>
 								</li>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img//pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img//pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -60,7 +60,7 @@
 									</div>
 								</li>
 								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resource/online_img/pasta1.jpg"></div>
+									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img/pasta1.jpg"></div>
 									<div class="ImgReviewInfo">
 										<span>아이디</span> | 
 										<span>별점 갯수</span>
@@ -77,7 +77,7 @@
 							<c:forEach var="product_img" items="${productMiniImgList }">
 								<li><a><img src="${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
 							</c:forEach>
-							<li><a><img src="/store_img/review_mini_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
@@ -299,11 +299,48 @@
 										원산지 관련 문의
 									</div>
 									<div class="qnaIdDate">
-										아이디 | 리뷰쓴날
+										아이디 | 문의쓴날
 									</div>
 								</div>
 							</li>
 <%-- 						</c:forEach> --%>
+						<li>
+								<div class="qnaBox">
+									<div class="qnaAnswer">
+										<span>답변완료</span>
+									</div>
+									<div class="qnaInfo">
+										원산지 관련 문의
+									</div>
+									<div class="qnaIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li><li>
+								<div class="qnaBox">
+									<div class="qnaAnswer">
+										<span>답변완료</span>
+									</div>
+									<div class="qnaInfo">
+										원산지 관련 문의
+									</div>
+									<div class="qnaIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li><li>
+								<div class="qnaBox">
+									<div class="qnaAnswer">
+										<span>답변완료</span>
+									</div>
+									<div class="qnaInfo">
+										원산지 관련 문의
+									</div>
+									<div class="qnaIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
 					</ul>
 				</div>
 			</div>

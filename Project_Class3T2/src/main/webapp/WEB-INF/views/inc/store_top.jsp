@@ -41,6 +41,7 @@
 		<div class="mainMenuAreaLeft">
 			<div class="item"><a href="OnlineStore">ONLINE STORE</a></div>
 			<div class="item"><a href="StoreBest">BEST</a></div>
+			<div class="item"><a href="StoreHot">HOT</a></div>
 			<div class="item"><a href="StoreNew">NEW</a></div>
 			<div class="item"><a href="StoreKit">MEAL KIT</a></div>
 <!-- 				<div class="mealKitSubmenu"> -->
