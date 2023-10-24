@@ -41,9 +41,9 @@ public class StoreService {
 		return mapper.selectProductImg(proNum);
 	}
 	// 카트에 담은 상품 조회 (= peoduct_num)
-		public List<ProductVO> getProductCartList(int proNum) {
+		public List<ProductVO> getProductCartList(int proNum, String sId) {
 			// TODO Auto-generated method stub
-			return mapper.selectProductCartList(proNum);
+			return mapper.selectProductCartList(proNum, sId);
 		}
 		
 		// 메인페이지에서 장바구니 이동 시 카트 조회

@@ -46,7 +46,7 @@ public interface ProductMapper {
 //	public List<ProductVO> selectProductCartList(String sId);
 	
 	// CART 상품 조회
-	public List<ProductVO> selectProductCartList(int proNum);
+	public List<ProductVO> selectProductCartList(@Param("proNum") int proNum,@Param("sId") String sId);
 
 	// 메인 페이지에서 CART 상품 조회
 	public List<ProductVO> selectProductCartList(String sId);

@@ -131,7 +131,7 @@ public class StoreController {
 			}
 			
 			// 카트 등록 상품 목록 조회
-			List<ProductVO> productList = service.getProductCartList(proNum); // 갯수(count) 추가 작업 필요
+			List<ProductVO> productList = service.getProductCartList(proNum, sId); 
 			System.out.println("상품 번호 : " + proNum);
 
 			// 상품 목록 model 객체에 저장
