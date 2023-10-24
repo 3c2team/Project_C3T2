@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function productCount() {
-		let product_count = $("#amounts").val();
+		
+// 		let product_count = $("#amounts").val();
+		let product_count = document.getElementById("amounts").value;
 		
 		alert("주문 수량 : " + product_count);
 		
@@ -128,12 +130,15 @@
 							</tr>
 						</tbody>
 					</table>
+					<script type="text/javascript">
+						let product_count = $("#amounts").val();
+					</script>
 					<div class="detailTopSum">
 						<p class="detailTopSumTitle">판매가</p>
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
+						<button class="btn_white" onclick="productCount()">장바구니</button>
 						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
