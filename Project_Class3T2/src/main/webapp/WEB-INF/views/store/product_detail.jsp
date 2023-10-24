@@ -6,7 +6,7 @@
 <head>
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/order_detail.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/product_detail.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -14,9 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/product_detail.js"></script>
 <script type="text/javascript">
 	function productCount() {
-		
-// 		let product_count = $("#amounts").val();
-		let product_count = document.getElementById("amounts").value;
+		let product_count = $("#amounts").val();
 		
 		alert("주문 수량 : " + product_count);
 		
@@ -130,15 +128,12 @@
 							</tr>
 						</tbody>
 					</table>
-					<script type="text/javascript">
-						let product_count = $("#amounts").val();
-					</script>
 					<div class="detailTopSum">
 						<p class="detailTopSumTitle">판매가</p>
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="productCount()">장바구니</button>
+						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
 						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
@@ -153,21 +148,29 @@
 				
 		<section class="detailContainer">
 			<div class="detailBottomTab">
-				<button name="productInfo" onclick="">상품상세정보</button>
-				<button name="productReview" onclick="">리뷰</button>
-				<button name="productQnA" onclick="">Q&A</button>
-				<button name="productRaw" onclick="">상품정보제공고시</button>
+				<div class="detailBottomTabItem">
+					<a href="">상품상세정보</a>
+				</div>
+				<div class="detailBottomTabItem">
+					<a href="#review">리뷰</a>
+				</div>
+				<div class="detailBottomTabItem">
+					<a href="#QnA">Q&A</a>
+				</div>
+				<div class="detailBottomTabItem">
+					<a href="">상품정보제공고시</a>
+				</div>
 			</div>
 			<div class="detailInfoImgArea">
 				<%-- 경로 변경하기 --%>
-				<img class="detailInfoImg" src="${pageContext.request.contextPath }/resources/store_img/pasta1_info.png">
+				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
 			</div>
 		</section>
 		
 		<section class="reviewContainer">
 			<div>
 				<div class="reviewTatle">
-					<a>상품리뷰</a>
+					<a name="review">상품리뷰</a>
 				</div>
 				<hr>
 				<div>
@@ -282,7 +285,7 @@
 		<section class="qnaContainer">
 			<div class="qnaItem">
 				<div class="qnaTatle">
-					<a>상품 Q&A</a>
+					<a name="QnA">상품 Q&A</a>
 				</div>
 				<div class="qnaAve">
 					<div>

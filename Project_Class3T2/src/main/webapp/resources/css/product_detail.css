@@ -37,7 +37,6 @@
 	float: right;
 }
 
-
 .productNum p {
     margin: 0;
     font-size: 16px;
@@ -68,17 +67,16 @@
 
 .detailTopMainImg {
 	position: relative;
-    width: 500px;
-    height: 500px;
     width: auto;
-	height: auto;
+    height: 500px;
 }
 
 .detailTopMainImg img{
 	display: block;
-	margin:auto;
-    top: 0;
-    left: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 500px;
     object-fit: cover;
     margin: auto;
@@ -293,18 +291,28 @@ input[type='number']::-webkit-inner-spin-button {
 /*==========================*/
 
 .detailBottomTab {
-	font-size: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 68px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.detailBottomTab button{	
-	font-size: 20px;
+.detailBottomTabItem {
 	height: 68px;
+	width: 25%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.detailBottomTab a{	
+	font-size: 20px;
 	color: #464646;
 	background-color: white;;
 	border: none;
-	border-bottom: 1px solid #e0e0e0;;
-	width: 25%;
-	line-height: 0;
+	width: 100%;
+	line-height: 68px;
+	text-align: center;
 }
 
 .detailInfoImgArea {
