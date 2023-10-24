@@ -12,10 +12,15 @@ public class ReservationService {
 	@Autowired
 	private ReservationMapper mapper;
 	
-	// 예약 작업 요청
+		// 예약작성 작업 요청
 		public int registReservation(ReservationVO reservation) {
 			return mapper.insertReservation(reservation);
 		}
+		
+//		// 예약 상세정보 조회 요청
+//		public ReservationVO getReservation(ReservationVO reservation) {
+//			return mapper.selectReservation(reservation);
+//		}
 
 		
 }

@@ -8,10 +8,9 @@
 			<b>마이페이지 홈</b></a>
 		</li>
 	</ul>
-	<p><b>나의 예약정보</b></p>
+	<p><b>상품 구매</b></p>
 	<ul>
-		<li><a href="MypageReservationCheck">예약 확인</a></li>
-		<li><a href="MypageReservationChange">예약 변경</a></li>
+		<li><a href="MypageReservationCheck">상품 구매 내역</a></li>
 	</ul>
 </div>
 <div id="menu">
@@ -23,17 +22,15 @@
 	</ul>
 </div>
 <div id="menu">
-	<p><b>나의 포인트정보</b></p>
+	<p><b>나의 신상정보</b></p>
 	<ul>
-		<li><a href="MypagePoint">포인트 내역</a></li>
+		<li><a href="MypagePoint">나의 상세정보</a></li>
 	</ul>
 </div>
 <div id="menu">
 	<p><b>나의 활동정보</b></p>
 	<ul>
 		<li><a href="MypageGoodsReview">상품 리뷰</a></li>
-		<li><a href="MypageGoodsAsk">상품 문의</a></li>
-		<li><a href="MypageReservationAsk">예약 문의</a></li>
 	</ul>
 </div>
 <div id="menu">

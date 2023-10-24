@@ -119,4 +119,17 @@
 		WHERE member_id=#{member_id}
 	</select>
 	
+	<!-- 예약내역 조회 -->
+	<select id = "getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
+		SELECT * FROM USER_ORDER
+	</select>
+	
+	<!-- 회원상세정보 조회 -->
+	<select id = "selectMemberDetails" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT*
+		FROM MEMBER 
+		WHERE member_id = #{member_id}
+	</select>
+	
+	
 </mapper>

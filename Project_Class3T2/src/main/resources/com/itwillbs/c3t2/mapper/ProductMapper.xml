@@ -48,39 +48,21 @@
 		WHERE product_num = #{proNum};
 	</select>
 	
-	<select id="selectProductCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
-		SELECT *
-		FROM PRODUCT
-		WHERE product_num = #{proNum}
-	</select>
-	
-	<!-- 같은 상품이 있는지 조회 -->
-	<select id="selectCartMember" resultType="com.itwillbs.c3t2.vo.CartVO" >
-		SELECT *
-		FROM CART
-		WHERE product_num = #{proNum}
-	</select>
-	
-	<!-- CART에 해당 상품 담기 -->
-	<insert id="insertCart">
-		INSERT 
-			INTO CART(cart_num, member_id, product_num, product_count)
-			VALUES(
-				null
-				, #{sId}
-				, #{proNum}
-				, #{proCount}
-			)
-	</insert>
-	
-	<!-- 한가지 선택 상품 삭제 -->
-	<delete id="deleteCartProduct">
-		DELETE FROM CART
-		WHERE product_num = #{proNum}
-	</delete>
-	
 	<!-- 삭제 후 남은 상품 보기 -->
-	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+<!-- 	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO"> -->
+
+<!-- 		SELECT  -->
+<!-- 			P.product_num -->
+<!-- 			, P.product_main_img_real_file -->
+<!-- 			, P.product_name -->
+<!-- 			, P.product_price -->
+<!-- 			, C.product_count -->
+<!-- 		FROM  -->
+<!-- 			PRODUCT P JOIN CART C -->
+<!-- 			ON P.product_num = C.product_num -->
+<!-- 	</select> -->
+
+<select id="selectProductCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
 
 		SELECT 
 			P.product_num
@@ -91,7 +73,58 @@
 		FROM 
 			PRODUCT P JOIN CART C
 			ON P.product_num = C.product_num
+		WHERE
+			C.member_id = #{sId}
 
 	</select>
+	
+	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+
+		SELECT P.*
+		FROM PRODUCT P 
+		JOIN CART C
+		ON P.product_num = C.product_num
+
+	</select>
+	
+	<!-- 카트페이지에서 회원정보 출력 -->
+	<select id="selectPayMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_id = #{sId}
+	</select> 
+	
+	<!-- 카트페이지에서 회원아이디 Cart 테이블에 저장 -->
+	<insert id="insertCart">
+
+		INSERT 
+			INTO CART(cart_num,member_id, product_num, product_count)
+			VALUES(
+				null
+				, #{sId}
+				, #{proNum}
+				, #{proCount}
+			)
+			
+	</insert>
+	
+	<!-- 같은 상품이 있는지 조회 -->
+	<select id="selectCartMember" resultType="com.itwillbs.c3t2.vo.CartVO" >
+		SELECT *
+		FROM CART
+		WHERE product_num = #{proNum}
+	</select>
+	
+	<!-- 한가지 선택 상품 삭제 -->
+	<delete id="deleteCartProduct">
+		DELETE FROM CART
+		WHERE product_num = #{proNum}
+	</delete>
+	
+	
+	
+	
+	
+
 	
 </mapper>

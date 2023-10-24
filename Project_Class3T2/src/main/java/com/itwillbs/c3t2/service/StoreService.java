@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.ProductMapper;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
@@ -39,34 +40,57 @@ public class StoreService {
 	public List<ProductImgVO> getProductImg(int proNum) {
 		return mapper.selectProductImg(proNum);
 	}
+	// 카트에 담은 상품 조회 (= peoduct_num)
+		public List<ProductVO> getProductCartList(int proNum, String sId) {
+			// TODO Auto-generated method stub
+			return mapper.selectProductCartList(proNum, sId);
+		}
+		
+		// 메인페이지에서 장바구니 이동 시 카트 조회
+		public List<ProductVO> getMainCartList(String sId) {
+			// TODO Auto-generated method stub
+//			return mapper.selectMainCartList(sId);
+			return mapper.selectProductCartList(sId);
+		}
 
-	public List<ProductVO> getProductCartList(int proNum) {
-		// TODO Auto-generated method stub
-		return mapper.selectProductCartList(proNum);
-	}
+		// 카트 페이지에 온 회원 아이디 검색
+		public List<MemberVO> memberAuth(String sId) {
+			// TODO Auto-generated method stub
+			return mapper.selectPayMember(sId);
+		}
+		
+		// 같은 상품이 CART에 있는지 조회	
+		public CartVO getCartMember(int proNum) {
+			return mapper.selectCartMember(proNum);
+		}
 
-	// 같은 상품이 CART에 있는지 조회	
-	public CartVO getCartMember(int proNum) {
-		return mapper.selectCartMember(proNum);
-	}
+		//카트에 해당 상품 담기 (수정 전)
+//		public int registCart(String sId, int proNum) {
+//			// TODO Auto-generated method stub
+//			return  mapper.insertCart(sId, proNum);
+//		}
 
-	//카트에 해당 상품 담기
-	public int registCart(String sId, int proNum, int proCount) {
-		// TODO Auto-generated method stub
-		return mapper.insertCart(sId, proNum, proCount);
-	}
+		public List<ProductVO> getProductCartList(String sId) {
+			// TODO Auto-generated method stub
+			return mapper.insertCart(sId);
+		}
+
+
+
+		public int deleteCartProduct(int proNum) {
+			// TODO Auto-generated method stub
+			return mapper.deleteCartProduct(proNum);
+		}
+
+		
+		//카트에 해당 상품 담기
+		public int registCart(String sId, int proNum, int proCount) {
+			// TODO Auto-generated method stub
+			return  mapper.insertCart(sId, proNum, proCount);
+		}
+
 	
-	// 선택 상품 삭제
-	public int deleteCartProduct(int proNum) {
-		// TODO Auto-generated method stub
-		return mapper.deleteCartProduct(proNum);
-	}
-
-	// CART에 담긴 상품 보기 
-	public List<ProductVO> getMainCartList(String sId) {
-		// TODO Auto-generated method stub
-		return mapper.selectMainCartList(sId);
-	}
+	
 	
 	
 	
