@@ -313,17 +313,17 @@ input[type='number']::-webkit-inner-spin-button {
     padding-block: 10%;
 }
 
-/*============= < 리뷰 > =============*/
-.reviewTatle {
+/*============= < 리뷰, QnA > =============*/
+.reviewTatle, .qnaTatle {
     margin: 15px;
 }
 
-.reviewTatle a {
+.reviewTatle, .qnaTatle a {
     font-size: 30px;
     font-weight: bold;
 }
 
-.reviewAve {
+.reviewAve, .qnaAve {
     margin: 20px;
 }
 
@@ -360,7 +360,7 @@ span.reviewAveScore {
     margin: auto;
     padding-inline: 10%;
     height: 200px;
-    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .reviewStar {
@@ -390,4 +390,47 @@ span.reviewAveScore {
 .reviewIdDate {
     text-align: right;
     width: 20%;
+}
+
+.qnaContainer {
+    margin-block: 50px;
+}
+
+.qnaItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.qnaBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding-inline: 10%;
+    height: 150px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.qnaAnswer {
+	width:15%;
+}
+
+.qnaInfo {
+    width: 65%;
+}
+
+.qnaIdDate {
+    text-align: right;
+    width: 20%;
+}
+
+.qnaAnswer span{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    line-height: 29px;
+    color: #fff;
+    border-radius: 2px;
+    background-color: #bbbec2;
+    padding: 0 15px;
 }

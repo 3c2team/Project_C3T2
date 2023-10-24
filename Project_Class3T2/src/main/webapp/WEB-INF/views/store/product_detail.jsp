@@ -133,7 +133,7 @@
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="productCount()">장바구니</button>
+						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
 						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
@@ -184,6 +184,7 @@
 					</div>	
 				</div>
 			</div>
+			<hr>
 			<div>
 				<div>
 					<ul class="">
@@ -273,7 +274,40 @@
 				</div>
 			</div>
 		</section>
-		
+		<section class="qnaContainer">
+			<div class="qnaItem">
+				<div class="qnaTatle">
+					<a>상품 Q&A</a>
+				</div>
+				<div class="qnaAve">
+					<div>
+						<button class="qnaWrite">문의 하기</button>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div>
+				<div>
+					<ul class="">
+<%-- 						<c:forEach var="" items=""> --%>
+							<li>
+								<div class="qnaBox">
+									<div class="qnaAnswer">
+										<span>답변완료</span>
+									</div>
+									<div class="qnaInfo">
+										원산지 관련 문의
+									</div>
+									<div class="qnaIdDate">
+										아이디 | 리뷰쓴날
+									</div>
+								</div>
+							</li>
+<%-- 						</c:forEach> --%>
+					</ul>
+				</div>
+			</div>
+		</section>
 	</main>
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
