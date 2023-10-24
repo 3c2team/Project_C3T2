@@ -60,13 +60,13 @@ function calendarMaker(target, date) {
             "</colgroup>" +
             "<thead class='cal_date'>" +
             "<th><button type='button' class='prev'><</button></th>" +
-            "<th colspan='5'><span id='selectYear' name='selectYear'>" + year + "</span>년 <span id='selectMonth' name='selectMonth'>" + month + "</span>월</th>" +
+            "<th colspan='5'><span id='select_year' name='select_year'>" + year + "</span>년 <span id='select_month' name='select_month'>" + month + "</span>월</th>" +
             "<th><button type='button' class='next'></button></th>" +
             "</thead>" +
             "<thead class='cal_week'>" +
             "<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>" +
             "</thead>" +
-            "<tbody id='customSetDate'>" +
+            "<tbody id='customSetDate' name='reservation_date'>" +
             "</tbody>" +
             "</table>";
         return calendar_html_code;
@@ -90,29 +90,17 @@ function calendarMaker(target, date) {
             
             // ('00' + date).slice(-2); 날짜 형식 변환
             
-            let selectYear = $("selectYear").text();
-            let selectMonth = $("selectMonth").text();
+            let selectYear = $("#select_year").text();
+            let selectMonth = $("#select_month").text();
             let selectDay = $(".select_day").text();
-			selectMonth.length < 2 ? "0"+ selectMonth : selectMonth;
-			selectDay.length < 2 ? "0"+ selectDay : selectDay;
-            let selectedDay = selectYear + selectMonth + selectDay; // 연월일 불러오기
+            let selectedDay = selectYear + "-" + selectMonth + "-" + selectDay; // 연월일 불러오기
 			alert("예약일자 : " + selectedDay);
 			
-			if (todayMonth < 10) {
-				todayString += "0";
-			}
-			
+			return selectedDay;
 			
         });
     }
 }
-
-
-function showPopup() {
-	window.open("table.jsp", "자리 선택", "width=400px, height=360px, left=100, top=50")
-};
-
-
 
 //$(document).ready( function()
 //{
