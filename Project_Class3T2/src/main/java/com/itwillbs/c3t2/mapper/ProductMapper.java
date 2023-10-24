@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
@@ -23,17 +24,43 @@ public interface ProductMapper {
 
 	public List<ProductImgVO> selectProductImg(int proNum);
 
+//	// CART 상품 조회
+//	public List<ProductVO> selectProductCartList(int proNum);
+//
+//	// 같은 상품이 CART에 있는지 조회	
+//	public CartVO selectCartMember(int proNum);
+//
+//	// CART에 선택 상품 담기
+//	public int insertCart(@Param("sId") String sId, @Param("proNum") int proNum, @Param("proCount") int proCount);
+//
+//	// 선택상품 삭제
+//	public int deleteCartProduct(int proNum);
+//
+//	// 메인 페이지에서 CART 상품 조회
+////	public List<ProductVO> selectMainCartList(String sId);
+//
+//	// 카트 페이지에 온 회원 아이디 검색
+//	public List<MemberVO> selectPayMember(String sId);
+//
+//	// 메인 페이지에서 CART 상품 조회
+//	public List<ProductVO> selectProductCartList(String sId);
+	
+	// CART 상품 조회
 	public List<ProductVO> selectProductCartList(int proNum);
 
-	// 같은 상품이 CART에 있는지 조회	
+	// 메인 페이지에서 CART 상품 조회
+	public List<ProductVO> selectProductCartList(String sId);
+
+	public List<MemberVO> selectPayMember(String sId);
+
 	public CartVO selectCartMember(int proNum);
 
-	// CART에 선택 상품 담기
-	public int insertCart(@Param("sId") String sId, @Param("proNum") int proNum, @Param("proCount") int proCount);
+	// CART에 상품 담기
+	public int insertCart(@Param("sId") String sId, @Param("proNum") int proNum,@Param("proCount") int proCount);
 
-	// 선택상품 삭제
+//	public List<ProductVO> selectMainCartList(String sId);
+
 	public int deleteCartProduct(int proNum);
 
-	// CART에 담긴 상품 보기
-	public List<ProductVO> selectMainCartList(String sId);
+	public List<ProductVO> insertCart(String sId);
 }

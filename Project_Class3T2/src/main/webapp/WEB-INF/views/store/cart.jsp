@@ -106,18 +106,18 @@
 							<td>
 								<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
-								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete()">삭제</button><br>
-								<script type="text/javascript">
-								function confirmDelete() {
-									// "삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시
-									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num});
+								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br>
+<!-- 								<script type="text/javascript"> -->
+<!-- // 								function confirmDelete() { -->
+<!-- // 									"삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시 -->
+<%-- // 									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num}); --%>
 									
-//									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청
-										if(result) {
-											location.href="DeleteCartProduct?proNum=${productList.product_num}";
-										}
-								}
-								</script>
+<!-- // 									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청 -->
+<!-- // 										if(result) { -->
+<%-- // 											location.href="DeleteCartProduct?proNum=${productList.product_num}"; --%>
+<!-- // 										} -->
+<!-- // 								} -->
+<!-- 								</script> -->
 							</td>
 						</tr>
 					</c:forEach>
