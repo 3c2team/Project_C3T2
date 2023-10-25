@@ -1,9 +1,22 @@
 package com.itwillbs.c3t2.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.itwillbs.c3t2.service.MyPageService;
+import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 @Controller
 public class MyPageController {
+	
+	@Autowired
+	private MyPageService service;
 	
 	//mypageMapping
 	@GetMapping("MypageDashboard")				//마이페이지 홈
@@ -72,4 +85,28 @@ public class MyPageController {
 	public String mypageReservationChange() {
 		return "mypage/mypage_reservation_change";
 	}
+	
+	@GetMapping("/MypageReservationCheck")	//상품 구매 내역
+	public String mypageReservationCheck(Model model) {
+		
+		//상품 구매 내역을 가져옴
+		List<UserOrderVO> OrderList = service.getOrderList();
+		System.out.println(OrderList);
+		model.addAttribute("OrderList", OrderList);
+		
+		return "mypage/mypage_reservation_check";
+	}
+	
+	@GetMapping("MypagePoint")				//회원 상새내역
+	public String mypagePoint(MemberVO member, Model model, HttpSession session) {
+		String member_id = (String)session.getAttribute("sId");
+		MemberVO dbMember = service.getMemberDetails(member_id);
+		model.addAttribute("Member", dbMember);
+		System.out.println(dbMember);
+		
+		return "mypage/mypage_point";
+	}
+	
+	
+	
 }
