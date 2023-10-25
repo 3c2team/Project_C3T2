@@ -1,7 +1,5 @@
 package com.itwillbs.c3t2.controller;
 
-import java.util.List; 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +9,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
-import com.itwillbs.c3t2.vo.ReservationVO;
-import com.itwillbs.c3t2.vo.UserOrderVO;
+
+import lombok.AllArgsConstructor;
 
 @Controller
 public class MainController {
 		
 		@Autowired
 		private MemberService service;
-	// 硫붿씤�럹�씠吏� �젒�냽 而⑦듃濡ㅻ윭
 		
 		@Autowired
 		private SendMailService mailService;
@@ -95,6 +95,12 @@ public class MainController {
 			return "other/login";
 		}
 		
+		@ResponseBody
+		@GetMapping("/auth/kakao/callback")
+		public void kakaoCallback(@RequestParam("code") String code) {
+		    System.out.println("code : " + code);
+		}
+		
 		@PostMapping("LoginPro")
 		public String loginPro(
 				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, Model model) {
@@ -136,7 +142,7 @@ public class MainController {
 		
 		@PostMapping("IdForgotPro")
 		public String idForgotPro(String member_name, String member_phone_num, MemberVO member, Model model, HttpSession session) {
-			String member_id = service.getMemberId(member_phone_num);
+			String member_id = service.getMember(member_name);
 			String member_id_2 = service.getMemberId(member_phone_num);
 			System.out.println("입력받은 이름 : " + member.getMember_name());
 			System.out.println("입력받은 번호 : " + member.getMember_phone_num());
@@ -271,6 +277,4 @@ public class MainController {
 				return "fail_back";
 			}
 		}
-		
-		
 }

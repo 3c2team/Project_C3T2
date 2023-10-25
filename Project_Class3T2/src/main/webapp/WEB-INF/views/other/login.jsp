@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login_temp.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 // 	$(function() {
 // 		$("#btn_submit").on("click",function(){
@@ -38,13 +39,16 @@
 				<input class="user" type="text" name="member_id" id="id" style="align-content: center" placeholder="아이디">
 				<input class="pass" type="password" name="member_passwd" id="passwd"style="align-content: center" placeholder="비밀번호">
 <!-- 				<p class="submit" id="btn_submit"align="center">로그인</p> -->
-				<input type="submit" class="submit" id="btn_submit" style="margin-left: 35%" value="로그인">
+				<input type="submit" class="submit" id="btn_submit" style="margin-left: 35%;" value="로그인">
+			</form>
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=d118c5007cdbd4dc822d8a5e39c2eec9&redirect_uri=http://localhost:8081/c3t2/oauth/kakao/callback&response_type=code">
+					<img height="33px" src="${pageContext.request.contextPath }/resources/main_img/kakao.png" style="margin-left: 32%; margin-top: -3%;">
+				</a>
 				<div class="aTag" align="center">
 					<a href="JoinAgree" class="join" style="align-content: center">회원가입</a>
-					<a href="IdForgot"  class="idForgot" style="align-content: center">아이디찾기</a>
+					<a href="IdForgot" class="idForgot" style="align-content: center">아이디찾기</a>
 					<a href="PassForgot"  class="passForgot" style="align-content: center">비밀번호찾기</a>
 				</div>
-			</form>
 	    </div>
 	</main>
 	<footer id="footer">
