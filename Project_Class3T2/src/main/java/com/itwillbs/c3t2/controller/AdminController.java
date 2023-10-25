@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.service.AdminService;
+import com.itwillbs.c3t2.service.StoreService;
 import com.itwillbs.c3t2.vo.AdminVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductVO;
@@ -38,7 +40,8 @@ import com.itwillbs.c3t2.vo.ReservationVO;
 public class AdminController {
 	@Autowired
 	private AdminService service;
-	
+	@Autowired
+	private StoreService storeService;
 	
 //		model.addAttribute("msg","로그인 하십시오");
 //		return "fail_back";
@@ -78,7 +81,8 @@ public class AdminController {
     
     //상품 등록 페이지 이동(관리자)
     @GetMapping("AdminProductRegist")
-    public String adminProductRegist() {
+    public String adminProductRegist(@RequestParam(required = false) List<Integer> product_nums) {
+    	
     	return "admin/admin_product_regist";
     }
 
@@ -167,22 +171,24 @@ public class AdminController {
     	return "/";
     }
     //상품 삭제 메서드(관리자)
-    @GetMapping("DeleteProductPro")
-    	public String deleteProduct(@RequestParam List<String> product_num) {
-    		System.out.println("여긴 들어오나?");
-    		System.out.println(product_num);
-    		
-//    		int deleteProductImgCount = service.deleteProductImg(product_num);
-    		
-//    		if(deleteProductImgCount == 0) return "fail_back";
-//    		System.out.println("하나는 성공");
-//    		int deleteProductCount = service.deleteProduct(product_num);
-    		
-//    		if(deleteProductCount == 0) return "fail_back";
-    		
-    		
-    		return "/";
-    	}
+//    @PostMapping("DeleteProductPro")
+//    	public String deleteProduct() {
+//    	//@RequestParam List<Integer> product_nums
+////    		System.out.println(product_nums);
+//    		int deleteProductImgCount = 0;
+//    		int deleteProductCount = 0;
+//    		int deleteCartCount = 0;
+//    		int product_num=0;
+//    		
+////    		for(int item : product_nums) {
+////    			product_num = item;
+////    			deleteProductImgCount = service.deleteProductImg(product_num);
+////    			deleteCartCount = storeService.deleteCartProduct(product_num);
+////    			deleteProductCount = service.deleteProduct(product_num);
+////    		}
+//    		
+//    		return "/";
+//    	}
     //예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
     public String adminReservationList(Model model) {
@@ -246,6 +252,8 @@ public class AdminController {
     	
     	model.addAttribute("dbProduct",dbProduct);//저장후 들고가기
     	model.addAttribute("dbProductImg",dbProductImg);//저장후 들고가기
+    	System.out.println(dbProduct);
+    	System.out.println(dbProductImg);
     	return "admin/admin_product_update";
     }
     //로그인 페이지 이동(관리자)

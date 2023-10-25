@@ -21,12 +21,18 @@
 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 <!-- 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post"> -->
 			<div class="form-group row">
+				<label class="col-sm-2">등록 분류</label>
+				<div class="com-sm-3">
+					<jsp:include page="../inc/admin_answer.jsp"></jsp:include>
+				</div> 
+			</div>
+			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
-					<input type="radio" value="1" name="product_category_num" >스테이크
-					<input type="radio" value="2" name="product_category_num" >드링크 
-					<input type="radio" value="3" name="product_category_num" >
-					<input type="radio" value="4" name="product_category_num" >
+					<input type="radio" value="1" name="product_category_num" >Staek
+					<input type="radio" value="2" name="product_category_num" >Pasta
+					<input type="radio" value="3" name="product_category_num" >Soup
+					<input type="radio" value="4" name="product_category_num" >Etc
 				</div> 
 			</div>
 			<div class="form-group row">

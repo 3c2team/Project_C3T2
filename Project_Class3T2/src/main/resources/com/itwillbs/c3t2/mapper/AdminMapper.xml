@@ -19,7 +19,7 @@
 			WHERE admin_id = #{admin_id}
 		</select>
 		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
-			SELECT  *
+			SELECT  *,ROW_NUMBER() OVER(order by product_num) as num
 			FROM PRODUCT
 			<if test="product_num != null">
 				WHERE product_num = ${product_num}

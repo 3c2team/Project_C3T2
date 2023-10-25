@@ -15,4 +15,5 @@ public class ProductVO {
 	private String product_main_img;
 	private String product_main_img_real_file;
 	private int product_count;
+	private int num;
 }

@@ -58,7 +58,7 @@ table {
 									<th><input type="checkbox" class=""></th>
 									<th>1</th>
 									<th>
-										마이쪙<button class="btn btn-light btn-right">답글달기</button>
+										마이쪙<button class="btn btn-light btn-right" onclick="location.href='AdminReviewAnswer?review_num='">답글달기</button>
 									</th>
 									<th>맛잇음</th>
 									<th>1000000</th>

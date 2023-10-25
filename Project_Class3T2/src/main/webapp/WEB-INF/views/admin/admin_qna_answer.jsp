@@ -3,11 +3,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <title>상품 등록</title>
 </head>
 <body>
-
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">
@@ -22,6 +21,12 @@
 		enctype="multipart/form-data">
 			
 			
+			<div class="form-group row">
+				<label class="col-sm-2">등록 분류</label>
+				<div class="com-sm-3">
+					<jsp:include page="../inc/admin_answer.jsp"></jsp:include>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">작성아이디</label>
 				<div class="com-sm-3">

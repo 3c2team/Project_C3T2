@@ -52,10 +52,10 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.insertProductImg(map);
 	}
-	public int deleteProduct(List<String> product_num) {
+	public int deleteProduct(int product_num) {
 		return mapper.deleteProduct(product_num);
 	}
-	public int deleteProductImg(List<String> product_num) {
+	public int deleteProductImg(int product_num) {
 		// TODO Auto-generated method stub
 		return mapper.deleteProductImg(product_num);
 	}

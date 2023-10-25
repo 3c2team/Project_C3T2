@@ -3,7 +3,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <title>리뷰 답변</title>
 </head>
 <body>
@@ -15,13 +15,15 @@
 			</h1>
 		</div>
 	</div>
-	
 	<div class="container">
-		
 		<form name="newProduct" action="" class="form-horizontal" method="post" 
 		enctype="multipart/form-data">
-			
-			
+			<div class="form-group row">
+				<label class="col-sm-2">등록 분류</label>
+				<div class="com-sm-3">
+					<jsp:include page="../inc/admin_answer.jsp"></jsp:include>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 번호/이름</label>
 				<div class="com-sm-3">

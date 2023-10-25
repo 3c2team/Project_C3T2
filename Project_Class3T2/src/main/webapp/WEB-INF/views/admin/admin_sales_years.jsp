@@ -117,6 +117,5 @@
 	crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath }/resources/demo/sales_year_chart.js"></script>
 <script src="${pageContext.request.contextPath }/resources/demo/sales_year_bar.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/admin_datatable.js"></script>
 </body>
 </html>
