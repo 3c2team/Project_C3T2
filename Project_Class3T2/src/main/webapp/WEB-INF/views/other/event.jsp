@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/event.js"></script>
 <style>
@@ -40,6 +43,23 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
+			<div id="popup_layer">
+			  <div class="popupBox">
+			      <div class="popupCont">
+			          <h2>Popup</h2>
+			          <p>
+			          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+			          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+			          when an unknown printer took a galley of type and 
+			          scrambled it to make a type specimen book.
+			          </p>
+			      </div>
+			      <div class="popupBtn">
+			          <a id="chk_today" href="javascript:closeToday();" class="closeDay">하루동안 열지 않기</a> 
+			          <a href="javascript:closePop();">Close</a>
+			      </div>
+			  </div>
+			</div>
 			<div class="slideBox">
                 <div class="slider">
                     <div class="slides">
@@ -49,19 +69,19 @@
                         <input type="radio" name="radio-btn" id="radio4">
                         
                         <div class="slide first">
-                            <img src="./img/news_1.jpg" alt="">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/main.jpg" alt="">
                         </div>
                         
                         <div class="slide">
-                            <img src="./img/news_2.jpg" alt="">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/table_setting.jpg" alt="">
                         </div>
                         
                         <div class="slide">
-                            <img src="./img/news_3.jpg" alt="">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/platter1.jpg" alt="">
                         </div>
                         
                         <div class="slide">      
-                            <img src="./img/news_4.jpg" alt="">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/steak1.jpg" alt="">
                         </div>
           
                         <div class="navigationAuto">
@@ -83,10 +103,10 @@
 			<div class="container">
 				<ul class="links">
 					<li>
-						<a href="${pageContext.request.contextPath }/resources/news.jsp" id="notice">운영공지</a>
+						<a href="News" id="notice">운영공지</a>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/resources/event.jsp" id="event">이벤트</a>
+						<a href="Event" id="event">이벤트</a>
 					</li>
 				</ul>
 				<ul class="notice" style="margin: 5px 0 5px 100px;">

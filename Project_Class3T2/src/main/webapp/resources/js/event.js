@@ -16,15 +16,9 @@ $(function(){
 	// 보이기 | 숨기기 
 	$(window).scroll(scrollEvent);
 	
-	// popup event
-// 	$(".popupBox").draggable({containment:'parent', scroll:false}); 
-// 	let disp = document.cookie.indexOf("popToday=close") < 0 ? 'block' : 'none';
-// 	document.getElementById("popup_layer").style.display = disp;
-	
 	// 슬라이드 counter 동기화
 	$('.manualBtn').on('click', (e) => counter = $(e.target).attr('for').replace("radio", ""));
 });
-
 
 // functions
 function scrollEvent() {
@@ -39,4 +33,19 @@ function scrollEvent() {
 		$('#topBtn').fadeIn();
 		$('#bottomBtn').fadeIn();
 	}
+}
+
+function setCookie(name, value, expiredays) {
+	var todayDate = new Date();
+	todayDate.setDate( todayDate.getDate() + expiredays ); 
+	document.cookie = name + "=" + value + "; path=/; expires=" + todayDate.toUTCString() + ";"
+} 
+
+function closeToday() { 
+	setCookie( "popToday", "close" , 1); 
+	$("#popup_layer").css("display", "none");
+	closePop();
+}
+function closePop() { 
+	document.getElementById("popup_layer").style.display = "none";
 }
