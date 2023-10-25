@@ -7,16 +7,16 @@
 		<div id="bottomLogoArea">
 			<div id="sns" >
 				<a href="https://www.facebook.com/itwill.busan">
-					<img src="${pageContext.request.contextPath }/img/facebook.png" title="페이스북 아이콘" width="40" height="40" align="right">
+					<img src="${pageContext.request.contextPath }/resources/main_img/facebook.png" title="페이스북 아이콘" width="40" height="40" align="right">
 				</a>
 				<a href="https://www.instagram.com/itwillbusan_official/">
-					<img src="${pageContext.request.contextPath }/img/instagram.png" title="인스타그램 아이콘" width="40" height="40" align="right">
+					<img src="${pageContext.request.contextPath }/resources/main_img/instagram.png" title="인스타그램 아이콘" width="40" height="40" align="right">
 				</a>
 				<a href="https://blog.naver.com/itwillbusan01">
-					<img src="${pageContext.request.contextPath }/img/call.png" title="전화 아이콘" width="40" height="40" align="right">
+					<img src="${pageContext.request.contextPath }/resources/main_img/call.png" title="전화 아이콘" width="40" height="40" align="right">
 				</a>
 				<a href="https://cafe.naver.com/learntimes">
-					<img src="${pageContext.request.contextPath }/img/twitter.png" title="트위터 아이콘" width="40" height="40" align="right">
+					<img src="${pageContext.request.contextPath }/resources/main_img/twitter.png" title="트위터 아이콘" width="40" height="40" align="right">
 				</a>
 			<a id="logo">J'ai faim</a>
 			</div>

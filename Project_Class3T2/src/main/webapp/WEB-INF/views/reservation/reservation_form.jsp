@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
-<link href="${pageContext.request.contextPath }/resources/css/reservation.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
@@ -32,8 +31,8 @@
 				<tr>
 					<th>예약시간</th>
 					<td>
+						<input type="hidden" id="reservation_date" name="reservation_date">
 						<div class="form_radio_btn">
-							<input type="text" id="date" name="reservation_date"readonly>
 							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio-0">10:00</label>
 						</div>
@@ -74,7 +73,7 @@
 							<label for="radio-9">19:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-10" type="radio" name="reservation_time " value="20:00">
+							<input id="radio-10" type="radio" name="reservation_time" value="20:00">
 							<label for="radio-10">20:00</label>
 						</div>
 					</td>
@@ -83,56 +82,50 @@
 					<th>예약인원</th>
 					<td>
 						<div class="form_radio_btn">
-							<input id="radio-1" type="radio" name="reservation_person_count" value="1" checked>
-							<label for="radio-1">1</label>
+							<input id="radio1" type="radio" name="reservation_person_count" value="1" checked>
+							<label for="radio1">1</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-2" type="radio" name="reservation_person_count" value="2">
-							<label for="radio-2">2</label>
+							<input id="radio2" type="radio" name="reservation_person_count" value="2">
+							<label for="radio2">2</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-3" type="radio" name="reservation_person_count" value="3">
-							<label for="radio-3">3</label>
+							<input id="radio3" type="radio" name="reservation_person_count" value="3">
+							<label for="radio3">3</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-4" type="radio" name="reservation_person_count" value="4">
-							<label for="radio-4">4</label>
+							<input id="radio4" type="radio" name="reservation_person_count" value="4">
+							<label for="radio4">4</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-5" type="radio" name="reservation_person_count" value="5">
-							<label for="radio-5">5</label>
+							<input id="radio5" type="radio" name="reservation_person_count" value="5">
+							<label for="radio5">5</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-6" type="radio" name="reservation_person_count" value="6">
-							<label for="radio-6">6</label>
+							<input id="radio6" type="radio" name="reservation_person_count" value="6">
+							<label for="radio6">6</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-7" type="radio" name="reservation_person_count" value="7">
-							<label for="radio-7">7</label>
+							<input id="radio7" type="radio" name="reservation_person_count" value="7">
+							<label for="radio7">7</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio-8" type="radio" name="reservation_person_count" value="8">
-							<label for="radio-8">8</label>
+							<input id="radio8" type="radio" name="reservation_person_count" value="8">
+							<label for="radio8">8</label>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" name="reservation_person_name" value="${reservation_person_name }" size="20">
-						<c:if test="${sessionScope.sId ne null}"> <%-- 일반 회원 --%>
-							<input type="text" name="reservation_person_name" value="${member_name }" size="20">
-						</c:if>
-					</td>
+						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20">
+					</td> <!-- value="${sessionScope.sName}" --> 
 				</tr>
 				<tr>
 					<th>예약자 전화번호</th>
 					<td>
-						<input type="text" name="reservation_person_phone" placeholder="010-0000-0000" value="${reservation_phone }" size="20">
-							<c:if test="${sessionScope.sId ne null}"> <%-- 일반 회원 --%>
-								<input type="text" name="phone" value="${member_phone_num }" size="20">
-							</c:if>
-					</td>
+						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20">
+					</td> <!-- value="${sessionScope.sPhone}" --> 
 				</tr>
 				
 				<tr>
@@ -144,9 +137,9 @@
 			</table>
 		</form>
 	</main>
-<!-- 	<footer id="footer"> -->
-<%-- 		<jsp:include page="../inc/bottom.jsp"></jsp:include> --%>
-<!-- 	</footer> -->
+	<footer id="footer">
+		<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	</footer>
 	</div>
 </body>
 </html>

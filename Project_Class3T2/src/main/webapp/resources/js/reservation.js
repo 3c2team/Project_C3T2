@@ -64,7 +64,7 @@ $(function(){
 	            "<thead class='cal_date'>" +
 	            "<th><button type='button' class='prev'><</button></th>" +
 	            "<th colspan='5'><span id='select_year' name='select_year'>" + year + "</span>년 <span id='select_month' name='select_month'>" + month + "</span>월</th>" +
-	            "<th><button type='button' class='next'></button></th>" +
+	            "<th><button type='button' class='next'>></button></th>" +
 	            "</thead>" +
 	            "<thead class='cal_week'>" +
 	            "<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>" +
@@ -98,7 +98,7 @@ $(function(){
 	            let selectDay = $(".select_day").text();
 	            selectedDay = selectYear + "-" + selectMonth + "-" + selectDay; // 연월일 불러오기
 				console.log("예약일자 : " + selectedDay);
-				$("#date").val(selectedDay);
+				$("#reservation_date").val(selectedDay);
 	//			alert(selectedDay);
 	
 				return selectedDay;
