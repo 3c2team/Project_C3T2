@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.ProductMapper;
+import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
@@ -60,8 +61,8 @@ public class StoreService {
 		}
 		
 		// 같은 상품이 CART에 있는지 조회	
-		public CartVO getCartMember(int proNum) {
-			return mapper.selectCartMember(proNum);
+		public CartVO getCartMember(int proNum, String sId) {
+			return mapper.selectCartMember(proNum, sId);
 		}
 
 		//카트에 해당 상품 담기 (수정 전)
@@ -88,6 +89,20 @@ public class StoreService {
 			// TODO Auto-generated method stub
 			return  mapper.insertCart(sId, proNum, proCount);
 		}
+		
+		//카트에 담은 총액 가져오기
+		public CartAllPriceVO getCartAllPrice(String sId) {
+			// TODO Auto-generated method stub
+			return mapper.selectCartAllPrice(sId);
+		}
+
+		// 카트 상품 금액 계산 결과
+		public int registCartPrice(String sId) {
+			// TODO Auto-generated method stub
+			return mapper.updateCartPrice(sId);
+		}
+
+
 
 	
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <link href="${pageContext.request.contextPath }/resources/css/cart.css" rel="stylesheet" type="text/css">
@@ -54,7 +55,7 @@
 			<div id="frame2">
 				<span style="font-size: 18pt;, font-weight: bold; text-align: left;" onclick="fnPageChange('/')">장바구니</span>
 				<span class="home"> 홈 > 장바구니</span>
-				<span>${sessionScope.sId} </span>
+				<span></span>
 			</div>
 			<br>
 									
@@ -65,7 +66,7 @@
 				
 				<thead style="padding: 5px 0; ">
 					<tr>
-						<th colspan="10" style="text-align: left;  padding-left: 10px; font-size: 20px" >주문상품		</th>
+						<th colspan="10" style="text-align: left;  padding-left: 10px; font-size: 20px" >주문상품 (${cartAllPrice.count })</th>
 					</tr>
 					
 					<tr style="border-collapse: collapse;">
@@ -92,7 +93,8 @@
 							
 							<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;" >${productList.product_name }</td>
 							
-							<td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 -->
+<%-- 							<td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 --> --%>
+							<td><span style="padding-left: 10px;"><fmt:formatNumber value="${productList.product_price }" pattern="#,###" /></span>원</td> <!-- 상품가격 -->
 							
 							<td style="width:80px;">
 								<input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" value="${productList.product_count }">
@@ -102,22 +104,14 @@
 <!-- 							<td>-</td> -->
 							<td>기본배송</td>
 							<td>고정</td>
-							<td><span>0</span>원</td>
+<%-- 							<td><span>${productList.product_price  * productList.product_count }</span>원</td> --%>
+							<td><span><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
 							<td>
 								<button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br>
-<!-- 								<script type="text/javascript"> -->
-<!-- // 								function confirmDelete() { -->
-<!-- // 									"삭제 하시겠습니까?" 질문을 수행할 다이얼로그 표시 -->
-<%-- // 									let result = confirm("삭제 하시겠습니까?" + ${productList.product_num}); --%>
-									
-<!-- // 									 만약, result 값이 true 일 경우 "BoardDelete" 서블릿 주소 요청 -->
-<!-- // 										if(result) { -->
-<%-- // 											location.href="DeleteCartProduct?proNum=${productList.product_num}"; --%>
-<!-- // 										} -->
-<!-- // 								} -->
-<!-- 								</script> -->
+<%-- 								<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete(${productList.product_num})">삭제</button><br> --%>
+
 							</td>
 						</tr>
 					</c:forEach>
@@ -130,7 +124,9 @@
 							<span>[기본배송]</span>
 						</td>
 						<td colspan="5" style="border-right: none; text-align: left; padding-left: 10ox; border: solid 1px  #e0e0eb;">
-							상품금액 <span>0</span> + <span>배송비 2,500 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 15pt">0</span>
+<%-- 							상품금액 <span>${cartAllPrice.allPrice }</span> + <span>배송비 3,000 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 15pt">${cartAllPrice.allPrice + 3000}</span> --%> 
+							상품금액 <span><fmt:formatNumber value="${cartAllPrice.allPrice }" pattern="#,###" /></span> + <span>배송비 3,000 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 15pt"><fmt:formatNumber value="${cartAllPrice.allPrice + 3000 }" pattern="#,###" /></span>
+							
 						</td>
 					</tr>
 				</tfoot>
@@ -161,9 +157,11 @@
 					</tr>
 					
 					<tr style="background-color: #fff">
-						<td style="padding: 22px 0;"><span class="price">0</span>원</td>
-						<td>+<span class="price">2,500</span>원</td>
-						<td>=<span class="price">0</span>원</td>
+						<td style="padding: 22px 0;"><span class="price"><fmt:formatNumber value="${cartAllPrice.allPrice }" pattern="#,###" /></span>원</td>
+<%-- 						<td style="padding: 22px 0;"><span class="price">${cartAllPrice.allPrice }</span>원</td> --%>
+						<td>+<span class="price">3,000</span>원</td>
+						<td>=<span class="price"><fmt:formatNumber value="${cartAllPrice.allPrice + 3000 }" pattern="#,###" /></span>원</td>
+<%-- 						<td>=<span class="price">${cartAllPrice.allPrice + 3000}</span>원</td> --%>
 					</tr>
 				</table>
 			</div>

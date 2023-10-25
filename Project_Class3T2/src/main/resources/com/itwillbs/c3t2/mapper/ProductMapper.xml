@@ -112,7 +112,7 @@
 	<select id="selectCartMember" resultType="com.itwillbs.c3t2.vo.CartVO" >
 		SELECT *
 		FROM CART
-		WHERE product_num = #{proNum}
+		WHERE product_num = #{proNum} AND member_id = #{sId}
 	</select>
 	
 	<!-- 한가지 선택 상품 삭제 -->
@@ -120,6 +120,21 @@
 		DELETE FROM CART
 		WHERE product_num = #{proNum}
 	</delete>
+	
+	<!-- CART에 담은 상품 총액 계산 -->
+	<select id="selectCartAllPrice" resultType="com.itwillbs.c3t2.vo.CartAllPriceVO">
+		SELECT SUM(product_price) as allPrice, COUNT(product_num) count
+		FROM CART
+		WHERE member_id = #{sId}
+	</select>
+	
+	<!-- 카트 상품 금액 계산 결과 -->
+	<update id="updateCartPrice">
+		UPDATE CART C INNER JOIN PRODUCT P
+		ON C.product_num = P.product_num
+		SET C.product_price = C.product_count * P.product_price
+		WHERE C.member_id = #{sId};
+	</update>
 	
 	
 	

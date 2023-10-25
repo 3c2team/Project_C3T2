@@ -16,7 +16,7 @@
 	function productCount() {
 		let product_count = $("#amounts").val();
 		
-		alert("주문 수량 : " + product_count);
+// 		alert("주문 수량 : " + product_count);
 		
 		location.href="CartPro?proNum=${productDetail.product_num }&proCount=" + product_count;
 	}
@@ -133,7 +133,7 @@
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 					</div>
 					<div class="detailBtn">
-						<button class="btn_white" onclick="location.href='Cart'">장바구니</button>
+						<button class="btn_white" onclick="productCount()">장바구니</button>
 						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
