@@ -220,7 +220,9 @@ public class AdminController {
     
     //공지사항 페이지 이동(관리자)
     @GetMapping("AdminNoticeBoard")
-    public String adminNoticeBoard() {
+    public String adminNoticeBoard(Model model) {
+    	List<Map<String, Object>> selectNoticeList = service.selectNoticeList();
+    	model.addAttribute("selectNoticeList", selectNoticeList);
     	return "admin/admin_notice_board";
     }
     

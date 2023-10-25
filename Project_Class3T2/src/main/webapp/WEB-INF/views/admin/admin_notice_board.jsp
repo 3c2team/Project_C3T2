@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,28 +11,25 @@
 	.body_gray {
 		background-color: #f8f8f8;
 	}
-	
 	.white_box {
 		margin: 20px;
 	}
-	
 	.bottun_margin {
 		margin: 30px;
 	}
-	
 	span {
 		justify-content: center;
 		align-items: center;
 		display: flex;
 	}
-	
-	.right_button {
-		margin-left: 10%;
+	tr{
+		text-align: center;
+	}
+	.datatable-table th a{
+		text-align: center;
 	}
 	
-	td {
-		padding: 100;
-	}
+	
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
@@ -56,7 +54,7 @@
 					</div>
 					<div class="body_gray card mb-4">
 						<table>
-							<tr height="60px">
+							<tr class="body_gray"  height="60px">
 								<td>
 									<span class="sb-sidenav fs-4">공지사항 조회</span>
 								</td>
@@ -74,15 +72,19 @@
 											<th>공지제목</th>
 											<th>공지내용</th>
 											<th>공지날짜</th>
+											<th>조회수</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody >
+									<c:forEach var="selectNoticeList" items="${selectNoticeList }">
 										<tr>
-											<th>1</th>
-											<td>살려줘</td>
-											<td>집에가고싶어ㅠ</td>
-											<td>2023년10월12일</td>
+											<th>${selectNoticeList.num }</th>
+											<td>${selectNoticeList.notice_subject}</td>
+											<td>${selectNoticeList.notice_content }</td>
+											<td>${selectNoticeList.notice_date }</td>
+											<td>${selectNoticeList.notice_readcount }</td>
 										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>

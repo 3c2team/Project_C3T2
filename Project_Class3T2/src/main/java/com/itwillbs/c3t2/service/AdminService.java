@@ -59,6 +59,9 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.deleteProductImg(product_num);
 	}
+	public List<Map<String, Object>> selectNoticeList() {
+		return mapper.selectNotice();
+	}
 	
 
 }

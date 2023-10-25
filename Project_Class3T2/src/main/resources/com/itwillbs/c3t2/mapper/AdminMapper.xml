@@ -18,6 +18,15 @@
 			FROM ADMIN
 			WHERE admin_id = #{admin_id}
 		</select>
+		<select id="selectNotice" resultType="map">
+			SELECT  notice_num
+				  , notice_subject
+				  , notice_content
+				  , notice_readcount
+				  , DATE_FORMAT(notice_date, '%Y년 %m월%d일 %H:%i') as notice_date
+				  , ROW_NUMBER() OVER(order by notice_num) as num
+			FROM NOTICE
+		</select>
 		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
 			SELECT  *,ROW_NUMBER() OVER(order by product_num) as num
 			FROM PRODUCT

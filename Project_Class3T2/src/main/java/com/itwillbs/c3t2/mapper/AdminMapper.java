@@ -26,5 +26,6 @@ public interface AdminMapper {
 	int insertProductImg(Map<String, Object> map);
 	int deleteProduct(int product_num);
 	int deleteProductImg(int product_num);
+	List<Map<String, Object>> selectNotice();
 
 }
