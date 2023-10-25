@@ -18,7 +18,6 @@
 	<ul>
 		<li><a href="MypageCheckOrder">주문 조회</a></li>
 		<li><a href="MypageCheckCancel">취소/반품 조회</a></li>
-		<li><a href="MypageCheckPay">결제 조회</a></li>
 	</ul>
 </div>
 <div id="menu">

@@ -44,11 +44,6 @@ public class MyPageController {
 		return "mypage/mypage_check_order";
 	}
 	
-	@GetMapping("MypageCheckPay")				//나의 주문정보 - 결제 내역
-	public String mypageCheckPay() {
-		return "mypage/mypage_check_pay";
-	}
-	
 	@GetMapping("MypageGoodsReview")			//나의 활동정보 - 상품 리뷰
 	public String mypageGoodsReview() {
 		return "mypage/mypage_goods_review";
