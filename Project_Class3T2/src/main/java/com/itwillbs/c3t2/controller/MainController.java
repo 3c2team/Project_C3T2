@@ -142,7 +142,7 @@ public class MainController {
 		
 		@PostMapping("IdForgotPro")
 		public String idForgotPro(String member_name, String member_phone_num, MemberVO member, Model model, HttpSession session) {
-			String member_id = service.getMember(member_name);
+			String member_id = service.getMemberId(member_name);
 			String member_id_2 = service.getMemberId(member_phone_num);
 			System.out.println("입력받은 이름 : " + member.getMember_name());
 			System.out.println("입력받은 번호 : " + member.getMember_phone_num());
