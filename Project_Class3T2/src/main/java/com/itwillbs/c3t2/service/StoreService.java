@@ -102,6 +102,12 @@ public class StoreService {
 			return mapper.updateCartPrice(sId);
 		}
 
+		// 선택 상품 삭제 
+		public int selectDeleteCartProduct(int proNum1) {
+			// TODO Auto-generated method stub
+			return mapper.deleteSelectCart(proNum1);
+		}
+
 
 
 	

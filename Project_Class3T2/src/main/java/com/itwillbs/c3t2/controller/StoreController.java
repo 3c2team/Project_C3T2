@@ -205,11 +205,33 @@ public class StoreController {
 			}
 		
 		
-//		@GetMapping("SelectDeleteCart")
-//		@ResponseBody
-//		public void selectDeleteCart(HttpSession session, int proNum) {
-//			System.out.println("삭제 시 넘어온 값 : " + proNum);
-//		}
+			@GetMapping("SelectDeleteCart")
+			public String selectDeleteCart(HttpSession session, int[] proNum, Model model) {
+				System.out.println("선택 삭제 시 넘어온 값 : " + proNum);
+				String sId = (String)session.getAttribute("sId");
+				
+				System.out.println(proNum);
+				
+				// 선택 상품 삭제 작업
+				for( int proNum1 : proNum) {
+					
+					int deleteProduct = service.selectDeleteCartProduct(proNum1);
+					if(deleteProduct > 0) {
+						System.out.println(proNum1 + " : 삭제 완료");
+					}
+				}
+				
+				// 메인 페이지에서 카트 등록 상품 목록 조회
+				List<ProductVO> productList = service.getMainCartList(sId);
+				model.addAttribute("productList", productList);
+
+				// 카트 상품 총액
+				CartAllPriceVO cartAllPrice = service.getCartAllPrice(sId);
+				model.addAttribute("cartAllPrice", cartAllPrice);
+				System.out.println("결과값 뭐임? :" + cartAllPrice);
+				
+				return "store/cart";
+			}
 
 		
 		@GetMapping("Pay")

@@ -51,4 +51,7 @@ public interface ProductMapper {
 	
 	// CART에 담은 상품 총액 계산
 	public CartAllPriceVO selectCartAllPrice(String sId);
+
+	// 선택 상품 삭제 진행
+	public int deleteSelectCart(int proNum1);
 }

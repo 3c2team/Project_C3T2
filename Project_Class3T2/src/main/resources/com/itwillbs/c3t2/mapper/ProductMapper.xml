@@ -136,6 +136,11 @@
 		WHERE C.member_id = #{sId};
 	</update>
 	
+	<!-- 선택 상품 삭제 진행 -->
+	<delete id="deleteSelectCart">
+		DELETE FROM CART
+		WHERE product_num = #{proNum}
+	</delete>
 	
 	
 	
