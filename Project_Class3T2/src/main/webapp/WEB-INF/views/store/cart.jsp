@@ -61,19 +61,24 @@ $(function() {
     
     $("#btnmemberdel").on("click",function(){
 //        alert(product_num);
-       if(confirm("삭제 하시겠습니까?")){
+       if(confirm("삭제하시겠습니까?")){
            location.href="SelectDeleteCart?proNum=" + product_num;
        }else{
           alert("삭제를 취소 하셨습니다.");
        }
     });
     
-
     
+    $("#productAllDelete").on("click", function() {
+// 		alert("장바구니를 비우시겠습니까?")
+
+		if(confirm("장바구니를 비우시겠습니까?")){
+	           location.href="productAllDelete";
+	       }
+	});
+        
  });
    
-
-
 
 </script>
 </head>
@@ -124,7 +129,7 @@ $(function() {
                         <input type="checkbox" name="checkbox" class="checkbox" id="${productList.product_num}" value="${productList.product_num}" proNum="${productList.product_num}"/>
                      </td>
                      <td style="border-left: none; border-right: none"><img style="width: 60%" src="
-<%--                      ${productList.product_main_img_real_file } --%>
+                     ${productList.product_main_img_real_file }
                      "></td>   
                      
                      <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;" >${productList.product_name }</td>
@@ -178,7 +183,7 @@ $(function() {
             <span style="margin: 0 10px;" class = "btnfloat">선택 상품을 </span>
             <button class="btn default btnfloat" style=" color: black;" id="btnmemberdel">삭제하기</button>&nbsp;
             
-            <button class="btn default backBtn btnfloat2" style="color: black; float: right;">장바구니 비우기</button>
+            <button class="btn default backBtn btnfloat2" style="color: black; float: right;" id="productAllDelete">장바구니 비우기</button>
 <!--             <span class="clearboth"></span> -->
          </div>
          <br><br>
@@ -206,7 +211,7 @@ $(function() {
          <div align="center">
             <button class="btn default" id="allProduct" style="color: black;">전체상품주문</button>         
             <button class="btn default backBtn" id="productClear" style="color: black;">선택상품주문</button>         
-            <button class="btn default footerbtn" id="footerBtn" style="color: black;" onclick="location.href='store_main.jsp'">쇼핑계속하기</button>         
+            <button class="btn default footerbtn" id="footerBtn" style="color: black;" onclick="location='OnlineStore'">쇼핑계속하기</button>         
             <span class="clearboth"></span>
          </div>
          
@@ -235,9 +240,9 @@ $(function() {
       
       <br>   
       
-<!--       <footer id="footer"> -->
-<%--          <jsp:include page="../inc/bottom.jsp"></jsp:include> --%>
-<!--       </footer> -->
+      <footer id="footer">
+         <jsp:include page="../inc/bottom.jsp"></jsp:include>
+      </footer>
    </div>
 </body>
 </html>

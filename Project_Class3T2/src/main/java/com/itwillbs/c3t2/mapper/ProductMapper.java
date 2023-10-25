@@ -54,4 +54,7 @@ public interface ProductMapper {
 
 	// 선택 상품 삭제 진행
 	public int deleteSelectCart(int proNum1);
+
+	// 장바구니 비우기
+	public int deleteAll(String sId);
 }

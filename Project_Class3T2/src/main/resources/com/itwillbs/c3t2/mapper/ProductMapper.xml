@@ -142,7 +142,11 @@
 		WHERE product_num = #{proNum}
 	</delete>
 	
-	
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteAll">
+		DELETE FROM CART
+		WHERE member_id = #{sId}
+	</delete>
 	
 	
 
