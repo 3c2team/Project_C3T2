@@ -231,6 +231,11 @@ public class AdminController {
     public String adminNoticeRegist() {
     	return "admin/admin_notice_regist";
     }
+    @PostMapping("AdminNoticeRegistPro")
+    public String adminNoticeRegist(@RequestParam Map<String, String> map) {
+    	System.out.println(map);
+    	return "/";
+    }
     
     //문의 리스트 페이지 이동(관리자)
     @GetMapping("AdminQnaBoard")

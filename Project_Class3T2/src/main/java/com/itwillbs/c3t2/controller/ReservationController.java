@@ -21,7 +21,6 @@ public class ReservationController {
 	private ReservationService service;
 	
 	// 예약 폼 전송
-	@GetMapping("/ReservationPro")
 	@PostMapping("/ReservationPro")
 	public String reservationPro(ReservationVO reservation, Model model
 								,@RequestParam Map<String,Object> map) {

@@ -44,9 +44,9 @@ $(function(){
 	        cnt++;
 	        if (cnt % 7 == 0) {
 	            tag += "</tr>";
-	    calMoveEvtFn();
 	        }
 	    }
+	    calMoveEvtFn();
 	    $(target).find("#customSetDate").append(tag);
 	
 	    function assembly(year, month) {
@@ -98,8 +98,9 @@ $(function(){
 	            let selectDay = $(".select_day").text();
 	            selectedDay = selectYear + "-" + selectMonth + "-" + selectDay; // 연월일 불러오기
 				console.log("예약일자 : " + selectedDay);
-	//			export {selectedDay};
+				$("#date").val(selectedDay);
 	//			alert(selectedDay);
+	
 				return selectedDay;
 				
 	        });
@@ -107,9 +108,6 @@ $(function(){
 	    }
 	    
 	}
-	$("#submit").on("click",function(){
-		location.href="ReservationPro?reservation_date="+selectedDay;	
-	});
 });
 
 //$(document).ready( function()

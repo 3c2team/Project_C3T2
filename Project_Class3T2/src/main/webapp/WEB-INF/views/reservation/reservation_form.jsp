@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	</script>
+</script>
 </head>
 <body>
 	<div id="mainLayout">
@@ -26,13 +26,14 @@
 		<%-- 조회된 회원 정보를 테이블에 출력 --%>
 		<%-- EL 을 사용하여 member 객체에 저장된 각 항목을 테이블에 출력 --%>
 		<h1>Reservation</h1>
-		<form action="ReservationPro" method="post">
+		<form action="ReservationPro" method="post" id="custom_submit">
 		<div id="calendarForm"></div>
 			<table>
 				<tr>
 					<th>예약시간</th>
 					<td>
 						<div class="form_radio_btn">
+							<input type="text" id="date" name="reservation_date"readonly>
 							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio-0">10:00</label>
 						</div>
@@ -137,7 +138,7 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="돌아가기" onclick="history.back()">
-						<input type="submit" id="submit" value="예약하기" >
+						<input type="submit" value="예약하기" >
 					</td>
 				</tr>
 			</table>
