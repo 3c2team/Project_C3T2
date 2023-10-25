@@ -14,6 +14,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	</script>
 </head>
 <body>
 	<div id="mainLayout">
@@ -24,8 +26,8 @@
 		<%-- 조회된 회원 정보를 테이블에 출력 --%>
 		<%-- EL 을 사용하여 member 객체에 저장된 각 항목을 테이블에 출력 --%>
 		<h1>Reservation</h1>
-		<div id="calendarForm"></div>
 		<form action="ReservationPro" method="post">
+		<div id="calendarForm"></div>
 			<table>
 				<tr>
 					<th>예약시간</th>
@@ -135,15 +137,15 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="돌아가기" onclick="history.back()">
-						<input type="submit" value="예약하기" onclick="confirm(예약하시겠습니까?)">
+						<input type="submit" id="submit" value="예약하기" >
 					</td>
 				</tr>
 			</table>
 		</form>
 	</main>
-	<footer id="footer">
-		<jsp:include page="../inc/bottom.jsp"></jsp:include>
-	</footer>
+<!-- 	<footer id="footer"> -->
+<%-- 		<jsp:include page="../inc/bottom.jsp"></jsp:include> --%>
+<!-- 	</footer> -->
 	</div>
 </body>
 </html>
