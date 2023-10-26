@@ -68,7 +68,12 @@ $(function() {
        }
     });
     
+    // 상품 하나 삭제
+//     $("productDelete").on("click", function() {
+//     	confirm("장바구니를 비우시겠습니까?")
+// 	})
     
+    // 장바구니 비우기
     $("#productAllDelete").on("click", function() {
 // 		alert("장바구니를 비우시겠습니까?")
 
@@ -78,6 +83,19 @@ $(function() {
 	});
         
  });
+ 
+//상품 개별 삭제
+function deleteCart(proNum) {
+	
+	let result = confirm("해당 상품을 삭제 하시겠습니까?");
+	
+	if(result){
+        location.href="DeleteCartProduct?proNum=" + proNum;
+    }else{
+    	alert("삭제를 취소 하셨습니다.");
+    }
+}
+
    
 
 </script>
@@ -150,7 +168,9 @@ $(function() {
                      <td>
                         <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
-                        <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br>
+<!--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" id="productDelete">삭제</button><br> -->
+						<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="deleteCart('${productList.product_num}')">삭제</button><br>
+<%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br> --%>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete(${productList.product_num})">삭제</button><br> --%>
 
                      </td>
