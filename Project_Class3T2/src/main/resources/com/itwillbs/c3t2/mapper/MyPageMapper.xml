@@ -16,4 +16,17 @@
 		FROM MEMBER 
 		WHERE member_id = #{member_id}
 	</select>
+	
+	<!-- 특정 회원의 모든 리뷰를 조회 -->
+	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO">
+	    SELECT r.*, m.member_name
+	    FROM REVIEW r
+	    JOIN MEMBER m ON r.member_num = m.member_num
+	    WHERE r.member_num = #{member_num}
+	</select>
+	
+	<!-- 비번 재입력 -->
+	<select id="selectPassword" resultType="com.itwillbs.c3t2.vo.MemberVO">
+        SELECT * FROM MEMBER WHERE member_id = #{member_id}
+    </select>
 </mapper>

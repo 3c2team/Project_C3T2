@@ -10,7 +10,7 @@
 	</ul>
 	<p><b>상품 구매</b></p>
 	<ul>
-		<li><a href="MypageReservationCheck">상품 구매 내역</a></li>
+		<li><a href="MypageBuyList">상품 구매 내역</a></li>
 	</ul>
 </div>
 <div id="menu">

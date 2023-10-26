@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,7 @@
 				</span>
 			</span>
 		</div>
+		<!-- 마이페이지 컨텐츠 영역 -->
 		<div id="mypage_container">
 			<div class="mypageBox" id="mypage_sideMenu">
 				<nav class="menu">
@@ -61,19 +63,33 @@
 					</div>
 				</div>
 				<br><br>
-				<article>
-					<section id="list_Form">
-						<table>
-							<tr id="tr_top">
-								<th width="120px">주문번호</th> <!-- 적립 or 소멸 -->
-								<th width="400px">상품명</th>
-								<th width="130px">수량</th> <!-- 개별 유효기간 등 -->
-								<th width="130px">결제상태</th>
-								<th width="130px">주문상태</th>
-							</tr>
-						</table>
-					</section>
-				</article>
+				<!-- 리뷰 목록 테이블 -->
+                    <article>
+                        <section id="list_Form">
+                            <table>
+                                <!-- 테이블 헤더 -->
+                                <tr id="tr_top">
+                                    <th width="120px">주문번호</th>
+                                    <th width="400px">상품명</th>
+                                    <th width="130px">리뷰 제목</th>
+                                    <th width="130px">리뷰 내용</th>
+                                    <th width="130px">별점</th>
+                                    <th width="130px">리뷰 날짜</th>
+                                </tr>
+                                <!-- 리뷰 데이터 반복 출력 -->
+                                <c:forEach var="review" items="${review}">
+                                    <tr>
+                                        <td>${review.order_num}</td>
+                                        <td>${review.product_num}</td>
+                                        <td>${review.review_title}</td>
+                                        <td>${review.review_content}</td>
+                                        <td>${review.review_star}</td>
+                                        <td>${review.review_date}</td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </section>
+                    </article>
 				</div>
 				<br><br>
 			</div>

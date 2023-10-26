@@ -1,6 +1,6 @@
 package com.itwillbs.c3t2.vo;
 
-import java.sql.Timestamp;
+import java.sql.Timestamp; 
 
 import lombok.Data;
 
