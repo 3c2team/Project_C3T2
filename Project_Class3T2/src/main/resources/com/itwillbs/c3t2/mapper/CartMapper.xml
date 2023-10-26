@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.itwillbs.c3t2.mapper.CartMapper">
+	
+	<!-- CART상품 조회 -->
+	<select id="selectProductCartList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+
+		SELECT 
+			P.product_num
+			, P.product_main_img_real_file
+			, P.product_name
+			, P.product_price
+			, C.product_count
+		FROM 
+			PRODUCT P JOIN CART C
+			ON P.product_num = C.product_num
+		WHERE
+			C.member_id = #{sId}
+
+	</select>
+	
+	<!-- CART상품 조회 -->
+<!-- 	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO"> -->
+
+<!-- 		SELECT P.* -->
+<!-- 		FROM PRODUCT P  -->
+<!-- 		JOIN CART C -->
+<!-- 		ON P.product_num = C.product_num -->
+
+<!-- 	</select> -->
+	
+	<!-- 카트페이지에서 회원정보 출력 -->
+	<select id="selectPayMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_id = #{sId}
+	</select> 
+	
+	<!-- 카트페이지에서 회원아이디 Cart 테이블에 저장 -->
+	<insert id="insertCart">
+
+		INSERT 
+			INTO CART(cart_num,member_id, product_num, product_count)
+			VALUES(
+				null
+				, #{sId}
+				, #{proNum}
+				, #{proCount}
+			)
+			
+	</insert>
+	
+	<!-- 같은 상품이 있는지 조회 -->
+	<select id="selectCartMember" resultType="com.itwillbs.c3t2.vo.CartVO" >
+		SELECT *
+		FROM CART
+		WHERE product_num = #{proNum} AND member_id = #{sId}
+	</select>
+	
+	<!-- 한가지 선택 상품 삭제 -->
+	<delete id="deleteCartProduct">
+		DELETE FROM CART
+		WHERE product_num = #{proNum}
+	</delete>
+	
+	<!-- CART에 담은 상품 총액 계산 -->
+	<select id="selectCartAllPrice" resultType="com.itwillbs.c3t2.vo.CartAllPriceVO">
+		SELECT SUM(product_price) as allPrice, COUNT(product_num) count
+		FROM CART
+		WHERE member_id = #{sId}
+	</select>
+	
+	<!-- 카트 상품 금액 계산 결과 -->
+	<update id="updateCartPrice">
+		UPDATE CART C INNER JOIN PRODUCT P
+		ON C.product_num = P.product_num
+		SET C.product_price = C.product_count * P.product_price
+		WHERE C.member_id = #{sId};
+	</update>
+	
+	<!-- 선택 상품 삭제 진행 -->
+	<delete id="deleteSelectCart">
+		DELETE FROM CART
+		WHERE product_num = #{proNum}
+	</delete>
+	
+	<!-- 장바구니 비우기 -->
+	<delete id="deleteAll">
+		DELETE FROM CART
+		WHERE member_id = #{sId}
+	</delete>
+	
+		<!-- 삭제 후 남은 상품 보기 -->
+<!-- 	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO"> -->
+
+<!-- 		SELECT  -->
+<!-- 			P.product_num -->
+<!-- 			, P.product_main_img_real_file -->
+<!-- 			, P.product_name -->
+<!-- 			, P.product_price -->
+<!-- 			, C.product_count -->
+<!-- 		FROM  -->
+<!-- 			PRODUCT P JOIN CART C -->
+<!-- 			ON P.product_num = C.product_num -->
+<!-- 	</select> -->
+
+
+
+
+
+
+
+</mapper>
