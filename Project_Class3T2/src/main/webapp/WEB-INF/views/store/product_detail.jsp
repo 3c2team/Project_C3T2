@@ -184,7 +184,7 @@
 									<span class="reviewCount">총 4건의 리뷰</span>
 								</div>
 								<div>
-									<button class="reviewWrite">리뷰 쓰기</button>
+									<button class="reviewWrite" onclick="window.open('ReviewFrom?proNum=${productDetail.product_num }', 'review_from', 'width=500, height=800, location=no, status=no, scrollbars=no')">리뷰 쓰기</button>
 								</div>
 							</div>
 						</div>
