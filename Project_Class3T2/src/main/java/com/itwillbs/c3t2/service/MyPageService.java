@@ -28,8 +28,9 @@ public class MyPageService {
 	}
 	
 	//리뷰 상세내역
-	public List<ReviewVO> getReviewDetail(int memberNum) {
-		return mapper.selectReviewDetail(memberNum);
+	public List<ReviewVO> getReviewDetail(Integer member_num) {
+		return mapper.selectReviewDetail(member_num);
+		
 	}
 	
 	// 비번 점검

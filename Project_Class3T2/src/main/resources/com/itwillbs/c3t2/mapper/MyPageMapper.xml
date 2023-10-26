@@ -17,7 +17,7 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
-	<!-- 특정 회원의 모든 리뷰를 조회 -->
+	<!-- 내 모든 리뷰를 조회 -->
 	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 	    SELECT r.*, m.member_name
 	    FROM REVIEW r

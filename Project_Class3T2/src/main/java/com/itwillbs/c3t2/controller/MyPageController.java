@@ -2,6 +2,7 @@ package com.itwillbs.c3t2.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,6 +81,10 @@ public class MyPageController {
 		return "mypage/mypage_reservation_change";
 	}
 	
+//	@GetMapping("MypageReservationList")				// 예약 내역
+//	public String mypageReservationList() {
+//		return "mypage/mypage_reservation_list";
+//	}
 	
 	
 	//============================================================================
@@ -104,22 +110,27 @@ public class MyPageController {
 		return "mypage/mypage_member_detail";
 	}
 	
-//	@GetMapping("MypageReservationList")				// 예약 내역
-//	public String mypageReservationList() {
-//		return "mypage/mypage_reservation_list";
-//	}
-	
-	//* @param memberNum 조회하고자 하는 회원의 번호
-    //* @param model 뷰에 전달할 데이터를 담는 객체
-    //* @return 리뷰 목록을 보여줄 뷰 페이지의 이름
 	@GetMapping("MypageGoodsReview")			//나의 활동정보 - 상품 리뷰
-	public String mypageGoodsReview(@RequestParam("memberNum") int member_num, Model model) {
+	public String mypageGoodsReview(HttpSession session ,Model model) {
 		
-		List<ReviewVO> review = service.getReviewDetail(member_num);
-		model.addAttribute("review", review);
+		// 세션에서 현재 로그인한 회원의 번호 가져오기
+		Integer member_num = (Integer) session.getAttribute("sNum");
+		System.out.println(member_num);
+		
+		// 현재 로그인한 회원의 모든 리뷰 가져오기
+		List<ReviewVO> reviews = service.getReviewDetail(member_num);
+		System.out.println(reviews);
+		
+		// 가져온 리뷰 목록을 모델에 추가
+		model.addAttribute("reviews", reviews);
+		
+		// 리뷰 조회 페이지 반환
 		return "mypage/mypage_goods_review";
 	}
 	
+	//* @param memberNum 조회하고자 하는 회원의 번호
+	//* @param model 뷰에 전달할 데이터를 담는 객체
+	//* @return 리뷰 목록을 보여줄 뷰 페이지의 이름
 	@PostMapping("MypagePasswdChange")			//나의 정보관리 - 비밀번호 변경 전 비번입력
 	public ResponseEntity<?> MypagePasswdChange(@RequestParam String member_id, @RequestParam String member_passwd) {
 		

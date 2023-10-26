@@ -131,6 +131,7 @@ public class MainController {
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
 					session.setAttribute("sPhone", dbMember.getMember_phone_num());
+					session.setAttribute("sNum", dbMember.getMember_num());
 					return "redirect:/Main";
 				}
 			}

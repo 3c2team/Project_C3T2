@@ -77,16 +77,16 @@
                                     <th width="130px">리뷰 날짜</th>
                                 </tr>
                                 <!-- 리뷰 데이터 반복 출력 -->
-                                <c:forEach var="review" items="${review}">
-                                    <tr>
-                                        <td>${review.order_num}</td>
-                                        <td>${review.product_num}</td>
-                                        <td>${review.review_title}</td>
-                                        <td>${review.review_content}</td>
-                                        <td>${review.review_star}</td>
-                                        <td>${review.review_date}</td>
-                                    </tr>
-                                </c:forEach>
+                                <c:forEach var="reviews" items="${reviews}">
+								    <tr>
+								        <td>${reviews.order_num}</td>
+								        <td>${reviews.product_num}</td>
+								        <td>${reviews.review_title}</td>
+								        <td>${reviews.review_content}</td>
+								        <td>${reviews.review_star}</td>
+								        <td>${reviews.review_date}</td>
+								    </tr>
+								</c:forEach>
                             </table>
                         </section>
                     </article>

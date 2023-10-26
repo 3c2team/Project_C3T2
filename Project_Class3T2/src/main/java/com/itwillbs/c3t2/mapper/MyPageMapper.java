@@ -23,12 +23,14 @@ public interface MyPageMapper {
 	MemberVO selectMemberDetails(String member_id);
 	
 	//리뷰 상세내역 조회
-	List<ReviewVO> selectReviewDetail(int member_num);
+	List<ReviewVO> selectReviewDetail(Integer member_num);
 	
 	//비번 다시한번 묻기
 	
 	// memberId를 기반으로 특정 회원의 정보를 가져오는 메서드
 	MemberVO selectPassword(String member_id);
+
+
 	
 	
 }
