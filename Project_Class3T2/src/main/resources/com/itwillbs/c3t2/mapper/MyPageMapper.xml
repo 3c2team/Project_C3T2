@@ -5,11 +5,8 @@
     
 
 <mapper namespace="com.itwillbs.c3t2.mapper.MyPageMapper">
-	<!-- 예약내역 조회 -->
-	<select id = "getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
-		SELECT * FROM USER_ORDER
-	</select>
 	
+    
 	<!-- 회원상세정보 조회 -->
 	<select id = "selectMemberDetails" resultType="com.itwillbs.c3t2.vo.MemberVO">
 		SELECT*
@@ -17,7 +14,8 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
-	<!-- 내 모든 리뷰를 조회 -->
+	
+	<!-- 특정 회원의 모든 리뷰를 조회 -->
 	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 	    SELECT r.*, m.member_name
 	    FROM REVIEW r
@@ -25,8 +23,15 @@
 	    WHERE r.member_num = #{member_num}
 	</select>
 	
-	<!-- 비번 재입력 -->
-	<select id="selectPassword" resultType="com.itwillbs.c3t2.vo.MemberVO">
-        SELECT * FROM MEMBER WHERE member_id = #{member_id}
+	<!-- 상품 구매 내역 -->
+	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
+        SELECT u.*, m.member_name
+		FROM USER_ORDER u
+		JOIN MEMBER m ON u.member_num = m.member_num
+		WHERE u.member_num = #{member_num}
     </select>
+	
+	<!-- 비밀번호 맞나 확인 -->
+	
+	
 </mapper>

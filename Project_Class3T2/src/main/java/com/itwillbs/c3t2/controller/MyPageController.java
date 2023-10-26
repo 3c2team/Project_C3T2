@@ -88,18 +88,6 @@ public class MyPageController {
 	
 	
 	//============================================================================
-	@GetMapping("/MypageBuyList")	//상품 구매 내역
-	public String mypagebuylist(Model model) {
-		
-		//상품 구매 내역을 가져옴
-		List<UserOrderVO> OrderList = service.getOrderList();
-		System.out.println(OrderList);
-		// 이 USER_ORDER DB에 있는지 확인
-		model.addAttribute("OrderList", OrderList);
-		
-		return "mypage/mypage_buy_check";
-	}
-	
 	@GetMapping("MypageMemberDetail")				//회원 상새내역
 	public String mypageMemberDetail(MemberVO member, Model model, HttpSession session) {
 		String member_id = (String)session.getAttribute("sId");
@@ -108,6 +96,23 @@ public class MyPageController {
 		System.out.println(dbMember);
 		
 		return "mypage/mypage_member_detail";
+	}
+	
+	@GetMapping("/MypageBuyList")	//상품 구매 내역
+	public String mypagebuylist(HttpSession session, Model model) {
+		
+		// 세션에서 현재 로그인한 회원의 번호 가져오기
+		Integer member_num = (Integer) session.getAttribute("sNum");
+		System.out.println(member_num);
+		
+		//상품 구매 내역을 가져옴
+		List<UserOrderVO> OrderList = service.getOrderList(member_num);
+		System.out.println(OrderList);
+		
+		// 가져온 구매 목록을 모델에 추가
+		model.addAttribute("OrderList", OrderList);
+		
+		return "mypage/mypage_buy_check";
 	}
 	
 	@GetMapping("MypageGoodsReview")			//나의 활동정보 - 상품 리뷰
@@ -128,20 +133,12 @@ public class MyPageController {
 		return "mypage/mypage_goods_review";
 	}
 	
-	//* @param memberNum 조회하고자 하는 회원의 번호
-	//* @param model 뷰에 전달할 데이터를 담는 객체
-	//* @return 리뷰 목록을 보여줄 뷰 페이지의 이름
-	@PostMapping("MypagePasswdChange")			//나의 정보관리 - 비밀번호 변경 전 비번입력
-	public ResponseEntity<?> MypagePasswdChange(@RequestParam String member_id, @RequestParam String member_passwd) {
-		
-		// 비밀번호가 일치하면 "Success" 반환, 그렇지 않으면 "Fail" 반환
-		if(service.MypagePasswdChange(member_id,member_passwd)) {
-		
-			return  new ResponseEntity<>("Success", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
-		}
+	@GetMapping("MypagePasswdChange")		   //나의 정보관리 - 비밀번호 변경 전 비번입력
+	public String mypagePasswdChange() {
+		return "mypage/mypage_passwd_change";
 	}
+	
+	
 	
 	
 }
