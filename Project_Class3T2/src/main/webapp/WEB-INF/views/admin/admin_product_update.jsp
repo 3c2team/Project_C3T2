@@ -13,10 +13,6 @@
 <script type="text/javascript">
 $(function() {
 	$("#${dbProduct.product_category_num }").prop("checked",true);
-	
-	$("#delete_btn").on("click",function (){
-		$("#main_file").html("<input type='file' class='form-control' accept='.jpg, .png'>") ;
-	});
 });
 </script>
 </head>
@@ -27,7 +23,7 @@ $(function() {
 		</div>
 	</div>
 	<div class="container">
-		<form name="newProduct" action="" class="form-horizontal"method="post" enctype="multipart/form-data">
+		<form name="newProduct" action="AdminProductUpdatePro" class="form-horizontal"method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
@@ -79,20 +75,20 @@ $(function() {
 							<c:forEach var="dbProductImg" items="${dbProductImg }" varStatus="i">
 								<div id="sub_file${i.index }">
 									${dbProductImg.product_image}
-									<input type="button" value="삭제" 
+									<input type="button" class="btn-primary" value="삭제" 
 									onclick="$('#sub_file${i.index}').html('<input type=file class=form-control accept=.jpg, .png>')"><br>
 								</div>
 							</c:forEach>
 							<div id="button_add_result"></div>
-							<input type="button" id="button_add" value="+">
+							<input type="button" id="button_add" class="btn bg-gray" value="+">
 						</div>
 					</c:when>
 				</c:choose>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input type="button" class="btn btn-primary" value="취소">
-					<input type="submit" class="btn btn-primary" value="등록">
+					<input type="button" class="btn btn-primary" onclick="window.close()"value="취소">
+					<input type="submit" onclick="isSubmit()" class="btn btn-primary" value="등록">
 						
 				</div>
 			</div>

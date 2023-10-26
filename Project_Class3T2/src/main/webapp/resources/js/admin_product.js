@@ -1,15 +1,24 @@
 $(function() {
-		$("#button_add").on("click",function(){
-			$("#button_add_result").append(
-				"<input type='file'  class='form-control' accept='.jpg, .png'>"
-			)
-			
-		});
-		
-		$("#button_open").on("click",function() {
-			window.open('AdminProductRegist','', 'width=100', 'height=600');
-		});
-		$("#button_delete").on("click",function() {
-			location.href="DeleteProductPro";
-		});
+	$("#button_add").on("click",function(){
+		$("#button_add_result").append(
+			"<input type='file'  class='form-control' accept='.jpg, .png'>"
+		)
 	});
+	
+	$("#button_open").on("click",function() {
+		window.open('AdminProductRegist','상품등록', "top=500,left=500,width=700, height=700");
+	});
+	$("#button_delete").on("click",function() {
+		location.href="DeleteProductPro";
+	});
+	
+	
+	$("#delete_btn").on("click",function (){
+		$("#main_file").html("<input type='file' class='form-control' accept='.jpg, .png'>") ;
+	});
+});
+function isSubmit() {
+	if(!confirm("등록하시겠습니까?")){
+		return false;
+	}
+}

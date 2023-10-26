@@ -73,6 +73,37 @@
 			DELETE FROM PRODUCT
 			WHERE product_num = #{product_num};
 		</delete>
+		<insert id="insertNotice">
+		INSERT INTO NOTICE
+		VALUES(	null
+				, #{notice_subject}
+				, #{notice_content}
+				,now()
+				,0
+		)
+		</insert>
+		<delete id="deleteNotice">
+		DELETE FROM NOTICE
+		WHERE notice_num = #{notice_num}
+		</delete>
+		<select id="selectReviewList" resultType="map">
+			SELECT review_num
+				, ROW_NUMBER() OVER(order by review_num) as num
+				, review_content
+				, order_num
+				, product_num
+				, review_star
+				, DATE_FORMAT(review_date, '%Y년 %m월%d일 %H:%i') as review_date
+				, member_num
+				, review_image
+				, review_image_real_file
+			FROM REVIEW
+		</select>
+		<delete id="deleteReview">
+			DELETE FROM REVIEW
+			WHERE review_num = #{review_num} 
+		</delete>
+		
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->

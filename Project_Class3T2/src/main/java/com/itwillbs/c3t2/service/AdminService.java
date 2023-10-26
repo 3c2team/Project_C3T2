@@ -62,6 +62,21 @@ public class AdminService {
 	public List<Map<String, Object>> selectNoticeList() {
 		return mapper.selectNotice();
 	}
+	public int insertNotice(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertNotice(map);
+	}
+	public int deleteNotice(int notice_num) {
+		return mapper.deleteNotice(notice_num);
+	}
+	public List<Map<String, Object>> selectReviewList() {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewList();
+	}
+	public int deleteReview(int review_num) {
+		// TODO Auto-generated method stub
+		return mapper.deleteReview(review_num);
+	}
 	
 
 }

@@ -38,31 +38,37 @@
 						<i class="fas fa-table me-1"></i> 상품목록
 					</div>
 					<div class="card-body">
-						<table id="datatablesSimple">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>상품번호</th>
-									<th>상품이름</th>
-									<th>찜갯수</th>
-									<th>판매가</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="productList" items="${productList }">
+						<form action="DeleteProductPro" method="post">
+							<table id="datatablesSimple">
+								<thead>
 									<tr>
-										<th><input type="checkbox"  value="${productList.product_num }" class="custom-control-input"></th>
-										<th>${productList.num}</th>
-										<th>${productList.product_name }<span>
-											<button id="button_open_update"class="btn btn-light btn-right" onclick="window.open('AdminProductUpdate?product_num=${productList.product_num}','', 'width=200', 'height=600')">수정</button></span></th>
-										<th>10</th>
-										<th>${productList.product_price }</th>
+										<th>#</th>
+										<th>상품번호</th>
+										<th>상품이름</th>
+										<th>찜갯수</th>
+										<th>판매가</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-<!-- 						<input type="button"class="btn btn-primary" value="삭제"> -->
-						<button class="btn btn-primary" id="button_open">등록</button>
+								</thead>
+								<tbody>
+									<c:forEach var="productList" items="${productList }">
+										<tr>
+											<th><input type="checkbox" name="product_nums" value="${productList.product_num }" class="custom-control-input"></th>
+											<th>${productList.num}</th>
+											<th>${productList.product_name }
+												<span>
+												<input type="button" value="수정" id="button_open_update"class="btn btn-light btn-right" 
+												onclick="window.open('AdminProductUpdate?product_num=${productList.product_num}','', 'top=500,left=500,width=700, height=700')">
+												</span>
+											</th>
+											<th>10</th>
+											<th>${productList.product_price }</th>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<input type="submit"class="btn btn-primary" value="삭제">
+							<input type="button" class="btn btn-primary" value="등록" id="button_open">
+						</form>
 					</div>
 				</div>
 			</main>

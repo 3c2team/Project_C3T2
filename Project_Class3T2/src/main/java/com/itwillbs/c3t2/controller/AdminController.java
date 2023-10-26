@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.service.AdminService;
+import com.itwillbs.c3t2.service.CartService;
 import com.itwillbs.c3t2.service.StoreService;
 import com.itwillbs.c3t2.vo.AdminVO;
 import com.itwillbs.c3t2.vo.MemberVO;
@@ -41,7 +42,7 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	@Autowired
-	private StoreService storeService;
+	private CartService cartService;
 	
 //		model.addAttribute("msg","로그인 하십시오");
 //		return "fail_back";
@@ -101,9 +102,8 @@ public class AdminController {
     		model.addAttribute("msg","로그인 하십시오");
     		return "fail_back";
     	}
-    	
     	System.out.println(subFiles);
-//    	System.out.println(mainFile);
+    	
     	String uploadDir = "/resources/store_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
     	
@@ -122,8 +122,11 @@ public class AdminController {
 //			System.out.println(map);
 			
 			int insertProductCount = service.registProduct(map);
-			if(insertProductCount == 0) return "fail_back";
-			
+			if(insertProductCount == 0) {
+				model.addAttribute("msg","전체 실패");
+				return "fail_back";
+			}
+			System.out.println("여기까지안오나?");
 			//db등록
 			Path path = Paths.get(saveDir);//실제 업로드 경로
 			Files.createDirectories(path);//중간 경로 생성
@@ -137,7 +140,6 @@ public class AdminController {
 			map.put("info_file_name", infoFileName);
 			map.put("upload_dir", uploadDir +infoFileName);
 			//맵에 경로 및 이름 추가
-			//실제로는 saveDir을 넣어야하지만 차피 파일을 서버에 못올리고 있기때문에 내용이라도 맞추는용도
 
 //			System.out.println(map);//확인작업
 //			service.registProductImg(map);
@@ -149,47 +151,44 @@ public class AdminController {
 			
 			for(MultipartFile subFile : subFiles) {
 				String subFileName = uuid.substring(0, 3) + "_" + subFile.getOriginalFilename();
-				
+				System.out.println("실제 업로드 파일명 : " + subFile.getOriginalFilename());
 				map.put("info_file_name", subFileName);
 				map.put("upload_dir", uploadDir +subFileName);
 				
 				insertProductImgCount = service.registProductImg(map);
 				
 				subFile.transferTo(new File(saveDir, subFileName));
-			if(insertProductImgCount > 0) return "admin/admin_product_list";//전체 성공시
-			
-			model.addAttribute("msg","상품등록은 성공했지만 이미지에서 실패함");	
-			return "fail_back";	//상풍등록만 성공시
+				if(insertProductImgCount == 0) {
+					model.addAttribute("msg","상품등록은 성공했지만 이미지에서 실패함");	
+					return "fail_back";	//상풍등록만 성공시
+				}	
 			}
-			model.addAttribute("msg","전부 실패!");//전부 실패시
-			return "fail_back";
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(saveDir);
+		System.out.println(uploadDir);
+		model.addAttribute("msg","등록 완료되었습니다!");
+		return "success_close";//전체 성공시
 			
-    	return "/";
     }
-    //상품 삭제 메서드(관리자)
-//    @PostMapping("DeleteProductPro")
-//    	public String deleteProduct() {
-//    	//@RequestParam List<Integer> product_nums
-////    		System.out.println(product_nums);
-//    		int deleteProductImgCount = 0;
-//    		int deleteProductCount = 0;
-//    		int deleteCartCount = 0;
-//    		int product_num=0;
-//    		
-////    		for(int item : product_nums) {
-////    			product_num = item;
-////    			deleteProductImgCount = service.deleteProductImg(product_num);
-////    			deleteCartCount = storeService.deleteCartProduct(product_num);
-////    			deleteProductCount = service.deleteProduct(product_num);
-////    		}
-//    		
-//    		return "/";
-//    	}
-    //예약 리스트 페이지 이동(관리자)
+//    상품 삭제 메서드(관리자)
+    @PostMapping("DeleteProductPro")
+    	public String deleteProduct(@RequestParam List<Integer> product_nums) {
+    	System.out.println(product_nums);
+    		
+    		for(int product_num : product_nums) {
+    			int deleteProductImgCount = service.deleteProductImg(product_num);
+    			int deleteCartCount = cartService.deleteCartProduct(product_num);
+    			int deleteProductCount = service.deleteProduct(product_num);
+    		
+    		}
+    		
+    		return "redirect:/AdminProductList";
+    	}
+//    예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
     public String adminReservationList(Model model) {
     	List<ReservationVO> ReservationList = service.getReservationList();
@@ -197,23 +196,54 @@ public class AdminController {
     	return "admin/admin_reservation_list";
     }
     
-    //리뷰 답변등록 페이지 이동(관리자)
-    @GetMapping("AdminReviewAnswer")
-    public String adminReviewAnswer() {
-    	return "admin/admin_review_answer";
-    }
     
     //리뷰 삭제 페이지 이동(관리자)
     @GetMapping("AdminReviewDelete")
-    public String adminReviewDelete() {
+    public String adminReviewDelete(Model model) {
+    	
+    	List<Map<String, Object>> selectReviewList = service.selectReviewList();
+    	model.addAttribute("selectReviewList", selectReviewList);
     	return "admin/admin_review_delete";
+    }
+    //리뷰 삭제 처리(관리자)
+    @PostMapping("AdminReviewDeletePro")
+    public String AdminReviewDeletePro(@RequestParam(value = "review_num",required = false) List<Integer> list
+    									, Model model
+    									, HttpSession session) {
+    	
+    	
+    	System.out.println(list);
+    	for(int review_num : list) {
+    		int deleteReviewCount = service.deleteReview(review_num);
+    		
+    		if(deleteReviewCount == 0) {
+    			model.addAttribute("msg","삭제에 실패했습니다.");
+    			return "fail_back";
+    		}
+    	}
+//    		try {
+//    			if(deleteReviewCount > 0) { // 레코드의 파일명 삭제(수정) 성공 시
+//    				// 저장된 실제 파일 삭제
+//    				String uploadDir = "/resources/upload"; // 가상의 경로
+//    				String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
+//    				
+//    					Path path = Paths.get(saveDir + "/" + board.getBoard_file1());
+//    					Files.deleteIfExists(path);
+//    					
+//    			}
+//    		} catch (IOException e) {
+//    			e.printStackTrace();
+    		
+//    	}
+//    	}
+    	
+    	return "redirect:/AdminReviewDelete";
     }
     
     //회원 정보 페이지 이동(관리자)
     @GetMapping("AdminMember")
     public String adminMember(Model model) {
     	List<MemberVO> MemberList = service.selectMemberList();
-    	System.out.println(MemberList);
     	model.addAttribute("memberList",MemberList);
     	return "admin/admin_member";
     }
@@ -231,10 +261,25 @@ public class AdminController {
     public String adminNoticeRegist() {
     	return "admin/admin_notice_regist";
     }
+    //공지사항 등록 처리(관리자)
     @PostMapping("AdminNoticeRegistPro")
     public String adminNoticeRegist(@RequestParam Map<String, String> map) {
     	System.out.println(map);
+    	int insertNoticeCount = service.insertNotice(map);
+    	if(insertNoticeCount == 0) return "fail_back";
     	return "/";
+    }
+    //공지사항 삭제 처리(관리자)
+    @PostMapping("AdminNoticeDelete")
+    public String adminNoticeDelete(@RequestParam(required = false, value = "checkbox") List<Integer> list) {
+    	int deleteNoticeCount = 0;
+    	for(int notice_num : list) {
+    		deleteNoticeCount = service.deleteNotice(notice_num);
+    		if(deleteNoticeCount == 0) return "fail_back()";
+    	}
+    		
+    	
+    	return "redirect:/AdminNoticeBoard";
     }
     
     //문의 리스트 페이지 이동(관리자)
@@ -262,6 +307,26 @@ public class AdminController {
     	System.out.println(dbProduct);
     	System.out.println(dbProductImg);
     	return "admin/admin_product_update";
+    }
+    
+    //상품 수정 처리
+    @PostMapping("AdminProductUpdatePro")
+    public String adminProductUpdatePro(  @RequestParam Map<String, Object> map
+							    		, @RequestParam(value = "product_main_image", required = false) MultipartFile mainFile
+							    		, @RequestParam(value = "product_info_image", required = false) MultipartFile infoFile
+							    		, @RequestParam(value = "product_image", required = false) List<MultipartFile> subFiles
+							    		, Model model, HttpSession session
+							    		, HttpServletRequest request) {
+    	
+    	
+    	System.out.println(mainFile);
+    	System.out.println(map);
+    	System.out.println(infoFile);
+    	System.out.println(subFiles);
+    	
+    	
+    	model.addAttribute("msg","등록이 완료되었습니다");
+    	return "success_close";
     }
     //로그인 페이지 이동(관리자)
     @GetMapping("AdminLogin")

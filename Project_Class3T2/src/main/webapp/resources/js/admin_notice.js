@@ -1,6 +1,12 @@
 $(function(){
 	$("#open_notice_insert").on("click",function(){
-		window.open('AdminNoticeRegist','', 'width=150', 'height=4100');
+		window.open('AdminNoticeRegist','공지등록', "top=500,left=500,width=700, height=700");
 	});
+
 });
+	function isSubmit() {
+		if(!confirm("등록하시겠습니까?")){
+			return false;
+		}
+	}
 
