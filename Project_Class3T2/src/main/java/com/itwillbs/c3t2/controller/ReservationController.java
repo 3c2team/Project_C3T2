@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.c3t2.handler.GenerateRandomCode;
 import com.itwillbs.c3t2.service.ReservationService;
+import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 
 @Controller
@@ -42,11 +43,6 @@ public class ReservationController {
 		// => 실패 시 "fail_back.jsp" 포워딩(Model 객체의 "msg" 속성값으로 "회원 가입 실패!" 저장)
 		if(insertCount > 0) { // 성공
 			System.out.println(reservation);
-
-			// 예약 확인 이메일 전송
-//			String email = reservation.getEmail1() + "@" + reservation.getEmail2();
-//			String authCode = mailService.sendAuthMail(reservation.getId(), email);
-//			service.registAuthInfo(reservation.getName(), authCode);
 			return "redirect:/ReservationSuccess";
 		} else { // 실패
 			model.addAttribute("msg", "예약 실패!");
@@ -63,36 +59,36 @@ public class ReservationController {
 	//비회원 예약 조회 페이지 이동
 	@PostMapping("/ReservationSearchInfo")
 	public String reservationSearchInfo(ReservationVO reservation, HttpSession session, Model model) {
-//		String sGuestNum = (String)session.getAttribute("sGuestNum");
-//		if(sGuestNum == null) {
-//			model.addAttribute("msg", "잘못된 접근입니다!");
-//			return "fail_back";
-//		}
-		
-		// 만약, 현재 세션이 관리자가 아니거나 또는 관리자이면서 id 파라미터가 없을 경우
-		// id 변수값을 세션 아이디로 교체
-//			if(!sGuestNum.equals("admin") || (sId.equals("admin") && member.getId() == null || member.getId().equals(""))) {
-//				member.setId(sId);
-//			}
-		
+
 		ReservationVO dbReservation = service.getReservation(reservation);
 		System.out.println(dbReservation);
 		
-		// 회원 상세정보를 Model 객체에 저장
 		model.addAttribute("reservation", dbReservation);
-		
+		session.setAttribute("sGuestNum", reservation.getReservation_guest_num());
 		
 		return "reservation/reservation_search_Info";
 	}
 	
-	//비회원 예약 취소 페이지 이동
-	@GetMapping("/ReservationCancle")
-	public String reservationCancle() {
-		return "reservation/reservation_cancle";
+	// 비회원 예약 취소 페이지 이동
+	@GetMapping("/Reservationcancel")
+	public String reservationcancel() {
+		return "reservation/reservation_cancel";
 	}
-	//
+	
+	// 비회원 예약 정보 수정
 	@GetMapping("/ReservationUpdate")
-	public String reservationUpdate() {
+	public String reservationUpdate(int reservation_guest_num, HttpSession session, Model model) {
+		int sGuestNum = (int)session.getAttribute("sGuestNum");
+		if(sGuestNum < 0) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";
+		}
+		
+		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
+//		System.out.println(dbReservation);
+		
+		// 회원 상세정보를 Model 객체에 저장
+		model.addAttribute("reservation", dbReservation);
 		return "reservation/reservation_update";
 	}
 	

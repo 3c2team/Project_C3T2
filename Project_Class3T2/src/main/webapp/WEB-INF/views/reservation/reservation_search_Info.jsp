@@ -13,39 +13,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="mainLayout">
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
+	<div id="mainLayout">
 		<main>
 			<div>
-				<h2>예약 상세정보</h2>
-				<table class="custom_table">
+				<input type="hidden" name="${reservation.reservation_guest_num }">
+				<table class="custom_calendar_table">
 					<tr>
+						<h2 class="sign" align="center">예약 상세 조회</h2>
 						<th>예약일자</th>
-						<th>예약인원</th>
-						<th>이름</th>
-						<th>전화번호</th>
+						<td>${reservation.reservation_date }&nbsp;${reservation.reservation_time }</td>
 					</tr>
 					<tr>
-						<td>${reservation.reservation_date }&nbsp;${reservation.reservation_time }</td>
+						<th>예약인원</th>
 						<td>${reservation.reservation_person_count }</td>
+					</tr>
+					<tr>
+						<th>이름</th>
 						<td>${reservation.reservation_person_name }</td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
 						<td>${reservation.reservation_person_phone }</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<input type="button" value="돌아가기" onclick="./">
-							<input type="button" value="예약취소" onclick="location.href ='ReservationCancle?guestNum=${reservation.reservation_guest_num}'">
+							<input type="button" value="메인으로" onclick="location.href='./'">
+							<input type="button" value="예약취소" onclick="location.href ='Reservationcancel?guestNum=${reservation.reservation_guest_num}'">
 							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate?guestNum=${reservation.reservation_guest_num}'">
 						</td>
 					</tr>
 				</table>
 			</div>
 		</main>
+	</div>
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>
 		</footer>
-	</div>
 </body>
 </html>

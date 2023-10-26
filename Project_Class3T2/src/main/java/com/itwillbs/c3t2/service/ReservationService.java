@@ -1,7 +1,5 @@
 package com.itwillbs.c3t2.service;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,11 @@ public class ReservationService {
 		}
 
 		public ReservationVO getReservation(ReservationVO reservation) {
-			return  mapper.getReservation(reservation);
+			return mapper.getReservation(reservation);
+		}
+
+		public ReservationVO updateReservation(int reservation_guest_num) {
+			return mapper.updateReservation(reservation_guest_num);
 		}
 
 

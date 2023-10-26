@@ -16,7 +16,8 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
-			
+			<p class="sign" align="center"></p>
+			<input type="button" value="예약하기" onclick="location.href='ReservationForm'">
 		</main>
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>
