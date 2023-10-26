@@ -43,7 +43,6 @@ public class StoreController {
 		return "store/store_hot";
 	}
 	
-	
 	@GetMapping("StoreNew")
 	public String storeNew(Model model) {
 		List<ProductVO> newList = service.getProductNewList();
@@ -93,4 +92,21 @@ public class StoreController {
 		return "store/product_detail";
 	}
 	
+	// 리뷰작성폼으로 이동~
+	@GetMapping("ReviewFrom")
+	public String reviewFrom(int proNum, Model model) {
+		ProductVO product = service.getProductDetail(proNum);
+		System.out.println(product);
+		
+		model.addAttribute("product", product);
+		return "store/popup/review_from";
 	}
+	
+	// QnA작성폼으로 이동~
+	@GetMapping("QuestionFrom")
+	public String questionFrom() {
+		return "store/popup/questionFrom";
+	}
+	
+	
+}
