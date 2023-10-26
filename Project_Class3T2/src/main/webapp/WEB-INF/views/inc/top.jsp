@@ -45,7 +45,7 @@
 		<li><a href="Menu">MENU</a></li>
 		<li><a href="News">NEWS/EVENT</a></li>
 		<li><a href="Location">LOCATION</a></li>
-		<li><a href="ReservationForm">RESERVATION</a></li>
+		<li><a href="ReservationInfo">RESERVATION</a></li>
 		<li><a href="OnlineStore">ONLINE STORE</a></li>
 	</ul>
 </div>

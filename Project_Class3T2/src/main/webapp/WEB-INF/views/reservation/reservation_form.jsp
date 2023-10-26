@@ -26,7 +26,7 @@
 		<%-- EL 을 사용하여 member 객체에 저장된 각 항목을 테이블에 출력 --%>
 		<h1>Reservation</h1>
 		<form action="ReservationPro" method="post" id="custom_submit">
-		<div id="calendarForm"></div>
+			<div id="calendarForm"></div>
 			<table>
 				<tr>
 					<th>예약시간</th>
@@ -118,19 +118,32 @@
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20">
+						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required>
 					</td> <!-- value="${sessionScope.sName}" --> 
 				</tr>
 				<tr>
 					<th>예약자 전화번호</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20">
+						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required>
 					</td> <!-- value="${sessionScope.sPhone}" --> 
 				</tr>
-				
+<!-- 				<tr> -->
+<!-- 					<th>예약 확인 받으실 이메일</th> -->
+<!-- 					<td> -->
+<!-- 						<input type="text" class="input" name="reservation_person_email1" id="email1" required size="10">@<input type="text" class="input" name="reservation_person_email2" id="email2" required size="10"> -->
+<!-- 						<select id="emailDomain" class="input"> -->
+<!-- 							<option value="">직접입력</option> -->
+<!-- 							<option value="naver.com">naver.com</option> -->
+<!-- 							<option value="gmail.com">gmail.com</option> -->
+<!-- 							<option value="nate.com">nate.com</option> -->
+<!-- 							<option value="gmail.com">daum.net</option> -->
+<!-- 						</select> -->
+<!-- 					</td> value="${sessionScope.sPhone}"  -->
+<!-- 				</tr> -->
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="돌아가기" onclick="history.back()">
+						<input type="button" value="비회원 예약 조회" onclick="location.href='ReservationGuestSearch'">
 						<input type="submit" value="예약하기" >
 					</td>
 				</tr>

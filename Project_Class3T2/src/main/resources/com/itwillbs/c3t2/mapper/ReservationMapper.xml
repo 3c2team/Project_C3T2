@@ -6,7 +6,7 @@
 <mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
   	
 <!-- 	<select id="available" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
-<!-- 		SELECT #{time} FROM SCHEDULE WHERE date = #{date} -->
+<!-- 		SELECT #{reservaton_time} FROM SCHEDULE WHERE date = #{reservaton_date} -->
 <!-- 	</select> -->
 	
 <!-- 	<select id="isMember" resultType="ReservationIsMember"> -->
