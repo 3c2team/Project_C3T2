@@ -32,6 +32,7 @@
 					<th>예약시간</th>
 					<td>
 						<input type="hidden" id="reservation_date" name="reservation_date">
+						<input type="hidden" id="member_id" name="member_id" value="${sessionScope.sId }">
 						<div class="form_radio_btn">
 							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio-0">10:00</label>
@@ -118,32 +119,22 @@
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required>
-					</td> <!-- value="${sessionScope.sName}" --> 
+						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
+							<c:if test="${sessionScope.sId ne null}">value="${sessionScope.sName }"</c:if>>
+						
+					</td> <!-- value= --> 
 				</tr>
 				<tr>
 					<th>예약자 전화번호</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required>
+						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required
+							<c:if test="${sessionScope.sId ne null}">value="${sessionScope.sPhone }"</c:if>>
 					</td> <!-- value="${sessionScope.sPhone}" --> 
 				</tr>
-<!-- 				<tr> -->
-<!-- 					<th>예약 확인 받으실 이메일</th> -->
-<!-- 					<td> -->
-<!-- 						<input type="text" class="input" name="reservation_person_email1" id="email1" required size="10">@<input type="text" class="input" name="reservation_person_email2" id="email2" required size="10"> -->
-<!-- 						<select id="emailDomain" class="input"> -->
-<!-- 							<option value="">직접입력</option> -->
-<!-- 							<option value="naver.com">naver.com</option> -->
-<!-- 							<option value="gmail.com">gmail.com</option> -->
-<!-- 							<option value="nate.com">nate.com</option> -->
-<!-- 							<option value="gmail.com">daum.net</option> -->
-<!-- 						</select> -->
-<!-- 					</td> value="${sessionScope.sPhone}"  -->
-<!-- 				</tr> -->
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="돌아가기" onclick="history.back()">
-						<input type="button" value="비회원 예약 조회" onclick="location.href='ReservationGuestSearch'">
+						<input type="button" value="비회원 예약 조회" onclick="location.href='ReservationSearch'">
 						<input type="submit" value="예약하기" >
 					</td>
 				</tr>

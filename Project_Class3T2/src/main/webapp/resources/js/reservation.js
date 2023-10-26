@@ -64,7 +64,7 @@ $(function(){
 	
 	    function assembly(year, month) {
 	        var calendar_html_code =
-	            "<table class='custom_calendar_table'>" +
+	            "<table class='custom_table'>" +
 	            "<colgroup>" +
 	            "<col style='width:70px'/>" +
 	            "<col style='width:70px'/>" +

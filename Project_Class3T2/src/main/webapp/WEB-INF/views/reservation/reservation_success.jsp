@@ -34,7 +34,7 @@
 						return RandomStringUtils.randomAlphanumeric(length);
 					} -->
 				<input type="button" value="홈으로" onclick="location.href='./'">
-				<input type="button" value="로그인" onclick="location.href = 'Login'">
+				<input type="button" value="예약조회" onclick="location.href = 'ReservationSearch'">
 			</div>
 		</main>
 		<footer id="footer">

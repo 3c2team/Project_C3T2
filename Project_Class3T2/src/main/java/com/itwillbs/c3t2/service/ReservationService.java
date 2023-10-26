@@ -24,6 +24,10 @@ public class ReservationService {
 			return mapper.selectReservation(reservation_num);
 		}
 
+		public ReservationVO getReservation(ReservationVO reservation) {
+			return  mapper.getReservation(reservation);
+		}
+
 
 
 		

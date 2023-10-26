@@ -26,14 +26,16 @@
 			, #{reservation_person_phone}
 			, 0
 			, 'Y'
+			, 300000002
 			, 1
 			, 1
 		)
 	</insert>
 	
-<!-- 	<select id="selectReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
-<!-- 		SELECT * FROM RESERVATION WHERE is_member = #{is_member} -->
-<!-- 	</select> -->
+	<select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT * FROM RESERVATION 
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_phone = #{reservation_person_phone}
+	</select>
 	
 <!-- 	<typeAliases> -->
 <!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="ReservationIsMember"/> -->
