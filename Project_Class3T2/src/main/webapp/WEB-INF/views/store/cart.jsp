@@ -61,7 +61,7 @@ $(function() {
     
     $("#btnmemberdel").on("click",function(){
 //        alert(product_num);
-       if(confirm("삭제하시겠습니까?")){
+       if(confirm("선택 상품을 삭제하시겠습니까?")){
            location.href="SelectDeleteCart?proNum=" + product_num;
        }else{
           alert("삭제를 취소 하셨습니다.");
@@ -73,6 +73,7 @@ $(function() {
 //     	confirm("장바구니를 비우시겠습니까?")
 // 	})
     
+    
     // 장바구니 비우기
     $("#productAllDelete").on("click", function() {
 // 		alert("장바구니를 비우시겠습니까?")
@@ -81,6 +82,8 @@ $(function() {
 	           location.href="productAllDelete";
 	       }
 	});
+    
+
         
  });
  
@@ -91,9 +94,21 @@ function deleteCart(proNum) {
 	
 	if(result){
         location.href="DeleteCartProduct?proNum=" + proNum;
+//         location.href="CartPro?proNum=" + proNum;
     }else{
     	alert("삭제를 취소 하셨습니다.");
     }
+}
+
+// 개별 상품 결제 페이지 이동
+function orderPro(proNum){
+	
+	let result = confirm("결제창으로 이동 하시겠습니까?");
+	
+	if(result){
+		location.href="PayPro?proNum=" + proNum;	
+	}
+	
 }
 
    
@@ -166,7 +181,7 @@ function deleteCart(proNum) {
 <%--                      <td><span>${productList.product_price  * productList.product_count }</span>원</td> --%>
                      <td><span><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
                      <td>
-                        <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" >주문하기</button><br>
+                        <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" onclick="orderPro('${productList.product_num}')">주문하기</button><br>
                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
 <!--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" id="productDelete">삭제</button><br> -->
 						<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="deleteCart('${productList.product_num}')">삭제</button><br>

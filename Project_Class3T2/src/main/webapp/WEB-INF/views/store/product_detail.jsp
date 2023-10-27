@@ -18,7 +18,7 @@
 		
 // 		alert("주문 수량 : " + product_count);
 		
-		location.href="CartPro?proNum=${productDetail.product_num }&proCount=" + product_count;
+		location.href="MainCart?proNum=${productDetail.product_num }&proCount=" + product_count;
 	}
 </script>
 </head>
