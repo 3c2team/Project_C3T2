@@ -2,6 +2,7 @@ package com.itwillbs.c3t2.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.ReviewVO;
 
 @Service
 public class StoreService {
@@ -40,6 +42,10 @@ public class StoreService {
 
 	public List<ProductImgVO> getProductImg(int proNum) {
 		return mapper.selectProductImg(proNum);
+	}
+
+	public int registReview(ReviewVO review) {
+		return mapper.insertReview(review);
 	}
 	
 	

@@ -285,11 +285,11 @@
 		<section class="qnaContainer">
 			<div class="qnaItem">
 				<div class="qnaTatle">
-					<a name="QnA">상품 Q&A</a>
+					<a name="QnA">상품 문의</a>
 				</div>
 				<div class="qnaAve">
 					<div>
-						<button class="qnaWrite">문의 하기</button>
+						<button class="reviewWrite" id="questionBtn" onclick="window.open('QuestionFrom?proNum=${productDetail.product_num }', 'question_from', 'width=600, height=800, location=no, status=no, scrollbars=no')">문의 하기</button>
 					</div>
 				</div>
 			</div>
