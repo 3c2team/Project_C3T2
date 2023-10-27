@@ -61,7 +61,7 @@ p{
 	border-radius: 20px;
 	outline: none;
 	box-sizing: border-box;
-	border: 2px solid rgba(0, 0, 0, 0.05);
+	border: 2px solid rgba(0, 0, 0, 0.1);
 	margin: 5px;
 /* 	margin-left: 46px; */
 	text-align: center;
@@ -73,7 +73,7 @@ tr{
 	margin: 4em auto;
 }
 
-.submit {
+input[type=button],[type=submit] {
 	cursor: pointer;
 	border-radius: 5em;
 	color: #fff;
@@ -84,8 +84,8 @@ tr{
 	padding-bottom: 10px;
 	padding-top: 10px;
 	font-family: 'Noto Serif KR', serif;
-	margin-left: 20%;
-	margin-right: 20%;
+/* 	margin-left: 20%; */
+/* 	margin-right: 20%; */
 	font-size: 13px;
 	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
@@ -97,17 +97,26 @@ table.resConfirm{
 
 h3{
 	font-size: 20px;
-	
+	text-align: center;
 }
 h1{
-	margin-left: 20%;
+	margin-left: 30%;
 	
+}
+h2{
+	font-size: 35px;
+	text-align: center;
 }
 
 table {
 	font-size: 13pt;
 	margin: 1em auto;
 }
+tr {
+	margin: 2em auto;
+}
+
+/* 라디오버튼 css */
 .form_radio_btn {
   	width: 20%;
 	height : 40px;
@@ -148,6 +157,7 @@ table {
 	border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
+/* 달력 css */
 .custom_calendar_table {
     background-color: #FFFFFF;
 	width: 600px;
@@ -173,16 +183,16 @@ table {
 }
 
 .custom_calendar_table tbody td {
-    cursor: pointer;
+	cursor: pointer;
 }
 
- .custom_calendar_table tbody td:nth-child(1) { 
-     color: red; 
- } 
+.custom_calendar_table tbody td:nth-child(1) { 
+	color: red; 
+} 
 
- .custom_calendar_table tbody td:nth-child(7) { 
-     color: #288CFF; 
- } 
+.custom_calendar_table tbody td:nth-child(7) { 
+	color: #288CFF; 
+} 
 
 .custom_calendar_table tbody td.select_day {
     background-color:  rgb(80, 80, 80);
@@ -190,3 +200,16 @@ table {
     border-radius: 20px;
 }
 
+.info_table{
+	background-color: #FFFFFF;
+	width: 1000px;
+	height: 600px;
+	margin: 2em auto;
+	padding: 40px;
+	border-radius: 1.5em;
+	box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+	text-align: center;
+	-webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    overflow: visible;
+}

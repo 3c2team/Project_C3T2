@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,11 +53,23 @@
     font-weight: bold;
 }
 </style>
+<script>
+    function deleteFavorite(favoriteNum) {
+        if(confirm('정말로 삭제하시겠습니까?')) {
+            location.href = "${pageContext.request.contextPath}/deleteFavorite?favoriteNum=" + favoriteNum;
+        }
+    }
+</script>
 </head>
 <body>
 <header>
 	<jsp:include page="../inc/top.jsp"></jsp:include>
 </header>	
+	<c:if test="${not empty errorMessage}">
+	    <script>
+	        alert('${errorMessage}');
+	    </script>
+	</c:if>
 	<main>
 	<div id="main_layout">
 		<div class="mypageBox" id="mypage_dashboard">
@@ -87,44 +100,27 @@
 			<h2>총 0개 상품</h2>
 			<br><br><br><br>
 				<div class="container2" align="center">
-			    	<div class="line"></div>
-			        <div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
-		        	<div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
-		        	<div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
-		        	<div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
-		        	<div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
-				    <div class="item">
-				        <img src="${pageContext.request.contextPath }/resources/resources/online_img/soup1.jpg" width="200" height="200">
-				        <p class="itemDesc bold">가격</p>
-				        <p class="itemDesc">상품설명</p>
-				    </div>
+                        <div class="line"></div>
+                        <!-- 찜 목록 동적 표시 -->
+                        <c:forEach var="favorite" items="${favorites}">
+                            <div class="item">
+                                <img src="${pageContext.request.contextPath }/resources/${favorite.product_main_img_real_file}" width="200" height="200">
+                                <p class="itemDesc bold">${favorite.product_name}</p>
+                                <button>상품페이지로 이동</button>
+                                <form action="${pageContext.request.contextPath}/deleteFavorite" method="post">
+		                            <input type="hidden" name="favoriteNum" value="${favorite.favorite_num}" />
+		                            <button type="submit">삭제</button>
+		                        </form>
+<%--                                 <button onclick="deleteFavorite(${favorite.favorite_num})">삭제</button> --%>
+                            </div>
+                        </c:forEach>
+                    </div>
 				</div>
 			</div>
 		</div>
-	</div>
-</main>
-<footer id="footer">
-	<jsp:include page="../inc/bottom.jsp"></jsp:include>
-</footer>
+	</main>
+	<footer id="footer">
+		<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

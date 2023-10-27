@@ -131,5 +131,79 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
+	<select id="selectMemberKakaoLogin" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE kakao_id = #{kakao_id}
+	</select>
+	
+	<update id="updateKakaoId">
+		UPDATE MEMBER
+		SET kakao_id = #{kakao_id}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<select id="selectNoticeList" resultType="com.itwillbs.c3t2.vo.NoticeVO">
+		SELECT *
+		FROM NOTICE
+		<if test="!searchKeyword.equals('')">
+			WHERE
+			<choose>
+				<when test="searchType.equals('subject')">
+						notice_subject LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchType.equals('content')">
+						notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchType.equals('subject_content')">
+						notice_subject LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+			</choose>
+		</if>
+		ORDER BY
+			notice_num DESC
+		LIMIT
+			#{startRow}
+			, #{listLimit}
+	</select>
+	
+	<select id="selectNoticeListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		<if test="!searchKeyword.equals('')">
+			WHERE
+			<choose>
+				<when test="searchType.equals('subject')">
+						notice_subject LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchType.equals('content')">
+						notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="searchType.equals('subject_content')">
+						notice_subject LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR notice_content LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="selectNotice" resultType="com.itwillbs.c3t2.vo.NoticeVO">
+		SELECT  *
+		FROM NOTICE
+		WHERE notice_num = #{notice_num}
+	</select>
+	
+	<update id="updateReadcount">
+		<selectKey keyProperty="notice_readcount" resultType="int" order="AFTER">
+			SELECT notice_readcount
+			FROM NOTICE
+			WHERE notice_num = #{notice_num}
+		</selectKey>
+		
+		UPDATE NOTICE
+		SET notice_readcount = notice_readcount + 1
+		WHERE notice_num = #{notice_num}
+	</update>
 	
 </mapper>

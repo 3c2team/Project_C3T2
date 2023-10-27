@@ -2,7 +2,20 @@
  * 
  */
 $(function(){
-	
+	$("#emailDomain").change(function() {
+		
+		$("#email2").val($("#emailDomain").val());
+		
+		if($("#emailDomain").val() == "") { // 직접입력 선택 시
+			$("#email2").focus(); // 커서 요청
+			$("#email2").css("background", ""); // 배경색 초기화
+			$("#email2").removeAttr("readonly"); // 읽기 전용 속성 제거(결과 동일)
+		} else {
+			// readonly 속성을 true 로 변경(읽기 전용)
+			$("#email2").css("background", "lightgray"); // 배경색 초기화
+			$("#email2").attr("readonly", true); // 읽기 전용으로 변경
+		}
+	});
  
 	$(function () {
 	    calendarMaker($("#calendarForm"), new Date());
@@ -76,27 +89,27 @@ $(function(){
 	    }
 	
 	    function calMoveEvtFn() {
-	        //전달 클릭
+	        // 전달 클릭
 	        $(".custom_calendar_table").on("click", ".prev", function () {
 	            nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
 	            calendarMaker($(target), nowDate);
 	        });
-	        //다음날 클릭
+	        // 다음날 클릭
 	        $(".custom_calendar_table").on("click", ".next", function () {
 	            nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
 	            calendarMaker($(target), nowDate);
 	        });
-	        //일자 선택 클릭
+	        // 일자 선택 클릭
 	        $(".custom_calendar_table").on("click", "td", function () {
 	            $(".custom_calendar_table .select_day").removeClass("select_day");
 	            $(this).removeClass("select_day").addClass("select_day");
 	            
-	            // ('00' + date).slice(-2); 날짜 형식 변환
-	            
+	            // 변수에 연, 월, 일 저장
 	            let selectYear = $("#select_year").text();
 	            let selectMonth = $("#select_month").text();
 	            let selectDay = $(".select_day").text();
-	            selectedDay = selectYear + "-" + selectMonth + "-" + selectDay; // 연월일 불러오기
+	            
+	            selectedDay = selectYear + "-" +(("00"+selectMonth.toString()).slice(-2))+"-"+(("00"+selectDay.toString()).slice(-2)); // 연월일 불러오기
 				console.log("예약일자 : " + selectedDay);
 				$("#reservation_date").val(selectedDay);
 	//			alert(selectedDay);

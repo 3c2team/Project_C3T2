@@ -1,6 +1,6 @@
 package com.itwillbs.c3t2.vo;
 
-import java.sql.Date; 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -27,4 +27,5 @@ public class MemberVO {
 	private int c2;
 	private int c3;
 	private int c4;
+	private String kakao_id;
 }

@@ -6,7 +6,7 @@
 <mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
   	
 <!-- 	<select id="available" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
-<!-- 		SELECT #{time} FROM SCHEDULE WHERE date = #{date} -->
+<!-- 		SELECT #{reservaton_time} FROM SCHEDULE WHERE date = #{reservaton_date} -->
 <!-- 	</select> -->
 	
 <!-- 	<select id="isMember" resultType="ReservationIsMember"> -->
@@ -15,25 +15,41 @@
 <!-- 		WHERE member_name = (SELECT id FROM Reservation WHERE reservation_is_member = #{reservation_is_member} -->
 <!-- 	</select> 서브쿼리 or 체크박스 세션아이디 불러오기 -->
 	
+	<!-- 예약 등록 -->
 	<insert id="insertReservation">
 		INSERT INTO RESERVATION
-		VALUES (
-			null
-			, #{reservation_date}
-			, #{reservation_time}
-			, #{reservation_person_name}
-			, #{reservation_person_count}
-			, #{reservation_person_phone}
-			, 0
-			, 'Y'
-			, 1
-			, 1
+			VALUES (
+				null <!-- reservation_num -->
+				, #{reservation_date}
+				, #{reservation_time}
+				, #{reservation_person_name}
+				, #{reservation_person_count}
+				, #{reservation_person_phone}
+				, 0 <!-- cancel -->
+				, 'Y' <!-- is_member -->
+				, 300000004 <!-- guest_num -->
+				, 1 <!-- dinning_num -->
+				, 1 <!-- restaurant_num -->
 		)
 	</insert>
 	
-<!-- 	<select id="selectReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
-<!-- 		SELECT * FROM RESERVATION WHERE is_member = #{is_member} -->
-<!-- 	</select> -->
+	<!-- 예약 상세 정보 조회 -->
+	<select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT * FROM RESERVATION 
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_phone = #{reservation_person_phone}
+	</select>
+	
+	<!-- 예약 수정 -->
+	<update id="updateReservation">
+		UPDATE RESERVATION 
+		SET reservation_date = #{reservation_date}, reservation_time = #{reservation_time}
+		WHERE reservation_guest_num = #{reservation_guest_num}
+	</update>
+	
+	<delete id="deleteReservation">
+		DELETE FROM RESERVATION
+		WHERE reservation_person_name = #{reservation_person_name}
+	</delete>
 	
 <!-- 	<typeAliases> -->
 <!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="ReservationIsMember"/> -->

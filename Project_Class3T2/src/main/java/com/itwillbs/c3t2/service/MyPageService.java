@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.MyPageMapper;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -18,10 +19,6 @@ public class MyPageService {
 	@Autowired
 	private MyPageMapper mapper;
 	
-	// 상품 구매 내역
-	public List<UserOrderVO> getOrderList() {
-		return mapper.getOrderList();
-	}
 	//회원 상세내역
 	public MemberVO getMemberDetails(String member_id) {
 		return mapper.selectMemberDetails(member_id);
@@ -32,17 +29,24 @@ public class MyPageService {
 		return mapper.selectReviewDetail(member_num);
 		
 	}
-	
-	// 비번 점검
-	// 사용자가 입력한 비밀번호와 데이터베이스의 비밀번호를 비교하는 메서드
-	public boolean MypagePasswdChange(String member_id, String member_passwd) {
-		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
-		// 데이터베이스에서 해당 회원의 정보를 가져옴
-		MemberVO member = mapper.selectPassword(member_id);
-				
-		// BCrypt를 사용하여 저장된 비밀번호와 입력된 비밀번호를 비교
-		return encoder.matches(member_passwd, member.getMember_passwd());
+	// 상품 구매 내역
+	public List<UserOrderVO> getOrderList(Integer member_num) {
+		return mapper.getOrderList(member_num);
 	}
+
+	// 비번 점검
+
+	public MemberVO getMemberPasswd(MemberVO member) {
+		return mapper.selectMember(member);
+	}
+	// 찜 목록
+	public List<FavoriteVO> getFavorite(String member_id) {
+		return mapper.getFavorite(member_id);
+	}
+	// 찜 목록 삭제
+	public boolean deleteFavorite(Integer favoriteNum) {
+        int result = mapper.deleteFavorite(favoriteNum);
+        return result > 0;  // 삭제된 행의 수가 0보다 크면 true를 반환, 그렇지 않으면 false를 반환
+    }
+	
 }

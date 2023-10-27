@@ -13,6 +13,7 @@ public class ReservationVO {
 	private String reservation_person_name;
 	private int reservation_person_count;
 	private String reservation_person_phone;
+	private int reservation_guest_num;
 	private int reservation_cancel;
 	private int dinning_num;
 	private int restaurant_num;

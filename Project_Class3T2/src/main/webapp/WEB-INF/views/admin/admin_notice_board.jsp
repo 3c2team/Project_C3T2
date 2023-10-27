@@ -28,8 +28,6 @@
 	.datatable-table th a{
 		text-align: center;
 	}
-	
-	
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
@@ -37,6 +35,18 @@
 <script
 	src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous">
+</script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#delete_btn").on("click",function(){
+			if(!confirm("삭제하시겠습니까?")) return false;
+			if(!$("input[name=checkbox]").is(":checked")){
+				alert("삭제할 공지사항을 선택하시오.");
+				return false;
+			}
+		});
+	});
 </script>
 <link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 
@@ -65,28 +75,33 @@
 						</table>
 						<div>
 							<div class="card-body">
-								<table id="datatablesSimple">
-									<thead>
-										<tr>
-											<th>공지번호</th>
-											<th>공지제목</th>
-											<th>공지내용</th>
-											<th>공지날짜</th>
-											<th>조회수</th>
-										</tr>
-									</thead>
-									<tbody >
-									<c:forEach var="selectNoticeList" items="${selectNoticeList }">
-										<tr>
-											<th>${selectNoticeList.num }</th>
-											<td>${selectNoticeList.notice_subject}</td>
-											<td>${selectNoticeList.notice_content }</td>
-											<td>${selectNoticeList.notice_date }</td>
-											<td>${selectNoticeList.notice_readcount }</td>
-										</tr>
-									</c:forEach>
-									</tbody>
-								</table>
+								<form action="AdminNoticeDelete" method="post">
+									<table id="datatablesSimple">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>공지번호</th>
+												<th>공지제목</th>
+												<th>공지내용</th>
+												<th>공지날짜</th>
+												<th>조회수</th>
+											</tr>
+										</thead>
+										<tbody >
+										<c:forEach var="selectNoticeList" items="${selectNoticeList }">
+											<tr>
+												<th><input type="checkbox" name="checkbox" value="${selectNoticeList.notice_num }"></th>
+												<th>${selectNoticeList.num }</th>
+												<td>${selectNoticeList.notice_subject}</td>
+												<td>${selectNoticeList.notice_content }</td>
+												<td>${selectNoticeList.notice_date }</td>
+												<td>${selectNoticeList.notice_readcount }</td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+									<input type="submit" id="delete_btn"class="btn btn-primary" value="삭제">	
+								</form>
 							</div>
 						</div>
 					</div>
@@ -98,7 +113,6 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
-		<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 		<script src="${pageContext.request.contextPath }/resources/js/admin_notice.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 	<script

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 
@@ -56,5 +57,17 @@ public interface MemberMapper {
 	
 	// 회원 상세정보 조회
 	MemberVO selectMemberDetails(String member_id);
-	
+
+	MemberVO selectMemberKakaoLogin(String kakao_id);
+
+	List<NoticeVO> selectNoticeList(@Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+
+	int selectNoticeListCount(@Param("searchType") String searchType, @Param("searchKeyword") String searchKeyword);
+
+	NoticeVO selectNotice(int notice_num);
+
+	void updateReadcount(NoticeVO notice);
+
+	int updateKakaoId(@Param("member_id") String member_id, @Param("kakao_id") String kakao_id);
+			
 }

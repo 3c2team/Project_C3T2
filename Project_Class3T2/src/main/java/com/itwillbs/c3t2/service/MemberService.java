@@ -1,14 +1,27 @@
 package com.itwillbs.c3t2.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.itwillbs.c3t2.mapper.MemberMapper;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
-import com.itwillbs.c3t2.vo.ReservationVO;
+import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Service
@@ -20,53 +33,134 @@ public class MemberService {
 	public int registMember(MemberVO member) {
 		return mapper.insertMember(member);
 	}
+	
+	public String getKaKaoAccessToken(String code){
+        String access_Token="";
+        String refresh_Token ="";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
 
+        try{
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+            StringBuilder sb = new StringBuilder();
+            sb.append("grant_type=authorization_code");
+            sb.append("&client_id=46389b0d2a4098beef5e03823cefb9a9"); // TODO REST_API_KEY 입력
+            sb.append("&redirect_uri=http%3A%2F%2Flocalhost%3A8081%2Fc3t2%2Fkakao"); // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&code=" + code);
+            bw.write(sb.toString());
+            bw.flush();
+
+            int responseCode = conn.getResponseCode();
+//            System.out.println("responseCode : " + responseCode);
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            
+//            System.out.println("response body : " + result);
+
+            //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            access_Token = element.getAsJsonObject().get("access_token").getAsString();
+            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+
+//            System.out.println("access_token : " + access_Token);
+//            System.out.println("refresh_token : " + refresh_Token);
+
+            br.close();
+            bw.close();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return access_Token;
+    }
+	
+	public HashMap<String, Object> createKakaoUser(String access_Token) {
+	    HashMap<String, Object> userInfo = new HashMap<>();
+	    String reqURL = "https://kapi.kakao.com/v2/user/me";
+	    try {
+	        URL url = new URL(reqURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+//	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String line = "";
+	        String result = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+//	        System.out.println("response body : " + result);
+	        
+	        JsonParser parser = new JsonParser();
+	        JsonElement element = parser.parse(result);
+	        String id = element.getAsJsonObject().get("id").getAsString();
+	        
+	        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+//	        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+	        
+	        String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+	        
+	        userInfo.put("nickname", nickname);
+	        userInfo.put("id", id);
+	        
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return userInfo;
+	}
+	
+	public MemberVO getMemberKakaoLogin(String kakao_id) {
+		System.out.println("@@@@@@@@@@@@" + mapper.selectMemberKakaoLogin(kakao_id));
+		return mapper.selectMemberKakaoLogin(kakao_id);
+	}
 
 	public void registAuthInfo(String member_id, String authCode) {
-		// 기존 인증정보가 존재하는지 여부 확인
-		// MemberMapper - selectAuthInfo() 메서드 호출하여 기존 인증정보 조회
-		// => 파라미터 : 아이디   리턴타입 : AuthInfoVO(authInfo)
 		AuthInfoVO authInfo = mapper.selectAuthInfo(member_id);
 //				System.out.println("인증 정보 : " + authInfo);
 		
-		// 기존 인증정보 존재 여부 판별
 		if(authInfo == null) { // 기존 인증정보 존재하지 않을 경우(새 인증정보 추가)
 			System.out.println("기존 인증정보 없음!");
 			
-			// MemberMapper - insertAuthInfo() 메서드 호출하여 새 인증정보 추가
 			mapper.insertAuthInfo(member_id, authCode);
 		} else { // 기존 인증정보 존재(기존 인증정보 갱신)
 			System.out.println("기존 인증정보 있음!");
 			
-			// MemberMapper - updateAuthInfo() 메서드 호출하여 기존 인증정보 갱신
 			mapper.updateAuthInfo(member_id, authCode);
 		}
 	}
 
-	// 이메일 인증 요청
 		public boolean emailAuth(AuthInfoVO authInfo) {
 		boolean isAuthSuccess = false;
 		
-		// MemberMapper - selectAuthInfo() 메서드를 호출하여 아이디가 일치하는 인증정보 조회(재사용)
 		AuthInfoVO currentAuthInfo = mapper.selectAuthInfo(authInfo.getId());
 		System.out.println("전달받은 인증정보 : " + authInfo);
 		System.out.println("조회된 기존 인증정보 : " + currentAuthInfo);
 		
-		// 조회된 인증정보 존재할 경우
 		if(currentAuthInfo != null) {
-			// 하이퍼링크 통해 전달받은 인증코드와 조회된 인증정보의 인증코드 문자열 비교
 			if(authInfo.getAuth_code().equals(currentAuthInfo.getAuth_code())) { // 인증코드 일치
-				// 1. Mapper - updateMailAuthStatus() 메서드를 호출하여
-				//    member 테이블의 인증상태(mail_auth_status)를 "Y" 로 변경
-				// => 파라미터 : 아이디
 				mapper.updateMailAuthStatus(authInfo.getId());
 				
-				// 2. Mapper - deleteAuthInfo() 메서드를 호출하여
-				//    auth_info 테이블의 인증정보 삭제
-				// => 파라미터 : 아이디
 				mapper.deleteAuthInfo(authInfo.getId());
 				
-				// 3. isAuthSuccess 를 true 로 변경
 				isAuthSuccess = true;
 			}
 		}
@@ -74,7 +168,6 @@ public class MemberService {
 		return isAuthSuccess;
 	}
 
-	// 암호화 된 패스워드 조회 요청
 	public String getPasswd(MemberVO member) {
 		return mapper.selectPasswd(member);
 	}
@@ -116,4 +209,24 @@ public class MemberService {
 		return mapper.selectMemberDetails(member_id);
 	}
 
+	public List<NoticeVO> getNewsList(String searchType, String searchKeyword, int startRow, int listLimit) {
+		return mapper.selectNoticeList(searchType, searchKeyword, startRow, listLimit);
+	}
+
+	public int getNoticeListCount(String searchType, String searchKeyword) {
+		return mapper.selectNoticeListCount(searchType, searchKeyword);
+	}
+
+	public NoticeVO getNotice(int notice_num) {
+		NoticeVO notice = mapper.selectNotice(notice_num);
+		
+		if(notice != null) {
+			mapper.updateReadcount(notice);
+		}
+		return notice; 
+	}
+
+	public int addKakaoId(String member_id, String kakao_id) {
+		return mapper.updateKakaoId(member_id, kakao_id);
+	}
 }

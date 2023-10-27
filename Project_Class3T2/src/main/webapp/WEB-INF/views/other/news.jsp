@@ -166,14 +166,14 @@ table td {
 							<th width="150px">날짜</th>
 							<th width="100px">조회수</th>
 						</tr>
-						<c:forEach var="news" items="${noticeList }">
+						<c:forEach var="notice" items="${noticeList }">
 							<tr>
 								<td>${notice.notice_num }</td>
 								<td id="subject">
 									<%-- 제목 하이퍼링크 추가(BoardDetail.bo), 파라미터 : 글번호, 현재페이지번호 --%>
-									<a href="NoticeDetail?notice_num=${notice.news_num }&pageNum=${pageNum }">${news.news_subject }</a>
+									<a href="NoticeDetail?notice_num=${notice.notice_num }&pageNum=${pageNum }">${notice.notice_subject }</a>
 								</td>
-								<td>admin</td>
+								<td>관리자</td>
 								<td>
 									<fmt:formatDate value="${notice.notice_date }" pattern="yy-MM-dd HH:mm"/>
 								</td>
@@ -185,7 +185,7 @@ table td {
 				<section id="pageList">
 					<c:choose>
 						<c:when test="${pageNum > 1 }"> <%-- 현재 페이지가 1보다 클 경우(버튼 동작) --%>
-							<input type="button" value="이전" onclick="location.href='BoardList?pageNum=${pageNum - 1 }'">
+							<input type="button" value="이전" onclick="location.href='News?pageNum=${pageNum - 1 }'">
 						</c:when>
 						<c:otherwise> <%-- 현재 페이지 1 페이지보다 크지 않을 경우(버튼 비활성화) --%>
 							<input type="button" value="이전" disabled>
@@ -197,13 +197,13 @@ table td {
 								<b>${i }</b>
 							</c:when>
 							<c:otherwise> <%-- 현재 페이지가 아닐 경우(하이퍼링크 표시) --%>
-								<a href="BoardList?pageNum=${i }">${i }</a> 
+								<a href="News?pageNum=${i }">${i }</a> 
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 					<c:choose>
 						<c:when test="${pageNum < pageInfo.maxPage }"> <%-- 현재 페이지가 1보다 클 경우(버튼 동작) --%>
-							<input type="button" value="다음" onclick="location.href='BoardList?pageNum=${pageNum + 1 }'">
+							<input type="button" value="다음" onclick="location.href='News?pageNum=${pageNum + 1 }'">
 						</c:when>
 						<c:otherwise> <%-- 현재 페이지 1 페이지보다 크지 않을 경우(버튼 비활성화) --%>
 							<input type="button" value="다음" disabled>

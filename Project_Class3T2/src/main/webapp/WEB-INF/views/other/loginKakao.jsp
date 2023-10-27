@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login_temp.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 // 	$(function() {
 // 		$("#btn_submit").on("click",function(){
@@ -34,24 +33,19 @@
 	</div>
 	<main>
 		<div class="main">
+		<input type="hidden" name="kakao_id" id="kakao_id" value="${sessionScope.kakao_id}">
 			<p class="sign" align="center">로그인</p>
-			<form action="LoginPro" method="post" class="form1">
+			<form action="KakaoLoginPro" method="post" class="form1">
 				<input class="user" type="text" name="member_id" id="id" style="align-content: center" placeholder="아이디">
 				<input class="pass" type="password" name="member_passwd" id="passwd"style="align-content: center" placeholder="비밀번호">
 <!-- 				<p class="submit" id="btn_submit"align="center">로그인</p> -->
-				<input type="submit" class="submit" id="btn_submit" style="margin-left: 35%;" value="로그인">
-			</form>
-				<a href="https://kauth.kakao.com/oauth/authorize?
-							client_id=46389b0d2a4098beef5e03823cefb9a9
-							&redirect_uri=http%3A%2F%2Flocalhost%3A8081%2Fc3t2%2Fkakao
-							&response_type=code" id="kakaoLogin">
-		            		Kakao 로그인
-		        </a>
+				<input type="submit" class="submit" id="btn_submit" style="margin-left: 28%" value="카카오 연동하기">
 				<div class="aTag" align="center">
 					<a href="JoinAgree" class="join" style="align-content: center">회원가입</a>
-					<a href="IdForgot" class="idForgot" style="align-content: center">아이디찾기</a>
+					<a href="IdForgot"  class="idForgot" style="align-content: center">아이디찾기</a>
 					<a href="PassForgot"  class="passForgot" style="align-content: center">비밀번호찾기</a>
 				</div>
+			</form>
 	    </div>
 	</main>
 	<footer id="footer">
