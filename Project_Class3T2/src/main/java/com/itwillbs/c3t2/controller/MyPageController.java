@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.itwillbs.c3t2.service.MyPageService;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 @Controller
@@ -140,25 +141,6 @@ public class MyPageController {
 		return "mypage/mypage_passwd_change";
 	}
 	
-	// 사용자가 입력한 비밀번호를 검증하는 메서드
-	@PostMapping("PasswdPro")
-	public String PasswdPro(MemberVO member, @RequestParam(value="member_id", required=false)String member_id, @RequestParam String password, Model model) {
-		
-		MemberVO dbmember = service.getMemberPasswd(member);
-		
-		// BCryptPasswordEncoder 객체를 활용한 패스워드 비교	
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
-		if (dbmember != null || !passwordEncoder.matches(member.getMember_passwd(), member.getMember_name())) {
-            model.addAttribute("member", member);
-            return "mypage/mypage_passwd_change2"; // 로그인 성공 시 mypage_passwd_change2" 페이지로 이동
-        } else {
-            model.addAttribute("error", "로그인 실패");
-            System.out.println("틀림");
-            return "mypage/mypage_dashboard"; // 로그인 실패 시 다시 mypage_dashboard 페이지로 이동
-        }
-		
-	}
 	
 	@GetMapping("MypageZzim")					//나의 관심정보 - 찜
 	public String mypageZzim(HttpSession session, Model model) {
@@ -198,5 +180,21 @@ public class MyPageController {
 			redirectAttributes.addFlashAttribute("errorMessage", "찜 항목 삭제 성공!");
 	    }
 		return "redirect:/MypageZzim";
+	}
+	
+	@GetMapping("MypageReservationList")				// 예약 내역
+	public String mypageReservationList(HttpSession session, Model model) {
+		
+		// 세션에서 현재 로그인한 회원의 번호 가져오기
+		Integer member_num = (Integer) session.getAttribute("sNum");
+		System.out.println(member_num);
+		
+		// 현재 로그인한 회원의 모든 리뷰 가져오기
+		List<ReservationVO> reviews = service.getReservationDetail(member_num);
+		System.out.println(reviews);
+		
+		model.addAttribute("reviews", reviews);
+		
+		return "mypage/mypage_reservation_list";
 	}
 }

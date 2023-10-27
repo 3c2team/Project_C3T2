@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,7 @@
 				</span>
 			</span>
 		</div>
+		<!-- 마이페이지 컨텐츠 영역 -->
 		<div id="mypage_container">
 			<div class="mypageBox" id="mypage_sideMenu">
 				<nav class="menu">
@@ -39,41 +41,53 @@
 			<div class ="mypageContents">
 				<div align="center">
 				<br><br>
-				<h1>예약 문의 내역</h1><br>
+				<h1>상품 리뷰</h1><br>
 				</div>
 				<h2>기간 조회</h2>
 				<div class="reservationConfirmContainer">
-					<div class="reservationConfirmTerm">
-						<div class="calendarContainer">
-						      <button onclick="setToday()">오늘</button>
-						      <button onclick="setMonths(-1)">1개월</button>
-						      <button onclick="setMonths(-3)">3개월</button>
-						      <button onclick="setMonths(-6)">6개월</button>
-						</div>
-    					<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
-						<div id="reservation_confirm_term_right">
-							<div class="calanderWrap">
-								<input type="date" id="startDate">
-						         -  
-						        <input type="date" id="endDate"> 
-						        <button id="search_btn">조회</button>
-							</div>
+				<div class="reservationConfirmTerm">
+					<div class="calendarContainer">
+					      <button onclick="setToday()">오늘</button>
+					      <button onclick="setMonths(-1)">1개월</button>
+					      <button onclick="setMonths(-3)">3개월</button>
+					      <button onclick="setMonths(-6)">6개월</button>
+					</div>
+   					<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
+					<div id="reservation_confirm_term_right">
+						<div class="calanderWrap">
+							<input type="date" id="startDate">
+					         -  
+					        <input type="date" id="endDate"> 
+					        <button id="search_btn">조회</button>
 						</div>
 					</div>
-					<br><br>
-					<article>
-						<section id="list_Form">
-							<table>
-								<tr id="tr_top">
-									<th width="120px">주문번호</th> <!-- 적립 or 소멸 -->
-									<th width="400px">상품명</th>
-									<th width="130px">수량</th> <!-- 개별 유효기간 등 -->
-									<th width="130px">결제상태</th>
-									<th width="130px">주문상태</th>
-								</tr>
-							</table>
-						</section>
-					</article>
+				</div>
+				<br><br>
+				<!-- 리뷰 목록 테이블 -->
+                    <article>
+                        <section id="list_Form">
+                            <table>
+                                <!-- 테이블 헤더 -->
+                                <tr id="tr_top">
+                                    <th width="120px">예약 번호</th>
+                                    <th width="400px">예약 날짜</th>
+                                    <th width="130px">예약 시간</th>
+                                    <th width="130px">예약 인원</th>
+                                    <th width="130px">취소 여부</th>
+                                </tr>
+                                <!-- 예약 내역 데이터 반복 출력 -->
+					            <c:forEach var="reservation" items="${reviews}">
+					                <tr>
+					                    <td>${reservation.reservation_num}</td>
+					                    <td>${reservation.reservation_date}</td>
+					                    <td>${reservation.reservation_time}</td>
+					                    <td>${reservation.reservation_person_count}</td>
+					                    <td>${reservation.reservation_cancel == 0 ? "No" : "Yes"}</td>
+					                </tr>
+					            </c:forEach>
+                            </table>
+                        </section>
+                    </article>
 				</div>
 				<br><br>
 			</div>

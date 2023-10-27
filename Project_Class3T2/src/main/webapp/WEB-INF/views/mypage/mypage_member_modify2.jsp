@@ -96,7 +96,14 @@ window.onload = function() {
 				<form id="myForm">	
 					<table border="1">
 						<tr>
-							<th>닉네임</th>
+							<th>id</th>
+							<td>
+								<input type="text" name="id" placeholder="4 ~ 8글자 사이 입력"size="20"><br>
+								<span id="checkIdResult1"></span>
+							</td>
+						</tr>
+						<tr>
+							<th>이름</th>
 							<td>
 								<input type="text" name="id" placeholder="4 ~ 8글자 사이 입력"size="20"><br>
 								<span id="checkIdResult1"></span>
