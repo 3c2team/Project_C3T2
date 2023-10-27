@@ -41,9 +41,9 @@
 					<tr>
 						<td colspan="2" align="center">
 							<input type="button" value="메인으로" onclick="location.href='./'">
-							<input type="button" value="예약취소" onclick="location.href ='Reservationcancel?guestNum=${reservation.reservation_guest_num}'">
-							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate?guestNum=${reservation.reservation_guest_num}'">
-						</td>
+							<input type="button" value="예약취소" onclick="location.href ='ReservationCancel?reservation_guest_num=${reservation.reservation_guest_num}'">
+							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate'">
+						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
 					</tr>
 				</table>
 			</div>

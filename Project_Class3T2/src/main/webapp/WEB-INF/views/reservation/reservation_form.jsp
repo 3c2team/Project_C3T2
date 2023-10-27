@@ -120,7 +120,7 @@
 					<th>예약자 성함</th>
 					<td>
 						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
-							<c:if test="${sessionScope.sId ne null}">value="${sessionScope.sName }"</c:if>>
+							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>>
 						
 					</td> <!-- value= --> 
 				</tr>
@@ -128,7 +128,7 @@
 					<th>예약자 전화번호</th>
 					<td>
 						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required
-							<c:if test="${sessionScope.sId ne null}">value="${sessionScope.sPhone }"</c:if>>
+							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sPhone }"</c:if>>
 					</td> <!-- value="${sessionScope.sPhone}" --> 
 				</tr>
 				<tr>

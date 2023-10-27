@@ -48,7 +48,7 @@
 	
 	<delete id="deleteReservation">
 		DELETE FROM RESERVATION
-		WHERE reservation_person_name = #{reservation_person_name}
+		WHERE reservation_guest_num = #{reservation_guest_num}
 	</delete>
 	
 <!-- 	<typeAliases> -->

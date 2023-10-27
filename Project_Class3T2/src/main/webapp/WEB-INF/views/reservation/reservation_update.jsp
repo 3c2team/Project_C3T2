@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
+<script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -20,6 +21,7 @@
 		<main>
 			<h1>예약 수정</h1>
 			<form action="Main" method="post">
+				<div id="calendarForm"></div>
 				<table class="custom_calendar_table">
 					<tr>
 						<td class="td_left"><label for="reservation_person_name">예약자 성함</label></td>
@@ -30,12 +32,13 @@
 					<tr>
 						<td class="td_left"><label for="reservation_person_phone">예약자 전화번호</label></td>
 						<td class="td_right">
-							<input type="text" name="reservation_person_phone" value="${reservation.reservation_person_phone }" required />
+<%-- 							<input type="text" name="reservation_person_phone" value="${reservation_person_phone }" required /> --%>
 						</td>
 					</tr>
 					<tr>
 						<td class="td_left"><label for="reservation_date">예약일자</label>
-							<input type="date" name="reservation_date" value="${reservation.reservation_date }" required>
+<%-- 							<input type="date" name="reservation_date" value="${reservation_date }" required> --%>
+<%-- 							<input type="date" name="reservation_date" value="${reservation_time }" required> --%>
 						</td>
 						<td class="td_right"><label for="reservation_date">예약시간</label>
 						</td>

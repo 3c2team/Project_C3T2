@@ -24,6 +24,7 @@ public class ReservationController {
 	//예약 폼 페이지 이동
 	@GetMapping("/ReservationForm")
 	public String reservationForm() {
+		
 		return "reservation/reservation_form";
 	}
 	
@@ -38,6 +39,7 @@ public class ReservationController {
 		
 		// 회원가입 작업 요청
 //		System.out.println(reservation);
+		
 		int insertCount = service.insertReservation(reservation);
 		
 		// => 실패 시 "fail_back.jsp" 포워딩(Model 객체의 "msg" 속성값으로 "회원 가입 실패!" 저장)
@@ -70,21 +72,23 @@ public class ReservationController {
 	}
 	
 	// 비회원 예약 취소 페이지 이동
-	@GetMapping("/Reservationcancel")
+	@GetMapping("/ReservationCancel")
 	public String reservationcancel() {
 		return "reservation/reservation_cancel";
 	}
 	
 	// 비회원 예약 정보 수정
 	@GetMapping("/ReservationUpdate")
-	public String reservationUpdate(int reservation_guest_num, HttpSession session, Model model) {
+	public String reservationUpdate(ReservationVO reservation, int reservation_guest_num, HttpSession session, Model model) {
+//		@RequestParam(defaultValue = "1") String pageNum,
+		
 		int sGuestNum = (int)session.getAttribute("sGuestNum");
 		if(sGuestNum < 0) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";
 		}
 		
-		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
+		ReservationVO dbReservation = service.updateReservation(reservation.getReservation_guest_num());
 //		System.out.println(dbReservation);
 		
 		// 회원 상세정보를 Model 객체에 저장
