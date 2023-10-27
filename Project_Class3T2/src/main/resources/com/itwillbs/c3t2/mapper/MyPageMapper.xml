@@ -31,13 +31,6 @@
 		WHERE u.member_num = #{member_num}
     </select>
 	
-	<!-- 비밀번호 맞나 확인 -->
-	<select id = "selectMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
-		SELECT member_passwd 
-		FROM MEMBER 
-		WHERE member_id = #{member_id}
-	</select>
-	
 	<!-- 찜목록 -->
 	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
         SELECT 
@@ -58,4 +51,20 @@
     <delete id="deleteFavorite">
        DELETE FROM FAVORITE WHERE favorite_num = #{favoriteNum}
     </delete>
+    
+    <!-- 예약 내역 -->
+    <select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+        SELECT 
+            R.reservation_num,
+            R.reservation_date,
+            R.reservation_time,
+            R.reservation_person_count,
+            R.reservation_cancel
+        FROM 
+            MEMBER M
+        JOIN 
+            RESERVATION R ON M.member_name = R.reservation_person_name
+        WHERE 
+            M.member_name = #{memberName}
+    </select>
 </mapper>
