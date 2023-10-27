@@ -1,7 +1,8 @@
 package com.itwillbs.c3t2.vo;
 
 
-import com.google.protobuf.Timestamp;
+
+import java.sql.Timestamp;
 
 import lombok.Data;
 
