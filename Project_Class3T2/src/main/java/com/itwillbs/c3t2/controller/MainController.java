@@ -107,7 +107,7 @@ public class MainController {
 		
 		@GetMapping("OnlineStore")
 		public String onlineStore() {
-			return "store/store_main";
+			return "store/store_best";
 		}
 		
 		@GetMapping("Login")
