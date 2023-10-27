@@ -32,6 +32,30 @@
     </select>
 	
 	<!-- 비밀번호 맞나 확인 -->
+	<select id = "selectMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT member_passwd 
+		FROM MEMBER 
+		WHERE member_id = #{member_id}
+	</select>
 	
-	
+	<!-- 찜목록 -->
+	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
+        SELECT 
+            F.favorite_num,
+            F.member_id,
+            F.product_num,
+            P.product_name,
+            P.product_main_img_real_file
+        FROM 
+            FAVORITE F
+        JOIN 
+            PRODUCT P ON F.product_num = P.product_num
+        WHERE 
+            F.member_id = #{member_id}
+    </select>
+    
+    <!-- 찜목록 삭제-->
+    <delete id="deleteFavorite">
+       DELETE FROM FAVORITE WHERE favorite_num = #{favoriteNum}
+    </delete>
 </mapper>

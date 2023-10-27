@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.MyPageMapper;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -32,6 +33,20 @@ public class MyPageService {
 	public List<UserOrderVO> getOrderList(Integer member_num) {
 		return mapper.getOrderList(member_num);
 	}
-	
+
 	// 비번 점검
+
+	public MemberVO getMemberPasswd(MemberVO member) {
+		return mapper.selectMember(member);
+	}
+	// 찜 목록
+	public List<FavoriteVO> getFavorite(String member_id) {
+		return mapper.getFavorite(member_id);
+	}
+	// 찜 목록 삭제
+	public boolean deleteFavorite(Integer favoriteNum) {
+        int result = mapper.deleteFavorite(favoriteNum);
+        return result > 0;  // 삭제된 행의 수가 0보다 크면 true를 반환, 그렇지 않으면 false를 반환
+    }
+	
 }
