@@ -66,7 +66,7 @@ public class ReservationController {
 		System.out.println(dbReservation);
 		
 		model.addAttribute("reservation", dbReservation);
-		session.setAttribute("sGuestNum", reservation.getReservation_guest_num());
+//		session.setAttribute("sGuestNum", reservation.getReservation_guest_num());
 		
 		return "reservation/reservation_search_Info";
 	}
@@ -88,7 +88,7 @@ public class ReservationController {
 			return "fail_back";
 		}
 		
-		ReservationVO dbReservation = service.updateReservation(reservation.getReservation_guest_num());
+		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
 //		System.out.println(dbReservation);
 		
 		// 회원 상세정보를 Model 객체에 저장
