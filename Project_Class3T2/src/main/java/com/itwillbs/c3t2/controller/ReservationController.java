@@ -57,6 +57,11 @@ public class ReservationController {
 	public String reservationSearch() {
 		return "reservation/reservation_search";
 	}
+	//비회원 예약 검색 페이지 이동
+	@GetMapping("/ReservationInfo")
+	public String reservationInfo() {
+		return "reservation/reservation_info";
+	}
 	
 	//비회원 예약 조회 페이지 이동
 	@PostMapping("/ReservationSearchInfo")
