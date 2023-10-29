@@ -1,5 +1,7 @@
 package com.itwillbs.c3t2.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,19 +34,29 @@ public class ReservationController {
 	
 	// 예약 폼 전송, 예약 확인 페이지 이동
 	@PostMapping("/ReservationPro")
-	public String reservationPro(ReservationVO reservation, Model model) {
+	public String reservationPro(ReservationVO reservation, HttpSession session, Model model) {
 		
-		// 예약번호 랜덤
-//		String reservationNum = GenerateRandomCode.getRandomCode(10); // 길이 10 만큼의 난수 생성
+		// 랜덤숫자 6자리
+		Random random = new Random();	// 랜덤 함수 선언
+		int createNum = 0;  			// 1자리 난수
+		String ranNum = ""; 			// 1자리 난수 형변환 변수
+		int letter = 6;					// 난수 자릿수:6
+		String guestNum = "";  		// 결과 난수
 		
-		// 회원가입 작업 요청
-//		System.out.println(reservation);
+		for (int i = 0; i < letter; i++) { 
+		    		
+			createNum = random.nextInt(9);		// 0부터 9까지 올 수 있는 1자리 난수 생성
+			ranNum =  Integer.toString(createNum);  // 1자리 난수를 String으로 형변환
+			guestNum += ranNum;			// 생성된 난수(문자열)을 원하는 수(letter)만큼 더하며 나열
+			reservation.setReservation_guest_num(guestNum);
+		}	
 		
 		int insertCount = service.insertReservation(reservation);
 		
 		// => 실패 시 "fail_back.jsp" 포워딩(Model 객체의 "msg" 속성값으로 "회원 가입 실패!" 저장)
 		if(insertCount > 0) { // 성공
 			System.out.println(reservation);
+			session.setAttribute("sGuestNum", reservation.getReservation_guest_num());
 			return "redirect:/ReservationSuccess";
 		} else { // 실패
 			model.addAttribute("msg", "예약 실패!");
@@ -52,76 +64,66 @@ public class ReservationController {
 		}
 	}
 	
+	//예약 성공 이동
+	@GetMapping("/ReservationSuccess")
+	public String reservationSuccess(ReservationVO reservation, Model model) {
+		ReservationVO dbReservation = service.getReservation(reservation);
+		dbReservation.setReservation_guest_num(reservation.getReservation_guest_num()); 
+		System.out.println(dbReservation);
+		model.addAttribute("reservation", dbReservation);
+		return "reservation/reservation_success";
+	}
+
 	//비회원 예약 검색 페이지 이동
 	@GetMapping("/ReservationSearch")
-	public String reservationSearch() {
+	public String reservationSearch(ReservationVO reservation, HttpSession session, Model model) {
+		ReservationVO dbReservation = service.getReservation(reservation);
+		System.out.println(dbReservation);
+		model.addAttribute("reservation", dbReservation);
 		return "reservation/reservation_search";
 	}
 	
 	//비회원 예약 조회 페이지 이동
-	@PostMapping("/ReservationSearchInfo")
+	@GetMapping("/ReservationSearchInfo")
 	public String reservationSearchInfo(ReservationVO reservation, HttpSession session, Model model) {
-
+		System.out.println(reservation);
 		ReservationVO dbReservation = service.getReservation(reservation);
 		System.out.println(dbReservation);
 		
 		model.addAttribute("reservation", dbReservation);
-//		session.setAttribute("sGuestNum", reservation.getReservation_guest_num());
 		
-		return "reservation/reservation_search_Info";
-	}
-	
-	// 비회원 예약 취소 페이지 이동
-	@GetMapping("/ReservationCancel")
-	public String reservationcancel() {
-		return "reservation/reservation_cancel";
+		return "reservation/reservation_search_info";
 	}
 	
 	// 비회원 예약 정보 수정
 	@GetMapping("/ReservationUpdate")
-	public String reservationUpdate(ReservationVO reservation, int reservation_guest_num, HttpSession session, Model model) {
-//		@RequestParam(defaultValue = "1") String pageNum,
+	public String reservationUpdate(ReservationVO reservation, @RequestParam String reservation_guest_num, HttpSession session, Model model) {
 		
-		int sGuestNum = (int)session.getAttribute("sGuestNum");
-		if(sGuestNum < 0) {
+		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
+		System.out.println(dbReservation);
+		
+		
+		if(reservation_guest_num.equals("")) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";
 		}
 		
-		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
-//		System.out.println(dbReservation);
-		
-		// 회원 상세정보를 Model 객체에 저장
 		model.addAttribute("reservation", dbReservation);
 		return "reservation/reservation_update";
 	}
 	
-	//예약 성공 이동
-	@GetMapping("/ReservationSuccess")
-	public String reservationSuccess() {
-		return "reservation/reservation_success";
+	// 비회원 예약 취소 페이지 이동
+	@GetMapping("/ReservationCancel")
+	public String reservationcancel(ReservationVO reservation,
+			@RequestParam String reservation_guest_num,
+			HttpSession session, Model model) {
+		ReservationVO dbReservation = service.getReservation(reservation);
+		System.out.println(dbReservation);
+		
+		model.addAttribute("reservation", dbReservation);
+		return "reservation/reservation_cancel";
 	}
 	
-    
-//	// 2) 리턴타입을 void 로 명시하고 HttpServletResponse 객체를 통해 응답 데이터를 출력
-//	@ResponseBody
-//	@PostMapping("/IsSchedule")
-//	public void isSchedule(ScheduleVO schedule, HttpSession session, HttpServletResponse response) {
-////		System.out.println(board.getBoard_num() + ", " + board.getBoard_file1());
-//		
-//		// Service - removeBoardFile() 메서드를 호출하여 지정된 파일 삭제 요청
-//		// => 파라미터 : BoardVO 객체(글번호, 삭제할 파일명)   리턴타입 : int(deleteCount)
-////		int deleteCount = service.removeBoardFile(board);
-//		int seleCount = service.isSchedule(schedule.getBoard_file1(), schedule);
-//		
-//		
-//		String uploadDir = "/resources/upload"; // 가상의 경로
-//		String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
-//		
-////		try {
-////			response.getWriter().print("test2222");
-////		} catch (IOException e) {
-////			e.printStackTrace();
-////		}
-//	}
+	
+	
 }

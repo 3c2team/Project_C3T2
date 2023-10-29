@@ -27,7 +27,7 @@
 				, #{reservation_person_phone}
 				, 0 <!-- cancel -->
 				, 'Y' <!-- is_member -->
-				, 300000004 <!-- guest_num -->
+				, #{reservation_guest_num} <!-- guest_num 랜덤부여 -->
 				, 1 <!-- dinning_num -->
 				, 1 <!-- restaurant_num -->
 		)
@@ -40,9 +40,12 @@
 	</select>
 	
 	<!-- 예약 수정 -->
-	<update id="updateReservation">
+	<update id="updateReservation" >
 		UPDATE RESERVATION 
-		SET reservation_date = #{reservation_date}, reservation_time = #{reservation_time}
+		SET reservation_date = #{reservation_date}
+			, reservation_time = #{reservation_time}
+			, reservation_person_count = #{reservation_person_count}
+			, reservation_person_phone = #{reservation_person_phone}
 		WHERE reservation_guest_num = #{reservation_guest_num}
 	</update>
 	
