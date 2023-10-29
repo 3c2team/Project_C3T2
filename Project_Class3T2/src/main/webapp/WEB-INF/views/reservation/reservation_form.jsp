@@ -134,7 +134,6 @@
 				<tr>
 					<td colspan="2" align="center">
 						<input type="button" value="돌아가기" onclick="history.back()">
-						<input type="button" value="비회원 예약 조회" onclick="location.href='ReservationSearch'">
 						<input type="submit" value="예약하기" >
 					</td>
 				</tr>

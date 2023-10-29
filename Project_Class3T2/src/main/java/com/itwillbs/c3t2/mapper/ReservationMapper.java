@@ -11,11 +11,17 @@ public interface ReservationMapper {
 	int insertReservation(ReservationVO reservation);
 
 	// 비회원 예약 상세정보 조회
-	ReservationVO selectReservation(int reservation_num);
-	
 	ReservationVO getReservation(ReservationVO reservation);
+	
+	
+	int updateReservation(int reservation_guest_num);
+	
+	// 예약 번호 조회
+	ReservationVO selectGuestNum(ReservationVO reservation);
+	
+	// 예약 취소
+	int deleteReservation(ReservationVO reservation);
 
-	ReservationVO updateReservation(int reservation_guest_num);
 	
 	
 }

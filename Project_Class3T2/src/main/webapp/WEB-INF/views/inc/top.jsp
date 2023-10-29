@@ -15,6 +15,7 @@
 <div class="accountArea">
 <c:choose>
 	<c:when test="${empty sessionScope.sId }">
+		<a href="${pageContext.request.contextPath}/ReservationSearch">비회원 예약 조회</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="${pageContext.request.contextPath}/Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="${pageContext.request.contextPath}/JoinAgree">Join</a>
 	</c:when>
@@ -22,7 +23,7 @@
 		<%-- 아이디 클릭 - MemberInfo 서블릿 주소 요청 --%>
 		<a href="${pageContext.request.contextPath}/mypage/MypageDashboard?id=${sessionScope.sId }">${sessionScope.sName }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
 		<a href="javascript:logout()">LogOut</a>
-		| &nbsp;&nbsp;<a href="MainCart?id=${sessionScope.sId }"">장바구니</a>
+		| &nbsp;&nbsp;<a href="MainCart?id=${sessionScope.sId }">장바구니</a>
 		<%-- 만약, 세션 아이디가 관리자("admin")일 경우 --%>
 		<%-- 관리자페이지 클릭 - MemberAdminMain 서블릿 주소 요청 --%>
 <%-- 		<c:if test="${sessionScope.sId eq 'admin' }"> --%>

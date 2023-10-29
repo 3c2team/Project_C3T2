@@ -27,7 +27,7 @@
 				, #{reservation_person_phone}
 				, 0 <!-- cancel -->
 				, 'Y' <!-- is_member -->
-				, 300000004 <!-- guest_num -->
+				, #{reservation_guest_num} <!-- guest_num -->
 				, 1 <!-- dinning_num -->
 				, 1 <!-- restaurant_num -->
 		)
@@ -45,6 +45,19 @@
 		SET reservation_date = #{reservation_date}, reservation_time = #{reservation_time}
 		WHERE reservation_guest_num = #{reservation_guest_num}
 	</update>
+	
+	<select id="selectGuestNum" resultType="Reservation">
+		SELECT reservation_date
+			   , reservation_time
+			   , reservation_person_name
+			   , reservation_person_count
+			   , reservation_person_phone
+			   , reservation_guest_num
+		FROM RESERVATION
+		WHERE reservation_guest_num = #{reservation_guest_num} 
+			AND reservation_person_phone = #{reservation_person_phone}
+	</select>
+	
 	
 	<delete id="deleteReservation">
 		DELETE FROM RESERVATION

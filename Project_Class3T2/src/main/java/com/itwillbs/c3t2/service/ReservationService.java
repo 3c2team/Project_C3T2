@@ -18,16 +18,22 @@ public class ReservationService {
 		}
 		
 		// 예약 상세정보 조회 요청
-		public ReservationVO selectReservation(int reservation_num) {
-			return mapper.selectReservation(reservation_num);
-		}
-
 		public ReservationVO getReservation(ReservationVO reservation) {
 			return mapper.getReservation(reservation);
 		}
 
-		public ReservationVO updateReservation(int reservation_guest_num) {
+		public int updateReservation(int reservation_guest_num) {
 			return mapper.updateReservation(reservation_guest_num);
+		}
+
+		// 파일명 조회 요청
+		public ReservationVO getGuestNum(ReservationVO reservation) {
+			return mapper.selectGuestNum(reservation);
+		}
+
+		// 글 삭제 요청
+		public int removeReservation(ReservationVO reservation) {
+			return mapper.deleteReservation(reservation);
 		}
 
 

@@ -18,6 +18,7 @@
 	<div class="accountArea">
 		<c:choose>
 			<c:when test="${empty sessionScope.sId }">
+				<a href="${pageContext.request.contextPath}/ReservationSearch">비회원 예약 조회</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="Login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<a href="JoinAgree">Join</a>
 			</c:when>
@@ -53,9 +54,9 @@
 <!-- 				</div> -->
 		</div>
 		
-		<div class="mainMenuAreaRight">
-			<a class="offlineReservation" href="Reservation">&nbsp;&nbsp;OFFLINE RESERVATION&nbsp;&nbsp;</a>
-		</div>
+<!-- 		<div class="mainMenuAreaRight"> -->
+<!-- 			<a class="offlineReservation" href="Reservation">&nbsp;&nbsp;OFFLINE RESERVATION&nbsp;&nbsp;</a> -->
+<!-- 		</div> -->
 		
 	</div>
 </div>

@@ -12,6 +12,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+	function check() {
+		let result = confirm("예약 취소 하시겠습니까?");
+		if(result){
+			location.href='ReservationDelete';
+		}
+	}
+</script>
 <body>
 		<header>
 			<jsp:include page="../inc/top.jsp"></jsp:include>
@@ -19,10 +27,10 @@
 	<div id="mainLayout">
 		<main>
 			<div>
+				<h2 class="sign" align="center">예약 상세 조회</h2>
 				<input type="hidden" name="${reservation.reservation_guest_num }">
 				<table class="custom_calendar_table">
 					<tr>
-						<h2 class="sign" align="center">예약 상세 조회</h2>
 						<th>예약일자</th>
 						<td>${reservation.reservation_date }&nbsp;${reservation.reservation_time }</td>
 					</tr>
@@ -41,7 +49,7 @@
 					<tr>
 						<td colspan="2" align="center">
 							<input type="button" value="메인으로" onclick="location.href='./'">
-							<input type="button" value="예약취소" onclick="location.href ='ReservationCancel?reservation_guest_num=${reservation.reservation_guest_num}'">
+							<input type="button" value="예약취소" onclick="check()">
 							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate'">
 						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
 					</tr>
