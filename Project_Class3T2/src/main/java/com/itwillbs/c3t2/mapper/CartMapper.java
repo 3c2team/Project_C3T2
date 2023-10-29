@@ -46,4 +46,7 @@ public interface CartMapper {
 		// 장바구니 비우기
 		public int deleteAll(String sId);
 
+		// 선택 상품 주문 목록 조회
+		public List<ProductVO> selectPayProduct(@Param("sId") String sId, @Param("proNum") int proNum);
+
 }

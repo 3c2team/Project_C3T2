@@ -82,7 +82,7 @@ public class CartController {
 	//=============================================================================================================================================
 	
 	
-	// 메인 페이지에서 장바구니로 이동
+	// 장바구니로 이동
 	@GetMapping("MainCart")
 	public String mainCart(
 					@RequestParam(value = "proNum", defaultValue = "0" ,required = false) int proNum
@@ -213,17 +213,33 @@ public class CartController {
 	
 	@GetMapping("PayPro")
 	public String pay(
-					@RequestParam(value = "proNum", required = false) int proNum
-					, int[] proNums
+//					@RequestParam(value = "proNum", required = false) int proNum
+					int[] proNums
 					, HttpSession session 
-					, MemberVO member) {
+					, MemberVO member
+					, Model model) {
 				
 		String sId = (String)session.getAttribute("sId");
 		
-		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNum);
+		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNums);
 		
 		
-		// 상품 하나 선택 후 결제 페이지 이동
+		// 선택 상품 주문
+		if(proNums.length >= 0) {
+			for( int proNum : proNums) {
+				
+				// 메인 페이지에서 카트 등록 상품 목록 조회
+					List<ProductVO> productPayList = service.selectPayProduct(sId, proNum);
+					model.addAttribute("productPayList", productPayList);
+					
+					System.out.println("결제 상품 조회 성공");
+					
+								
+				}
+		}
+		
+		// 전체 상품 주문
+		
 		
 		
 		

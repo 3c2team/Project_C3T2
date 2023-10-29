@@ -88,6 +88,12 @@ public class CartService {
 		// TODO Auto-generated method stub
 		return mapper.deleteAll(sId);
 	}
+	
+	// 선택 상품 주문
+	public List<ProductVO> selectPayProduct(String sId, int proNum) {
+		// TODO Auto-generated method stub
+		return mapper.selectPayProduct(sId, proNum);
+	}
 
 
 }
