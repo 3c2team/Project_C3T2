@@ -113,6 +113,15 @@
 						, event_image_real_file
 			FROM EVENT
 		</select>
+		<select id="selectEvent" resultType="map">
+			SELECT event_image
+			FROM EVENT
+			WHERE event_num = #{event_num}
+		</select>
+		<delete id="deleteEvent">
+				DELETE FROM EVENT
+				WHERE event_num = #{event_num}
+		</delete>
 		<delete id="deleteReview">
 				DELETE FROM REVIEW
 				WHERE review_num = #{review_num} 

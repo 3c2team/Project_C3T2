@@ -66,4 +66,8 @@ public interface AdminMapper {
 
 	int insertEvent(Map<String, Object> map);
 
+	Map<String, Object> selectEvent(int event_num);
+
+	int deleteEvent(int event_num);
+
 }

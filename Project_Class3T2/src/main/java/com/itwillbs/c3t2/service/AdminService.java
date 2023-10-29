@@ -89,6 +89,14 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.insertEvent(map);
 	}
+	public Map<String, Object> selectEvent(int event_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectEvent(event_num);
+	}
+	public int deleteEvent(int event_num) {
+		// TODO Auto-generated method stub
+		return mapper.deleteEvent(event_num);
+	}
 	
 
 }

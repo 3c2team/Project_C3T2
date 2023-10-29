@@ -217,6 +217,7 @@ public class AdminController {
     	System.out.println(product_nums);
     	String uploadDir = "/resources/store_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);
+    	System.out.println("fdsfdsfdsf : " + saveDir);
     	Path path = null;
     	try {
     		for(int product_num : product_nums) {
@@ -416,8 +417,7 @@ public class AdminController {
     public String adminEventList(HttpSession session, Model model) {
     	
     	List<Map<String, Object>> eventList = service.selectEventList();
-    	System.out.println(eventList);
-    	model.addAttribute("eventList", eventList);
+    	model.addAttribute("eventList",eventList);
     	return "admin/admin_event_list";
     }
     //이벤트 등록 페이지 이동(관리자)
@@ -441,7 +441,7 @@ public class AdminController {
 			
 			try {
 				map.put("event_img",file.getOriginalFilename());
-				map.put("event_image_real_file", uploadDir +file.getOriginalFilename());
+				map.put("img", uploadDir +file.getOriginalFilename());
 				// 맵에 이름과 경로 전달
 				
 //				System.out.println("실제 업로드 파일명 : " + file.getOriginalFilename());
@@ -449,7 +449,7 @@ public class AdminController {
 //			System.out.println(map);
 				int insertEvent = service.insertEvent(map);
 				//db등록
-				if(insertEvent ==0 ) return "fail_back";
+				if(insertEvent ==0 )return "fail_back";
 				Path path = Paths.get(saveDir);//실제 업로드 경로
 				Files.createDirectories(path);//중간 경로 생성
 				System.out.println(saveDir);
@@ -462,26 +462,34 @@ public class AdminController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		model.addAttribute("msg", "등록이 완료되었습니다.");
+		model.addAttribute("msg","등록 완료되었습니다.");
     	return "success_close";
 
     }
     //이벤트 삭제 처리(관리자)
-    @GetMapping("AdminEventDeletePro")
+    @PostMapping("AdminDeleteEventPro")
     public String adminEventDeletePro(Model model
-    		,@RequestParam Map<String, Object> map
+    		,@RequestParam(value = "event_nums") List<Integer> list
     		,HttpSession session) {
     	
-    	System.out.println(map);
+    	System.out.println("넘버 넘버"+list);
     	String uploadDir = "/resources/event_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
-    	
-    	
+    	String saveDir = session.getServletContext().getRealPath(uploadDir);
+    	Path path = null;
     	try {
-    		Path path = Paths.get(saveDir + "/" +"스크린샷 2023-10-12 210220");//실제 업로드 경로
-    		Files.deleteIfExists(path);
-    		System.out.println(saveDir);
-    		//업로드 진행 (메인 이미지 끝)
+    		for(int event_num : list) {
+        		Map<String, Object> selectEvent = service.selectEvent(event_num);
+        		int deleteEvent = service.deleteEvent(event_num);
+        		if(deleteEvent == 0) {
+        			model.addAttribute("msg","삭제 실패");
+        			return "fail_back";
+        		}
+				System.out.println("등록된 파일명 : " + selectEvent.get("event_image"));
+			
+	    		path = Paths.get(saveDir + "/" + selectEvent.get("event_image"));//실제 업로드 경로
+	    		Files.deleteIfExists(path);
+    	    		
+			}
     	} catch (IllegalStateException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
@@ -489,6 +497,7 @@ public class AdminController {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
+
     	return "redirect:/AdminEventList";
     	
     }

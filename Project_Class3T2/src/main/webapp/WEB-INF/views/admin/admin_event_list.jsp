@@ -47,7 +47,7 @@ $(function () {
 						<i class="fas fa-table me-1"></i> 이벤트 목록
 					</div>
 					<div class="card-body">
-						<form action="DeleteProductPro" method="post">
+						<form action="AdminDeleteEventPro" method="post">
 							<table id="datatablesSimple">
 								<thead>
 									<tr>
@@ -62,7 +62,7 @@ $(function () {
 								<tbody>
 									<c:forEach var="eventList" items="${eventList }">
 										<tr>
-											<th><input type="checkbox" name="product_nums" value="${eventList.event_num }" class="custom-control-input"></th>
+											<th><input type="checkbox" name="event_nums" value="${eventList.event_num }" class="custom-control-input"></th>
 											<th>${eventList.num }</th>
 											<th>${eventList.event_subject }</th>
 											<th>${eventList.event_content }</th>
