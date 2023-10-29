@@ -4,13 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%@ include file="./include/head.jsp"%>
+<title>마이페이지-찜</title>
 <style>
 .container2 {
     position: relative;
@@ -62,49 +57,22 @@
 </script>
 </head>
 <body>
-<header>
-	<jsp:include page="../inc/top.jsp"></jsp:include>
-</header>	
-	<c:if test="${not empty errorMessage}">
-	    <script>
-	        alert('${errorMessage}');
-	    </script>
-	</c:if>
-	<main>
-	<div id="main_layout">
-		<div class="mypageBox" id="mypage_dashboard">
-			<span id="mypage_dashboard_info">
-				<span id="col_1">
-					<span>
-						<jsp:include page="../inc/mypage_col_1.jsp" />
-					</span>	
-				</span>
-				<span id="col_2">
-					<ul>
-						<jsp:include page="../inc/mypage_col_2.jsp" />
-					</ul>
-				</span>
-			</span>
-		</div>
-		<div id="mypage_container">
-			<div class="mypageBox" id="mypage_sideMenu">
-				<nav class="menu">
-					<jsp:include page="../inc/mypage_box.jsp" />
-				</nav>
-			</div>
+	<%@ include file="./include/body_top.jsp"%>
+	
+
+			
 			<div class ="mypageContents">
-				<div align="center">
-					<br><br>
-					<h1>찜</h1><br>
+				<div class="text-center mt50 mb50">	
+					<h1>찜</h1>
 				</div>
-			<h2>총 0개 상품</h2>
+			<h2>총 ${favorites.size()}개 상품</h2>
 			<br><br><br><br>
-				<div class="container2" align="center">
+				<div class="container2" >
                         <div class="line"></div>
                         <!-- 찜 목록 동적 표시 -->
                         <c:forEach var="favorite" items="${favorites}">
                             <div class="item">
-                                <img src="${pageContext.request.contextPath }/resources/${favorite.product_main_img_real_file}" width="200" height="200">
+                                <img src="${pageContext.request.contextPath }resources/${favorite.product_main_img_real_file}" width="200" height="200">
                                 <p class="itemDesc bold">${favorite.product_name}</p>
                                 <button>상품페이지로 이동</button>
                                 <form action="${pageContext.request.contextPath}/deleteFavorite" method="post">
@@ -114,13 +82,14 @@
 <%--                                 <button onclick="deleteFavorite(${favorite.favorite_num})">삭제</button> --%>
                             </div>
                         </c:forEach>
+                        
+                        <c:if test="${empty favorites }">                        	
+                        	<h3 class="text-center mt50" style="width: 100%">등록된 찜 내역이 없습니다.</h3>
+                        </c:if>
                     </div>
 				</div>
-			</div>
-		</div>
-	</main>
-	<footer id="footer">
-		<jsp:include page="../inc/bottom.jsp"></jsp:include>
-	</footer>
+			
+			
+	<%@ include file="./include/body_bottom.jsp"%>
 </body>
 </html>

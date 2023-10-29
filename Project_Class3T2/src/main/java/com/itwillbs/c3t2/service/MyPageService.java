@@ -1,13 +1,14 @@
 package com.itwillbs.c3t2.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwillbs.c3t2.mapper.MyPageMapper;
+import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
@@ -26,12 +27,12 @@ public class MyPageService {
 	}
 	
 	//리뷰 상세내역
-	public List<ReviewVO> getReviewDetail(Integer member_num) {
+	public List<ReviewVO> getReviewDetail(String member_num) {
 		return mapper.selectReviewDetail(member_num);
 		
 	}
 	// 상품 구매 내역
-	public List<UserOrderVO> getOrderList(Integer member_num) {
+	public List<UserOrderVO> getOrderList(String member_num) {
 		return mapper.getOrderList(member_num);
 	}
 
@@ -49,5 +50,49 @@ public class MyPageService {
 	public List<ReservationVO> getReservationDetail(Integer member_num) {
 		return mapper.getReservation(member_num);
 	}
+
+	//비밀번호 업데이트
+	public Integer updatePassword(Map<String, Object> param) {
+		return mapper.updatePassword(param);
+	}
+
+	public Integer updateMember(MemberVO memberVO) {
+		return mapper.updateMember(memberVO);
+	}
+
+	
+	@Transactional
+	public void mypageMemberOut(Map<String, Object> paraMap)  throws Exception  {
+		
+		//2.회원 탈퇴 처리 
+		try {
+			 mapper.deleteMemberOut(paraMap);	
+		} catch (RuntimeException e) {
+			throw new RuntimeException();
+		}
+		//1.회원 탈퇴 사유 등록 처리
+		mapper.insertMbershipWithdrawal(paraMap);						
+	}
+
+	/**
+	 * 장바구니 목록
+	 * @param member_id
+	 * @return
+	 */
+	public List<CartVO> getCartList(Map<String, Object> paraMap) {
+		return 	mapper.getCartList(paraMap);
+	}
+
+	
+	/**
+	 * 장바구니 전체 갯수
+	 * @param member_id
+	 * @return
+	 */
+	public int getCartTotalCount(Map<String, Object> parMap) {
+		return 	mapper.getCartTotalCount(parMap);
+	}
+		
+	
 	
 }

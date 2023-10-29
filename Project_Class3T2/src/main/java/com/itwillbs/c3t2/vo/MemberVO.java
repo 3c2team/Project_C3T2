@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class MemberVO {
 	private int member_num;
 	private String member_name;
@@ -14,6 +16,7 @@ public class MemberVO {
 	private String member_address;
 	private String member_address1;
 	private String member_address2;
+	private String member_e_mail;
 	private String member_email;
 	private String member_email1;
 	private String member_email2;
@@ -21,6 +24,7 @@ public class MemberVO {
 	private int member_point;
 	private String member_phone_num;
 	private Date member_birth;
+	private Date member_birth_day;
 	private String member_gender;
 	private String mail_auth_status;
 	private int c1;

@@ -3,44 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<%@ include file="./include/head.jsp"%>
+<title>마이페이지-예약 변경</title>
 </head>
 <body>
-<header>
-	<jsp:include page="../inc/top.jsp"></jsp:include>
-</header>	
-	<main>
-	<div id="main_layout">
-		<div class="mypageBox" id="mypage_dashboard">
-			<span id="mypage_dashboard_info">
-				<span id="col_1">
-					<span>
-						<jsp:include page="../inc/mypage_col_1.jsp" />
-					</span>	
-				</span>
-				<span id="col_2">
-					<ul>
-						<jsp:include page="../inc/mypage_col_2.jsp" />
-					</ul>
-				</span>
-			</span>
-		</div>
-		<div id="mypage_container">
-			<div class="mypageBox" id="mypage_sideMenu">
-				<nav class="menu">
-					<jsp:include page="../inc/mypage_box.jsp" />
-				</nav>
-			</div>
+	<%@ include file="./include/body_top.jsp"%>
+	
+			
 			<div class ="mypageContents">
-				<div align="center">
-				<br><br>
-				<h1>예약 변경</h1><br>
-				</div>
+				<div class="text-center mt50 ">	
+				<h1 class="mb50">예약 변경</h1>
+				
 				<h2>기간 조회</h2>
 				<div class="reservationConfirmContainer">
 					<div class="reservationConfirmTerm">
@@ -78,10 +51,7 @@
 				<br><br>
 			</div>
 		</div>
-	</div>
-	</main>
-<footer id="footer">
-	<jsp:include page="../inc/bottom.jsp"></jsp:include>
-</footer>
+		
+	<%@ include file="./include/body_bottom.jsp"%>
 </body>
 </html>

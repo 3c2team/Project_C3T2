@@ -11,13 +11,21 @@
 	<!--    (기존 톰캣 DBCP 사용 시 context.xml 에 설정했던 내용) -->
 	<!-- com.zaxxer.hikari 패키지의 HikariConfig 클래스 지정 및 속성 설정 -->
 	<!-- property 태그를 활용하여 DB 접속에 필요한 정보 4가지 속성 설정 -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+<!-- 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="jdbcUrl" value="jdbc:mysql://itwillbs.com:3306/c3d2306t2"></property>
 		<property name="username" value="c3d2306t2"></property>
 		<property name="password" value="1234"></property>
+	</bean> -->
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://itwillbs.com:3306/c3d2306t2"></property>
+		<property name="username" value="c3d2306t2"></property>
+		<property name="password" value="1234"></property>
 	</bean>
 	
+		
 	<!-- 2. HikariCP 를 통해 커넥션을 관리하는 DataSource 객체(HikariDataSource) 설정 -->
 	<!-- 생성자 파라미터로 1번에서 생성한 HikariConfig 객체 전달 -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">

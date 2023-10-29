@@ -42,9 +42,6 @@
 .itemDesc.bold {
 	font-weight: bold;
 }
-button{
-cursor: pointer;
-}
 </style>
 
 </head>
@@ -54,41 +51,25 @@ cursor: pointer;
 	<c:import url="./include/body_top.jsp" />
 	
 	
-	<div class="mypageContents" >
+	<div class="mypageContents">
 		<div class="text-center mt50 mb50">		
 			<h1>장바구니</h1>
 		</div>
-		<h2 class="mb100"> 총 ${pageMaker.totalCount}개 상품</h2>
-		<div class="container2" align="center" style="justify-content: space-around;">
+		<h2 class="mb100"> 총 ${cartList.size()}개 상품</h2>
+		<div class="container2" align="center">
 			<div class="line"></div>
 			
-
-                  <c:forEach var="item" items="${cartList}">
-                      <div class="item">
-                          <img src="${pageContext.request.contextPath}/resources${item.product_main_img_real_file}" width="200" height="200">
-                          <p class="itemDesc bold text-center" style="padding: 5px 10px">${item.product_name}</p>
-                          <button onclick="location.href='${pageContext.request.contextPath}/ProductDetail?proNum=${item.product_num}'">상품페이지로 이동</button>
-                   <form action="${pageContext.request.contextPath}/deleteFavorite" method="post" style="display: inline;">
-                        <input type="hidden" name="favoriteNum" value="${item.cart_num}" />
-                        <button type="button">삭제</button>
-                    </form>
-
-                      </div>
-                  </c:forEach>
-                        
-                        		  
-		  
-		  
+		  <c:forEach items="${cartList}" var="item">
+		  	<div class="item">
+				<img src="${pageContext.request.contextPath }/${item.product_main_img_real_file}" width="200" height="200">
+				<p class="itemDesc bold"><fmt:formatNumber value="${item.product_price}" /></p>
+				<p class="itemDesc">${item.product_name}</p>
+			</div>
+		  </c:forEach>
           <c:if test="${empty cartList }">                        	
                        <h3 class="text-center mt50" style="width: 100%">장바구니 내역이 없습니다.</h3>
           </c:if>
-          
-
 		</div>
-		
-		          	<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
-          				${pagination}
-          			</div>
 	</div>
 
 

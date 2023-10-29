@@ -33,7 +33,7 @@
 				<%-- 왼쪽 시작 --%>
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
-						<img src="${productDetail.product_main_img_real_file}" id="main_img">
+						<img src="${pageContext.request.contextPath}/resources${productDetail.product_main_img_real_file}" id="main_img">
 						<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
 							<div class="orderAveStar">
 								<strong>
@@ -75,9 +75,9 @@
 						<ul>
 						<!-- 이미지 업로드 수 만큼 조절해야함 -->
 							<c:forEach var="product_img" items="${productMiniImgList }">
-								<li><a><img src="${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
+								<li><a><img src="${pageContext.request.contextPath}/resources${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
 							</c:forEach>
-							<li><a><img src="${pageContext.request.contextPath }/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<li><a><img src="${pageContext.request.contextPath}/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
@@ -163,7 +163,7 @@
 			</div>
 			<div class="detailInfoImgArea">
 				<%-- 경로 변경하기 --%>
-				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
+				<img class="detailInfoImg" src="${pageContext.request.contextPath}/resources${productInfoImg.product_image_real_file }">
 			</div>
 		</section>
 		
@@ -205,7 +205,7 @@
 									<div class="reviewInfo">
 										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
 										<div class="reviewImg">
-											<img src="../store_img/steak7 (4).jpg">
+											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
 										</div>
 										<div class="reviewContent">
 											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
@@ -225,7 +225,7 @@
 									<div class="reviewInfo">
 										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
 										<div class="reviewImg">
-											<img src="../store_img/steak7 (4).jpg">
+											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
 										</div>
 										<div class="reviewContent">
 											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
@@ -245,7 +245,7 @@
 									<div class="reviewInfo">
 										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
 										<div class="reviewImg">
-											<img src="../store_img/steak7 (4).jpg">
+											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
 										</div>
 										<div class="reviewContent">
 											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
@@ -265,7 +265,7 @@
 									<div class="reviewInfo">
 										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
 										<div class="reviewImg">
-											<img src="../store_img/steak7 (4).jpg">
+											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
 										</div>
 										<div class="reviewContent">
 											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용

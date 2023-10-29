@@ -16,20 +16,21 @@ public class ReservationService {
 		public int insertReservation(ReservationVO reservation) {
 			return mapper.insertReservation(reservation);
 		}
-
+		
 		// 예약 상세정보 조회 요청
+		public ReservationVO selectReservation(int reservation_num) {
+			return mapper.selectReservation(reservation_num);
+		}
+
 		public ReservationVO getReservation(ReservationVO reservation) {
 			return mapper.getReservation(reservation);
 		}
-		
-		// 비회원 예약 
-		public ReservationVO deleteReservation(String reservation_guest_num) {
-			return mapper.deleteReservation(reservation_guest_num);
-		}
 
-		public ReservationVO updateReservation(String reservation_guest_num) {
+		public ReservationVO updateReservation(int reservation_guest_num) {
 			return mapper.updateReservation(reservation_guest_num);
 		}
 
 
+
+		
 }

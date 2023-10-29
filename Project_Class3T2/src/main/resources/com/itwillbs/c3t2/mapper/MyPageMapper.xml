@@ -19,18 +19,77 @@
 	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 	    SELECT r.*, m.member_name
 	    FROM REVIEW r
-	    JOIN MEMBER m ON r.member_num = m.member_num
-	    WHERE r.member_num = #{member_num}
+	    JOIN MEMBER m ON r.member_id = m.member_id
+	    WHERE r.member_id = #{member_id}
 	</select>
 	
 	<!-- 상품 구매 내역 -->
 	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
-        SELECT u.*, m.member_name
+       SELECT u.*, m.member_name
 		FROM USER_ORDER u
-		JOIN MEMBER m ON u.member_num = m.member_num
-		WHERE u.member_num = #{member_num}
+		JOIN MEMBER m ON u.member_id = m.member_id
+		WHERE u.member_id = #{member_id}
     </select>
 	
+	<sql id="cartSearchSql">
+	    <if test="searchType !=null">
+	            <if test="searchType == 'userid'.toString()">
+	                and userid like CONCAT('%', #{keyword}, '%')
+	            </if>
+	     
+	            <if test="searchType == 'username'.toString()">
+	                and username like CONCAT('%', #{keyword}, '%')
+	            </if>
+	     
+	            <if test="searchType == 'email'.toString()">
+	                and email like CONCAT('%', #{keyword}, '%')
+	            </if>
+	             
+	            <if test="searchType == 'all'.toString()">
+	                and ( 
+	                     userid like CONCAT('%', #{keyword}, '%')
+	                    OR
+	                     username like CONCAT('%', #{keyword}, '%')
+	                    OR
+	                     email like CONCAT('%', #{keyword}, '%')
+	                )
+	            </if>
+	             
+	    </if>
+	</sql>
+	
+	
+		<!-- 장바구니 전체 갯수 -->
+	<select id="getCartTotalCount" resultType="int">
+	    SELECT  count(*) FROM 
+            CART C      
+		JOIN 
+            PRODUCT P ON C.product_num = P.product_num
+        WHERE 
+            C.member_id = #{member_id}
+     </select>       
+	
+	
+	
+	<!-- 장바구니 목록 -->
+	<select id="getCartList" resultType="com.itwillbs.c3t2.vo.CartVO">
+	    SELECT 
+            C.*,
+            P.product_name,
+            P.product_info,
+            P.product_main_img_real_file
+        FROM 
+            CART C
+        JOIN 
+            PRODUCT P ON C.product_num = P.product_num
+        WHERE 
+            C.member_id = #{member_id}
+            
+  		ORDER BY regDate desc             
+            limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}            
+     </select>       
+	
+
 	<!-- 찜목록 -->
 	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
         SELECT 
@@ -67,4 +126,45 @@
         WHERE 
             M.member_name = #{memberName}
     </select>
+    
+
+				
+    <!-- 회원정보 수정 -->
+    <update id="updateMember" parameterType="com.itwillbs.c3t2.vo.MemberVO">
+   		UPDATE MEMBER
+			SET 
+			member_name=#{member_name}, 
+			member_phone_num=#{member_phone_num},
+			member_address= CONCAT(#{member_address1}, ' ', #{member_address2}) ,
+			member_address1=#{member_address1},
+			member_address2=#{member_address2}, 			
+			member_e_mail=CONCAT(#{member_email1}, '@', #{member_email2})
+		WHERE member_id=#{member_id}
+    </update>
+    
+     <!--  비밀번호 업데이트 -->
+    <update id="updatePassword">    
+	    UPDATE `MEMBER`
+			SET   member_passwd=#{password}
+		WHERE member_id=#{memberId}
+    </update>
+    
+    
+    <!-- 회원 탈퇴사유 등록 -->
+    <insert id="insertMbershipWithdrawal">    
+	    INSERT INTO MEMBER_WITHDRAWAL_REASON
+			( member_withdrawal_reason_num, member_withdrawal_reason_text)
+		VALUES(#{select_num},#{select_text})
+    </insert>
+    
+    
+     <!-- 회원 탈퇴-->
+    <delete id="deleteMemberOut">
+      DELETE FROM `MEMBER` WHERE member_id=#{member_id} 
+    </delete>
+    
+
+    
+    
+    
 </mapper>

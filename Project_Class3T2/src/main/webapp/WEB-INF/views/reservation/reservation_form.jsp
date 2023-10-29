@@ -34,7 +34,7 @@
 						<input type="hidden" id="reservation_date" name="reservation_date">
 						<input type="hidden" id="member_id" name="member_id" value="${sessionScope.sId }">
 						<div class="form_radio_btn">
-							<input id="radio-0" type="radio" name="reservation_time" value="10:00:00" checked>
+							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio-0">10:00</label>
 						</div>
 						<div class="form_radio_btn">

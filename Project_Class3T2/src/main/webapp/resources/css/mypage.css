@@ -185,3 +185,106 @@ input[type="date"] {
     padding: 5px;
     border: 1px solid #ccc;
 }
+
+
+.text-center{
+	text-align: center;
+}
+
+#footer{
+	margin-top: 30px;
+}
+#bottomArea{
+	width: 68.5%;	
+	margin: 0 auto;
+	border-top: 2px solid #e0e0e0;
+	
+}
+#bottomLogoArea{
+	padding: 30px;
+}
+
+#bottomArea #company{
+	padding: 30px;
+}
+
+
+#mypage_sideMenu .menu ul li a.active{
+	color:#e31313 !important;
+	font-weight: 500;
+}
+#mypage_sideMenu .menu ul li a.active b{color:#e31313 !important;}
+
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
+.mb30{margin-bottom:30px;}
+.mb40{margin-bottom:40px;}
+.mb50{margin-bottom:50px;}
+.mb60{margin-bottom:60px;}
+.mb70{margin-bottom:70px;}
+.mb80{margin-bottom:80px;}
+.mb90{margin-bottom:90px;}
+.mb100{margin-bottom:100px;}
+.mb110{margin-bottom:110px;}
+.mb120{margin-bottom:120px;}
+.mb130{margin-bottom:130px;}
+.mb140{margin-bottom:140px;}
+.mb150{margin-bottom:150px;}
+.mb160{margin-bottom:160px;}
+.mb170{margin-bottom:170px;}
+.mb180{margin-bottom:180px;}
+.mb190{margin-bottom:190px;}
+.mb200{margin-bottom:200px;}
+
+.mt10{margin-top:10px;}
+.mt20{margin-top:20px;}
+.mt30{margin-top:30px;}
+.mt40{margin-top:40px;}
+.mt50{margin-top:50px;}
+.mt60{margin-top:60px;}
+.mt70{margin-top:70px;}
+.mt80{margin-top:80px;}
+.mt90{margin-top:90px;}
+.mt100{margin-top:100px;}
+.mt110{margin-top:110px;}
+.mt120{margin-top:120px;}
+.mt130{margin-top:130px;}
+.mt140{margin-top:140px;}
+.mt150{margin-top:150px;}
+.mt160{margin-top:160px;}
+.mt170{margin-top:170px;}
+.mt180{margin-top:180px;}
+.mt190{margin-top:190px;}
+.mt200{margin-top:200px;}
+
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    position: relative;
+     justify-content: center;
+     display: flex;
+}
+.pagination li {
+    height: 40px;
+    width: 40px;  
+ 
+}
+.pagination li a {
+    /* background: #eee; */
+    color: #000;
+    /* border-radius: 50%; */
+    border: 1px solid #eee; 
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
+    height: inherit;
+    line-height: 42px;
+    text-align: center;
+}
+.pagination li a:hover , .pagination li.active a {
+    background-color: #764af1;
+    color: #ffffff;
+}

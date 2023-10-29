@@ -1,56 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
+<%@ include file="./include/head.jsp"%>
+<title>마이페이지-비밀번호 변경</title>
+<style>
+.passwd {
+	display: block; /* input을 블록 요소로 변환 */
+	margin-bottom: 10px; /* 아래쪽 간격 추가 */
+}
+</style>
+
 </head>
 <body>
-<header>
-	<jsp:include page="../inc/top.jsp"></jsp:include>
-</header>	
-	<main>
-	<div id="main_layout">
-		<div class="mypageBox" id="mypage_dashboard">
-			<span id="mypage_dashboard_info">
-				<span id="col_1">
-					<span>
-						<jsp:include page="../inc/mypage_col_1.jsp" />
-					</span>	
-				</span>
-				<span id="col_2">
-					<ul>
-						<jsp:include page="../inc/mypage_col_2.jsp" />
-					</ul>
-				</span>
-			</span>
-		</div>
-		<div id="mypage_container">
-			<div class="mypageBox" id="mypage_sideMenu">
-				<nav class="menu">
-					<jsp:include page="../inc/mypage_box.jsp" />
-				</nav>
-			</div>
-			<div class ="mypageContents">
-				<div align="center">
-					<br><br><br>
-					<br>
-					<h2 >고객님의 개인정보 보호를 위해<br>
-					비밀번호를 다시 한번 입력해 주세요.</h2>
-					<input type="text" class="passwd" placeholder="비밀번호를 입력해 주세요">
-					<br><input type="button" value="제출" class="submit" id="확인" onclick="">
-				</div>
-			</div>
+	<%@ include file="./include/body_top.jsp"%>
+
+	<div class="mypageContents">
+		<div class="text-center mt50 mb50">	
+			<h2>
+				비밀번호를<br> 변경 하시렵니까?
+			</h2>
+			<input type="password" class="passwd" id="passwd"	style="margin: 0 auto;"	placeholder="비밀번호를 입력해 주세요">
+			<br> 
+			<input type="password" class="passwd" id="passwdConfirm"	style="margin: 0 auto;"  placeholder="비밀번호를 다시 입력해 주세요">
+			<br>
+			<input type="button" value="제출" class="submit" id="확인" onclick="passwordChange()">
 		</div>
 	</div>
-	</main>
-<footer id="footer">
-	<jsp:include page="../inc/bottom.jsp"></jsp:include>
-</footer>
+	<script type="text/javascript">
+		function passwordChange(){			
+			var passwd=$("#passwd").val();
+			var passwdConfirm=$("#passwdConfirm").val();
+			
+			if(passwd==""){
+				alert("비밀번호를 입력해 주세요.");
+				$("#passwd").focus();
+				return;
+			}
+			
+			if(passwdConfirm==""){
+				alert("비밀번호확인을 입력해 주세요.");
+				$("#passwdConfirm").focus();
+				return;
+			}
+			
+			if(passwd!=passwdConfirm){
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+				return;
+			}
+			
+			
+			$.ajax({
+				url:"MypagePasswdChange",
+				type:"post",
+				data:{
+					passwd
+				},
+				success:function(res){
+					console.log(" success : ", res);
+					if(res){
+						alert("비밀번호 변경이 정상처리 되었습니다.")		
+						window.location.href="MypageDashboard";
+						return;
+					}
+					
+				},
+				error:function(err){
+					console.error(" 에러 : ", err);
+				}
+			});
+				
+		}
+		</script>
+
+	<%@ include file="./include/body_bottom.jsp"%>
 </body>
 </html>

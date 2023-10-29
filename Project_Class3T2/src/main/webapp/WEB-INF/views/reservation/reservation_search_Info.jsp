@@ -19,15 +19,12 @@
 	<div id="mainLayout">
 		<main>
 			<div>
+				<input type="hidden" name="${reservation.reservation_guest_num }">
 				<table class="custom_calendar_table">
 					<tr>
 						<h2 class="sign" align="center">예약 상세 조회</h2>
 						<th>예약일자</th>
 						<td>${reservation.reservation_date }&nbsp;${reservation.reservation_time }</td>
-					</tr>
-					<tr>
-						<th>예약번호</th>
-						<td>${reservation.reservation_guest_num }</td>
 					</tr>
 					<tr>
 						<th>예약인원</th>
@@ -45,7 +42,7 @@
 						<td colspan="2" align="center">
 							<input type="button" value="메인으로" onclick="location.href='./'">
 							<input type="button" value="예약취소" onclick="location.href ='ReservationCancel?reservation_guest_num=${reservation.reservation_guest_num}'">
-							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate?reservation_guest_num=${reservation.reservation_guest_num}'">
+							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate'">
 						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
 					</tr>
 				</table>

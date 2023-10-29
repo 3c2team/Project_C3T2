@@ -8,7 +8,7 @@
 		
 		// 만약, result 값이 true 일 경우 "MemberLogout" 서블릿 주소 요청
 		if(result) {
-			location.href = "Logout";
+			location.href =  "${pageContext.request.contextPath}/"+"Logout";
 		}
 	}
 </script>
@@ -23,7 +23,7 @@
 			</c:when>
 			<c:otherwise>
 		<%-- 아이디 클릭 - MemberInfo 서블릿 주소 요청 --%>
-		<a href="MemberInfo?id=${sessionScope.sId }">${sessionScope.sId }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
+		<a href="${pageContext.request.contextPath}/mypage/MypageDashboard?id=${sessionScope.sId }">${sessionScope.sId }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
 		<a href="javascript:logout()">LogOut</a>
 		<%-- 만약, 세션 아이디가 관리자("admin")일 경우 --%>
 		<%-- 관리자페이지 클릭 - MemberAdminMain 서블릿 주소 요청 --%>
@@ -35,15 +35,15 @@
 	</div>
 	
 	<div class="logoArea">
-		<a class="logo" href="Main">J'ai Faim</a>
+		<a class="logo" href="${pageContext.request.contextPath}/Main">J'ai Faim</a>
 	</div>
 	<div class="mainMenuArea">
 		<div class="mainMenuAreaLeft">
-			<div class="item"><a href="OnlineStore">ONLINE STORE</a></div>
-			<div class="item"><a href="StoreBest">BEST</a></div>
-			<div class="item"><a href="StoreHot">HOT</a></div>
-			<div class="item"><a href="StoreNew">NEW</a></div>
-			<div class="item"><a href="StoreKit">MEAL KIT</a></div>
+			<div class="item"><a href="${pageContext.request.contextPath}/OnlineStore">ONLINE STORE</a></div>
+			<div class="item"><a href="${pageContext.request.contextPath}/StoreBest">BEST</a></div>
+			<div class="item"><a href="${pageContext.request.contextPath}/StoreHot">HOT</a></div>
+			<div class="item"><a href="${pageContext.request.contextPath}/StoreNew">NEW</a></div>
+			<div class="item"><a href="${pageContext.request.contextPath}/StoreKit">MEAL KIT</a></div>
 <!-- 				<div class="mealKitSubmenu"> -->
 <!-- 					<div class="mealKitItem"><a>All</a></div> -->
 <!-- 					<div class="mealKitItem"><a>Steak</a></div> -->

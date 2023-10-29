@@ -26,25 +26,19 @@
 					<tr>
 						<td class="td_left"><label for="reservation_person_name">예약자 성함</label></td>
 						<td class="td_right"> <!-- 예약자 성함 get으로 넘긴 guest_num으로 세션 불러오기  -->
-							<input type="text" name="reservation_person_name" value="${reservation.reservation_person_name }" readonly required />
-						</td>
-					</tr>
-					<tr>
-						<td class="td_left"><label for="reservation_guest_num">예약번호</label></td>
-						<td class="td_right"> <!-- 예약자 성함 get으로 넘긴 guest_num으로 세션 불러오기  -->
-							<input type="text" name="reservation_guest_num" value="${reservation.reservation_guest_num}" readonly required />
+							<input type="text" name="reservation_person_name" value="${sessionScope.sName}" readonly required />
 						</td>
 					</tr>
 					<tr>
 						<td class="td_left"><label for="reservation_person_phone">예약자 전화번호</label></td>
 						<td class="td_right">
-							<input type="text" name="reservation_person_phone" value="${reservation.reservation_person_phone }" required />
+<%-- 							<input type="text" name="reservation_person_phone" value="${reservation_person_phone }" required /> --%>
 						</td>
 					</tr>
 					<tr>
 						<td class="td_left"><label for="reservation_date">예약일자</label>
-							<input type="date" name="reservation_date" value="${reservation.reservation_date }" required>
-							<input type="date" name="reservation_date" value="${reservation.reservation_time }" required>
+<%-- 							<input type="date" name="reservation_date" value="${reservation_date }" required> --%>
+<%-- 							<input type="date" name="reservation_date" value="${reservation_time }" required> --%>
 						</td>
 						<td class="td_right"><label for="reservation_date">예약시간</label>
 						</td>

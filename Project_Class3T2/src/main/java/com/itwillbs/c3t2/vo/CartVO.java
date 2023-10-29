@@ -9,4 +9,7 @@ public class CartVO {
 	private int product_num;
 	private int product_count;
 	private int product_price;
+	private String product_name;
+	private String product_info;
+	private String product_main_img_real_file;
 }

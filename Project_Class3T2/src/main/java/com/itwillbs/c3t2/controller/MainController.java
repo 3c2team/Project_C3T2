@@ -99,11 +99,11 @@ public class MainController {
 			return "other/location";
 		}
 		
-		// 예약 클릭 시 예약 폼으로 이동
-		@GetMapping("ReservationInfo")
-		public String reservationInfo() {
-			return "reservation/reservation_info";
-		}
+//		// 예약 클릭 시 예약 폼으로 이동
+//		@GetMapping("ReservationForm")
+//		public String reservationForm() {
+//			return "reservation/reservation_form";
+//		}
 		
 		@GetMapping("OnlineStore")
 		public String onlineStore() {
