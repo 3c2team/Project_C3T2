@@ -8,4 +8,5 @@
 	<option value="AdminNoticeRegist">공지사항 등록</option>
 	<option value="AdminQnaAnswer">문의사항 답변</option>
 	<option value="AdminReviewAnswer">리뷰 답변</option>
+	<option value="AdminEventRegist">이벤트 등록</option>
 </select>

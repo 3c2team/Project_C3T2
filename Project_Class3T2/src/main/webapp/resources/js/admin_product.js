@@ -1,9 +1,4 @@
 $(function() {
-	$("#button_add").on("click",function(){
-		$("#button_add_result").append(
-			"<input type='file'  class='form-control' accept='.jpg, .png'>"
-		)
-	});
 	
 	$("#button_open").on("click",function() {
 		window.open('AdminProductRegist','상품등록', "top=500,left=500,width=700, height=700");
@@ -14,7 +9,7 @@ $(function() {
 	
 	
 	$("#delete_btn").on("click",function (){
-		$("#main_file").html("<input type='file' class='form-control' accept='.jpg, .png'>") ;
+		$("#main_file").html("<input type='file' name='product_main_image' form-control' accept='.jpg, .png'>") ;
 	});
 });
 function isSubmit() {

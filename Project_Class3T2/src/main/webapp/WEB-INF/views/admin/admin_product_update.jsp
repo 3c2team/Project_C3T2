@@ -14,6 +14,11 @@
 $(function() {
 	$("#${dbProduct.product_category_num }").prop("checked",true);
 });
+function add() {
+	$("#add").append(
+			"<input type='file'  class='form-control' accept='.jpg, .png'>"
+		);
+}
 </script>
 </head>
 <body>
@@ -23,73 +28,60 @@ $(function() {
 		</div>
 	</div>
 	<div class="container">
-		<form name="newProduct" action="AdminProductUpdatePro" class="form-horizontal"method="post" enctype="multipart/form-data">
+		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
-					<input type="radio" name="category" id="1" value="Stake">Stake
-					<input type="radio" name="category" id="2" value="Pasta">Pasta 
-					<input type="radio" name="category" id="3" value="Soup">Soup 
-					<input type="radio" name="category" id="4" value="etc">etc
+					<label><input type="radio" name="product_category_num"  value="1">Stake</label>
+					<label><input type="radio" name="product_category_num"  value="2">Pasta </label>
+					<label><input type="radio" name="product_category_num" value="3">Soup </label>
+					<label><input type="radio" name="product_category_num"  value="4">etc</label>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" value="${dbProduct.product_name }" id="fd" name="name" class="form-control">
+					<input type="text" value="${dbProduct.product_name }" name="product_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="number" value="${dbProduct.product_price }"id="unitPrice" name="unitPrice" class="form-control" >
+					<input type="number" value="${dbProduct.product_price }" name="product_price" class="form-control" >
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상세 내용</label>
 				<div class="com-sm-5">
-					<textarea name="description"  cols="50" rows="15" class="form-control">${dbProduct.product_info }</textarea>
+					<textarea name="product_info" cols="50" rows="15" class="form-control">${dbProduct.product_info }</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">상품 메인 이미지</label>
-				<c:choose>
-					<c:when test="${!empty dbProduct.product_main_img }">
-						<div id="main_file">
-							${dbProduct.product_main_img }
-							<input type="button" value="삭제" id="delete_btn"><br>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div>
-							<input type="file" class="form-control">
-						</div>
-					</c:otherwise>
-				</c:choose>
+				<div>
+					<input type="file" class="form-control" name="product_main_image" accept=".jpg, .png">
+				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2">상품 서브(내용) 이미지</label>
-				<c:choose>
-					<c:when test="${!empty dbProduct.product_main_img }">
-						<div id="main_file">
-							<c:forEach var="dbProductImg" items="${dbProductImg }" varStatus="i">
-								<div id="sub_file${i.index }">
-									${dbProductImg.product_image}
-									<input type="button" class="btn-primary" value="삭제" 
-									onclick="$('#sub_file${i.index}').html('<input type=file class=form-control accept=.jpg, .png>')"><br>
-								</div>
-							</c:forEach>
-							<div id="button_add_result"></div>
-							<input type="button" id="button_add" class="btn bg-gray" value="+">
-						</div>
-					</c:when>
-				</c:choose>
+				<label class="col-sm-2">상품 내용 이미지</label>
+				<div>
+					<input type="file" class="form-control" name="product_info_image" accept=".jpg, .png">
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">상품 서브 이미지
+				</label>
+				<div>
+					<input type="file" class="form-control" id="product_image"name="product_image" multiple accept=".jpg, .png">
+					<br><span>다중 선택 가능</span>
+				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
+				<input type="hidden" name="product_num" value="${dbProduct.product_num }">
 					<input type="button" class="btn btn-primary" onclick="window.close()"value="취소">
-					<input type="submit" onclick="isSubmit()" class="btn btn-primary" value="등록">
-						
+					<input type="submit" onclick="isSubmit()" class="btn btn-primary" value="수정하기">
 				</div>
 			</div>
 		</form>

@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Tables - SB Admin</title>
+<title>리뷰</title>
 <style type="text/css">
 .btn-right {
 	float: right;
@@ -54,7 +54,7 @@ table {
 								</thead>
 								<tbody>
 								<c:forEach var="selectReviewList" items="${selectReviewList }">
-									<tr>
+									<tr>	
 										<th><input type="checkbox" name="review_num" value="${selectReviewList.review_num }"></th>
 										<th>${selectReviewList.num }</th>
 										<th>

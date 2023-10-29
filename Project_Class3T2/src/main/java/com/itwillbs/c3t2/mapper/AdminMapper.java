@@ -60,4 +60,10 @@ public interface AdminMapper {
 	//리뷰 삭제
 	int deleteReview(int review_num);
 
+	Map<String, String> selectReviewImg();
+
+	List<Map<String, Object>> selectEventList();
+
+	int insertEvent(Map<String, Object> map);
+
 }

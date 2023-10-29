@@ -19,7 +19,6 @@
 	</div>
 	<div class="container">
 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
-<!-- 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post"> -->
 			<div class="form-group row">
 				<label class="col-sm-2">등록 분류</label>
 				<div class="com-sm-3">

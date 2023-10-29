@@ -77,6 +77,18 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.deleteReview(review_num);
 	}
+	public Map<String, String> selectReviewImg(int review_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectReviewImg();
+	}
+	public List<Map<String, Object>> selectEventList() {
+		// TODO Auto-generated method stub
+		return mapper.selectEventList();
+	}
+	public int insertEvent(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertEvent(map);
+	}
 	
 
 }

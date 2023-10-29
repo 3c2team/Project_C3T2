@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Tables - SB Admin</title>
+<title>이벤트 목록</title>
 <style type="text/css">
 .btn-right{
 	float: right;
@@ -14,6 +14,15 @@
 	font-size: 18px;
 }
 </style>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript">
+$(function () {
+	$("#button_open").on("click",function(){
+		window.open('AdminEventRegist','', "top=500,left=500,width=700, height=700");
+	});
+	
+});
+</script>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
@@ -30,12 +39,12 @@
 			<main>
 				<div class="container-fluid px-4 ">
 					<div class="card-body">
-						<h1 class="mt-4">상품목록</h1>
+						<h1 class="mt-4">이벤트 목록</h1>
 					</div>
 				</div>
 				<div class="card mb-4">
 					<div class="card-header">
-						<i class="fas fa-table me-1"></i> 상품목록
+						<i class="fas fa-table me-1"></i> 이벤트 목록
 					</div>
 					<div class="card-body">
 						<form action="DeleteProductPro" method="post">
@@ -43,25 +52,22 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>상품번호</th>
-										<th>상품이름</th>
-										<th>찜갯수</th>
-										<th>판매가</th>
+										<th>등록번호</th>
+										<th>이벤트 제목</th>
+										<th>이벤트 내용</th>
+										<th>등록날짜</th>
+										<th>조회수</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="productList" items="${productList }">
+									<c:forEach var="eventList" items="${eventList }">
 										<tr>
-											<th><input type="checkbox" name="product_nums" value="${productList.product_num }" class="custom-control-input"></th>
-											<th>${productList.num}</th>
-											<th>${productList.product_name }
-												<span>
-												<input type="button" value="자세히 보기" id="button_open_update"class="btn btn-light btn-right" 
-												onclick="window.open('AdminProductDetail?product_num=${productList.product_num}','', 'top=500,left=500,width=700, height=700')">
-												</span>
-											</th>
-											<th>10</th>
-											<th>${productList.product_price }</th>
+											<th><input type="checkbox" name="product_nums" value="${eventList.event_num }" class="custom-control-input"></th>
+											<th>${eventList.num }</th>
+											<th>${eventList.event_subject }</th>
+											<th>${eventList.event_content }</th>
+											<th>${eventList.event_date }</th>
+											<th>조회수 1 </th>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -74,8 +80,7 @@
 			</main>
 		</div>
 	</div>
-	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/admin_product.js"></script>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
