@@ -186,7 +186,7 @@ public class CartController {
 				System.out.println(proNum1 + " : 삭제 완료");
 			}
 		}
-		
+		 
 		// 메인 페이지에서 카트 등록 상품 목록 조회
 		List<ProductVO> productList = service.getMainCartList(sId);
 		model.addAttribute("productList", productList);
@@ -240,6 +240,12 @@ public class CartController {
 		
 		// 전체 상품 주문
 		
+		
+		
+		// 회원정보 조회
+		member = service.getMember(sId);
+		
+		model.addAttribute("Member", member); 
 		
 		
 		

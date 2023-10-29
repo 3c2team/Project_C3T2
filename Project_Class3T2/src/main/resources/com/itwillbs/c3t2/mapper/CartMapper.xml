@@ -32,13 +32,6 @@
 
 <!-- 	</select> -->
 	
-	<!-- 카트페이지에서 회원정보 출력 -->
-	<select id="selectPayMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
-		SELECT *
-		FROM MEMBER
-		WHERE member_id = #{sId}
-	</select> 
-	
 	<!-- 카트페이지에서 회원아이디 Cart 테이블에 저장 -->
 	<insert id="insertCart">
 
@@ -122,6 +115,12 @@
 				P.product_num = #{proNum} AND C.member_id = #{sId}
 	</select>
 
+	<!-- PAY 페이지에서 회원정보 출력 -->
+	<select id="selectPayMember" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_id = #{sId}
+	</select> 
 
 
 

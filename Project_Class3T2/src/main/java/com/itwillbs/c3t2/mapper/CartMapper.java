@@ -17,9 +17,6 @@ public interface CartMapper {
 		// 메인 페이지에서 CART 상품 조회
 		public List<ProductVO> selectProductCartList(String sId);
 
-		// 카트페이지에서 회원정보 출력
-		public List<MemberVO> selectPayMember(String sId);
-
 		// CART에 해당 상품 있는지 조회
 		public CartVO selectCartMember(@Param("proNum") int proNum,@Param("sId") String sId);
 
@@ -48,5 +45,8 @@ public interface CartMapper {
 
 		// 선택 상품 주문 목록 조회
 		public List<ProductVO> selectPayProduct(@Param("sId") String sId, @Param("proNum") int proNum);
+		
+		// 카트페이지에서 회원정보 출력
+		public MemberVO selectPayMember(String sId);
 
 }
