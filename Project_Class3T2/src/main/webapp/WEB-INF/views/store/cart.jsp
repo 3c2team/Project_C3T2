@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <link href="${pageContext.request.contextPath }/resources/css/cart.css" rel="stylesheet" type="text/css">
@@ -59,6 +59,8 @@ $(function() {
        }
     });
     
+    
+    
     $("#btnmemberdel").on("click",function(){
 //        alert(product_num);
        if(confirm("선택 상품을 삭제하시겠습니까?")){
@@ -101,12 +103,12 @@ function deleteCart(proNum) {
 }
 
 // 개별 상품 결제 페이지 이동
-function orderPro(proNum){
+function orderPro(proNums){
 	
 	let result = confirm("결제창으로 이동 하시겠습니까?");
 	
 	if(result){
-		location.href="PayPro?proNum=" + proNum;	
+		location.href="PayPro?proNums=" + proNums;	
 	}
 	
 }

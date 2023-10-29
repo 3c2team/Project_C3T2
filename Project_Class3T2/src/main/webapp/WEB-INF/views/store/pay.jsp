@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <link href="${pageContext.request.contextPath }/resources/css/pay.css" rel="stylesheet" type="text/css">
@@ -13,6 +15,108 @@
 <script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
 <title>상품결제</title>
+<script type="text/javascript">
+$(function() {
+	
+    var product_num = [];
+    $("#check_all").click(function() {
+       
+       if($("#check_all").is(":checked")) { // 전체선택 체크박스 체크 시
+          // 체크박스 모두 체크
+          $(":checkbox").prop("checked", true);
+       } else { // 전체선택 체크박스 체크해제 시
+          // 체크박스 모두 체크해제
+          $(":checkbox").prop("checked", false);
+       }
+       
+       //체크값 얻기
+       var chk = $(this).is(":checked");
+       console.log(chk);
+       
+       if($("input[name=checkbox]:checked").is(":checked")){
+           $("input[name=checkbox]:checked").each(function() {
+              product_num.push($(this).val());
+           });
+        }else{
+        product_num = [];
+           
+        }
+       
+       //전체를 각 글앞의 체크에 일괄 전달
+          //prop()을 통해서는 element가 가지는 실제적인 상태(활성화, 체크, 선택여부)를 제어하는 업무에 적절하고 
+          //attr()는 속성값이나 정보를 조회하는 업무에 적절하다
+       $(".checkbox").prop("checked",chk);
+    });
+
+    $(".checkbox").on("click",function(){
+       if($(this).is(":checked")){
+          product_num.push($(this).val());
+          return;
+       }
+       for(let i = 0; i < product_num.length; i++){
+          if(product_num[i] == $(this).val()){
+             product_num.splice(i, 1);
+             i--;
+          }
+       }
+    });
+    
+    
+    
+    $("#btnmemberdel").on("click",function(){
+       alert(product_num);
+       if(confirm("선택 상품을 삭제하시겠습니까?")){
+           location.href="SelectDeleteCart?proNum=" + product_num;
+       }else{
+          alert("삭제를 취소 하셨습니다.");
+       }
+    });
+    
+    // 상품 하나 삭제
+//     $("productDelete").on("click", function() {
+//     	confirm("장바구니를 비우시겠습니까?")
+// 	})
+    
+    
+    // 장바구니 비우기
+    $("#productAllDelete").on("click", function() {
+// 		alert("장바구니를 비우시겠습니까?")
+
+		if(confirm("장바구니를 비우시겠습니까?")){
+	           location.href="productAllDelete";
+	       }
+	});
+    
+
+        
+ });
+ 
+//상품 개별 삭제
+function deleteCart(proNum) {
+	
+	let result = confirm("해당 상품을 삭제 하시겠습니까?");
+	
+	if(result){
+        location.href="DeleteCartProduct?proNum=" + proNum;
+//         location.href="CartPro?proNum=" + proNum;
+    }else{
+    	alert("삭제를 취소 하셨습니다.");
+    }
+}
+
+// 개별 상품 결제 페이지 이동
+function orderPro(proNums){
+	
+	let result = confirm("결제창으로 이동 하시겠습니까?");
+	
+	if(result){
+		location.href="PayPro?proNums=" + proNums;	
+	}
+	
+}
+
+
+</script>
 
 </head>
 
@@ -35,16 +139,17 @@
 				<table class="calculation1" style="width: 100%">
 				<thead>
 					<tr>
-						<th colspan="10" style="text-align: left; padding-left: 20px;  ">일반상품(1)</th>
+						<th colspan="10" style="text-align: left; padding-left: 20px;  ">결제상품()</th>
 					</tr>
 					
 					<tr style="font-size: 15px;">
 	<!-- 					<th ><input type="checkbox" name="check" id="check" /></th> -->
+						<th><input type="checkbox"  class="checkebox" id="check_all" /></th>
 						<th style="width: 400px;"><span>이미지</span></th>
 						<th ><span>상품정보</span></th>
 						<th style="width: 100px;">판매가</th>
 						<th>수량</th>
-						<th style="width: 70px">적립금</th>
+<!-- 						<th style="width: 70px">적립금</th> -->
 						<th style="width: 80px;">배송구분</th>
 						<th style="width: 70px;">배송비</th>
 						<th style="width: 70px;">합계</th>
@@ -52,21 +157,27 @@
 				</thead>
 				
 				<tbody>
-					<tr style="height: 90px; background-color: #fff; font-size: 15px;">
-	<!-- 					<td style="text-align: left; text-align: center; border-right: none;"> -->
-	<!-- 						<input type="checkbox" name="checkbox"> -->
-	<!-- 					</td> -->
-						<td style="border-left: none; border-right: none;"><img style="width: 60%" src="resources/store_img/steak2.jpg"></td>
-						<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold; width: 40%">짱짱맛 스테이크</td>
-						<td><span style="padding-left: 10px;">0</span>원</td> <!-- 상품가격 -->
-						<td style="width: 80px;">
-							<span>1</span> <!-- 수량 -->
-						</td>
-						<td>-</td> <!-- 적립금 -->
-						<td>기본배송</td>
-						<td>고정</td>
-						<td><span>0</span>원</td> <!-- 합계 -->
-					</tr>
+					<c:forEach var="productPayList" items="${productPayList }">
+						<tr style="height: 90px; background-color: #fff; font-size: 15px;">
+ 							<td style="text-align: left; text-align: center; border-right: none;">
+                       			 <input type="checkbox" name="checkbox" class="checkbox" id="${productPayList.product_num}" value="${productPayList.product_num}" proNum="${productPayList.product_num}"/>
+                     		</td>
+
+<!-- 							<td style="text-align: left; text-align: center; border-right: none;"> -->
+<!-- 								<input type="checkbox" name="checkbox"> -->
+<!-- 							</td> -->
+							<td style="border-left: none; border-right: none;"><img style="width: 60%" src="${productPayList.product_main_img_real_file }"></td>
+							<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold; width: 40%">${productPayList.product_name }</td>
+							<td><span style="padding-left: 10px;"><fmt:formatNumber value="${productPayList.product_price }" pattern="#,###" /></span>원</td> <!-- 상품가격 -->
+							<td style="width: 80px;">
+								<span><fmt:formatNumber value="${productPayList.product_count }" pattern="#,###" /></span> <!-- 수량 -->
+							</td>
+<!-- 							<td>-</td> 적립금 -->
+							<td>기본배송</td>
+							<td>고정</td>
+							<td><span>0</span>원</td> <!-- 합계 -->
+						</tr>
+					</c:forEach>
 				</tbody>
 				
 				<tfoot>
@@ -90,7 +201,7 @@
 			
 			<div style="margin: 10px 0; padding-bottom: 50px; border-bottom: solid 1px gray;">
 				<span style="margin: 0 10px;" class="btnfloat">선택상품을</span>
-				<button type="button" class="btn default btnfloat" style="background-color: gray; color: #fff;">삭제하기</button>
+				<button type="button" class="btn default btnfloat" style="background-color: gray; color: #fff;" id="btnmemberdel">삭제하기</button>
 				
 				<button type="button" class="btn default btnfloat2" onclick="history.back()">이전페이지</button>
 				<span class="clearboth"></span>

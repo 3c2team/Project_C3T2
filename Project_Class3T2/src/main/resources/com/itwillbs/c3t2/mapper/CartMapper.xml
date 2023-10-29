@@ -107,6 +107,22 @@
 <!-- 			ON P.product_num = C.product_num -->
 <!-- 	</select> -->
 
+	<!-- 선택 상품 주문 목록 조회 -->
+	<select id="selectPayProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
+			SELECT 
+				P.product_num
+				, P.product_main_img_real_file
+				, P.product_name
+				, P.product_price
+				, C.product_count
+			FROM 
+				PRODUCT P JOIN CART C
+				ON P.product_num = C.product_num
+			WHERE
+				P.product_num = #{proNum} AND C.member_id = #{sId}
+	</select>
+
+
 
 
 

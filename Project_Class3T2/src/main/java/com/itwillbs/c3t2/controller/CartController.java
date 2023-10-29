@@ -82,7 +82,7 @@ public class CartController {
 	//=============================================================================================================================================
 	
 	
-	// 메인 페이지에서 장바구니로 이동
+	// 장바구니로 이동
 	@GetMapping("MainCart")
 	public String mainCart(
 					@RequestParam(value = "proNum", defaultValue = "0" ,required = false) int proNum
@@ -95,13 +95,13 @@ public class CartController {
 		String sId = (String)session.getAttribute("sId");
 		System.out.println("장바구니 아이디 : " + sId);
 		
-		// 비회원 장바구니 이동 시 접근 불가 (복사한거)
+		// 비회원 장바구니 이동 시 접근 불가
 		if(sId == null ) {
 			model.addAttribute("msg", "로그인 후 이용 부탁드립니다!");
 			return "fail_back";
 		}
 				
-		// 같은 상품이 CART에 있는지 조회 (복사한거)	
+		// 같은 상품이 CART에 있는지 조회	
 		CartVO productCart = service.getCartMember(proNum, sId);
 		if(proNum > 0) {
 			if(productCart != null) {
@@ -110,12 +110,12 @@ public class CartController {
 			}
 		}
 		
-		// PRODUCT_DETAIL 페이지에서 넘어 온 상품 수량 (복사한거)
+		// PRODUCT_DETAIL 페이지에서 넘어 온 상품 수량 
 		if(proCount > 0) {
 			System.out.println("상품 갯수 : " + proCount);
 		}
 		
-		// 카트에 상품 등록 (회원 아이디, 상품 번호, 상품 수량) (복사한거)
+		// 카트에 상품 등록 (회원 아이디, 상품 번호, 상품 수량) 
 		if(proNum > 0) {
 			int insertCart = service.registCart(sId, proNum, proCount);		
 			if(insertCart > 0) {
@@ -213,17 +213,33 @@ public class CartController {
 	
 	@GetMapping("PayPro")
 	public String pay(
-					@RequestParam(value = "proNum", required = false) int proNum
-					, int[] proNums
+//					@RequestParam(value = "proNum", required = false) int proNum
+					int[] proNums
 					, HttpSession session 
-					, MemberVO member) {
+					, MemberVO member
+					, Model model) {
 				
 		String sId = (String)session.getAttribute("sId");
 		
-		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNum);
+		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNums);
 		
 		
-		// 상품 하나 선택 후 결제 페이지 이동
+		// 선택 상품 주문
+		if(proNums.length >= 0) {
+			for( int proNum : proNums) {
+				
+				// 메인 페이지에서 카트 등록 상품 목록 조회
+					List<ProductVO> productPayList = service.selectPayProduct(sId, proNum);
+					model.addAttribute("productPayList", productPayList);
+					
+					System.out.println("결제 상품 조회 성공");
+					
+								
+				}
+		}
+		
+		// 전체 상품 주문
+		
 		
 		
 		
