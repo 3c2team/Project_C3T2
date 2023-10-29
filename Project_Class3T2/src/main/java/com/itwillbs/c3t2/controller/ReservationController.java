@@ -76,15 +76,12 @@ public class ReservationController {
 
 	//비회원 예약 검색 페이지 이동
 	@GetMapping("/ReservationSearch")
-	public String reservationSearch(ReservationVO reservation, HttpSession session, Model model) {
-		ReservationVO dbReservation = service.getReservation(reservation);
-		System.out.println(dbReservation);
-		model.addAttribute("reservation", dbReservation);
+	public String reservationSearch() {
 		return "reservation/reservation_search";
 	}
 	
 	//비회원 예약 조회 페이지 이동
-	@GetMapping("/ReservationSearchInfo")
+	@PostMapping("/ReservationSearchInfo")
 	public String reservationSearchInfo(ReservationVO reservation, HttpSession session, Model model) {
 		System.out.println(reservation);
 		ReservationVO dbReservation = service.getReservation(reservation);
@@ -92,16 +89,14 @@ public class ReservationController {
 		
 		model.addAttribute("reservation", dbReservation);
 		
-		return "reservation/reservation_search_info";
+		return "reservation/reservation_search_Info";
 	}
 	
 	// 비회원 예약 정보 수정
 	@GetMapping("/ReservationUpdate")
 	public String reservationUpdate(ReservationVO reservation, @RequestParam String reservation_guest_num, HttpSession session, Model model) {
 		
-		ReservationVO dbReservation = service.updateReservation(reservation_guest_num);
-		System.out.println(dbReservation);
-		
+		ReservationVO dbReservation = service.getReservation(reservation_guest_num);
 		
 		if(reservation_guest_num.equals("")) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
@@ -110,6 +105,19 @@ public class ReservationController {
 		
 		model.addAttribute("reservation", dbReservation);
 		return "reservation/reservation_update";
+	}
+	@GetMapping("/ReservationUpdatePro")
+	public String reservationUpdatePro(ReservationVO reservation, @RequestParam String reservation_guest_num, HttpSession session, Model model) {
+		
+		ReservationVO dbReservation = service.getReservation(reservation_guest_num);
+		
+		if(reservation_guest_num.equals("")) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";
+		}
+		
+		model.addAttribute("reservation", dbReservation);
+		return "redirect:/Main";
 	}
 	
 	// 비회원 예약 취소 페이지 이동

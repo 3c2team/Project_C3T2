@@ -16,13 +16,14 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
+		<form action="ReservationSearchInfo" method="post">
 			<div class="main">
 				<p class="sign" align="center">비회원 예약 조회</p>
 				<input type="text" class="user" name="reservation_guest_num" id="reservation_guest_num" style="align-content: center" placeholder="예약번호">
 				<input type="text" class="user" name="reservation_person_phone" id="reservation_person_phone" style="align-content: center" placeholder="예약자 전화번호">
-				<input type="button" class="submit" id="btn_submit" style="margin-left: 38%; margin-top: 5%" value="조회" 
-					onclick="location.href='ReservationSearchInfo?reservation_guest_num=${reservation_guest_num}&reservation_person_phone=${reservation_person_phone}'">
+				<input type="submit" class="submit" id="btn_submit" style="margin-left: 38%; margin-top: 5%" value="조회" >
 	    	</div>
+	    	</form>
 		</main>
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>
