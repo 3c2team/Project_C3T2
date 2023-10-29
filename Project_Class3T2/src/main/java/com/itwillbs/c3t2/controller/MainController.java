@@ -132,6 +132,7 @@ public class MainController {
 		            session.setAttribute("access_Token", access_Token);
 		            session.setAttribute("sId", dbMember.getMember_id());
 		            session.setAttribute("sName", dbMember.getMember_name());
+		            session.setAttribute("loginUser", dbMember);
 		            model.addAttribute("msg", "로그인에 성공했습니다. 메인페이지로 이동합니다."); // 출력할 메세지
 					model.addAttribute("targetURL", "Main"); // 이동시킬 페이지
 					return "forward";
@@ -183,6 +184,7 @@ public class MainController {
 				} else { // 이메일 인증 회원
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
+					session.setAttribute("loginUser", dbMember);
 					String kakao_id = (String)session.getAttribute("kakao_id");
 					int updateCount = service.addKakaoId(member_id, kakao_id);
 					if(updateCount > 0) {
@@ -216,6 +218,7 @@ public class MainController {
 					model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다!");
 					return "fail_back";
 				} else { // 이메일 인증 회원
+					session.setAttribute("loginUser", dbMember);
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
 					return "redirect:/Main";
