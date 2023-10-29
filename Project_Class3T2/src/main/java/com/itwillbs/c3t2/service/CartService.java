@@ -31,10 +31,10 @@ public class CartService {
 	}
 
 	// 카트 페이지에 온 회원 아이디 검색
-	public List<MemberVO> memberAuth(String sId) {
-		// TODO Auto-generated method stub
-		return mapper.selectPayMember(sId);
-	}
+//	public List<MemberVO> memberAuth(String sId) {
+//		// TODO Auto-generated method stub
+//		return mapper.selectPayMember(sId);
+//	}
 	
 	// 같은 상품이 CART에 있는지 조회	
 	public CartVO getCartMember(int proNum, String sId) {
@@ -93,6 +93,12 @@ public class CartService {
 	public List<ProductVO> selectPayProduct(String sId, int proNum) {
 		// TODO Auto-generated method stub
 		return mapper.selectPayProduct(sId, proNum);
+	}
+
+	// 회원정보 조회
+	public MemberVO getMember(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectPayMember(sId);
 	}
 
 

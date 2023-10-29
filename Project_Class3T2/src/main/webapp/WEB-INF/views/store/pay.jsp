@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <link href="${pageContext.request.contextPath }/resources/css/pay.css" rel="stylesheet" type="text/css">
@@ -186,7 +187,7 @@ function orderPro(proNums){
 							<span>[기본배송]</span>
 						</td>
 						<td colspan="5" style="border-left: none; text-align: right; padding-right: 10px; width: 300px;">
-							상품금액 <span>0</span> + <span>배송비 2,500 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 10px;"></span>
+							상품금액 <span>0</span> + <span>배송비 3,000 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 10px;"></span>
 						</td>
 					</tr>
 				</tfoot>
@@ -219,7 +220,7 @@ function orderPro(proNums){
 					<tr>
 						<td class="deliverytd">배송지 선택</td>
 						<td>
-							<input type="radio" name="memberInfo">
+							<input type="radio" name="memberInfo" checked>
 							<label>회원정보와 동일</label>
 							
 							<input type="radio" name="memberInfo">
@@ -230,7 +231,7 @@ function orderPro(proNums){
 					
 					<tr>
 						<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-						<td><input type="text"></td>
+						<td><input type="text" value="${Member.member_name}"></td>
 					</tr>
 					
 					<tr>
@@ -238,10 +239,10 @@ function orderPro(proNums){
 						</td>
 						
 						<td>
-							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp;
-							<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">우편번호 찾기</button> 
-							<input style="margin-bottom: 10px;" type="text" id="addr1" size="50"><br>
-							<input type="text" id="addr2" size="50" />
+<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
+							<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" value="${Member.member_address1}">&nbsp;
+							<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
+							<input type="text" id="addr2" size="40" value="${Member.member_address2}"/>
 						</td>
 					</tr>
 					
@@ -249,7 +250,7 @@ function orderPro(proNums){
 						<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
 						<td>
 <!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
-							<input type="text" name="phone" id="phone" placeholder="000-0000-0000">
+							<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" placeholder="000-0000-0000">
 							<span id="checkPhoneResult"></span><br>
 						</td>
 					
@@ -257,7 +258,10 @@ function orderPro(proNums){
 					
 					<tr>
 						<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
-						<td><input type="text" id="eMail">@<input id="domainName" type="text" name="mailUrl"/>&nbsp;
+						<td>
+							<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
+							
+							<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
 							<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
 								<option value="">-직접 입력-</option>
 								<option value="naver.com">naver.com</option>
@@ -337,4 +341,4 @@ function orderPro(proNums){
 
 	</form>	
 </body>
-</html>
+</html>	
