@@ -17,19 +17,34 @@ function changeImgOut() {
 
 
 // -------------------- < 수량 버튼 > --------------------
-$(document).ready(function() {
-    const amountsInput = $('#amounts');
+$(document).ready(function() {	
+	const amountsInput = $('#amounts');
+	const productPrice = $('#productPrice').val();
+	
+	alert(productPrice);
 
-    $("#delBtn").click(function() {
-        let currentValue = parseInt(amountsInput.val());
-        if (currentValue > 1) {
-            amountsInput.val(currentValue - 1);
+	$("#delBtn").click(function() {
+	    let currentValue = parseInt(amountsInput.val());
+	    if (currentValue > 1) {
+	        amountsInput.val(currentValue - 1);
+	        updateTotal(currentValue - 1);
 		}
-    });
-
-    $('#addBtn').click(function() {
-        let currentValue = parseInt(amountsInput.val());
-        amountsInput.val(currentValue + 1);
-    });
+	});
+	
+	$('#addBtn').click(function() {
+	    let currentValue = parseInt(amountsInput.val());
+	    amountsInput.val(currentValue + 1);
+	    updateTotal(currentValue + 1);
+	});
+	
+	amountsInput.on('input', function() {
+	    let currentValue = parseInt(amountsInput.val());
+	    updateTotal(currentValue);
+	});
+	
+	function updateTotal(quantity) {
+	    const totalPrice = productPrice * quantity;
+	    $('#my_sum').text(totalPrice.toFixed(0));
+	}
 });
 //--------------------------------------------------------

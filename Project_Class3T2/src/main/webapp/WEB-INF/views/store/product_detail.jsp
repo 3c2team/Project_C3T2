@@ -131,6 +131,7 @@
 					<div class="detailTopSum">
 						<p class="detailTopSumTitle">판매가</p>
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
+						<input type="hidden" id="productPrice" value="${productDetail.product_price }">
 					</div>
 					<div class="detailBtn">
 						<button class="btn_white" onclick="productCount()">장바구니</button>
