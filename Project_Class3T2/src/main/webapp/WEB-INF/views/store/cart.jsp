@@ -163,9 +163,11 @@ function orderPro(proNums){
                      <td style="text-align: left; text-align: center; border-right: none;">
                         <input type="checkbox" name="checkbox" class="checkbox" id="${productList.product_num}" value="${productList.product_num}" proNum="${productList.product_num}"/>
                      </td>
-                     <td style="border-left: none; border-right: none"><img style="width: 60%" src="
-                     ${productList.product_main_img_real_file }
-                     "></td>   
+                     <td style="border-left: none; border-right: none">
+                     	
+                     	<img style="width: 60%" src="${pageContext.request.contextPath }/resources${productList.product_main_img_real_file }">
+                     	
+                     </td>   
                      
                      <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;" >${productList.product_name }</td>
                      
