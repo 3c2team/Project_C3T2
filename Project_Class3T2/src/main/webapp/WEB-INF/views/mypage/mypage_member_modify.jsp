@@ -143,7 +143,7 @@ input[readonly]{background: #eee;}
 					<tr>
 						<th>E-Mail</th>
 						<td>
-						   <c:set value="${fn:split(Member.member_email, '@') }" var="mail"  />	
+						   <c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
 						
 							<input type="text" name="email1" id="email1"	 required="required" size="10" value="${mail[0]}" >@
 							<input type="text" name="email2" id="email2" 	required="required" size="10" value="${mail[1]}"  >
@@ -225,14 +225,14 @@ function memberModify(){
 			console.log(" success : ", res);
 			if(res=="success"){				
 				alert("회원 수정 완료 됬습니다요");		
-				window.location.href="MypagePoint";	
+				window.location.href="MypageDashboard";	
 				return;
 				
 			}else if(res=="error_member_phone_num"){
 				alert("이미 사용중인 전화번호입니다.");					
 				$("#member_phone_num").focus();	
 				return;
-			}else if(res=="error_member_email"){
+			}else if(res=="error_member_e_mail"){
 				alert("이미 사용중인 이메일입니다");
 				$("#email1").focus();
 				return;

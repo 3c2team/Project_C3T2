@@ -140,7 +140,7 @@
 			member_address= CONCAT(#{member_address1}, ' ', #{member_address2}) ,
 			member_address1=#{member_address1},
 			member_address2=#{member_address2}, 			
-			member_email=CONCAT(#{member_email1}, '@', #{member_email2})
+			member_e_mail=CONCAT(#{member_email1}, '@', #{member_email2})
 		WHERE member_id=#{member_id}
     </update>
     

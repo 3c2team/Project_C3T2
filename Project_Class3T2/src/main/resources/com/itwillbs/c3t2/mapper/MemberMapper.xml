@@ -7,7 +7,7 @@
 	<insert id="insertMember">
 		INSERT
 			INTO MEMBER
-			(member_name, member_id, member_passwd, member_address, member_email, member_insert_date, member_point, member_phone_num, member_birth, member_gender, mail_auth_status, member_private_info_agree_1, member_private_info_agree_2, member_private_info_agree_3, member_private_info_agree_4)
+			(member_name, member_id, member_passwd, member_address, member_e_mail, member_insert_date, member_point, member_phone_num, member_birth, member_gender, mail_auth_status, member_private_info_agree_1, member_private_info_agree_2, member_private_info_agree_3, member_private_info_agree_4)
 			VALUES (
 				  #{member_name}
 				, #{member_id}
@@ -108,7 +108,7 @@
 	</update>
 	
 	<select id="selectMemberEmail" resultType="string">
-		SELECT member_email
+		SELECT member_e_mail
 		FROM MEMBER
 		WHERE member_id = #{member_id}
 	</select>

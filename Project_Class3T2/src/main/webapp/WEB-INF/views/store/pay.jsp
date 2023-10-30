@@ -259,7 +259,7 @@ function orderPro(proNums){
 					<tr>
 						<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
 						<td>
-							<c:set value="${fn:split(Member.member_email, '@') }" var="mail"  />	
+							<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
 							
 							<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
 							<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
