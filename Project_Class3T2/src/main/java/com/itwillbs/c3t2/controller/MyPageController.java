@@ -249,7 +249,9 @@ public class MyPageController {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if(loginUser==null) return "redirect:/Logout";
+		System.out.println(loginUser);
+//		if(loginUser==null) return "redirect:/Logout";
+		if(loginUser==null) return "Main";
 		
 		//상품 구매 내역을 가져옴
 		List<UserOrderVO> OrderList = service.getOrderList(loginUser.getMember_id());
