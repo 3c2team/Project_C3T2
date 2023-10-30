@@ -46,7 +46,7 @@
 		WHERE reservation_guest_num = #{reservation_guest_num}
 	</update>
 	
-	<select id="selectGuestNum" resultType="Reservation">
+	<select id="selectGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT reservation_date
 			   , reservation_time
 			   , reservation_person_name
