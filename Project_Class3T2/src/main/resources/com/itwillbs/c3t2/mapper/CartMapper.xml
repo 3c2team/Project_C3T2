@@ -107,12 +107,12 @@
 				, P.product_main_img_real_file
 				, P.product_name
 				, P.product_price
-				, C.product_count
+				, O.product_count
 			FROM 
-				PRODUCT P JOIN CART C
-				ON P.product_num = C.product_num
+				PRODUCT P JOIN ORDER_DETAIL O
+				ON P.product_num = O.product_num
 			WHERE
-				P.product_num = #{proNum} AND C.member_id = #{sId}
+				O.member_id = #{sId}
 	</select>
 
 	<!-- PAY 페이지에서 회원정보 출력 -->
@@ -121,6 +121,71 @@
 		FROM MEMBER
 		WHERE member_id = #{sId}
 	</select> 
+	
+	<insert id="insertFavoriteProduct">
+		INSERT INTO 
+			FAVORITE (favorite_num, member_id, product_num)
+			VALUES(
+			null
+			, #{sId}
+			, #{favoriteProNum}
+			)
+	
+	</insert>
+	
+	<select id="selectFavoriteProduct" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
+		SELECT *
+		FROM FAVORITE
+		WHERE member_id = #{sId} AND product_num = #{favoriteProNum}	
+	</select>
+	
+	<select id="selectAllPay" resultType="com.itwillbs.c3t2.vo.ProductVO">
+			SELECT 
+				P.product_num
+				, P.product_main_img_real_file
+				, P.product_name
+				, P.product_price
+				, C.product_count
+			FROM 
+				PRODUCT P JOIN CART C
+				ON P.product_num = C.product_num
+			WHERE
+				C.member_id = #{sId}
+	</select>
+	
+	<!--  선택 상품 ORDER_DETAIL에 저장 -->
+	<insert id="insertOrderDetail">
+		INSERT INTO
+			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num)
+			SELECT member_id, product_num, product_count, product_price, cart_num
+			FROM CART
+			WHERE member_id = #{sId} AND product_num = #{proNum}
+	
+	</insert>
+	
+	<!-- ORDER_DETAIL 조회 -->
+	<select id="selectOrderDetail">
+		SELECT *
+		FROM OREDER_DETAIL
+		WHERE member_id = #{sId} AND product_num = {proNum}
+	
+	</select>
+	
+	<!-- 결제페이지에서 ORDER_DETAIL 지우기 -->
+	<delete id="deleteOrderDetail">
+		DELETE FROM
+			ORDER_DETAIL
+			WHERE member_id = #{sId}
+	</delete>
+
+	<!-- 상품 전체 ORDER_DETAIL에 저장 -->
+	<insert id="insertOrderDetailAll">
+		INSERT INTO
+			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num)
+			SELECT member_id, product_num, product_count, product_price, cart_num
+			FROM CART
+			WHERE member_id = #{sId}
+	</insert>
 
 
 

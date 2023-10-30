@@ -52,10 +52,10 @@ table {
 							<tbody>
 								<c:forEach var="ReservationList" items="${ReservationList }">
 									<tr>
-										<th>${ReservationList.reservation_num }</th>
+										<th>${ReservationList.num }</th>
 										<th>${ReservationList.reservation_person_name }</th>
-										<th>${ReservationList.reservation_date }/${ReservationList.reservation_time } </th>
-										<th>${ReservationList.reservation_person_name }</th>
+										<th>${ReservationList.reservation_date }</th>
+										<th>${ReservationList.dinning_num }</th>
 										<th>${ReservationList.reservation_person_phone }</th>
 										
 									</tr>

@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<form name="newProduct" action="AdminEventRegistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
+		<form name="newProduct" onsubmit="return confirm('등록하시겠습니까?')" action="AdminEventRegistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 <!-- 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post"> -->
 			<div class="form-group row">
 				<label class="col-sm-2">등록 분류</label>
@@ -28,13 +28,13 @@
 			<div class="form-group row">
 				<label class="col-sm-2">이벤트 제목</label>
 				<div class="com-sm-3">
-					<input type="text" name="event_subject" class="form-control">
+					<input type="text" required  name="event_subject" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">이벤트 내용</label>
 				<div class="com-sm-5">
-					<textarea name="event_content" cols="50" rows="15" class="form-control"></textarea>
+					<textarea name="event_content" required  cols="50" rows="15" class="form-control"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">

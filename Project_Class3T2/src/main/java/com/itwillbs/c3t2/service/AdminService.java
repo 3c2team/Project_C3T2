@@ -25,7 +25,7 @@ public class AdminService {
 
 		return mapper.selectMemberList();
 	}
-	public List<ReservationVO> getReservationList() {
+	public List<Map<String, Object>> getReservationList() {
 
 		return mapper.selectReservationList();
 	}
@@ -96,6 +96,18 @@ public class AdminService {
 	public int deleteEvent(int event_num) {
 		// TODO Auto-generated method stub
 		return mapper.deleteEvent(event_num);
+	}
+	public List<Map<String, Object>> selectQnaBoardList() {
+		// TODO Auto-generated method stub
+		return mapper.selectQnaBoardList();
+	}
+	public Map<String, Object> selectQnaBoard(int qna_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectQnaBoard(qna_num);
+	}
+	public int updateQnaBoard(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateQnaBoard(map);
 	}
 	
 

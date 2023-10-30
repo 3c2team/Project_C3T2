@@ -262,6 +262,7 @@ function orderPro(proNums){
 							<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
 							
 							<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
+<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
 							<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
 								<option value="">-직접 입력-</option>
 								<option value="naver.com">naver.com</option>

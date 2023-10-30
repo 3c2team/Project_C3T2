@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwillbs.c3t2.service.CartService;
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 @Controller
@@ -86,8 +88,9 @@ public class CartController {
 	@GetMapping("MainCart")
 	public String mainCart(
 					@RequestParam(value = "proNum", defaultValue = "0" ,required = false) int proNum
-					,@RequestParam(value = "proCount", defaultValue = "0" ,required = false) int proCount
-					,@RequestParam(value = "proNums",defaultValue = "0" ,required = false) int[] proNums
+					, @RequestParam(value = "proCount", defaultValue = "0" ,required = false) int proCount
+					, @RequestParam(value = "proNums",defaultValue = "0" ,required = false) int[] proNums
+					, @RequestParam(value = "favoriteProNum", defaultValue = "0", required = false) int favoriteProNum
 					, Model model
 					, HttpSession session) {
 		
@@ -125,6 +128,37 @@ public class CartController {
 		
 		// 카트 상품 금액 계산 결과
 		int cartPrice = service.registCartPrice(sId);
+		
+		// 동일 상품이 관심상품에 있는지 확인
+		FavoriteVO selectFavorite = service.selectFavoriteProduct(sId, favoriteProNum);
+		
+		if(selectFavorite != null) {
+			model.addAttribute("msg", "동일 상품이 관심상품에 있습니다.");
+			return "fail_back";
+		}else {
+			// 관심 상품 등록
+			System.out.println("관심상품 번호 : " + favoriteProNum);
+			if(favoriteProNum > 0) {
+				
+				int insertFavorite = service.insertFavoriteProduct(sId, favoriteProNum);
+				if(insertFavorite > 0) {
+					System.out.println("관심 상품 등록 완료!");
+					model.addAttribute("msg", "관심상품 등록이 완료 됐습니다.");
+					return "fail_back";
+				}
+				
+			}
+						
+		}
+		
+		//ORDER_DETAIL 테이블 비우기
+		
+		int deleteOrderDetail = service.deleteOrderDetail(sId);
+		if(deleteOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL 삭제 완료");
+		}
+		
+		
 		
 		// 메인 페이지에서 카트 등록 상품 목록 조회
 		List<ProductVO> productList = service.getMainCartList(sId);
@@ -213,45 +247,114 @@ public class CartController {
 	
 	@GetMapping("PayPro")
 	public String pay(
-//					@RequestParam(value = "proNum", required = false) int proNum
-					int[] proNums
+					@RequestParam(value = "proNums",defaultValue = "0", required = false) int[] proNums
 					, HttpSession session 
 					, MemberVO member
 					, Model model) {
 				
 		String sId = (String)session.getAttribute("sId");
 		
+		
 		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNums);
 		
+//		for(int i = 0; i < proNums.length; i++) {
+//			System.out.println("넘어온 결제 선택 상품" + proNums[i]);
+//			int proNum = proNums[i];
+//			// 메인 페이지에서 카트 등록 상품 목록 조회
+//			List<ProductVO> productPayList = service.selectPayProduct(sId, proNum);
+//			model.addAttribute("productPayList", productPayList);
+//			
+//			System.out.println("선택 결제 상품 조회 성공");
+//			
+//		}
 		
-		// 선택 상품 주문
-		if(proNums.length >= 0) {
-			for( int proNum : proNums) {
-				
-				// 메인 페이지에서 카트 등록 상품 목록 조회
-					List<ProductVO> productPayList = service.selectPayProduct(sId, proNum);
-					model.addAttribute("productPayList", productPayList);
-					
-					System.out.println("결제 상품 조회 성공");
-					
-								
-				}
+		//선택 상품 ORDER_DETAIL에 있는지 확인 작업(확인 후 진행)
+//		if(proNums[0] != 0) {
+//			for( int proNum : proNums) {
+//				List<OrderDetailVO> selectOrderDetail = service.getOrderDetail(sId, proNum);
+//				
+//				if(selectOrderDetail != null) {
+//					System.out.println("해당 상품 ORDER_DETAIL에 있음");
+//				}
+//			}
+//		}
+		
+		//ORDER_DETAIL 테이블 비우기
+		
+		int deleteOrderDetail = service.deleteOrderDetail(sId);
+		if(deleteOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL 삭제 완료");
 		}
 		
-		// 전체 상품 주문
+		// 선택 상품 ORDER_DETAIL에 저장
+		if(proNums[0] != 0) {
+					
+			for( int proNum : proNums) {
+				
+				// 저장 작업
+				int insertOrderDetail = service.insertOrderDetail(sId, proNum);
+				if(insertOrderDetail > 0) {
+					System.out.println("ORDER_DETAIL에 저장 성공");
+				}
+			}
+		}
 		
+			
+		// 메인 페이지에서 카트 등록 상품 목록 조회 (보류)
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		model.addAttribute("productPayList", productPayList);
+		
+		System.out.println("선택 결제 상품 조회 성공");
 		
 		
 		// 회원정보 조회
 		member = service.getMember(sId);
 		
 		model.addAttribute("Member", member); 
+			
+		return "store/pay";
+	}
+	
+	@GetMapping("AllPayPro")
+	public String allPayPro(
+					@RequestParam(value = "proNums",defaultValue = "0", required = false) int[] proNums
+					, MemberVO member
+					, HttpSession session
+					, Model model) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		//ORDER_DETAIL 테이블 비우기
+		int deleteOrderDetail = service.deleteOrderDetail(sId);
+		if(deleteOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL 삭제 완료");
+		}
+		
+		// 
+		
+				
+		// 전체 상품 ORDER_DETAIL에 저장
+		int insertOrderDetail = service.insertOrderDetail(sId);
+		if(insertOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL에 저장 성공");
+		}
 		
 		
+		// 전체 상품 주문 조회
+		List<ProductVO> allProductPayList = service.selectAllPay(sId);
+		model.addAttribute("productPayList", allProductPayList);
 		
+		System.out.println("전체 상품 주문 조회 성공");
 		
+		// 회원정보 조회
+		member = service.getMember(sId);
 		
+		model.addAttribute("Member", member); 
+			
 		
 		return "store/pay";
 	}
+	
+	
+	
 }

@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 public interface CartMapper {
@@ -44,9 +46,30 @@ public interface CartMapper {
 		public int deleteAll(String sId);
 
 		// 선택 상품 주문 목록 조회
-		public List<ProductVO> selectPayProduct(@Param("sId") String sId, @Param("proNum") int proNum);
+		public List<ProductVO> selectPayProduct(String sId);
 		
 		// 카트페이지에서 회원정보 출력
 		public MemberVO selectPayMember(String sId);
+
+		// 관심 상품 등록
+		public int insertFavoriteProduct(@Param("sId") String sId, @Param("favoriteProNum") int favoriteProNum);
+
+		// 동일 상품이 관심상품에 등록되어 있는지 확인
+		public FavoriteVO selectFavoriteProduct(@Param("sId") String sId, @Param("favoriteProNum") int favoriteProNum);
+
+		// 전체 상품 주문 조회
+		public List<ProductVO> selectAllPay(String sId);
+
+		// 선택 상품 ORDER_DETAIL에 저장
+		public int insertOrderDetail(@Param("sId") String sId, @Param("proNum") int proNum);
+
+		// 선택 상품 ORDER_DETAIL에 있는지 확인 작업
+		public List<OrderDetailVO> selectOrderDetail(@Param("sId") String sId, @Param("proNum") int proNum);
+
+		// ORDER_DETAIL 테이블 비우기
+		public int deleteOrderDetail(String sId);
+
+		// 전체 상품 ORDER_DETAIL에 저장
+		public int insertOrderDetailAll(String sId);
 
 }

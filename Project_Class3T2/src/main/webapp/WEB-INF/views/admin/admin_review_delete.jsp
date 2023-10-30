@@ -46,7 +46,7 @@ table {
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>상품번호</th>
+										<th>상품이름</th>
 										<th>작성자</th>
 										<th>리뷰내용</th>
 										<th>구매일자</th>
@@ -56,9 +56,9 @@ table {
 								<c:forEach var="selectReviewList" items="${selectReviewList }">
 									<tr>	
 										<th><input type="checkbox" name="review_num" value="${selectReviewList.review_num }"></th>
-										<th>${selectReviewList.num }</th>
+										<th>${selectReviewList.product_name }</th>
 										<th>
-											${selectReviewList.review_title }
+											${selectReviewList.member_id }
 										</th>
 										<th>${selectReviewList.review_content }</th>
 										<th>${selectReviewList.review_date }</th>

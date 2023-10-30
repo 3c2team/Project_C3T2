@@ -20,7 +20,7 @@
 	</div>
 	
 	<div class="container">
-		<form name="newProduct" action="AdminNoticeRegistPro" class="form-horizontal" method="post" 
+		<form name="newProduct" onsubmit="return confirm('등록하시겠습니까?')" action="AdminNoticeRegistPro" class="form-horizontal" method="post" 
 		enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">등록 분류</label>
@@ -46,7 +46,7 @@
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
 					<input type="reset" class="btn btn-primary" onclick="window.close()" value="취소" >
-					<input type="submit"class="btn btn-primary" onclick="isSubmit()" value="등록" >
+					<input type="submit"class="btn btn-primary" value="등록" >
 				</div>
 			</div>
 		</form>

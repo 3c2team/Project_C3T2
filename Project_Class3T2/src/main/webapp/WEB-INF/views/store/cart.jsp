@@ -60,7 +60,7 @@ $(function() {
     });
     
     
-    
+    // 선택 상품 삭제
     $("#btnmemberdel").on("click",function(){
 //        alert(product_num);
        if(confirm("선택 상품을 삭제하시겠습니까?")){
@@ -70,15 +70,20 @@ $(function() {
        }
     });
     
-    // 상품 하나 삭제
-//     $("productDelete").on("click", function() {
-//     	confirm("장바구니를 비우시겠습니까?")
-// 	})
-    
-    
+    // 선택 상품 결제 페이지 이동
+    $("#productClear").on("click", function() {
+    	 if(confirm("결제창으로 이동 하시겠습니까?")){
+//              location.href="SelectDeleteCart?proNum=" + product_num;
+             location.href="PayPro?proNums=" + product_num;	
+         }
+//     	 else{
+//             alert("삭제를 취소 하셨습니다.");
+//          }
+	});
+        
     // 장바구니 비우기
     $("#productAllDelete").on("click", function() {
-// 		alert("장바구니를 비우시겠습니까?")
+	// alert("장바구니를 비우시겠습니까?")
 
 		if(confirm("장바구니를 비우시겠습니까?")){
 	           location.href="productAllDelete";
@@ -102,6 +107,18 @@ function deleteCart(proNum) {
     }
 }
 
+// 관심 상품 등록
+function favorite(favoriteProNum) {
+	
+// 	alert(favoriteProNum);
+    location.href="MainCart?favoriteProNum=" + favoriteProNum;
+//         location.href="CartPro?proNum=" + proNum;
+  
+//     alert("관심상품 등록이 완료 됐습니다.");
+    
+}
+
+
 // 개별 상품 결제 페이지 이동
 function orderPro(proNums){
 	
@@ -109,6 +126,17 @@ function orderPro(proNums){
 	
 	if(result){
 		location.href="PayPro?proNums=" + proNums;	
+	}
+	
+}
+
+// 전체 상품 결제 페이지 이동
+function AllPayProduct(sId) {
+	
+	let result = confirm("결제창으로 이동 하시겠습니까?")
+	
+	if(result){
+		location.href="AllPayPro?sId=" + sId;
 	}
 	
 }
@@ -186,7 +214,7 @@ function orderPro(proNums){
                      <td><span><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
                      <td>
                         <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" onclick="orderPro('${productList.product_num}')">주문하기</button><br>
-                        <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;">관심상품</button><br>
+                        <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="favorite('${productList.product_num}')">관심상품</button><br>
 <!--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" id="productDelete">삭제</button><br> -->
 						<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="deleteCart('${productList.product_num}')">삭제</button><br>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br> --%>
@@ -248,8 +276,8 @@ function orderPro(proNums){
          <br><br>
          
          <div align="center">
-            <button class="btn default" id="allProduct" style="color: black;">전체상품주문</button>         
-            <button class="btn default backBtn" id="productClear" style="color: black;">선택상품주문</button>         
+            <button class="btn default" id="allProduct" style="color: black;" onclick="AllPayProduct('${sessionScope.sId}')">전체상품주문</button>         
+            <button class="btn default backBtn" id="productClear" style="color: black;" name="">선택상품주문</button>         
             <button class="btn default footerbtn" id="footerBtn" style="color: black;" onclick="location='OnlineStore'">쇼핑계속하기</button>         
             <span class="clearboth"></span>
          </div>

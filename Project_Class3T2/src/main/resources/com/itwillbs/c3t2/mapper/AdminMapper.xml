@@ -7,12 +7,23 @@
      <select id="selectMemberList" resultType="com.itwillbs.c3t2.vo.MemberVO">
 			SELECT * FROM MEMBER
 		</select>
-		<select id="selectReservationList" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-			SELECT * FROM RESERVATION
+		<select id="selectReservationList" resultType="map">
+			SELECT rm.reservation_num
+			,CONCAT(rs.reservation_date,'/',reservation_time) as reservation_date
+			,ROW_NUMBER() OVER(order by reservation_num) as num
+			,reservation_person_name
+			,reservation_person_count
+			,reservation_person_phone
+			,reservation_cancel
+			,reservation_is_member
+			,reservation_guest_num
+			,CONCAT(dinning_num,' 번 테이블') as dinning_num
+			,restaurant_num
+			FROM RESERVATION rm JOIN ( SELECT reservation_num,reservation_date
+										FROM RESERVATION
+										WHERE reservation_date > date_format(now(),'%Y-%m-%d')) rs
+			ON rm.reservation_num = rs.reservation_num;
 		</select>
-<!-- 		<select id="selectReviewList" resultType="com.itwillbs.c3t2.vo.ReviewVO"> -->
-<!-- 			SELECT * FROM REVIEW -->
-<!-- 		</select> -->
 		<select id="selectAdmin" resultType="com.itwillbs.c3t2.vo.AdminVO">
 			SELECT *
 			FROM ADMIN
@@ -91,12 +102,14 @@
 				, ROW_NUMBER() OVER(order by review_num) as num
 				, review_content
 				, order_num
-				, product_num
+				, r.product_num
+				, product_name
 				, review_star
 				, DATE_FORMAT(review_date, '%Y년 %m월%d일 %H:%i') as review_date
 				, member_id
 				, review_image
-			FROM REVIEW
+			FROM REVIEW r JOIN PRODUCT p
+			ON r.product_num = p.product_num
 		</select>
 		<select id="selectReviewImg" resultType="map">
 			SELECT review_image
@@ -105,12 +118,12 @@
 		</select>
 		<select id="selectEventList" resultType="map">
 			SELECT event_num
-						, ROW_NUMBER() OVER(order by event_num) as num
-						, DATE_FORMAT(event_date, '%Y년 %m월%d일 %H:%i') as event_date
-						, event_subject
-						, event_content
-						, event_image
-						, event_image_real_file
+				, ROW_NUMBER() OVER(order by event_num) as num
+				, DATE_FORMAT(event_date, '%Y년 %m월%d일 %H:%i') as event_date
+				, event_subject
+				, event_content
+				, event_image
+				, event_image_real_file
 			FROM EVENT
 		</select>
 		<select id="selectEvent" resultType="map">
@@ -127,15 +140,53 @@
 				WHERE review_num = #{review_num} 
 		</delete>
 		<insert id="insertEvent">
-		INSERT INTO EVENT
-		VALUES(	null
-						, #{event_subject}
-						, #{event_content}
-						, now()
-						, #{event_img}
-						, #{event_image_real_file}
-					)
+			INSERT INTO EVENT
+			VALUES(null
+				, #{event_subject}
+				, #{event_content}
+				, now()
+				, #{event_img}
+				, #{event_image_real_file}
+				)
 		</insert>
+		<select id="selectQnaBoardList" resultType="map">
+			SELECT qna_num
+				,ROW_NUMBER() OVER(order by qna_num) as num
+				,product_num
+				,q.member_id as member_id
+				,member_name
+				,qna_answer
+				,IF(ISNULL(qna_answer),'답변대기','답변완료') as qna_is_answer
+				,DATE_FORMAT(qna_date, '%Y년 %m월%d일 %H:%i') as qna_date
+				,qna_subject
+				,qna_content
+			FROM QNA q join MEMBER m
+			on q.member_id = m.member_id
+			WHERE qna_date > DATE_FORMAT(now(), '%Y년')
+		</select>
+		<select id="selectQnaBoard" resultType="map">
+			SELECT qna_num
+				,ROW_NUMBER() OVER(order by qna_num) as num
+				,q.product_num
+				,product_name
+				,m.member_id
+				,member_name
+				,qna_answer
+				,IF(ISNULL(qna_answer),'답변대기','답변완료') as qna_is_answer
+				,DATE_FORMAT(qna_date, '%Y년 %m월%d일 %H:%i') as qna_date
+				,qna_subject
+				,qna_content
+			FROM QNA  q JOIN MEMBER m
+			ON q.member_id = m.member_id 
+			JOIN PRODUCT p
+			ON p.product_num = q.product_num
+			WHERE qna_num= #{qna_num}
+		</select>
+		<update id="updateQnaBoard">
+			update QNA
+			set qna_answer = #{qna_answer}
+			where qna_num = #{qna_num}
+		</update>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->
