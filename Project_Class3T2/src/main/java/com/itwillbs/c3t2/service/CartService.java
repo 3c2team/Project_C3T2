@@ -139,5 +139,11 @@ public class CartService {
 		return mapper.deleteOrderDetail(sId);
 	}
 
+	// 전체 상품 ORDER_DETAIL에 저장
+	public int insertOrderDetail(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.insertOrderDetailAll(sId);
+	}
+
 
 }

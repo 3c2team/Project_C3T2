@@ -298,6 +298,7 @@ public class CartController {
 				}
 			}
 		}
+		
 			
 		// 메인 페이지에서 카트 등록 상품 목록 조회 (보류)
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -315,9 +316,29 @@ public class CartController {
 	}
 	
 	@GetMapping("AllPayPro")
-	public String allPayPro(MemberVO member, HttpSession session, Model model) {
+	public String allPayPro(
+					@RequestParam(value = "proNums",defaultValue = "0", required = false) int[] proNums
+					, MemberVO member
+					, HttpSession session
+					, Model model) {
 		
 		String sId = (String)session.getAttribute("sId");
+		
+		//ORDER_DETAIL 테이블 비우기
+		int deleteOrderDetail = service.deleteOrderDetail(sId);
+		if(deleteOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL 삭제 완료");
+		}
+		
+		// 
+		
+				
+		// 전체 상품 ORDER_DETAIL에 저장
+		int insertOrderDetail = service.insertOrderDetail(sId);
+		if(insertOrderDetail > 0) {
+			System.out.println("ORDER_DETAIL에 저장 성공");
+		}
+		
 		
 		// 전체 상품 주문 조회
 		List<ProductVO> allProductPayList = service.selectAllPay(sId);
@@ -329,6 +350,7 @@ public class CartController {
 		member = service.getMember(sId);
 		
 		model.addAttribute("Member", member); 
+			
 		
 		return "store/pay";
 	}

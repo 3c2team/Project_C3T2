@@ -153,6 +153,7 @@
 				C.member_id = #{sId}
 	</select>
 	
+	<!--  선택 상품 ORDER_DETAIL에 저장 -->
 	<insert id="insertOrderDetail">
 		INSERT INTO
 			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num)
@@ -162,6 +163,7 @@
 	
 	</insert>
 	
+	<!-- ORDER_DETAIL 조회 -->
 	<select id="selectOrderDetail">
 		SELECT *
 		FROM OREDER_DETAIL
@@ -169,12 +171,21 @@
 	
 	</select>
 	
+	<!-- 결제페이지에서 ORDER_DETAIL 지우기 -->
 	<delete id="deleteOrderDetail">
 		DELETE FROM
 			ORDER_DETAIL
 			WHERE member_id = #{sId}
 	</delete>
 
+	<!-- 상품 전체 ORDER_DETAIL에 저장 -->
+	<insert id="insertOrderDetailAll">
+		INSERT INTO
+			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num)
+			SELECT member_id, product_num, product_count, product_price, cart_num
+			FROM CART
+			WHERE member_id = #{sId}
+	</insert>
 
 
 

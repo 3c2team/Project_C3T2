@@ -63,10 +63,13 @@ public interface CartMapper {
 		// 선택 상품 ORDER_DETAIL에 저장
 		public int insertOrderDetail(@Param("sId") String sId, @Param("proNum") int proNum);
 
-		//선택 상품 ORDER_DETAIL에 있는지 확인 작업
+		// 선택 상품 ORDER_DETAIL에 있는지 확인 작업
 		public List<OrderDetailVO> selectOrderDetail(@Param("sId") String sId, @Param("proNum") int proNum);
 
-		//ORDER_DETAIL 테이블 비우기
+		// ORDER_DETAIL 테이블 비우기
 		public int deleteOrderDetail(String sId);
+
+		// 전체 상품 ORDER_DETAIL에 저장
+		public int insertOrderDetailAll(String sId);
 
 }
