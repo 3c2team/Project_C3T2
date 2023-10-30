@@ -44,8 +44,8 @@ public class StoreService {
 		return mapper.selectProductImg(proNum);
 	}
 
-	public int registReview(ReviewVO review) {
-		return mapper.insertReview(review);
+	public int registReview(Map<String, Object> map) {
+		return mapper.insertReview(map);
 	}
 	
 	public List<ReviewVO> getReviewList(int proNum) {

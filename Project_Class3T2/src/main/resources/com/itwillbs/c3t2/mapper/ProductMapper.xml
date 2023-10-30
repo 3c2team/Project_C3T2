@@ -60,11 +60,11 @@
 			NULL
 			, #{member_id}
 			, #{review_content}
-			, #{order_num}
+			, 1
 			, #{product_num}
 			, #{review_star}
 			, now()
-			, #{review_image}
+			, #{file_name}
 		)
 	</insert>
 

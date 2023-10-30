@@ -57,6 +57,7 @@
 				  <div class="fileUpload">사진 첨부하기</div>
 				</label>
 				<input type="file" name="file" id="file">
+				<input type="hidden" value="${product.product_num }" name="product_num">
 				<!--  -->
 			</div>
 			<div class="buttomBtn">

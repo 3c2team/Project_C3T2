@@ -271,16 +271,15 @@ public class AdminController {
     }
     //리뷰 삭제 처리(관리자)
     @PostMapping("AdminReviewDeletePro")
-    public String AdminReviewDeletePro(@RequestParam(value = "review_num",required = false) List<Integer> list
+    public String AdminReviewDeletePro(@RequestParam(value = "checkbox",required = false) List<Integer> list
     									, Model model
     									, HttpSession session) {
-    	
-    	Map<String, String> selectReviewImg =null;
+    	Map<String, String> selectReview =null;
     	int deleteReviewCount = 0;
     	System.out.println(list);
     	for(int review_num : list) {
     		deleteReviewCount = service.deleteReview(review_num);
-    		selectReviewImg = service.selectReviewImg(review_num);
+    		selectReview = service.selectReviewImg(review_num);
     		
     		if(deleteReviewCount == 0) {
     			model.addAttribute("msg","삭제에 실패했습니다.");
@@ -293,7 +292,7 @@ public class AdminController {
     				String uploadDir = "/resources/review_img"; // 가상의 경로
     				String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
     				
-    					Path path = Paths.get(saveDir + "/" + selectReviewImg.get("review_img"));
+    					Path path = Paths.get(saveDir + "/" + selectReview.get("review_image"));
     					Files.deleteIfExists(path);
     					//이미지 이름 uuid상관없음 db에 파일 이름으로 차피 저장되어 있으니 그걸로 가져오면됨
     			}

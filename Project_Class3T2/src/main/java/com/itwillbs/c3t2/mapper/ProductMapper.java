@@ -27,7 +27,7 @@ public interface ProductMapper {
 
 	public List<ProductImgVO> selectProductImg(int proNum);
 
-	public int insertReview(ReviewVO review);
+	public int insertReview(Map<String, Object> map);
 
 	public List<ReviewVO> selectReviewList(int proNum);
 	

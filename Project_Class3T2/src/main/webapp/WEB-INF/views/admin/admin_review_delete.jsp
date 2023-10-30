@@ -55,7 +55,7 @@ table {
 								<tbody>
 								<c:forEach var="selectReviewList" items="${selectReviewList }">
 									<tr>	
-										<th><input type="checkbox" name="review_num" value="${selectReviewList.review_num }"></th>
+										<th><input type="checkbox" name="checkbox" value="${selectReviewList.review_num }"></th>
 										<th>${selectReviewList.product_name }</th>
 										<th>
 											${selectReviewList.member_id }
@@ -77,7 +77,6 @@ table {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/admin_review.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
