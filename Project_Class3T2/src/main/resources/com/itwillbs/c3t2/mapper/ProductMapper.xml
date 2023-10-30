@@ -47,6 +47,12 @@
 		FROM PRODUCT_IMG
 		WHERE product_num = #{proNum};
 	</select>
+	<!-- 상품상세 리뷰 조회 -->
+	<select id="selectReviewList" resultType="com.itwillbs.c3t2.vo.ReviewVO">
+		SELECt *
+		FROM REVIEW
+		WHERE product_num = #{proNum};
+	</select>
 	<insert id="insertReview">
 		INSERT
 		INTO REVIEW
