@@ -140,7 +140,7 @@ function orderPro(proNums){
 				<table class="calculation1" style="width: 100%">
 				<thead>
 					<tr>
-						<th colspan="10" style="text-align: left; padding-left: 20px;  ">결제상품()</th>
+						<th colspan="10" style="text-align: left; padding-left: 20px;  ">결제상품(${payAllPrice.count })</th>
 					</tr>
 					
 					<tr style="font-size: 15px;">
@@ -176,7 +176,7 @@ function orderPro(proNums){
 <!-- 							<td>-</td> 적립금 -->
 							<td>기본배송</td>
 							<td>고정</td>
-							<td><span>0</span>원</td> <!-- 합계 -->
+							<td><span><fmt:formatNumber value="${productPayList.product_price  * productPayList.product_count }" pattern="#,###" /></span>원</td> <!-- 합계 -->
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -187,7 +187,7 @@ function orderPro(proNums){
 							<span>[기본배송]</span>
 						</td>
 						<td colspan="5" style="border-left: none; text-align: right; padding-right: 10px; width: 300px;">
-							상품금액 <span>0</span> + <span>배송비 3,000 = 합계</span>&nbsp;<span style="font-weight: bold; font-size: 10px;"></span>
+							상품금액 <span><fmt:formatNumber value="${payAllPrice.allPrice }" pattern="#,###" /></span> + <span>배송비 3,000 = <br>합계</span>&nbsp;<span style="font-weight: bold; font-size: 15pt"><fmt:formatNumber value="${payAllPrice.allPrice + 3000 }" pattern="#,###" /></span> 
 						</td>
 					</tr>
 				</tfoot>
@@ -296,9 +296,9 @@ function orderPro(proNums){
 				</tr>
 				
 				<tr style="background-color: #fff;">
-					<td style="padding: 23px 0;"><span class="price">0</span>원</td>
-					<td>+<span class="price">0</span>원</td>
-					<td>=<span class="price">0</span>원</td>
+					<td style="padding: 23px 0;"><span class="price"><fmt:formatNumber value="${payAllPrice.allPrice }" pattern="#,###" /></span>원</td>
+					<td>+<span class="price">3,000</span>원</td>
+					<td>=<span class="price"><fmt:formatNumber value="${payAllPrice.allPrice + 3000}" pattern="#,###" /></span>원</td>
 				</tr>
 			</table>
 			<br><br>

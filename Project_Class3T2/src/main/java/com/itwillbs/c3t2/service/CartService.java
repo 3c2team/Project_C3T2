@@ -11,6 +11,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
+import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 @Service
@@ -143,6 +144,12 @@ public class CartService {
 	public int insertOrderDetail(String sId) {
 		// TODO Auto-generated method stub
 		return mapper.insertOrderDetailAll(sId);
+	}
+
+	// 페이 상품 총액
+	public PayAllPriceVO getPaytAllPrice(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectPayAllPrice(sId);
 	}
 
 

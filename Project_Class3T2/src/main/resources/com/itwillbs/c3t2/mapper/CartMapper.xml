@@ -187,6 +187,12 @@
 			WHERE member_id = #{sId}
 	</insert>
 
+	<!-- 페이 상품 총액 --> 
+	<select id="selectPayAllPrice" resultType="com.itwillbs.c3t2.vo.PayAllPriceVO">
+		SELECT SUM(product_price) as allPrice, COUNT(product_num) count
+		FROM ORDER_DETAIL
+		WHERE member_id = #{sId}
+	</select>
 
 
 

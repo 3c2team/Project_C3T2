@@ -16,6 +16,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
+import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 @Controller
@@ -193,7 +194,7 @@ public class CartController {
 		
 		List<ProductVO> productList = service.getMainCartList(sId);
 		model.addAttribute("productList", productList);
-		
+		 
 		// 카트 상품 총액
 		CartAllPriceVO cartAllPrice = service.getCartAllPrice(sId);
 		model.addAttribute("cartAllPrice", cartAllPrice);
@@ -306,6 +307,13 @@ public class CartController {
 		
 		System.out.println("선택 결제 상품 조회 성공");
 		
+		// 페이 상품 총액
+				System.out.println("나옴??");
+				PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+				System.out.println("나옴2??");
+				model.addAttribute("payAllPrice", payAllPrice);
+				System.out.println("결제 상품 갯수랑 총액 :" + payAllPrice);
+		
 		
 		// 회원정보 조회
 		member = service.getMember(sId);
@@ -346,9 +354,15 @@ public class CartController {
 		
 		System.out.println("전체 상품 주문 조회 성공");
 		
+		// 페이 상품 총액
+		System.out.println("나옴??");
+		PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+		System.out.println("나옴2??");
+		model.addAttribute("payAllPrice", payAllPrice);
+		System.out.println("결제 상품 갯수랑 총액 :" + payAllPrice);
+		
 		// 회원정보 조회
 		member = service.getMember(sId);
-		
 		model.addAttribute("Member", member); 
 			
 		

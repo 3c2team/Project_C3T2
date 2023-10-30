@@ -9,6 +9,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
+import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 public interface CartMapper {
@@ -71,5 +72,8 @@ public interface CartMapper {
 
 		// 전체 상품 ORDER_DETAIL에 저장
 		public int insertOrderDetailAll(String sId);
+
+		// 페이 상품 총액
+		public PayAllPriceVO selectPayAllPrice(String sId);
 
 }
