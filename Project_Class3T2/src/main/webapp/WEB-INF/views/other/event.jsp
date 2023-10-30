@@ -46,13 +46,7 @@
 			<div id="popup_layer">
 			  <div class="popupBox">
 			      <div class="popupCont">
-			          <h2>Popup</h2>
-			          <p>
-			          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-			          when an unknown printer took a galley of type and 
-			          scrambled it to make a type specimen book.
-			          </p>
+			          <h2>Event</h2>
 			      </div>
 			      <div class="popupBtn">
 			          <a id="chk_today" href="javascript:closeToday();" class="closeDay">하루동안 열지 않기</a> 
@@ -109,31 +103,16 @@
 						<a href="Event" id="event">이벤트</a>
 					</li>
 				</ul>
-				<ul class="notice" style="margin: 5px 0 5px 100px;">
-					<li>
-						<a href="" id="notice_1">
-						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-						</a>
-					</li>
-					<li>
-						<a href="" id="notice_3">
-						<img src="./img/news_3.jpg" style=" width:250px; height:150px; display:block;">
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
-						fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
-						qui officia deserunt mollit anim id est laborum.</p>
-						</a>
-					</li>
-					<li>
-						<a href="" id="notice_1">
-						<img src="./img/news_1.jpg" style=" width:250px; height:150px; display:block;">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-						</a>
-					</li>
+<%-- 				<h1>${eventList.event_num }</h1> --%>
+				<ul class="event" style="margin: 5px 0 5px 100px;">
+					<c:forEach var="event" items="${eventList }">
+						<li>
+							<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">
+								<img src="${saveDir }${event.event_image }" style="width:41%; height:180px; object-fit: cover;">
+							</a>
+							<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">${event.event_subject }</a>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</main>

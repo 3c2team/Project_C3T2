@@ -170,7 +170,6 @@ table td {
 							<tr>
 								<td>${notice.notice_num }</td>
 								<td id="subject">
-									<%-- 제목 하이퍼링크 추가(BoardDetail.bo), 파라미터 : 글번호, 현재페이지번호 --%>
 									<a href="NoticeDetail?notice_num=${notice.notice_num }&pageNum=${pageNum }">${notice.notice_subject }</a>
 								</td>
 								<td>관리자</td>
@@ -183,17 +182,12 @@ table td {
 					</table>
 				</section>
 				<section id="pageList">
-					<c:choose>
-						<c:when test="${pageNum > 1 }"> <%-- 현재 페이지가 1보다 클 경우(버튼 동작) --%>
-							<input type="button" value="이전" onclick="location.href='News?pageNum=${pageNum - 1 }'">
-						</c:when>
-						<c:otherwise> <%-- 현재 페이지 1 페이지보다 크지 않을 경우(버튼 비활성화) --%>
-							<input type="button" value="이전" disabled>
-						</c:otherwise>
-					</c:choose>
+				<%-- <c:if test="${{pageInfo.pageNum <= 1 }">disabled</c:if> --%>
+					<input type="button" value="이전" onclick="location.href='News?pageNum=${pageInfo.pageNum - 1 }'">
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+						<a href="News?pageNum=${i }">${i }</a>
 						<c:choose>
-							<c:when test="${pageNum eq i }"> <%-- 현재 페이지일 경우(하이퍼링크 미표시 및 굵게) --%>
+							<c:when test="${pageInfo.pageNum eq i }"> <%-- 현재 페이지일 경우(하이퍼링크 미표시 및 굵게) --%>
 								<b>${i }</b>
 							</c:when>
 							<c:otherwise> <%-- 현재 페이지가 아닐 경우(하이퍼링크 표시) --%>
@@ -201,14 +195,8 @@ table td {
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<c:choose>
-						<c:when test="${pageNum < pageInfo.maxPage }"> <%-- 현재 페이지가 1보다 클 경우(버튼 동작) --%>
-							<input type="button" value="다음" onclick="location.href='News?pageNum=${pageNum + 1 }'">
-						</c:when>
-						<c:otherwise> <%-- 현재 페이지 1 페이지보다 크지 않을 경우(버튼 비활성화) --%>
-							<input type="button" value="다음" disabled>
-						</c:otherwise>
-					</c:choose>
+					<%-- <c:if test="${pageInfo.pageNum >= pageInfo.maxPage }">disabled</c:if> --%>
+					<input type="button" value="다음" onclick="location.href='News?pageNum=${pageInfo.pageNum + 1 }'" >
 				</section>
 			</div>
 		</main>

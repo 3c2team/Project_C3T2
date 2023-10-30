@@ -7,7 +7,7 @@
 	<insert id="insertMember">
 		INSERT
 			INTO MEMBER
-			(member_name, member_id, member_passwd, member_address, member_e_mail, member_insert_date, member_point, member_phone_num, member_birth, member_gender, mail_auth_status, member_private_info_agree_1, member_private_info_agree_2, member_private_info_agree_3, member_private_info_agree_4)
+			(member_name, member_id, member_passwd, member_address, member_e_mail, member_insert_date, member_point, member_phone_num, member_birth_day, member_gender, mail_auth_status, member_private_info_agree_1, member_private_info_agree_2, member_private_info_agree_3, member_private_info_agree_4)
 			VALUES (
 				  #{member_name}
 				, #{member_id}
@@ -215,5 +215,15 @@
 		SET notice_readcount = notice_readcount + 1
 		WHERE notice_num = #{notice_num}
 	</update>
+	
+	<select id="selectEventList" resultType="com.itwillbs.c3t2.vo.EventVO">
+		SELECT *
+		FROM EVENT
+		ORDER BY
+			event_num DESC
+<!-- 		LIMIT -->
+<!-- 			#{startRow} -->
+<!-- 			, #{listLimit} -->
+	</select>
 	
 </mapper>

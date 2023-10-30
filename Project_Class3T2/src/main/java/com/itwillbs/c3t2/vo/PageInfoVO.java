@@ -13,4 +13,5 @@ public class PageInfoVO {
 	private int maxPage; // 전체 페이지 수
 	private int startPage; // 시작 페이지 번호
 	private int endPage; // 끝 페이지 번호
+	private int pageNum;
 }

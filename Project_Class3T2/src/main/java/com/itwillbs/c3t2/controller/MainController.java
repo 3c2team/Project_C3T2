@@ -23,6 +23,7 @@ import com.google.protobuf.Timestamp;
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
+import com.itwillbs.c3t2.vo.EventVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.PageInfoVO;
@@ -71,7 +72,7 @@ public class MainController {
 			if(endPage > maxPage) {
 				endPage = maxPage;
 			}
-			PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage);
+			PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
 			model.addAttribute("noticeList", noticeList);
 			model.addAttribute("pageInfo", pageInfo);
 			
@@ -99,7 +100,12 @@ public class MainController {
 		}
 		
 		@GetMapping("Event")
-		public String event() {
+		public String event(Model model, HttpSession session) {
+			String uploadDir = "/resources/store_img/";//가상 업로드 경로
+	    	String saveDir = session.getServletContext().getRealPath(uploadDir);
+			List<EventVO> eventList = service.getEventList();
+			model.addAttribute("eventList", eventList);
+			model.addAttribute("saveDir", saveDir);
 			return "other/event";
 		}
 		

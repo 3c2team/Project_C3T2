@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.AuthInfoVO;
+import com.itwillbs.c3t2.vo.EventVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
@@ -69,5 +70,7 @@ public interface MemberMapper {
 	void updateReadcount(NoticeVO notice);
 
 	int updateKakaoId(@Param("member_id") String member_id, @Param("kakao_id") String kakao_id);
+
+	List<EventVO> selectEventList();
 			
 }
