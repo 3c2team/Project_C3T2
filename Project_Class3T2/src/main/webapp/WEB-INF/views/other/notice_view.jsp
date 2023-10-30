@@ -43,8 +43,16 @@ p {
 }
 </style>
 <script type="text/javascript">
-
-if (${notice.notice_num })
+$(document).ready(function() {
+    if(${notice.notice_num_pre} == 0) {
+    	$('#pre').attr('disabled', 'disabled');
+    	$("#preMent").prepend("등록된 게시글이 없습니다.");
+    }
+    if(${notice.notice_num_next} == 0) {
+    	$('#next').attr('disabled', 'disabled');
+    	$("#nextMent").prepend("등록된 게시글이 없습니다.");
+    }
+});
 </script>
 </head>
 <body>
@@ -59,27 +67,37 @@ if (${notice.notice_num })
 			<h1>${notice.notice_subject }</h1>
 			<p>관리자 &nbsp|&nbsp <fmt:formatDate value="${notice.notice_date }" pattern="yyyy.MM.dd"/> &nbsp|&nbsp 조회수 ${notice.notice_readcount }</p>
 			</section>
-			<section id="articleContentArea"> <%-- 본문이 표시될 영역 --%>
-				<pre>${notice.notice_content }</pre>
+			<section id="articleContentArea" style="width: 67vw;"> <%-- 본문이 표시될 영역 --%>
+				<pre style="width: 64vw; white-space: pre-line;">${notice.notice_content }</pre>
 			</section>
 		</section>
 		<section id="commandList">
-			<hr>
-			<a href="NoticeDetail?notice_num=${notice.notice_num - 1} &pageNum=1">${notice.notice_subject }</a>
-			<input type="button" value="이전글" onclick="location.href='NoticeDetail?notice_num=${notice.notice_num -1 }&pageNum=1'">
-			<h1>|</h1>
-			<a href="NoticeDetail?notice_num=${notice.notice_num + 1 }&pageNum=1">${notice.notice_subject }</a>
-			<input type="button" value="다음글" onclick="location.href='NoticeDetail?notice_num=${notice.notice_num + 1 }&pageNum=1'">
-			<hr>
+			<hr style="margin-left: -2%; width: 67vw;">
+			<div style="height: 10vh; width: 67vw; display: inline-block;">
+				<div style="display: inline-block; float: left;">
+					<h3 id="preMent"><a href="NoticeDetail?notice_num=${noticePre.notice_num} &pageNum=${param.pageNum}">${noticePre.notice_subject }</a>
+					<br>
+					<input type="button" id="pre" value="이전글" onclick="location.href='NoticeDetail?notice_num=${noticePre.notice_num }&pageNum=${param.pageNum}'"></h3>
+				</div>
+<!-- 				<div style="display: absolute;"> -->
+<!-- 					<h1 style="margin-right: 0;">|</h1> -->
+<!-- 				</div> -->
+				<div style="display: inline-block; float: right; margin-right: 5%;">
+					<h3 id="nextMent"><a href="NoticeDetail?notice_num=${noticeNext.notice_num }&pageNum=${param.pageNum}">${noticeNext.notice_subject }</a>
+					<br>
+					<input type="button" id="next" value="다음글" style="float:right;" onclick="location.href='NoticeDetail?notice_num=${noticeNext.notice_num }&pageNum=${param.pageNum}'"></h3>
+				</div>
+			</div>
+			<hr style="margin-left: -2%; width: 67vw;">
 			<input type="button" id="list" value="목록" onclick="location.href='News?pageNum=${param.pageNum}'">
 		</section>
 	</section>
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
 		<a id="topBtn" style="display:scroll; position:fixed; bottom:50px; right:15px;" href="#" title="맨 위로">
-		<img src="./img/arrow_top.png" style="width: 20px; height: 20px"></a>
+		<img src="${pageContext.request.contextPath }/resources/main_img/arrow_top.png" style="width: 20px; height: 20px"></a>
 		<a style="display:scroll; position:fixed; bottom:20px; right:15px;" href="#footer" title="맨 아래로">
-		<img src="./img/arrow_bottom.png" style="width: 20px; height: 20px"></a>
+		<img src="${pageContext.request.contextPath }/resources/main_img/arrow_bottom.png" style="width: 20px; height: 20px"></a>
 	</footer>
 </body>
 </html>

@@ -44,7 +44,7 @@ form.form1 {
 	padding-top: 30px;
 }
     
-.mail {
+.phone {
 	width: 76%;
 	color: rgb(128, 128, 128);
 	font-weight: 700;
@@ -64,7 +64,7 @@ form.form1 {
 	font-family: 'Noto Serif KR', serif;
 }
 
-.user:focus, .mail:focus {
+.user:focus, .phone:focus {
 	border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
     

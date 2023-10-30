@@ -3,6 +3,7 @@ package com.itwillbs.c3t2.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -58,7 +59,7 @@ public class MainController {
 			@RequestParam(defaultValue = "1") int pageNum,
 			Model model, NoticeVO notice
 				) {
-			int listLimit = 10; // 한 페이지에서 표시할 글 목록 갯수
+			int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
 			int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
 			List<NoticeVO> noticeList = service.getNewsList(searchType, searchKeyword, startRow, listLimit);
 			System.out.println(noticeList);
@@ -80,6 +81,14 @@ public class MainController {
 		@GetMapping("/NoticeDetail")
 		public String noticeDetail(@RequestParam int notice_num, Model model, NoticeVO notice) {
 			notice = service.getNotice(notice_num);
+			if(notice.getNotice_num_pre() != 0) {
+				NoticeVO notice_pre = service.getNotice(notice.getNotice_num_pre());
+				model.addAttribute("noticePre", notice_pre);
+			}
+			if(notice.getNotice_num_next() != 0) {
+				NoticeVO notice_next = service.getNotice(notice.getNotice_num_next());
+				model.addAttribute("noticeNext", notice_next);
+			}
 			
 			model.addAttribute("notice", notice);
 			System.out.println("notice_date : " + notice.getNotice_date());
@@ -99,15 +108,15 @@ public class MainController {
 			return "other/location";
 		}
 		
-//		// 예약 클릭 시 예약 폼으로 이동
-//		@GetMapping("ReservationForm")
-//		public String reservationForm() {
-//			return "reservation/reservation_form";
-//		}
+		// 예약 클릭 시 예약 폼으로 이동
+		@GetMapping("ReservationInfo")
+		public String reservationInfo() {
+			return "reservation/reservation_form";
+		}
 		
 		@GetMapping("OnlineStore")
 		public String onlineStore() {
-			return "store/store_best";
+			return "store/store_main";
 		}
 		
 		@GetMapping("Login")
@@ -132,7 +141,7 @@ public class MainController {
 		            session.setAttribute("access_Token", access_Token);
 		            session.setAttribute("sId", dbMember.getMember_id());
 		            session.setAttribute("sName", dbMember.getMember_name());
-		            session.setAttribute("loginUser", dbMember);
+		            session.setAttribute("sPhone", dbMember.getMember_phone_num());
 		            model.addAttribute("msg", "로그인에 성공했습니다. 메인페이지로 이동합니다."); // 출력할 메세지
 					model.addAttribute("targetURL", "Main"); // 이동시킬 페이지
 					return "forward";
@@ -184,7 +193,7 @@ public class MainController {
 				} else { // 이메일 인증 회원
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
-					session.setAttribute("loginUser", dbMember);
+					session.setAttribute("sPhone", dbMember.getMember_phone_num());
 					String kakao_id = (String)session.getAttribute("kakao_id");
 					int updateCount = service.addKakaoId(member_id, kakao_id);
 					if(updateCount > 0) {
@@ -206,7 +215,7 @@ public class MainController {
 		
 		@PostMapping("LoginPro")
 		public String loginPro(
-				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, Model model) {
+				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, HttpServletResponse response, Model model) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			MemberVO dbMember = service.getMemberLogin(member_id);
 			System.out.println(dbMember.getMember_passwd());
@@ -218,9 +227,17 @@ public class MainController {
 					model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다!");
 					return "fail_back";
 				} else { // 이메일 인증 회원
-					session.setAttribute("loginUser", dbMember);
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
+					session.setAttribute("sPhone", dbMember.getMember_phone_num());
+					Cookie cookie = new Cookie("cookieId", member.getMember_id());
+					System.out.println(rememberId);
+					if(rememberId) { // 아이디 저장 체크됨
+						cookie.setMaxAge(60 * 60 * 24 * 30);
+					} else { // 아이디 저장 미체크
+						cookie.setMaxAge(0); // 쿠키 즉시 삭제한다는 의미
+					}
+					response.addCookie(cookie);
 					return "redirect:/Main";
 				}
 			}
@@ -233,7 +250,7 @@ public class MainController {
 		
 		@PostMapping("IdForgotPro")
 		public String idForgotPro(String member_name, String member_phone_num, MemberVO member, Model model, HttpSession session) {
-			String member_id = service.getMemberId(member_name);
+			String member_id = service.getMember(member_name);
 			String member_id_2 = service.getMemberId(member_phone_num);
 			System.out.println("입력받은 이름 : " + member.getMember_name());
 			System.out.println("입력받은 번호 : " + member.getMember_phone_num());
@@ -243,6 +260,7 @@ public class MainController {
 			if(member_id.equals(member_id_2)) { // 성공
 				session.setAttribute("sName", member.getMember_name());
 				session.setAttribute("sId", member_id);
+				session.setAttribute("sPhone", member_phone_num);
 				System.out.println("세션 아이디 : " + member_id);
 				return "other/id_found";
 			} else { // 실패

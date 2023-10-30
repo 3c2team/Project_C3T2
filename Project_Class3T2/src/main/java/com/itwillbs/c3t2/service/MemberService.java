@@ -129,7 +129,6 @@ public class MemberService {
 	}
 	
 	public MemberVO getMemberKakaoLogin(String kakao_id) {
-		System.out.println("@@@@@@@@@@@@" + mapper.selectMemberKakaoLogin(kakao_id));
 		return mapper.selectMemberKakaoLogin(kakao_id);
 	}
 
@@ -175,7 +174,10 @@ public class MemberService {
 //	public MemberVO getMember(MemberVO member) {
 //		return mapper.selectMember(member);
 //	}
-
+	
+	public String getMember(String member_name) {
+		return mapper.selectMember(member_name);
+	}
 
 	public String getMemberId(String member_phone_num) {
 		return mapper.selectMemberId(member_phone_num);

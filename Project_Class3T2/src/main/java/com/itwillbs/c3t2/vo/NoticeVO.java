@@ -13,4 +13,6 @@ public class NoticeVO {
 	private String notice_content;
 	private Timestamp notice_date;
 	private int notice_readcount;
+	private int notice_num_pre;
+	private int notice_num_next;
 }
