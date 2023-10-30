@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
 <meta charset="UTF-8">
@@ -19,45 +20,136 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
-			<h1>예약 수정</h1>
-			<form action="Main" method="post">
-				<div id="calendarForm"></div>
-				<table class="custom_calendar_table">
+			<h1>예약 내역 변경</h1>
+			<form action="ReservationUpdatePro" method="post">
+				<div id="calendarForm" ></div>
+				<table>
 					<tr>
-						<td class="td_left"><label for="reservation_person_name">예약자 성함</label></td>
-						<td class="td_right"> <!-- 예약자 성함 get으로 넘긴 guest_num으로 세션 불러오기  -->
-							<input type="text" name="reservation_person_name" value="${sessionScope.sName}" readonly required />
+						<th>예약시간</th>
+						<td>
+							<input type="hidden" id="reservation_date" name="reservation_date">
+							<div class="form_radio_btn">
+								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>>
+								<label for="radio-0">10:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-1" type="radio" name="reservation_time" value="11:00" <c:if test="${reservation.reservation_time eq '11:00' }">checked</c:if>>
+								<label for="radio-1">11:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-2" type="radio" name="reservation_time" value="12:00" <c:if test="${reservation.reservation_time eq '12:00' }">checked</c:if>>
+								<label for="radio-2">12:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-3" type="radio" name="reservation_time" value="13:00" <c:if test="${reservation.reservation_time eq '13:00' }">checked</c:if>>
+								<label for="radio-3">13:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-4" type="radio" name="reservation_time" value="14:00" <c:if test="${reservation.reservation_time eq '14:00' }">checked</c:if>>
+								<label for="radio-4">14:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-5" type="radio" name="reservation_time" value="15:00" <c:if test="${reservation.reservation_time eq '15:00' }">checked</c:if>>
+								<label for="radio-5">15:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-6" type="radio" name="reservation_time" value="16:00" <c:if test="${reservation.reservation_time eq '16:00' }">checked</c:if>>
+								<label for="radio-6">16:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-7" type="radio" name="reservation_time" value="17:00" <c:if test="${reservation.reservation_time eq '17:00' }">checked</c:if>>
+								<label for="radio-7">17:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-8" type="radio" name="reservation_time" value="18:00" <c:if test="${reservation.reservation_time eq '18:00' }">checked</c:if>>
+								<label for="radio-8">18:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-9" type="radio" name="reservation_time" value="19:00" <c:if test="${reservation.reservation_time eq '19:00' }">checked</c:if>>
+								<label for="radio-9">19:00</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio-10" type="radio" name="reservation_time" value="20:00" <c:if test="${reservation.reservation_time eq '20:00' }">checked</c:if>>
+								<label for="radio-10">20:00</label>
+							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="td_left"><label for="reservation_person_phone">예약자 전화번호</label></td>
-						<td class="td_right">
-<%-- 							<input type="text" name="reservation_person_phone" value="${reservation_person_phone }" required /> --%>
+						<th>예약인원</th>
+						<td>
+							<div class="form_radio_btn">
+								<input id="radio1" type="radio" name="reservation_person_count" value="1" <c:if test="${reservation.reservation_person_count eq '1' }">checked</c:if>>
+								<label for="radio1">1</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio2" type="radio" name="reservation_person_count" value="2" <c:if test="${reservation.reservation_person_count eq '2' }">checked</c:if>>
+								<label for="radio2">2</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio3" type="radio" name="reservation_person_count" value="3" <c:if test="${reservation.reservation_person_count eq '3' }">checked</c:if>>
+								<label for="radio3">3</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio4" type="radio" name="reservation_person_count" value="4" <c:if test="${reservation.reservation_person_count eq '4' }">checked</c:if>>
+								<label for="radio4">4</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio5" type="radio" name="reservation_person_count" value="5" <c:if test="${reservation.reservation_person_count eq '5' }">checked</c:if>>
+								<label for="radio5">5</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio6" type="radio" name="reservation_person_count" value="6" <c:if test="${reservation.reservation_person_count eq '6' }">checked</c:if>>
+								<label for="radio6">6</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio7" type="radio" name="reservation_person_count" value="7" <c:if test="${reservation.reservation_person_count eq '7' }">checked</c:if>>
+								<label for="radio7">7</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio8" type="radio" name="reservation_person_count" value="8" <c:if test="${reservation.reservation_person_count eq '8' }">checked</c:if>>
+								<label for="radio8">8</label>
+							</div>
 						</td>
 					</tr>
 					<tr>
-						<td class="td_left"><label for="reservation_date">예약일자</label>
-<%-- 							<input type="date" name="reservation_date" value="${reservation_date }" required> --%>
-<%-- 							<input type="date" name="reservation_date" value="${reservation_time }" required> --%>
-						</td>
-						<td class="td_right"><label for="reservation_date">예약시간</label>
+						<th>예약자 성함</th>
+						<td>
+							<input type="text" class="readonly" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" readonly required>
 						</td>
 					</tr>
 					<tr>
-						<td class="td_left"><label for="board_file">첨부파일</label></td>
-						<td class="td_right">
+						<th>예약번호</th>
+						<td>
+							<input type="text" class="readonly" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" readonly required />
+						</td>
+					</tr>
+					<tr>
+						<th>예약자 전화번호</th>
+						<td>
+							<input type="text" name="reservation_person_phone" value="${reservation.reservation_person_phone }" required />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" value="예약변경" onclick="updateCheck()">
+							<input type="reset" value="다시쓰기">
+							<input type="button" value="취소" onclick="history.back()">
+						</td>
 					</tr>
 				</table>
-				<section id="commandCell">
-					<input type="submit" value="수정">&nbsp;&nbsp;
-					<input type="reset" value="다시쓰기">&nbsp;&nbsp;
-					<input type="button" value="취소" onclick="history.back()">
-				</section>
 			</form>
 		</main>
 		<footer id="footer">
 			<jsp:include page="../inc/bottom.jsp"></jsp:include>
 		</footer>
 	</div>
+	<script type="text/javascript">
+		function updateCheck() {
+			let result = confirm("예약 변경 하시겠습니까?");
+			if(result){
+				location.href='./';
+			}
+		}
+	</script>
 </body>
 </html>

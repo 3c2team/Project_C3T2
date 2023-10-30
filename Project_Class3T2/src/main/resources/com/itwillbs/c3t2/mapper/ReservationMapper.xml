@@ -33,35 +33,39 @@
 		)
 	</insert>
 	
-	<!-- 예약 상세 정보 조회 -->
-	<select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-		SELECT * FROM RESERVATION 
+	<!-- 예약번호 불러오기 -->
+	<select id="getGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT reservation_guest_num 
+		FROM RESERVATION 
+		WHERE reservation_person_name = #{reservation_person_name} AND reservation_person_phone = #{reservation_person_phone}
+	</select>
+	
+	<!-- 예약자 불러오기 -->
+	<select id="getPersonName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+		SELECT * 
+		FROM RESERVATION 
 		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_phone = #{reservation_person_phone}
 	</select>
 	
 	<!-- 예약 수정 -->
 	<update id="updateReservation">
 		UPDATE RESERVATION 
-		SET reservation_date = #{reservation_date}, reservation_time = #{reservation_time}
-		WHERE reservation_guest_num = #{reservation_guest_num}
+		SET reservation_date = #{reservation_date}
+			, reservation_time = #{reservation_time}
+			, reservation_person_count = #{reservation_person_count}
+			, reservation_person_phone = #{reservation_person_phone}
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
 	<select id="selectGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-		SELECT reservation_date
-			   , reservation_time
-			   , reservation_person_name
-			   , reservation_person_count
-			   , reservation_person_phone
-			   , reservation_guest_num
+		SELECT *
 		FROM RESERVATION
-		WHERE reservation_guest_num = #{reservation_guest_num} 
-			AND reservation_person_phone = #{reservation_person_phone}
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</select>
 	
-	
 	<delete id="deleteReservation">
-		DELETE FROM RESERVATION
-		WHERE reservation_guest_num = #{reservation_guest_num}
+		DELETE FROM RESERVATION 
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</delete>
 	
 <!-- 	<typeAliases> -->

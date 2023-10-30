@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
@@ -24,8 +25,8 @@
 				<h3>● 좌석 배치는 사전 예약순에 따르며 특정 좌석 지정은 불가합니다.</h3>
 				<h3>● 홈페이지 예약은 최대 8인 이하 테이블에 한하며 9인 이상 단체는 유선으로 문의 부탁드립니다.</h3>
 				<h3>● 예약 취소 및 변경을 원하실 경우 최소 하루 전까지 온라인으로 예약 취소 후 다시 이용해주시기 바랍니다.</h3>
-				<input type="checkbox">&nbsp;예약 안내 약관에 동의 하십니까?<br><br>
-				<input type="button" value="예약하기" onclick="location.href='ReservationForm'">
+				<input type="checkbox" required>&nbsp;예약 안내 약관에 동의 하십니까?<br><br>
+				<input type="button" value="예약하기" onclick="location.href='ReservationForm'" > <!-- alert('약관에 동의하셔야 예약 가능합니다.'); -->
 			</div>
 		</main>
 		<footer id="footer">

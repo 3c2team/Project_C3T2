@@ -22,18 +22,27 @@ public class ReservationService {
 			return mapper.getReservation(reservation);
 		}
 
-		public int updateReservation(int reservation_guest_num) {
-			return mapper.updateReservation(reservation_guest_num);
+		public int updateReservation(int reservation_guest_num, String reservation_person_name) {
+			return mapper.updateReservation(reservation_guest_num, reservation_person_name);
 		}
 
+		// 예약 번호를 조회
+		public ReservationVO getGuestNum(String reservation_person_name, String reservation_person_phone) {
+			return mapper.getGuestNum(reservation_person_name, reservation_person_phone);
+		}
+		
 		// 파일명 조회 요청
-		public ReservationVO getGuestNum(ReservationVO reservation) {
-			return mapper.selectGuestNum(reservation);
+		public ReservationVO selectGuestNum(int reservation_guest_num, String reservation_person_name) {
+			return mapper.selectGuestNum(reservation_guest_num, reservation_person_name);
+		}
+		
+		// 글 삭제 요청
+		public int removeReservation(int reservation_guest_num, String reservation_person_name) {
+			return mapper.deleteReservation(reservation_guest_num, reservation_person_name);
 		}
 
-		// 글 삭제 요청
-		public int removeReservation(ReservationVO reservation) {
-			return mapper.deleteReservation(reservation);
+		public ReservationVO getPersonName(int reservation_guest_num, String reservation_person_phone) {
+			return mapper.getPersonName(reservation_guest_num, reservation_person_phone);
 		}
 
 

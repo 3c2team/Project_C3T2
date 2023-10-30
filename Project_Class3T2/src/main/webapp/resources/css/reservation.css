@@ -42,7 +42,8 @@ textarea.center {
 div.mainLayout{
  	height: 1500px;
 }
- 
+
+
 p{
 	text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
 	color: rgb(184, 197, 201);
@@ -73,7 +74,7 @@ tr{
 	margin: 4em auto;
 }
 
-input[type=button],[type=submit] {
+input[type=button],[type=submit],[type=reset] {
 	cursor: pointer;
 	border-radius: 5em;
 	color: #fff;

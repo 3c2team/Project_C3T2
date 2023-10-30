@@ -13,8 +13,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-</script>
 </head>
 <body>
 	<div id="mainLayout">
@@ -32,7 +30,7 @@
 					<th>예약시간</th>
 					<td>
 						<input type="hidden" id="reservation_date" name="reservation_date">
-						<input type="hidden" id="member_id" name="member_id" value="${sessionScope.sId }">
+						<input type="hidden" id="member_id" name="member_id" <c:if test='${not empty sessionScope.sId }'>value="${sessionScope.sId }"</c:if>>
 						<div class="form_radio_btn">
 							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio-0">10:00</label>
@@ -119,7 +117,7 @@
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
+						<input type="text" name="reservation_person_name" placeholder="성함" size="20" required
 							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>>
 						
 					</td> <!-- value= --> 
@@ -127,7 +125,7 @@
 				<tr>
 					<th>예약자 전화번호</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required
+						<input type="text" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required
 							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sPhone }"</c:if>>
 					</td> <!-- value="${sessionScope.sPhone}" --> 
 				</tr>
