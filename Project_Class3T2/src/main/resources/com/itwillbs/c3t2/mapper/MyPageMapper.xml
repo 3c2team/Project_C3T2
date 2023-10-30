@@ -31,28 +31,37 @@
 		WHERE u.member_id = #{member_id}
     </select>
 	
-	<!-- 장바구니 -->
+	<!-- 장바구니 검색 SQL -->
 	<sql id="cartSearchSql">
+		
+		<!-- 검색 유형이 null이 아닐 경우에만 검색 조건을 추가합니다. -->
 	    <if test="searchType !=null">
+	    
+	    		<!-- 검색 유형이 'member_id'일 경우 -->
 	            <if test="searchType == 'userid'.toString()">
-	                and userid like CONCAT('%', #{keyword}, '%')
+	            	
+	            	<!-- 사용자 ID에 키워드가 포함된 데이터를 검색합니다. -->
+	                and member_id like CONCAT('%', #{keyword}, '%')
 	            </if>
-	     
+	     		
+	     		<!-- 검색 유형이 'member_name'일 경우 -->
 	            <if test="searchType == 'username'.toString()">
-	                and username like CONCAT('%', #{keyword}, '%')
+	                and member_name like CONCAT('%', #{keyword}, '%')
 	            </if>
-	     
+	     		
+	     		<!-- 검색 유형이 'member_email'일 경우 -->
 	            <if test="searchType == 'email'.toString()">
-	                and email like CONCAT('%', #{keyword}, '%')
+	                and member_email like CONCAT('%', #{keyword}, '%')
 	            </if>
-	             
+	            
+	            <!-- 검색 유형이 'all'일 경우 -->
 	            <if test="searchType == 'all'.toString()">
 	                and ( 
-	                     userid like CONCAT('%', #{keyword}, '%')
+	                     member_id like CONCAT('%', #{keyword}, '%')
 	                    OR
-	                     username like CONCAT('%', #{keyword}, '%')
+	                     member_name like CONCAT('%', #{keyword}, '%')
 	                    OR
-	                     email like CONCAT('%', #{keyword}, '%')
+	                     member_email like CONCAT('%', #{keyword}, '%')
 	                )
 	            </if>
 	             
