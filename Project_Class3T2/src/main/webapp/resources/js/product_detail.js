@@ -20,8 +20,6 @@ function changeImgOut() {
 $(document).ready(function() {	
 	const amountsInput = $('#amounts');
 	const productPrice = $('#productPrice').val();
-	
-	alert(productPrice);
 
 	$("#delBtn").click(function() {
 	    let currentValue = parseInt(amountsInput.val());
