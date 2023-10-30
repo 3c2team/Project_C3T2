@@ -20,6 +20,8 @@
 		
 		location.href="MainCart?proNum=${productDetail.product_num }&proCount=" + product_count;
 	}
+	
+	
 </script>
 </head>
 <body>
@@ -33,7 +35,7 @@
 				<%-- 왼쪽 시작 --%>
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
-						<img src="${pageContext.request.contextPath}/resources${productDetail.product_main_img_real_file}" id="main_img">
+						<img src="${productDetail.product_main_img_real_file}" id="main_img">
 						<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
 							<div class="orderAveStar">
 								<strong>
@@ -75,9 +77,9 @@
 						<ul>
 						<!-- 이미지 업로드 수 만큼 조절해야함 -->
 							<c:forEach var="product_img" items="${productMiniImgList }">
-								<li><a><img src="${pageContext.request.contextPath}/resources${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
+								<li><a><img src="${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
 							</c:forEach>
-							<li><a><img src="${pageContext.request.contextPath}/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<li><a><img src="${pageContext.request.contextPath }/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
@@ -132,6 +134,7 @@
 						<p class="detailTopSumTitle">판매가</p>
 						<p class="detailTopSumPrice"><span class="priceSum" id="my_sum">${productDetail.product_price }</span>&nbsp;원</p>
 						<input type="hidden" id="productPrice" value="${productDetail.product_price }">
+						<%-- 문제 1 주소에서 바로 Pronum 으로 검색하면 컨텐츠 안뜸 --%>
 					</div>
 					<div class="detailBtn">
 						<button class="btn_white" onclick="productCount()">장바구니</button>
@@ -164,7 +167,7 @@
 			</div>
 			<div class="detailInfoImgArea">
 				<%-- 경로 변경하기 --%>
-				<img class="detailInfoImg" src="${pageContext.request.contextPath}/resources${productInfoImg.product_image_real_file }">
+				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
 			</div>
 		</section>
 		
@@ -180,9 +183,12 @@
 							<strong class="reviewAveStr">상품 총 평점</strong>
 							<div class="reviewAveDashboard">
 								<div class="reviewAveStar">
-									<a>★★★★★</a>
-									<span class="reviewAveScore"> 4.2</span><span class="reviewMaxScore">/  5</span>
-									<span class="reviewCount">총 4건의 리뷰</span>
+									<div class="reviewStarMax">
+										<div class="bg_star" style="width: ${AveReviewStar * 20 }%;">
+										</div>									
+									</div>
+									<span class="reviewAveScore"> ${AveReviewStar }</span><span class="reviewMaxScore">/  5</span>
+									<span class="reviewCount">총 ${reviewCount }건의 리뷰</span>
 								</div>
 								<div>
 									<button class="reviewWrite" onclick="window.open('ReviewFrom?proNum=${productDetail.product_num }', 'review_from', 'width=500, height=800, location=no, status=no, scrollbars=no')">리뷰 쓰기</button>
@@ -197,88 +203,28 @@
 			<div>
 				<div>
 					<ul class="">
-<%-- 						<c:forEach var="" items=""> --%>
+						<c:forEach var="reviewList" items="${reviewList }">
 							<li>
 								<div class="reviewBox">
-									<div class="reviewStar">
-										<a>★★★★★ | 5</a>
+									<div class="reviewStarMin">
+										<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
+										</div>									
 									</div>
 									<div class="reviewInfo">
 										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
 										<div class="reviewImg">
-											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
+											<img src="${reviewList.review_image }">
 										</div>
 										<div class="reviewContent">
-											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
-											리뷰내용리뷰내용리뷰내용리뷰내용
+											${reviewList.review_content }
 										</div>
 									</div>
 									<div class="reviewIdDate">
-										아이디 | 리뷰쓴날
+										${reviewList.member_id } | ${reviewList.review_date }
 									</div>
 								</div>
 							</li>
-							<li>
-								<div class="reviewBox">
-									<div class="reviewStar">
-										<a>★★★★★ | 5</a>
-									</div>
-									<div class="reviewInfo">
-										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
-										<div class="reviewImg">
-											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
-										</div>
-										<div class="reviewContent">
-											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
-											리뷰내용리뷰내용리뷰내용리뷰내용
-										</div>
-									</div>
-									<div class="reviewIdDate">
-										아이디 | 리뷰쓴날
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="reviewBox">
-									<div class="reviewStar">
-										<a>★★★★★ | 5</a>
-									</div>
-									<div class="reviewInfo">
-										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
-										<div class="reviewImg">
-											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
-										</div>
-										<div class="reviewContent">
-											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
-											리뷰내용리뷰내용리뷰내용리뷰내용
-										</div>
-									</div>
-									<div class="reviewIdDate">
-										아이디 | 리뷰쓴날
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="reviewBox">
-									<div class="reviewStar">
-										<a>★★★★★ | 5</a>
-									</div>
-									<div class="reviewInfo">
-										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
-										<div class="reviewImg">
-											<img src="${pageContext.request.contextPath}/resources/store_img/steak7 (4).jpg">
-										</div>
-										<div class="reviewContent">
-											리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용
-											리뷰내용리뷰내용리뷰내용리뷰내용
-										</div>
-									</div>
-									<div class="reviewIdDate">
-										아이디 | 리뷰쓴날
-									</div>
-								</div>
-							</li>
-<%-- 						</c:forEach> --%>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

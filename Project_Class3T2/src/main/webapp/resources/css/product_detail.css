@@ -96,8 +96,6 @@
 
 .detailTopMiniImg ul {
 	list-style:none;
-	display: flex;
-    align-items: center;
 }
 
 .detailTopMiniImg li {
@@ -348,9 +346,53 @@ strong.reviewAveStr {
     justify-content: space-between;
 }
 
-.reviewAveStar a {
-    color: #FE2E2E;
+/* .reviewAveStar a { */
+/*     color: #FE2E2E; */
+/* } */
+
+.reviewStarMax {
+	position: relative;
+    display: inline-block;
+	width: 175px;
+    height: 30px;
+    background-position: 0;
+    background-repeat: no-repeat;
+	background-image: url("../store_img/bg_star_max.png");
 }
+
+.bg_star{
+	position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.reviewStarMax .bg_star{
+	width: 175px;
+    height: 30px;
+    background-position: 0;
+    background-repeat: no-repeat;
+	background-image: url("../store_img/bg_star_max_on.png");
+}
+
+.reviewStarMin {
+	position: relative;
+    display: inline-block;
+	width: 90px;
+    height: 15px;
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-image: url("../store_img/bg_star_min.png");
+}
+
+.reviewStarMin .bg_star {
+	width: 90px;
+    height: 15px;
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-image: url("../store_img/bg_star_min_on.png");
+}
+
 
 span.reviewAveScore {
     font-weight: bold;

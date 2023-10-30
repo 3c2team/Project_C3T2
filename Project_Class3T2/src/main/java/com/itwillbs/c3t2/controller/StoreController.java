@@ -102,6 +102,22 @@ public class StoreController {
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("productMiniImgList", productMiniImgList);
 		model.addAttribute("productInfoImg", productInfoImg);
+		
+		//=========================================================================
+		// 리뷰
+		List<ReviewVO> reviewList = service.getReviewList(proNum);
+		double reviewCount = 0;
+		double sumReviewStar = 0;
+		for(ReviewVO review : reviewList) {
+			sumReviewStar += review.getReview_star();
+			reviewCount++;
+		}
+		double AveReviewStar = sumReviewStar/reviewCount;
+		
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("AveReviewStar", AveReviewStar);
+		model.addAttribute("reviewCount", (int)reviewCount);
+
 		return "store/product_detail";
 	}
 	

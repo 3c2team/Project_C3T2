@@ -29,5 +29,6 @@ public interface ProductMapper {
 
 	public int insertReview(ReviewVO review);
 
+	public List<ReviewVO> selectReviewList(int proNum);
 	
 }

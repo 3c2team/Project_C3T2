@@ -164,12 +164,23 @@ h1 {
     -webkit-appearance: none;
 }
 
-button.fileUpload {
-	background-color: rgba( 255, 255, 255, 0.5 );
+.fileUpload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba( 255, 255, 255, 0.5 );
     width: 100%;
     height: 60px;
     font-size: 20px;
+    border: 1px solid #464646;
+    cursor: pointer;
 }
+
+#file {
+  display: none;
+}
+
+
 
 .buttomBtn input {
 	width: 49%;

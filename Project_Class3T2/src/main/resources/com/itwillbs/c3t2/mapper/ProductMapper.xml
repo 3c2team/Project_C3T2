@@ -47,7 +47,20 @@
 		FROM PRODUCT_IMG
 		WHERE product_num = #{proNum};
 	</select>
-	
+	<insert id="insertReview">
+		INSERT
+		INTO REVIEW
+		VALUES (
+			NULL
+			, #{member_id}
+			, #{review_content}
+			, #{order_num}
+			, #{product_num}
+			, #{review_star}
+			, now()
+			, #{review_image}
+		)
+	</insert>
 
 	
 </mapper>

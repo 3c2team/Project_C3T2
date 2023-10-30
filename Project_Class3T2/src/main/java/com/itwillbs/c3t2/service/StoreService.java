@@ -48,7 +48,9 @@ public class StoreService {
 		return mapper.insertReview(review);
 	}
 	
-	
+	public List<ReviewVO> getReviewList(int proNum) {
+		return mapper.selectReviewList(proNum);
+	}
 	
 	
 }

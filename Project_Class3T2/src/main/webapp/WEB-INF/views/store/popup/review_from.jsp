@@ -56,9 +56,8 @@
 				<label for="file">
 				  <div class="fileUpload">사진 첨부하기</div>
 				</label>
-				<input type="file" class="reviewFile" name="review_img" id="review_img">
-<!-- 					<button class="fileUpload" type="button">사진 첨부하기</button> -->
-<!-- 				</div> -->
+				<input type="file" name="file" id="file">
+				<!--  -->
 			</div>
 			<div class="buttomBtn">
 				<input type="button" id="cencle" value="취소" onclick="window.close();">
