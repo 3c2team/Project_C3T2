@@ -21,7 +21,7 @@
 	</c:when>
 	<c:otherwise>
 		<%-- 아이디 클릭 - MemberInfo 서블릿 주소 요청 --%>
-		<a href="${pageContext.request.contextPath}/mypage/MypageDashboard?id=${sessionScope.sId }">${sessionScope.sName }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
+		<a href="${pageContext.request.contextPath}/MypageDashboard?id=${sessionScope.sId }">${sessionScope.sName }</a> 님&nbsp;&nbsp;&nbsp;&nbsp; 
 		<a href="javascript:logout()">LogOut</a>
 		| &nbsp;&nbsp;<a href="MainCart?id=${sessionScope.sId }">장바구니</a>
 		<%-- 만약, 세션 아이디가 관리자("admin")일 경우 --%>

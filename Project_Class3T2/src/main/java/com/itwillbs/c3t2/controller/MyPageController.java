@@ -29,7 +29,7 @@ import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 @Controller
-@RequestMapping("/mypage/")
+//@RequestMapping("/mypage/")
 public class MyPageController {
 	
 	@Autowired
