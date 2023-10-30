@@ -324,11 +324,11 @@ public class MyPageController {
 	public String mypageReservationList(HttpSession session, Model model) {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
-		Integer member_num = (Integer) session.getAttribute("sNum");
-		System.out.println(member_num);
+		String member_name = (String) session.getAttribute("sName");
+		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_name);
 		
 		// 현재 로그인한 회원의 모든 리뷰 가져오기
-		List<ReservationVO> reviews = service.getReservationDetail(member_num);
+		List<ReservationVO> reviews = service.getReservationDetail(member_name);
 		System.out.println(reviews);
 		
 		model.addAttribute("reviews", reviews);

@@ -47,8 +47,8 @@ public class MyPageService {
     }
 	
 	// 예약 내역
-	public List<ReservationVO> getReservationDetail(Integer member_num) {
-		return mapper.getReservation(member_num);
+	public List<ReservationVO> getReservationDetail(String member_name) {
+		return mapper.getReservation(member_name);
 	}
 
 	//비밀번호 업데이트

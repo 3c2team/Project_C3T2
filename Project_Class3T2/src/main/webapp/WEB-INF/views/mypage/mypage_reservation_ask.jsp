@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="./include/head.jsp"%>
-<title>마이페이지-상품 리뷰</title>
+<title>마이페이지-예약 내역</title>
 </head>
 <body>
 	<%@ include file="./include/body_top.jsp"%>
@@ -13,7 +13,7 @@
 
 	<div class="mypageContents">
 		<div class="text-center mt50 mb50">	
-			<h1>상품 리뷰</h1>
+			<h1>예약 내역</h1>
 		</div>
 		<h2>기간 조회</h2>
 		<div class="reservationConfirmContainer">
@@ -40,20 +40,20 @@
 					<table>
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
-							<th width="120px">예약 번호</th>
+							<th width="120px">예약자 성함</th>
 							<th width="400px">예약 날짜</th>
 							<th width="130px">예약 시간</th>
 							<th width="130px">예약 인원</th>
-							<th width="130px">취소 여부</th>
+							<th width="130px">예약 테이블</th>
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">
 							<tr>
-								<td>${reservation.reservation_num}</td>
+								<td>${reservation.reservation_person_name}</td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>
 								<td>${reservation.reservation_person_count}</td>
-								<td>${reservation.reservation_cancel == 0 ? "No" : "Yes"}</td>
+								<td>${reservation.dinning_num}</td>
 							</tr>
 						</c:forEach>
 					</table>

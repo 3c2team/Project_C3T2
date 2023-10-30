@@ -31,6 +31,7 @@
 		WHERE u.member_id = #{member_id}
     </select>
 	
+	<!-- 장바구니 -->
 	<sql id="cartSearchSql">
 	    <if test="searchType !=null">
 	            <if test="searchType == 'userid'.toString()">
@@ -114,17 +115,18 @@
     <!-- 예약 내역 -->
     <select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
         SELECT 
-            R.reservation_num,
             R.reservation_date,
             R.reservation_time,
+            R.reservation_person_name,
             R.reservation_person_count,
-            R.reservation_cancel
+            R.reservation_person_phone,
+            R.dinning_num
         FROM 
-            MEMBER M
+            RESERVATION R
         JOIN 
-            RESERVATION R ON M.member_name = R.reservation_person_name
+            MEMBER M ON R.reservation_person_name = M.member_name
         WHERE 
-            M.member_name = #{memberName}
+            M.member_name = #{member_name}
     </select>
     
 

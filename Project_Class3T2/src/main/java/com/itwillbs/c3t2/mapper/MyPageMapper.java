@@ -35,7 +35,7 @@ public interface MyPageMapper {
 	int deleteFavorite(Integer favoriteNum);
 	
 	// 예약 내역
-	List<ReservationVO> getReservation(Integer member_num);
+	List<ReservationVO> getReservation(String member_name);
 
 	//비밀번호 업데이트
 	int updatePassword(Map<String, Object> param);
