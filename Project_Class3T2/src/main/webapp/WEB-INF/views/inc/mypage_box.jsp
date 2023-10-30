@@ -19,14 +19,13 @@
 <div id="menu">
 	<p><b>나의 주문정보</b></p>
 	<ul>
-		<li><a href="MypageCheckOrder" class="${fn:contains(URI,'check_order') ? 'active':''}">주문 조회</a></li>
-		<li><a href="MypageCheckCancel" class="${fn:contains(URI,'check_cancel') ? 'active':''}">취소/반품 조회</a></li>
+		<li><a href="MypageReservationList" class="${fn:contains(URI,'reservation_ask') ? 'active':''}">예약 조회</a></li>
 	</ul>
 </div>
 <div id="menu">
 	<p><b>나의 신상정보</b></p>
 	<ul>
-		<li><a href="MypagePoint" class="${fn:contains(URI,'point') ? 'active':''}">나의 상세정보</a></li>
+		<li><a href="MypageDetail" class="${fn:contains(URI,'mypage_detail') ? 'active':''}">나의 상세정보</a></li>
 	</ul>
 </div>
 <div id="menu">

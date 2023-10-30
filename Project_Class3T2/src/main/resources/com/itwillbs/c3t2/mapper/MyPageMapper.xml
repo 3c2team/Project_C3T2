@@ -89,7 +89,7 @@
             limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}            
      </select>       
 	
-
+	
 	<!-- 찜목록 -->
 	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
         SELECT 

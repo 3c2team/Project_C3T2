@@ -70,27 +70,10 @@ public class MyPageController {
 	}
 	
 	
-	
-	@GetMapping("MypageCheckCancel")			//나의 주문정보 - 취소/반품 내역
-	public String mypageCheckCancel() {
-		return "mypage/mypage_check_cancel";
-	}
-	
 	@GetMapping("MypageCheckOrder")			//나의 주문정보 - 주문 조회
 	public String mypageCheckOrder() {
 		return "mypage/mypage_check_order";
 	}
-	
-	
-	
-	@GetMapping("MypagePoint")		
-	public String mypagePoint(Model model, HttpSession session) {
-		String member_id=(String)session.getAttribute("sId");
-		MemberVO memberVO = memberService.getMemberLogin(member_id);
-		model.addAttribute("Member", memberVO);
-		return "mypage/mypage_point";
-	}
-	
 	
 	
 	/**◆1.공통-비밀번호 확인 - GET 
@@ -134,8 +117,6 @@ public class MyPageController {
 		session.removeAttribute("mypageChckConfirm");
 	    return true;		
 	}
-		
-	
 	
    /**
     * 나의 정보관리
@@ -196,8 +177,6 @@ public class MyPageController {
 		return "mypage/mypage_passwd_change";
 	}
 	
-	
-	
 	@PostMapping("MypagePasswdChange")		
 	@ResponseBody
 	public boolean mypagePasswdChange(String passwd, HttpSession session ) {
@@ -218,10 +197,6 @@ public class MyPageController {
 			return false;
 		}			
 	}
-	
-	
-	
-	
 	
 	/**
 	 * 회원 탈퇴
@@ -251,28 +226,11 @@ public class MyPageController {
 			return false;
 		}		
 	}
-
-	
-	
-
-	
-
-	
-
 	
 	@GetMapping("MypageReservationAsk")		//나의 정보관리 - 회원 탈퇴
 	public String mypageReservationAsk() {
 		return "mypage/mypage_reservation_ask";
 	}
-	@GetMapping("MypageReservationChange")	//나의 예약정보 - 예약 변경 전 비번입력
-	public String mypageReservationChange() {
-		return "mypage/mypage_reservation_change";
-	}
-	
-//	@GetMapping("MypageReservationList")				// 예약 내역
-//	public String mypageReservationList() {
-//		return "mypage/mypage_reservation_list";
-//	}
 	
 	
 	//============================================================================
@@ -375,6 +333,14 @@ public class MyPageController {
 		
 		model.addAttribute("reviews", reviews);
 		
-		return "mypage/mypage_reservation_list";
+		return "mypage/mypage_reservation_ask";
+	}
+	
+	@GetMapping("MypageDetail")							// 나의 상세 정보
+	public String mypagePoint(Model model, HttpSession session) {
+		String member_id=(String)session.getAttribute("sId");
+		MemberVO memberVO = memberService.getMemberLogin(member_id);
+		model.addAttribute("Member", memberVO);
+		return "mypage/mypage_detail";
 	}
 }
