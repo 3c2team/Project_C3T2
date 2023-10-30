@@ -20,7 +20,7 @@ public interface AdminMapper {
 	List<MemberVO> selectMemberList();
 	
 	//예약조회
-	List<ReservationVO> selectReservationList();
+	List<Map<String, Object>> selectReservationList();
 	
 	//관리자조회
 	AdminVO selectAdmin(AdminVO admin);
@@ -69,5 +69,11 @@ public interface AdminMapper {
 	Map<String, Object> selectEvent(int event_num);
 
 	int deleteEvent(int event_num);
+
+	List<Map<String, Object>> selectQnaBoardList();
+
+	Map<String, Object> selectQnaBoard(int qna_num);
+
+	int updateQnaBoard(Map<String, Object> map);
 
 }

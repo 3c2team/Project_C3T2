@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,23 +42,28 @@ table {
 						<table id="datatablesSimple">
 							<thead>
 								<tr>
-									<th>상품번호</th>
+									<th>문의번호</th>
 									<th>작성자</th>
-									<th>문의내용</th>
+									<th>상풍번호</th>
+									<th>문의제목</th>
 									<th>문의날짜</th>
 									<th>답변여부</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th>1</th>
-									<th>
-										강석진<button class="btn btn-light btn-right" id="open_ditail">자세히보기</button>
-									</th>
-									<th>이것은 뭔가요?</th>
-									<th>2023-10-11</th>
-									<th>답변완료</th>
-								</tr>
+								<c:forEach var="QnaBoardList" items="${QnaBoardList}">
+									<tr>
+										<th>${QnaBoardList.num}</th>
+										<th>
+											${QnaBoardList.member_id}(${QnaBoardList.member_name })
+											<button class="btn btn-light btn-right go_detail" value="${QnaBoardList.qna_num}">자세히보기</button>
+										</th>
+										<th>${QnaBoardList.product_num}</th>
+										<th>${QnaBoardList.qna_subject}</th>
+										<th>${QnaBoardList.qna_date}</th>
+										<th>${QnaBoardList.qna_is_answer}</th>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -70,7 +76,6 @@ table {
 		crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/admin_qna.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
 		crossorigin="anonymous"></script>

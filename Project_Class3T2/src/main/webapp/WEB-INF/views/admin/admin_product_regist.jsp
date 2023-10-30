@@ -10,6 +10,7 @@
 <title>상품 등록</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/admin_product.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/admin_scripts.js"></script>
 </head>
 <body>
 	<div class="jumbotron">
@@ -18,7 +19,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
+		<form name="newProduct" onsubmit="return confirm('등록하시겠습니까?')" action="AdminProductRagistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 			<div class="form-group row">
 				<label class="col-sm-2">등록 분류</label>
 				<div class="com-sm-3">
@@ -28,7 +29,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
-					<input type="radio" value="1" name="product_category_num" >Staek
+					<input type="radio" value="1" checked="checked" name="product_category_num" >Staek
 					<input type="radio" value="2" name="product_category_num" >Pasta
 					<input type="radio" value="3" name="product_category_num" >Soup
 					<input type="radio" value="4" name="product_category_num" >Etc
@@ -37,13 +38,13 @@
 			<div class="form-group row">
 				<label class="col-sm-2">상품 이름</label>
 				<div class="com-sm-3">
-					<input type="text" name="product_name" class="form-control">
+					<input type="text" required name="product_name" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2">가격</label>
 				<div class="com-sm-3">
-					<input type="number" name="product_price" class="form-control">
+					<input type="number" required name="product_price" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -74,7 +75,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input id="product_image"type="submit" class="btn btn-primary" value="등록">
+					<input type="submit" class="btn btn-primary" value="등록">
 				</div>
 			</div>
 			 

@@ -24,4 +24,17 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+$(function() {
+	$("#delete_btn").on("click",function(){
+		if(!confirm("삭제하시겠습니까?")) return false;
+		if(!$("input[name=checkbox]").is(":checked")){
+			alert("선택된 체크박스가 없습니다");
+			return false;
+		}
+	});
+	$(".go_detail").on("click",function(){
+		window.open('AdminQnaAnswer?qna_num='+$(this).val(),'공지등록', "top=500,left=500,width=700, height=700");
+	});
+});
+
 

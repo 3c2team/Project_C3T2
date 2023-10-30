@@ -66,7 +66,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
-							<input type="submit"class="btn btn-primary" value="삭제">
+							<input type="submit" id="delete_btn" class="btn btn-primary" value="삭제">
 							<input type="button" class="btn btn-primary" value="등록" id="button_open">
 						</form>
 					</div>

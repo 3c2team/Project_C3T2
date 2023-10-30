@@ -102,6 +102,11 @@ public class AdminController {
     		model.addAttribute("msg","로그인 하십시오");
     		return "fail_back";
     	}
+    	if(mainFile.getOriginalFilename().equals("")||infoFile.getOriginalFilename().equals("")) {
+    		model.addAttribute("msg","파일을 등록하시오");
+    		return "fail_back";
+    	}
+    	System.out.println(mainFile + " , " + infoFile + "  , " + subFiles);
     	if(map.get("product_num")!=null) {
     		Path path = null;
     		String item = (String)map.get("product_num");
@@ -250,7 +255,7 @@ public class AdminController {
 //    예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
     public String adminReservationList(Model model) {
-    	List<ReservationVO> ReservationList = service.getReservationList();
+    	List<Map<String, Object>> ReservationList = service.getReservationList();
     	model.addAttribute("ReservationList",ReservationList);
     	return "admin/admin_reservation_list";
     }
@@ -344,14 +349,33 @@ public class AdminController {
     
     //문의 리스트 페이지 이동(관리자)
     @GetMapping("AdminQnaBoard")
-    public String adminQnaBoard() {
+    public String adminQnaBoard(Model model,
+    							HttpSession session) {
+    	
+    	List<Map<String, Object>> QnaBoardList = service.selectQnaBoardList();
+    	System.out.println("확인 작업" + QnaBoardList);
+    	model.addAttribute("QnaBoardList",QnaBoardList);
     	return "admin/admin_qna_board";
     }
     
     //문의 답변 페이지 이동(관리자)
     @GetMapping("AdminQnaAnswer")
-    public String adminQnaAnswer() {
+    public String adminQnaAnswer(Model model,int qna_num) {
+    	Map<String, Object> QnaBoardDetail = service.selectQnaBoard(qna_num);
+    	model.addAttribute("QnaBoardDetail",QnaBoardDetail);
     	return "admin/admin_qna_answer";
+    }
+    //문의 답변 처리(관리자)
+    @PostMapping("AdminQnaAnswerPro")
+    public String adminQnaAnswerPro(Model model
+    							,@RequestParam Map<String, Object> map){
+    	int updqteQnaCount = service.updateQnaBoard(map);
+    	if(updqteQnaCount == 0) {
+    		model.addAttribute("msg","등록에 실패하였습니다");
+    		return "fail_back";
+    	}
+    	model.addAttribute("msg","등록 완료되었습니다");
+    	return "success_close";
     }
 
     //상품 수정 페이지 이동(관리자)
@@ -432,9 +456,15 @@ public class AdminController {
     												,@RequestParam(value = "event_image", required = false) MultipartFile file
     												,HttpSession session) {
     	
-    	System.out.println(map);
-    	System.out.println(file);
-    	
+    	if(session.getAttribute("sId").equals("")||session.getAttribute("sId")==null) {
+    		model.addAttribute("msg","로그인이 필요합니다");
+    		return "fail_back";
+    	}else if(file.getOriginalFilename().equals("")) {
+    		model.addAttribute("msg","파일을 등록하세요");
+    		return "fail_back";
+    	}
+//    	System.out.println(map);
+//    	System.out.println(file);
      	String uploadDir = "/resources/event_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
     	
@@ -499,6 +529,5 @@ public class AdminController {
     	}
 
     	return "redirect:/AdminEventList";
-    	
     }
 }

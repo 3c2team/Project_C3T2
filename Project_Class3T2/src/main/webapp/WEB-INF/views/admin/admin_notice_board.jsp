@@ -38,15 +38,7 @@
 </script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#delete_btn").on("click",function(){
-			if(!confirm("삭제하시겠습니까?")) return false;
-			if(!$("input[name=checkbox]").is(":checked")){
-				alert("삭제할 공지사항을 선택하시오.");
-				return false;
-			}
-		});
-	});
+	
 </script>
 <link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 
