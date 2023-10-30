@@ -152,9 +152,9 @@ public class MyPageController {
 				System.out.println("***** Duplicate  오류  : 사용중인 전화번호 ");
 				return "error_member_phone_num";
 			}
-			if(erroMessge.contains("member_e_mail")) {
+			if(erroMessge.contains("member_email")) {
 				System.out.println("***** Duplicate  오류  :  사용중인 이메일 ");
-				return "error_member_e_mail";
+				return "error_member_email";
 			}
 			
 			e.printStackTrace();

@@ -44,7 +44,7 @@ td{text-align: left; padding: 5px;}
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>${Member.member_e_mail}</td>
+						<td>${Member.member_email}</td>
 					</tr>
 					<tr>
 						<th>가입 날짜</th>
@@ -56,7 +56,7 @@ td{text-align: left; padding: 5px;}
 					</tr>
 					<tr>
 						<th>생일</th>
-						<td>${Member.member_birth_day}</td>
+						<td>${Member.member_birth}</td>
 					</tr>
 					<tr>
 						<th>성별</th>
