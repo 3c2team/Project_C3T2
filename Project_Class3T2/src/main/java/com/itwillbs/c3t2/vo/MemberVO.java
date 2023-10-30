@@ -14,6 +14,7 @@ public class MemberVO {
 	private String member_address;
 	private String member_address1;
 	private String member_address2;
+	private String member_e_mail;
 	private String member_email;
 	private String member_email1;
 	private String member_email2;

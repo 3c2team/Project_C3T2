@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.c3t2.mapper.CartMapper;
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 
 @Service
@@ -47,10 +49,10 @@ public class CartService {
 //		return  mapper.insertCart(sId, proNum);
 //	}
 
-	public List<ProductVO> getProductCartList(String sId) {
-		// TODO Auto-generated method stub
-		return mapper.insertCart(sId);
-	}
+//	public List<ProductVO> getProductCartList(String sId) {
+//		// TODO Auto-generated method stub
+//		return mapper.insertCart(sId);
+//	}
 
 
 	public int deleteCartProduct(int proNum) {
@@ -89,16 +91,52 @@ public class CartService {
 		return mapper.deleteAll(sId);
 	}
 	
-	// 선택 상품 주문
-	public List<ProductVO> selectPayProduct(String sId, int proNum) {
-		// TODO Auto-generated method stub
-		return mapper.selectPayProduct(sId, proNum);
-	}
-
 	// 회원정보 조회
 	public MemberVO getMember(String sId) {
 		// TODO Auto-generated method stub
 		return mapper.selectPayMember(sId);
+	}
+
+	// 관심 상품 등록
+	public int insertFavoriteProduct(String sId, int favoriteProNum) {
+		// TODO Auto-generated method stub
+		return mapper.insertFavoriteProduct(sId, favoriteProNum);
+	}
+
+	// 동일 상품이 관심상품에 있는지 확인
+	public FavoriteVO selectFavoriteProduct(String sId, int favoriteProNum) {
+		// TODO Auto-generated method stub
+		return mapper.selectFavoriteProduct(sId, favoriteProNum);
+	}
+	
+	// 선택 상품 주문
+		public List<ProductVO> selectPayProduct(String sId) {
+			// TODO Auto-generated method stub
+			return mapper.selectPayProduct(sId);
+		}
+
+	// 전체 상품 주문 조회
+	public List<ProductVO> selectAllPay(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectAllPay(sId);
+	}
+
+	// 선택 상품 ORDER_DETAIL에 저장
+	public int insertOrderDetail(String sId, int proNum) {
+		// TODO Auto-generated method stub
+		return mapper.insertOrderDetail(sId, proNum);
+	}
+
+	//선택 상품 ORDER_DETAIL에 있는지 확인 작업
+	public List<OrderDetailVO> getOrderDetail(String sId, int proNum) {
+		// TODO Auto-generated method stub
+		return mapper.selectOrderDetail(sId, proNum);
+	}
+
+	//ORDER_DETAIL 테이블 비우기
+	public int deleteOrderDetail(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.deleteOrderDetail(sId);
 	}
 
 
