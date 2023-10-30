@@ -54,10 +54,10 @@ td{text-align: left; padding: 5px;}
 						<th>전화번호</th>
 						<td>${Member.member_phone_num}</td>
 					</tr>
-					<tr>
-						<th>생일</th>
-						<td>${Member.member_birth}</td>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<th>생일</th> -->
+<%-- 						<td>${Member.member_birth}</td> --%>
+<!-- 					</tr> -->
 					<tr>
 						<th>성별</th>
 						<td>${Member.member_gender}</td>
