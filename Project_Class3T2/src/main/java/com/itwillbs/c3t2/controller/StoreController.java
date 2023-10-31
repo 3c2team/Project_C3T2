@@ -106,13 +106,18 @@ public class StoreController {
 		//=========================================================================
 		// 리뷰
 		List<ReviewVO> reviewList = service.getReviewList(proNum);
-		double reviewCount = 0;
+		double reviewCount = reviewList.size();
 		double sumReviewStar = 0;
+		
 		for(ReviewVO review : reviewList) {
 			sumReviewStar += review.getReview_star();
-			reviewCount++;
 		}
+		
 		double AveReviewStar = sumReviewStar/reviewCount;
+		
+		if(Double.isNaN(AveReviewStar)) {
+			AveReviewStar = 0;
+		}
 		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("AveReviewStar", AveReviewStar);
