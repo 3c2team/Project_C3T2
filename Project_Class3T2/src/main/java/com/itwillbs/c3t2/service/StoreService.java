@@ -56,4 +56,8 @@ public class StoreService {
 	public List<QnAVO> getQnAList(int proNum) {
 		return mapper.selectQnAList(proNum);
 	}
+
+	public int registQuestion(QnAVO question) {
+		return mapper.insertQuestion(question);
+	}
 }

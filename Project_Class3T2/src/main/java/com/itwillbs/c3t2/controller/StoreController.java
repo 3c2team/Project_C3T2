@@ -230,10 +230,22 @@ public class StoreController {
 		return "store/popup/question_from";
 	}
 	
-//	@PostMapping("QuestionPro")
-//	public String questionPro(QuestionVO question, HttpSession session, Model model) {
-//		
-//		model.addAttribute("question", question);
-//		return"store/popup/question_pro";
-//	}
+	@PostMapping("QuestionPro")
+	public String questionPro(QnAVO question, HttpSession session, Model model) {
+		if(session.getAttribute("sId") == null) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "store/popup/close";
+		}
+		
+		System.out.println("question.getProduct_num()" + question.getProduct_num());
+		int insertCount = service.registQuestion(question);
+		
+		if(insertCount > 0) {
+			return "store/popup/question_pro";
+		} else {
+			model.addAttribute("msg", "문의글 등록을 실패했습니다.");
+			return "stoer/popup/close";
+		}
+		
+	}
 }

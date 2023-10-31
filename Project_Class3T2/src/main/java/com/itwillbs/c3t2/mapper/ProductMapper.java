@@ -33,4 +33,6 @@ public interface ProductMapper {
 	public List<ReviewVO> selectReviewList(int proNum);
 
 	public List<QnAVO> selectQnAList(int proNum);
+
+	public int insertQuestion(QnAVO question);
 }

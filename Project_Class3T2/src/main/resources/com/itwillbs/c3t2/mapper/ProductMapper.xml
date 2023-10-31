@@ -77,4 +77,14 @@
 		ON Q.question_num = A.question_num
 		WHERE Q.product_num = #{proNum}
 	</select>
+	<insert id="insertQuestion">
+		INSERT INTO QUESTION VALUES(
+			NULL
+			, #{member_id}
+			, #{question_content}
+			, #{product_num}
+			, now()
+			, #{secret}
+		)
+	</insert>
 </mapper>
