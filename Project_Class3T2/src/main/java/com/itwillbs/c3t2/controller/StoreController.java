@@ -226,10 +226,10 @@ public class StoreController {
 		return "store/popup/question_from";
 	}
 	
-	@PostMapping("QuestionPro")
-	public String questionPro(QuestionVO question, HttpSession session, Model model) {
-		
-		model.addAttribute("question", question);
-		return"store/popup/question_pro";
-	}
+//	@PostMapping("QuestionPro")
+//	public String questionPro(QuestionVO question, HttpSession session, Model model) {
+//		
+//		model.addAttribute("question", question);
+//		return"store/popup/question_pro";
+//	}
 }
