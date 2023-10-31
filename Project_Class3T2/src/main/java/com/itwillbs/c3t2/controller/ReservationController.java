@@ -2,16 +2,19 @@ package com.itwillbs.c3t2.controller;
 
 import java.util.Random;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwillbs.c3t2.handler.GenerateRandomCode;
 import com.itwillbs.c3t2.service.ReservationService;
+import com.itwillbs.c3t2.service.SendMailService;
+import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 
 @Controller
@@ -19,6 +22,9 @@ public class ReservationController {
 
 	@Autowired
 	private ReservationService service;
+	
+	@Autowired 
+	private SendMailService mailService;
 	
 	
 	//예약 폼 페이지 이동
@@ -39,30 +45,20 @@ public class ReservationController {
 	@PostMapping("/ReservationPro")
 	public String reservationPro(ReservationVO reservation, Model model) {
 		
-		// 예약번호 랜덤숫자 6자리
-		Random random = new Random();	// 랜덤 함수 선언
-		int createNum = 0;  			// 1자리 난수
-		String ranNum = ""; 			// 1자리 난수 형변환 변수
-		int length = 6;					// 난수 자릿수:6
-		String guestNum = "";  		// 결과 난수
-		
-		for (int i = 0; i < length; i++) { 
-			createNum = random.nextInt(9);		// 0부터 9까지 올 수 있는 1자리 난수 생성
-			ranNum =  Integer.toString(createNum);  // 1자리 난수를 String으로 형변환
-			guestNum += ranNum;			// 생성된 난수(문자열)을 원하는 수(letter)만큼 더하며 나열
-			reservation.setReservation_guest_num(Integer.parseInt(guestNum));
-		}
-		// 회원가입 작업 요청
+		// 예약 번호 - 6자리 랜덤 숫자
+		reservation.setReservation_guest_num(Integer.parseInt(GenerateRandomCode.getRandomNumCode(6)));
 //		System.out.println(reservation);
+		reservation.setReservation_email(reservation.getReservation_email1()+"@"+reservation.getReservation_email2());
 		
 		int insertCount = service.insertReservation(reservation);
 		
-		// => 실패 시 "fail_back.jsp" 포워딩(Model 객체의 "msg" 속성값으로 "회원 가입 실패!" 저장)
-		if(insertCount > 0) { // 성공
+		if(insertCount > 0) { // 성공 시 success
 			System.out.println(reservation);
+			mailService.sendReservationMail(reservation.getReservation_person_name(), reservation.getReservation_email());
+			model.addAttribute("msg", "예약 확인 메일을 전송했습니다."); // 출력할 메세지
 			model.addAttribute("reservation", reservation);
 			return "reservation/reservation_success";
-		} else { // 실패
+		} else { // => 실패 시 "fail_back.jsp" 포워딩
 			model.addAttribute("msg", "예약 실패!");
 			return "fail_back";
 		}
@@ -75,20 +71,21 @@ public class ReservationController {
 	}
 	
 	//비회원 예약 조회 페이지 이동
-	@PostMapping("/ReservationSearchInfo")
-	public String reservationSearchInfo(ReservationVO reservation, 
+	@RequestMapping(value = "/ReservationSearchInfo", method = {RequestMethod.GET, RequestMethod.POST})
+	public String reservationSearchInfo(
 			@RequestParam int reservation_guest_num, 
-			@RequestParam String reservation_person_phone, 
+			@RequestParam String reservation_email1, 
+			@RequestParam String reservation_email2, 
 			Model model) {
 		
 		// 쿼리 조회
 		System.out.println("!!!"+reservation_guest_num);
-		System.out.println("!!!"+reservation_person_phone);
-		ReservationVO dbReservation = service.getPersonName(reservation_guest_num, reservation_person_phone);
+		System.out.println("!!!"+reservation_email1);
+		System.out.println("!!!"+reservation_email2);
+//		reservation.setReservation_email(reservation_email1+"@"+reservation_email2);
+		ReservationVO dbReservation = service.getPersonName(reservation_guest_num, reservation_email1+"@"+reservation_email2); 
+		// 예약 조회 내역 없으면 fail back 구현해놓기!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		System.out.println("예약객체 !!!!!!"+dbReservation);
-//		dbReservation.setReservation_person_name(reservation.getReservation_person_name());
-//		dbReservation.setReservation_guest_num(reservation.getReservation_guest_num());
-		System.out.println("searchInfo: "+dbReservation);
 		
 		// 조회 사항 넘겨주기
 		model.addAttribute("reservation", dbReservation);
@@ -99,7 +96,6 @@ public class ReservationController {
 	// 비회원 예약 취소 페이지 이동
 	@GetMapping("/ReservationDelete")
 	public String reservationDelete(ReservationVO reservation,
-			@RequestParam String reservation_date, 
 			@RequestParam int reservation_guest_num, 
 			@RequestParam String reservation_person_name,
 			Model model) {
@@ -138,22 +134,31 @@ public class ReservationController {
 	@PostMapping("/ReservationUpdatePro")
 	public String reservationUpdatePro(ReservationVO reservation, Model model) {
 		
-		int updateCount = service.updateReservation(reservation.getReservation_guest_num(), reservation.getReservation_person_name());
+		System.out.println("예약!!!!!!!!!!!!" + reservation);
+		System.out.println("예약날짜!!!!!!" + reservation.getReservation_date());
+		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2()); // 메서드로 빼기
+		System.out.println("이메일: " + reservation.getReservation_email());
+		int updateCount = service.updateReservation(reservation);
+//		int updateCount = service.updateReservation(reservation.getReservation_guest_num(), reservation.getReservation_person_name());
 		if(updateCount < 0) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";
 		}
 		// 회원 상세정보를 Model 객체에 저장
-		return "ReservationSearchInfo";
+		return "redirect:/ReservationSearchInfo?"
+				+ "reservation_guest_num=" + reservation.getReservation_guest_num() 
+				+ "&reservation_email1=" + reservation.getReservation_email1() 
+				+ "&reservation_email2=" + reservation.getReservation_email2();
+//		return "";
 	}
 	
 	//예약 성공 이동
 	@GetMapping("/ReservationSuccess")
 	public String reservationSuccess(ReservationVO reservation, 
 			@RequestParam String reservation_person_name, 
-			@RequestParam String reservation_person_phone, 
+			@RequestParam String reservation_email, 
 			Model model) {
-		reservation = service.getGuestNum(reservation_person_name, reservation_person_phone);
+		reservation = service.getGuestNum(reservation_person_name, reservation_email);
 		
 		model.addAttribute("reservation", reservation);
 		System.out.println("예약번호 : " + reservation.getReservation_guest_num());

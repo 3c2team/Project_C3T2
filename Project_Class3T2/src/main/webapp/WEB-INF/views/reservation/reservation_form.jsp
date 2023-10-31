@@ -117,17 +117,25 @@
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" name="reservation_person_name" placeholder="성함" size="20" required
+						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
 							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>>
 						
 					</td> <!-- value= --> 
 				</tr>
 				<tr>
-					<th>예약자 전화번호</th>
+					<th>예약내역 받으실 이메일</th>
 					<td>
-						<input type="text" name="reservation_person_phone" placeholder="010-0000-0000" size="20" required
-							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sPhone }"</c:if>>
-					</td> <!-- value="${sessionScope.sPhone}" --> 
+						<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required
+						<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
+						<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required
+						<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
+						<select id="emailDomain" class="input"> <!--   -->
+							<option value="">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="nate.com">nate.com</option>
+							<option value="gmail.com">gmail.com</option>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">

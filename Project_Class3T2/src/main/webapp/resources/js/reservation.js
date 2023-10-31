@@ -4,16 +4,16 @@
 $(function(){
 	$("#emailDomain").change(function() {
 		
-		$("#email2").val($("#emailDomain").val());
+		$("#reservation_email2").val($("#emailDomain").val());
 		
 		if($("#emailDomain").val() == "") { // 직접입력 선택 시
-			$("#email2").focus(); // 커서 요청
-			$("#email2").css("background", ""); // 배경색 초기화
-			$("#email2").removeAttr("readonly"); // 읽기 전용 속성 제거(결과 동일)
+			$("#reservation_email2").focus(); // 커서 요청
+			$("#reservation_email2").css("background", ""); // 배경색 초기화
+			$("#reservation_email2").removeAttr("readonly"); // 읽기 전용 속성 제거(결과 동일)
 		} else {
 			// readonly 속성을 true 로 변경(읽기 전용)
-			$("#email2").css("background", "lightgray"); // 배경색 초기화
-			$("#email2").attr("readonly", true); // 읽기 전용으로 변경
+			$("#reservation_email2").css("background", "lightgray"); // 배경색 초기화
+			$("#reservation_email2").attr("readonly", true); // 읽기 전용으로 변경
 		}
 	});
  

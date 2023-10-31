@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.c3t2.mapper.ReservationMapper;
+import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 
 @Service
@@ -22,13 +23,13 @@ public class ReservationService {
 			return mapper.getReservation(reservation);
 		}
 
-		public int updateReservation(int reservation_guest_num, String reservation_person_name) {
-			return mapper.updateReservation(reservation_guest_num, reservation_person_name);
+		public int updateReservation(ReservationVO reservation) {
+			return mapper.updateReservation(reservation);
 		}
 
 		// 예약 번호를 조회
-		public ReservationVO getGuestNum(String reservation_person_name, String reservation_person_phone) {
-			return mapper.getGuestNum(reservation_person_name, reservation_person_phone);
+		public ReservationVO getGuestNum(String reservation_person_name, String reservation_email) {
+			return mapper.getGuestNum(reservation_person_name, reservation_email);
 		}
 		
 		// 파일명 조회 요청
@@ -41,10 +42,10 @@ public class ReservationService {
 			return mapper.deleteReservation(reservation_guest_num, reservation_person_name);
 		}
 
-		public ReservationVO getPersonName(int reservation_guest_num, String reservation_person_phone) {
-			return mapper.getPersonName(reservation_guest_num, reservation_person_phone);
+		public ReservationVO getPersonName(int reservation_guest_num, String reservation_email) {
+			return mapper.getPersonName(reservation_guest_num, reservation_email);
 		}
-
+		
 
 
 		

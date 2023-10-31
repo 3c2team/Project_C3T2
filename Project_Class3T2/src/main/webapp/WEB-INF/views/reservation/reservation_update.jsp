@@ -22,7 +22,7 @@
 		<main>
 			<h1>예약 내역 변경</h1>
 			<form action="ReservationUpdatePro" method="post">
-				<div id="calendarForm" ></div>
+				<div id="calendarForm"></div>
 				<table>
 					<tr>
 						<th>예약시간</th>
@@ -126,12 +126,21 @@
 					<tr>
 						<th>예약자 전화번호</th>
 						<td>
-							<input type="text" name="reservation_person_phone" value="${reservation.reservation_person_phone }" required />
+							<input type="text" class="readonly" name="reservation_email1" id="reservation_email1" size="20" required
+								<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
+							<input type="text" class="readonly" name="reservation_email2" id="reservation_email2" size="20" required
+								<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
+							<select id="emailDomain">
+								<option value="">직접입력</option>
+								<option value="naver.com">naver.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="gmail.com">gmail.com</option>
+							</select>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="submit" value="예약변경" onclick="updateCheck()">
+							<input type="button" value="예약변경" onclick="updateCheck()">
 							<input type="reset" value="다시쓰기">
 							<input type="button" value="취소" onclick="history.back()">
 						</td>
@@ -147,7 +156,8 @@
 		function updateCheck() {
 			let result = confirm("예약 변경 하시겠습니까?");
 			if(result){
-				location.href='./';
+// 				location.href='./';
+				$("form").submit();
 			}
 		}
 	</script>

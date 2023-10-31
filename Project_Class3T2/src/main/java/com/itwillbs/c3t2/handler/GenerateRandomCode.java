@@ -14,4 +14,9 @@ public class GenerateRandomCode {
 		// => 알파벳, 숫자 조합 난수 생성 가능
 		return RandomStringUtils.randomAlphanumeric(length);
 	}
+	
+	// => 숫자 조합 난수 생성
+	public static String getRandomNumCode(int length) {
+		return RandomStringUtils.randomNumeric(length);
+	}
 }

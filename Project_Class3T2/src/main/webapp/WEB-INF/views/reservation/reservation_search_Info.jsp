@@ -46,8 +46,8 @@
 						<td>${reservation.reservation_person_name }</td>
 					</tr>
 					<tr>
-						<th>전화번호</th>
-						<td>${reservation.reservation_person_phone }</td>
+						<th>이메일</th>
+						<td>${reservation.reservation_email }</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center">

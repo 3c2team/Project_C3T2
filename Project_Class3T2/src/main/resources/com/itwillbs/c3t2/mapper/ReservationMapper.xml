@@ -24,7 +24,7 @@
 				, #{reservation_time}
 				, #{reservation_person_name}
 				, #{reservation_person_count}
-				, #{reservation_person_phone}
+				, #{reservation_email}
 				, 0 <!-- cancel -->
 				, 'Y' <!-- is_member -->
 				, #{reservation_guest_num} <!-- guest_num -->
@@ -37,14 +37,14 @@
 	<select id="getGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT reservation_guest_num 
 		FROM RESERVATION 
-		WHERE reservation_person_name = #{reservation_person_name} AND reservation_person_phone = #{reservation_person_phone}
+		WHERE reservation_person_name = #{reservation_person_name} AND reservation_email = #{reservation_email}
 	</select>
 	
 	<!-- 예약자 불러오기 -->
 	<select id="getPersonName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT * 
 		FROM RESERVATION 
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_phone = #{reservation_person_phone}
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_email = #{reservation_email}
 	</select>
 	
 	<!-- 예약 수정 -->
@@ -53,7 +53,7 @@
 		SET reservation_date = #{reservation_date}
 			, reservation_time = #{reservation_time}
 			, reservation_person_count = #{reservation_person_count}
-			, reservation_person_phone = #{reservation_person_phone}
+			, reservation_email = #{reservation_email}
 		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
