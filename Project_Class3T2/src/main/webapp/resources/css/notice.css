@@ -107,3 +107,138 @@
 #radio4:checked ~ .navigationAuto .autoBtn4{
     background: white;
 }
+
+/*--------------*/
+.container{
+  display:block;
+  width:100%;
+  margin:10px 0 10px 0;
+  overflow: hidden;
+  height:auto;
+}
+
+.links{
+	list-style-type: none;
+	margin: 20px 0 20px 100px;
+}
+
+.links li {
+	display: inline-block; /* inline + block */
+	/* inline : 요소끼리 한줄에 위치 */
+	/* block : 바로 옆에 다른 요소 X */
+	/* 즉, 한줄에 배치되지만 크기와 상하 간격 지정 가능 */
+	margin: 0 20px 0 0;
+	transition: .2s linear; /* 일정하게 유지 */
+}
+
+/*.links li:nth-child(2) {*/
+/*	opacity: .6;  불투명도 */
+/*}*/
+
+/*.links li:nth-child(2):hover {*/
+/*	opacity: 1;*/
+/*}*/
+
+/*.links li:nth-child(3) {*/
+/*	opacity: .6;*/
+/*	float: right;*/
+/*}*/
+
+/*.links li:nth-child(3):hover {*/
+/*	opacity: 1;*/
+/*}*/
+
+.links li a {
+	text-decoration:none;
+    color:#0f132a;
+    font-weight:bolder;
+    text-align:center;
+    cursor : pointer;
+}
+
+p {
+	width: 250px;
+	height: 100px;
+	overflow : hidden;
+}
+
+.notice li {
+	float: left;
+	margin-right: 30px;
+}
+
+.links li:nth-child(2) {
+	opacity: .6; /* 불투명도 */
+}
+
+.links li:nth-child(2):hover {
+	opacity: 1;
+}
+
+.links li:nth-child(3) {
+	opacity: .6;
+	float: right;
+}
+
+.links li:nth-child(3):hover {
+	opacity: 1;
+}
+article h1 {
+	text-align: center;
+}
+
+#listForm {
+	width: 1724px;
+	max-height: 610px;
+	margin: auto;
+}
+
+h2 {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+	width: 1724px;
+}
+
+#tr_top {
+	background: lightgray;
+	text-align: center;
+}
+
+table td {
+	text-align: center;
+}
+
+
+#pageList {
+	margin: auto;
+	width: 1724px;
+	text-align: center;
+}
+
+#emptyArea {
+	margin: auto;
+	width: 1724px;
+	text-align: center;
+}
+
+#buttonArea {
+	margin: auto;
+	width: 1715px;
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+/* 제목 좌측 정렬 및 여백(20px) 설정 */
+#subject {
+	text-align: left;
+	padding-left: 20px;
+	
+	/* 제목 길이 제한(잘린 부분은 ... 표시) */
+	max-width: 450px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

@@ -72,5 +72,9 @@ public interface MemberMapper {
 	int updateKakaoId(@Param("member_id") String member_id, @Param("kakao_id") String kakao_id);
 
 	List<EventVO> selectEventList();
-			
+
+	List<EventVO> selectEventListJson(@Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	
+	int selectEventListCount();
+
 }

@@ -7,88 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/notice.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/news.js"></script>
 <style>
-.links li:nth-child(2) {
-	opacity: .6; /* 불투명도 */
-}
 
-.links li:nth-child(2):hover {
-	opacity: 1;
-}
-
-.links li:nth-child(3) {
-	opacity: .6;
-	float: right;
-}
-
-.links li:nth-child(3):hover {
-	opacity: 1;
-}
-article h1 {
-	text-align: center;
-}
-
-#listForm {
-	width: 1724px;
-	max-height: 610px;
-	margin: auto;
-}
-
-h2 {
-	text-align: center;
-}
-
-table {
-	margin: auto;
-	width: 1724px;
-}
-
-#tr_top {
-	background: lightgray;
-	text-align: center;
-}
-
-table td {
-	text-align: center;
-}
-
-
-#pageList {
-	margin: auto;
-	width: 1724px;
-	text-align: center;
-}
-
-#emptyArea {
-	margin: auto;
-	width: 1724px;
-	text-align: center;
-}
-
-#buttonArea {
-	margin: auto;
-	width: 1715px;
-	text-align: right;
-	margin-bottom: 20px;
-}
-
-/* 제목 좌측 정렬 및 여백(20px) 설정 */
-#subject {
-	text-align: left;
-	padding-left: 20px;
-	
-	/* 제목 길이 제한(잘린 부분은 ... 표시) */
-	max-width: 450px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
 </style>
 </head>
 <body>
@@ -184,8 +110,8 @@ table td {
 				<section id="pageList">
 				<%-- <c:if test="${{pageInfo.pageNum <= 1 }">disabled</c:if> --%>
 					<input type="button" value="이전" onclick="location.href='News?pageNum=${pageInfo.pageNum - 1 }'">
+					<a href="News?pageNum=${i }">${i }</a>
 					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
-						<a href="News?pageNum=${i }">${i }</a>
 						<c:choose>
 							<c:when test="${pageInfo.pageNum eq i }"> <%-- 현재 페이지일 경우(하이퍼링크 미표시 및 굵게) --%>
 								<b>${i }</b>

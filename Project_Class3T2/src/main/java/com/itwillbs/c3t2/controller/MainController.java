@@ -2,6 +2,7 @@ package com.itwillbs.c3t2.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
 import com.google.protobuf.Timestamp;
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.SendMailService;
@@ -100,15 +102,52 @@ public class MainController {
 		}
 		
 		@GetMapping("Event")
-		public String event(Model model, HttpSession session) {
-			String uploadDir = "/resources/store_img/";//가상 업로드 경로
+		public String event(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
+			String uploadDir = "/event_img/"; //가상 업로드 경로
 	    	String saveDir = session.getServletContext().getRealPath(uploadDir);
-	    	System.out.println("!!!!!!!!!!!!!!!!!!!!!" + saveDir);
+//	    	System.out.println("saveDir" + saveDir);
+	    	int i = saveDir.indexOf("wtpwebapps");
+//	    	System.out.println(i);
+	    	String realSaveDir = saveDir.substring(0, i) + "wtpwebapps\\event_img\\";
+//	    	System.out.println(realSaveDir);
 			List<EventVO> eventList = service.getEventList();
 			model.addAttribute("eventList", eventList);
-			model.addAttribute("saveDir", saveDir);
+			model.addAttribute("saveDir", realSaveDir);
 			return "other/event";
 		}
+		
+//		@ResponseBody
+//		@GetMapping("/EventListJson")
+//		public String listJson( @RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
+//			String uploadDir = "/event_img/"; //가상 업로드 경로
+//	    	String saveDir = session.getServletContext().getRealPath(uploadDir);
+//	    	int i = saveDir.indexOf("wtpwebapps");
+//	    	String realSaveDir = saveDir.substring(0, i) + "wtpwebapps\\event_img\\";
+//			model.addAttribute("saveDir", realSaveDir);
+//			
+//			int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
+//			int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
+//			List<EventVO> eventList = service.getEventListJson(startRow, listLimit);
+//			int listCount = service.getEventListCount();
+//			
+//			int pageListLimit = 5;
+//			int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+//			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+//			int endPage = startPage + pageListLimit - 1;
+//			if(endPage > maxPage) {
+//				endPage = maxPage;
+//			}
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("endPage", endPage);
+//			map.put("eventList", eventList);
+			
+//			JsonObject jsonObject = new JsonObject();
+//			jsonObject.addProperty("endPage", endPage + "");
+//			jsonObject.addProperty("eventList", eventList + "");
+//			jsonObject.addProperty("saveDir", realSaveDir);
+//			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!" + jsonObject.toString());
+//			return jsonObject.toString();
+//		}
 		
 		@GetMapping("Location")
 		public String location() {
@@ -149,6 +188,8 @@ public class MainController {
 		            session.setAttribute("sId", dbMember.getMember_id());
 		            session.setAttribute("sName", dbMember.getMember_name());
 		            session.setAttribute("sPhone", dbMember.getMember_phone_num());
+		            session.setAttribute("sEmail1", dbMember.getMember_email1());
+		            session.setAttribute("sEmail2", dbMember.getMember_email2());
 		            session.setAttribute("loginUser", dbMember);
 		            model.addAttribute("msg", "로그인에 성공했습니다. 메인페이지로 이동합니다."); // 출력할 메세지
 					model.addAttribute("targetURL", "Main"); // 이동시킬 페이지
@@ -203,6 +244,8 @@ public class MainController {
 					session.setAttribute("sName", dbMember.getMember_name());
 					session.setAttribute("sPhone", dbMember.getMember_phone_num());
 					session.setAttribute("loginUser", dbMember);
+					session.setAttribute("sEmail1", dbMember.getMember_email1());
+		            session.setAttribute("sEmail2", dbMember.getMember_email2());
 					String kakao_id = (String)session.getAttribute("kakao_id");
 					int updateCount = service.addKakaoId(member_id, kakao_id);
 					if(updateCount > 0) {
@@ -240,6 +283,8 @@ public class MainController {
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
 					session.setAttribute("sPhone", dbMember.getMember_phone_num());
+					session.setAttribute("sEmail1", dbMember.getMember_email1());
+		            session.setAttribute("sEmail2", dbMember.getMember_email2());
 					Cookie cookie = new Cookie("cookieId", member.getMember_id());
 					System.out.println(rememberId);
 					if(rememberId) { // 아이디 저장 체크됨

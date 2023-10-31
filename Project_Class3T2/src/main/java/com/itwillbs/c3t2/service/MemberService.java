@@ -236,4 +236,13 @@ public class MemberService {
 	public List<EventVO> getEventList() {
 		return mapper.selectEventList();
 	}
+	
+	public List<EventVO> getEventListJson(int startRow, int listLimit) {
+		return mapper.selectEventListJson(startRow, listLimit);
+	}
+
+	public int getEventListCount() {
+		return mapper.selectEventListCount();
+	}
+	
 }

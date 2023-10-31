@@ -7,35 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>J'ai Faim</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/event.js"></script>
-<style>
-.links li:nth-child(1) {
-	opacity: .6; /* 불투명도 */
-}
-
-.links li:nth-child(1):hover {
-	opacity: 1;
-}
-
-.links li:nth-child(2) {
-	opacity: 1;
-}
-
-.links li:nth-child(3) {
-	opacity: .6;
-	float: right;
-}
-
-.links li:nth-child(3):hover {
-	opacity: 1;
-}
-</style>
 </head>
 <body>
 	<div>
@@ -43,17 +20,6 @@
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
-			<div id="popup_layer">
-			  <div class="popupBox">
-			      <div class="popupCont">
-			          <h2>Event</h2>
-			      </div>
-			      <div class="popupBtn">
-			          <a id="chk_today" href="javascript:closeToday();" class="closeDay">하루동안 열지 않기</a> 
-			          <a href="javascript:closePop();">Close</a>
-			      </div>
-			  </div>
-			</div>
 			<div class="slideBox">
                 <div class="slider">
                     <div class="slides">
@@ -100,20 +66,23 @@
 						<a href="News" id="notice">운영공지</a>
 					</li>
 					<li>
-						<a href="Event" id="event">이벤트</a>
+						<a href="Event" id="event" style="margin-left: 20px;">이벤트</a>
 					</li>
 				</ul>
-<%-- 				<h1>${eventList.event_num }</h1> --%>
-				<ul class="event" style="margin: 5px 0 5px 100px;">
-					<c:forEach var="event" items="${eventList }">
-						<li>
-							<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">
-								<img src="${saveDir }${event.event_image }" style="width:41%; height:180px; object-fit: cover;">
-							</a>
-							<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">${event.event_subject }</a>
-						</li>
-					</c:forEach>
-				</ul>
+				<div class="">
+					<ul class="event">
+						<c:forEach var="event" items="${eventList }">
+							<li>
+								<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">
+<%-- 									<img src="${saveDir }${event.event_image }"> --%>
+ 									<img src="${pageContext.request.contextPath }/resources/main_img/platter1.jpg">
+								</a>
+								<a href="EventDetail?event_num=${event.event_num }&pageNum=${pageNum }">${event.event_subject }</a>
+							<p class="tx_brief"><fmt:formatDate value="${event.event_date }" pattern="yyyy-MM-dd"/></p>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
 			</div>
 		</main>
 	</div>

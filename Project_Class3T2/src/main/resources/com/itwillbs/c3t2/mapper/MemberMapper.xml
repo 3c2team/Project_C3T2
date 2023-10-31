@@ -226,4 +226,18 @@
 <!-- 			, #{listLimit} -->
 	</select>
 	
+	<select id="selectEventListJson" resultType="com.itwillbs.c3t2.vo.EventVO">
+		SELECT *
+		FROM EVENT
+		ORDER BY
+			event_num DESC
+		LIMIT
+			#{startRow}
+			, #{listLimit}
+	</select>
+	
+	<select id="selectEventListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM NOTICE
+	</select>
 </mapper>

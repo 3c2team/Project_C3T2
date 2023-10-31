@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/slide.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/event_popup.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/popup.js"></script>
 <style>
 img {
 	 -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 2% 98%, transparent 100%);
@@ -23,6 +25,17 @@ img {
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
+			<div id="popup_layer">
+			  <div class="popupBox">
+			      <div class="popupCont">
+			          <h2>Event</h2>
+			      </div>
+			      <div class="popupBtn">
+			          <a id="chk_today" href="javascript:closeToday();" class="closeDay">하루동안 열지 않기</a> 
+			          <a href="javascript:closePop();">Close</a>
+			      </div>
+			  </div>
+			</div>
 			<div class="slideBox" style="height: 550px; position: relative; text-align: center;">
 				<div class="slider" style="height: 550px;">
 					<div class="slides">
