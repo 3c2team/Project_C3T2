@@ -74,12 +74,12 @@
                             <div class="item">
                                 <img src="${pageContext.request.contextPath }resources/${favorite.product_main_img_real_file}" width="200" height="200">
                                 <p class="itemDesc bold">${favorite.product_name}</p>
-                                <button onclick="location.href='${pageContext.request.contextPath}/ProductDetail?proNum=${item.product_num}'">상품페이지로 이동</button>
+                                <button onclick="location.href='${pageContext.request.contextPath}/ProductDetail?proNum=${favorite.product_num}'">상품페이지로 이동</button>
                                 <form action="${pageContext.request.contextPath}/deleteFavorite" method="post">
 		                            <input type="hidden" name="favoriteNum" value="${favorite.favorite_num}" />
-		                            <button type="button">삭제</button>
+		                            <button onclick="deleteFavorite(${favorite.favorite_num})">삭제</button>
 		                        </form>
-<%--                                 <button onclick="deleteFavorite(${favorite.favorite_num})">삭제</button> --%>
+<%--       <button type="button">삭제</button>                          <button onclick="deleteFavorite(${favorite.favorite_num})">삭제</button> --%>
                             </div>
                         </c:forEach>
                         

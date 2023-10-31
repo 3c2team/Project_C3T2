@@ -50,19 +50,19 @@ public class MyPageController {
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		
-		// 로그인한 사용자가 없으면 로그아웃 페이지로 리다이렉트합니다.
+		// 로그인한 사용자가 없으면 로그아웃 페이지로 리다이렉트.
 		if(loginUser==null) return "redirect:/Logout";
 		
-		// 로그인한 사용자의 ID를 매개변수 맵에 추가합니다.
+		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
 		parMap.put("member_id", loginUser.getMember_id());	
 		
-		// 페이지당 표시할 아이템 수를 설정합니다.
+		// 페이지당 표시할 아이템 수를 설정.
 		pageMaker.setPerPageNum(6);
 		
-		// 장바구니의 전체 아이템 수를 설정합니다.
+		// 장바구니의 전체 아이템 수를 설정.
 		pageMaker.setTotalCount(service.getCartTotalCount(parMap));
 		
-		// 페이지네이션 HTML을 생성합니다.
+		// 페이지네이션 HTML을 생성.
 		String pagination=pageMaker.paginationHTML("MypageBasket");
 		parMap.put("pageMaker", pageMaker);
 		
