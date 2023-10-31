@@ -22,9 +22,9 @@
 				<div class="questionBox">
 					<textarea id="question_content" name="question_content"></textarea>
 				</div>
-<!-- 				<div class="privateCheck"> -->
-<!-- 					<input type="checkbox" id=""><a>비공개</a> -->
-<!-- 				</div> -->
+				<div class="privateCheck">
+					<input type="checkbox" id="secret" name="secret" value="1"><a>비공개</a>
+				</div>
 			</div>
 			<div class="buttonBtn">
 				<input type="button" id="cencle" value="취소" onclick="window.close();">
