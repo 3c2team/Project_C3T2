@@ -77,7 +77,12 @@
             PRODUCT P ON C.product_num = P.product_num
         WHERE 
             C.member_id = #{member_id}
-     </select>       
+     </select> 
+     
+     <!-- 장바구니 삭제 -->
+     <delete id="deleteCartItem" parameterType="int">
+        DELETE FROM CART WHERE cart_num = #{cartNum}
+    </delete>      
 	
 	
 	
@@ -100,9 +105,19 @@
      </select>       
 	
 	
+	<!-- 찜 전체 개수 -->
+	<select id="getZzimTotalCount" resultType="int">
+	    SELECT  count(*) FROM 
+            FAVORITE F      
+		JOIN 
+            PRODUCT P ON F.product_num = P.product_num
+        WHERE 
+            F.member_id = #{member_id}
+     </select> 
+	
 	<!-- 찜목록 -->
-	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
-        SELECT 
+	<select id="getZzimList" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
+		SELECT 
             F.favorite_num,
             F.member_id,
             F.product_num,
@@ -114,7 +129,26 @@
             PRODUCT P ON F.product_num = P.product_num
         WHERE 
             F.member_id = #{member_id}
-    </select>
+        ORDER BY 
+		    F.favorite_num DESC
+		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
+	</select>
+	
+<!-- 	 찜목록 -->
+<!-- 	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO"> -->
+<!--         SELECT  -->
+<!--             F.favorite_num, -->
+<!--             F.member_id, -->
+<!--             F.product_num, -->
+<!--             P.product_name, -->
+<!--             P.product_main_img_real_file -->
+<!--         FROM  -->
+<!--             FAVORITE F -->
+<!--         JOIN  -->
+<!--             PRODUCT P ON F.product_num = P.product_num -->
+<!--         WHERE  -->
+<!--             F.member_id = #{member_id} -->
+<!--     </select> -->
     
     <!-- 찜목록 삭제-->
     <delete id="deleteFavorite">
@@ -128,15 +162,22 @@
             R.reservation_time,
             R.reservation_person_name,
             R.reservation_person_count,
-            R.reservation_person_phone,
-            R.dinning_num
+            R.reservation_cancel,
+            R.dinning_num,
+            R.restaurant_num
         FROM 
             RESERVATION R
         JOIN 
-            MEMBER M ON R.reservation_person_name = M.member_name
+            MEMBER M ON R.reservation_email = M.member_e_mail
         WHERE 
-            M.member_name = #{member_name}
+            M.member_id = #{member_id}
     </select>
+    
+    <!-- 예약 취소 -->
+    <update id="cancelReservation">
+	    DELETE FROM RESERVATION
+    	WHERE reservation_num = #{reservation_num}
+	</update>
     
 
 				

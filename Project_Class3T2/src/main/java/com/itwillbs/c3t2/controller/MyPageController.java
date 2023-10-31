@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -76,6 +77,26 @@ public class MyPageController {
 		model.addAttribute("pagination", pagination);
 
 		return "mypage/mypage_basket";
+	}
+	
+	@GetMapping("deleteBasket")					// 장바구니 내역 삭제
+	public String deleteBasket(@RequestParam("cartNum") int cartNum) {
+		
+		service.deleteCartItem(cartNum);
+		return "redirect:/MypageBasket";
+	}
+	
+	@PostMapping("deleteBasket")
+	public String deleteBasket(@RequestParam int cartNum, RedirectAttributes redirectAttributes) {
+		
+		boolean isDeleted = service.deleteCartItem(cartNum);
+		
+		if (isDeleted) {
+	        redirectAttributes.addFlashAttribute("successMessage", "장바구니 항목 삭제 성공!");
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMessage", "장바구니 항목 삭제 실패!");
+	    }
+	    return "redirect:/MypageBasket";
 	}
 	
 	
@@ -313,21 +334,43 @@ public class MyPageController {
 	
 
 	@GetMapping("MypageZzim")					//나의 관심정보 - 찜
-	public String mypageZzim(HttpSession session, Model model) {
+	public String mypageZzim(HttpSession session, Model model, PageMaker pageMaker, Map<String, Object> parMap) {
 		
-		// 세션에서 현재 로그인한 회원의 아이디 가져오기
-		String member_id = (String) session.getAttribute("sId");
-		System.out.println(member_id);
+//		// 세션에서 현재 로그인한 회원의 번호 가져오기
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+//		
+//		
+//		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
+		parMap.put("member_id", loginUser.getMember_id());	
+		
+//		// 세션에서 현재 로그인한 회원의 아이디 가져오기
+//		String member_id = (String) session.getAttribute("sId");
+//		System.out.println(member_id);
+//		
+//		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
+//		parMap.put("member_id", member_id);
+		
+		// 페이지당 표시할 아이템 수를 설정.
+		pageMaker.setPerPageNum(6);
+		
+		// 찜의 전체 아이템 수를 설정.
+		pageMaker.setTotalCount(service.getFavoriteTotalCount(parMap));
+		
+		// 페이지네이션 HTML을 생성.
+		String pagination=pageMaker.paginationHTML("MypageZzim");
 		
 		// 현재 로그인한 회원의 찜 목록 가져오기
-		List<FavoriteVO> favorites = service.getFavorite(member_id);
+		List<FavoriteVO> favorites = service.getFavoriteList(parMap);
 		System.out.println(favorites);
 		
-		// 가져온 찜 목록을 모델에 추가
+		// 가져온 찜 목록과 페이지네이션 관련 정보를 모델에 추가
 		model.addAttribute("favorites", favorites);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
 		
 		return "mypage/mypage_zzim";
 	}
+	
 	@GetMapping("/deleteFavorite")				//나의 관심정보 - 찜 내역 삭제
 	public String deleteFavorite(@RequestParam("favoriteNum") Integer favoriteNum) {
 	    
@@ -339,33 +382,43 @@ public class MyPageController {
 	}
 	
 	
-	@PostMapping("deleteFavorite")				//나의 관심정보 - 찜 내역 삭제
-	public String deleteFavorite(@RequestParam Integer favoriteNum, RedirectAttributes redirectAttributes) {
-		
-		// Service를 호출하여 favoriteNum에 해당하는 찜 목록 데이터 삭제
-		boolean isDeleted = service.deleteFavorite(favoriteNum);
-		
-		// 삭제 성공 시 사용자에게 알림 메시지 전달
-		if (isDeleted) {
-			redirectAttributes.addFlashAttribute("errorMessage", "찜 항목 삭제 성공!");
-	    }
-		return "redirect:/MypageZzim";
-	}
+	
 	
 	@GetMapping("MypageReservationList")				// 예약 내역
 	public String mypageReservationList(HttpSession session, Model model) {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
-		String member_name = (String) session.getAttribute("sName");
-		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_name);
+		String member_id = (String) session.getAttribute("sId");
+		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_id);
 		
 		// 현재 로그인한 회원의 모든 리뷰 가져오기
-		List<ReservationVO> reviews = service.getReservationDetail(member_name);
+		List<ReservationVO> reviews = service.getReservationDetail(member_id);
 		System.out.println(reviews);
 		
 		model.addAttribute("reviews", reviews);
 		
 		return "mypage/mypage_reservation_ask";
+	}
+	
+	@GetMapping("cancelReservation")		// 예약취소
+	public String cancelReservation(@RequestParam("reservation_num") int reservation_num) {
+	    service.cancelReservation(reservation_num);
+	    return "redirect:/MypageReservationList";
+	}
+	
+	@PostMapping("cancelReservation") // 예약 취소
+	public String cancelReservation(@RequestParam Integer reservation_num, RedirectAttributes redirectAttributes) {
+	    
+	    // Service를 호출하여 reservation_num에 해당하는 예약 데이터를 취소
+	    boolean isCancelled = service.cancelReservation(reservation_num);
+	    
+	    // 취소 성공 시 사용자에게 알림 메시지 전달
+	    if (isCancelled) {
+	        redirectAttributes.addFlashAttribute("successMessage", "예약이 성공적으로 취소되었습니다.");
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMessage", "예약 취소에 실패하였습니다.");
+	    }
+	    return "redirect:/MypageReservationList";
 	}
 	
 	@GetMapping("MypageDetail")							// 나의 상세 정보

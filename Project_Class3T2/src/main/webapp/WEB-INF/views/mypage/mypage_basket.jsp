@@ -47,6 +47,14 @@ cursor: pointer;
 }
 </style>
 
+<script>
+function deleteCartItem(cartNum) {
+    if(confirm('정말로 삭제하시겠습니까?')) {
+        location.href = "${pageContext.request.contextPath}/deleteBasket?cartNum=" + cartNum;
+    }
+}
+</script>
+
 </head>
 <body>
 	
@@ -68,9 +76,9 @@ cursor: pointer;
                           <img src="${pageContext.request.contextPath}/resources${item.product_main_img_real_file}" width="200" height="200">
                           <p class="itemDesc bold text-center" style="padding: 5px 10px">${item.product_name}</p>
                           <button onclick="location.href='${pageContext.request.contextPath}/PayPro?proNums=${item.product_num}'">상품페이지로 이동</button>
-                   <form action="${pageContext.request.contextPath}/deleteFavorite" method="post" style="display: inline;">
-                        <input type="hidden" name="favoriteNum" value="${item.cart_num}" />
-                        <button type="button">삭제</button>
+                   <form action="${pageContext.request.contextPath}/deleteBasket" method="post" style="display: inline;">
+                        <input type="hidden" name="cartNum" value="${item.cart_num}" />
+                        <button type="button" onclick="deleteCartItem(${item.cart_num})">삭제</button>
                     </form>
 
                       </div>
@@ -86,9 +94,9 @@ cursor: pointer;
 
 		</div>
 		
-		          	<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
-          				${pagination}
-          			</div>
+	   <div class="text-center mt50" style=" display: flex;justify-content: space-around;">
+         	${pagination}
+       </div>
 	</div>
 
 

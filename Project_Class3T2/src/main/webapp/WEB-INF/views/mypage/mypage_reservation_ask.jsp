@@ -54,6 +54,19 @@
 								<td>${reservation.reservation_time}</td>
 								<td>${reservation.reservation_person_count}</td>
 								<td>${reservation.dinning_num}</td>
+								<td>
+									<c:choose>
+						                <c:when test="${reservation.reservation_cancel == 0}">
+						                    <form action="cancelReservation" method="post">
+						                        <input type="hidden" name="reservation_num" value="${reservation.reservation_num}">
+						                        <button type="submit">취소하기</button>
+						                    </form>
+						                </c:when>
+						                <c:otherwise>
+						                    이미 취소됨
+						                </c:otherwise>
+						            </c:choose>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>

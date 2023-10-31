@@ -35,7 +35,7 @@ public interface MyPageMapper {
 	int deleteFavorite(Integer favoriteNum);
 	
 	// 예약 내역
-	List<ReservationVO> getReservation(String member_name);
+	List<ReservationVO> getReservation(String member_id);
 
 	//비밀번호 업데이트
 	int updatePassword(Map<String, Object> param);
@@ -54,6 +54,18 @@ public interface MyPageMapper {
 
 	//장바구니 전체 갯수
 	int getCartTotalCount(Map<String, Object> parMap);
+	
+	// 장바구니 삭제
+	int deleteCartItem(int cartNum);
+	
+	// 찜 전체 개수
+	int getZzimTotalCount(Map<String, Object> paraMap);
+	
+	// 찜 목록
+	List<FavoriteVO> getZzimList(Map<String, Object> parMap);
+	
+	// 예약 취소
+	boolean cancelReservation(int reservation_num);
 
 
 	

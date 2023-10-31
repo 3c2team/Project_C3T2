@@ -65,7 +65,7 @@
 				<div class="text-center mt50 mb50">	
 					<h1>찜</h1>
 				</div>
-			<h2>총 ${favorites.size()}개 상품</h2>
+			<h2 class="mb100"> 총 ${pageMaker.totalCount}개 상품</h2>
 			<br><br><br><br>
 				<div class="container2" >
                         <div class="line"></div>
@@ -87,6 +87,9 @@
                         	<h3 class="text-center mt50" style="width: 100%">등록된 찜 내역이 없습니다.</h3>
                         </c:if>
                     </div>
+                    <div class="text-center mt50" style=" display: flex;justify-content: space-around;">
+         				${pagination}
+       				</div>
 				</div>
 			
 			

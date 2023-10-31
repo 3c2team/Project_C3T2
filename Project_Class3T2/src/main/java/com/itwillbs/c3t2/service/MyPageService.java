@@ -36,10 +36,10 @@ public class MyPageService {
 		return mapper.getOrderList(member_num);
 	}
 
-	// 찜 목록
-	public List<FavoriteVO> getFavorite(String member_id) {
-		return mapper.getFavorite(member_id);
-	}
+//	// 찜 목록
+//	public List<FavoriteVO> getFavorite(String member_id) {
+//		return mapper.getFavorite(member_id);
+//	}
 	// 찜 목록 삭제
 	public boolean deleteFavorite(Integer favoriteNum) {
         int result = mapper.deleteFavorite(favoriteNum);
@@ -47,8 +47,8 @@ public class MyPageService {
     }
 	
 	// 예약 내역
-	public List<ReservationVO> getReservationDetail(String member_name) {
-		return mapper.getReservation(member_name);
+	public List<ReservationVO> getReservationDetail(String member_id) {
+		return mapper.getReservation(member_id);
 	}
 
 	//비밀번호 업데이트
@@ -91,6 +91,25 @@ public class MyPageService {
 	 */
 	public int getCartTotalCount(Map<String, Object> parMap) {
 		return 	mapper.getCartTotalCount(parMap);
+	}
+	
+	// 장바구니 삭제
+	public boolean deleteCartItem(int cartNum) {
+		int result = mapper.deleteCartItem(cartNum);
+		return result > 0;  // 삭제된 항목의 수가 0보다 크면 true를 반환, 그렇지 않으면 false를 반환
+	}
+	
+	// 찜 전체 갯수
+	public int getFavoriteTotalCount(Map<String, Object> paraMap) {
+		return mapper.getZzimTotalCount(paraMap);
+	}
+	// 찜 목록
+	public List<FavoriteVO> getFavoriteList(Map<String, Object> parMap) {
+		return mapper.getZzimList(parMap);
+	}
+	// 예약 취소
+	public boolean cancelReservation(int reservation_num) {
+		return mapper.cancelReservation(reservation_num);
 	}
 		
 	
