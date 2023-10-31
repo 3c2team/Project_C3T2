@@ -156,10 +156,10 @@
 					<a href="">상품상세정보</a>
 				</div>
 				<div class="detailBottomTabItem">
-					<a href="#review">리뷰</a>
+					<a href="#review">상품리뷰</a>
 				</div>
 				<div class="detailBottomTabItem">
-					<a href="#QnA">Q&A</a>
+					<a href="#QnA">상품문의</a>
 				</div>
 				<div class="detailBottomTabItem">
 					<a href="">상품정보제공고시</a>
@@ -203,28 +203,39 @@
 			<div>
 				<div>
 					<ul class="">
-						<c:forEach var="reviewList" items="${reviewList }">
-							<li>
-								<div class="reviewBox">
-									<div class="reviewStarMin">
-										<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
-										</div>									
+						<c:choose>
+							<c:when test="${empty reviewList }">
+								<li>
+									<div class="reviewBox">
+												등록된 리뷰가 없습니다.
 									</div>
-									<div class="reviewInfo">
-										<%-- if 사진 있으면 넣고 없으면 빼고 --%>
-										<div class="reviewImg">
-											<img src="${reviewList.review_image }">
+								</li>								
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="reviewList" items="${reviewList }">
+									<li>
+										<div class="reviewBox">
+											<div class="reviewStarMin">
+												<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
+												</div>									
+											</div>
+											<div class="reviewInfo">
+												if 사진 있으면 넣고 없으면 빼고
+												<div class="reviewImg">
+													<img src="${reviewList.review_image }">
+												</div>
+												<div class="reviewContent">
+													${reviewList.review_content }
+												</div>
+											</div>
+											<div class="reviewIdDate">
+												${reviewList.member_id } | ${reviewList.review_date }
+											</div>
 										</div>
-										<div class="reviewContent">
-											${reviewList.review_content }
-										</div>
-									</div>
-									<div class="reviewIdDate">
-										${reviewList.member_id } | ${reviewList.review_date }
-									</div>
-								</div>
-							</li>
-						</c:forEach>
+									</li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</div>
 			</div>
@@ -244,58 +255,56 @@
 			<div>
 				<div>
 					<ul class="">
-<%-- 						<c:forEach var="" items=""> --%>
+						<c:if test="${empty QnAList }">
 							<li>
-								<div class="qnaBox">
-									<div class="qnaAnswer">
-										<span>답변완료</span>
-									</div>
-									<div class="qnaInfo">
-										원산지 관련 문의
-									</div>
-									<div class="qnaIdDate">
-										아이디 | 문의쓴날
-									</div>
+								<div class="reviewBox">
+									등록된 문의글이 없습니다.
 								</div>
 							</li>
-<%-- 						</c:forEach> --%>
-						<li>
-								<div class="qnaBox">
+						</c:if>
+						<c:forEach var="QnA" items="${QnAList }">
+							<li>
+								<div class="questionBox">
 									<div class="qnaAnswer">
-										<span>답변완료</span>
+										<c:choose>
+											<c:when test="${not empty QnA.answer_content }">
+												<span>답변완료</span>
+											</c:when>
+											<c:otherwise>
+												<span>답변대기</span>
+											</c:otherwise>
+										</c:choose>
 									</div>
-									<div class="qnaInfo">
-										원산지 관련 문의
-									</div>
-									<div class="qnaIdDate">
-										아이디 | 리뷰쓴날
-									</div>
+									<c:choose>
+										<c:when test="${QnA.secret eq 0}">
+											<div class="questionInfo" id="question_${QnA.question_num}">
+												${QnA.question_content }
+											</div>
+											<div class="questionIdDate">
+												${QnA.member_id } | ${QnA.question_date }
+											</div>
+										</c:when>
+										<c:when test="${QnA.secret eq 1}">
+											<div class="questionInfo secretQuestion">
+												비밀글 입니다
+											</div>
+											<div class="questionIdDate">
+											</div>
+										</c:when>
+									</c:choose>
 								</div>
-							</li><li>
-								<div class="qnaBox">
-									<div class="qnaAnswer">
-										<span>답변완료</span>
+								<c:if test="${not empty QnA.answer_content }">
+									<div class="answerBox" id="answer_${QnA.question_num}" style="display: none;">
+										<div class="answerInfo">
+											${QnA.answer_content }
+										</div>
+	<!-- 									<div class="answerIdDate"> -->
+	<%-- 										${QnA.answer_date } --%>
+	<!-- 									</div> -->
 									</div>
-									<div class="qnaInfo">
-										원산지 관련 문의
-									</div>
-									<div class="qnaIdDate">
-										아이디 | 리뷰쓴날
-									</div>
-								</div>
-							</li><li>
-								<div class="qnaBox">
-									<div class="qnaAnswer">
-										<span>답변완료</span>
-									</div>
-									<div class="qnaInfo">
-										원산지 관련 문의
-									</div>
-									<div class="qnaIdDate">
-										아이디 | 리뷰쓴날
-									</div>
-								</div>
+								</c:if>
 							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

@@ -409,6 +409,7 @@ span.reviewAveScore {
 .reviewBox {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin: auto;
     padding-inline: 10%;
     height: 200px;
@@ -453,7 +454,7 @@ span.reviewAveScore {
     align-items: center;
     justify-content: space-between;
 }
-.qnaBox {
+.answerBox, .questionBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -467,15 +468,6 @@ span.reviewAveScore {
 	width:15%;
 }
 
-.qnaInfo {
-    width: 65%;
-}
-
-.qnaIdDate {
-    text-align: right;
-    width: 20%;
-}
-
 .qnaAnswer span{
     display: inline-block;
     vertical-align: middle;
@@ -485,4 +477,24 @@ span.reviewAveScore {
     border-radius: 2px;
     background-color: #bbbec2;
     padding: 0 15px;
+}
+
+.questionInfo {
+    width: 65%;
+}
+
+.questionIdDate {
+    text-align: right;
+    width: 20%;
+}
+
+.answerBox {
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 350px;
+}
+
+.answerInfo {
+    text-align: left;
 }

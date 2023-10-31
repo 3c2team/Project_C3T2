@@ -13,6 +13,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.QnAVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 
 @Service
@@ -51,6 +52,8 @@ public class StoreService {
 	public List<ReviewVO> getReviewList(int proNum) {
 		return mapper.selectReviewList(proNum);
 	}
-	
-	
+
+	public List<QnAVO> getQnAList(int proNum) {
+		return mapper.selectQnAList(proNum);
+	}
 }

@@ -67,6 +67,14 @@
 			, #{file_name}
 		)
 	</insert>
-
-	
+	<select id="selectQnAList" resultType="com.itwillbs.c3t2.vo.QnAVO">
+		SELECT
+			Q.*
+			, IFNULL(A.answer_num, '') AS answer_num
+			, IFNULL(A.answer_content, '') AS answer_content
+		FROM QUESTION Q
+		LEFT JOIN ANSWER A
+		ON Q.question_num = A.question_num
+		WHERE Q.product_num = #{proNum}
+	</select>
 </mapper>

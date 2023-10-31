@@ -15,7 +15,6 @@ function changeImgOut() {
 
 // ---------------------------------------------------------------------
 
-
 // -------------------- < 수량 버튼 > --------------------
 $(document).ready(function() {	
 	const amountsInput = $('#amounts');
@@ -46,3 +45,23 @@ $(document).ready(function() {
 	}
 });
 //--------------------------------------------------------
+
+//-------------------------------------- < 문의글 클릭 이벤트 > --------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    const questionElements = document.querySelectorAll('.questionInfo:not(.secretQuestion)');
+
+    questionElements.forEach(question => {
+        question.addEventListener('click', function() {
+            const answerId = this.id.replace('question_', 'answer_');
+            const answerBox = document.getElementById(answerId);
+
+            if (answerBox.style.display === 'none' || answerBox.style.display === '') {
+                answerBox.style.display = 'flex';
+            } else {
+                answerBox.style.display = 'none';
+            }
+        });
+    });
+});
+//----------------------------------------------------------------------------------------------------
+

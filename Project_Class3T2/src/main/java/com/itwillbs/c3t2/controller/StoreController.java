@@ -28,6 +28,7 @@ import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.QnAVO;
 import com.itwillbs.c3t2.vo.QuestionVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 
@@ -118,6 +119,12 @@ public class StoreController {
 		model.addAttribute("AveReviewStar", AveReviewStar);
 		model.addAttribute("reviewCount", (int)reviewCount);
 
+		//=========================================================================
+		// 문의
+		List<QnAVO> QnAList = service.getQnAList(proNum);
+		System.out.println(QnAList);
+		model.addAttribute("QnAList", QnAList);
+		
 		return "store/product_detail";
 	}
 	
