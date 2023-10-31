@@ -29,7 +29,6 @@ import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
 import com.itwillbs.c3t2.vo.QnAVO;
-import com.itwillbs.c3t2.vo.QuestionVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 
 @Controller
