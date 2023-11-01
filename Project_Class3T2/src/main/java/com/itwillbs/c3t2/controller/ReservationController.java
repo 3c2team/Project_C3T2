@@ -33,11 +33,11 @@ public class ReservationController {
 		return "reservation/reservation_form";
 	}
 	
-	//예약 폼 페이지 이동
-	@GetMapping("/ReservationInfo")
-	public String reservationInfo() {
-		return "reservation/reservation_info";
-	}
+//	//예약 폼 페이지 이동
+//	@GetMapping("/ReservationInfo")
+//	public String reservationInfo() {
+//		return "reservation/reservation_info";
+//	}
 	
 	
 	
