@@ -77,10 +77,6 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.deleteReview(review_num);
 	}
-	public Map<String, String> selectReviewImg(int review_num) {
-		// TODO Auto-generated method stub
-		return mapper.selectReviewImg();
-	}
 	public List<Map<String, Object>> selectEventList() {
 		// TODO Auto-generated method stub
 		return mapper.selectEventList();
@@ -108,6 +104,14 @@ public class AdminService {
 	public int updateQnaBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.updateQnaBoard(map);
+	}
+	public Map<String, Object> selectReview(int review_num) {
+		// TODO Auto-generated method stub
+		return mapper.selectReview(review_num);
+	}
+	public Map<String, Integer> selectMemberOut() {
+		// TODO Auto-generated method stub
+		return mapper.selectMemberOut();
 	}
 	
 

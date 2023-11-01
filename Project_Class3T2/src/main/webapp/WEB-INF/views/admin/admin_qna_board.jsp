@@ -44,8 +44,7 @@ table {
 								<tr>
 									<th>문의번호</th>
 									<th>작성자</th>
-									<th>상풍번호</th>
-									<th>문의제목</th>
+									<th>상품번호</th>
 									<th>문의날짜</th>
 									<th>답변여부</th>
 								</tr>
@@ -56,12 +55,11 @@ table {
 										<th>${QnaBoardList.num}</th>
 										<th>
 											${QnaBoardList.member_id}(${QnaBoardList.member_name })
-											<button class="btn btn-light btn-right go_detail" value="${QnaBoardList.qna_num}">자세히보기</button>
+											<button class="btn btn-light btn-right go_detail" value="${QnaBoardList.question_num}">자세히보기</button>
 										</th>
 										<th>${QnaBoardList.product_num}</th>
-										<th>${QnaBoardList.qna_subject}</th>
-										<th>${QnaBoardList.qna_date}</th>
-										<th>${QnaBoardList.qna_is_answer}</th>
+										<th>${QnaBoardList.question_date}</th>
+										<th>${QnaBoardList.question_is_answer}</th>
 									</tr>
 								</c:forEach>
 							</tbody>

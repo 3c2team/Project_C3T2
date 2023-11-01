@@ -3,38 +3,30 @@ package com.itwillbs.c3t2.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.filefilter.FalseFileFilter;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.service.AdminService;
 import com.itwillbs.c3t2.service.CartService;
-import com.itwillbs.c3t2.service.StoreService;
 import com.itwillbs.c3t2.vo.AdminVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductVO;
-import com.itwillbs.c3t2.vo.ReservationVO;
 
 
 @Controller
@@ -67,7 +59,10 @@ public class AdminController {
     
     //상품별 매출 페이지 이동(관리자)
     @GetMapping("AdminSalesProduct")
-    public String adminSalesProduct() {
+    public String adminSalesProduct(Model model) {
+    	List<ProductVO> productList = service.getproductList();
+    	System.out.println(productList);
+    	model.addAttribute("productList",productList);
     	return "admin/admin_sales_product";
     }
     
@@ -110,7 +105,7 @@ public class AdminController {
     	if(map.get("product_num")!=null) {
     		Path path = null;
     		String item = (String)map.get("product_num");
-    		String uploadDir = "/resources/store_img/";//가상 업로드 경로
+    		String uploadDir = "/store_img/";//가상 업로드 경로
         	String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 업로드 경로
     		int product_num = Integer.parseInt(item); 
     		List<Map<String, Object>> selecteProductImg = service.getproductImg(product_num);
@@ -144,7 +139,7 @@ public class AdminController {
 //    	System.out.println(map);
 //    	System.out.println(subFiles);
     	
-    	String uploadDir = "/resources/store_img/";//가상 업로드 경로
+    	String uploadDir = "/store_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
     	
 		try {
@@ -217,10 +212,10 @@ public class AdminController {
     }
 //    상품 삭제 메서드(관리자)
     @PostMapping("DeleteProductPro")
-    	public String deleteProduct(@RequestParam List<Integer> product_nums
+    	public String deleteProduct(@RequestParam(value = "checkbox")  List<Integer> product_nums
     										, HttpSession session) {
     	System.out.println(product_nums);
-    	String uploadDir = "/resources/store_img/";//가상 업로드 경로
+    	String uploadDir = "/store_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);
     	System.out.println("fdsfdsfdsf : " + saveDir);
     	Path path = null;
@@ -266,6 +261,7 @@ public class AdminController {
     public String adminReviewDelete(Model model) {
     	
     	List<Map<String, Object>> selectReviewList = service.selectReviewList();
+    	System.out.println("리뷰 리스트 : " + selectReviewList);
     	model.addAttribute("selectReviewList", selectReviewList);
     	return "admin/admin_review_delete";
     }
@@ -274,32 +270,29 @@ public class AdminController {
     public String AdminReviewDeletePro(@RequestParam(value = "checkbox",required = false) List<Integer> list
     									, Model model
     									, HttpSession session) {
-    	Map<String, String> selectReview =null;
     	int deleteReviewCount = 0;
     	System.out.println(list);
     	for(int review_num : list) {
+    		Map<String, Object> selectReview = service.selectReview(review_num);
     		deleteReviewCount = service.deleteReview(review_num);
-    		selectReview = service.selectReviewImg(review_num);
     		
     		if(deleteReviewCount == 0) {
     			model.addAttribute("msg","삭제에 실패했습니다.");
     			return "fail_back";
     		}
-    	}
     		try {
-    			if(deleteReviewCount > 0) { // 레코드의 파일명 삭제(수정) 성공 시
-    				// 저장된 실제 파일 삭제
-    				String uploadDir = "/resources/review_img"; // 가상의 경로
-    				String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
-    				
-    					Path path = Paths.get(saveDir + "/" + selectReview.get("review_image"));
-    					Files.deleteIfExists(path);
-    					//이미지 이름 uuid상관없음 db에 파일 이름으로 차피 저장되어 있으니 그걸로 가져오면됨
-    			}
+				String uploadDir = "/review_img"; // 가상의 경로
+				String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
+				
+				Path path = Paths.get(saveDir + "/" + selectReview.get("review_image"));
+				Files.deleteIfExists(path);
+				//이미지 이름 uuid상관없음 db에 파일 이름으로 차피 저장되어 있으니 그걸로 가져오면됨
+			
     		} catch (IOException e) {
     			e.printStackTrace();
-    		
-    	}
+    			
+    		}
+		}
     	
     	return "redirect:/AdminReviewDelete";
     }
@@ -308,6 +301,8 @@ public class AdminController {
     @GetMapping("AdminMember")
     public String adminMember(Model model) {
     	List<MemberVO> MemberList = service.selectMemberList();
+    	Map<String, Integer> selectMemberOut= service.selectMemberOut();
+    	model.addAttribute("selectMemberOut",selectMemberOut);
     	model.addAttribute("memberList",MemberList);
     	return "admin/admin_member";
     }
@@ -368,6 +363,7 @@ public class AdminController {
     @PostMapping("AdminQnaAnswerPro")
     public String adminQnaAnswerPro(Model model
     							,@RequestParam Map<String, Object> map){
+    	System.out.println(map);
     	int updqteQnaCount = service.updateQnaBoard(map);
     	if(updqteQnaCount == 0) {
     		model.addAttribute("msg","등록에 실패하였습니다");
@@ -464,7 +460,7 @@ public class AdminController {
     	}
 //    	System.out.println(map);
 //    	System.out.println(file);
-     	String uploadDir = "/resources/event_img/";//가상 업로드 경로
+     	String uploadDir = "/event_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
     	
 			
@@ -498,11 +494,11 @@ public class AdminController {
     //이벤트 삭제 처리(관리자)
     @PostMapping("AdminDeleteEventPro")
     public String adminEventDeletePro(Model model
-    		,@RequestParam(value = "event_nums") List<Integer> list
+    		,@RequestParam(value = "checkbox") List<Integer> list
     		,HttpSession session) {
     	
     	System.out.println("넘버 넘버"+list);
-    	String uploadDir = "/resources/event_img/";//가상 업로드 경로
+    	String uploadDir = "/event_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir);
     	Path path = null;
     	try {
@@ -528,5 +524,12 @@ public class AdminController {
     	}
 
     	return "redirect:/AdminEventList";
+    }
+    //js 파일에 들고가는 탈퇴사유 셀렉(관리자)
+    @ResponseBody
+	@PostMapping("/AdminSelectReson")
+    public Map<String, Integer> selectReson() {
+    	Map<String, Integer> selectMemberOut= service.selectMemberOut();
+    return selectMemberOut;
     }
 }

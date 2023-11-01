@@ -61,7 +61,7 @@ $(function () {
 								<tbody>
 									<c:forEach var="eventList" items="${eventList }">
 										<tr>
-											<th><input type="checkbox" name="event_nums" value="${eventList.event_num }" class="custom-control-input"></th>
+											<th><input type="checkbox" name="checkbox" value="${eventList.event_num }" class="custom-control-input"></th>
 											<th>${eventList.num }</th>
 											<th>${eventList.event_subject }</th>
 											<th>${eventList.event_content }</th>

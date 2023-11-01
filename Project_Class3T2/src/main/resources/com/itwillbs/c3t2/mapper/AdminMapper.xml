@@ -4,8 +4,17 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
     <mapper namespace="com.itwillbs.c3t2.mapper.AdminMapper">
-     <select id="selectMemberList" resultType="com.itwillbs.c3t2.vo.MemberVO">
+     	<select id="selectMemberList" resultType="com.itwillbs.c3t2.vo.MemberVO">
 			SELECT * FROM MEMBER
+		</select>
+    	<select id="selectMemberOut" resultType="map">
+			SELECT COUNT(result1) as reson1
+					,COUNT(result2) as reson2
+					,COUNT(result3) as reson3
+					,COUNT(result4) as reson4
+					,COUNT(result5) as reson5
+					,COUNT(result6) as reson6
+			FROM MEMBER_OUT
 		</select>
 		<select id="selectReservationList" resultType="map">
 			SELECT rm.reservation_num
@@ -39,8 +48,17 @@
 			FROM NOTICE
 		</select>
 		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
-			SELECT  *,ROW_NUMBER() OVER(order by product_num) as num
-			FROM PRODUCT
+			SELECT  product_num
+					,product_name
+					,product_price
+					,product_info
+					,product_release
+					,product_category_name
+					,product_main_img
+					,product_main_img_real_file
+					,ROW_NUMBER() OVER(order by product_num) as num
+			FROM PRODUCT p JOIN PRODUCT_CATEGORY c
+			ON p.product_category_num = c.product_category_num
 			<if test="product_num != null">
 				WHERE product_num = ${product_num}
 			</if>
@@ -111,9 +129,19 @@
 			FROM REVIEW r JOIN PRODUCT p
 			ON r.product_num = p.product_num
 		</select>
-		<select id="selectReviewImg" resultType="map">
-			SELECT review_image
-			FROM REVIEW
+		<select id="selectReview" resultType="map">
+			SELECT review_num
+				, ROW_NUMBER() OVER(order by review_num) as num
+				, review_content
+				, order_num
+				, r.product_num
+				, product_name
+				, review_star
+				, DATE_FORMAT(review_date, '%Y년 %m월%d일 %H:%i') as review_date
+				, member_id
+				, review_image
+			FROM REVIEW r JOIN PRODUCT p
+			ON r.product_num = p.product_num
 			WHERE review_num = #{review_num}
 		</select>
 		<select id="selectEventList" resultType="map">
@@ -150,42 +178,42 @@
 				)
 		</insert>
 		<select id="selectQnaBoardList" resultType="map">
-			SELECT qna_num
-				,ROW_NUMBER() OVER(order by qna_num) as num
+			SELECT question_num
+				,ROW_NUMBER() OVER(order by question_num) as num
 				,product_num
 				,q.member_id as member_id
 				,member_name
-				,qna_answer
-				,IF(ISNULL(qna_answer),'답변대기','답변완료') as qna_is_answer
-				,DATE_FORMAT(qna_date, '%Y년 %m월%d일 %H:%i') as qna_date
-				,qna_subject
-				,qna_content
-			FROM QNA q join MEMBER m
-			on q.member_id = m.member_id
-			WHERE qna_date > DATE_FORMAT(now(), '%Y년')
+				,question_answer
+				,IF(ISNULL(question_answer),'답변대기','답변완료') as question_is_answer
+				,DATE_FORMAT(question_date, '%Y년 %m월%d일 %H:%i') as question_date
+				,question_content
+				,secret
+			FROM QUESTION q join MEMBER m
+			ON q.member_id = m.member_id
+			WHERE question_date > CONCAT(YEAR(now())-1,'-',DATE_FORMAT(question_date, '%m-%d %H:%i'))
 		</select>
 		<select id="selectQnaBoard" resultType="map">
-			SELECT qna_num
-				,ROW_NUMBER() OVER(order by qna_num) as num
+			SELECT question_num
 				,q.product_num
 				,product_name
-				,m.member_id
+				,m.member_id as member_id
 				,member_name
-				,qna_answer
-				,IF(ISNULL(qna_answer),'답변대기','답변완료') as qna_is_answer
-				,DATE_FORMAT(qna_date, '%Y년 %m월%d일 %H:%i') as qna_date
-				,qna_subject
-				,qna_content
-			FROM QNA  q JOIN MEMBER m
+				,question_answer
+				,IF(ISNULL(question_answer),'답변대기','답변완료') as question_is_answer
+				,DATE_FORMAT(question_date, '%Y년 %m월%d일 %H:%i') as question_date
+				,question_content
+				,IF(ISNULL(question_answer_date),'',DATE_FORMAT(question_answer_date, '%Y년 %m월%d일 %H:%i')) as question_answer_date
+			FROM QUESTION  q JOIN MEMBER m
 			ON q.member_id = m.member_id 
 			JOIN PRODUCT p
 			ON p.product_num = q.product_num
-			WHERE qna_num= #{qna_num}
+			WHERE question_num= #{question_num}
 		</select>
 		<update id="updateQnaBoard">
-			update QNA
-			set qna_answer = #{qna_answer}
-			where qna_num = #{qna_num}
+			UPDATE QUESTION
+			SET question_answer = #{question_answer},
+            question_answer_date = now()
+			where question_num = #{question_num};
 		</update>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->

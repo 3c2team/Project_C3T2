@@ -32,8 +32,9 @@ $(function() {
 			return false;
 		}
 	});
+	
 	$(".go_detail").on("click",function(){
-		window.open('AdminQnaAnswer?qna_num='+$(this).val(),'공지등록', "top=500,left=500,width=700, height=700");
+		window.open('AdminQnaAnswer?question_num='+$(this).val(),'답변', "top=500,left=500,width=700, height=700");
 	});
 });
 

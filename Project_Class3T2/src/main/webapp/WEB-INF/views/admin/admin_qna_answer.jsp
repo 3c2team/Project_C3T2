@@ -48,17 +48,11 @@
 					${QnaBoardDetail.member_name }
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-2">문의 제목</label>
-				<div class="com-sm-3">
-					${QnaBoardDetail.qna_subject }
-				</div>
-			</div>
 			
 			<div class="form-group row">
 				<label class="col-sm-2">문의 내용</label>
 				<div class="com-sm-3">
-					${QnaBoardDetail.qna_content }
+					${QnaBoardDetail.question_content }
 				</div>
 			</div>
 			<hr>
@@ -66,13 +60,13 @@
 			<div class="form-group row">
 				<label class="col-sm-2">답변하기</label>
 				<div class="com-sm-5">
-				<input type="hidden" name="qna_num" value="${QnaBoardDetail.qna_num }">
+				<input type="hidden" name="question_num" value="${QnaBoardDetail.question_num }">
 				<c:choose>
-					<c:when test="${empty QnaBoardDetail.qna_answer }">
-						<textarea name="qna_answer" cols="50" rows="2" required class="form-control"></textarea>
+					<c:when test="${empty QnaBoardDetail.question_answer }">
+						<textarea name="question_answer" cols="50" rows="2" required class="form-control"></textarea>
 					</c:when>
 					<c:otherwise>
-						<textarea name="qna_answer" cols="50" rows="2" readonly class="form-control">${QnaBoardDetail.qna_answer }</textarea>
+						<textarea name="question_answer" cols="50" rows="2" readonly class="form-control">${QnaBoardDetail.question_answer }</textarea>
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -82,7 +76,7 @@
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10">
 				<c:choose>
-					<c:when test="${empty QnaBoardDetail.qna_answer }">
+					<c:when test="${empty QnaBoardDetail.question_answer }">
 						<input type="button"onclick="window.close()" class="btn btn-primary" value="취소" >
 						<input type="submit"class="btn btn-primary" onclick="isSubmit()" value="등록" >
 					</c:when>

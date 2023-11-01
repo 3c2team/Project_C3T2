@@ -60,7 +60,6 @@ public interface AdminMapper {
 	//리뷰 삭제
 	int deleteReview(int review_num);
 
-	Map<String, String> selectReviewImg();
 
 	List<Map<String, Object>> selectEventList();
 
@@ -75,5 +74,9 @@ public interface AdminMapper {
 	Map<String, Object> selectQnaBoard(int qna_num);
 
 	int updateQnaBoard(Map<String, Object> map);
+
+	Map<String, Object> selectReview(int review_num);
+
+	Map<String, Integer> selectMemberOut();
 
 }

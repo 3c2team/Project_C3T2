@@ -52,7 +52,7 @@
 								<tbody>
 									<c:forEach var="productList" items="${productList }">
 										<tr>
-											<th><input type="checkbox" name="product_nums" value="${productList.product_num }" class="custom-control-input"></th>
+											<th><input type="checkbox" name="checkbox" value="${productList.product_num }" class="custom-control-input"></th>
 											<th>${productList.num}</th>
 											<th>${productList.product_name }
 												<span>

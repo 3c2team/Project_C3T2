@@ -10,6 +10,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>월별 매출</title>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />

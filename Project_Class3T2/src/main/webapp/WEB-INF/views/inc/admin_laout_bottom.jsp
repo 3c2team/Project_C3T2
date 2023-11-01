@@ -12,10 +12,10 @@
 						<i class="fas fa-tachometer-alt"></i>
 					</div> 매출정보
 				</a>
-				<a class="nav-link" href="AdminEventList">
-					<div class="sb-nav-link-icon">
-						<i class="fas fa-columns"></i>
-					</div> 이벤트관리
+<!-- 				<a class="nav-link" href="AdminEventList"> -->
+<!-- 					<div class="sb-nav-link-icon"> -->
+<!-- 						<i class="fas fa-columns"></i> -->
+<!-- 					</div> 이벤트관리 -->
 				</a>
 				<a class="nav-link" href="AdminNoticeBoard">
 					<div class="sb-nav-link-icon">

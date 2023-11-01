@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +87,7 @@
 					<div class="col-xl-6">
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-bar me-1"></i> 이용자 탈퇴이유
+								<i class="fas fa-chart-bar me-1"></i> 상품별 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myPieChart" width="100%" height="40"></canvas>
@@ -109,10 +110,20 @@
 						</div>
 						<div class="card-body">
 							<table id="datatablesSimple"> 
-								<thead>
-								</thead>
-								<tbody>
-								</tbody>
+									<tr>
+										<th>번호</th>
+										<th>상품카테고리</th>
+										<th>상품이름</th>
+										<th>판매가</th>
+									</tr>
+								<c:forEach var="productList" items="${productList }">
+									<tr>
+										<th>${productList.num }</th>
+										<th>${productList.product_category_name }</th>
+										<th>${productList.product_name }</th>
+										<th>${productList.product_price }</th>
+									</tr>
+								</c:forEach>	
 							</table>
 						</div>
 					</div>
@@ -120,6 +131,7 @@
 			</main>
 		</div>
 	</div>
+<%-- 	<h1>${productList }</h1> --%>
 	
 <script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
