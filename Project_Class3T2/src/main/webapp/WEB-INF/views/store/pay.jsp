@@ -19,6 +19,42 @@
 <script type="text/javascript">
 $(function() {
 	
+	// 배송지 선택
+	$("#resultArea2").hide();
+	
+	
+// 	$("#member1").click(function() {
+		
+// 		var result1 = ("#member1").val();
+// 		var result2 = ("#member2").val();
+		
+// 		alert(result1);
+		
+// 		if(result1 == "1"){
+// 			$("#resultArea1").show();
+// 			$("#resultArea2").hide();
+// 		}else if(result == "2"){
+// 			$("#resultArea2").show();
+// 			$("#resultArea1").hide();
+// 		}
+// 	});
+	
+// 	$("#member2").click(function() {
+		
+// 		var result1 = ("#member1").val();
+// 		var result2 = ("#member2").val();
+		
+// 		if(result1 == "1"){
+// 			$("#resultArea1").show();
+// 			$("#resultArea2").hide();
+// 		}else if(result == "2"){
+// 			$("#resultArea2").show();
+// 			$("#resultArea1").hide();
+// 		}
+// 	});
+	
+	
+	
     var product_num = [];
     $("#check_all").click(function() {
        
@@ -115,6 +151,30 @@ function orderPro(proNums){
 	}
 	
 }
+
+function setDisplay(){
+    
+	if($("input:radio[id=member1]").is(":checked")){
+        $("#resultArea2").hide();
+        $("#resultArea1").show();
+//         $("#member1").prop("checked", true);
+//         $("#member2").prop("checked", false);
+    }else if($('input:radio[id=member2]').is(':checked')){
+    	$("#resultArea1").hide();
+        $("#resultArea2").show();
+//         $("#member2").prop("checked", true);  
+//         $("#member1").prop("checked", false);  
+    }
+}
+
+
+// function setDisplay(){
+//     if($('input:radio[id=member1]').is(':checked')){
+//         $('#divId').hide();
+//     }else{
+//         $('#divId').show();
+//     }
+// }
 
 
 </script>
@@ -215,79 +275,157 @@ function orderPro(proNums){
 			배송정보
 			</span>
 			
-			<table class="delivery">
-				<thead>
-					<tr>
-						<td class="deliverytd">배송지 선택</td>
-						<td>
-							<input type="radio" name="memberInfo" checked>
-							<label>회원정보와 동일</label>
-							
-							<input type="radio" name="memberInfo">
-							<label>새로운 배송지</label>&nbsp;
-		<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-						<td><input type="text" value="${Member.member_name}"></td>
-					</tr>
-					
-					<tr>
-						<td class="deliverytd">주소&nbsp;<span style="color: red">*</span>
-						</td>
+			
+			<div id="resultArea1">
+				<table class="delivery">
+					<thead>
+						<tr>
+							<td class="deliverytd">배송지 선택</td>
+							<td>
+								<input type="radio" name="memberInfo" id="member1" value="1" checked onclick="setDisplay()">
+								<label>회원정보와 동일</label>
+								
+								<input type="radio" name="memberInfo" id="member2" value="2" onclick="setDisplay()">
+								<label>새로운 배송지</label>&nbsp;
+			<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
+							</td>
+						</tr>
 						
-						<td>
-<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
-							<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" value="${Member.member_address1}">&nbsp;
-							<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
-							<input type="text" id="addr2" size="40" value="${Member.member_address2}"/>
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
-						<td>
-<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
-							<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" placeholder="000-0000-0000">
-							<span id="checkPhoneResult"></span><br>
-						</td>
-					
-					</tr>
-					
-					<tr>
-						<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
-						<td>
-							<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
+						<tr>
+							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
+							<td><input type="text" value="${Member.member_name}"></td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">주소&nbsp;<span style="color: red">*</span>
+							</td>
 							
-							<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
-<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
-							<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
-								<option value="">-직접 입력-</option>
-								<option value="naver.com">naver.com</option>
-								<option value="gmail.com">gmail.com</option>
-								<option value="daum.net">daum.net</option>
-								<option value="nate.com">nate.com</option>
-							</select>
-							<span style="font-size: 10pt; color:gray;">
-								<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
-									이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요
-								</p>
-							</span>
-						</td>
-					</tr>
-					
-					<tr>
-						<td class="deliverytd">배송메세지</td>
-						<td><textarea rows="5" cols="100"></textarea></td>
-					</tr>
-				</thead>
-			</table>
-			<br><br>
+							<td>
+	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
+								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" value="${Member.member_address1}">&nbsp;
+								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
+								<input type="text" id="addr2" size="40" value="${Member.member_address2}"/>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
+							<td>
+	<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
+								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" placeholder="000-0000-0000">
+								<span id="checkPhoneResult"></span><br>
+							</td>
+						
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
+							<td>
+								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
+								
+								<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
+	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
+								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
+									<option value="">-직접 입력-</option>
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="nate.com">nate.com</option>
+								</select>
+								<span style="font-size: 10pt; color:gray;">
+									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
+										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요
+									</p>
+								</span>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">배송메세지</td>
+							<td><textarea rows="5" cols="100"></textarea></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			
+			<!-- ------------------------------------------------------------------------------------------- -->
+			
+			<div id="resultArea2">
+				<table class="delivery">
+					<thead>
+						<tr>
+							<td class="deliverytd">배송지 선택</td>
+							<td>
+								<input type="radio" name="memberInfo" id="member1"  value="1" onclick="setDisplay()">
+								<label>회원정보와 동일</label>
+								
+								<input type="radio" name="memberInfo" id="member2"  value="2" checked onclick="setDisplay()">
+								<label>새로운 배송지</label>&nbsp;
+			<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
+							<td><input type="text" ></td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">주소&nbsp;<span style="color: red">*</span>
+							</td>
+							
+							<td>
+	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
+								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" ">&nbsp;
+								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
+								<input type="text" id="addr2" size="40" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
+							<td>
+	<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
+								<input type="text" name="phone" id="phone"  placeholder="000-0000-0000">
+								<span id="checkPhoneResult"></span><br>
+							</td>
+						
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
+							<td>
+<%-- 								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	 --%>
+								
+								<input type="text" id="eMail"  >@<input id="domainName" type="text" name="mailUrl"  />&nbsp;
+	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
+								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
+									<option value="">-직접 입력-</option>
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="nate.com">nate.com</option>
+								</select>
+								<span style="font-size: 10pt; color:gray;">
+									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
+										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요
+									</p>
+								</span>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="deliverytd">배송메세지</td>
+							<td><textarea rows="5" cols="100"></textarea></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		
 			
 			<%-- 결제예정금액 테이블 --%>
 			
+			<br><br>
 			<table class="calculation2">
 				<tr>
 					<th>총 상품금액</th>
