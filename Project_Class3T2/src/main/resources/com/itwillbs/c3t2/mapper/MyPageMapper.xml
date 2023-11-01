@@ -23,6 +23,11 @@
 	    WHERE r.member_id = #{member_id}
 	</select>
 	
+	<!-- 리뷰 상품번호 누르면 상품페이지로 -->
+	<select id="getReviewByNum" resultType="com.itwillbs.c3t2.vo.ReviewVO">
+	    SELECT * FROM REVIEW WHERE review_num = #{reviewNum}
+	</select>
+	
 	<!-- 상품 구매 내역 -->
 	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
        SELECT u.*, m.member_name

@@ -332,6 +332,14 @@ public class MyPageController {
 		return "mypage/mypage_goods_review";
 	}
 	
+	@GetMapping("/productDetail")	//상품 리뷰 페이지 넘어가게하기
+    public String reviewDetail(@RequestParam("review_num") int reviewNum, Model model) {
+        ReviewVO review = service.getReviewByNum(reviewNum);
+        System.out.println(review);
+        model.addAttribute("review", review);
+        return "productDetail";  	// 리뷰 상세 페이지의 뷰 이름
+    }
+	
 
 	@GetMapping("MypageZzim")					//나의 관심정보 - 찜
 	public String mypageZzim(HttpSession session, Model model, PageMaker pageMaker, Map<String, Object> parMap) {

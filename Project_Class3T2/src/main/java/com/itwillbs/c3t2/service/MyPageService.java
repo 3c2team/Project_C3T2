@@ -112,6 +112,9 @@ public class MyPageService {
         mapper.cancelReservation(reservationNum);
     }
 		
-	
+	//상품 리뷰 페이지 넘어가게하기
+	public ReviewVO getReviewByNum(int reviewNum) {
+		return mapper.getReviewByNum(reviewNum);
+	}
 	
 }

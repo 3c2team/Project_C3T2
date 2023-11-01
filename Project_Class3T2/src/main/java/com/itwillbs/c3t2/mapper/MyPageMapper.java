@@ -67,7 +67,8 @@ public interface MyPageMapper {
 	// 예약 취소
 	void cancelReservation(int reservationNum);
 
-
+	// 상품 리뷰 페이지 넘어가게하기
+	ReviewVO getReviewByNum(int reviewNum);
 	
 	
 }

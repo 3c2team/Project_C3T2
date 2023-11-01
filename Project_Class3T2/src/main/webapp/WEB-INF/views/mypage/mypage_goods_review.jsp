@@ -40,9 +40,8 @@
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
 							<th width="120px">주문번호</th>
-							<th width="400px">상품명</th>
-							<th width="130px">리뷰 제목</th>
-							<th width="130px">리뷰 내용</th>
+							<th width="130px">상품명</th>
+							<th width="400px">리뷰 내용</th>
 							<th width="130px">별점</th>
 							<th width="130px">리뷰 날짜</th>
 						</tr>
@@ -50,8 +49,12 @@
 						<c:forEach var="reviews" items="${reviews}">
 							<tr>
 								<td>${reviews.order_num}</td>
-								<td>${reviews.product_num}</td>
-								<td>${reviews.review_title}</td>
+								<td>
+						            <!-- 상품명을 클릭하면 productDetail 페이지로 이동 -->
+						            <a href="${pageContext.request.contextPath}/ProductDetail?proNum=${reviews.product_num}&review_num=${reviews.review_num}">
+									    ${reviews.product_num}
+									</a>
+						        </td>
 								<td>${reviews.review_content}</td>
 								<td>${reviews.review_star}</td>
 								<td>${reviews.review_date}</td>
