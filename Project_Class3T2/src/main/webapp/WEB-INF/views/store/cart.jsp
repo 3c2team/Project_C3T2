@@ -66,7 +66,7 @@ $(function() {
     	if(product_num == ""){
     		alert("선택한 상품이 없습니다.");
     	}else if(confirm("선택 상품을 삭제하시겠습니까?")){
-           location.href="SelectDeleteCart?proNum=" + product_num;
+           location.href="DeleteCartProduct?proNums=" + product_num;
        	}else{
           alert("삭제를 취소 하셨습니다.");
        	}
@@ -140,7 +140,8 @@ function AllPayProduct(sId) {
 	let result = confirm("결제창으로 이동 하시겠습니까?")
 	
 	if(result){
-		location.href="AllPayPro?sId=" + sId;
+// 		location.href="AllPayPro?sId=" + sId;
+		location.href="PayPro?sId=" + sId;
 	}
 	
 }

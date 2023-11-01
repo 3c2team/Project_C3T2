@@ -20,40 +20,18 @@
 $(function() {
 	
 	// 배송지 선택
-	$("#resultArea2").hide();
 	
+	$("input[name=memberInfo]:checked").focus();
 	
-// 	$("#member1").click(function() {
-		
-// 		var result1 = ("#member1").val();
-// 		var result2 = ("#member2").val();
-		
-// 		alert(result1);
-		
-// 		if(result1 == "1"){
-// 			$("#resultArea1").show();
-// 			$("#resultArea2").hide();
-// 		}else if(result == "2"){
-// 			$("#resultArea2").show();
-// 			$("#resultArea1").hide();
-// 		}
-// 	});
-	
-// 	$("#member2").click(function() {
-		
-// 		var result1 = ("#member1").val();
-// 		var result2 = ("#member2").val();
-		
-// 		if(result1 == "1"){
-// 			$("#resultArea1").show();
-// 			$("#resultArea2").hide();
-// 		}else if(result == "2"){
-// 			$("#resultArea2").show();
-// 			$("#resultArea1").hide();
-// 		}
-// 	});
-	
-	
+    $("input[name=memberInfo]").change(function(){
+	   if($("input[name=memberInfo]:checked").val()==1){
+	         var proNums = $(".result_num").val();
+	         location.href="PayPro?proNums=" + proNums;
+	   }else{
+	         $("input[type=text]").val("");
+	   }
+    });
+      	
 	
     var product_num = [];
     $("#check_all").click(function() {
@@ -101,8 +79,11 @@ $(function() {
     
     
     $("#btnmemberdel").on("click",function(){
-       alert(product_num);
-       if(confirm("선택 상품을 삭제하시겠습니까?")){
+//        alert(product_num);
+
+       if(product_num == ""){
+    	   alert("선택하신 상품이 없습니다.")
+       }else if(confirm("선택 상품을 삭제하시겠습니까?")){
            location.href="SelectDeleteCart?proNum=" + product_num;
        }else{
           alert("삭제를 취소 하셨습니다.");
@@ -115,14 +96,7 @@ $(function() {
 // 	})
     
     
-    // 장바구니 비우기
-    $("#productAllDelete").on("click", function() {
-// 		alert("장바구니를 비우시겠습니까?")
 
-		if(confirm("장바구니를 비우시겠습니까?")){
-	           location.href="productAllDelete";
-	       }
-	});
     
 
         
@@ -152,20 +126,20 @@ function orderPro(proNums){
 	
 }
 
-function setDisplay(){
+// function setDisplay(){
     
-	if($("input:radio[id=member1]").is(":checked")){
-        $("#resultArea2").hide();
-        $("#resultArea1").show();
+// 	if($("input:radio[id=member1]").is(":checked")){
+//         $("#resultArea2").hide();
+//         $("#resultArea1").show();
 //         $("#member1").prop("checked", true);
 //         $("#member2").prop("checked", false);
-    }else if($('input:radio[id=member2]').is(':checked')){
-    	$("#resultArea1").hide();
-        $("#resultArea2").show();
+//     }else if($('input:radio[id=member2]').is(':checked')){
+//     	$("#resultArea1").hide();
+//         $("#resultArea2").show();
 //         $("#member2").prop("checked", true);  
 //         $("#member1").prop("checked", false);  
-    }
-}
+//     }
+// }
 
 
 // function setDisplay(){
@@ -223,7 +197,7 @@ function setDisplay(){
  							<td style="text-align: left; text-align: center; border-right: none;">
                        			 <input type="checkbox" name="checkbox" class="checkbox" id="${productPayList.product_num}" value="${productPayList.product_num}" proNum="${productPayList.product_num}"/>
                      		</td>
-
+									<input type="hidden" class="result_num" value="${productPayList.product_num}">
 <!-- 							<td style="text-align: left; text-align: center; border-right: none;"> -->
 <!-- 								<input type="checkbox" name="checkbox"> -->
 <!-- 							</td> -->
@@ -259,12 +233,12 @@ function setDisplay(){
 				</div>
 				
 			</div>
-			
+				
 			<div style="margin: 10px 0; padding-bottom: 50px; border-bottom: solid 1px gray;">
 				<span style="margin: 0 10px;" class="btnfloat">선택상품을</span>
 				<button type="button" class="btn default btnfloat" style="background-color: gray; color: #fff;" id="btnmemberdel">삭제하기</button>
 				
-				<button type="button" class="btn default btnfloat2" onclick="history.back()">이전페이지</button>
+				<button type="button" class="btn default btnfloat2" onclick="location.href='MainCart'">이전페이지</button>
 				<span class="clearboth"></span>
 			</div>
 			<br><br>
@@ -348,80 +322,7 @@ function setDisplay(){
 				</table>
 			</div>
 			
-			<!-- ------------------------------------------------------------------------------------------- -->
-			
-			<div id="resultArea2">
-				<table class="delivery">
-					<thead>
-						<tr>
-							<td class="deliverytd">배송지 선택</td>
-							<td>
-								<input type="radio" name="memberInfo" id="member1"  value="1" onclick="setDisplay()">
-								<label>회원정보와 동일</label>
-								
-								<input type="radio" name="memberInfo" id="member2"  value="2" checked onclick="setDisplay()">
-								<label>새로운 배송지</label>&nbsp;
-			<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-							<td><input type="text" ></td>
-						</tr>
-						
-						<tr>
-							<td class="deliverytd">주소&nbsp;<span style="color: red">*</span>
-							</td>
-							
-							<td>
-	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
-								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" ">&nbsp;
-								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
-								<input type="text" id="addr2" size="40" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
-							<td>
-	<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
-								<input type="text" name="phone" id="phone"  placeholder="000-0000-0000">
-								<span id="checkPhoneResult"></span><br>
-							</td>
-						
-						</tr>
-						
-						<tr>
-							<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
-							<td>
-<%-- 								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	 --%>
-								
-								<input type="text" id="eMail"  >@<input id="domainName" type="text" name="mailUrl"  />&nbsp;
-	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
-								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
-									<option value="">-직접 입력-</option>
-									<option value="naver.com">naver.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="daum.net">daum.net</option>
-									<option value="nate.com">nate.com</option>
-								</select>
-								<span style="font-size: 10pt; color:gray;">
-									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
-										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요
-									</p>
-								</span>
-							</td>
-						</tr>
-						
-						<tr>
-							<td class="deliverytd">배송메세지</td>
-							<td><textarea rows="5" cols="100"></textarea></td>
-						</tr>
-					</thead>
-				</table>
-			</div>
-		
+			<!-- ------------------------------------------------------------------------------------------- -->	
 			
 			<%-- 결제예정금액 테이블 --%>
 			
@@ -445,11 +346,11 @@ function setDisplay(){
 			<div class="payArea">
 				<div class="payment">
 					<div style="padding: 18px 10px; font-size: 10pt; border-bottom: solid 1px #e0e0eb;">
-						<input type="radio" name="cardradio" checked/><label>카드결제</label>&nbsp;&nbsp;
-						<input type="radio" name="cardradio"/><label>실시간 계좌이체</label>&nbsp;&nbsp;
-						<input type="radio" name="cardradio"/><label>휴대폰 결제</label>&nbsp;&nbsp;
+						<input type="radio" name="cardradio" checked/><label>카카오페이</label>&nbsp;&nbsp;
+						<input type="radio" name="cardradio"/><label>카드결제</label>&nbsp;&nbsp;
+<!-- 						<input type="radio" name="cardradio"/><label>휴대폰 결제</label>&nbsp;&nbsp; -->
 						<input type="radio" name="cardradio"/><label>무통장 입금</label>&nbsp;&nbsp;
-						<input type="radio" name="cardradio"/><label>에스크로(가장계좌)</label>&nbsp;
+<!-- 						<input type="radio" name="cardradio"/><label>에스크로(가장계좌)</label>&nbsp; -->
 						
 					</div>
 					
