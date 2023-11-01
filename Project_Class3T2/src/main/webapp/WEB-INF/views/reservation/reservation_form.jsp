@@ -14,6 +14,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+	// 날짜에 맞는 시간 보이기
+// 	function selectableTime(reservation_date) {
+		// 날짜 입력 안 했을때
+// 		if($("#reservation_date").val() == "") {
+// 			alert("날짜 클릭 필수!");
+// 			return;
+// 		}
+// 		$.ajax({
+// 			type: "GET",
+// 			url: "ReservationSchedule?reservation_date=" + reservation_date,
+// 			data: "reservation_date" : reservation_date, // 파라미터
+// 			dataType: "map", // 리턴타입
+// 			success: function(data) {
+				
+// 				document.form.ttt["data"].disabled = true;
+// 			}
+// 				$(".form_radio_btn1").val()
+				
+// 			},
+// 			error: function() {
+// 				alert("댓글 작성 실패!");
+// 			}
+// 		});	
+// 	}
+
+</script>
 <body>
 	<div id="mainLayout">
 	<header>
@@ -80,35 +107,35 @@
 				<tr>
 					<th>예약인원</th>
 					<td>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio1" type="radio" name="reservation_person_count" value="1" checked>
 							<label for="radio1">1</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio2" type="radio" name="reservation_person_count" value="2">
 							<label for="radio2">2</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio3" type="radio" name="reservation_person_count" value="3">
 							<label for="radio3">3</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio4" type="radio" name="reservation_person_count" value="4">
 							<label for="radio4">4</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio5" type="radio" name="reservation_person_count" value="5">
 							<label for="radio5">5</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio6" type="radio" name="reservation_person_count" value="6">
 							<label for="radio6">6</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio7" type="radio" name="reservation_person_count" value="7">
 							<label for="radio7">7</label>
 						</div>
-						<div class="form_radio_btn">
+						<div class="form_radio_btn1">
 							<input id="radio8" type="radio" name="reservation_person_count" value="8">
 							<label for="radio8">8</label>
 						</div>
@@ -139,8 +166,8 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
+						<input type="button" value="예약하기" onclick="insertCheck()">
 						<input type="button" value="돌아가기" onclick="history.back()">
-						<input type="submit" value="예약하기" >
 					</td>
 				</tr>
 			</table>
@@ -150,5 +177,13 @@
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
 	</footer>
 	</div>
+	<script type="text/javascript">
+		function insertCheck() {
+			let result = confirm("예약 하시겠습니까?");
+			if(result){
+				$("form").submit();
+			}
+		}
+	</script>
 </body>
 </html>

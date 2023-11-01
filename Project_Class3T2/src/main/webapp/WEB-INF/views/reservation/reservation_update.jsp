@@ -106,7 +106,7 @@
 								<label for="radio7">7</label>
 							</div>
 							<div class="form_radio_btn">
-								<input id="radio8" type="radio" name="reservation_person_count" value="8" <c:if test="${reservation.reservation_person_count eq '8' }">checked</c:if>>
+								<input id="radio8" type="radio" name="reservation_person_count" value="8"  <c:if test="${reservation.reservation_person_count eq '8' }">checked</c:if>>
 								<label for="radio8">8</label>
 							</div>
 						</td>
@@ -114,21 +114,21 @@
 					<tr>
 						<th>예약자 성함</th>
 						<td>
-							<input type="text" class="readonly" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" readonly required>
+							<input type="text" class="input" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" readonly required>
 						</td>
 					</tr>
 					<tr>
 						<th>예약번호</th>
 						<td>
-							<input type="text" class="readonly" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" readonly required />
+							<input type="text" class="input" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" readonly required />
 						</td>
 					</tr>
 					<tr>
-						<th>예약자 전화번호</th>
+						<th>예약내역 받으실 이메일</th>
 						<td>
-							<input type="text" class="readonly" name="reservation_email1" id="reservation_email1" size="20" required
+							<input type="text" class="input" name="reservation_email1" id="reservation_email1" size="20" required
 								<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
-							<input type="text" class="readonly" name="reservation_email2" id="reservation_email2" size="20" required
+							<input type="text" class="input" name="reservation_email2" id="reservation_email2" size="20" required
 								<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
 							<select id="emailDomain">
 								<option value="">직접입력</option>
@@ -139,9 +139,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td colspan="2" align="center">
 							<input type="button" value="예약변경" onclick="updateCheck()">
-							<input type="reset" value="다시쓰기">
 							<input type="button" value="취소" onclick="history.back()">
 						</td>
 					</tr>

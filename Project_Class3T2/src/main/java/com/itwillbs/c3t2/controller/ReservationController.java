@@ -1,6 +1,8 @@
 package com.itwillbs.c3t2.controller;
 
-import java.util.Random;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.itwillbs.c3t2.handler.GenerateRandomCode;
 import com.itwillbs.c3t2.service.ReservationService;
 import com.itwillbs.c3t2.service.SendMailService;
-import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 
 @Controller
@@ -33,10 +36,11 @@ public class ReservationController {
 		return "reservation/reservation_form";
 	}
 	
-//	//예약 폼 페이지 이동
-//	@GetMapping("/ReservationInfo")
-//	public String reservationInfo() {
-//		return "reservation/reservation_info";
+//	@ResponseBody
+//	@GetMapping("/ReservationSchedule")
+//	public String reservationSchedule(String reservation_date) {
+//		
+//		
 //	}
 	
 	
@@ -48,14 +52,14 @@ public class ReservationController {
 		// 예약 번호 - 6자리 랜덤 숫자
 		reservation.setReservation_guest_num(Integer.parseInt(GenerateRandomCode.getRandomNumCode(6)));
 //		System.out.println(reservation);
-		reservation.setReservation_email(reservation.getReservation_email1()+"@"+reservation.getReservation_email2());
+		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
 		
 		int insertCount = service.insertReservation(reservation);
 		
-		if(insertCount > 0) { // 성공 시 success
+		if(insertCount > 0) { // 성공 시 success로 이동
 			System.out.println(reservation);
-			mailService.sendReservationMail(reservation.getReservation_person_name(), reservation.getReservation_email());
-			model.addAttribute("msg", "예약 확인 메일을 전송했습니다."); // 출력할 메세지
+			mailService.sendReservationMail(reservation);
+			model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
 			model.addAttribute("reservation", reservation);
 			return "reservation/reservation_success";
 		} else { // => 실패 시 "fail_back.jsp" 포워딩
@@ -72,17 +76,20 @@ public class ReservationController {
 	
 	//비회원 예약 조회 페이지 이동
 	@RequestMapping(value = "/ReservationSearchInfo", method = {RequestMethod.GET, RequestMethod.POST})
-	public String reservationSearchInfo(
+	public String reservationSearchInfo(ReservationVO reservation,
 			@RequestParam int reservation_guest_num, 
 			@RequestParam String reservation_email1, 
 			@RequestParam String reservation_email2, 
 			Model model) {
 		
-		// 쿼리 조회
+		if(reservation_guest_num != reservation.getReservation_guest_num() || !reservation_email1.equals(reservation.getReservation_email1()) || !reservation_email2.equals(reservation.getReservation_email2())) {
+			model.addAttribute("msg", "잘못된 접근입니다!");
+			return "fail_back";
+		}
 		System.out.println("!!!"+reservation_guest_num);
 		System.out.println("!!!"+reservation_email1);
 		System.out.println("!!!"+reservation_email2);
-//		reservation.setReservation_email(reservation_email1+"@"+reservation_email2);
+		// 쿼리 조회
 		ReservationVO dbReservation = service.getPersonName(reservation_guest_num, reservation_email1+"@"+reservation_email2); 
 		// 예약 조회 내역 없으면 fail back 구현해놓기!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		System.out.println("예약객체 !!!!!!"+dbReservation);

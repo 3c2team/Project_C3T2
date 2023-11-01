@@ -42,7 +42,7 @@
 						<td>${reservation.reservation_person_count }</td>
 					</tr>
 					<tr>
-						<th>이름</th>
+						<th>예약자 성함</th>
 						<td>${reservation.reservation_person_name }</td>
 					</tr>
 					<tr>
@@ -51,9 +51,10 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center">
-							<input type="button" value="메인으로" onclick="location.href='./'">
+							<input type="button" value="홈으로" onclick="location.href='./'">
 							<input type="button" value="예약취소" onclick="check()">
-							<input type="button" value="예약수정" onclick="location.href ='ReservationUpdate?reservation_guest_num=${reservation.reservation_guest_num}&reservation_person_name=${reservation.reservation_person_name}'">
+							<input type="button" value="예약수정" 
+							onclick="location.href ='ReservationUpdate?reservation_guest_num=${reservation.reservation_guest_num}&reservation_person_name=${reservation.reservation_person_name}'">
 						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
 					</tr>
 				</table>

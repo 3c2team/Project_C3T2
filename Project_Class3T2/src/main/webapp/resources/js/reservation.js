@@ -60,7 +60,7 @@ $(function(){
 	        }
 	    }
 	    calMoveEvtFn();
-	    $(target).find("#customSetDate").append(tag);
+	    $(target).find("#reservation_date").append(tag);
 	
 	    function assembly(year, month) {
 	        var calendar_html_code =
@@ -82,7 +82,7 @@ $(function(){
 	            "<thead class='cal_week'>" +
 	            "<th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>" +
 	            "</thead>" +
-	            "<tbody id='customSetDate' name='reservation_date'>" +
+	            "<tbody id='reservation_date' name='reservation_date'>" +
 	            "</tbody>" +
 	            "</table>";
 	        return calendar_html_code;
@@ -104,7 +104,7 @@ $(function(){
 	            $(".custom_calendar_table .select_day").removeClass("select_day");
 	            $(this).removeClass("select_day").addClass("select_day");
 	            
-	            // 변수에 연, 월, 일 저장
+//	            // 변수에 연, 월, 일 저장
 	            let selectYear = $("#select_year").text();
 	            let selectMonth = $("#select_month").text();
 	            let selectDay = $(".select_day").text();
@@ -112,9 +112,7 @@ $(function(){
 	            selectedDay = selectYear + "-" +(("00"+selectMonth.toString()).slice(-2))+"-"+(("00"+selectDay.toString()).slice(-2)); // 연월일 불러오기
 				console.log("예약일자 : " + selectedDay);
 				$("#reservation_date").val(selectedDay);
-	//			alert(selectedDay);
-	
-				return selectedDay;
+//	//			alert(selectedDay);
 				
 	        });
 	        
