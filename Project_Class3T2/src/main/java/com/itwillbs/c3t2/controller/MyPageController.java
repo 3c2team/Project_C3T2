@@ -371,7 +371,7 @@ public class MyPageController {
 		return "mypage/mypage_zzim";
 	}
 	
-	@GetMapping("/deleteFavorite")				//나의 관심정보 - 찜 내역 삭제
+	@GetMapping("deleteFavorite")				//나의 관심정보 - 찜 내역 삭제
 	public String deleteFavorite(@RequestParam("favoriteNum") Integer favoriteNum) {
 	    
 		// Service를 호출하여 favoriteNum에 해당하는 찜 목록 데이터 삭제
@@ -381,6 +381,20 @@ public class MyPageController {
 	    return "redirect:/MypageZzim";
 	}
 	
+	@PostMapping("deleteFavorite")				//나의 관심정보 - 찜 내역 삭제
+	public String deleteFavorite(@RequestParam Integer favoriteNum, RedirectAttributes redirectAttributes) {
+		
+		// Service를 호출하여 favoriteNum에 해당하는 찜 목록 데이터 삭제
+		boolean isDeleted = service.deleteFavorite(favoriteNum);
+		
+		// 삭제 성공 시 사용자에게 알림 메시지 전달
+		if (isDeleted) {
+			redirectAttributes.addFlashAttribute("errorMessage", "찜 항목 삭제 성공!");
+	    } else {
+	        redirectAttributes.addFlashAttribute("errorMessage", "장바구니 항목 삭제 실패!");
+	    }
+		return "redirect:/MypageZzim";
+	}
 	
 	
 	
@@ -400,26 +414,27 @@ public class MyPageController {
 		return "mypage/mypage_reservation_ask";
 	}
 	
-	@GetMapping("cancelReservation")		// 예약취소
-	public String cancelReservation(@RequestParam("reservation_num") int reservation_num) {
-	    service.cancelReservation(reservation_num);
-	    return "redirect:/MypageReservationList";
+	@PostMapping("cancelReservation")		// 예약취소
+	public String cancelReservation(@RequestParam("reservation_num") int reservationNum) {
+        service.cancelReservation(reservationNum);
+        System.out.println(reservationNum);
+        return "redirect:/MypageReservationList";
 	}
 	
-	@PostMapping("cancelReservation") // 예약 취소
-	public String cancelReservation(@RequestParam Integer reservation_num, RedirectAttributes redirectAttributes) {
-	    
-	    // Service를 호출하여 reservation_num에 해당하는 예약 데이터를 취소
-	    boolean isCancelled = service.cancelReservation(reservation_num);
-	    
-	    // 취소 성공 시 사용자에게 알림 메시지 전달
-	    if (isCancelled) {
-	        redirectAttributes.addFlashAttribute("successMessage", "예약이 성공적으로 취소되었습니다.");
-	    } else {
-	        redirectAttributes.addFlashAttribute("errorMessage", "예약 취소에 실패하였습니다.");
-	    }
-	    return "redirect:/MypageReservationList";
-	}
+//	@PostMapping("cancelReservation") // 예약 취소
+//	public String cancelReservation(@RequestParam Integer reservation_num, RedirectAttributes redirectAttributes) {
+//	    
+//	    // Service를 호출하여 reservation_num에 해당하는 예약 데이터를 취소
+//	    boolean isCancelled = service.cancelReservation(reservation_num);
+//	    
+//	    // 취소 성공 시 사용자에게 알림 메시지 전달
+//	    if (isCancelled) {
+//	        redirectAttributes.addFlashAttribute("successMessage", "예약이 성공적으로 취소되었습니다.");
+//	    } else {
+//	        redirectAttributes.addFlashAttribute("errorMessage", "예약 취소에 실패하였습니다.");
+//	    }
+//	    return "redirect:/MypageReservationList";
+//	}
 	
 	@GetMapping("MypageDetail")							// 나의 상세 정보
 	public String mypagePoint(Model model, HttpSession session) {

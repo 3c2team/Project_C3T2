@@ -65,7 +65,7 @@ public interface MyPageMapper {
 	List<FavoriteVO> getZzimList(Map<String, Object> parMap);
 	
 	// 예약 취소
-	boolean cancelReservation(int reservation_num);
+	void cancelReservation(int reservationNum);
 
 
 	

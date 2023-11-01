@@ -158,6 +158,7 @@
     <!-- 예약 내역 -->
     <select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
         SELECT 
+        	R.reservation_num,
             R.reservation_date,
             R.reservation_time,
             R.reservation_person_name,
@@ -175,9 +176,10 @@
     
     <!-- 예약 취소 -->
     <update id="cancelReservation">
-	    DELETE FROM RESERVATION
-    	WHERE reservation_num = #{reservation_num}
-	</update>
+        UPDATE RESERVATION
+        SET reservation_cancel = 1
+        WHERE reservation_num = #{reservationNum}
+    </update>
     
 
 				

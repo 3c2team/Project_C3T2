@@ -108,9 +108,9 @@ public class MyPageService {
 		return mapper.getZzimList(parMap);
 	}
 	// 예약 취소
-	public boolean cancelReservation(int reservation_num) {
-		return mapper.cancelReservation(reservation_num);
-	}
+	public void cancelReservation(int reservationNum) {
+        mapper.cancelReservation(reservationNum);
+    }
 		
 	
 	

@@ -41,10 +41,10 @@
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
 							<th width="120px">예약자 성함</th>
-							<th width="400px">예약 날짜</th>
+							<th width="200px">예약 날짜</th>
 							<th width="130px">예약 시간</th>
-							<th width="130px">예약 인원</th>
-							<th width="130px">예약 테이블</th>
+							<th width="100px">예약 인원</th>
+							<th width="100px">예약 테이블</th>
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">
@@ -56,16 +56,16 @@
 								<td>${reservation.dinning_num}</td>
 								<td>
 									<c:choose>
-						                <c:when test="${reservation.reservation_cancel == 0}">
-						                    <form action="cancelReservation" method="post">
-						                        <input type="hidden" name="reservation_num" value="${reservation.reservation_num}">
-						                        <button type="submit">취소하기</button>
-						                    </form>
-						                </c:when>
-						                <c:otherwise>
-						                    이미 취소됨
-						                </c:otherwise>
-						            </c:choose>
+									    <c:when test="${reservation.reservation_cancel == 0}">
+									        <form action="cancelReservation" method="post">
+									            <input type="hidden" name="reservation_num" value="${reservation.reservation_num}">
+									            <button type="submit">취소하기</button>
+									        </form>
+									    </c:when>
+									    <c:otherwise>
+									        이미 취소됨
+									    </c:otherwise>
+									</c:choose>
 								</td>
 							</tr>
 						</c:forEach>
