@@ -44,7 +44,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/About">ABOUT</a></li>
 		<li><a href="${pageContext.request.contextPath}/Menu">MENU</a></li>
-		<li><a href="${pageContext.request.contextPath}/News">NEWS/EVENT</a></li>
+		<li><a href="${pageContext.request.contextPath}/News">NOTICE</a></li>
 		<li><a href="${pageContext.request.contextPath}/Location">LOCATION</a></li>
 		<li><a href="${pageContext.request.contextPath}/ReservationInfo">RESERVATION</a></li>
 		<li><a href="${pageContext.request.contextPath}/OnlineStore">ONLINE STORE</a></li>

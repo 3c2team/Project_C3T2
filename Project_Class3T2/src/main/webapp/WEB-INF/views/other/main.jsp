@@ -25,10 +25,13 @@ img {
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
-			<div id="popup_layer">
+			<div style="display: none;" id="popup_layer">
 			  <div class="popupBox">
 			      <div class="popupCont">
-			          <h2>Event</h2>
+			          <h2><a href="NoticeDetail?notice_num=${noticeRecent.notice_num }&pageNum=1">${noticeRecent.notice_subject }</a></h2>
+			          <p>
+			          <a href="NoticeDetail?notice_num=${noticeRecent.notice_num }&pageNum=1">${noticeRecent.notice_content }</a>
+			          </p>
 			      </div>
 			      <div class="popupBtn">
 			          <a id="chk_today" href="javascript:closeToday();" class="closeDay">하루동안 열지 않기</a> 

@@ -64,14 +64,7 @@
                 </div>
     		</div>
 			<div class="container">
-				<ul class="links">
-					<li>
-						<a href="News" id="notice">운영공지</a>
-					</li>
-					<li>
-						<a href="Event" id="event">이벤트</a>
-					</li>
-				</ul>
+				<p>운영 공지</p>
 				<section id="buttonArea">
 					<form action="News">
 						<select name="searchType">

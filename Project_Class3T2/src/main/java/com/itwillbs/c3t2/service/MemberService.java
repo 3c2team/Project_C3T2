@@ -20,7 +20,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.itwillbs.c3t2.mapper.MemberMapper;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
-import com.itwillbs.c3t2.vo.EventVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -233,16 +232,8 @@ public class MemberService {
 		return mapper.updateKakaoId(member_id, kakao_id);
 	}
 
-	public List<EventVO> getEventList() {
-		return mapper.selectEventList();
-	}
-	
-	public List<EventVO> getEventListJson(int startRow, int listLimit) {
-		return mapper.selectEventListJson(startRow, listLimit);
-	}
-
-	public int getEventListCount() {
-		return mapper.selectEventListCount();
+	public NoticeVO getNoticeRecent() {
+		return mapper.selectNoticeRecent();
 	}
 	
 }

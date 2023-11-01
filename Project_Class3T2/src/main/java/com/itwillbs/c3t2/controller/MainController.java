@@ -23,9 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.JsonObject;
 import com.google.protobuf.Timestamp;
 import com.itwillbs.c3t2.service.MemberService;
+import com.itwillbs.c3t2.service.ReservationService;
 import com.itwillbs.c3t2.service.SendMailService;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
-import com.itwillbs.c3t2.vo.EventVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.PageInfoVO;
@@ -40,8 +40,15 @@ public class MainController {
 		@Autowired 
 		private SendMailService mailService;
 		
+		@GetMapping("PayPay")
+		public String payPay() {
+			return "store/pay1";
+		}
+		
 		@GetMapping("Main")
-		public String main() {
+		public String main(Model model) {
+			NoticeVO notice_recent = service.getNoticeRecent();
+			model.addAttribute("noticeRecent", notice_recent);
 			return "other/main";
 		}
 	
@@ -101,54 +108,6 @@ public class MainController {
 			return "other/notice_view";
 		}
 		
-		@GetMapping("Event")
-		public String event(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
-			String uploadDir = "/event_img/"; //가상 업로드 경로
-	    	String saveDir = session.getServletContext().getRealPath(uploadDir);
-//	    	System.out.println("saveDir" + saveDir);
-	    	int i = saveDir.indexOf("wtpwebapps");
-//	    	System.out.println(i);
-	    	String realSaveDir = saveDir.substring(0, i) + "wtpwebapps\\event_img\\";
-//	    	System.out.println(realSaveDir);
-			List<EventVO> eventList = service.getEventList();
-			model.addAttribute("eventList", eventList);
-			model.addAttribute("saveDir", realSaveDir);
-			return "other/event";
-		}
-		
-//		@ResponseBody
-//		@GetMapping("/EventListJson")
-//		public String listJson( @RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session) {
-//			String uploadDir = "/event_img/"; //가상 업로드 경로
-//	    	String saveDir = session.getServletContext().getRealPath(uploadDir);
-//	    	int i = saveDir.indexOf("wtpwebapps");
-//	    	String realSaveDir = saveDir.substring(0, i) + "wtpwebapps\\event_img\\";
-//			model.addAttribute("saveDir", realSaveDir);
-//			
-//			int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
-//			int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
-//			List<EventVO> eventList = service.getEventListJson(startRow, listLimit);
-//			int listCount = service.getEventListCount();
-//			
-//			int pageListLimit = 5;
-//			int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-//			int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-//			int endPage = startPage + pageListLimit - 1;
-//			if(endPage > maxPage) {
-//				endPage = maxPage;
-//			}
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("endPage", endPage);
-//			map.put("eventList", eventList);
-			
-//			JsonObject jsonObject = new JsonObject();
-//			jsonObject.addProperty("endPage", endPage + "");
-//			jsonObject.addProperty("eventList", eventList + "");
-//			jsonObject.addProperty("saveDir", realSaveDir);
-//			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!" + jsonObject.toString());
-//			return jsonObject.toString();
-//		}
-		
 		@GetMapping("Location")
 		public String location() {
 			return "other/location";
@@ -157,7 +116,7 @@ public class MainController {
 		// 예약 클릭 시 예약 폼으로 이동
 		@GetMapping("ReservationInfo")
 		public String reservationInfo() {
-			return "reservation/reservation_form";
+			return "reservation/reservation_info";
 		}
 		
 		@GetMapping("OnlineStore")

@@ -117,72 +117,14 @@
   height:auto;
 }
 
-.links{
+p {
 	list-style-type: none;
-	margin: 20px 0 20px 100px;
-}
-
-.links li {
-	display: inline-block; /* inline + block */
-	/* inline : 요소끼리 한줄에 위치 */
-	/* block : 바로 옆에 다른 요소 X */
-	/* 즉, 한줄에 배치되지만 크기와 상하 간격 지정 가능 */
-	margin: 0 20px 0 0;
-	transition: .2s linear; /* 일정하게 유지 */
-}
-
-/*.links li:nth-child(2) {*/
-/*	opacity: .6;  불투명도 */
-/*}*/
-
-/*.links li:nth-child(2):hover {*/
-/*	opacity: 1;*/
-/*}*/
-
-/*.links li:nth-child(3) {*/
-/*	opacity: .6;*/
-/*	float: right;*/
-/*}*/
-
-/*.links li:nth-child(3):hover {*/
-/*	opacity: 1;*/
-/*}*/
-
-.links li a {
-	text-decoration:none;
-    color:#0f132a;
+	margin: 20px 20px -15px 100px;
+	color:#0f132a;
     font-weight:bolder;
-    text-align:center;
     cursor : pointer;
 }
 
-p {
-	width: 250px;
-	height: 100px;
-	overflow : hidden;
-}
-
-.notice li {
-	float: left;
-	margin-right: 30px;
-}
-
-.links li:nth-child(2) {
-	opacity: .6; /* 불투명도 */
-}
-
-.links li:nth-child(2):hover {
-	opacity: 1;
-}
-
-.links li:nth-child(3) {
-	opacity: .6;
-	float: right;
-}
-
-.links li:nth-child(3):hover {
-	opacity: 1;
-}
 article h1 {
 	text-align: center;
 }

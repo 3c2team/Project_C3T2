@@ -13,6 +13,7 @@
 	top:50%;
 	left:50%; 
 	width:500px;
+	height: 580px;
 	transform:translate(-70%, -50%);
 	z-index:1002;
 	box-sizing:border-box;
@@ -22,7 +23,7 @@
 	-moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
 }
 .popupBox .popupCont {
-	padding:50px 50px 50px 50px;
+	padding:50px 50px 3px 50px;
 	line-height: 1.4rem;
 	font-size:14px;
 	word-break: break-word;
@@ -36,6 +37,12 @@
 	border-top: 1px solid #666;
 	padding: 30px 0;
 	width: 400px;
+	height: 330px;
+	overflow: hidden;
+	white-space: pre-line;
+	text-align: center;
+	padding-top: 0px;
+	padding-bottom: 50px;
 }
 .popupBox .popupBtn {
 	display:table;
