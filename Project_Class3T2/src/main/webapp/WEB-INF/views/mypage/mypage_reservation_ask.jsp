@@ -27,8 +27,8 @@
 						<input type="date" id="startDate"> - <input type="date" id="endDate">
 						<button id="search_btn">조회</button> <!--  "조회" 버튼을 클릭하면, filterReservationsByDate 함수가 호출 -->
 					</div>
-				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 				</div>
+<%-- 				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script> --%>
 			</div>
 			<br>
 			<br>
@@ -75,6 +75,7 @@
 		<br>
 	</div>
 
+	<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 	<%@ include file="./include/body_bottom.jsp"%>
 </body>
 </html>

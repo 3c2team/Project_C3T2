@@ -84,9 +84,13 @@ tr td{text-align: left;}
 					</td>
 				</tr>
 				<tr>
+<!-- 					<td> -->
+<!-- 						<label class="radio">  -->
+<!-- 							<input type="radio" name="membershipWithdrawal"  value="3"><span>장기간 부재(군입대, 유학 등)</span> -->
+<!-- 						</label> -->
+<!-- 					</td> -->
 					<td>
-						<label class="radio"> 
-							<input type="radio" name="membershipWithdrawal"  value="3"><span>장기간 부재(군입대, 유학 등)</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="3"><span>교환/환불/반품 불만</span>
 						</label>
 					</td>
 					<td></td>
@@ -103,20 +107,16 @@ tr td{text-align: left;}
 					</td>
 					<td></td>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="6"><span>상품 가격 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="4"><span>배송 불만</span>
 						</label>
 					</td>
+<!-- 					<td> -->
+<!-- 						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="6"><span>상품 가격 불만</span> -->
+<!-- 						</label> -->
+<!-- 					</td> -->
 				</tr>
 				<tr>
-					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="7"><span>배송 불만</span>
-						</label>
-					</td>
 					<td></td>
-					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="8"><span>교환/환불/반품 불만</span>
-						</label>
-					</td>
 				</tr>
 			</table>
 			<br>

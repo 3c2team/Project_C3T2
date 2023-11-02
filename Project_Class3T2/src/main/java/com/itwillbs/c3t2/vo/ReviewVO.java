@@ -17,4 +17,5 @@ public class ReviewVO {
     private Date review_date;
     private String review_img_name;
     private MultipartFile review_img;
+    private String product_name;
 }
