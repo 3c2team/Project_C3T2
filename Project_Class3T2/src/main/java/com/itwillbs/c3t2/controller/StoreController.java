@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.c3t2.service.StoreService;
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
@@ -132,6 +135,16 @@ public class StoreController {
 		return "store/product_detail";
 	}
 	
+	@ResponseBody
+	@PostMapping("ProductDetailFavorite")
+	public void favorite(FavoriteVO favorite, HttpSession session, HttpServletResponse response) {
+		int insertCount = service.registFavorite(favorite);
+		
+		if(insertCount > 0) {
+			//찜하기 실패
+		}
+	}
+	
 	// 리뷰작성폼으로 이동~
 	@GetMapping("ReviewFrom")
 	public String reviewFrom(int proNum, HttpSession session, Model model) {
@@ -153,7 +166,7 @@ public class StoreController {
 							,@RequestParam(value = "file") MultipartFile file
 							, HttpSession session, Model model) {
 		String sId = (String)session.getAttribute("sId");
-		String uploadDir = "/resources/review_img/"; //가상 경로
+		String uploadDir = "/review_img/"; //가상 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 경로
 		
 		if(session.getAttribute("sId") == null) {
@@ -187,8 +200,8 @@ public class StoreController {
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("uuid" + uuid);
 		
-		String fileName = UUID.randomUUID().toString().substring(0, 3) + "_" + file.getOriginalFilename();
-		map.put("file_name",subDir+"/" + fileName);
+		String fileName =  UUID.randomUUID().toString().substring(0, 3) + "_" + file.getOriginalFilename();
+		map.put("file_name", subDir + "/" + fileName);
 		map.put("member_id", sId);
 //		//------------------ < 게시물 등록 처리 > -------------------
 //		

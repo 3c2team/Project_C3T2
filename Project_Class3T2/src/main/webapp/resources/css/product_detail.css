@@ -322,11 +322,11 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 /*============= < 리뷰, QnA > =============*/
-.reviewTatle, .qnaTatle {
+.reviewTatle, .qnaTatle, .returnTatle {
     margin: 15px;
 }
 
-.reviewTatle, .qnaTatle a {
+.reviewTatle a, .qnaTatle a, .returnTatle a {
     font-size: 30px;
     font-weight: bold;
 }
@@ -445,11 +445,11 @@ span.reviewAveScore {
     width: 20%;
 }
 
-.qnaContainer {
+.qnaContainer, .returnContainer {
     margin-block: 50px;
 }
 
-.qnaItem {
+.qnaItem, .returnItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -498,3 +498,54 @@ span.reviewAveScore {
 .answerInfo {
     text-align: left;
 }
+
+.returnBox {
+	display: flex;
+    width: 100%;
+    border: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.returnInfo {
+    margin-top: 20px;
+    padding: 19px 0;
+   	border-block: 1px solid #ededed;
+    background-color: #fafafa;
+    /* font-size: 12px; */
+    text-align: center;
+    width: 80%;
+}
+
+.returnTable {
+    width: 80%;
+}
+
+.returnSub {
+	background-color: #fafafa;
+    font-weight: normal;
+    text-align: left;
+}
+
+.answerIdDate {
+    text-align: right;
+    width: 20%;
+}
+
+.answerInfo {
+    text-align: left;
+    width: 80%;
+}
+
+th, td {
+    padding: 9px 17px 11px 20px;
+/*     border-top: 1px solid #ededed; */
+    border-bottom: 1px solid #ededed;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000;
+    word-break: keep-all;
+}
+

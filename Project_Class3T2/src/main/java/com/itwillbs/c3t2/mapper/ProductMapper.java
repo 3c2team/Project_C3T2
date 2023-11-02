@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
@@ -35,4 +36,6 @@ public interface ProductMapper {
 	public List<QnAVO> selectQnAList(int proNum);
 
 	public int insertQuestion(QnAVO question);
+
+	public int insertFavorite(FavoriteVO favorite);
 }

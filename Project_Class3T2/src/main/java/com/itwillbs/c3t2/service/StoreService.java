@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.c3t2.mapper.ProductMapper;
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
 import com.itwillbs.c3t2.vo.CartVO;
+import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.ProductImgVO;
 import com.itwillbs.c3t2.vo.ProductVO;
@@ -59,5 +60,9 @@ public class StoreService {
 
 	public int registQuestion(QnAVO question) {
 		return mapper.insertQuestion(question);
+	}
+
+	public int registFavorite(FavoriteVO favorite) {
+		return mapper.insertFavorite(favorite);
 	}
 }

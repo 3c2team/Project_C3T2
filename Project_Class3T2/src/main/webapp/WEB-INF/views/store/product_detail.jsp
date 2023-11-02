@@ -36,42 +36,30 @@
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
 						<img src="${productDetail.product_main_img_real_file}" id="main_img">
-						<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
-							<div class="orderAveStar">
-								<strong>
-									구매자들의 평균 평점
-									<span><b>★</b></span>
-									<span>5</span>
-								</strong>
+						<c:forEach var="reviewList" items="${reviewList }">
+							<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
+								<div class="orderAveStar">
+									<strong>
+										구매자들의 평균 평점
+										<span><b>★</b></span>
+										<span>5</span>
+									</strong>
+								</div>
+								<ul>
+									<li class="ImgReview">
+										<c:if test="${not empty review_image }">
+											<div class="ImgReviewImg"><img src="${reviewList.review_image }"></div>
+										</c:if>
+										<div class="ImgReviewInfo">
+											<span>${reviewList.member_id }</span> | 
+											<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;"></div>
+											<div>${reviewList.review_content }</div>
+										</div>
+									</li>
+								</ul>
+								<a class="ImgReviewMore" href="">${reviewCount }건 리뷰 더보기</a>			
 							</div>
-							<ul>
-								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img/pasta1.jpg"></div>
-									<div class="ImgReviewInfo">
-										<span>아이디</span> | 
-										<span>별점 갯수</span>
-										<div>리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용</div>
-									</div>
-								</li>
-								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img//pasta1.jpg"></div>
-									<div class="ImgReviewInfo">
-										<span>아이디</span> | 
-										<span>별점 갯수</span>
-										<div>리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용</div>
-									</div>
-								</li>
-								<li class="ImgReview">
-									<div class="ImgReviewImg"><img src="${pageContext.request.contextPath }/resources/online_img/pasta1.jpg"></div>
-									<div class="ImgReviewInfo">
-										<span>아이디</span> | 
-										<span>별점 갯수</span>
-										<div>리뷰내용리뷰내용리뷰내용리뷰내용리뷰내용</div>
-									</div>
-								</li>
-							</ul>
-							<a class="ImgReviewMore" href="">324건 리뷰 더보기</a>			
-						</div>
+						</c:forEach>
 					</div>
 					<div class="detailTopMiniImg">
 						<ul>
@@ -79,7 +67,9 @@
 							<c:forEach var="product_img" items="${productMiniImgList }">
 								<li><a><img src="${product_img.product_image_real_file}" id="mini_img" onmouseover="changeImg(this)"></a></li>
 							</c:forEach>
-							<li><a><img src="${pageContext.request.contextPath }/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							<c:if test="${not empty reviewList }">
+								<li><a><img src="${pageContext.request.contextPath }/resources/store_img/review_icon.png" onmouseover="changeImgOver()" onmouseout="changeImgOut()"></a></li>
+							</c:if>
 						</ul>					
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
@@ -91,11 +81,9 @@
 				<div class="detailTopRigth">
 					<div class="detailTopLikeShare">
 						<!-- 찜하기 공유하기 버튼 -->
+						<input type="hidden" name="product_num" value="${param.proNum }">
 						<button name="like">
 							<span class="likeBtn">찜하기</span>
-						</button>
-						<button name="share">
-							<span class="likeBtn">공유하기</span>
 						</button>
 					</div>
 					<div class="productNum">
@@ -153,19 +141,19 @@
 		<section class="detailContainer">
 			<div class="detailBottomTab">
 				<div class="detailBottomTabItem">
-					<a href="">상품상세정보</a>
+					<a href="#ProductDetail">상품상세정보</a>
 				</div>
 				<div class="detailBottomTabItem">
-					<a href="#review">상품리뷰</a>
+					<a href="#Review">상품리뷰</a>
 				</div>
 				<div class="detailBottomTabItem">
 					<a href="#QnA">상품문의</a>
 				</div>
 				<div class="detailBottomTabItem">
-					<a href="">상품정보제공고시</a>
+					<a href="#Return">반품/교환정보</a>
 				</div>
 			</div>
-			<div class="detailInfoImgArea">
+			<div class="detailInfoImgArea" name="ProductDetail">
 				<%-- 경로 변경하기 --%>
 				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
 			</div>
@@ -174,7 +162,7 @@
 		<section class="reviewContainer">
 			<div>
 				<div class="reviewTatle">
-					<a name="review">상품리뷰</a>
+					<a name="Review">상품리뷰</a>
 				</div>
 				<hr>
 				<div>
@@ -220,10 +208,11 @@
 												</div>									
 											</div>
 											<div class="reviewInfo">
-												if 사진 있으면 넣고 없으면 빼고
-												<div class="reviewImg">
-													<img src="${reviewList.review_image }">
-												</div>
+												<c:if test="${not empty reviewList.review_img_name }">
+													<div class="reviewImg">
+														<img src="${reviewList.review_img_name }">
+													</div>
+												</c:if>
 												<div class="reviewContent">
 													${reviewList.review_content }
 												</div>
@@ -267,7 +256,7 @@
 								<div class="questionBox">
 									<div class="qnaAnswer">
 										<c:choose>
-											<c:when test="${not empty QnA.answer_content }">
+											<c:when test="${not empty QnA.question_answer }">
 												<span>답변완료</span>
 											</c:when>
 											<c:otherwise>
@@ -293,19 +282,87 @@
 										</c:when>
 									</c:choose>
 								</div>
-								<c:if test="${not empty QnA.answer_content }">
+								<c:if test="${not empty QnA.question_answer }">
 									<div class="answerBox" id="answer_${QnA.question_num}" style="display: none;">
 										<div class="answerInfo">
-											${QnA.answer_content }
+											${QnA.question_answer }
 										</div>
-	<!-- 									<div class="answerIdDate"> -->
-	<%-- 										${QnA.answer_date } --%>
-	<!-- 									</div> -->
+										<div class="answerIdDate">
+											답변일자 ${QnA.question_answer_date }
+										</div>
 									</div>
 								</c:if>
 							</li>
 						</c:forEach>
 					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="returnContainer">
+			<div class="returnItem">
+				<div class="returnTatle">
+					<a name="Return">반품/교환정보</a>
+				</div>
+			</div>
+			<hr>
+			<div class="returnBox">
+				<div class="returnInfo">
+					<strong>J'ai Farm 반품/교환 안내</strong>
+					<p>반품 시 먼저 판매자와 연락하셔서 반품사유, 택배사, 배송비, 반품지 주소 등을 협의하신 후 반품상품을 발송해 주시기 바랍니다.</p>
+				</div>
+				<div class="returnTable">
+					<table cellspacing="0">
+						<colgroup>
+							<col width="150">
+							<col width="410">
+							<col width="150">
+							<col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row" class="returnSub">판매자 지정택배사</th>
+								<td colspan="3">CJ대한통운</td>
+							</tr>
+							<tr>
+								<th scope="row" class="returnSub">반품배송비</th>
+								<td>편도 3,000원 (최초 배송비 무료인 경우 6,000원 부과)</td>
+								<th scope="row" class="returnSub">교환배송비</th>
+								<td>6,000원</td>
+							</tr>
+							<tr>
+								<th scope="row" class="returnSub">보내실 곳</th>
+								<td colspan="3">부산광역시 부산진구 동천로 109 삼한골든게이트 7층</td>
+							</tr>
+							<tr>
+								<th scope="row" rowspan="2" class="returnSub">반품/교환 사유에 따른 요청 가능 기간</th>
+								<td colspan="3">
+									"구매자 단순 변심은 상품 수령 후 7일 이내"
+									<span>(구매자 반품배송비 부담)</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									표시/광고와 상이, 계약 내용과 다르게 이행된 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내 
+									<span>(판매자 반품 배송비 부담)</span>
+									<br>둘 중 하나 경과 시 반품/교환 불가
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" rowspan="7" class="returnSub">반품/교환 불가능 사유</th>
+								<td colspan="3">
+									<ul>
+										<li><span>1.</span>반품요청기간이 지난 경우</li>
+										<li><span>2.</span>구매자의 책임 있는 사유로 상품 등이 멸실 또는 훼손된 경우 <span class="_3OXYkEjCxo">(단, 상품의 내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)</span></li>
+										<li><span>3.</span>구매자의 책임있는 사유로 포장이 훼손되어 상품 가치가 현저히 상실된 경우 <span class="_3OXYkEjCxo">(예: 식품, 화장품, 향수류, 음반 등)</span></li>
+										<li><span>4.</span>구매자의 사용 또는 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우 <span class="_3OXYkEjCxo">(라벨이 떨어진 의류 또는 태그가 떨어진 명품관 상품인 경우)</span></li>
+										<li><span>5.</span>시간의 경과에 의하여 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우</li>
+										<li><span>6.</span>고객의 요청사항에 맞춰 제작에 들어가는 맞춤제작상품의 경우 <span class="_3OXYkEjCxo">(판매자에게 회복불가능한 손해가 예상되고, 그러한 예정으로 청약철회권 행사가 불가하다는 사실을 서면 동의 받은 경우)</span></li>
+										<li><span>7.</span>복제가 가능한 상품 등의 포장을 훼손한 경우 <span class="_3OXYkEjCxo">(CD/DVD/GAME/도서의 경우 포장 개봉 시)</span></li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</section>
