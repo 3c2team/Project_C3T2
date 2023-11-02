@@ -9,8 +9,6 @@
 <body>
 	<%@ include file="./include/body_top.jsp"%>
 
-
-
 	<div class="mypageContents">
 		<div class="text-center mt50 mb50">	
 			<h1>예약 내역</h1>
@@ -20,16 +18,16 @@
 			<div class="reservationConfirmTerm">
 				<div class="calendarContainer">
 					<button onclick="setToday()">오늘</button>
-					<button onclick="setMonths(-1)">1개월</button>
+					<button onclick="setMonths(-1)">1개월</button> <!-- "1개월" 버튼을 클릭하면 setMonths 함수가 호출됨 -->
 					<button onclick="setMonths(-3)">3개월</button>
 					<button onclick="setMonths(-6)">6개월</button>
 				</div>
-				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 				<div id="reservation_confirm_term_right">
 					<div class="calanderWrap">
 						<input type="date" id="startDate"> - <input type="date" id="endDate">
-						<button id="search_btn">조회</button>
+						<button id="search_btn">조회</button> <!--  "조회" 버튼을 클릭하면, filterReservationsByDate 함수가 호출 -->
 					</div>
+				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 				</div>
 			</div>
 			<br>
@@ -48,7 +46,7 @@
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">
-							<tr>
+							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>
@@ -76,7 +74,6 @@
 		<br>
 		<br>
 	</div>
-
 
 	<%@ include file="./include/body_bottom.jsp"%>
 </body>
