@@ -43,39 +43,44 @@
     </select>
 	
 	<!-- 장바구니 검색 SQL -->
+	<!-- 장바구니 데이터를 검색할 때 여러 조건에 따라 필터링하는 데 사용될 수 있는 SQL 조각을 정의 -->
+	<!-- 다른 SQL 쿼리에서 재사용될 수 있으며, 검색 유형(searchType)과 키워드(keyword)에 따라 동적으로 WHERE 조건을 생성 -->
 	<sql id="cartSearchSql">
 		
-		<!-- 검색 유형이 null이 아닐 경우에만 검색 조건을 추가합니다. -->
+		<!-- 검색 유형이 설정되어 있지 않으면 검색 조건을 추가하지 않습니다. -->
 	    <if test="searchType !=null">
 	    
-	    		<!-- 검색 유형이 'member_id'일 경우 -->
-	            <if test="searchType == 'userid'.toString()">
-	            	
-	            	<!-- 사용자 ID에 키워드가 포함된 데이터를 검색합니다. -->
-	                and member_id like CONCAT('%', #{keyword}, '%')
-	            </if>
-	     		
-	     		<!-- 검색 유형이 'member_name'일 경우 -->
-	            <if test="searchType == 'username'.toString()">
-	                and member_name like CONCAT('%', #{keyword}, '%')
-	            </if>
-	     		
-	     		<!-- 검색 유형이 'member_email'일 경우 -->
-	            <if test="searchType == 'email'.toString()">
-	                and member_email like CONCAT('%', #{keyword}, '%')
-	            </if>
-	            
-	            <!-- 검색 유형이 'all'일 경우 -->
-	            <if test="searchType == 'all'.toString()">
-	                and ( 
-	                     member_id like CONCAT('%', #{keyword}, '%')
-	                    OR
-	                     member_name like CONCAT('%', #{keyword}, '%')
-	                    OR
-	                     member_email like CONCAT('%', #{keyword}, '%')
-	                )
-	            </if>
-	             
+    		<!-- 검색 유형이 'userid'인 경우, 사용자 ID를 기준으로 검색합니다. -->
+            <if test="searchType == 'userid'.toString()">
+            	
+            	<!-- member_id 필드에 검색 키워드가 포함되는 항목을 찾습니다. -->
+            	<!-- CONCAT 함수를 사용하여 키워드를 포함하는 문자열을 생성합니다. -->
+                and member_id like CONCAT('%', #{keyword}, '%')
+            </if>
+     		
+     		<!-- 검색 유형이 'username'인 경우, 사용자 이름을 기준으로 검색합니다. -->
+            <if test="searchType == 'username'.toString()">
+            	<!-- member_name 필드에 검색 키워드가 포함되는 항목을 찾습니다. -->
+                and member_name like CONCAT('%', #{keyword}, '%')
+            </if>
+     		
+     		<!-- 검색 유형이 'email'인 경우, 사용자 이메일을 기준으로 검색합니다. -->
+            <if test="searchType == 'email'.toString()">
+            	<!-- member_email 필드에 검색 키워드가 포함되는 항목을 찾습니다. -->
+                and member_email like CONCAT('%', #{keyword}, '%')
+            </if>
+            
+            <!-- 검색 유형이 'all'인 경우, 모든 필드(ID, 이름, 이메일)에서 검색합니다. -->
+            <if test="searchType == 'all'.toString()">
+            	<!-- OR 연산자를 사용하여 여러 필드 중 하나라도 조건을 만족하는 항목을 찾습니다. -->
+                and ( 
+                     member_id like CONCAT('%', #{keyword}, '%')
+                    OR
+                     member_name like CONCAT('%', #{keyword}, '%')
+                    OR
+                     member_email like CONCAT('%', #{keyword}, '%')
+                )
+            </if>
 	    </if>
 	</sql>
 	
