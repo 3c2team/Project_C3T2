@@ -8,18 +8,19 @@
 <link href="${pageContext.request.contextPath }/resources/css/pay.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <head>
 <meta charset="UTF-8">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <title>상품결제</title>
 <script type="text/javascript">
 $(function() {
 	
-	// 배송지 선택
+	// 배송정보 라디오버튼 선택
 	
 	$("input[name=memberInfo]:checked").focus();
 	
@@ -32,7 +33,7 @@ $(function() {
 	   }
     });
       	
-	
+	// 체크박스 모두 선택 
     var product_num = [];
     $("#check_all").click(function() {
        
@@ -63,6 +64,7 @@ $(function() {
        $(".checkbox").prop("checked",chk);
     });
 
+    
     $(".checkbox").on("click",function(){
        if($(this).is(":checked")){
           product_num.push($(this).val());
@@ -77,55 +79,39 @@ $(function() {
     });
     
     
-    
+    // 선택 상품 삭제 (ajax로 변경)
     $("#btnmemberdel").on("click",function(){
 //        alert(product_num);
 
        if(product_num == ""){
-    	   alert("선택하신 상품이 없습니다.")
+	  	   	alert("선택하신 상품이 없습니다.")
        }else if(confirm("선택 상품을 삭제하시겠습니까?")){
-           location.href="SelectDeleteCart?proNum=" + product_num;
+//          location.href="PayPro?deleteProNum=" + product_num;
+			
+			$.ajax({
+				url:"DeletePayProduct?proNums=" + product_num,
+				type:"GET",
+				data:{product_num},
+				success:function(result){
+					location.href="PayPro";
+				},
+				error:function(error){
+					alert("삭제 실패")
+				}
+				
+				
+			});
+
        }else{
-          alert("삭제를 취소 하셨습니다.");
+          	alert("삭제를 취소 하셨습니다.");
        }
+    
+    
     });
-    
-    // 상품 하나 삭제
-//     $("productDelete").on("click", function() {
-//     	confirm("장바구니를 비우시겠습니까?")
-// 	})
-    
-    
-
-    
-
+           
         
  });
  
-//상품 개별 삭제
-function deleteCart(proNum) {
-	
-	let result = confirm("해당 상품을 삭제 하시겠습니까?");
-	
-	if(result){
-        location.href="DeleteCartProduct?proNum=" + proNum;
-//         location.href="CartPro?proNum=" + proNum;
-    }else{
-    	alert("삭제를 취소 하셨습니다.");
-    }
-}
-
-// 개별 상품 결제 페이지 이동
-function orderPro(proNums){
-	
-	let result = confirm("결제창으로 이동 하시겠습니까?");
-	
-	if(result){
-		location.href="PayPro?proNums=" + proNums;	
-	}
-	
-}
-
 // function setDisplay(){
     
 // 	if($("input:radio[id=member1]").is(":checked")){
@@ -313,7 +299,10 @@ function orderPro(proNums){
 								</span>
 							</td>
 						</tr>
-						
+						<tr>
+							<td class="deliverytd">포인트</td>
+							<td style="font-size: 10pt"><input type="text" value="${Member.member_point}"><input type="checkbox" id="pointCheck" value="chPoint">포인트 사용하기</td>
+						</tr>
 						<tr>
 							<td class="deliverytd">배송메세지</td>
 							<td><textarea rows="5" cols="100"></textarea></td>
