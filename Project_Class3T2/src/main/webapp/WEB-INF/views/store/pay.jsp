@@ -121,27 +121,35 @@ $(function() {
     
     });
     
+    // 포인트 사용 시
     $("#pointCheck").click(function() {
 		
 		if($(this).is(":checked")){
 			
-			let memberPoint = $("#pointCheck").val();
-// 			alert(memberPoint);
+			let memberPoint = $("#usePoint").val();
+			let maxPoint = $("#pointCheck").val();
+// 			alert(parseInt(memberPoint) + ", max : " + parseInt(maxPoint));
 			
-			$.ajax({
-				type:"POST",
-				url:"UsePoint",
-				data:{memberPoint},
-				success:function(result){
-					console.log("포인트 넘어감");
-					$("#checkedResult").text(result + "원");
-					
-				},
-				error:function(){
-					console.log("작업 실패")
-				}
+// 			console.log(typeof memberPoint <= typeof maxPoint)
+			
+			if(parseInt(memberPoint) <= parseInt(maxPoint)){
+				$.ajax({
+					type:"POST",
+					url:"UsePoint",
+					data:{memberPoint},
+					success:function(result){
+						console.log("포인트 넘어감");
+						$("#checkedResult").text(result + "원");
+					},
+					error:function(){
+						console.log("작업 실패")
+					}
+				});
 				
-			});
+			}else{
+				alert("보유한 포인트만큼 사용 가능합니다.");
+			}
+			
 	    }else{			
 			$("#checkedResult").text($(".allPrice").val() + "원");
 	    }
@@ -342,7 +350,7 @@ $(function() {
 						</tr>
 						<tr>
 							<td class="deliverytd">포인트</td>
-							<td><input type="hidden" value="${Member.member_point}">${Member.member_point}&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기</td>
+							<td><input type="text" id="usePoint" >&nbsp;&nbsp;사용 가능 포인트 (${Member.member_point})&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						</tr>
 						<tr>
 							<td class="deliverytd">배송메세지</td>

@@ -381,9 +381,10 @@ public class CartController {
 		System.out.println("결제 상품 갯수랑 총액 :" + payAllPrice);
 		
 		int allPay = payAllPrice.getAllPrice() + 3000;
-		result = allPay - member.getMember_point();
+		System.out.println("포인트 사용 전 총액 : " + allPay);
+		result = allPay - memberPoint;
 		
-		System.out.println("포인트 계산 후 금액");
+		System.out.println("포인트 계산 후 금액 : " + result);
 		
 		System.out.println("상품 총 금액" + allPay);
 		System.out.println("해당 회원의 포인트 : " +  member.getMember_point());
