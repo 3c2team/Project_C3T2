@@ -76,4 +76,7 @@ public interface CartMapper {
 		// 페이 상품 총액
 		public PayAllPriceVO selectPayAllPrice(String sId);
 
+		// 결제 상품 삭제
+		public int deletePayProduct(int proNum);
+
 }

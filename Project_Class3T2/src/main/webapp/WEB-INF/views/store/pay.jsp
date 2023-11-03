@@ -26,8 +26,20 @@ $(function() {
 	
     $("input[name=memberInfo]").change(function(){
 	   if($("input[name=memberInfo]:checked").val()==1){
-	         var proNums = $(".result_num").val();
-	         location.href="PayPro?proNums=" + proNums;
+		   
+		   $("#member_name").val("${Member.member_name}");
+		   $("#phone").val("${Member.member_phone_num}");
+		   $("#addr1").val("${Member.member_address1}");
+		   $("#addr2").val("${Member.member_address2}");
+		   $("#eMail").val("${sessionScope.Email1 }");
+		   $("#domainName").val("${sessionScope.Email2}");
+		   
+// 		   alert(member_name);
+		   
+// 	         var proNums = $(".result_num").val();
+// 	         location.href="PayPro?proNums=" + proNums;
+// 	         $("#memberName").text(결과값);
+			 
 	   }else{
 	         $("input[type=text]").val("");
 	   }
@@ -108,6 +120,34 @@ $(function() {
     
     
     });
+    
+    $("#pointCheck").click(function() {
+		
+		if($(this).is(":checked")){
+			
+			let memberPoint = $("#pointCheck").val();
+// 			alert(memberPoint);
+			
+			$.ajax({
+				type:"POST",
+				url:"UsePoint",
+				data:{memberPoint},
+				success:function(result){
+					console.log("포인트 넘어감");
+					$("#checkedResult").text(result + "원");
+					
+				},
+				error:function(){
+					console.log("작업 실패")
+				}
+				
+			});
+	    }else{			
+			$("#checkedResult").text($(".allPrice").val() + "원");
+	    }
+		
+		
+	});
            
         
  });
@@ -179,11 +219,11 @@ $(function() {
 				
 				<tbody>
 					<c:forEach var="productPayList" items="${productPayList }">
+						<input type="hidden" class="result_num" value="${productPayList.product_num}">
 						<tr style="height: 90px; background-color: #fff; font-size: 15px;">
  							<td style="text-align: left; text-align: center; border-right: none;">
                        			 <input type="checkbox" name="checkbox" class="checkbox" id="${productPayList.product_num}" value="${productPayList.product_num}" proNum="${productPayList.product_num}"/>
                      		</td>
-									<input type="hidden" class="result_num" value="${productPayList.product_num}">
 <!-- 							<td style="text-align: left; text-align: center; border-right: none;"> -->
 <!-- 								<input type="checkbox" name="checkbox"> -->
 <!-- 							</td> -->
@@ -242,10 +282,10 @@ $(function() {
 						<tr>
 							<td class="deliverytd">배송지 선택</td>
 							<td>
-								<input type="radio" name="memberInfo" id="member1" value="1" checked onclick="setDisplay()">
+								<input type="radio" name="memberInfo" id="member1" value="1" checked >
 								<label>회원정보와 동일</label>
 								
-								<input type="radio" name="memberInfo" id="member2" value="2" onclick="setDisplay()">
+								<input type="radio" name="memberInfo" id="member2" value="2" >
 								<label>새로운 배송지</label>&nbsp;
 			<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
 							</td>
@@ -253,7 +293,7 @@ $(function() {
 						
 						<tr>
 							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-							<td><input type="text" value="${Member.member_name}"></td>
+							<td id="memberName"><input type="text" id="member_name" value="${Member.member_name}"></td>
 						</tr>
 						
 						<tr>
@@ -281,9 +321,10 @@ $(function() {
 						<tr>
 							<td class="deliverytd">이메일&nbsp;<span style="color: red">*</span></td>
 							<td>
-								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	
+<%-- 								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	 --%>
 								
-								<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp;
+<%-- 								<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp; --%>
+								<input type="text" id="eMail" value="${sessionScope.Email1 }" >@<input id="domainName" type="text" name="mailUrl" value="${sessionScope.Email2}" />&nbsp;
 	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
 								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
 									<option value="">-직접 입력-</option>
@@ -293,15 +334,15 @@ $(function() {
 									<option value="nate.com">nate.com</option>
 								</select>
 								<span style="font-size: 10pt; color:gray;">
-									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br>
-										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요
-									</p>
+<!-- 									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br> -->
+<!-- 										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요 -->
+<!-- 									</p> -->
 								</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="deliverytd">포인트</td>
-							<td style="font-size: 10pt"><input type="text" value="${Member.member_point}"><input type="checkbox" id="pointCheck" value="chPoint">포인트 사용하기</td>
+							<td><input type="hidden" value="${Member.member_point}">${Member.member_point}&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기</td>
 						</tr>
 						<tr>
 							<td class="deliverytd">배송메세지</td>
@@ -324,11 +365,12 @@ $(function() {
 				</tr>
 				
 				<tr style="background-color: #fff;">
-					<td style="padding: 23px 0;"><span class="price"><fmt:formatNumber value="${payAllPrice.allPrice }" pattern="#,###" /></span>원</td>
+					<td style="padding: 23px 0;"><span class="price" ><fmt:formatNumber value="${payAllPrice.allPrice }" pattern="#,###" /></span>원</td>
 					<td>+<span class="price">3,000</span>원</td>
 					<td>=<span class="price"><fmt:formatNumber value="${payAllPrice.allPrice + 3000}" pattern="#,###" /></span>원</td>
 				</tr>
 			</table>
+					<input type="hidden" class="allPrice" value="${payAllPrice.allPrice + 3000}">
 			<br><br>
 			
 			<%-- 결제하기 --%>
@@ -353,8 +395,8 @@ $(function() {
 				
 				<div class="total">
 					<span style="display:inline-block; padding: 20px 10px;">최종결제 금액</span><br>
-					<span style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">0원</span><br><br>
-					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
+					<span id="checkedResult" style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">${payAllPrice.allPrice + 3000}원</span><br><br>
+					<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
 				</div>
 			</div>
 			<br><br>
