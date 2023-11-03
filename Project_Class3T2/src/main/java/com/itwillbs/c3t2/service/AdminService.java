@@ -113,6 +113,10 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectMemberOut();
 	}
+	public List<Map<String, Integer>> selectOutDate() {
+		// TODO Auto-generated method stub
+		return mapper.selectOutDate();
+	}
 	
 
 }

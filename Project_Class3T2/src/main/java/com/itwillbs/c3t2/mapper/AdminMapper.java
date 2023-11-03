@@ -79,4 +79,6 @@ public interface AdminMapper {
 
 	Map<String, Integer> selectMemberOut();
 
+	List<Map<String, Integer>> selectOutDate();
+
 }

@@ -46,19 +46,20 @@ table {
 									<th>예약자성함</th>
 									<th>예약시간</th>
 									<th>예약테이블</th>
-									<th>예약자전화번호</th>
+									<th>예약 번호</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="ReservationList" items="${ReservationList }">
-									<tr>
-										<th>${ReservationList.num }</th>
-										<th>${ReservationList.reservation_person_name }</th>
-										<th>${ReservationList.reservation_date }</th>
-										<th>${ReservationList.dinning_num }</th>
-										<th>${ReservationList.reservation_person_phone }</th>
-										
-									</tr>
+									<c:if test="${ReservationList.reservation_cancel eq 0 }">
+										<tr>
+											<th>${ReservationList.num }</th>
+											<th>${ReservationList.reservation_person_name }</th>
+											<th>${ReservationList.reservation_date }</th>
+											<th>${ReservationList.dinning_num }</th>
+											<th>${ReservationList.reservation_guest_num }</th>
+										</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>

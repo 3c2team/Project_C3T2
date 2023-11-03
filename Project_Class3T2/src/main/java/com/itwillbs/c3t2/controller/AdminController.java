@@ -532,4 +532,11 @@ public class AdminController {
     	Map<String, Integer> selectMemberOut= service.selectMemberOut();
     return selectMemberOut;
     }
+    @ResponseBody
+    @PostMapping("/AdminSelectOutDate")
+    public List<Map<String, Integer>> adminSelectOutDate() {
+    	List<Map<String, Integer>> AdminSelectOutDate= service.selectOutDate();
+    	System.out.println("결과값 : " + AdminSelectOutDate);
+    	return AdminSelectOutDate;
+    }
 }

@@ -4,10 +4,29 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+var selectOutDate = [];
+
+var mons;
+var cnts;
+
+$.ajax({
+	type: "POST",
+	url: "AdminSelectOutDate",
+	async: false,
+	data: {},
+	success: function(AdminSelectOutDate) {
+		cnts = AdminSelectOutDate.map(row => row.cnt);
+		mons = AdminSelectOutDate.map(row => row.mon);
+	},
+	error:function(){
+		alert("실패");
+	}
+});
 var myLineChart = new Chart(ctx, {
+	
   type: 'line',
   data: {
-    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+	labels: mons,
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,9 +39,8 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [32285000, 23515000, 46425000,34450000,34825000, 23150000, 36425000,41250000,25285000, 31515000, 42125000,34450000],
-    }],
-  },
+      data: cnts
+   	}],
   options: {
     scales: {
       xAxes: [{
@@ -38,8 +56,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 10000000,
-          max: 50000000,
+          min: 0,
+          max: 100,
           maxTicksLimit: 5
         },
         gridLines: {
@@ -50,5 +68,6 @@ var myLineChart = new Chart(ctx, {
     legend: {
       display: false
     }
+   }
   }
 });

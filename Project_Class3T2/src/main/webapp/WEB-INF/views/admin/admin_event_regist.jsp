@@ -4,43 +4,57 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-<title>이벤트 등록</title>
+<title>가계 수정</title>
+<style type="text/css">
+.fs-5{
+	color: white; 
+}
+</style>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 </head>
-<body>
+<body class="bg-secondary">
 	<div class="jumbotron">
 		<div class="container">
-			<h1 class="display-3">이벤트 등록</h1>
 		</div>
 	</div>
 	<div class="container">
 		<form name="newProduct" onsubmit="return confirm('등록하시겠습니까?')" action="AdminEventRegistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 <!-- 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post"> -->
 			<div class="form-group row">
-				<label class="col-sm-2">등록 분류</label>
-				<div class="com-sm-3">
-					<jsp:include page="../inc/admin_answer.jsp"></jsp:include>
-				</div> 
+				<p class="fw-bolder fs-4">가계이름</p>
 			</div>
+				<p class="fw-bolder fs-5">가계이름</p>
 			<div class="form-group row">
-				<label class="col-sm-2">이벤트 제목</label>
+				<p class="fw-bolder fs-4">대표자 성명</p>
 				<div class="com-sm-3">
 					<input type="text" required  name="event_subject" class="form-control">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2">이벤트 내용</label>
+				<p class="fw-bolder fs-4">영업 시간</p>
 				<div class="com-sm-5">
-					<textarea name="event_content" required  cols="50" rows="15" class="form-control"></textarea>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2">이벤트 이미지</label>
-				<div>
-					<input type="file" class="form-control" name="event_image" accept=".jpg, .png">
+					 <select class="form-select" name="">
+						<option>07:00</option>
+						<option>08:00</option>
+						<option>09:00</option>
+						<option>10:00</option>
+						<option>11:00</option>
+						<option>12:00</option>
+						<option>13:00</option>
+						<option>14:00</option>
+					</select> ~ 
+					<select class="form-select" name="">
+						<option>19:00</option>
+						<option>20:00</option>
+						<option>21:00</option>
+						<option>22:00</option>
+						<option>23:00</option>
+						<option>24:00</option>
+						<option>01:00</option>
+						<option>02:00</option>
+					</select>
+<!-- 					<input type="text" required  name="event_subject" class="form-control">~<input type="text" required  name="event_subject" class="form-control"> -->
 				</div>
 			</div>
 			<div class="form-group row">
@@ -53,4 +67,6 @@
 		</form>
 	</div>
 </body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

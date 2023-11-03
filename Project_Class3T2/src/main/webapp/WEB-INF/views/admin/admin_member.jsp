@@ -23,7 +23,9 @@
 <link href="${pageContext.request.contextPath }/resources/css/admin_style.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
 	crossorigin="anonymous"></script>
+	
 </head>
+
 <body class="body_gray">
 	<jsp:include page="../inc/admin_laout_top.jsp"></jsp:include>
 	<div id="layoutSidenav">
@@ -111,7 +113,7 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 		crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath }/resources/demo/chart-pie-demo2.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/demo/member_out_pie.js"></script>
 	<script  src="${pageContext.request.contextPath }/resources/demo/member_out_chart.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"

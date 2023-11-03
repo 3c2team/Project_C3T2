@@ -18,15 +18,15 @@
 		</select>
 		<select id="selectReservationList" resultType="map">
 			SELECT rm.reservation_num
-			,CONCAT(rs.reservation_date,'/',reservation_time) as reservation_date
-			,ROW_NUMBER() OVER(order by reservation_num) as num
+			,CONCAT(rm.reservation_date,' ',reservation_time) AS reservation_date
+			,ROW_NUMBER() OVER(order by reservation_num) AS num
 			,reservation_person_name
 			,reservation_person_count
-			,reservation_person_phone
 			,reservation_cancel
-			,reservation_is_member
+			,reservation_member_id
 			,reservation_guest_num
-			,CONCAT(dinning_num,' 번 테이블') as dinning_num
+            ,reservation_email
+			,CONCAT(dinning_num,' 번 테이블') AS dinning_num
 			,restaurant_num
 			FROM RESERVATION rm JOIN ( SELECT reservation_num,reservation_date
 										FROM RESERVATION
@@ -215,6 +215,23 @@
             question_answer_date = now()
 			where question_num = #{question_num};
 		</update>
+		<select id="selectOutDate" resultType="map">
+			WITH RECURSIVE result_mon AS (
+			SELECT 1 AS rnum
+		    UNION ALL
+		    SELECT rnum + 1 FROM result_mon
+		    WHERE  12 > rnum
+			)   
+			SELECT CONCAT(r.rnum, '월') as mon
+				 , ifnull(m.cnt, 0) as cnt
+			FROM result_mon r 
+			LEFT JOIN (SELECT MONTH(out_date) AS mon
+							, count(out_num) as cnt
+						FROM MEMBER_OUT
+						WHERE out_date LIKE CONCAT(year(now()),'%')
+						GROUP BY out_date) m
+			ON r.rnum = m.mon;
+		</select>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->

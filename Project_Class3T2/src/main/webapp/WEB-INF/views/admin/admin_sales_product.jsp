@@ -110,18 +110,20 @@
 						</div>
 						<div class="card-body">
 							<table id="datatablesSimple"> 
+								<thead>
 									<tr>
 										<th>번호</th>
 										<th>상품카테고리</th>
 										<th>상품이름</th>
 										<th>판매가</th>
 									</tr>
+								</thead>
 								<c:forEach var="productList" items="${productList }">
 									<tr>
 										<th>${productList.num }</th>
 										<th>${productList.product_category_name }</th>
 										<th>${productList.product_name }</th>
-										<th>${productList.product_price }</th>
+										<th>${productList.product_price } 원</th>
 									</tr>
 								</c:forEach>	
 							</table>
