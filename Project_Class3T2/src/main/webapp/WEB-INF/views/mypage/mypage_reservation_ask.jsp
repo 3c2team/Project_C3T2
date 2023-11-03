@@ -46,6 +46,8 @@
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">
+							
+							<!-- 각 테이블 행에는 'reservation-row' 클래스가 지정되어 있고, 예약 날짜를 데이터 속성으로 포함-->
 							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
 								<td>${reservation.reservation_date}</td>
