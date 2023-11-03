@@ -14,7 +14,6 @@ setInterval(function(){
 $(function(){
 	// 슬라이드 counter 동기화
 	$('.manualBtn').on('click', (e) => {
-		debugger;
 		counter = $(e.target).attr('for').replace("radio", "");
 	});
 	
@@ -24,7 +23,7 @@ $(function(){
     if (popToday == "close") {
         document.getElementById("popup_layer").style.display = "none";
     } else {
-		document.getElementById("popup_layer").style.display = "block";
+//		document.getElementById("popup_layer").style.display = "block";
 	}
 });
 

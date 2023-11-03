@@ -348,12 +348,18 @@ button:focus:not(:focus-visible) {
   outline: 0;
 }
 
-input,
+input :not(.custom_input),
 button,
 select,
 optgroup,
-textarea {
+textarea :not(.custom_input) {
   margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.custom_input {
+  margin: 10px;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -7681,6 +7687,8 @@ textarea.form-control-lg {
 
 .mb-4 {
   margin-bottom: 1.5rem !important;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .mb-5 {

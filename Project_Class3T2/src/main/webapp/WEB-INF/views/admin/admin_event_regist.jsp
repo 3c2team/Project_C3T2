@@ -10,15 +10,22 @@
 .fs-5{
 	color: white; 
 }
+.custom_div{
+	width: 50%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
 </style>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 </head>
 <body class="bg-secondary">
 	<div class="jumbotron">
-		<div class="container">
+		<div class="custom_div" style="margin-top: 15%;width: 50%;">
 		</div>
 	</div>
-	<div class="container">
+	<div class="custom_div">
 		<form name="newProduct" onsubmit="return confirm('등록하시겠습니까?')" action="AdminEventRegistPro" class="form-horizontal"method="post" enctype="multipart/form-data">
 <!-- 		<form name="newProduct" action="AdminProductRagistPro" class="form-horizontal"method="post"> -->
 			<div class="form-group row">
@@ -43,7 +50,7 @@
 						<option>12:00</option>
 						<option>13:00</option>
 						<option>14:00</option>
-					</select> ~ 
+					</select> <span class="fs-5">~</span> 
 					<select class="form-select" name="">
 						<option>19:00</option>
 						<option>20:00</option>
@@ -55,6 +62,12 @@
 						<option>02:00</option>
 					</select>
 <!-- 					<input type="text" required  name="event_subject" class="form-control">~<input type="text" required  name="event_subject" class="form-control"> -->
+				</div>
+				<div class="form-group row">
+					<p class="fw-bolder fs-4">가계 주소</p>
+					<div class="com-sm-3">
+						<input type="text" required  name="event_subject" class="form-control">
+					</div>
 				</div>
 			</div>
 			<div class="form-group row">

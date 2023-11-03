@@ -421,7 +421,7 @@ public class AdminController {
     	}else {
     		session.setAttribute("sId", dbAdmin.getAdmin_id());
     		session.setAttribute("sName", dbAdmin.getAdmin_name());
-    		return "admin/admin_sales_years";
+    		return "redirect:/AdminMain";
     	}
     }
     //로그아웃 처리(관리자)
@@ -431,65 +431,69 @@ public class AdminController {
     	return "admin/admin_login";
     }
     
-    //이벤트 게시판 페이지 이동(관리자)
-    @GetMapping("AdminEventList")
+    //메인 페이지 이동(관리자)
+    @GetMapping("AdminMain")
     public String adminEventList(HttpSession session, Model model) {
     	
-    	List<Map<String, Object>> eventList = service.selectEventList();
-    	model.addAttribute("eventList",eventList);
-    	return "admin/admin_event_list";
+    	
+    	String sId = (String)session.getAttribute("sId");
+    	String sName = (String)session.getAttribute("sName");
+    	if(sId == null) {
+    		model.addAttribute("msg","로그인을 해주세요");
+    		return "fail_back";
+    	}
+    	Map<String, Object> selectRestaurant = service.selectRestaurant(sId);
+    	if(selectRestaurant.get("restaurant_num") == null) {
+    		model.addAttribute("msg","잘못된 요청입니다.");
+    		return "fail_back";
+    	}
+    	String phons = (String)selectRestaurant.get("restaurant_call");
+    	
+    	System.out.println(phons.toString());
+    	for(int i = 0; i < phons.split("-").length;i++) {
+    		selectRestaurant.put("phon" + i, phons.split("-")[i]);
+    	}
+    	System.out.println("fdafa : "+selectRestaurant.get("phon"));
+    	System.out.println("결과값 : " + selectRestaurant);
+    	selectRestaurant.put("sName", sName);
+    	model.addAttribute("selectRestaurant",selectRestaurant);
+    	
+    	
+    	return "admin/admin_main";
+    }
+    //가계정보 수정 및 등록 처리(관리자)
+    @PostMapping("AdminRestaurantUpdatePro")
+    public String adminRestaurantUpdatePro(Model model,HttpSession session
+							    			,@RequestParam Map<String, Object> map) {
+    	
+    	String sId = (String)session.getAttribute("sId");
+    	System.out.println("fdfdf : " + map);
+    	if(map.get("admin_id") == null) {
+	    	if(sId==null||sId.equals("")) {
+	    		model.addAttribute("msg","로그인이 필요합니다");
+	    		return "fail_back";
+	    	}
+	    	
+	    	int restaurantUpdate = service.restaurantUpdate(map);
+	    	
+	    	if(restaurantUpdate == 0) {
+	    		model.addAttribute("msg","수정에 실패하였습니다.");
+	    		return "fail_back";
+	    	}
+	    	return "redirect:/AdminMain";
+    	}
+    	int insertRestaurant = service.insertRestaurant(map);
+    	if(insertRestaurant == 0) {
+    		model.addAttribute("msg","등록에 실패하였습니다.");
+    		return "fail_back";
+    	}
+//    	int insertAdmin = service.insertAdmin(map);
+    	return "redirect:/AdminMain";
     }
     //이벤트 등록 페이지 이동(관리자)
     @GetMapping("AdminEventRegist")
     public String adminEventRegist() {
     	return "admin/admin_event_regist";
-    }
-    //이벤트 등록 처리(관리자)
-    @PostMapping("AdminEventRegistPro")
-    public String adminEventRegistPro(Model model
-    												,@RequestParam Map<String, Object> map
-    												,@RequestParam(value = "event_image", required = false) MultipartFile file
-    												,HttpSession session) {
-    	
-    	if(session.getAttribute("sId").equals("")||session.getAttribute("sId")==null) {
-    		model.addAttribute("msg","로그인이 필요합니다");
-    		return "fail_back";
-    	}else if(file.getOriginalFilename().equals("")) {
-    		model.addAttribute("msg","파일을 등록하세요");
-    		return "fail_back";
-    	}
-//    	System.out.println(map);
-//    	System.out.println(file);
-     	String uploadDir = "/event_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
-    	
-			
-			try {
-				map.put("event_img",file.getOriginalFilename());
-				map.put("img", uploadDir +file.getOriginalFilename());
-				// 맵에 이름과 경로 전달
-				
-//				System.out.println("실제 업로드 파일명 : " + file.getOriginalFilename());
-				
-//			System.out.println(map);
-				int insertEvent = service.insertEvent(map);
-				//db등록
-				if(insertEvent ==0 )return "fail_back";
-				Path path = Paths.get(saveDir);//실제 업로드 경로
-				Files.createDirectories(path);//중간 경로 생성
-				System.out.println(saveDir);
-				file.transferTo(new File(saveDir, file.getOriginalFilename()));
-				//업로드 진행 (메인 이미지 끝)
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		model.addAttribute("msg","등록 완료되었습니다.");
-    	return "success_close";
-
     }
     //이벤트 삭제 처리(관리자)
     @PostMapping("AdminDeleteEventPro")

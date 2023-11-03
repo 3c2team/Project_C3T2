@@ -81,4 +81,12 @@ public interface AdminMapper {
 
 	List<Map<String, Integer>> selectOutDate();
 
+	Map<String, Object> selectRestaurant(String sId);
+
+	int updateRestaurant(Map<String, Object> map);
+
+	int insertRestaurant(Map<String, Object> map);
+
+	int insertAdmin(Map<String, Object> map);
+
 }

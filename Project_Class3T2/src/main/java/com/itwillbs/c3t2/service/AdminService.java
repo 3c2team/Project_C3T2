@@ -117,6 +117,22 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectOutDate();
 	}
+	public Map<String, Object> selectRestaurant(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectRestaurant(sId);
+	}
+	public int restaurantUpdate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateRestaurant(map);
+	}
+	public int insertRestaurant(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertRestaurant(map);
+	}
+	public int insertAdmin(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertAdmin(map);
+	}
 	
 
 }

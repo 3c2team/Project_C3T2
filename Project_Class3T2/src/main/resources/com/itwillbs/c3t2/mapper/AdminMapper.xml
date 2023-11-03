@@ -232,6 +232,41 @@
 						GROUP BY out_date) m
 			ON r.rnum = m.mon;
 		</select>
+		<select id="selectRestaurant" resultType="map">
+			SELECT *
+			FROM RESTAURANT r JOIN (SELECT restaurant_num
+									FROM ADMIN
+			                        WHERE admin_id = #{sId}) a		
+		</select>
+		<update id="updateRestaurant">
+		
+			UPDATE RESTAURANT
+			SET ceo_name = #{ceo_name}
+				,restaurant_open_time = #{restaurant_open_time}
+			    ,restaurant_close_time = #{restaurant_close_time}
+			    ,restaurant_address = #{restaurant_address}
+			    ,restaurant_call = CONCAT(#{phon0},'-',#{phon1},'-',#{phon2})
+			    ,restaurant_aim = #{restaurant_aim}
+		    WHERE restaurant_num = #{restaurant_num}
+		</update>
+		<insert id="insertRestaurant">
+			INSERT INTO RESTAURANT
+			VALUES(null
+				,#{restaurant_name}
+				,#{ceo_name}
+				,#{restaurant_open_time}
+				,#{restaurant_close_time}
+				,#{restaurant_address}
+				,CONCAT(#{phon0},'-',#{phon1},'-',#{phon2})
+				)
+		</insert>
+<!-- 		<insert id="insertAdmin"> -->
+<!-- 			<selectKey keyColumn="restaurant_num" order="BEFORE"> -->
+<!-- 				SELECT restaurant_num -->
+<!-- 				FROM RESTAURANT -->
+<!-- 				WHERE  -->
+<!-- 			</selectKey> -->
+<!-- 		</insert> -->
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->
