@@ -193,6 +193,13 @@
 		FROM ORDER_DETAIL
 		WHERE member_id = #{sId}
 	</select>
+	
+	<!-- 결제페이지에서 상품 삭제 -->
+	<delete id="deletePayProduct">
+		DELETE FROM
+			ORDER_DETAIL
+			WHERE product_num = #{proNum}
+	</delete>
 
 
 

@@ -152,5 +152,11 @@ public class CartService {
 		return mapper.selectPayAllPrice(sId);
 	}
 
+	// 결제 상품 삭제
+	public int deletePayProduct(int proNum) {
+		// TODO Auto-generated method stub
+		return mapper.deletePayProduct(proNum);
+	}
+
 
 }

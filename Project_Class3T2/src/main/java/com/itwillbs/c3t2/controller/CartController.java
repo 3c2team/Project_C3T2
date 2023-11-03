@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.c3t2.service.CartService;
 import com.itwillbs.c3t2.vo.CartAllPriceVO;
@@ -271,6 +273,7 @@ public class CartController {
 	@GetMapping("PayPro")
 	public String pay(
 					@RequestParam(value = "proNums",defaultValue = "0", required = false) int[] proNums
+					, @RequestParam(value = "deleteProNum",defaultValue = "0", required = false) int[] deleteProNum
 					, HttpSession session 
 					, MemberVO member
 					, Model model) {
@@ -300,13 +303,22 @@ public class CartController {
 			}
 		}
 		
-		// 전체 상품 ORDER_DETAIL에 저장
+		// 전체 상품 ORDER_DETAIL에 저장 (이거 땜에 계속 모든 상품 뜸)
 		if(proNums[0] == 0) {
 			int insertOrderDetail = service.insertOrderDetail(sId);
 				if(insertOrderDetail > 0) {
 					System.out.println("ORDER_DETAIL에 저장 성공");
 				}
 		}	
+		
+		// 결제 상품 삭제 
+		if(deleteProNum[0] != 0) {
+			for(int proNum:deleteProNum) {
+				int deletePayProduct = service.deletePayProduct(proNum);
+			}
+			
+		}
+		
 		
 		// 메인 페이지에서 카트 등록 상품 목록 조회
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -324,10 +336,63 @@ public class CartController {
 		
 		// 회원정보 조회
 		member = service.getMember(sId);
-		model.addAttribute("Member", member); 
-			
+		
+        System.out.println("멤버 이메일 주소1 : " + member.getMember_e_mail());
+        
+        String Email = member.getMember_e_mail();
+        String[] ArraysEmail = Email.split("@");
+        
+        session.setAttribute("Email1", ArraysEmail[0]);
+        session.setAttribute("Email2", ArraysEmail[1]);
+        
+        System.out.println("이메일 1 : " + ArraysEmail[0]);
+        System.out.println("이메일 2 : " + ArraysEmail[1]);
+        
+        model.addAttribute("Member", member); 
 		return "store/pay";
 	}
+	
+	// 포인트 사용 체크 시 
+	@PostMapping("UsePoint")
+	@ResponseBody
+	public int usePoint(
+					@RequestParam(value = "memberPoint", defaultValue = "0", required = false) int memberPoint
+					, HttpSession session
+					, MemberVO member) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		int result = 0;
+
+		// 포인트 조회
+		System.out.println("usePoint의 memberPoint : " + memberPoint);
+
+		
+		// 포인트 사용 -> 결제 넘어갈 때 작업 (여기서 안함)
+//		if(memberPoint > 0) {
+//			MemberVO usePoint = service.updateMemberPoint(sId, memberPoint);
+//			
+//		}
+		
+		member = service.getMember(sId);
+		
+		// 페이 상품 총액
+		PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+		System.out.println("결제 상품 갯수랑 총액 :" + payAllPrice);
+		
+		int allPay = payAllPrice.getAllPrice() + 3000;
+		result = allPay - member.getMember_point();
+		
+		System.out.println("포인트 계산 후 금액");
+		
+		System.out.println("상품 총 금액" + allPay);
+		System.out.println("해당 회원의 포인트 : " +  member.getMember_point());
+
+	
+		return result;
+	}
+	
+
 	
 
 	
