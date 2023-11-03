@@ -350,7 +350,7 @@ public class MyPageController {
 //		
 //		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
 		parMap.put("member_id", loginUser.getMember_id());	
-		
+		System.out.println(loginUser);
 //		// 세션에서 현재 로그인한 회원의 아이디 가져오기
 //		String member_id = (String) session.getAttribute("sId");
 //		System.out.println(member_id);
