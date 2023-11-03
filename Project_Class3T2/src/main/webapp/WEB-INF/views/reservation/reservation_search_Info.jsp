@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -16,6 +17,7 @@
 	function check() {
 		let result = confirm("예약 취소 하시겠습니까?");
 		if(result){
+			alert("취소 완료되었습니다.")
 			location.href='ReservationDelete?reservation_guest_num=${reservation.reservation_guest_num}&reservation_person_name=${reservation.reservation_person_name}';
 		}
 	}

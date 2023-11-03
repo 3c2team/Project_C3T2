@@ -36,8 +36,7 @@ public class ReservationVO {
 	private String reservation_email2;
 	private int reservation_cancel;
 	private int reservation_is_member;
-	private int reservation_guest_num;
+	private String reservation_guest_num;
 	private int dinning_num;
 	private int restaurant_num;
-
 }

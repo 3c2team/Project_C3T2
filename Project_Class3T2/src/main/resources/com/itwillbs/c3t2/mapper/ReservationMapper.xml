@@ -5,15 +5,6 @@
     
 <mapper namespace="com.itwillbs.c3t2.mapper.ReservationMapper">
   	
-<!-- 	<select id="available" resultType="com.itwillbs.c3t2.vo.ReservationVO"> -->
-<!-- 		SELECT #{reservaton_time} FROM SCHEDULE WHERE date = #{reservaton_date} -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="isMember" resultType="ReservationIsMember"> -->
-<!-- 		SELECT #{member_name}, #{member_phone}  -->
-<!-- 		FROM MEMBER  -->
-<!-- 		WHERE member_name = (SELECT id FROM Reservation WHERE reservation_is_member = #{reservation_is_member} -->
-<!-- 	</select> 서브쿼리 or 체크박스 세션아이디 불러오기 -->
 	
 	<!-- 예약 등록 -->
 	<insert id="insertReservation">
@@ -28,23 +19,23 @@
 				, 0 <!-- cancel -->
 				, 'Y' <!-- is_member -->
 				, #{reservation_guest_num} <!-- guest_num -->
-				, 1 <!-- dinning_num -->
+				, #{dinning_num} <!-- 컨트롤러에서 지정 -->
 				, 1 <!-- restaurant_num -->
 		)
 	</insert>
 	
 	<!-- 예약번호 불러오기 -->
-	<select id="getGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+	<select id="selectNameEmail" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT reservation_guest_num 
 		FROM RESERVATION 
-		WHERE reservation_person_name = #{reservation_person_name} AND reservation_email = #{reservation_email}
+		WHERE reservation_person_name = #{reservation_person_name} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
 	</select>
 	
-	<!-- 예약자 불러오기 -->
-	<select id="getPersonName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+	<!-- 예약내역 불러오기 / 예약번호, 예약이메일 -->
+	<select id="selectNumEmail" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT * 
 		FROM RESERVATION 
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_email = #{reservation_email}
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
 	</select>
 	
 	<!-- 예약 수정 -->
@@ -56,22 +47,64 @@
 			, reservation_email = #{reservation_email}
 		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</update>
+
+	<update id="deleteReservation">
+		UPDATE RESERVATION 
+		SET reservation_cancel = 1
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+	</update>
 	
-	<select id="selectGuestNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+	<!-- 예약내역 불러오기 / 예약번호, 이름 -->
+	<select id="selectNumName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT *
 		FROM RESERVATION
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name} AND reservation_cancel = 0
 	</select>
 	
-	<delete id="deleteReservation">
-		DELETE FROM RESERVATION 
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
-	</delete>
+	<!-- 예약 가능 시간 조회 -->
+	<select id="selectDateCount" resultType="map">
+		WITH TMP AS (
+			SELECT *
+			  FROM (SELECT A.RESERVATION_TIME
+					  	 , A.NUM
+					     , A.DINNING_MAX
+					     , CASE WHEN A.NUM =  (SELECT GROUP_CONCAT(DINNING_NUM ORDER BY DINNING_NUM) AS NUM
+											     FROM DINNING
+					                            WHERE A.DINNING_MAX = DINNING_MAX 
+										  		GROUP BY DINNING_MAX)
+			                 	THEN 'N'
+			                 	ELSE 'Y' END AS AVAILABLE
+			                 	
+					  FROM (SELECT R.RESERVATION_TIME
+							     , GROUP_CONCAT(R.DINNING_NUM ORDER BY R.DINNING_NUM) AS NUM 
+					             , D.DINNING_MAX
+							  FROM RESERVATION R
+							  LEFT JOIN DINNING D
+								ON R.DINNING_NUM = D.DINNING_NUM
+							 WHERE RESERVATION_DATE = #{selectedDay}
+							   AND DINNING_MAX = #{count}
+							 GROUP BY R.RESERVATION_TIME, D.DINNING_MAX) A
+					) A
+			  WHERE AVAILABLE = 'N'
+		) 
+		SELECT reservation_time
+	      FROM TMP
+		 UNION 
+	    SELECT CONCAT(reservation_time + 1, ":00")
+	      FROM TMP  
+	</select>
 	
-<!-- 	<typeAliases> -->
-<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="ReservationIsMember"/> -->
-<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="insertReservation"/> -->
-<!-- 		<typeAlias type="com.itwillbs.c3t2.vo.ReservationVO" alias="SelectReservation"/> -->
-<!-- 	</typeAliases> -->
-	
+	<!-- 레스토랑 오픈/마감 시간 조회 -->
+<!-- 	<select id="selectOpenClose" resultType="com.itwillbs.c3t2.vo.RestaurantVO"> -->
+<!-- 		WITH RECURSIVE OCT AS ( -->
+<!-- 				SELECT (select cast(substr(#{restaurant_open_time}, 1, 2) as unsigned)  -->
+<!-- 						from RESTAURANT) AS NUM -->
+<!-- 				UNION ALL -->
+<!-- 				SELECT NUM + 1 FROM CTE -->
+<!-- 				WHERE NUM &lt; (select cast(substr(#{restaurant_close_time}, 1, 2) as unsigned)  -->
+<!-- 							   from RESTAURANT) -->
+<!-- 			) -->
+<!-- 		SELECT * FROM OCT -->
+<!-- 	</select> -->
+
 </mapper>

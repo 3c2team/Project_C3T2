@@ -16,30 +16,38 @@
 </head>
 <script type="text/javascript">
 	// 날짜에 맞는 시간 보이기
-// 	function selectableTime(reservation_date) {
-		// 날짜 입력 안 했을때
+	/*
+	function selectableTime(reservation_date) {
+// 		날짜 입력 안 했을때
 // 		if($("#reservation_date").val() == "") {
 // 			alert("날짜 클릭 필수!");
 // 			return;
 // 		}
-// 		$.ajax({
-// 			type: "GET",
-// 			url: "ReservationSchedule?reservation_date=" + reservation_date,
-// 			data: "reservation_date" : reservation_date, // 파라미터
-// 			dataType: "map", // 리턴타입
-// 			success: function(data) {
+		$.ajax({
+			type: "GET",
+			url: "ReservationSchedule"
+			data: {
+				"reservation_date" : reservation_date, // 파라미터
 				
-// 				document.form.ttt["data"].disabled = true;
-// 			}
-// 				$(".form_radio_btn1").val()
+			}
+			dataType: "json", // 리턴타입
+			success: function(ReservationSchedule) {
 				
-// 			},
-// 			error: function() {
-// 				alert("댓글 작성 실패!");
-// 			}
-// 		});	
-// 	}
-
+				
+				
+				let radio_ = ReservationSchedule;
+				for(let i = 0; i < radio_.length; i++){
+					document.getElementById("radio_[i]").disabled = true;
+					document.form.ttt["data"].disabled = true;
+				}
+					
+			},
+			error: function() {
+// 				alert("날짜를 선택해주세요.");
+			}
+		});	
+	}
+*/
 </script>
 <body>
 	<div id="mainLayout">
@@ -54,59 +62,10 @@
 			<div id="calendarForm"></div>
 			<table>
 				<tr>
-					<th>예약시간</th>
+					<th>예약인원</th>
 					<td>
 						<input type="hidden" id="reservation_date" name="reservation_date">
 						<input type="hidden" id="member_id" name="member_id" <c:if test='${not empty sessionScope.sId }'>value="${sessionScope.sId }"</c:if>>
-						<div class="form_radio_btn">
-							<input id="radio-0" type="radio" name="reservation_time" value="10:00" checked>
-							<label for="radio-0">10:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-1" type="radio" name="reservation_time" value="11:00">
-							<label for="radio-1">11:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-2" type="radio" name="reservation_time" value="12:00">
-							<label for="radio-2">12:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-3" type="radio" name="reservation_time" value="13:00">
-							<label for="radio-3">13:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-4" type="radio" name="reservation_time" value="14:00">
-							<label for="radio-4">14:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-5" type="radio" name="reservation_time" value="15:00">
-							<label for="radio-5">15:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-6" type="radio" name="reservation_time" value="16:00">
-							<label for="radio-6">16:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-7" type="radio" name="reservation_time" value="17:00">
-							<label for="radio-7">17:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-8" type="radio" name="reservation_time" value="18:00">
-							<label for="radio-8">18:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-9" type="radio" name="reservation_time" value="19:00">
-							<label for="radio-9">19:00</label>
-						</div>
-						<div class="form_radio_btn">
-							<input id="radio-10" type="radio" name="reservation_time" value="20:00">
-							<label for="radio-10">20:00</label>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>예약인원</th>
-					<td>
 						<div class="form_radio_btn1">
 							<input id="radio1" type="radio" name="reservation_person_count" value="1" checked>
 							<label for="radio1">1</label>
@@ -138,6 +97,55 @@
 						<div class="form_radio_btn1">
 							<input id="radio8" type="radio" name="reservation_person_count" value="8">
 							<label for="radio8">8</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>예약시간</th>
+					<td>
+						<div class="form_radio_btn">
+							<input id="radio_0" type="radio" name="reservation_time" data-value="10:00" checked>
+							<label for="radio_0">10:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_1" type="radio" name="reservation_time" data-value="11:00">
+							<label for="radio_1">11:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_2" type="radio" name="reservation_time" data-value="12:00">
+							<label for="radio_2">12:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_3" type="radio" name="reservation_time" data-value="13:00">
+							<label for="radio_3">13:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_4" type="radio" name="reservation_time" data-value="14:00">
+							<label for="radio_4">14:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_5" type="radio" name="reservation_time" data-value="15:00">
+							<label for="radio_5">15:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_6" type="radio" name="reservation_time" data-value="16:00">
+							<label for="radio_6">16:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_7" type="radio" name="reservation_time" data-value="17:00">
+							<label for="radio_7">17:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_8" type="radio" name="reservation_time" data-value="18:00">
+							<label for="radio_8">18:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_9" type="radio" name="reservation_time" data-value="19:00">
+							<label for="radio_9">19:00</label>
+						</div>
+						<div class="form_radio_btn">
+							<input id="radio_10" type="radio" name="reservation_time" data-value="20:00">
+							<label for="radio_10">20:00</label>
 						</div>
 					</td>
 				</tr>

@@ -16,7 +16,15 @@ public class GenerateRandomCode {
 	}
 	
 	// => 숫자 조합 난수 생성
-	public static String getRandomNumCode(int length) {
-		return RandomStringUtils.randomNumeric(length);
+	public static String getRandomNumCode(int minLength, int maxLength) {
+//		if (Integer.parseInt(GenerateRandomCode.getRandomNumCode(6, 6)) < maxLength) {
+//			
+//		}
+		
+		return RandomStringUtils.randomNumeric(minLength, maxLength);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(GenerateRandomCode.getRandomNumCode(6, 6));
 	}
 }
