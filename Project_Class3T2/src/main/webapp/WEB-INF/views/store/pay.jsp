@@ -99,39 +99,36 @@ $(function() {
 	  	   	alert("선택하신 상품이 없습니다.")
        }else if(confirm("선택 상품을 삭제하시겠습니까?")){
 //          location.href="PayPro?deleteProNum=" + product_num;
+// 			alert("상품 번호 : " + product_num);
+			location.href="ResultPay?deleteProNum=" + product_num;
 			
-			$.ajax({
-				url:"DeletePayProduct?proNums=" + product_num,
-				type:"GET",
-				data:{product_num},
-				success:function(result){
-					location.href="PayPro";
-				},
-				error:function(error){
-					alert("삭제 실패")
-				}
-				
-				
-			});
-
+// 			$.ajax({
+// 				url:"PayProductDelete?deleteProNum=" + product_num,
+// 				type:"POST",
+// 				data:{product_num},
+// 				success:function(result){
+// 					console.log("접근 성공");
+// 					console.log(result);
+// 					location.href="ResultPay";
+// 				},
+// 				error:function(error){
+// 					alert("삭제 실패")
+// 				}
+// 			});
        }else{
           	alert("삭제를 취소 하셨습니다.");
        }
-    
-    
     });
     
     // 포인트 사용 시
     $("#pointCheck").click(function() {
-		
+    	
 		if($(this).is(":checked")){
-			
 			let memberPoint = $("#usePoint").val();
 			let maxPoint = $("#pointCheck").val();
 // 			alert(parseInt(memberPoint) + ", max : " + parseInt(maxPoint));
-			
 // 			console.log(typeof memberPoint <= typeof maxPoint)
-			
+
 			if(parseInt(memberPoint) <= parseInt(maxPoint)){
 				$.ajax({
 					type:"POST",
@@ -145,45 +142,15 @@ $(function() {
 						console.log("작업 실패")
 					}
 				});
-				
 			}else{
 				alert("보유한 포인트만큼 사용 가능합니다.");
 			}
-			
 	    }else{			
 			$("#checkedResult").text($(".allPrice").val() + "원");
 	    }
-		
-		
 	});
-           
-        
  });
  
-// function setDisplay(){
-    
-// 	if($("input:radio[id=member1]").is(":checked")){
-//         $("#resultArea2").hide();
-//         $("#resultArea1").show();
-//         $("#member1").prop("checked", true);
-//         $("#member2").prop("checked", false);
-//     }else if($('input:radio[id=member2]').is(':checked')){
-//     	$("#resultArea1").hide();
-//         $("#resultArea2").show();
-//         $("#member2").prop("checked", true);  
-//         $("#member1").prop("checked", false);  
-//     }
-// }
-
-
-// function setDisplay(){
-//     if($('input:radio[id=member1]').is(':checked')){
-//         $('#divId').hide();
-//     }else{
-//         $('#divId').show();
-//     }
-// }
-
 
 </script>
 
@@ -390,7 +357,6 @@ $(function() {
 <!-- 						<input type="radio" name="cardradio"/><label>휴대폰 결제</label>&nbsp;&nbsp; -->
 						<input type="radio" name="cardradio"/><label>무통장 입금</label>&nbsp;&nbsp;
 <!-- 						<input type="radio" name="cardradio"/><label>에스크로(가장계좌)</label>&nbsp; -->
-						
 					</div>
 					
 					<div align="left">
@@ -410,7 +376,6 @@ $(function() {
 			<br><br>
 			
 			<%--이용안내 --%>
-			
 			
 			<footer id="footer">
 				<jsp:include page="../inc/bottom.jsp"></jsp:include>
