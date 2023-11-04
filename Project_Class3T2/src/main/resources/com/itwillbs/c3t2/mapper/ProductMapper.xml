@@ -26,6 +26,11 @@
 		FROM PRODUCT
 		ORDER BY product_release ASC
 	</select>
+	<select id="selectProductCategoryList" resultType="com.itwillbs.c3t2.vo.ProductVO">
+		SELECT *
+		FROM PRODUCT
+		WHERE product_category_num = #{category_num}
+	</select>
 	<!-- Category별 조회 -->
 	<!-- 
 	<select id="selectCategoryList" parameterType="String" resultType="com.itwillbs.c3t2.vo.ProductImgVO">
@@ -47,6 +52,15 @@
 		FROM PRODUCT_IMG
 		WHERE product_num = #{proNum};
 	</select>
+	<insert id="insertFavorite">
+		INSERT
+		INTO FAVORITE
+		VALUES (
+			NULL
+			, #{member_id}
+			, #{product_num}
+		)
+	</insert>
 	<!-- 상품상세 리뷰 조회 -->
 	<select id="selectReviewList" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 		SELECt *
@@ -67,24 +81,31 @@
 			, #{file_name}
 		)
 	</insert>
+<!-- 	<select id="selectQnAList" resultType="com.itwillbs.c3t2.vo.QnAVO"> -->
+<!-- 		SELECT -->
+<!-- 			Q.* -->
+<!-- 			, IFNULL(A.answer_num, '') AS answer_num -->
+<!-- 			, IFNULL(A.answer_content, '') AS answer_content -->
+<!-- 		FROM QUESTION Q -->
+<!-- 		LEFT JOIN ANSWER A -->
+<!-- 		ON Q.question_num = A.question_num -->
+<!-- 		WHERE Q.product_num = #{proNum} -->
+<!-- 	</select> -->
 	<select id="selectQnAList" resultType="com.itwillbs.c3t2.vo.QnAVO">
-		SELECT
-			Q.*
-			, IFNULL(A.answer_num, '') AS answer_num
-			, IFNULL(A.answer_content, '') AS answer_content
-		FROM QUESTION Q
-		LEFT JOIN ANSWER A
-		ON Q.question_num = A.question_num
-		WHERE Q.product_num = #{proNum}
+		SELECT *
+		FROM QUESTION
+		WHERE product_num = #{proNum}
 	</select>
 	<insert id="insertQuestion">
 		INSERT INTO QUESTION VALUES(
 			NULL
 			, #{member_id}
 			, #{question_content}
+			, NULL
 			, #{product_num}
 			, now()
 			, #{secret}
+			, NULL
 		)
 	</insert>
 </mapper>

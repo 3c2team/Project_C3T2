@@ -38,4 +38,6 @@ public interface ProductMapper {
 	public int insertQuestion(QnAVO question);
 
 	public int insertFavorite(FavoriteVO favorite);
+
+	public List<ProductVO> selectProductCategoryList(int category_num);
 }

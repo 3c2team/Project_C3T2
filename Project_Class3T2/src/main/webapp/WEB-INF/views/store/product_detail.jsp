@@ -82,9 +82,7 @@
 					<div class="detailTopLikeShare">
 						<!-- 찜하기 공유하기 버튼 -->
 						<input type="hidden" name="product_num" value="${param.proNum }">
-						<button name="like">
-							<span class="likeBtn">찜하기</span>
-						</button>
+<!-- 						<button name="favoriteBtn">찜하기</button> -->
 					</div>
 					<div class="productNum">
 						<p>온라인상품코드 ${productDetail.product_num }</p>

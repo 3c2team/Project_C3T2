@@ -65,4 +65,8 @@ public class StoreService {
 	public int registFavorite(FavoriteVO favorite) {
 		return mapper.insertFavorite(favorite);
 	}
+
+	public List<ProductVO> getProductCategoryList(int category_num) {
+		return mapper.selectProductCategoryList(category_num);
+	}
 }

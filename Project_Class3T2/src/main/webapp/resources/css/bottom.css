@@ -5,18 +5,10 @@ font-family: 'Nanum Myeongjo', serif;
 font-family: 'Sacramento', cursive;
 */
 
-
-
-.company li{
-	font-size: 12px;
-}
 .bottomArea {
-	width: 1400px;
-    margin: 0 auto;
-    box-sizing: content-box;
-    overflow: visible;
-    padding-left: 50px;
+    background-color: #f1f1f1;
+    padding-block: 60px;
+    padding-inline: 10%;
+    font-size: 15px;
 }
-.bottomLogoArea {
-	margin-bottom: 20px;
-}
+

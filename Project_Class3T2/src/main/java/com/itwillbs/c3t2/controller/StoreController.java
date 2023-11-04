@@ -40,6 +40,20 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	@GetMapping("OnlineStore")
+	public String main(Model model) {
+		List<ProductVO> bestList = service.getProductbestList();
+//		List<ProductVO> hotList = service.getProductHotList();
+//		List<ProductVO> newList = service.getProductNewList();
+		
+		model.addAttribute("bestList", bestList);
+//		model.addAttribute("hotList", hotList);
+//		model.addAttribute("newList", newList);
+		
+		
+		return "store/store_main";
+	}
+	
 	@GetMapping("StoreBest")
 	public String best(Model model) {
 		List<ProductVO> bestList = service.getProductbestList();
@@ -70,10 +84,32 @@ public class StoreController {
 	}
 	
 	@GetMapping("StoreKit")
-	public String storeKit(Model model) {
-		List<ProductVO> bestList = service.getProductbestList();
-		model.addAttribute("bestList", bestList);
+	public String storeKit(Model model, String category) {
+		List<ProductVO> proList = null;
+		if(category == null || category.equals("")) {
+			proList = service.getProductNewList();
+			model.addAttribute("proList", proList);
+			
+			return "store/store_kit";
+		}
+		
+		int category_num = 0;
+		switch (category) {
+			case "Steak": category_num = 1; break;
+			case "Pasta": category_num = 2; break;
+			case "Soup": category_num = 3; break;
+			case "ets": category_num = 4; break;
+		}
+		
+		System.out.println("int cate_num: " + category_num);
+		System.out.println("Sting cate: " + category);
+	
+		if(category_num > 0) {
+			proList = service.getProductCategoryList(category_num);
+		}
+		model.addAttribute("proList", proList);
 		return "store/store_kit";
+		
 	}	// 아래 코드 수정 전 까지 임시 사용
 	
 //	@RequestMapping("/Products")
@@ -135,15 +171,15 @@ public class StoreController {
 		return "store/product_detail";
 	}
 	
-	@ResponseBody
-	@PostMapping("ProductDetailFavorite")
-	public void favorite(FavoriteVO favorite, HttpSession session, HttpServletResponse response) {
-		int insertCount = service.registFavorite(favorite);
-		
-		if(insertCount > 0) {
-			//찜하기 실패
-		}
-	}
+//	@ResponseBody
+//	@PostMapping("ProductDetailFavorite")
+//	public void favorite(FavoriteVO favorite, HttpSession session, HttpServletResponse response) {
+//		int insertCount = service.registFavorite(favorite);
+//		
+//		if(insertCount > 0) {
+//			//찜하기 실패
+//		}
+//	}
 	
 	// 리뷰작성폼으로 이동~
 	@GetMapping("ReviewFrom")
@@ -163,8 +199,9 @@ public class StoreController {
 	@PostMapping("ReviewPro")
 //	public String reviewPro(ReviewVO review, HttpSession session, Model model, @RequestParam(value = "review_image", required = false) MultipartFile mainFile) {
 	public String reviewPro( @RequestParam Map<String, Object> map
-							,@RequestParam(value = "file") MultipartFile file
+							,@RequestParam(value = "file", required=false) MultipartFile file
 							, HttpSession session, Model model) {
+		
 		String sId = (String)session.getAttribute("sId");
 		String uploadDir = "/review_img/"; //가상 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 경로
@@ -174,13 +211,13 @@ public class StoreController {
 			return "sotre/popup/close";
 		}
 		
-		System.out.println(map);
-		System.out.println(file);
-		System.out.println(sId);
 //		//===================== < 이미지 처리 > ===================== 
 //		//--------------------- < 이미지 경로 > ---------------------
-//		
-//		
+		
+//		if(file.getName().equals("") || file == null) {
+//			map.put(uploadDir, saveDir)
+//		}
+		
 //		// 서브디렉토리명 저장 yyyy/MM/dd 형식
 		String subDir = "";
 		try {
@@ -201,10 +238,16 @@ public class StoreController {
 		System.out.println("uuid" + uuid);
 		
 		String fileName =  UUID.randomUUID().toString().substring(0, 3) + "_" + file.getOriginalFilename();
+		
+		if(file.getOriginalFilename() != null || !(file.getOriginalFilename().equals(""))) {
+		}
 		map.put("file_name", subDir + "/" + fileName);
 		map.put("member_id", sId);
+		
 //		//------------------ < 게시물 등록 처리 > -------------------
-//		
+		
+		System.out.println("**************************************************** map : " + map);
+		
 //		System.out.println(review);
 		int insertCount = service.registReview(map);
 //		
@@ -213,6 +256,7 @@ public class StoreController {
 				System.out.println("리뷰등록 완료");
 				file.transferTo(new File(saveDir, fileName));
 				model.addAttribute("msg", "리뷰를 등록했습니다.");
+				
 				return "store/popup/close";
 			} 
 		} catch (IllegalStateException e) {
@@ -223,8 +267,9 @@ public class StoreController {
 			e.printStackTrace();
 		}
 		
-		//-----------------------------------------------------------
 		
+		//-----------------------------------------------------------
+		System.out.println("*****************************************saveDir" + saveDir);
 		model.addAttribute("msg", "리뷰등록을 실패했습니다.");
 		return "store/popup/close";
 		//============================================================
