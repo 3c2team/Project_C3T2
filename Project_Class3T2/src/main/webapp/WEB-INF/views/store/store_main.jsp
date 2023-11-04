@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,149 +9,33 @@
 </head>
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-<%-- <link href="${pageContext.request.contextPath }/resource/css/store_default.css" rel="stylesheet" type="text/css"> --%>
-<link href="${pageContext.request.contextPath }/resource/css/store_main.css" rel="stylesheet" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath }/resource/js/store_main.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/online_store.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/slick.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/slick-theme.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/slick.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/store_main.js"></script>
 <body>
 	<header>
 		<jsp:include page="../inc/store_top.jsp"></jsp:include>
 	</header>
-	<main>
-		<div id="mainLayout">
-			<!-- 첫번째 BEST 슬라이더 -->
-			<div class="title">BEST</div>
-			<div class="container">
-				<div class="bx">
-					<h2>1</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta1.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
+	<main class="mainLayout">
+		<div class="categoryMenuArea">
+			<div class="categoryName"><h1>BEST</h1></div>
+		</div>
+		<div class="bestListArea">
+			<c:forEach items="${bestList }" var="best" begin="0" end="9" varStatus="status">
+				<div class="best${status.count} productBest">
+					<a class="productClick" href="ProductDetail?proNum=${best.product_num}">
+						<img src="${pageContext.request.contextPath}/resources${best.product_main_img_real_file}">
+						<div class="bestCount">${status.count}</div>
+						<strong>${best.product_name }</strong><br>
+						<strong><span>${best.product_price }</span><span>원</span></strong>
+<%-- 								<strong>${product.product_info }</strong> --%>
+					</a>
 				</div>
-				<div class="bx">
-					<h2>2</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta2.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>3</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta3.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>4</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta4.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>5</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta5.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>6</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta6.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>7</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta7.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<h2>8</h2>
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta8.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-			</div>
-			
-			<!-- 두번째 NEW 슬라이더 -->
-			<div class="title">NEW</div>
-			<div class="container">
-				
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak1.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak2.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak3.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak4.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak5.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/steak6.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-			</div>
-			
-			<!-- 세번째 HOT 슬라이더 -->
-			<div class="title">HOT</div>
-			<div class="container" >
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta1.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta2.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta3.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta4.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta5.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta6.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta7.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-				<div class="bx">
-					<img src="${pageContext.request.contextPath }/resource/store_img/pasta8.jpg" />
-					<p style="font-weight: bold;">20,000원</p>
-	        		<p>함박 스테이크 (2인분) 밀키트</p>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</main>
 	<footer id="footer">
