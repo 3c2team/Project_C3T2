@@ -395,6 +395,36 @@ public class CartController {
 		
 		return "store/pay";
 	}
+	
+	@PostMapping("PaymentPro")
+	public String paymentPro(MemberVO member, OrderDetailVO orderDetail, HttpSession session, Model model) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		// 메인 페이지에서 카트 등록 상품 목록 조회
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		model.addAttribute("productPayList", productPayList);
+		
+		member = service.getMember(sId);
+		model.addAttribute("Member", member); 
+		 
+		System.out.println("PaymentPro : " + sId);
+		System.out.println("PaymentPro : " + productPayList);
+		System.out.println("PaymentPro : " + member);
+		System.out.println("PaymentPro : " + orderDetail);
+		
+		
+		
+		return "store/payment";
+	}
+	
+	@GetMapping("PaymentResult")
+	public String paymentResult() {
+		
+		System.out.println("결제 성공");
+	
+		return "store/pay_result";
+	}
 
 	
 

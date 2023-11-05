@@ -12,10 +12,12 @@
 <head>
 <meta charset="UTF-8">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <title>상품결제</title>
 <script type="text/javascript">
 $(function() {
@@ -150,7 +152,8 @@ $(function() {
 	    }
 	});
  });
- 
+  
+
 
 </script>
 
@@ -158,7 +161,7 @@ $(function() {
 
 <body>
 	
-	<form name="fr">
+	<form name="fr" action="PaymentPro" method="post">
 		<div id="frame">
 		<header>
 					<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -370,6 +373,7 @@ $(function() {
 				<div class="total">
 					<span style="display:inline-block; padding: 20px 10px;">최종결제 금액</span><br>
 					<span id="checkedResult" style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">${payAllPrice.allPrice + 3000}원</span><br><br>
+<%-- 					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="requestPay('${Member}')">결제하기</button> --%>
 					<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
 				</div>
 			</div>
@@ -384,5 +388,6 @@ $(function() {
 		</div>
 
 	</form>	
+	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 </body>
 </html>	
