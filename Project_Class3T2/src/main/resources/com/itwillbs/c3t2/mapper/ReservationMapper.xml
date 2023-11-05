@@ -17,9 +17,9 @@
 				, #{reservation_person_count}
 				, #{reservation_email}
 				, 0 <!-- cancel -->
-				, 'Y' <!-- is_member -->
+				, 'Y' <!-- #{reservation_member_id} -->
 				, #{reservation_guest_num} <!-- guest_num -->
-				, #{dinning_num} <!-- 컨트롤러에서 지정 -->
+				, 1 <!-- 컨트롤러에서 지정 -->
 				, 1 <!-- restaurant_num -->
 		)
 	</insert>
@@ -47,7 +47,8 @@
 			, reservation_email = #{reservation_email}
 		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
 	</update>
-
+	
+	<!-- 예약 삭제 -->
 	<update id="deleteReservation">
 		UPDATE RESERVATION 
 		SET reservation_cancel = 1
@@ -60,7 +61,7 @@
 		FROM RESERVATION
 		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name} AND reservation_cancel = 0
 	</select>
-	
+
 	<!-- 예약 가능 시간 조회 -->
 	<select id="selectDateCount" resultType="map">
 		WITH TMP AS (
@@ -70,7 +71,7 @@
 					     , A.DINNING_MAX
 					     , CASE WHEN A.NUM =  (SELECT GROUP_CONCAT(DINNING_NUM ORDER BY DINNING_NUM) AS NUM
 											     FROM DINNING
-					                            WHERE A.DINNING_MAX = DINNING_MAX 
+					                            WHERE A.DINNING_MAX = #{count} 
 										  		GROUP BY DINNING_MAX)
 			                 	THEN 'N'
 			                 	ELSE 'Y' END AS AVAILABLE

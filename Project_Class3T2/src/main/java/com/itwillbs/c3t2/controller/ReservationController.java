@@ -1,9 +1,10 @@
 package com.itwillbs.c3t2.controller;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,12 +48,13 @@ public class ReservationController {
 	
 	// 예약 폼 전송, 예약 확인 페이지 이동
 	@PostMapping("/ReservationPro")
-	public String reservationPro(ReservationVO reservation, Model model) {
+	public String reservationPro(ReservationVO reservation, HttpSession session, Model model) {
 		
 		// 예약 번호 - 6자리 랜덤 숫자
 		reservation.setReservation_guest_num(GenerateRandomCode.getRandomNumCode(6, 6));
 //		System.out.println(reservation);
 		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
+		reservation.setReservation_member_id((String)session.getAttribute("sId"));
 		
 		int insertCount = service.insertReservation(reservation);
 		
@@ -90,13 +92,12 @@ public class ReservationController {
 		// 예약 조회 내역 없으면 fail back 구현해놓기!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		System.out.println("예약객체 !!!!!!"+dbReservation);
 		
+		// 조회 사항 넘겨주기
 		if(dbReservation == null) {
 			model.addAttribute("msg", "입력하신 정보가 맞지 않습니다. 입력한 내용을 확인하신 후 다시 시도해 주세요.");
 			return "fail_back";
 		}
-		// 조회 사항 넘겨주기
 		model.addAttribute("reservation", dbReservation);
-		
 		return "reservation/reservation_search_Info";
 	}
 	

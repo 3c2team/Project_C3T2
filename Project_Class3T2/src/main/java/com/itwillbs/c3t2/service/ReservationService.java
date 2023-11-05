@@ -23,10 +23,7 @@ public class ReservationService {
 		// 예약 상세정보 조회 요청
 		public ReservationVO selectReservation(int reservation_guest_num, String reservation_email) {
 			ReservationVO reservation = mapper.selectNumEmail(reservation_guest_num, reservation_email);
-			 
-			if(reservation != null) {
-				mapper.selectNumEmail(reservation_guest_num, reservation_email);
-			}
+			
 			return reservation;
 		}
 		

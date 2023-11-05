@@ -25,6 +25,43 @@
 				<div id="calendarForm"></div>
 				<table>
 					<tr>
+						<th>예약인원</th>
+						<td>
+							<div class="form_radio_btn">
+								<input id="radio1" type="radio" name="reservation_person_count" value="1" <c:if test="${reservation.reservation_person_count eq '1' }">checked</c:if>>
+								<label for="radio1">1</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio2" type="radio" name="reservation_person_count" value="2" <c:if test="${reservation.reservation_person_count eq '2' }">checked</c:if>>
+								<label for="radio2">2</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio3" type="radio" name="reservation_person_count" value="3" <c:if test="${reservation.reservation_person_count eq '3' }">checked</c:if>>
+								<label for="radio3">3</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio4" type="radio" name="reservation_person_count" value="4" <c:if test="${reservation.reservation_person_count eq '4' }">checked</c:if>>
+								<label for="radio4">4</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio5" type="radio" name="reservation_person_count" value="5" <c:if test="${reservation.reservation_person_count eq '5' }">checked</c:if>>
+								<label for="radio5">5</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio6" type="radio" name="reservation_person_count" value="6" <c:if test="${reservation.reservation_person_count eq '6' }">checked</c:if>>
+								<label for="radio6">6</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio7" type="radio" name="reservation_person_count" value="7" <c:if test="${reservation.reservation_person_count eq '7' }">checked</c:if>>
+								<label for="radio7">7</label>
+							</div>
+							<div class="form_radio_btn">
+								<input id="radio8" type="radio" name="reservation_person_count" value="8"  <c:if test="${reservation.reservation_person_count eq '8' }">checked</c:if>>
+								<label for="radio8">8</label>
+							</div>
+						</td>
+					</tr>
+					<tr>
 						<th>예약시간</th>
 						<td>
 							<input type="hidden" id="reservation_date" name="reservation_date">
@@ -75,43 +112,6 @@
 						</td>
 					</tr>
 					<tr>
-						<th>예약인원</th>
-						<td>
-							<div class="form_radio_btn">
-								<input id="radio1" type="radio" name="reservation_person_count" value="1" <c:if test="${reservation.reservation_person_count eq '1' }">checked</c:if>>
-								<label for="radio1">1</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio2" type="radio" name="reservation_person_count" value="2" <c:if test="${reservation.reservation_person_count eq '2' }">checked</c:if>>
-								<label for="radio2">2</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio3" type="radio" name="reservation_person_count" value="3" <c:if test="${reservation.reservation_person_count eq '3' }">checked</c:if>>
-								<label for="radio3">3</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio4" type="radio" name="reservation_person_count" value="4" <c:if test="${reservation.reservation_person_count eq '4' }">checked</c:if>>
-								<label for="radio4">4</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio5" type="radio" name="reservation_person_count" value="5" <c:if test="${reservation.reservation_person_count eq '5' }">checked</c:if>>
-								<label for="radio5">5</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio6" type="radio" name="reservation_person_count" value="6" <c:if test="${reservation.reservation_person_count eq '6' }">checked</c:if>>
-								<label for="radio6">6</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio7" type="radio" name="reservation_person_count" value="7" <c:if test="${reservation.reservation_person_count eq '7' }">checked</c:if>>
-								<label for="radio7">7</label>
-							</div>
-							<div class="form_radio_btn">
-								<input id="radio8" type="radio" name="reservation_person_count" value="8"  <c:if test="${reservation.reservation_person_count eq '8' }">checked</c:if>>
-								<label for="radio8">8</label>
-							</div>
-						</td>
-					</tr>
-					<tr>
 						<th>예약자 성함</th>
 						<td>
 							<input type="text" class="input" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" readonly required>
@@ -130,7 +130,7 @@
 								<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
 							<input type="text" class="input" name="reservation_email2" id="reservation_email2" size="20" required
 								<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
-							<select id="emailDomain">
+							<select id="emailDomain" class="input">
 								<option value="">직접입력</option>
 								<option value="naver.com">naver.com</option>
 								<option value="nate.com">nate.com</option>

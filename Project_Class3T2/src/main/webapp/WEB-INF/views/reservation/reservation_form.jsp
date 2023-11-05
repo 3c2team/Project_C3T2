@@ -14,41 +14,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
-	// 날짜에 맞는 시간 보이기
-	/*
-	function selectableTime(reservation_date) {
-// 		날짜 입력 안 했을때
-// 		if($("#reservation_date").val() == "") {
-// 			alert("날짜 클릭 필수!");
-// 			return;
-// 		}
-		$.ajax({
-			type: "GET",
-			url: "ReservationSchedule"
-			data: {
-				"reservation_date" : reservation_date, // 파라미터
-				
-			}
-			dataType: "json", // 리턴타입
-			success: function(ReservationSchedule) {
-				
-				
-				
-				let radio_ = ReservationSchedule;
-				for(let i = 0; i < radio_.length; i++){
-					document.getElementById("radio_[i]").disabled = true;
-					document.form.ttt["data"].disabled = true;
-				}
-					
-			},
-			error: function() {
-// 				alert("날짜를 선택해주세요.");
-			}
-		});	
-	}
-*/
-</script>
 <body>
 	<div id="mainLayout">
 	<header>
@@ -161,9 +126,9 @@
 					<th>예약내역 받으실 이메일</th>
 					<td>
 						<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required
-						<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
+						<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
 						<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required
-						<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
+						<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
 						<select id="emailDomain" class="input"> <!--   -->
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>

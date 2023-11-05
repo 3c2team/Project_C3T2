@@ -28,9 +28,11 @@
 		</header>
 	<div id="mainLayout">
 		<main>
-			<div>
-				<h2 class="sign" align="center">예약 상세 조회</h2>
-				<table class="custom_calendar_table">
+				<h2 class="sign" align="center">Reservation</h2>
+				<table class="custom_table">
+					<tr>
+						<th id="searchInfo" align="center">예약 상세 조회</th>
+					</tr>
 					<tr>
 						<th>예약일자</th>
 						<td>${reservation.reservation_date }&nbsp;${reservation.reservation_time }</td>
@@ -60,9 +62,7 @@
 						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
 					</tr>
 				</table>
-			</div>
-			<h2 class="sign" align="center">오시는길</h2>
-			<div id="map" style="margin:auto; width:1300px; height:800px;"></div>
+			<div id="map" style="margin:auto; width:700px; height:600px; margin-bottom: 85px;"></div>
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d79e4be802855b8c8c9dc38e9b02f6d"></script>
 			<script>
 				var container = document.getElementById('map');
@@ -83,7 +83,7 @@
 	// 			// 마커가 지도 위에 표시되도록 설정합니다
 	// 			marker.setMap(map);
 	
-				var imageSrc = './img/free-icon-food-and-restaurant-1515636.png', // 마커이미지의 주소입니다    
+				var imageSrc = '/c3t2/resources/main_img/free-icon-food-and-restaurant-1515636.png', // 마커이미지의 주소입니다    
 			    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
 			    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 			      

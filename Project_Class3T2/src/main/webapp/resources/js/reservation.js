@@ -95,12 +95,14 @@ function assembly(year, month) {
 	    "<tbody id='customSetDate' name='reservation_date'>" +
 	    "</tbody>" +
 	    "</table>";
+	    
+	
+	
 	return calendar_html_code;
 }
 //- ------------------------------------------------
 // ---------- 날짜, 인원수 ajax로 체크 -----------
 function validationCheck(){
-	
 	
 	// 연, 월, 일 저장
     let selectYear = $("#select_year").text();
@@ -115,8 +117,8 @@ function validationCheck(){
 	let count = $('input[name=reservation_person_count]:checked').val();
 	$("#reservation_person_count").val(count);	
 	
-	// 인원수 받아서 disable 걸기
 	
+	// 인원수 받아서 disable 걸기
 	$.ajax({
 		type: "GET",
 		url: "ReservationSchedule",
@@ -140,23 +142,10 @@ function validationCheck(){
 				let time = e.RESERVATION_TIME;
 				$.each($("input[name=reservation_time]"), (i2, e2) => {
 					if(time === e2.dataset.value){
-						$(e2).attr('disabled', true);	
-					} 
+						$(e2).attr('disabled', true);
+					}
 				});
 			});
-			
-			
-			
-			// 예약 가능하다면
-//			let isAvailable = false;
-//			if(!isAvailable){
-//				for(let i of map){
-//					$("input[name=reservation_person_count]").attr("disabled",true);
-//					$("input[name=reservation_person_count]").each({
-//						
-//						
-//					});
-				
 		}
 	});	
 }
@@ -311,68 +300,4 @@ $(function(){
 	    
 	}
 });
-TODO */ 
-
-
-
-//$(document).ready( function()
-//{
-//	var bMove = false;
-//	var startX = 0;
-//	var scrollLeft = 0;
-//	var slider = document.querySelector(".contents");
-//
-//	slider.addEventListener("mousedown", function(e){
-//		bMove = true;
-//		startX = e.pageX - slider.offsetLeft;
-//		scrollLeft = slider.scrollLeft;
-//	});
-//
-//	slider.addEventListener("mouseleave", function(){
-//		bMove = false;
-//	});
-//
-//	slider.addEventListener("mouseup", function(){
-//		bMove = false;
-//	});
-//
-//	slider.addEventListener("mousemove", function(e){
-//		if( bMove )
-//		{
-//			const x = e.pageX - slider.offsetLeft;
-//			const walk = x - startX;
-//			slider.scrollLeft = scrollLeft - walk;
-//		}
-//	});
-//} );
-//
-//$(document).ready( function()
-//{
-//	var bMove = false;
-//	var startX = 0;
-//	var scrollLeft = 0;
-//	var slider = document.querySelector(".contents2");
-//
-//	slider.addEventListener("mousedown", function(e){
-//		bMove = true;
-//		startX = e.pageX - slider.offsetLeft;
-//		scrollLeft = slider.scrollLeft;
-//	});
-//
-//	slider.addEventListener("mouseleave", function(){
-//		bMove = false;
-//	});
-//
-//	slider.addEventListener("mouseup", function(){
-//		bMove = false;
-//	});
-//
-//	slider.addEventListener("mousemove", function(e){
-//		if( bMove )
-//		{
-//			const x = e.pageX - slider.offsetLeft;
-//			const walk = x - startX;
-//			slider.scrollLeft = scrollLeft - walk;
-//		}
-//	});
-//} );
+*/
