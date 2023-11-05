@@ -135,22 +135,22 @@
 		</section>
 		
 		<%-- =========================================================================================================================== --%>
+		<div class="detailBottomTab sticky">
+			<div class="detailBottomTabItem">
+				<a href="#ProductDetail">상품상세정보</a>
+			</div>
+			<div class="detailBottomTabItem">
+				<a href="#Review">상품리뷰</a>
+			</div>
+			<div class="detailBottomTabItem">
+				<a href="#QnA">상품문의</a>
+			</div>
+			<div class="detailBottomTabItem">
+				<a href="#Return">반품/교환정보</a>
+			</div>
+		</div>
 				
 		<section class="detailContainer">
-			<div class="detailBottomTab">
-				<div class="detailBottomTabItem">
-					<a href="#ProductDetail">상품상세정보</a>
-				</div>
-				<div class="detailBottomTabItem">
-					<a href="#Review">상품리뷰</a>
-				</div>
-				<div class="detailBottomTabItem">
-					<a href="#QnA">상품문의</a>
-				</div>
-				<div class="detailBottomTabItem">
-					<a href="#Return">반품/교환정보</a>
-				</div>
-			</div>
 			<div class="detailInfoImgArea" name="ProductDetail">
 				<%-- 경로 변경하기 --%>
 				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
@@ -206,9 +206,9 @@
 												</div>									
 											</div>
 											<div class="reviewInfo">
-												<c:if test="${not empty reviewList.review_img_name }">
+												<c:if test="${not empty reviewList.review_image }">
 													<div class="reviewImg">
-														<img src="${reviewList.review_img_name }">
+														<img src="${reviewList.review_image }">
 													</div>
 												</c:if>
 												<div class="reviewContent">

@@ -20,19 +20,28 @@
 			<div class="categoryName"><h1>MEAL KIT</h1></div>
 			<div class="categoryMenu">
 <!-- 	            <a href="/Products?category=All" class="categoryLink">All</a> -->
-	            <a href="/Products?category=Steak" class="categoryLink">Steak</a>
-	            <a href="/Products?category=Pasta" class="categoryLink">Pasta</a>
-	            <a href="/Products?category=Soup" class="categoryLink">Soup</a>
-	            <a href="/Products?category=ets" class="categoryLink">ets</a>
+	            <a href="?category=Steak" class="categoryLink">Steak</a>
+	            <a href="?category=Pasta" class="categoryLink">Pasta</a>
+	            <a href="?category=Soup" class="categoryLink">Soup</a>
+	            <a href="?category=ets" class="categoryLink">ets</a>
         </div>
 		</div>
 		
 		<%-- ================================================ --%>
 		<div class="productListAll">
 			<ul class="productList">
-				<c:forEach var="product" items="${categoryList}">
-					<li>${product.product_name} - ${product.product_price}</li>
- 				</c:forEach>
+				<c:forEach var="product" items="${proList }">
+					<li class="productListLi">
+						<div class="product">
+							<a class="productClick" href="ProductDetail?proNum=${product.product_num }">
+								<img src="${pageContext.request.contextPath}/resources${product.product_main_img_real_file}">
+								<strong>${product.product_name }</strong><br>
+								<strong><span>${product.product_price }</span><span>원</span></strong>
+<%-- 								<strong>${product.product_info }</strong> --%>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
 			</ul>
 		</div>
 		

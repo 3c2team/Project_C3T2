@@ -112,15 +112,6 @@ public class StoreController {
 		
 	}	// 아래 코드 수정 전 까지 임시 사용
 	
-//	@RequestMapping("/Products")
-//	public String category(@RequestParam("category") String category, Model model) {
-//	    System.out.println("컨트롤러 왔다");
-//		List<ProductVO> categoryList = service.getCategoryList(category);
-//		System.out.println("list: " + categoryList);
-//	    model.addAttribute("categoryList", categoryList);
-//	    return "store/store_kit";
-//	}	// 오류 수정중
-	
 	// 상세페이지~
 	@GetMapping("ProductDetail")
 	public String productDetail(int proNum, Model model) {
