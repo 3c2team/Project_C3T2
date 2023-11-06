@@ -422,6 +422,8 @@ public class CartController {
 		System.out.println("사용할 포인트 : " + map.get("usePoint"));
 		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
 		
+		
+		
 //		for(int odn :order_detail_num) {
 //			System.out.println("odn : " + odn);
 //			map.get(odn);
@@ -441,6 +443,15 @@ public class CartController {
 				map.put("order_detail_num", order_detail_num[i]);
 				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
 			}
+			
+			String usePoint = (String)map.get("usePoint");
+			int resultPoint = Integer.parseInt(usePoint);
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000) - resultPoint;
+			System.out.println("최종 결제 금액 : " + resultPrice);
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
@@ -449,7 +460,18 @@ public class CartController {
 				map.put("order_detail_num", order_detail_num[i]);
 				int insertReceiverInfo = service.insertReceiverInfo(map);
 			}
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000);
+			System.out.println("최종 결제 금액 : " + resultPrice);
 		}
+		
+
+		
+		
+		
 		
 		// 결제 상품 저장
 //		for(OrderDetailVO payProduct:orderDetailList) {
