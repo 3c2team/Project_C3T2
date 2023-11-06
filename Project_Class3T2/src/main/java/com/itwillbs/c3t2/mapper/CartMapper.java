@@ -1,6 +1,7 @@
 package com.itwillbs.c3t2.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -78,5 +79,11 @@ public interface CartMapper {
 
 		// 결제 상품 삭제
 		public int deletePayProduct(int proNum);
+
+		// 회원의 배송정보 저장 (포인트 사용 시)
+		public int insertReceiverUsePoint(Map<String, Object> map);
+		
+		// 회원의 배송정보 저장 (포인트 미 사용 시)
+		public int insertReceiverInfo(Map<String, Object> map);
 
 }

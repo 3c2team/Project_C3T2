@@ -1,6 +1,7 @@
 package com.itwillbs.c3t2.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -156,6 +157,18 @@ public class CartService {
 	public int deletePayProduct(int proNum) {
 		// TODO Auto-generated method stub
 		return mapper.deletePayProduct(proNum);
+	}
+
+	// 회원의 배송 정보 저장 (포인트 사용 시)
+	public int insertReceiverUsePoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertReceiverUsePoint(map);
+	}
+
+	// 회원의 배송 정보 저장 (포인트 미 사용 시)
+	public int insertReceiverInfo(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertReceiverInfo(map);
 	}
 
 

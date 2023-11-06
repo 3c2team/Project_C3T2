@@ -1,6 +1,7 @@
 package com.itwillbs.c3t2.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -397,7 +398,7 @@ public class CartController {
 	}
 	
 	@PostMapping("PaymentPro")
-	public String paymentPro(MemberVO member, OrderDetailVO orderDetail, HttpSession session, Model model) {
+	public String paymentPro(@RequestParam Map<String, Object> map, MemberVO member, OrderDetailVO orderDetail, HttpSession session, Model model) {
 		
 		String sId = (String)session.getAttribute("sId");
 		
@@ -412,6 +413,30 @@ public class CartController {
 		System.out.println("PaymentPro : " + productPayList);
 		System.out.println("PaymentPro : " + member);
 		System.out.println("PaymentPro : " + orderDetail);
+		
+		// 배송지 정보 저장
+		map.put("sId", sId);
+		System.out.println("사용할 포인트 : " + map.get("usePoint"));
+		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
+		String result = (String)(map.get("usePoint"));
+		int usePoint = Integer.parseInt(result);
+		
+		// 포인트 사용 시 배송지에 정보 저장
+		
+		if(usePoint > 0) {
+			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+		}
+		
+		// 포인트 미 사용 시 배송지에 정보 저장
+		if(usePoint == 0){// 포인트 없을 때
+			int insertReceiverInfo = service.insertReceiverInfo(map);
+		}
+		
+		
+//		int insertInfo = service.insertReceiverInfo(map);
+//		if(insertInfo > 0) {
+//			System.out.println("배송지 정보 저장 성공");
+//		}
 		
 		
 		

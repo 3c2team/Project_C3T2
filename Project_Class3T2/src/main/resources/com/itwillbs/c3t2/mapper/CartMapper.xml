@@ -200,6 +200,40 @@
 			ORDER_DETAIL
 			WHERE product_num = #{proNum}
 	</delete>
+	
+	<!-- 포인트 사용 시 배송지에 정보 저장 -->
+	<insert id="insertReceiverUsePoint">
+	INSERT INTO
+		RECEIVER_INFO (receiver_info_num, member_id, receiver_name, receiver_address, receiver_phone, receiver_email, receiver_request, order_detail_num, use_point)
+		VALUES(
+			null
+			, #{sId}
+			, #{receiver_name}
+			, CONCAT(#{receiver_addr1}, ' ', #{receiver_addr2})
+			, #{phone}
+			, CONCAT(#{eMail}, '@', #{mailUrl})
+			, #{receiver_request}
+			, #{order_detail_num}
+			, #{usePoint}
+		)		
+	</insert>
+	
+	<!-- 포인트 미사용 시 배송지에 정보 저장 -->
+	<insert id="insertReceiverInfo">
+	INSERT INTO
+		RECEIVER_INFO (receiver_info_num, member_id, receiver_name, receiver_address, receiver_phone, receiver_email, receiver_request, order_detail_num)
+		VALUES(
+			null
+			, #{sId}
+			, #{receiver_name}
+			, CONCAT(#{receiver_addr1}, ' ', #{receiver_addr1})
+			, #{phone}
+			, CONCAT(#{eMail}, '@', #{mailUrl})
+			, #{receiver_request}
+			, #{order_detail_num}
+		)		
+	
+	</insert>
 
 
 

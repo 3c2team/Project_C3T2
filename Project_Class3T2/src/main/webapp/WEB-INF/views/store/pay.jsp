@@ -198,6 +198,7 @@ $(function() {
 				<tbody>
 					<c:forEach var="productPayList" items="${productPayList }">
 						<input type="hidden" class="result_num" value="${productPayList.product_num}">
+						<input type="hidden" name="order_detail_num" value="${productPayList.order_detail_num }">
 						<tr style="height: 90px; background-color: #fff; font-size: 15px;">
  							<td style="text-align: left; text-align: center; border-right: none;">
                        			 <input type="checkbox" name="checkbox" class="checkbox" id="${productPayList.product_num}" value="${productPayList.product_num}" proNum="${productPayList.product_num}"/>
@@ -271,7 +272,7 @@ $(function() {
 						
 						<tr>
 							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-							<td id="memberName"><input type="text" id="member_name" value="${Member.member_name}"></td>
+							<td id="memberName"><input type="text" id="member_name" name="receiver_name" value="${Member.member_name}"></td>
 						</tr>
 						
 						<tr>
@@ -280,9 +281,9 @@ $(function() {
 							
 							<td>
 	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
-								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" value="${Member.member_address1}">&nbsp;
+								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" name="receiver_addr1" value="${Member.member_address1}">&nbsp;
 								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
-								<input type="text" id="addr2" size="40" value="${Member.member_address2}"/>
+								<input type="text" id="addr2" size="40" name="receiver_addr2"  value="${Member.member_address2}"/>
 							</td>
 						</tr>
 						
@@ -302,7 +303,7 @@ $(function() {
 <%-- 								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	 --%>
 								
 <%-- 								<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp; --%>
-								<input type="text" id="eMail" value="${sessionScope.Email1 }" >@<input id="domainName" type="text" name="mailUrl" value="${sessionScope.Email2}" />&nbsp;
+								<input type="text" id="eMail" name="eMail" value="${sessionScope.Email1 }" >@<input id="domainName" type="text" name="mailUrl" value="${sessionScope.Email2}" />&nbsp;
 	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
 								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
 									<option value="">-직접 입력-</option>
@@ -320,11 +321,11 @@ $(function() {
 						</tr>
 						<tr>
 							<td class="deliverytd">포인트</td>
-							<td><input type="text" id="usePoint" >&nbsp;&nbsp;사용 가능 포인트 (${Member.member_point})&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input type="text" id="usePoint" name="usePoint">&nbsp;&nbsp;사용 가능 포인트 (${Member.member_point})&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						</tr>
 						<tr>
 							<td class="deliverytd">배송메세지</td>
-							<td><textarea rows="5" cols="100"></textarea></td>
+							<td><textarea rows="5" cols="100" name="receiver_request"></textarea></td>
 						</tr>
 					</thead>
 				</table>

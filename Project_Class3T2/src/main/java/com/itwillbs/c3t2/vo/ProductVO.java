@@ -17,4 +17,5 @@ public class ProductVO {
 	private int product_count;
 	private int num;
 	private String product_category_name;
+	private int order_detail_num;
 }
