@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import com.itwillbs.c3t2.service.MyPageService;
 import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.PointVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -70,5 +73,9 @@ public interface MyPageMapper {
 	// 상품 리뷰 페이지 넘어가게하기
 	ReviewVO getReviewByNum(int reviewNum);
 	
+	// 포인트 목록
+	List<PointVO> selectPoints(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
 	
+	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
+
 }

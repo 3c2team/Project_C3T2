@@ -11,6 +11,7 @@ import com.itwillbs.c3t2.mapper.MyPageMapper;
 import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.PointVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -117,4 +118,11 @@ public class MyPageService {
 		return mapper.getReviewByNum(reviewNum);
 	}
 	
+	public List<PointVO> getPoints(String startDate, String endDate, String memberId, int startRow, int listLimit) {
+		return mapper.selectPoints(startDate, endDate, memberId, startRow, listLimit);
+	}
+
+	public int getPointsCount(String startDate, String endDate, String memberId) {
+		return mapper.selectPointsCount(startDate, endDate, memberId);
+	}
 }

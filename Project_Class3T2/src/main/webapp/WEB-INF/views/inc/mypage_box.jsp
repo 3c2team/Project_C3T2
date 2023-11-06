@@ -33,6 +33,9 @@
 	<ul>
 		<li><a href="MypageGoodsReview" class="${fn:contains(URI,'goods_review') ? 'active':''}">상품 리뷰</a></li>
 	</ul>
+	<ul>
+		<li><a href="MypagePoint" class="${fn:contains(URI,'point') ? 'active':''}">포인트 내역</a></li>
+	</ul>
 </div>
 <div id="menu">
 	<p><b>나의 관심정보</b></p>

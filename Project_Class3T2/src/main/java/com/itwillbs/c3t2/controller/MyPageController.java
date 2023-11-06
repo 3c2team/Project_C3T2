@@ -26,6 +26,8 @@ import com.itwillbs.c3t2.utils.PageMaker;
 import com.itwillbs.c3t2.vo.CartVO;
 import com.itwillbs.c3t2.vo.FavoriteVO;
 import com.itwillbs.c3t2.vo.MemberVO;
+import com.itwillbs.c3t2.vo.PageInfoVO;
+import com.itwillbs.c3t2.vo.PointVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
 import com.itwillbs.c3t2.vo.ReviewVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
@@ -339,6 +341,37 @@ public class MyPageController {
         model.addAttribute("review", review);
         return "productDetail";  	// 리뷰 상세 페이지의 뷰 이름
     }
+	
+	@GetMapping("MypagePoint")
+	public String myPagePoint(HttpSession session ,Model model, 
+			@RequestParam(defaultValue = "1000-01-01") String startDate, 
+			@RequestParam(defaultValue = "5000-12-31") String endDate,
+			@RequestParam(defaultValue = "1") int pageNum) {
+		String memberId = (String)session.getAttribute("sId");
+		
+		if(memberId == null) {
+			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
+			return "fail_back";
+		}
+		
+		// 페이징 처리
+		int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
+		int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
+		List<PointVO> points = service.getPoints(startDate, endDate, memberId, startRow, listLimit);
+		int listCount = service.getPointsCount(startDate, endDate, memberId);
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
+		model.addAttribute("points", points);
+		
+		model.addAttribute("pageInfo", pageInfo);
+		return "mypage/mypage_point";
+	}
 	
 
 	@GetMapping("MypageZzim")					//나의 관심정보 - 찜

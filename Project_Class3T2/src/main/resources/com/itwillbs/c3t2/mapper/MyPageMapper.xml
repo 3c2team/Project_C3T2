@@ -234,8 +234,48 @@
       DELETE FROM `MEMBER` WHERE member_id=#{member_id} 
     </delete>
     
-
-    
-    
-    
+	<!-- 포인트 목록 -->
+	<select id="selectPoints" resultType="com.itwillbs.c3t2.vo.PointVO">
+		WITH TMP AS (
+		    SELECT *
+		    FROM POINT
+	        WHERE member_num = (SELECT member_num
+							   FROM MEMBER
+							  where member_id = #{memberId} )
+	        <if test="!startDate.equals('') and !endDate.equals('')">
+				AND
+					point_date BETWEEN #{startDate} AND date_format(date('2023-11-06') + 1, '%Y-%m-%d') -- 테이블 칼럼명에 맞춰 바꾸기!!
+			</if>
+	        ORDER BY 
+			    point_date DESC
+		    LIMIT
+				#{startRow}
+				, #{listLimit}
+		)
+		SELECT * FROM TMP
+<!-- 		<if test=""> -->
+		     UNION ALL
+		     SELECT ''
+				  , '1'
+		          , member_point
+		          , '회원가입 축하 포인트'
+		          , member_insert_date
+		          , member_num
+		          , ''
+			FROM MEMBER
+		  where member_id = #{memberId}
+<!-- 		</if> -->
+     </select>
+     
+     <select id="selectPointsCount" resultType="int">
+		SELECT COUNT(*)
+		FROM POINT
+		WHERE member_num = (SELECT member_num
+							   FROM MEMBER
+							  where member_id = #{memberId} )
+		<if test="!startDate.equals('') and !endDate.equals('')">
+			AND
+				point_date BETWEEN #{startDate} AND date_format(date('2023-11-06') + 1, '%Y-%m-%d') -- 테이블 칼럼명에 맞춰 바꾸기!!
+		</if>
+	</select>
 </mapper>
