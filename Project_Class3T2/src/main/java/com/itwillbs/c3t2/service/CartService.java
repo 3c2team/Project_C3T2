@@ -171,5 +171,13 @@ public class CartService {
 		return mapper.insertReceiverInfo(map);
 	}
 
+	// 결제 상품명 조회
+	public ProductVO selectProductNames(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectProductNames(sId);
+	}
+
+
+
 
 }

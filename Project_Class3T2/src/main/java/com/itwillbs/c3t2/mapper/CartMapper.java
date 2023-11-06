@@ -86,4 +86,7 @@ public interface CartMapper {
 		// 회원의 배송정보 저장 (포인트 미 사용 시 -- )
 		public int insertReceiverInfo(Map<String, Object> map);
 
+		// 결제 상품명 조회
+		public ProductVO selectProductNames(String sId);
+
 }

@@ -225,6 +225,7 @@ public class CartController {
 			System.out.println("PayPro에서 ORDER_DETAIL 삭제 완료");
 		}
 		
+		
 		// 선택 상품 ORDER_DETAIL에 저장
 		if(proNums[0] != 0) {
 					
@@ -276,7 +277,7 @@ public class CartController {
         
         String Email = member.getMember_e_mail();
         String[] ArraysEmail = Email.split("@");
-        
+        	
         session.setAttribute("Email1", ArraysEmail[0]);
         session.setAttribute("Email2", ArraysEmail[1]);
         
@@ -468,9 +469,10 @@ public class CartController {
 			System.out.println("최종 결제 금액 : " + resultPrice);
 		}
 		
-
+		// 결제 상품 이름 조회
 		
-		
+		ProductVO productNames = service.selectProductNames(sId);
+		System.out.println("결제 상품 명 : " + productNames);
 		
 		
 		// 결제 상품 저장
