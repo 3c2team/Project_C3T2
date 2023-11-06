@@ -358,6 +358,19 @@ strong.reviewAveStr {
 /*     color: #FE2E2E; */
 /* } */
 
+.reviewContent {
+    display: flex;
+    align-items: center;
+}
+
+.reviewStar {
+    display: flex;
+    font-size: 17px;
+    text-align: center;
+    width: 15%;
+    align-items: center;
+}
+
 .reviewStarMax {
 	position: relative;
     display: inline-block;
@@ -386,7 +399,7 @@ strong.reviewAveStr {
 .reviewStarMin {
 	position: relative;
     display: inline-block;
-	width: 15%;
+	width: 90px;
     height: 15px;
     background-position: 0;
     background-repeat: no-repeat;

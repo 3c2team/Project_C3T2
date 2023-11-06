@@ -201,9 +201,12 @@
 								<c:forEach var="reviewList" items="${reviewList }">
 									<li>
 										<div class="reviewBox">
-											<div class="reviewStarMin">
-												<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
-												</div>									
+											<div class="reviewStar">
+												<div class="reviewStarMin">
+													<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
+													</div>
+												</div>
+												<p><strong>&nbsp;| ${reviewList.review_star }</strong></p>									
 											</div>
 											<div class="reviewInfo">
 												<c:if test="${not empty reviewList.review_image }">
