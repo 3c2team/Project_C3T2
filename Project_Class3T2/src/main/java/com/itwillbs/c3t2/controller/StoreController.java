@@ -40,6 +40,7 @@ public class StoreController {
 	@Autowired
 	private StoreService service;
 	
+	
 	@GetMapping("OnlineStore")
 	public String main(Model model) {
 		List<ProductVO> bestList = service.getProductbestList();
@@ -57,7 +58,6 @@ public class StoreController {
 	@GetMapping("StoreBest")
 	public String best(Model model) {
 		List<ProductVO> bestList = service.getProductbestList();
-//		System.out.println(bestList);
 		
 		model.addAttribute("bestList", bestList);
 		return "store/store_best";
@@ -101,16 +101,13 @@ public class StoreController {
 			case "ets": category_num = 4; break;
 		}
 		
-		System.out.println("int cate_num: " + category_num);
-		System.out.println("Sting cate: " + category);
-	
-		if(category_num > 0) {
+		if(category_num > 0 && category_num <= 4) {
 			proList = service.getProductCategoryList(category_num);
 		}
+		
 		model.addAttribute("proList", proList);
 		return "store/store_kit";
-		
-	}	// 아래 코드 수정 전 까지 임시 사용
+	}
 	
 	// 상세페이지~
 	@GetMapping("ProductDetail")
@@ -162,17 +159,7 @@ public class StoreController {
 		return "store/product_detail";
 	}
 	
-//	@ResponseBody
-//	@PostMapping("ProductDetailFavorite")
-//	public void favorite(FavoriteVO favorite, HttpSession session, HttpServletResponse response) {
-//		int insertCount = service.registFavorite(favorite);
-//		
-//		if(insertCount > 0) {
-//			//찜하기 실패
-//		}
-//	}
-	
-	// 리뷰작성폼으로 이동~
+	// 리뷰작성폼으로 이동
 	@GetMapping("ReviewFrom")
 	public String reviewFrom(int proNum, HttpSession session, Model model) {
 		ProductVO product = service.getProductDetail(proNum);
@@ -195,21 +182,18 @@ public class StoreController {
 		
 		String sId = (String)session.getAttribute("sId");
 		String uploadDir = "/review_img/"; //가상 경로
-		String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); //실제 경로
 		
 		if(session.getAttribute("sId") == null) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "sotre/popup/close";
 		}
 		
-//		//===================== < 이미지 처리 > ===================== 
-//		//--------------------- < 이미지 경로 > ---------------------
+		//===================== < 이미지 처리 > ===================== 
+		//--------------------- < 이미지 경로 > ---------------------
 		
-//		if(file.getName().equals("") || file == null) {
-//			map.put(uploadDir, saveDir)
-//		}
 		
-//		// 서브디렉토리명 저장 yyyy/MM/dd 형식
+		// 서브디렉토리명 저장 yyyy/MM/dd 형식
 		String subDir = "";
 		try {
 			LocalDate now = LocalDate.now();
@@ -224,7 +208,7 @@ public class StoreController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		//-------------------- < 이미지명 처리 > --------------------
+		//-------------------- < 이미지명 처리 > --------------------
 		String uuid = UUID.randomUUID().toString();
 		System.out.println("uuid" + uuid);
 		
@@ -235,13 +219,9 @@ public class StoreController {
 		map.put("file_name", subDir + "/" + fileName);
 		map.put("member_id", sId);
 		
-//		//------------------ < 게시물 등록 처리 > -------------------
+		//------------------ < 게시물 등록 처리 > -------------------
 		
-		System.out.println("**************************************************** map : " + map);
-		
-//		System.out.println(review);
 		int insertCount = service.registReview(map);
-//		
 		try {
 			if(insertCount > 0) { //성공
 				System.out.println("리뷰등록 완료");
@@ -296,5 +276,24 @@ public class StoreController {
 			return "stoer/popup/close";
 		}
 		
+	}
+	
+	
+	
+	public enum ProductCategory {
+		STEAK(1),
+	    PASTA(2),
+	    SOUP(3),
+	    ETS(4);
+
+		private final int categoryCode;
+
+	    ProductCategory(int categoryCode) {
+    		this.categoryCode = categoryCode;
+	    }
+
+	    public int getCategoryCode() {
+	    	return categoryCode;
+	    }
 	}
 }
