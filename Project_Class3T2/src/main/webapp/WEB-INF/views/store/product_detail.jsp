@@ -36,30 +36,31 @@
 				<div class="detailTopLeft">
 					<div class="detailTopMainImg">
 						<img src="${productDetail.product_main_img_real_file}" id="main_img">
-						<c:forEach var="reviewList" items="${reviewList }">
 							<div class="detailTopMainImgReview" id="main_img_review" style="visibility:hidden;">
 								<div class="orderAveStar">
 									<strong>
 										구매자들의 평균 평점
 										<span><b>★</b></span>
-										<span>5</span>
+										<span>${AveReviewStar }</span>
 									</strong>
 								</div>
 								<ul>
-									<li class="ImgReview">
-										<c:if test="${not empty review_image }">
+									<c:forEach var="reviewList" items="${reviewList }" begin="0" end="2">
+										<li class="ImgReview">
 											<div class="ImgReviewImg"><img src="${reviewList.review_image }"></div>
-										</c:if>
-										<div class="ImgReviewInfo">
-											<span>${reviewList.member_id }</span> | 
-											<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;"></div>
-											<div>${reviewList.review_content }</div>
-										</div>
-									</li>
+											<div class="ImgReviewInfo">
+												<span>${reviewList.member_id }</span> | 
+												<div class="reviewStarMin">
+													<div class="bg_star" style="width: ${reviewList.review_star * 20 }%;">
+													</div>
+												</div>
+												<div>${reviewList.review_content }</div>
+											</div>
+										</li>
+									</c:forEach>
 								</ul>
 								<a class="ImgReviewMore" href="">${reviewCount }건 리뷰 더보기</a>			
 							</div>
-						</c:forEach>
 					</div>
 					<div class="detailTopMiniImg">
 						<ul>
@@ -151,6 +152,7 @@
 		</div>
 				
 		<section class="detailContainer">
+			<a name="ProductDetail"></a>
 			<div class="detailInfoImgArea" name="ProductDetail">
 				<%-- 경로 변경하기 --%>
 				<img class="detailInfoImg" src="${productInfoImg.product_image_real_file }">
@@ -176,7 +178,7 @@
 									<span class="reviewAveScore"> ${AveReviewStar }</span><span class="reviewMaxScore">/  5</span>
 									<span class="reviewCount">총 ${reviewCount }건의 리뷰</span>
 								</div>
-								<div>
+								<div id="reviewWriteBtn">
 									<button class="reviewWrite" onclick="window.open('ReviewFrom?proNum=${productDetail.product_num }', 'review_from', 'width=500, height=800, location=no, status=no, scrollbars=no')">리뷰 쓰기</button>
 								</div>
 							</div>

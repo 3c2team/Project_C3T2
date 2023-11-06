@@ -204,7 +204,7 @@ public class StoreController {
 		
 		String sId = (String)session.getAttribute("sId");
 		String uploadDir = "/review_img/"; //가상 경로
-		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); //실제 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Bakc_Project_Class3T2/", ""); //실제 경로
 		
 		
 		
@@ -259,8 +259,8 @@ public class StoreController {
 					file.transferTo(new File(saveDir, fileName));
 				}
 				model.addAttribute("msg", "리뷰를 등록했습니다.");
-				
-				return "store/popup/close";
+
+				return "store/popup/popup_pro";
 			} 
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
@@ -302,7 +302,7 @@ public class StoreController {
 		int insertCount = service.registQuestion(question);
 		
 		if(insertCount > 0) {
-			return "store/popup/question_pro";
+			return "store/popup/popup_pro";
 		} else {
 			model.addAttribute("msg", "문의글 등록을 실패했습니다.");
 			return "stoer/popup/close";
