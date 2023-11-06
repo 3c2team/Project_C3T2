@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<th>예약인원</th>
-						<td>${reservation.reservation_person_count }</td>
+						<td>${reservation.reservation_person_count }명</td>
 					</tr>
 					<tr>
 						<th>예약자 성함</th>

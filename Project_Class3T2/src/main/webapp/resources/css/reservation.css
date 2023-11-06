@@ -10,7 +10,7 @@ body {
 
 input.indent, .reservationInput {
 	margin-left: 3em;	
-	width: 76%;
+	width: 70%;
 	color: rgb(38, 50, 56);
 	font-weight: 700;
 	font-size: 14px;
@@ -33,9 +33,9 @@ textarea.center {
 	
 }
 
-div.mainLayout{
- 	height: 1500px;
-}
+/* div.mainLayout{ */
+/*  	height: 1500px; */
+/* } */
 
 
 p{
@@ -46,6 +46,24 @@ p{
 
 .input {
 /* 	width: 76%; */
+	color: rgb(128, 128, 128);
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: 1px;
+	background: rgb(255, 255, 255);
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	box-sizing: border-box;
+	border: 2px solid rgba(0, 0, 0, 0.1);
+	margin: 5px;
+	text-align: center;
+	font-family: 'Noto Serif KR', serif;
+}
+
+.input1 {
+	width: 40%;
 	color: rgb(128, 128, 128);
 	font-weight: 700;
 	font-size: 14px;
@@ -117,11 +135,18 @@ tr {
 	height : 40px;
   	border: 1px solid #EAE7E7;
   	border-radius: 20px;
-  	float: left; 
+  	float: left;
+  	margin: 5px; 
 }
 .form_radio_btn input[type=radio] {
 	display: none;
 }
+
+.form_radio_btn input[type=radio]:disabled + label {
+	background-color: white;
+    color: white;
+}
+
 .form_radio_btn label {
 	display: block;
   	border-radius: 20px;
@@ -130,15 +155,10 @@ tr {
   	height: -webkit-fill-available;
   	line-height: 45px;
 }
- 
+
 /* Checked */
 .form_radio_btn input[type=radio]:checked + label {
 	background: rgb(80, 80, 80);
-	color: #fff;
-}
-
-.form_radio_btn input[type=radio]:disable + label {
-	background: black;
 	color: #fff;
 }
  
@@ -158,7 +178,8 @@ tr {
 	height : 40px;
   	border: 1px solid #EAE7E7;
   	border-radius: 20px;
-  	float: left; 
+  	float: left;
+  	margin: 5px; 
 }
 .form_radio_btn1 input[type=radio] {
 	display: none;
@@ -182,7 +203,7 @@ tr {
 .form_radio_btn1 label:hover {
 	color: #666;
 }
- 
+
 /* Disabled */
 .form_radio_btn1 input[type=radio] + label {
 	background: #F9FAFC;
@@ -195,14 +216,28 @@ tr {
 
 /* 달력 css */
 .custom_calendar_table {
+	background-color: #FFFFFF;
+    width: 450px;
+    height: 600px;
+    margin: 2em;
+    padding: 30px;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    float: left;
+    margin-left: 15%;
+}
+
+.custom_reservation_form {
     background-color: #FFFFFF;
-	width: 600px;
-	height: 600px;
-	margin-left: 2em auto;
-	padding: 40px;
+	width: 700px;
+    height: 600px;
+	margin: 2em;
+	padding: 30px;
 	border-radius: 1.5em;
 	box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+	float: left;
 }
+
 .custom_table {
     background-color: #FFFFFF;
     width: 650px;

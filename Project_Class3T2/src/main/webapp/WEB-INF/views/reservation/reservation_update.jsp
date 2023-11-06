@@ -126,10 +126,10 @@
 					<tr>
 						<th>예약내역 받으실 이메일</th>
 						<td>
-							<input type="text" class="input" name="reservation_email1" id="reservation_email1" size="20" required
-								<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail1 }"</c:if>>@
-							<input type="text" class="input" name="reservation_email2" id="reservation_email2" size="20" required
-								<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail2 }"</c:if>>
+							<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
+							<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
+							<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
+							<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
 							<select id="emailDomain" class="input">
 								<option value="">직접입력</option>
 								<option value="naver.com">naver.com</option>

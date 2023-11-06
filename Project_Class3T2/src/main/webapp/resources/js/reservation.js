@@ -95,9 +95,7 @@ function assembly(year, month) {
 	    "<tbody id='customSetDate' name='reservation_date'>" +
 	    "</tbody>" +
 	    "</table>";
-	    
-	
-	
+
 	return calendar_html_code;
 }
 //- ------------------------------------------------
@@ -116,7 +114,26 @@ function validationCheck(){
 	// 인원수 저장
 	let count = $('input[name=reservation_person_count]:checked').val();
 	$("#reservation_person_count").val(count);	
+
+	let time = $('input[name=reservation_time]:checked').val();
+	$("#reservation_time").val(time);	
 	
+//	let arr = [2, 4, 8];
+	let arr = dinningMax;
+	
+	if(arr.indexOf(Number(count)) == -1){
+		for (let cnt of arr) {
+		    if(count < cnt){
+		        count = cnt;
+		        break;
+		    }
+		}	
+	}
+	switch(count){
+		case 2: $("#dinning_num").val(count); break;
+		case 4: $("#dinning_num").val(count); break;
+		case 8: $("#dinning_num").val(count); break;
+	}
 	
 	// 인원수 받아서 disable 걸기
 	$.ajax({
@@ -130,18 +147,20 @@ function validationCheck(){
 		},
 		dataType: "JSON", // 리턴타입
 		success: function(data) { // 불가능 시간 배열
-			if(data.length < 1) return;
-			
+
 			// 전부 diabled 해제
 			$.each($("input[name=reservation_time]"), (i, e) => {
 				$(e).attr('disabled', false);	
 			})
+			$('input:radio[name=reservation_time]').eq(0).attr("checked", true);
+			
+			if(data.length < 1) return;
 
 			// 예약 불가 시간만 disabled true			
 			data.forEach((e, i) => {
 				let time = e.RESERVATION_TIME;
 				$.each($("input[name=reservation_time]"), (i2, e2) => {
-					if(time === e2.dataset.value){
+					if(time === e2.value){
 						$(e2).attr('disabled', true);
 					}
 				});

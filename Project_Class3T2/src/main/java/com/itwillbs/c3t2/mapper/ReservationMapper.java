@@ -35,9 +35,7 @@ public interface ReservationMapper {
 	// 예약 가능한 시간 조회
 	List<Map<String, String>> selectDateCount(Map<String, String> param);
 
-
-
-
-	
+	// 좌석수 조회
+	List<Map<String, Integer>> selectDinningMax();
 	
 }

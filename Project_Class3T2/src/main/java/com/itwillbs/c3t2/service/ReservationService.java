@@ -51,7 +51,9 @@ public class ReservationService {
 			return mapper.selectDateCount(param);
 		}
 		
-		
+		public List<Map<String, Integer>> getDinningMax(){
+			return mapper.selectDinningMax();
+		}
 
 		
 }

@@ -1,9 +1,9 @@
 package com.itwillbs.c3t2.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.itwillbs.c3t2.handler.GenerateRandomCode;
 import com.itwillbs.c3t2.service.ReservationService;
 import com.itwillbs.c3t2.service.SendMailService;
@@ -33,7 +35,9 @@ public class ReservationController {
 	
 	//예약 폼 페이지 이동
 	@GetMapping("/ReservationForm")
-	public String reservationForm() {
+	public String reservationForm(Model model) {
+		List<Map<String, Integer>> dinningMax = service.getDinningMax();
+		model.addAttribute("dinningMax", dinningMax);
 		return "reservation/reservation_form";
 	}
 	

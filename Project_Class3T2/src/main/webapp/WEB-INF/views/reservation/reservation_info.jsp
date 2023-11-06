@@ -19,7 +19,7 @@ function checkAgree(){
 	var isChecked = agreeBox.checked; // 체크박스의 true false
 	
 	if(!isChecked){ //약관동의를 하지 않은 경우
-		alert("약관에 동의하셔야 예약 가능합니다.");
+		alert("약관에 동의하셔야 예약이 가능합니다.");
 		return false; //페이지 이동시키지 않는다
 	}
 	location.href="ReservationForm";
@@ -42,7 +42,7 @@ function checkAgree(){
 					<h3>- 홈페이지 예약은 최대 8인 이하 테이블에 한하며 9인 이상 단체는 유선으로 문의 부탁드립니다.</h3>
 					<h3>- 예약 취소 및 변경을 원하실 경우 최소 하루 전까지 온라인으로 예약 취소 후 다시 이용해주시기 바랍니다.</h3>
 <!-- 					<input type="checkbox" name="agree" onClick="agreeCheck(this.form)">&nbsp;예약 안내 약관에 동의 하십니까?<br><br> -->
-					<input type="checkbox" id="agreeTerms"> 위 약관에 동의 합니다.(필수)<br> <br>
+					<input type="checkbox" id="agreeTerms"> <label for="agreeTerms">위 약관에 동의 합니다.(필수)</label><br> <br>
 					<input type="button" id="checkButton" value="예약하기" onclick="return checkAgree();">
 <!-- 					<a href="ReservationForm" onclick="return checkAgree();"><button>회원가입 페이지로 이동</button></a> -->
 				</div>

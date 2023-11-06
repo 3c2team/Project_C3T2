@@ -17,9 +17,9 @@
 				, #{reservation_person_count}
 				, #{reservation_email}
 				, 0 <!-- cancel -->
-				, 'Y' <!-- #{reservation_member_id} -->
+				, #{reservation_member_id} <!-- #{reservation_member_id} -->
 				, #{reservation_guest_num} <!-- guest_num -->
-				, 1 <!-- 컨트롤러에서 지정 -->
+				, #{dinning_num} <!-- 컨트롤러에서 지정 -->
 				, 1 <!-- restaurant_num -->
 		)
 	</insert>
@@ -71,7 +71,7 @@
 					     , A.DINNING_MAX
 					     , CASE WHEN A.NUM =  (SELECT GROUP_CONCAT(DINNING_NUM ORDER BY DINNING_NUM) AS NUM
 											     FROM DINNING
-					                            WHERE A.DINNING_MAX = #{count} 
+					                            WHERE A.DINNING_MAX = DINNING_MAX
 										  		GROUP BY DINNING_MAX)
 			                 	THEN 'N'
 			                 	ELSE 'Y' END AS AVAILABLE
@@ -93,6 +93,12 @@
 		 UNION 
 	    SELECT CONCAT(reservation_time + 1, ":00")
 	      FROM TMP  
+	</select>
+	
+	<!-- 테이블 예약 가능 여부 -->
+	<select id="selectDinningMax" resultType="map">
+	SELECT DISTINCT DINNING_MAX
+  	  FROM DINNING
 	</select>
 	
 	<!-- 레스토랑 오픈/마감 시간 조회 -->

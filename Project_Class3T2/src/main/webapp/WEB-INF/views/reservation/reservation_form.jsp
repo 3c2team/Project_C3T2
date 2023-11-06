@@ -25,11 +25,12 @@
 		<h1>Reservation</h1>
 		<form action="ReservationPro" method="post" id="custom_submit">
 			<div id="calendarForm"></div>
-			<table>
+			<table class="custom_reservation_form">
 				<tr>
 					<th>예약인원</th>
 					<td>
 						<input type="hidden" id="reservation_date" name="reservation_date">
+						<input type="hidden" id="dinning_num" name="dinning_num">
 						<input type="hidden" id="member_id" name="member_id" <c:if test='${not empty sessionScope.sId }'>value="${sessionScope.sId }"</c:if>>
 						<div class="form_radio_btn1">
 							<input id="radio1" type="radio" name="reservation_person_count" value="1" checked>
@@ -69,47 +70,47 @@
 					<th>예약시간</th>
 					<td>
 						<div class="form_radio_btn">
-							<input id="radio_0" type="radio" name="reservation_time" data-value="10:00" checked>
+							<input id="radio_0" type="radio" name="reservation_time" value="10:00" checked>
 							<label for="radio_0">10:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_1" type="radio" name="reservation_time" data-value="11:00">
+							<input id="radio_1" type="radio" name="reservation_time" value="11:00">
 							<label for="radio_1">11:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_2" type="radio" name="reservation_time" data-value="12:00">
+							<input id="radio_2" type="radio" name="reservation_time" value="12:00">
 							<label for="radio_2">12:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_3" type="radio" name="reservation_time" data-value="13:00">
+							<input id="radio_3" type="radio" name="reservation_time" value="13:00">
 							<label for="radio_3">13:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_4" type="radio" name="reservation_time" data-value="14:00">
-							<label for="radio_4">14:00</label>
+							<input id="radio_4" type="radio" name="reservation_time" value="14:00">
+							<label for="radio_4" >14:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_5" type="radio" name="reservation_time" data-value="15:00">
+							<input id="radio_5" type="radio" name="reservation_time" value="15:00">
 							<label for="radio_5">15:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_6" type="radio" name="reservation_time" data-value="16:00">
+							<input id="radio_6" type="radio" name="reservation_time" value="16:00">
 							<label for="radio_6">16:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_7" type="radio" name="reservation_time" data-value="17:00">
+							<input id="radio_7" type="radio" name="reservation_time" value="17:00">
 							<label for="radio_7">17:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_8" type="radio" name="reservation_time" data-value="18:00">
+							<input id="radio_8" type="radio" name="reservation_time" value="18:00">
 							<label for="radio_8">18:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_9" type="radio" name="reservation_time" data-value="19:00">
+							<input id="radio_9" type="radio" name="reservation_time" value="19:00">
 							<label for="radio_9">19:00</label>
 						</div>
 						<div class="form_radio_btn">
-							<input id="radio_10" type="radio" name="reservation_time" data-value="20:00">
+							<input id="radio_10" type="radio" name="reservation_time" value="20:00">
 							<label for="radio_10">20:00</label>
 						</div>
 					</td>
@@ -118,18 +119,18 @@
 					<th>예약자 성함</th>
 					<td>
 						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
-							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>>
+							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>> <span id="checkIdResult"></span>
 						
 					</td> <!-- value= --> 
 				</tr>
 				<tr>
 					<th>예약내역 받으실 이메일</th>
 					<td>
-						<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required
-						<c:if test="${not empty sessionScope.sEmail1}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
-						<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required
-						<c:if test="${not empty sessionScope.sEmail2}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
-						<select id="emailDomain" class="input"> <!--   -->
+						<input type="text" class="input1" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
+						<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
+						<input type="text" class="input1" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
+						<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
+						<select id="emailDomain" class="input1"> <!--   -->
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="nate.com">nate.com</option>
@@ -151,6 +152,10 @@
 	</footer>
 	</div>
 	<script type="text/javascript">
+		let dinningMax = '${dinningMax}';
+		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
+		dinningMax = dinningMax.map(e => e.DINNING_MAX);
+		
 		function insertCheck() {
 			let result = confirm("예약 하시겠습니까?");
 			if(result){
