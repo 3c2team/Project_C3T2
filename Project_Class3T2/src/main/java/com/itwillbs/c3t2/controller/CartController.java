@@ -395,7 +395,13 @@ public class CartController {
 	}
 	
 	@PostMapping("PaymentPro")
-	public String paymentPro(@RequestParam Map<String, Object> map, MemberVO member, OrderDetailVO orderDetail, HttpSession session, Model model) {
+	public String paymentPro(
+					@RequestParam Map<String, Object> map
+					, MemberVO member
+					, OrderDetailVO orderDetail
+					, HttpSession session
+					, Model model, 
+					int[] order_detail_num) {
 		
 		String sId = (String)session.getAttribute("sId");
 		
@@ -416,17 +422,39 @@ public class CartController {
 		System.out.println("사용할 포인트 : " + map.get("usePoint"));
 		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
 		
+//		for(int odn :order_detail_num) {
+//			System.out.println("odn : " + odn);
+//			map.get(odn);
+//			map.put("order_detail_num", odn[index]);
+//			System.out.println("odn2 : " + map.get("odn"));
+//		}
+		
+		for(int i = 0; i < order_detail_num.length; i++) {
+//			map.put("order_detail_num", order_detail_num[i]);
+			System.out.println(map.put("order_detail_num", order_detail_num[i]));
+		}
+		
 		
 		// 포인트 사용 시 배송지에 정보 저장
 		if(!map.get("usePoint").equals("")) {
-			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			for(int i = 0; i < order_detail_num.length; i++) {
+				map.put("order_detail_num", order_detail_num[i]);
+				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			}
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
 		if(map.get("usePoint").equals("")){// 포인트 없을 때
-			int insertReceiverInfo = service.insertReceiverInfo(map);
+			for(int i = 0; i < order_detail_num.length; i++) {
+				map.put("order_detail_num", order_detail_num[i]);
+				int insertReceiverInfo = service.insertReceiverInfo(map);
+			}
 		}
-			
+		
+		// 결제 상품 저장
+//		for(OrderDetailVO payProduct:orderDetailList) {
+//			int insertUserOder = service.insertUserOrder(payProduct);
+//		}
 		
 		return "store/payment";
 	}

@@ -215,7 +215,7 @@
 			, CONCAT(#{eMail}, '@', #{mailUrl})
 			, #{receiver_request}
 			, #{order_detail_num}
-			, #{usePoint}
+			, #{usePoint} 
 		)		
 	</insert>
 	
@@ -227,7 +227,7 @@
 			null
 			, #{sId}
 			, #{receiver_name}
-			, CONCAT(#{receiver_addr1}, ' ', #{receiver_addr1})
+			, CONCAT(#{receiver_addr1}, ' ', #{receiver_addr2})
 			, #{phone}
 			, CONCAT(#{eMail}, '@', #{mailUrl})
 			, #{receiver_request}

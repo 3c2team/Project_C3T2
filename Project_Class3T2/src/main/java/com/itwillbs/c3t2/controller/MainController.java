@@ -133,10 +133,10 @@ public class MainController {
 			return "reservation/reservation_info";
 		}
 		
-		@GetMapping("OnlineStore")
-		public String onlineStore() {
-			return "store/store_main";
-		}
+//		@GetMapping("OnlineStore")
+//		public String onlineStore() {
+//			return "store/store_main";
+//		}
 		
 		@GetMapping("Login")
 		public String login() {
