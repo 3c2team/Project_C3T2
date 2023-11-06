@@ -83,7 +83,7 @@ public interface CartMapper {
 		// 회원의 배송정보 저장 (포인트 사용 시)
 		public int insertReceiverUsePoint(Map<String, Object> map);
 		
-		// 회원의 배송정보 저장 (포인트 미 사용 시)
+		// 회원의 배송정보 저장 (포인트 미 사용 시 -- )
 		public int insertReceiverInfo(Map<String, Object> map);
 
 }
