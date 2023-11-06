@@ -234,9 +234,10 @@
 		</select>
 		<select id="selectRestaurant" resultType="map">
 			SELECT *
-			FROM RESTAURANT r JOIN (SELECT restaurant_num
+			FROM RESTAURANT
+			WHERE restaurant_num = (SELECT restaurant_num
 									FROM ADMIN
-			                        WHERE admin_id = #{sId}) a		
+			                        WHERE admin_id = #{sId}) 
 		</select>
 		<update id="updateRestaurant">
 		
@@ -253,20 +254,28 @@
 			INSERT INTO RESTAURANT
 			VALUES(null
 				,#{restaurant_name}
-				,#{ceo_name}
+				,#{ceo_name} 
 				,#{restaurant_open_time}
 				,#{restaurant_close_time}
 				,#{restaurant_address}
 				,CONCAT(#{phon0},'-',#{phon1},'-',#{phon2})
+				,#{restaurant_aim}
 				)
 		</insert>
-<!-- 		<insert id="insertAdmin"> -->
-<!-- 			<selectKey keyColumn="restaurant_num" order="BEFORE"> -->
-<!-- 				SELECT restaurant_num -->
-<!-- 				FROM RESTAURANT -->
-<!-- 				WHERE  -->
-<!-- 			</selectKey> -->
-<!-- 		</insert> -->
+		<insert id="insertAdmin">
+			<selectKey keyProperty="select_restaurant_num" resultType="int" order="BEFORE">
+				SELECT MAX(restaurant_num)
+				FROM RESTAURANT
+			</selectKey>
+			INSERT INTO ADMIN
+			VALUES (#{admin_id}
+					,#{admin_passwd}
+					,#{admin_name}
+					,#{admin_business_num}
+					,#{member_num}
+					,#{select_restaurant_num}
+			)
+		</insert>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->

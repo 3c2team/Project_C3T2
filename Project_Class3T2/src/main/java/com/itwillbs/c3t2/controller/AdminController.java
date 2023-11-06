@@ -106,9 +106,10 @@ public class AdminController {
     		Path path = null;
     		String item = (String)map.get("product_num");
     		String uploadDir = "/store_img/";//가상 업로드 경로
-        	String saveDir = session.getServletContext().getRealPath(uploadDir); //실제 업로드 경로
+        	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); //실제 업로드 경로
     		int product_num = Integer.parseInt(item); 
     		List<Map<String, Object>> selecteProductImg = service.getproductImg(product_num);
+    		System.out.println("저장경로 테스트 : " + saveDir);
     		ProductVO product = service.getproductList(product_num);
 			try {
 				for(Map<String, Object> imgMap : selecteProductImg) {
@@ -140,7 +141,7 @@ public class AdminController {
 //    	System.out.println(subFiles);
     	
     	String uploadDir = "/store_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir);//실제 업로드 경로
+    	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");//실제 업로드 경로
     	
 		try {
 			
@@ -204,8 +205,8 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(saveDir);
-		System.out.println(uploadDir);
+		System.out.println("마지막 : "+ saveDir);
+//		System.out.println(uploadDir);
 		model.addAttribute("msg","등록 완료되었습니다!");
 		return "success_close";//전체 성공시
 			
@@ -216,7 +217,7 @@ public class AdminController {
     										, HttpSession session) {
     	System.out.println(product_nums);
     	String uploadDir = "/store_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir);
+    	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");
     	System.out.println("fdsfdsfdsf : " + saveDir);
     	Path path = null;
     	try {
@@ -282,7 +283,7 @@ public class AdminController {
     		}
     		try {
 				String uploadDir = "/review_img"; // 가상의 경로
-				String saveDir = session.getServletContext().getRealPath(uploadDir); // 실제 경로
+				String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); // 실제 경로
 				
 				Path path = Paths.get(saveDir + "/" + selectReview.get("review_image"));
 				Files.deleteIfExists(path);
@@ -484,10 +485,14 @@ public class AdminController {
     	}
     	int insertRestaurant = service.insertRestaurant(map);
     	if(insertRestaurant == 0) {
-    		model.addAttribute("msg","등록에 실패하였습니다.");
+    		model.addAttribute("msg","가게 등록에 실패하였습니다.");
     		return "fail_back";
     	}
-//    	int insertAdmin = service.insertAdmin(map);
+    	int insertAdmin = service.insertAdmin(map);
+    	if(insertAdmin == 0) {
+    		model.addAttribute("msg","관리자 정보 등록에 실패하였습니다.");
+    		return "fail_back";
+    	}
     	return "redirect:/AdminMain";
     }
     //이벤트 등록 페이지 이동(관리자)
@@ -503,7 +508,7 @@ public class AdminController {
     	
     	System.out.println("넘버 넘버"+list);
     	String uploadDir = "/event_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir);
+    	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");
     	Path path = null;
     	try {
     		for(int event_num : list) {
