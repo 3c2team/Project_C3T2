@@ -36,10 +36,11 @@
 	
 	<!-- 상품 구매 내역 -->
 	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
-       SELECT u.*, m.member_name
-		FROM USER_ORDER u
-		JOIN MEMBER m ON u.member_id = m.member_id
-		WHERE u.member_id = #{member_id}
+        SELECT u.*, m.member_name, d.product_price
+	    FROM USER_ORDER u
+	    JOIN MEMBER m ON u.member_id = m.member_id
+	    JOIN ORDER_DETAIL d ON u.order_num = d.order_detail_num
+	    WHERE u.member_id = #{member_id}
     </select>
 	
 	<!-- 장바구니 검색 SQL -->
