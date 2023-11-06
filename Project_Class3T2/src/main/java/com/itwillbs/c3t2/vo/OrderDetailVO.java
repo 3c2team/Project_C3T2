@@ -10,5 +10,6 @@ public class OrderDetailVO {
 	private int product_count;
 	private int product_price;
 	private int cart_num;
+	
 
 }

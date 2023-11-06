@@ -108,6 +108,7 @@
 				, P.product_name
 				, P.product_price
 				, O.product_count
+				, O.order_detail_num
 			FROM 
 				PRODUCT P JOIN ORDER_DETAIL O
 				ON P.product_num = O.product_num

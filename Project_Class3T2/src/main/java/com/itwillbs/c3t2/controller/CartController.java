@@ -287,9 +287,6 @@ public class CartController {
 		return "store/pay";
 	}
 	
-	
-	
-	
 	// 포인트 사용 체크 시 
 	@PostMapping("UsePoint")
 	@ResponseBody
@@ -418,27 +415,18 @@ public class CartController {
 		map.put("sId", sId);
 		System.out.println("사용할 포인트 : " + map.get("usePoint"));
 		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
-		String result = (String)(map.get("usePoint"));
-		int usePoint = Integer.parseInt(result);
+		
 		
 		// 포인트 사용 시 배송지에 정보 저장
-		
-		if(usePoint > 0) {
+		if(!map.get("usePoint").equals("")) {
 			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
-		if(usePoint == 0){// 포인트 없을 때
+		if(map.get("usePoint").equals("")){// 포인트 없을 때
 			int insertReceiverInfo = service.insertReceiverInfo(map);
 		}
-		
-		
-//		int insertInfo = service.insertReceiverInfo(map);
-//		if(insertInfo > 0) {
-//			System.out.println("배송지 정보 저장 성공");
-//		}
-		
-		
+			
 		
 		return "store/payment";
 	}
