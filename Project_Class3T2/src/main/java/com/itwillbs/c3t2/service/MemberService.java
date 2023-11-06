@@ -22,6 +22,7 @@ import com.itwillbs.c3t2.mapper.MemberMapper;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
+import com.itwillbs.c3t2.vo.RestaurantVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Service
@@ -234,6 +235,19 @@ public class MemberService {
 
 	public NoticeVO getNoticeRecent() {
 		return mapper.selectNoticeRecent();
+	}
+
+	// 회원 상세정보 조회 요청
+	public MemberVO getMemberDup(String id) {
+		return mapper.selectMemberDup(id);
+	}
+
+	public MemberVO getMemberDupPhone(String phone_num) {
+		return mapper.selectMemberDupPhone(phone_num);
+	}
+
+	public RestaurantVO getRestaurant() {
+		return mapper.selectRestaurant();
 	}
 	
 }

@@ -29,6 +29,7 @@ import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.PageInfoVO;
+import com.itwillbs.c3t2.vo.RestaurantVO;
 
 
 @Controller
@@ -46,10 +47,23 @@ public class MainController {
 		}
 		
 		@GetMapping("Main")
-		public String main(Model model) {
+		public String main(Model model, HttpSession session) {
 			NoticeVO notice_recent = service.getNoticeRecent();
 			model.addAttribute("noticeRecent", notice_recent);
 			return "other/main";
+		}
+		
+		@GetMapping("Bottom")
+		@ResponseBody
+		public JsonObject bottom(Model model) {
+			RestaurantVO restaurant = service.getRestaurant();
+			JsonObject json = new JsonObject();
+			json.addProperty("restaurant_name", restaurant.getRestaurant_name());
+			json.addProperty("restaurant_address", restaurant.getRestaurant_address());
+			json.addProperty("restaurant_call", restaurant.getRestaurant_call());
+			json.addProperty("ceo_name", restaurant.getCeo_name());
+			
+			return json;
 		}
 	
 		@GetMapping("About")
@@ -119,11 +133,10 @@ public class MainController {
 			return "reservation/reservation_info";
 		}
 		
-		//SotreController로 이동
-//		@GetMapping("OnlineStore")
-//		public String onlineStore() {
-//			return "store/store_main";
-//		}
+		@GetMapping("OnlineStore")
+		public String onlineStore() {
+			return "store/store_main";
+		}
 		
 		@GetMapping("Login")
 		public String login() {
@@ -148,8 +161,7 @@ public class MainController {
 		            session.setAttribute("sId", dbMember.getMember_id());
 		            session.setAttribute("sName", dbMember.getMember_name());
 		            session.setAttribute("sPhone", dbMember.getMember_phone_num());
-		            session.setAttribute("sEmail1", dbMember.getMember_email1());
-		            session.setAttribute("sEmail2", dbMember.getMember_email2());
+		            session.setAttribute("sEmail", dbMember.getMember_e_mail());
 		            session.setAttribute("loginUser", dbMember);
 		            model.addAttribute("msg", "로그인에 성공했습니다. 메인페이지로 이동합니다."); // 출력할 메세지
 					model.addAttribute("targetURL", "Main"); // 이동시킬 페이지
@@ -204,8 +216,7 @@ public class MainController {
 					session.setAttribute("sName", dbMember.getMember_name());
 					session.setAttribute("sPhone", dbMember.getMember_phone_num());
 					session.setAttribute("loginUser", dbMember);
-					session.setAttribute("sEmail1", dbMember.getMember_email1());
-		            session.setAttribute("sEmail2", dbMember.getMember_email2());
+					session.setAttribute("sEmail", dbMember.getMember_e_mail());
 					String kakao_id = (String)session.getAttribute("kakao_id");
 					int updateCount = service.addKakaoId(member_id, kakao_id);
 					if(updateCount > 0) {
@@ -230,7 +241,6 @@ public class MainController {
 				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, HttpServletResponse response, Model model) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			MemberVO dbMember = service.getMemberLogin(member_id);
-			System.out.println(dbMember.getMember_passwd());
 			if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
 				model.addAttribute("msg", "로그인 실패!");
 				return "fail_back";
@@ -243,8 +253,10 @@ public class MainController {
 					session.setAttribute("sId", member.getMember_id());
 					session.setAttribute("sName", dbMember.getMember_name());
 					session.setAttribute("sPhone", dbMember.getMember_phone_num());
-					session.setAttribute("sEmail1", dbMember.getMember_email1());
-		            session.setAttribute("sEmail2", dbMember.getMember_email2());
+					session.setAttribute("sEmail", dbMember.getMember_e_mail());
+//					String email = dbMember.getMember_e_mail();
+//					session.setAttribute("sEmail1", email[0]);
+//		            session.setAttribute("sEmail2", email[1]);
 					Cookie cookie = new Cookie("cookieId", member.getMember_id());
 					System.out.println(rememberId);
 					if(rememberId) { // 아이디 저장 체크됨
@@ -342,6 +354,34 @@ public class MainController {
 //			model.addAttribute("c4", member.getC4());
 			
 			return "other/join";
+		}
+		
+		// 아이디 중복 판별 처리
+		@ResponseBody
+		@GetMapping("/MemberCheckDupId")
+		public String checkDupId(String id) {
+			MemberVO returnMember = service.getMemberDup(id);
+			System.out.println(returnMember);
+			
+			if(returnMember != null) { // 아이디 중복
+				return "true"; // 리턴타입 String일 때 응답 데이터로 String 타입 "true" 문자열 리턴
+			} else {
+				return "false";
+			}
+		}
+		
+		// 아이디 중복 판별 처리
+		@ResponseBody
+		@GetMapping("/MemberCheckDupPhone")
+		public String checkDupPhone(String phone_num) {
+			MemberVO returnMember = service.getMemberDupPhone(phone_num);
+			System.out.println(returnMember);
+			
+			if(returnMember != null) { // 아이디 중복
+				return "true"; // 리턴타입 String일 때 응답 데이터로 String 타입 "true" 문자열 리턴
+			} else {
+				return "false";
+			}
 		}
 		
 		@PostMapping("/JoinPro")

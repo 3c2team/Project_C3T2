@@ -9,6 +9,7 @@ import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
 import com.itwillbs.c3t2.vo.ReservationVO;
+import com.itwillbs.c3t2.vo.RestaurantVO;
 import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Mapper
@@ -71,5 +72,11 @@ public interface MemberMapper {
 	int updateKakaoId(@Param("member_id") String member_id, @Param("kakao_id") String kakao_id);
 
 	NoticeVO selectNoticeRecent();
+
+	MemberVO selectMemberDup(String id);
+
+	MemberVO selectMemberDupPhone(String phone_num);
+
+	RestaurantVO selectRestaurant();
 
 }

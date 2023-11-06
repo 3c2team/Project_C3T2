@@ -37,23 +37,22 @@
 				<tr>
 					<th>ID</th>
 					<td>
-						<input type="text" name="member_id" id="member_id" placeholder="4 ~ 8글자 사이 입력" required size="20">
-						<input type="button" id="checkId" value="중복검사"><br>
-						<span id="checkIdResult1" style="margin-left: 5%; font-size: 0.8em;"></span>
+						<input type="text" name="member_id" id="member_id" required size="24">
+						<br><span id="checkIdResult">영문소문자/숫자, 4~16자</span>
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
 					<td>
-						<input type="password" name="member_passwd" id="member_passwd" placeholder="8 ~ 16글자 사이 입력" required size="20">
-						<span id="checkPasswdResult" style="font-size: 0.8em;"></span>
+						<input type="password" name="member_passwd" id="member_passwd" required size="24">
+						<br><span id="checkPasswdResult">영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자</span>
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
 					<td>
-						<input type="password" name="member_passwd2" id="member_passwd2" required size="20">
-						<span id="checkPasswd2Result" style="font-size: 0.8em;"></span>
+						<input type="password" name="member_passwd2" id="member_passwd2" required size="24">
+						<br><span id="checkPasswd2Result"></span>
 					</td>
 				</tr>
 				<tr>
@@ -75,11 +74,15 @@
 							<option value="gmail.com">gmail.com</option>
 							<option value="daum.net">daum.net</option>
 						</select>
+						<br><span style="color: gray;">인증번호를 이메일로 보내드리니 한번 더 확인 후 가입해주세요.</span>
 					</td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" name="member_phone_num" id="member_phone_num" placeholder="000-0000-0000" required size="20"></td>
+					<td>
+						<input type="text" name="member_phone_num" id="member_phone_num" required size="20">
+						<br><span id="checkPhoneResult">000-0000-0000</span>
+					</td>
 				</tr>
 				<tr>
 					<th>생일</th>
