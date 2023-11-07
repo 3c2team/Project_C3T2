@@ -4,6 +4,7 @@
 <head>
 <%@ include file="./include/head.jsp"%>
 <title>마이페이지-회원수정</title>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 window.onload = function() {
@@ -19,13 +20,13 @@ window.onload = function() {
 	            }
 	            
 	            console.log("address : " +address);
-	            $("#address1").val(address);
+	            $("#member_address1").val(address);
 	            // 주소 표시
 	            //document.myForm.address1.value = address;
 	            
 	            // 상세주소 항목으로 커서(포커스) 이동
 	            //document.myForm.address2.focus();
-	            $("#address2").focus();
+	            $("#member_address2").focus();
 	            
 	        }
 	    }).open();

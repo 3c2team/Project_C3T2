@@ -83,9 +83,6 @@
                                     <c:forEach begin="1" end="${review.review_star}" var="star">
                                         ★
                                     </c:forEach>
-                                    <c:forEach begin="${review.review_star + 1}" end="5" var="emptyStar">
-                                        .
-                                    </c:forEach>
                                 </td>
                                 <td>${review.review_date}</td>
                             </tr>
