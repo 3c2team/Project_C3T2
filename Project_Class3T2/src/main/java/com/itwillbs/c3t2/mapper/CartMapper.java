@@ -89,4 +89,8 @@ public interface CartMapper {
 		// 결제 상품명 조회
 		public ProductVO selectProductNames(String sId);
 
+		// 결제 후 상품 UserOrder 저장
+		public int insertUserOrder(Map<String, Object> map);
+
+
 }

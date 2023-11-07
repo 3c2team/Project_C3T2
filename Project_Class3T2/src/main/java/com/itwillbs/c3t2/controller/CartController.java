@@ -479,6 +479,7 @@ public class CartController {
 		System.out.println(productNames.getProduct_name());
 		model.addAttribute("paymentProduct",productNames.getProduct_name());
 		
+		
 		session.setAttribute("usePoint", map.get("usePoint"));
         session.setAttribute("paymentProduct", productNames.getProduct_name());
 		
@@ -486,20 +487,60 @@ public class CartController {
 //		for(OrderDetailVO payProduct:orderDetailList) {
 //			int insertUserOder = service.insertUserOrder(payProduct);
 //		}
+        
+        
+        
 		
 		return "store/payment";
 	}
 	
 	
 	
-	@GetMapping("PaymentResult")
-	public String paymentResult(HttpSession session) {
+	@PostMapping("PaymentResult")
+	@ResponseBody
+	public String paymentResult(HttpSession session,@RequestParam Map<String, Object> map) {
 		
 		System.out.println("결제 성공");
-		 
+		System.out.println("주문번호 : " + map.get("merchant_uid"));
 		
+		String sId = (String)session.getAttribute("sId");
+		map.put("sId", sId);
+		System.out.println("sId : " + sId);
+		System.out.println("회원 ID : " + map.get("sId"));
+		String paymentProduct = (String)session.getAttribute("paymentProduct");
+		String[] arrPaymentProduct = paymentProduct.split("|");
+		System.out.println("상품 이름 : " + paymentProduct);
+//		for(String name :arrPaymentProduct) {
+//			System.out.println("name : " + name);
+//		}
+			
+		// 상품 정보 가져 오기
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		System.out.println("상품 정보 : " + productPayList);
 		
+		for(ProductVO payProduct:productPayList) {
+			System.out.println( "상품 이름 :  " + payProduct.getProduct_name());
+//			productName = payProduct.getProduct_name();
+			System.out.println( "상품 번호 : " + payProduct.getProduct_num());
+			System.out.println( "상품 수량 : " + payProduct.getProduct_count());
+			
+//			productNum = payProduct.getProduct_num();
+			map.put("productName", payProduct.getProduct_name());
+			map.put("productNum", payProduct.getProduct_num()); 
+//			String productNum = (String)map.get("product_num");
+//			map.put("productNum", productNum);
+			map.put("productCount", payProduct.getProduct_count());
+			map.put("ProductPrice", payProduct.getProduct_price());
+			
+			//데이터 저장
+			
+			int insertUserOrder = service.insertUserOrder(map);
+			
+			
+		}
 		
+//		System.out.println("숫자 확인 용 : " + orderDetail.getProduct_num());
+//		int insertUserOder = service.insertUserOrder(payProduct);
 		
 		
 	

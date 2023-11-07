@@ -244,7 +244,20 @@
 		ON P.product_num = O.product_num
 		WHERE O.member_id = #{sId}
 	</select>
-
+	<insert id="insertUserOrder">
+		INSERT INTO
+			USER_ORDER(order_num, member_id, product_num, product_name, product_count, product_price, merchant_uid, order_date)
+			VALUES(
+				null
+				, #{sId}
+				, #{productNum}
+				, #{productName}
+				, #{productCount}
+				, #{ProductPrice} 
+				, #{merchant_uid}
+				, now()
+			)
+	</insert>
 
 
 

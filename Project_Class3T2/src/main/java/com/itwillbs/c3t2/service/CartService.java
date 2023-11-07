@@ -177,6 +177,12 @@ public class CartService {
 		return mapper.selectProductNames(sId);
 	}
 
+	public int insertUserOrder(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertUserOrder(map);
+	}
+
+
 
 
 
