@@ -92,5 +92,8 @@ public interface CartMapper {
 		// 결제 후 상품 UserOrder 저장
 		public int insertUserOrder(Map<String, Object> map);
 
+		// 상품 상세 페이지에서 ORDER_DETAIL로 저장
+		public int insertOrderDetailDirect(@Param("sId") String sId,@Param("proNumber") int proNumber,@Param("proCount") int proCount,@Param("proPrice") int proPrice);
+
 
 }

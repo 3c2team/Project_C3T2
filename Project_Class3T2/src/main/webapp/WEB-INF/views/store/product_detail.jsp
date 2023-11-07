@@ -21,6 +21,17 @@
 		location.href="MainCart?proNum=${productDetail.product_num }&proCount=" + product_count;
 	}
 	
+	function paymentDirect() {
+		let product_count = $("#amounts").val();
+		let product_price = $("#productPrice").val();
+		let allPrice = product_count * product_price;
+		
+// 		alert("주문 수량 : " + product_count);
+		
+		location.href="PayPro?proNumber=${productDetail.product_num }&proCount=" + product_count + "&proPrice=" + allPrice;
+		
+	}
+	
 	
 </script>
 </head>
@@ -125,7 +136,7 @@
 					</div>
 					<div class="detailBtn">
 						<button class="btn_white" onclick="productCount()">장바구니</button>
-						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
+						<button class="btn_black" onclick="paymentDirect()">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
 <!-- 						<button>일시 판매종료</button> -->

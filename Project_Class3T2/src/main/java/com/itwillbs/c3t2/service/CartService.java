@@ -182,6 +182,12 @@ public class CartService {
 		return mapper.insertUserOrder(map);
 	}
 
+	// 상품 상세에서 결제 페이지로 이동 시 상품 저장
+	public int insertProduct(String sId, int proNumber, int proCount, int proPrice) {
+		// TODO Auto-generated method stub
+		return mapper.insertOrderDetailDirect(sId, proNumber, proCount, proPrice);
+	}
+
 
 
 

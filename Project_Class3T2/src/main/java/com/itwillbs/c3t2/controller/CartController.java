@@ -92,10 +92,10 @@ public class CartController {
 		}
 		
 		//ORDER_DETAIL 테이블 비우기
-//		int deleteOrderDetail = service.deleteOrderDetail(sId);
-//		if(deleteOrderDetail > 0) {
-//			System.out.println("CART에서 ORDER_DETAIL 삭제 완료");
-//		}
+		int deleteOrderDetail = service.deleteOrderDetail(sId);
+		if(deleteOrderDetail > 0) {
+			System.out.println("CART에서 ORDER_DETAIL 삭제 완료");
+		}
 		
 		// 메인 페이지에서 카트 등록 상품 목록 조회
 		List<ProductVO> productList = service.getMainCartList(sId);
@@ -210,14 +210,17 @@ public class CartController {
 	public String pay(
 					@RequestParam(value = "proNums",defaultValue = "0", required = false) int[] proNums
 					, @RequestParam(value = "deleteProNum",defaultValue = "0", required = false) int[] deleteProNum
+					, @RequestParam(value = "proNumber",defaultValue = "0", required = false) int proNumber
+					, @RequestParam(value = "proCount",defaultValue = "0", required = false) int proCount
+					, @RequestParam(value = "proPrice",defaultValue = "0", required = false) int proPrice
 					, HttpSession session 
 					, MemberVO member
 					, Model model) {
-				
+//		proNumber=61&proCount=1&proPrice=17500
 		String sId = (String)session.getAttribute("sId");
 		
 		
-		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNums);
+		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNumber + ", " + proCount + ", 가격정보 : " + proPrice);
 				
 		//ORDER_DETAIL 테이블 비우기
 		int deleteOrderDetail = service.deleteOrderDetail(sId);
@@ -225,12 +228,10 @@ public class CartController {
 			System.out.println("PayPro에서 ORDER_DETAIL 삭제 완료");
 		}
 		
-		
 		// 선택 상품 ORDER_DETAIL에 저장
+		
 		if(proNums[0] != 0) {
-					
 			for( int proNum : proNums) {
-				
 				// 저장 작업
 				int insertOrderDetail = service.insertOrderDetail(sId, proNum);
 				if(insertOrderDetail > 0) {
@@ -239,13 +240,18 @@ public class CartController {
 			}
 		}
 		
-		// 전체 상품 ORDER_DETAIL에 저장 (이거 땜에 계속 모든 상품 뜸)
-		if(proNums[0] == 0) {
-			int insertOrderDetail = service.insertOrderDetail(sId);
-				if(insertOrderDetail > 0) {
-					System.out.println("ORDER_DETAIL에 저장 성공");
-				}
-		}	
+		// 전체 상품 ORDER_DETAIL에 저장
+		if(proNumber == 0) {
+			if(proNums[0] == 0) {
+				int insertOrderDetail = service.insertOrderDetail(sId);
+					if(insertOrderDetail > 0) {
+						System.out.println("ORDER_DETAIL에 저장 성공");
+					}
+			}	
+		}else if(proNumber > 0) {// 상품 상세 페이지에서 결제 페이지로 이동시 ORDER_DETAIL에 저장
+			int insertProduct = service.insertProduct(sId, proNumber, proCount, proPrice);
+		}
+		
 		
 		// 결제 상품 삭제 
 		if(deleteProNum[0] != 0) {
@@ -532,6 +538,7 @@ public class CartController {
 //		session.setAttribute("mailUrl", map.get("mailUrl"));
 //		session.setAttribute("receiver_request", map.get("receiver_request"));
 //		session.setAttribute("usePoint", map.get("usePoint"));
+//		session.setAttribute("resultPrice",resultPrice);
 		
 		
 		String sId = (String)session.getAttribute("sId");
@@ -551,8 +558,6 @@ public class CartController {
 			int resultPoint = Integer.parseInt(usePoint);
 			map.put("usePoint",resultPoint);
 		}
-		
-		
 		
 		map.put("sId", sId);
 		map.put("receiver_name",receiver_name );

@@ -258,8 +258,25 @@
 				, now()
 			)
 	</insert>
+	
+	<insert id="insertOrderDetailDirect">
+		INSERT INTO 
+			ORDER_DETAIL(order_detail_num, member_id, product_num, product_count, product_price, cart_num)
+			VALUES(
+				null
+				, #{sId}
+				, #{proNumber}
+				, #{proCount}
+				, #{proPrice}
+				, 0
+			)
+	</insert>
 
-
+<!-- INSERT INTO -->
+<!-- 			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num) -->
+<!-- 			SELECT member_id, product_num, product_count, product_price, cart_num -->
+<!-- 			FROM CART -->
+<!-- 			WHERE member_id = #{sId} AND product_num = #{proNum} -->
 
 
 </mapper>
