@@ -28,9 +28,6 @@ public interface MyPageMapper {
 	//리뷰 상세내역 조회
 	List<ReviewVO> selectReviewDetail(String member_num);
 	
-	//상품 구매내역
-	List<UserOrderVO> getOrderList(String member_num);
-	
 	// 찜 목록
 	List<FavoriteVO> getFavorite(String member_id);
 	
@@ -77,9 +74,17 @@ public interface MyPageMapper {
 	List<PointVO> selectPoints(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
 	
 	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
-
+	
+	// 리뷰 개수
 	int getReviewTotalCount(Map<String, Object> paraMap);
-
+	
+	// 리뷰 목록
 	List<ReviewVO> getReviewList(Map<String, Object> parMap);
+	
+	// 구매 개수
+	int getBuyTotalCount(Map<String, Object> paraMap);
+	
+	// 구매 목록
+	List<UserOrderVO> getOrderList(Map<String, Object> parMap);
 
 }

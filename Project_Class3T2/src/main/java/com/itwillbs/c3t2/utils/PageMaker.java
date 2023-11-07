@@ -26,7 +26,7 @@ public class PageMaker {
    private boolean prev;   // 이전 여부 
    private boolean next;   // 다음 여부
     
-   private int displayPageNum=10;
+   private int displayPageNum=5;
     
    private int tempEndPage; //마지막 페이지
     
@@ -164,7 +164,7 @@ public class PageMaker {
        
        // '마지막' 버튼: 다음 페이지 그룹이 있을 경우 마지막 페이지로 이동하는 버튼을 추가
        if(next && endPage>0){
-           sBuffer.append("<li><a href='"+url+makeSearch(tempEndPage)+"'>마지막</a></li>");           
+           sBuffer.append("<li><a href='"+url+makeSearch(tempEndPage)+"'>막</a></li>");           
        }       
        // 페이징 컨트롤의 종료 태그
        sBuffer.append("</ul>");  

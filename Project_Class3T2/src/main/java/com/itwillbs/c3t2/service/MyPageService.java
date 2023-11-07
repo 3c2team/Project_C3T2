@@ -32,15 +32,6 @@ public class MyPageService {
 		return mapper.selectReviewDetail(member_num);
 		
 	}
-	// 상품 구매 내역
-	public List<UserOrderVO> getOrderList(String member_num) {
-		return mapper.getOrderList(member_num);
-	}
-
-//	// 찜 목록
-//	public List<FavoriteVO> getFavorite(String member_id) {
-//		return mapper.getFavorite(member_id);
-//	}
 	// 찜 목록 삭제
 	public boolean deleteFavorite(Integer favoriteNum) {
         int result = mapper.deleteFavorite(favoriteNum);
@@ -132,5 +123,13 @@ public class MyPageService {
 	// 리뷰 목록
 	public List<ReviewVO> getReviewList(Map<String, Object> parMap) {
 		return mapper.getReviewList(parMap);
+	}
+	// 구매 전체 개수
+	public int getBuyTotalCount(Map<String, Object> paraMap) {
+		return mapper.getBuyTotalCount(paraMap);
+	}
+	// 구매 목록
+	public List<UserOrderVO> getOrderList(Map<String, Object> parMap) {
+		return mapper.getOrderList(parMap);
 	}
 }

@@ -40,20 +40,20 @@
 					<table>
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
-							<th width="120px">주문일자</th>
-							<th width="400px">배송자 주소</th>
-							<th width="130px">배송자 성함</th>
-							<th width="130px">배송 전 문자</th>
-							<th width="130px">제품 번호</th>
+							<th width="80px">주문일자</th>
+							<th width="250px">배송자 주소</th>
+							<th width="130px">요청 사항</th>
+							<th width="130px">총 구매 가격</th>
+							<th width="130px">구매 시각</th>
 						</tr>
 						<!-- 리뷰 데이터 반복 출력 -->
 						<c:forEach var="OrderList" items="${OrderList}">
 							<tr>
-								<td>${OrderList.order_date}</td>
+								<td>${OrderList.merchant_uid}</td>
 								<td>${OrderList.receiver_address}</td>
-								<td>${OrderList.receiver_name}</td>
 								<td>${OrderList.receiver_request}</td>
-								<td>${OrderList.product_num}</td>
+								<td>${OrderList.product_price}</td>
+								<td>${OrderList.order_date}</td>
 							</tr>
 						</c:forEach>
 						<c:if test="${empty OrderList}">
@@ -67,6 +67,9 @@
 				</section>
 			</article>
 		</div>
+		<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
+      		${pagination}
+    	</div>
 		<br>
 		<br>
 	</div>

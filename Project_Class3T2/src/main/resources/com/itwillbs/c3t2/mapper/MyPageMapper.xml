@@ -21,10 +21,11 @@
 	    FROM REVIEW r
 	    JOIN PRODUCT p ON r.product_num = p.product_num
 	    WHERE r.member_id = #{member_id}
+	    ORDER BY r.review_date DESC
 	    limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
 	
-	<!-- 찜 전체 개수 -->
+	<!-- 리뷰 전체 개수 -->
 	<select id="getReviewTotalCount" resultType="int">
 	    SELECT  count(*) FROM 
             REVIEW R      
@@ -41,12 +42,34 @@
 	
 	<!-- 상품 구매 내역 -->
 	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
-        SELECT u.*, m.member_name, d.product_price
-	    FROM USER_ORDER u
-	    JOIN MEMBER m ON u.member_id = m.member_id
-	    JOIN ORDER_DETAIL d ON u.order_num = d.order_detail_num
-	    WHERE u.member_id = #{member_id}
+        SELECT
+            o.order_num,
+            o.member_id,
+            o.order_date,
+            r.receiver_address,
+            r.receiver_name,
+            r.receiver_phone,
+            r.receiver_request,
+            o.product_num,
+            o.product_name,
+            o.product_count,
+            o.product_price,
+            o.merchant_uid
+        FROM
+            USER_ORDER o
+        INNER JOIN
+            RECEIVER_INFO r ON o.merchant_uid = r.merchant_uid
+        WHERE
+            o.member_id = #{member_id}
+        ORDER BY
+            o.order_date DESC
     </select>
+    
+    <!-- 구매 전체 개수 -->
+    <select id="getBuyTotalCount" resultType="int">
+	    SELECT COUNT(*) FROM USER_ORDER U
+	    WHERE U.member_id = #{member_id}
+	</select>
 	
 	<!-- 장바구니 검색 SQL -->
 	<!-- 장바구니 데이터를 검색할 때 여러 조건에 따라 필터링하는 데 사용될 수 있는 SQL 조각을 정의 -->
@@ -180,6 +203,8 @@
             MEMBER M ON R.reservation_email = M.member_e_mail
         WHERE 
             M.member_id = #{member_id}
+        ORDER BY 
+        	R.reservation_date DESC, R.reservation_time DESC
     </select>
     
     <!-- 예약 취소 -->

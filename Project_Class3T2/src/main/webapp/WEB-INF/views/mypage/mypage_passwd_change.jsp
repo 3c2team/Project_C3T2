@@ -28,23 +28,21 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function passwordChange(){			
-			var passwd=$("#passwd").val();
-			var passwdConfirm=$("#passwdConfirm").val();
-			
-			if(passwd==""){
-				alert("비밀번호를 입력해 주세요.");
-				$("#passwd").focus();
-				return;
-			}
-			
-			if(passwdConfirm==""){
-				alert("비밀번호확인을 입력해 주세요.");
-				$("#passwdConfirm").focus();
-				return;
-			}
-			
-			if(passwd!=passwdConfirm){
+		function passwordChange() {
+		    var passwd = $("#passwd").val();
+		    var passwdConfirm = $("#passwdConfirm").val();
+	
+		    // 정규 표현식
+		    var regex = /^(?=.*[A-Za-z])(?=.*\d)|(?=.*[A-Za-z])(?=.*[@$!%*#?&])|(?=.*\d)(?=.*[@$!%*#?&]).{8,16}$/;
+	
+		    // 비밀번호 유효성 검사
+		    if (!regex.test(passwd)) {
+		        alert("비밀번호는 영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자로 설정해야 한다규.");
+		        $("#passwd").focus();
+		        return;
+		    }
+	
+			if (passwd != passwdConfirm) {
 				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 				return;
 			}

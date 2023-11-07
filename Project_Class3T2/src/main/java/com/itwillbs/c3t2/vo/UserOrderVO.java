@@ -14,5 +14,7 @@ public class UserOrderVO {
 	private String receiver_phone;
 	private String receiver_request;
 	private int product_num;
+	private String merchant_uid;
+	private int product_price;
 	
 }
