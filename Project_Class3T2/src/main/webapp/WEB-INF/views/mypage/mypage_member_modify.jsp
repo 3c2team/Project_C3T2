@@ -60,13 +60,13 @@ function searchAddress(){
             }
             
             console.log("address : " +address);
-            $("#address1").val(address);
+            $("#member_address1").val(address);
             // 주소 표시
             //document.myForm.address1.value = address;
             
             // 상세주소 항목으로 커서(포커스) 이동
             //document.myForm.address2.focus();
-            $("#address2").focus();
+            $("#member_address2").focus();
             
         }
     }).open();
