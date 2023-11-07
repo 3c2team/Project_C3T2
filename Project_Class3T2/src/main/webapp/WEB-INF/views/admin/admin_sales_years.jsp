@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -89,6 +90,7 @@
 						<div class="card mb-4">
 							<div class="card-header">
 								<i class="fas fa-chart-area me-1"></i> 연간 매출
+								<input type="text" maxlength="4" placeholder=" ex)2023" id="year" style="float: right;" class="form-control-sm">
 							</div>
 							<div class="card-body">
 								<canvas id="myAreaChart" width="100%" height="40"></canvas>

@@ -33,7 +33,7 @@ var myLineChart = new Chart(ctx, {
           display: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 3
         }
       }],
       yAxes: [{
@@ -47,6 +47,8 @@ var myLineChart = new Chart(ctx, {
         }
       }],
     },
+      responsive: true,
+    
     legend: {
       display: false
     }

@@ -26,7 +26,7 @@ $(function() {
 		<div class="form-group row">
 			<label class="col-sm-2">상품 분류</label>
 			<div class="com-sm-3">
-				<input type="radio" name="category"  id="1" value="1">Stake
+				<input type="radio" name="category" id="1" value="1">Stake
 				<input type="radio" name="category" id="2" value="2">Pasta 
 				<input type="radio" name="category" id="3" value="3">Soup 
 				<input type="radio" name="category" id="4" value="4">etc

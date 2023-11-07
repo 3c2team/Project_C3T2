@@ -17,6 +17,9 @@ table{
 	font-size: small;
 	float: right;
 }
+.font{
+	font-size: 15px;
+}
 </style>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript">
@@ -85,11 +88,13 @@ function onSubmit() {
 	}
 	
 	if(confirm("등록하시겠습니까?")){
-		$(".custom_not").attr("disabled",false);
-		return true;
+		if($("#pass").val()==$("#pass2").val()){
+			$(".custom_not").attr("disabled",false);
+			return true;
+		}
+		alert("비밀번호가 일치하여야 합니다.");
 	}
 	return false;
-
 }
 function success_passwd() {
 	if($("#pass").val() == $("#pass2").val()){
@@ -185,9 +190,9 @@ function success_passwd() {
 				</div>
 				<div class="row">
 					<div class="col-xl-6">
-						<div id="result"class="card mb-4">
-							<div class="card-header">
-								<i class="fas fa-chart-area me-1"></i> 연간 매출
+						<div id="result"class="card mb-4 ">
+							<div class="card-header ">
+								<i class="fas fa-chart-area me-1 "></i> 연간 매출
 							</div>
 							<div class="card-body">
 								<canvas id="myAreaChart" width="100%" height="40"></canvas>
@@ -195,7 +200,7 @@ function success_passwd() {
 						</div>
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-area me-1"></i> 가계 정보
+								<i class="fas fa-chart-area me-1"></i> 가계 정보<input type="button" value="초기화" class="btn btn-primary" id ="reset">
 							</div>
 							<div class="card-body">
 								<form action="AdminRestaurantUpdatePro" onsubmit="return onSubmit()" method="POST">
@@ -213,6 +218,13 @@ function success_passwd() {
 										<tr>
 											<th>대표자 성함</th>
 											<th><input type="text" name="ceo_name" required value="${selectRestaurant.ceo_name }" aria-label="Disabled input example" disabled readonly class="custom_input form-control-sm form-control"></th>
+										</tr>
+										<tr>
+											<th>예약 텀</th>
+											<th>
+												<input type="number" min="1" max="24" name="restaurant_reservation_time" required value="${selectRestaurant.restaurant_reservation_time }" aria-label="Disabled input example" style="float: left; width: 60%;" disabled readonly class="custom_input form-control-sm form-control">
+												<span class="font">시간</span>
+											</th>
 										</tr>
 										<tr>
 											<th>가계 영업시간</th>

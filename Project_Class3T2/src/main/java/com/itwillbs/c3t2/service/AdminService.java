@@ -32,11 +32,11 @@ public class AdminService {
 	public AdminVO getAdmin(AdminVO admin) {
 		return mapper.selectAdmin(admin);
 	}
-	public List<ProductVO> getproductList() {
+	public List<Map<String,Object>> getproductList() {
 
-		return mapper.selectProduct();
+		return mapper.selectProductList();
 	}
-	public ProductVO getproductList(int product_num) {
+	public ProductVO getproduct(int product_num) {
 		// TODO Auto-generated method stub
 		return  mapper.selectProduct(product_num);
 	}
@@ -77,22 +77,22 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.deleteReview(review_num);
 	}
-	public List<Map<String, Object>> selectEventList() {
-		// TODO Auto-generated method stub
-		return mapper.selectEventList();
-	}
-	public int insertEvent(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return mapper.insertEvent(map);
-	}
-	public Map<String, Object> selectEvent(int event_num) {
-		// TODO Auto-generated method stub
-		return mapper.selectEvent(event_num);
-	}
-	public int deleteEvent(int event_num) {
-		// TODO Auto-generated method stub
-		return mapper.deleteEvent(event_num);
-	}
+//	public List<Map<String, Object>> selectEventList() {
+//		// TODO Auto-generated method stub
+//		return mapper.selectEventList();
+//	}
+//	public int insertEvent(Map<String, Object> map) {
+//		// TODO Auto-generated method stub
+//		return mapper.insertEvent(map);
+//	}
+//	public Map<String, Object> selectEvent(int event_num) {
+//		// TODO Auto-generated method stub
+//		return mapper.selectEvent(event_num);
+//	}
+//	public int deleteEvent(int event_num) {
+//		// TODO Auto-generated method stub
+//		return mapper.deleteEvent(event_num);
+//	}
 	public List<Map<String, Object>> selectQnaBoardList() {
 		// TODO Auto-generated method stub
 		return mapper.selectQnaBoardList();

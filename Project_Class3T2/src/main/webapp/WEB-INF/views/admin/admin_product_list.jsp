@@ -60,7 +60,7 @@
 												onclick="window.open('AdminProductDetail?product_num=${productList.product_num}','', 'top=500,left=500,width=700, height=700')">
 												</span>
 											</th>
-											<th>10</th>
+											<th>${productList.favorite_count }</th>
 											<th>${productList.product_price }</th>
 										</tr>
 									</c:forEach>

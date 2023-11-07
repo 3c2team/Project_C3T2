@@ -47,6 +47,29 @@
 				  , ROW_NUMBER() OVER(order by notice_num) as num
 			FROM NOTICE
 		</select>
+		<select id="selectProductList" resultType="map">
+			SELECT 	product_num
+					,product_name
+					,product_price
+					,product_info
+					,product_release
+					,product_category_name
+					,ifnull(favorite_count,0) AS favorite_count
+					,ROW_NUMBER() OVER(ORDER BY product_num) AS num
+			FROM PRODUCT_CATEGORY c JOIN (SELECT p.product_num
+										,product_name
+										,product_price
+										,product_info
+										,product_release
+										,product_category_num
+										,favorite_count
+										FROM PRODUCT p 
+										LEFT JOIN (SELECT product_num,count(favorite_num) as favorite_count
+													FROM FAVORITE
+													GROUP BY product_num) f
+										ON p.product_num = f.product_num) a
+			ON c.product_category_num =a.product_category_num
+		</select>
 		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
 			SELECT  product_num
 					,product_name
@@ -54,14 +77,13 @@
 					,product_info
 					,product_release
 					,product_category_name
+					,p.product_category_num
 					,product_main_img
 					,product_main_img_real_file
 					,ROW_NUMBER() OVER(order by product_num) as num
 			FROM PRODUCT p JOIN PRODUCT_CATEGORY c
 			ON p.product_category_num = c.product_category_num
-			<if test="product_num != null">
-				WHERE product_num = ${product_num}
-			</if>
+			WHERE product_num = #{product_num}
 		</select>
 		<select id="selectProductImg" resultType="map">
 			SELECT *
@@ -248,6 +270,7 @@
 			    ,restaurant_address = #{restaurant_address}
 			    ,restaurant_call = CONCAT(#{phon0},'-',#{phon1},'-',#{phon2})
 			    ,restaurant_aim = #{restaurant_aim}
+			    ,restaurant_reservation_time = #{restaurant_reservation_time}
 		    WHERE restaurant_num = #{restaurant_num}
 		</update>
 		<insert id="insertRestaurant">
@@ -260,6 +283,7 @@
 				,#{restaurant_address}
 				,CONCAT(#{phon0},'-',#{phon1},'-',#{phon2})
 				,#{restaurant_aim}
+				,#{restaurant_reservation_time}
 				)
 		</insert>
 		<insert id="insertAdmin">
@@ -272,7 +296,6 @@
 					,#{admin_passwd}
 					,#{admin_name}
 					,#{admin_business_num}
-					,#{member_num}
 					,#{select_restaurant_num}
 			)
 		</insert>

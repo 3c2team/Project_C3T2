@@ -38,29 +38,54 @@ public class AdminController {
 	
 //		model.addAttribute("msg","로그인 하십시오");
 //		return "fail_back";
-	
+//	public void isLogin(HttpSession session, Model model) throws Exception {
+//		String sId = (String)session.getAttribute("sId");
+//		if(sId == null||sId.equals("")) {
+//			System.out.println("들어오나???");
+//			failLogin(model);
+//		}
+//	}
+//	
+//	로그인관리(관리자)
+	@GetMapping("AdminFailLogin")
+	public String failLogin(Model model) {
+		
+		model.addAttribute("msg","로그인이 필요합니다");
+
+		return "admin_not_login";
+	}
 	//연매출 페이지 이동(관리자)
     @GetMapping("AdminSalesYear")
-    public String adminSalesYear() {
+    public String adminSalesYear(HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
+    	
     	return "admin/admin_sales_years";
     }
-    
+                                                                                         
     //달매출 페이지 이동(관리자)
     @GetMapping("AdminSalesMonth")
-    public String adminSalesMonth() {
+    public String adminSalesMonth(HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	return "admin/admin_sales_month";
     }
     
     //일매출 페이지 이동(관리자)
     @GetMapping("AdminSalesDay")
-    public String adminSalesDay() {
+    public String adminSalesDay(HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	return "admin/admin_sales_day";
     }
     
     //상품별 매출 페이지 이동(관리자)
     @GetMapping("AdminSalesProduct")
-    public String adminSalesProduct(Model model) {
-    	List<ProductVO> productList = service.getproductList();
+    public String adminSalesProduct(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
+    	
+    	List<Map<String, Object>> productList = service.getproductList();
     	System.out.println(productList);
     	model.addAttribute("productList",productList);
     	return "admin/admin_sales_product";
@@ -68,9 +93,11 @@ public class AdminController {
     
     //상품리스트 페이지 이동(관리자)
     @GetMapping("AdminProductList")
-    public String adminProductList(Model model) {
+    public String adminProductList(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	
-    	List<ProductVO> productList = service.getproductList();
+    	List<Map<String, Object>> productList = service.getproductList();
     	model.addAttribute("productList",productList);
     	return "admin/admin_product_list";
     }
@@ -93,10 +120,7 @@ public class AdminController {
     		, HttpServletRequest request) {
     	
     	String id = (String)session.getAttribute("sId");
-    	if(id==null||id.equals("")) {
-    		model.addAttribute("msg","로그인 하십시오");
-    		return "fail_back";
-    	}
+    	if(id == null || id.equals("")) return "redirect:/AdminFailLogin";
     	if(mainFile.getOriginalFilename().equals("")||infoFile.getOriginalFilename().equals("")) {
     		model.addAttribute("msg","파일을 등록하시오");
     		return "fail_back";
@@ -110,7 +134,7 @@ public class AdminController {
     		int product_num = Integer.parseInt(item); 
     		List<Map<String, Object>> selecteProductImg = service.getproductImg(product_num);
     		System.out.println("저장경로 테스트 : " + saveDir);
-    		ProductVO product = service.getproductList(product_num);
+    		ProductVO product = service.getproduct(product_num);
 			try {
 				for(Map<String, Object> imgMap : selecteProductImg) {
 //				System.out.println(imgMap);
@@ -180,6 +204,7 @@ public class AdminController {
 			//맵에 경로 및 이름 추가
 
 //			System.out.println(map);//확인작업
+			
 //			service.registProductImg(map);
 
 			infoFile.transferTo(new File(saveDir, infoFileName));
@@ -223,20 +248,20 @@ public class AdminController {
     	try {
     		for(int product_num : product_nums) {
         		List<Map<String, Object>> selecteProductImg = service.getproductImg(product_num);
-        		ProductVO product = service.getproductList(product_num);
+        		ProductVO product = service.getproduct(product_num);
 			
 				for(Map<String, Object> imgMap : selecteProductImg) {
-				System.out.println("등록된 파일명 : " + imgMap.get("product_image"));
-			
-	    		path = Paths.get(saveDir + "/" +imgMap.get("product_image"));//실제 업로드 경로
-	    		Files.deleteIfExists(path);
+					System.out.println("등록된 파일명 : " + imgMap.get("product_image"));
+				
+		    		path = Paths.get(saveDir + "/" +imgMap.get("product_image"));//실제 업로드 경로
+		    		Files.deleteIfExists(path);
     	    		
 				}
 				path = Paths.get(saveDir + "/" +product.getProduct_main_img());//실제 업로드 경로
 				Files.deleteIfExists(path);
-    				int deleteProductImgCount = service.deleteProductImg(product_num);
-    				int deleteCartCount = cartService.deleteCartProduct(product_num);
-    				int deleteProductCount = service.deleteProduct(product_num);
+				int deleteProductImgCount = service.deleteProductImg(product_num);
+				int deleteCartCount = cartService.deleteCartProduct(product_num);
+				int deleteProductCount = service.deleteProduct(product_num);
 			}
     	} catch (IllegalStateException e) {
     		// TODO Auto-generated catch block
@@ -250,7 +275,9 @@ public class AdminController {
     }
 //    예약 리스트 페이지 이동(관리자)
     @GetMapping("AdminReservationList")
-    public String adminReservationList(Model model) {
+    public String adminReservationList(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	List<Map<String, Object>> ReservationList = service.getReservationList();
     	model.addAttribute("ReservationList",ReservationList);
     	return "admin/admin_reservation_list";
@@ -259,8 +286,9 @@ public class AdminController {
     
     //리뷰 삭제 페이지 이동(관리자)
     @GetMapping("AdminReviewDelete")
-    public String adminReviewDelete(Model model) {
-    	
+    public String adminReviewDelete(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	List<Map<String, Object>> selectReviewList = service.selectReviewList();
     	System.out.println("리뷰 리스트 : " + selectReviewList);
     	model.addAttribute("selectReviewList", selectReviewList);
@@ -300,7 +328,9 @@ public class AdminController {
     
     //회원 정보 페이지 이동(관리자)
     @GetMapping("AdminMember")
-    public String adminMember(Model model) {
+    public String adminMember(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	List<MemberVO> MemberList = service.selectMemberList();
     	Map<String, Integer> selectMemberOut= service.selectMemberOut();
     	model.addAttribute("selectMemberOut",selectMemberOut);
@@ -310,7 +340,9 @@ public class AdminController {
     
     //공지사항 페이지 이동(관리자)
     @GetMapping("AdminNoticeBoard")
-    public String adminNoticeBoard(Model model) {
+    public String adminNoticeBoard(Model model,HttpSession session) {
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	List<Map<String, Object>> selectNoticeList = service.selectNoticeList();
     	model.addAttribute("selectNoticeList", selectNoticeList);
     	return "admin/admin_notice_board";
@@ -346,7 +378,8 @@ public class AdminController {
     @GetMapping("AdminQnaBoard")
     public String adminQnaBoard(Model model,
     							HttpSession session) {
-    	
+    	String sId = (String)session.getAttribute("sId");
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	List<Map<String, Object>> QnaBoardList = service.selectQnaBoardList();
     	System.out.println("확인 작업" + QnaBoardList);
     	model.addAttribute("QnaBoardList",QnaBoardList);
@@ -378,7 +411,7 @@ public class AdminController {
     @GetMapping("AdminProductUpdate")
     public String adminProductUpdate(Model model,int product_num) {
 //    	System.out.println("번호:" + product.getProduct_num());
-    	ProductVO dbProduct = service.getproductList(product_num);//하나 들고옴
+    	ProductVO dbProduct = service.getproduct(product_num);//하나 들고옴
     	
     	List<Map<String,Object>> dbProductImg = service.getproductImg(product_num);//이미지다들고옴
     	
@@ -392,7 +425,7 @@ public class AdminController {
     @GetMapping("AdminProductDetail")
     public String adminProductDetail(Model model,int product_num) {
 //    	System.out.println("번호:" + product.getProduct_num());
-    	ProductVO dbProduct = service.getproductList(product_num);//하나 들고옴
+    	ProductVO dbProduct = service.getproduct(product_num);//하나 들고옴
     	
     	List<Map<String,Object>> dbProductImg = service.getproductImg(product_num);//이미지다들고옴
     	
@@ -406,6 +439,7 @@ public class AdminController {
     //로그인 페이지 이동(관리자)
     @GetMapping("AdminLogin")
     public String adminLogin() {
+//    	System.out.println("에이설마..");
     	return "admin/admin_login";
     }
     
@@ -439,10 +473,9 @@ public class AdminController {
     	
     	String sId = (String)session.getAttribute("sId");
     	String sName = (String)session.getAttribute("sName");
-    	if(sId == null) {
-    		model.addAttribute("msg","로그인을 해주세요");
-    		return "fail_back";
-    	}
+    	
+    	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
+    	
     	Map<String, Object> selectRestaurant = service.selectRestaurant(sId);
     	if(selectRestaurant.get("restaurant_num") == null) {
     		model.addAttribute("msg","잘못된 요청입니다.");
@@ -496,44 +529,44 @@ public class AdminController {
     	return "redirect:/AdminMain";
     }
     //이벤트 등록 페이지 이동(관리자)
-    @GetMapping("AdminEventRegist")
-    public String adminEventRegist() {
-    	return "admin/admin_event_regist";
-    }
+//    @GetMapping("AdminEventRegist")
+//    public String adminEventRegist() {
+//    	return "admin/admin_event_regist";
+//    }
     //이벤트 삭제 처리(관리자)
-    @PostMapping("AdminDeleteEventPro")
-    public String adminEventDeletePro(Model model
-    		,@RequestParam(value = "checkbox") List<Integer> list
-    		,HttpSession session) {
-    	
-    	System.out.println("넘버 넘버"+list);
-    	String uploadDir = "/event_img/";//가상 업로드 경로
-    	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");
-    	Path path = null;
-    	try {
-    		for(int event_num : list) {
-        		Map<String, Object> selectEvent = service.selectEvent(event_num);
-        		int deleteEvent = service.deleteEvent(event_num);
-        		if(deleteEvent == 0) {
-        			model.addAttribute("msg","삭제 실패");
-        			return "fail_back";
-        		}
-				System.out.println("등록된 파일명 : " + selectEvent.get("event_image"));
-			
-	    		path = Paths.get(saveDir + "/" + selectEvent.get("event_image"));//실제 업로드 경로
-	    		Files.deleteIfExists(path);
-    	    		
-			}
-    	} catch (IllegalStateException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-
-    	return "redirect:/AdminEventList";
-    }
+//    @PostMapping("AdminDeleteEventPro")
+//    public String adminEventDeletePro(Model model
+//    		,@RequestParam(value = "checkbox") List<Integer> list
+//    		,HttpSession session) {
+//    	
+//    	System.out.println("넘버 넘버"+list);
+//    	String uploadDir = "/event_img/";//가상 업로드 경로
+//    	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");
+//    	Path path = null;
+//    	try {
+//    		for(int event_num : list) {
+//        		Map<String, Object> selectEvent = service.selectEvent(event_num);
+//        		int deleteEvent = service.deleteEvent(event_num);
+//        		if(deleteEvent == 0) {
+//        			model.addAttribute("msg","삭제 실패");
+//        			return "fail_back";
+//        		}
+//				System.out.println("등록된 파일명 : " + selectEvent.get("event_image"));
+//			
+//	    		path = Paths.get(saveDir + "/" + selectEvent.get("event_image"));//실제 업로드 경로
+//	    		Files.deleteIfExists(path);
+//    	    		
+//			}
+//    	} catch (IllegalStateException e) {
+//    		// TODO Auto-generated catch block
+//    		e.printStackTrace();
+//    	} catch (IOException e) {
+//    		// TODO Auto-generated catch block
+//    		e.printStackTrace();
+//    	}
+//
+//    	return "redirect:/AdminEventList";
+//    }
     //js 파일에 들고가는 탈퇴사유 셀렉(관리자)
     @ResponseBody
 	@PostMapping("/AdminSelectReson")

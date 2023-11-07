@@ -32,10 +32,10 @@ function add() {
 			<div class="form-group row">
 				<label class="col-sm-2">상품 분류</label>
 				<div class="com-sm-3">
-					<label><input type="radio" name="product_category_num"  value="1">Stake</label>
-					<label><input type="radio" name="product_category_num"  value="2">Pasta </label>
-					<label><input type="radio" name="product_category_num" value="3">Soup </label>
-					<label><input type="radio" name="product_category_num"  value="4">etc</label>
+					<label><input type="radio" name="product_category_num" id="1" value="1">Stake</label>
+					<label><input type="radio" name="product_category_num" id="2" value="2">Pasta </label>
+					<label><input type="radio" name="product_category_num" id="3" value="3">Soup </label>
+					<label><input type="radio" name="product_category_num" id="4" value="4">etc</label>
 				</div>
 			</div>
 			<div class="form-group row">

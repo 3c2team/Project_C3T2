@@ -26,7 +26,7 @@ public interface AdminMapper {
 	AdminVO selectAdmin(AdminVO admin);
 	
 	//상품조회
-	List<ProductVO> selectProduct();
+	List<Map<String,Object>> selectProductList();
 	
 	//상품상세정보 조회
 	ProductVO selectProduct(int product_num);
@@ -55,38 +55,49 @@ public interface AdminMapper {
 	//공지사항 삭제
 	int deleteNotice(int notice_num);
 	
-	//리뷰 조회
+	//리뷰 조회(복수)
 	List<Map<String, Object>> selectReviewList();
+	
 	//리뷰 삭제
 	int deleteReview(int review_num);
 
+	
+//	List<Map<String, Object>> selectEventList();
 
-	List<Map<String, Object>> selectEventList();
+//	int insertEvent(Map<String, Object> map);
 
-	int insertEvent(Map<String, Object> map);
+//	Map<String, Object> selectEvent(int event_num);
 
-	Map<String, Object> selectEvent(int event_num);
+//	int deleteEvent(int event_num);
 
-	int deleteEvent(int event_num);
-
+	// 문의사항 조회(복수)
 	List<Map<String, Object>> selectQnaBoardList();
 
+	// 문의사항 조회(단수)
 	Map<String, Object> selectQnaBoard(int qna_num);
-
+	
+	// 문의사항 답변(관리자)
 	int updateQnaBoard(Map<String, Object> map);
 
+	// 리뷰 조회(단수)
 	Map<String, Object> selectReview(int review_num);
 
+	// 회원탈퇴 사유 조회
 	Map<String, Integer> selectMemberOut();
 
+	// 회원탈퇴 날짜 조회
 	List<Map<String, Integer>> selectOutDate();
-
+	
+	// 레스토랑 테이블 조회
 	Map<String, Object> selectRestaurant(String sId);
 
+	// 레스토랑 테이블 수정
 	int updateRestaurant(Map<String, Object> map);
-
+	
+	// 레스토랑 테이블 등록
 	int insertRestaurant(Map<String, Object> map);
 
+	// 관리자 등록
 	int insertAdmin(Map<String, Object> map);
 
 }
