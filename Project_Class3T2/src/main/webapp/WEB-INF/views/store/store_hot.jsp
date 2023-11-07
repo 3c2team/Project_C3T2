@@ -34,7 +34,7 @@
 					<li class="productListLi">
 						<div class="product">
 							<a class="productClick" href="ProductDetail?proNum=${product.product_num }">
-								<img src="${pageContext.request.contextPath}/resources${product.product_main_img_real_file}">
+								<img src="${product.product_main_img_real_file}">
 								<strong>${product.product_name }</strong><br>
 								<strong><span>${product.product_price }</span><span>원</span></strong>
 <%-- 								<strong>${product.product_info }</strong> --%>

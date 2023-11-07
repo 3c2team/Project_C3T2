@@ -28,7 +28,7 @@
 			<c:forEach items="${bestList }" var="best" begin="0" end="9" varStatus="status">
 				<div class="best${status.count} productBest">
 					<a class="productClick" href="ProductDetail?proNum=${best.product_num}">
-						<img src="${pageContext.request.contextPath}/resources${best.product_main_img_real_file}">
+						<img src="${best.product_main_img_real_file}">
 						<div class="bestCount">${status.count}</div>
 						<strong>${best.product_name }</strong><br>
 						<strong><span>${best.product_price }</span><span>원</span></strong>
