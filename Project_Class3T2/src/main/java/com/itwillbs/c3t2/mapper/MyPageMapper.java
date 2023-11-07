@@ -78,4 +78,8 @@ public interface MyPageMapper {
 	
 	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
 
+	int getReviewTotalCount(Map<String, Object> paraMap);
+
+	List<ReviewVO> getReviewList(Map<String, Object> parMap);
+
 }

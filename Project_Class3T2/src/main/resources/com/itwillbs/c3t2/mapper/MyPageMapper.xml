@@ -16,18 +16,23 @@
 	
 	
 	<!-- 특정 회원의 모든 리뷰를 조회 -->
-<!-- 	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO"> -->
-<!-- 	    SELECT r.*, m.member_name -->
-<!-- 	    FROM REVIEW r -->
-<!-- 	    JOIN MEMBER m ON r.member_id = m.member_id -->
-<!-- 	    WHERE r.member_id = #{member_id} -->
-<!-- 	</select> -->
-	<select id="selectReviewDetail" resultType="com.itwillbs.c3t2.vo.ReviewVO">
+	<select id="getReviewList" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 	    SELECT r.*, p.product_name
 	    FROM REVIEW r
 	    JOIN PRODUCT p ON r.product_num = p.product_num
 	    WHERE r.member_id = #{member_id}
+	    limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
+	
+	<!-- 찜 전체 개수 -->
+	<select id="getReviewTotalCount" resultType="int">
+	    SELECT  count(*) FROM 
+            REVIEW R      
+		JOIN 
+            PRODUCT P ON R.review_num = R.review_num
+        WHERE 
+            R.member_id = #{member_id}
+     </select> 
 	
 	<!-- 리뷰 상품번호 누르면 상품페이지로 -->
 	<select id="getReviewByNum" resultType="com.itwillbs.c3t2.vo.ReviewVO">
@@ -151,21 +156,6 @@
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
 	
-<!-- 	 찜목록 -->
-<!-- 	<select id="getFavorite" resultType="com.itwillbs.c3t2.vo.FavoriteVO"> -->
-<!--         SELECT  -->
-<!--             F.favorite_num, -->
-<!--             F.member_id, -->
-<!--             F.product_num, -->
-<!--             P.product_name, -->
-<!--             P.product_main_img_real_file -->
-<!--         FROM  -->
-<!--             FAVORITE F -->
-<!--         JOIN  -->
-<!--             PRODUCT P ON F.product_num = P.product_num -->
-<!--         WHERE  -->
-<!--             F.member_id = #{member_id} -->
-<!--     </select> -->
     
     <!-- 찜목록 삭제-->
     <delete id="deleteFavorite">
@@ -179,6 +169,7 @@
             R.reservation_date,
             R.reservation_time,
             R.reservation_person_name,
+            R.reservation_guest_num,
             R.reservation_person_count,
             R.reservation_cancel,
             R.dinning_num,

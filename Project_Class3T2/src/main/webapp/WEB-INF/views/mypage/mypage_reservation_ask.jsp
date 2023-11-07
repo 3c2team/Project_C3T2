@@ -39,7 +39,8 @@
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
 							<th width="120px">예약자 성함</th>
-							<th width="200px">예약 날짜</th>
+							<th width="100px">예약 번호</th>
+							<th width="100px">예약 날짜</th>
 							<th width="130px">예약 시간</th>
 							<th width="100px">예약 인원</th>
 							<th width="100px">예약 테이블</th>
@@ -50,6 +51,7 @@
 							<!-- 각 테이블 행에는 'reservation-row' 클래스가 지정되어 있고, 예약 날짜를 데이터 속성으로 포함-->
 							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
+								<td>${reservation.reservation_guest_num}</td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>
 								<td>${reservation.reservation_person_count}</td>

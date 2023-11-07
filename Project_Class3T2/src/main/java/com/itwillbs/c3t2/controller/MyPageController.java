@@ -317,18 +317,32 @@ public class MyPageController {
 	}
 	
 	@GetMapping("MypageGoodsReview")			//나의 활동정보 - 상품 리뷰
-	public String mypageGoodsReview(HttpSession session ,Model model) {
+	public String mypageGoodsReview(HttpSession session ,Model model, Map<String, Object> parMap , PageMaker pageMaker) {
 		
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if(loginUser==null) return "redirect:/Logout";
 		
+		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
+		parMap.put("member_id", loginUser.getMember_id());
+		
+		// 페이지당 표시할 아이템 수를 설정.
+		pageMaker.setPerPageNum(5);
+		
+		// 장바구니의 전체 아이템 수를 설정.
+		pageMaker.setTotalCount(service.getReviewTotalCount(parMap));
+		
+		// 페이지네이션 HTML을 생성.
+		String pagination=pageMaker.paginationHTML("MypageGoodsReview");
+		parMap.put("pageMaker", pageMaker);
 		
 		// 현재 로그인한 회원의 모든 리뷰 가져오기
-		List<ReviewVO> reviews = service.getReviewDetail(loginUser.getMember_id());
+		List<ReviewVO> reviews = service.getReviewList(parMap);
 		System.out.println(reviews);
 		
 		// 가져온 리뷰 목록을 모델에 추가
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
 		
 		// 리뷰 조회 페이지 반환
 		return "mypage/mypage_goods_review";
@@ -462,20 +476,6 @@ public class MyPageController {
         return "redirect:/MypageReservationList";
 	}
 	
-//	@PostMapping("cancelReservation") // 예약 취소
-//	public String cancelReservation(@RequestParam Integer reservation_num, RedirectAttributes redirectAttributes) {
-//	    
-//	    // Service를 호출하여 reservation_num에 해당하는 예약 데이터를 취소
-//	    boolean isCancelled = service.cancelReservation(reservation_num);
-//	    
-//	    // 취소 성공 시 사용자에게 알림 메시지 전달
-//	    if (isCancelled) {
-//	        redirectAttributes.addFlashAttribute("successMessage", "예약이 성공적으로 취소되었습니다.");
-//	    } else {
-//	        redirectAttributes.addFlashAttribute("errorMessage", "예약 취소에 실패하였습니다.");
-//	    }
-//	    return "redirect:/MypageReservationList";
-//	}
 	
 	@GetMapping("MypageDetail")							// 나의 상세 정보
 	public String mypagePoint(Model model, HttpSession session) {

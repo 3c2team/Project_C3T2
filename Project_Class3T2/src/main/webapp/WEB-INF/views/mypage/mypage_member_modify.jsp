@@ -171,7 +171,7 @@ input[readonly]{background: #eee;}
 	
 <script>
 function memberModify(){	
-
+	// 입력 필드에서 값을 가져옴.
 	var member_name=$("#member_name").val();
 	var member_phone_num=$("#member_phone_num").val();
 	var member_address1=$("#member_address1").val();
@@ -181,6 +181,7 @@ function memberModify(){
 
 	console.log("member_name ", member_name);
 	
+	// 이름이 비어있는지 확인.
 	if(member_name==""){
 		alert("이름을 입력해 주세요.");
 		$("#member_name").focus();
@@ -209,7 +210,7 @@ function memberModify(){
 		return;
 	}
 
-	
+	// 모든 검증을 통과하면, AJAX를 통해 서버에 데이터를 전송
 	$.ajax({
 		url:"MypageMemberModify",
 		type:"post",
@@ -222,7 +223,7 @@ function memberModify(){
 			member_email2:email2
 			
 		},
-		success:function(res){
+		success:function(res){	// 요청이 성공하면 실행될 함수
 			console.log(" success : ", res);
 			if(res=="success"){				
 				alert("회원 수정 완료 됬습니다요");		
@@ -231,7 +232,7 @@ function memberModify(){
 				
 			}else if(res=="error_member_phone_num"){
 				alert("이미 사용중인 전화번호입니다.");					
-				$("#member_phone_num").focus();	
+				$("#member_phone_num").focus();	// 전화번호 입력 필드에 포커스를 맞춤.
 				return;
 			}else if(res=="error_member_e_mail"){
 				alert("이미 사용중인 이메일입니다");
@@ -240,7 +241,7 @@ function memberModify(){
 			}	
 			
 			alert("회원 수정에 실패 하였습니다.");
-			location.reload();
+			location.reload(); 	// 페이지를 새로고침
 		},
 		error:function(err){
 		
@@ -250,10 +251,12 @@ function memberModify(){
 	});
 		
 }
-
+//전화번호 입력 필드에 입력이 있을 때마다 실행되는 함수
 function oninputPhone(target) {
+	// 입력된 값을 숫자만 남기고 모두 제거한 후,
+    // 특정 패턴에 맞게 하이픈(-)을 추가하여 전화번호 형식으로 만듦
     target.value = target.value
-        .replace(/[^0-9]/g, '')
+        .replace(/[^0-9]/g, '')		// 숫자가 아닌 문자를 제거
         .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 }
 

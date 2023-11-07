@@ -125,4 +125,12 @@ public class MyPageService {
 	public int getPointsCount(String startDate, String endDate, String memberId) {
 		return mapper.selectPointsCount(startDate, endDate, memberId);
 	}
+	// 리뷰 전체 갯수
+	public int getReviewTotalCount(Map<String, Object> paraMap) {
+		return mapper.getReviewTotalCount(paraMap);
+	}
+	// 리뷰 목록
+	public List<ReviewVO> getReviewList(Map<String, Object> parMap) {
+		return mapper.getReviewList(parMap);
+	}
 }

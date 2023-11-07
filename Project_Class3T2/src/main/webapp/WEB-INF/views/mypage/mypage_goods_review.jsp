@@ -30,6 +30,7 @@
         <div class="text-center mt50 mb50">
             <h1>상품 리뷰</h1>
         </div>
+        <h2 class="mb100"> 총 ${pageMaker.totalCount}개 상품</h2>
         <h2>기간 조회</h2>
         <div class="reservationConfirmContainer">
             <div class="reservationConfirmTerm">
@@ -99,6 +100,9 @@
                 </section>
             </article>
         </div>
+        <div class="text-center mt50" style=" display: flex;justify-content: space-around;">
+      		${pagination}
+    	</div>
         <br>
         <br>
     </div>
