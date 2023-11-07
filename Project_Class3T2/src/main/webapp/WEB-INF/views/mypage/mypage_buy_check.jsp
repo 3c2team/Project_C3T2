@@ -40,11 +40,11 @@
 					<table>
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
-							<th width="80px">주문일자</th>
+							<th width="50px">주문일자</th>
 							<th width="250px">배송자 주소</th>
-							<th width="130px">요청 사항</th>
-							<th width="130px">총 구매 가격</th>
-							<th width="130px">구매 시각</th>
+							<th width="200px">요청 사항</th>
+							<th width="150px">총 구매 가격</th>
+							<th width="180px">구매 시각</th>
 						</tr>
 						<!-- 리뷰 데이터 반복 출력 -->
 						<c:forEach var="OrderList" items="${OrderList}">
