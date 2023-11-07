@@ -422,7 +422,22 @@ public class CartController {
 		System.out.println("사용할 포인트 : " + map.get("usePoint"));
 		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
 		 
+		session.setAttribute("receiver_name", map.get("receiver_name"));
+		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
+		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
+		session.setAttribute("phone", map.get("phone"));
+		session.setAttribute("eMail", map.get("eMail"));
+		session.setAttribute("mailUrl", map.get("mailUrl"));
+		session.setAttribute("usePoint", map.get("usePoint"));
 		
+		if(!map.get("receiver_request").equals("")) {
+			session.setAttribute("receiver_request", map.get("receiver_request"));
+		}else if(map.get("receiver_request").equals("")){
+			String request = "-";
+			session.setAttribute("receiver_request", request);
+		}
+		
+	
 		
 //		for(int odn :order_detail_num) {
 //			System.out.println("odn : " + odn);
@@ -437,12 +452,13 @@ public class CartController {
 		}
 		
 		
+		
 		// 포인트 사용 시 배송지에 정보 저장
 		if(!map.get("usePoint").equals("")) {
-			for(int i = 0; i < order_detail_num.length; i++) {
-				map.put("order_detail_num", order_detail_num[i]);
-				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
-			}
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+//			}
 			
 			String usePoint = (String)map.get("usePoint");
 			int resultPoint = Integer.parseInt(usePoint);
@@ -454,14 +470,16 @@ public class CartController {
 			System.out.println("최종 결제 금액 : " + resultPrice);
 			model.addAttribute("resultPrice",resultPrice);
 			session.setAttribute("resultPrice",resultPrice);
+			
+			session.setAttribute("usePoint", map.get("usePoint"));
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
 		if(map.get("usePoint").equals("")){// 포인트 없을 때
-			for(int i = 0; i < order_detail_num.length; i++) {
-				map.put("order_detail_num", order_detail_num[i]);
-				int insertReceiverInfo = service.insertReceiverInfo(map);
-			}
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverInfo = service.insertReceiverInfo(map);
+//			}
 			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
 			model.addAttribute("payAllPrice", payAllPrice);
 			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
@@ -470,6 +488,9 @@ public class CartController {
 			System.out.println("최종 결제 금액 : " + resultPrice);
 			model.addAttribute("resultPrice",resultPrice);
 			session.setAttribute("resultPrice",resultPrice);
+			
+			int resultPoint = 0;
+			session.setAttribute("usePoint", resultPoint);
 		}
 		
 		// 결제 상품 이름 조회
@@ -503,8 +524,46 @@ public class CartController {
 		System.out.println("결제 성공");
 		System.out.println("주문번호 : " + map.get("merchant_uid"));
 		
+//		session.setAttribute("receiver_name", map.get("receiver_name"));
+//		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
+//		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
+//		session.setAttribute("phone", map.get("phone"));
+//		session.setAttribute("eMail", map.get("eMail"));
+//		session.setAttribute("mailUrl", map.get("mailUrl"));
+//		session.setAttribute("receiver_request", map.get("receiver_request"));
+//		session.setAttribute("usePoint", map.get("usePoint"));
+		
+		
 		String sId = (String)session.getAttribute("sId");
+		String receiver_name = (String)session.getAttribute("receiver_name");
+		String receiver_addr1 = (String)session.getAttribute("receiver_addr1");
+		String receiver_addr2 = (String)session.getAttribute("receiver_addr2");
+		String phone = (String)session.getAttribute("phone");
+		String eMail = (String)session.getAttribute("eMail");
+		String mailUrl = (String)session.getAttribute("mailUrl");
+		String receiver_request = (String)session.getAttribute("receiver_request");
+		
+		String usePoint = (String)session.getAttribute("usePoint");
+		if(usePoint.equals("")) {
+			int resultPoint = 0;
+			map.put("usePoint", resultPoint);
+		}else if(!usePoint.equals("")) {
+			int resultPoint = Integer.parseInt(usePoint);
+			map.put("usePoint",resultPoint);
+		}
+		
+		
+		
 		map.put("sId", sId);
+		map.put("receiver_name",receiver_name );
+		map.put("receiver_addr1", receiver_addr1);
+		map.put("receiver_addr2", receiver_addr2);
+		map.put("phone", phone);
+		map.put("eMail", eMail);
+		map.put("mailUrl", mailUrl);
+		map.put("receiver_request", receiver_request);
+
+		
 		System.out.println("sId : " + sId);
 		System.out.println("회원 ID : " + map.get("sId"));
 		String paymentProduct = (String)session.getAttribute("paymentProduct");
@@ -533,17 +592,24 @@ public class CartController {
 			map.put("ProductPrice", payProduct.getProduct_price());
 			
 			//데이터 저장
-			
 			int insertUserOrder = service.insertUserOrder(map);
 			
-			
+					
+		}
+		
+		// 포인트 사용 시 배송지에 정보 저장
+		if(!map.get("usePoint").equals("")) {
+			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+		}
+		
+		// 포인트 미사용 시 배송지에 정보 저장
+		if(map.get("usePoint").equals("")) {
+			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
 		}
 		
 //		System.out.println("숫자 확인 용 : " + orderDetail.getProduct_num());
 //		int insertUserOder = service.insertUserOrder(payProduct);
 		
-		
-	
 		return "store/pay_result";
 	}
 
