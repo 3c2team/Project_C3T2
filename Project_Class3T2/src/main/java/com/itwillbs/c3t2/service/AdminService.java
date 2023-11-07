@@ -133,6 +133,14 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.insertAdmin(map);
 	}
+	public List<Map<String, Integer>> selectYearDate() {
+		// TODO Auto-generated method stub
+		return mapper.selectYearDate();
+	}
+	public List<Map<String, Integer>> selectMonthDate(int year) {
+		// TODO Auto-generated method stub
+		return mapper.selectMonthDate(year);
+	}
 	
 
 }

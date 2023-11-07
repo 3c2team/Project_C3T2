@@ -4,10 +4,46 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+	$.ajax({
+		type: "POST",
+		url: "AdminSelectMonthDate",
+		async: false,
+		data: {
+			year : 0
+		},
+		success: function(AdminSelectMonthDate) {
+			mons = AdminSelectMonthDate.map(row => row.rnum);
+			sales = AdminSelectMonthDate.map(row => row.sales);
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
+//$("#sales_btn").on("click",function(){
+//	let year = $("#year").val();
+//	alert(year);
+//	$.ajax({
+//		type: "POST",
+//		url: "AdminSelectMonthDate",
+//		async: false,
+//		data: {
+//			year : $("#year").val()
+//		},
+//		success: function(AdminSelectMonthDate) {
+//			mons = AdminSelectMonthDate.map(row => row.rnum);
+//			sales = AdminSelectMonthDate.map(row => row.sales);
+//		},
+//		error:function(){
+//			alert("실패");
+//		}
+//	});
+//	myChart.update();
+//	
+//});
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    labels: mons,
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,7 +56,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [32285000, 23515000, 46425000,34450000,34825000, 23150000, 36425000,41250000,25285000, 31515000, 42125000,34450000],
+      data: sales,
     }],
   },
   options: {
@@ -38,8 +74,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 10000000,
-          max: 50000000,
+          min: 0,
+          max: 500000,
           maxTicksLimit: 5
         },
         gridLines: {

@@ -100,4 +100,8 @@ public interface AdminMapper {
 	// 관리자 등록
 	int insertAdmin(Map<String, Object> map);
 
+	List<Map<String, Integer>> selectYearDate();
+
+	List<Map<String, Integer>> selectMonthDate(int year);
+
 }

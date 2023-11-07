@@ -14,16 +14,13 @@
 $(function() {
 	$("#${dbProduct.product_category_num }").prop("checked",true);
 });
-function add() {
-	$("#add").append(
-			"<input type='file'  class='form-control' accept='.jpg, .png'>"
-		);
-}
 </script>
 </head>
 <body>
 	<div class="jumbotron">
 		<div class="container">
+		
+		
 			<h1 class="display-3">상품 수정</h1>
 		</div>
 	</div>

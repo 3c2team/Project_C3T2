@@ -4,15 +4,30 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+$.ajax({
+		type: "POST",
+		url: "AdminSelectMonthDate",
+		async: false,
+		data: {
+			year : 0
+		},
+		success: function(AdminSelectMonthDate) {
+			mons = AdminSelectMonthDate.map(row => row.rnum);
+			sales = AdminSelectMonthDate.map(row => row.sales);
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+    labels: mons,
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data: [32285000, 23515000, 46425000,34450000,34825000, 23150000, 36425000,41250000,25285000, 31515000, 42125000,34450000],
+      data:sales,
     }],
   },
   options: {

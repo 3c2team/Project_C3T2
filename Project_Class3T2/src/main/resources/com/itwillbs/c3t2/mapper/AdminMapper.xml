@@ -299,6 +299,36 @@
 					,#{select_restaurant_num}
 			)
 		</insert>
+		<select id="selectYearDate" resultType="map">
+			WITH RECURSIVE result_year AS (
+				SELECT YEAR(now()) -4 AS rnum
+			    UNION ALL
+			    SELECT rnum + 1 
+			    FROM result_year
+			    WHERE  YEAR(now()) > rnum
+			)
+			SELECT CONCAT(rnum,'년') as rnum ,ifnull(salary,0) as salary
+			FROM result_year r left join (SELECT YEAR(order_date) AS year
+												,SUM((product_count*product_price)) AS salary
+											FROM USER_ORDER
+											GROUP BY YEAR(order_date)) y
+			ON r.rnum = y.year;
+		</select>
+		<select id="selectMonthDate" resultType="map">
+			WITH RECURSIVE result_mons AS (
+			SELECT 1 AS rnum
+		    UNION ALL
+		    SELECT rnum + 1 FROM result_mons
+            WHERE 12 > rnum
+			)
+
+			SELECT CONCAT(rnum,'월') AS rnum ,ifnull(sales,0) AS sales
+			FROM result_mons r LEFT JOIN (SELECT MONTH(order_date) as mons ,SUM((product_count*product_price)) as sales
+											FROM USER_ORDER
+											WHERE YEAR(order_date) = IF(#{year}=0,YEAR(now()),#{year})
+											GROUP BY MONTH(order_date)) y
+			on r.rnum = y.mons;
+		</select>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->

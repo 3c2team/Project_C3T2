@@ -581,4 +581,20 @@ public class AdminController {
     	System.out.println("결과값 : " + AdminSelectOutDate);
     	return AdminSelectOutDate;
     }
+    @ResponseBody
+    @PostMapping("/AdminSelectYearDate")
+    public List<Map<String, Integer>> adminSelectYearDate() {
+    	List<Map<String, Integer>> adminSelectYearDate= service.selectYearDate();
+    	System.out.println("결과값 : " + adminSelectYearDate);
+    	return adminSelectYearDate;	
+    }
+    @ResponseBody
+    @PostMapping("/AdminSelectMonthDate")
+    public List<Map<String, Integer>> adminSelectMonthDate(int year) {
+    	System.out.println("dfsf" + year);
+    	
+    	List<Map<String, Integer>> adminSelectMonthDate= service.selectMonthDate(year);
+    	System.out.println("결과값 : " + adminSelectMonthDate);
+    	return adminSelectMonthDate;	
+    }
 }
