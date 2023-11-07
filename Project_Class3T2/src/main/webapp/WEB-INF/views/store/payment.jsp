@@ -15,8 +15,8 @@ function requestPay() {
     	pg: "kakaopay.TC0ONETIME",
     	pay_method: "card",
     	merchant_uid: "ORD" + getDateTimeString(),   // 주문번호
-    	name: "${productPayList}",
-    	amount: 1000,                         // 숫자 타입
+    	name: "${paymentProduct}",
+    	amount: ${resultPrice },                         // 숫자 타입
     	buyer_email: "${Member.member_e_mail}",
     	buyer_name: "${Member.member_name}",
     	buyer_tel: "${Member.member_phone_num}",
@@ -26,8 +26,9 @@ function requestPay() {
      	if(rsp.success) { // 결제 성공 시
  			console.log("rsp.imp_uid : " + rsp.imp_uid);
  			console.log("rsp.merchant_uid : " + rsp.merchant_uid);
- 			console.log('${Member.member_name}');
- 			location.href = "PaymentResult";
+ 			
+ 			location.href = "PaymentResult";			
+ 			
      	}
     });
 }
@@ -55,8 +56,10 @@ function getDateTimeString() {
 	<h1>payment</h1>
 	
 	<h1>${productPayList}</h1>
+	<h1>${sessionScope.paymentProduct}</h1>
 	
 	<input type="button" value="결제하기" onclick="requestPay()">
+	<input type="hidden" id="resultPrice " value="${resultPrice }">
 	
 </body>
 </html>

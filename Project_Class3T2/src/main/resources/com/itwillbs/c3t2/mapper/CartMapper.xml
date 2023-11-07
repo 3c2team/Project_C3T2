@@ -239,10 +239,10 @@
 	
 	</insert>
 	<select id="selectProductNames" resultType="com.itwillbs.c3t2.vo.ProductVO">
-		SELECT GROUP_CONCAT(P.product_name)
+		SELECT GROUP_CONCAT(P.product_name SEPARATOR ' | ') AS product_name
 		FROM PRODUCT P LEFT JOIN ORDER_DETAIL O
 		ON P.product_num = O.product_num
-		WHERE O.member_id = #{sId};
+		WHERE O.member_id = #{sId}
 	</select>
 
 

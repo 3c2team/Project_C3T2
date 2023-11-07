@@ -367,7 +367,6 @@ public class CartController {
 			}
 //		}
 		
-		
 //		List<OrderDetailVO> productPayList = service.selectPay(sId);
 //		model.addAttribute("productPayList", productPayList);
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -422,7 +421,7 @@ public class CartController {
 		map.put("sId", sId);
 		System.out.println("사용할 포인트 : " + map.get("usePoint"));
 		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
-		
+		 
 		
 		
 //		for(int odn :order_detail_num) {
@@ -453,6 +452,8 @@ public class CartController {
 			
 			int resultPrice = (payAllPrice.getAllPrice() + 3000) - resultPoint;
 			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
@@ -467,13 +468,19 @@ public class CartController {
 			
 			int resultPrice = (payAllPrice.getAllPrice() + 3000);
 			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
 		}
 		
 		// 결제 상품 이름 조회
 		
 		ProductVO productNames = service.selectProductNames(sId);
 		System.out.println("결제 상품 명 : " + productNames);
+		System.out.println(productNames.getProduct_name());
+		model.addAttribute("paymentProduct",productNames.getProduct_name());
 		
+		session.setAttribute("usePoint", map.get("usePoint"));
+        session.setAttribute("paymentProduct", productNames.getProduct_name());
 		
 		// 결제 상품 저장
 //		for(OrderDetailVO payProduct:orderDetailList) {
@@ -483,10 +490,18 @@ public class CartController {
 		return "store/payment";
 	}
 	
+	
+	
 	@GetMapping("PaymentResult")
-	public String paymentResult() {
+	public String paymentResult(HttpSession session) {
 		
 		System.out.println("결제 성공");
+		 
+		
+		
+		
+		
+		
 	
 		return "store/pay_result";
 	}
