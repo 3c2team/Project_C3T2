@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // 예약 항목이 있는 경우 해당 항목을 날짜별로 필터링
             } else if (document.querySelector('.reservation-row')) {
                 filterItemsByDate('startDate', 'endDate', '.reservation-row', 'data-reservation-date');
-            }
+            // 포인트 내역이 있는 경우 해당 항복을 날짜별로 필터링
+            } else if (document.querySelector('.point-row')) {
+		        filterItemsByDate('startDate', 'endDate', '.point-row', 'data-point-date');
+		    }
         });
     }
 });

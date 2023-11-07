@@ -30,7 +30,7 @@ td {
 					<button onclick="setMonths(-3)">3개월</button>
 					<button onclick="setMonths(-6)">6개월</button>
 				</div>
-				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
+				
 				<form action="MypagePoint">
 					<div id="reservation_confirm_term_right">
 						<div class="calanderWrap">
@@ -55,7 +55,7 @@ td {
 						</tr>
 						<!-- 포인트 데이터 반복 출력 -->
 						<c:forEach var="point" items="${points}">
-							<tr>
+							<tr class="point-row" data-point-date="<fmt:formatDate value="${point.point_date}" pattern="yyyy-MM-dd"/>">
 								<c:choose>
 									<c:when test="${point.point_use eq 1}">
 										<td id="use">적립</td>
@@ -100,5 +100,18 @@ td {
 		<br>
 	</div>
 	<%@ include file="./include/body_bottom.jsp"%>
+	
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	    setMonths(-3); // 기간 설정 함수 호출
+
+	    // "조회" 버튼 클릭 시 적절한 함수를 호출하는 이벤트 리스너
+	    document.getElementById('search_btn').addEventListener('click', function(event) {
+	        event.preventDefault(); // 폼의 기본 제출 동작을 방지
+	        filterItemsByDate('startDate', 'endDate', '.point-row', 'data-point-date');
+	    });
+	});
+	</script>
+	<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 </body>
 </html>
