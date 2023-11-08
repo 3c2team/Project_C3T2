@@ -13,6 +13,48 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/product_detail.js"></script>
 <script type="text/javascript">
+	//찜하기 버튼 
+	$(document).ready(function(){
+		$("#favorite-btn").on('click', function() {
+			let proNum = ${param.proNum};
+			let sId = "${sessionScope.sId}";
+			let favBtnClass = $("#favorite-btn").attr("class");
+			
+			if(favBtnClass == "favorite_on") {
+				$.ajax({
+					url: "RemoveFavorite",
+					method: 'POST',
+					data: { proNum: proNum, sId: sId },
+					success: function() {
+						alert("관심상품에서 삭제")
+						$("#favorite-btn").removeClass();
+						$("#favorite-btn").addClass('favorite_off');
+					},
+					error: function(error) {
+						alert("압 큰일");
+						location.reload();
+					}
+				});
+			} else {
+				$.ajax({
+					url: "AddFavorite",
+					method: 'POST',
+					data: { proNum: proNum, sId: sId },
+					success: function() {
+						alert("관심상품에 등록")
+						$("#favorite-btn").removeClass();
+						$("#favorite-btn").addClass('favorite_on');
+					},
+					error: function(error) {
+						alert("압 큰일");
+						location.reload();
+					}
+				});
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
 	function productCount() {
 		let product_count = $("#amounts").val();
 		
@@ -86,15 +128,18 @@
 					</div>
 				</div>	<%-- 왼쪽 끝 --%>
 				
-				
-				
-				
 				<%-- 오른쪽 --%>
 				<div class="detailTopRigth">
 					<div class="detailTopLikeShare">
-						<!-- 찜하기 공유하기 버튼 -->
-						<input type="hidden" name="product_num" value="${param.proNum }">
-<!-- 						<button name="favoriteBtn">찜하기</button> -->
+						<span id="favorite-btn" class="<c:choose>
+							<c:when test="${productDetail.member_fav eq 1 }">
+								favorite_on
+							</c:when>
+							<c:otherwise>
+								favorite_off
+							</c:otherwise>
+						</c:choose>">
+						</span>
 					</div>
 					<div class="productNum">
 						<p>온라인상품코드 ${productDetail.product_num }</p>
@@ -136,7 +181,7 @@
 					</div>
 					<div class="detailBtn">
 						<button class="btn_white" onclick="productCount()">장바구니</button>
-						<button class="btn_black" onclick="paymentDirect()">구매하기</button>
+						<button class="btn_black" onclick="location.href='Pay'">구매하기</button>
 <!-- 						<button>정기 배송</button> -->
 <!-- 						<button>재고 품절 상품</button> -->
 <!-- 						<button>일시 판매종료</button> -->
@@ -189,9 +234,11 @@
 									<span class="reviewAveScore"> ${AveReviewStar }</span><span class="reviewMaxScore">/  5</span>
 									<span class="reviewCount">총 ${reviewCount }건의 리뷰</span>
 								</div>
-								<div id="reviewWriteBtn">
-									<button class="reviewWrite" onclick="window.open('ReviewFrom?proNum=${productDetail.product_num }', 'review_from', 'width=500, height=800, location=no, status=no, scrollbars=no')">리뷰 쓰기</button>
-								</div>
+								<c:if test="${productDetail.REPLY_YN eq 1}">
+									<div id="reviewWriteBtn">
+										<button class="reviewWrite" onclick="window.open('ReviewFrom?proNum=${productDetail.product_num }', 'review_from', 'width=500, height=800, location=no, status=no, scrollbars=no')">리뷰 쓰기</button>
+									</div>
+								</c:if>
 							</div>
 						</div>
 						
@@ -248,11 +295,13 @@
 				<div class="qnaTatle">
 					<a name="QnA">상품 문의</a>
 				</div>
-				<div class="qnaAve">
-					<div>
-						<button class="reviewWrite" id="questionBtn" onclick="window.open('QuestionFrom?proNum=${productDetail.product_num }', 'question_from', 'width=600, height=800, location=no, status=no, scrollbars=no')">문의 하기</button>
+				<c:if test="${not empty sessionScope.sId }">
+					<div class="qnaAve">
+						<div>
+							<button class="reviewWrite" id="questionBtn" onclick="window.open('QuestionFrom?proNum=${productDetail.product_num }', 'question_from', 'width=600, height=800, location=no, status=no, scrollbars=no')">문의 하기</button>
+						</div>
 					</div>
-				</div>
+				</c:if>
 			</div>
 			<hr>
 			<div>

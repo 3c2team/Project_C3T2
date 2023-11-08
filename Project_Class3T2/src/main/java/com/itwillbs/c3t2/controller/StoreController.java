@@ -36,63 +36,50 @@ import com.itwillbs.c3t2.vo.ReviewVO;
 
 @Controller
 public class StoreController {
-	
 	@Autowired
 	private StoreService service;
-	
+	// StroerMain 페이지
 	@GetMapping("OnlineStore")
 	public String main(Model model) {
 		List<ProductVO> bestList = service.getProductbestList();
 //		List<ProductVO> hotList = service.getProductHotList();
 //		List<ProductVO> newList = service.getProductNewList();
-		
 		model.addAttribute("bestList", bestList);
 //		model.addAttribute("hotList", hotList);
 //		model.addAttribute("newList", newList);
-		
-		
 		return "store/store_main";
 	}
-	
+	// Best 페이지
 	@GetMapping("StoreBest")
 	public String best(Model model) {
 		List<ProductVO> bestList = service.getProductbestList();
-//		System.out.println(bestList);
-		
 		model.addAttribute("bestList", bestList);
 		return "store/store_best";
 	}
-	
+	// Hot 페이지
 	@GetMapping("StoreHot")
 	public String storeHot(Model model) {
 		List<ProductVO> hotList = service.getProductHotList();
-//		System.out.println(hotList);
-		
 		model.addAttribute("hotList", hotList);
-		
 		return "store/store_hot";
 	}
-	
+	// New 페이지
 	@GetMapping("StoreNew")
 	public String storeNew(Model model) {
 		List<ProductVO> newList = service.getProductNewList();
-//		System.out.println(newList);
-		
 		model.addAttribute("newList", newList);
-		
 		return "store/store_new";
 	}
-	
+	// Category 페이지
 	@GetMapping("StoreKit")
 	public String storeKit(Model model, String category) {
 		List<ProductVO> proList = null;
 		if(category == null || category.equals("")) {
 			proList = service.getProductNewList();
 			model.addAttribute("proList", proList);
-			
 			return "store/store_kit";
 		}
-		
+		// String으로 받은 카테고리 파라미터 값을 DB의 int 값에 맞춰 변환
 		int category_num = 0;
 		switch (category) {
 			case "Steak": category_num = 1; break;
@@ -101,9 +88,6 @@ public class StoreController {
 			case "ets": category_num = 4; break;
 		}
 		
-		System.out.println("int cate_num: " + category_num);
-		System.out.println("Sting cate: " + category);
-	
 		if(category_num > 0) {
 			proList = service.getProductCategoryList(category_num);
 		}
@@ -112,15 +96,19 @@ public class StoreController {
 		
 	}
 	
-	// 상세페이지~
+	// 상세페이지
 	@GetMapping("ProductDetail")
-	public String productDetail(int proNum, Model model) {
-		ProductVO productDetail = service.getProductDetail(proNum);
+	public String productDetail(HttpSession session, int proNum, Model model, @RequestParam Map<String, Object> param) {
+		param.put("sId", session.getAttribute("sId"));
+		// 상품 정보 조회
+		Map<String, Object> productDetail = service.getProductDetail(param);
+		// 이미지 조회
 		List<ProductImgVO> productImgList = service.getProductImg(proNum);
 		
+		// productImgList에서 가지고 온 객체를 판별하여 info 이미지는 productInfoImg에,
+		// 미니 이미지는 productImgList 저장 후 전송
 		List<ProductImgVO> productMiniImgList = new ArrayList<ProductImgVO>();
 		ProductImgVO productInfoImg = new ProductImgVO();
-		
 		for(ProductImgVO proImg : productImgList ) {
 			if(proImg.getProduct_image().contains("info")) {
 				productInfoImg = proImg;
@@ -134,50 +122,36 @@ public class StoreController {
 		model.addAttribute("productInfoImg", productInfoImg);
 		
 		//=========================================================================
-		// 리뷰
+		// 리뷰조회
 		List<ReviewVO> reviewList = service.getReviewList(proNum);
-		double reviewCount = reviewList.size();
-		double sumReviewStar = 0;
-		
+		double reviewCount = reviewList.size();	// 총 리뷰 갯수
+		double sumReviewStar = 0;	// 별점 합
+		// 별점 평균 값 계산
 		for(ReviewVO review : reviewList) {
 			sumReviewStar += review.getReview_star();
 		}
-		
 		double AveReviewStar = sumReviewStar/reviewCount;
-		
 		if(Double.isNaN(AveReviewStar)) {
 			AveReviewStar = 0;
 		}
-		
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("AveReviewStar", AveReviewStar);
 		model.addAttribute("reviewCount", (int)reviewCount);
 
 		//=========================================================================
-		// 문의
+		// 문의하기 조회
 		List<QnAVO> QnAList = service.getQnAList(proNum);
-		System.out.println(QnAList);
 		model.addAttribute("QnAList", QnAList);
 		
 		return "store/product_detail";
 	}
 	
-//	@ResponseBody
-//	@PostMapping("ProductDetailFavorite")
-//	public void favorite(FavoriteVO favorite, HttpSession session, HttpServletResponse response) {
-//		int insertCount = service.registFavorite(favorite);
-//		
-//		if(insertCount > 0) {
-//			//찜하기 실패
-//		}
-//	}
-	
-	// 리뷰작성폼으로 이동~
+	// 리뷰작성폼
 	@GetMapping("ReviewFrom")
-	public String reviewFrom(int proNum, HttpSession session, Model model) {
-		ProductVO product = service.getProductDetail(proNum);
-		String id = (String)session.getAttribute("sId");
-		
+	public String reviewFrom(@RequestParam Map<String, Object> param, HttpSession session,  Model model) {
+		param.put("sId", session.getAttribute("sId"));
+		Map<String, Object> product = service.getProductDetail(param);
+		String id = session.getAttribute("sId").toString();
 		
 		// 로그인X 경우 close 처리
 		if(id == null || id.equals("")) {
@@ -185,28 +159,18 @@ public class StoreController {
 			return "store/popup/close";
 		}
 		
-		// 상품구매X 경우 close 처리
-//		if(조건) {
-//			model.addAttribute("msg", "상품을 구매했을 경우만 리뷰등록이 가능합니다");
-//			return "store/popup/close";
-//		}
-		
 		model.addAttribute("product", product);
 		return "store/popup/review_from";
 	}
 	
+	// 리뷰작성폼 Pro
 	@PostMapping("ReviewPro")
-//	public String reviewPro(ReviewVO review, HttpSession session, Model model, @RequestParam(value = "review_image", required = false) MultipartFile mainFile) {
 	public String reviewPro( @RequestParam Map<String, Object> map
 							,@RequestParam(value = "file", required=false) MultipartFile file
 							, HttpSession session, Model model) {
-		
-		
 		String sId = (String)session.getAttribute("sId");
 		String uploadDir = "/review_img/"; //가상 경로
 		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Bakc_Project_Class3T2/", ""); //실제 경로
-		
-		
 		
 		// 로그인X 처리
 		if(session.getAttribute("sId") == null) {
@@ -216,11 +180,6 @@ public class StoreController {
 		
 //		//===================== < 이미지 처리 > ===================== 
 //		//--------------------- < 이미지 경로 > ---------------------
-		
-//		if(file.getName().equals("") || file == null) {
-//			map.put(uploadDir, saveDir)
-//		}
-		
 //		// 서브디렉토리명 저장 yyyy/MM/dd 형식
 		String subDir = "";
 		try {
@@ -230,9 +189,7 @@ public class StoreController {
 			saveDir += subDir;
 			
 			Path path = Paths.get(saveDir);
-			System.out.println(saveDir);
 			Files.createDirectories(path);
-//			file.transferTo(new File(saveDir, file.getOriginalFilename()));// 경로 생성!
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -246,16 +203,13 @@ public class StoreController {
 			map.put("file_name", uploadDir + subDir + "/" + fileName);
 		}
 		map.put("member_id", sId);
-		
 //		//------------------ < 게시물 등록 처리 > -------------------
 		
-//		System.out.println(review);
 		int insertCount = service.registReview(map);
 //		
 		try {
 			if(insertCount > 0) { //성공
 				if(file != null && !(file.getOriginalFilename().equals(""))) {
-//					System.out.println("파일등록성공");
 					file.transferTo(new File(saveDir, fileName));
 				}
 				model.addAttribute("msg", "리뷰를 등록했습니다.");
@@ -263,34 +217,28 @@ public class StoreController {
 				return "store/popup/popup_pro";
 			} 
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 		//-----------------------------------------------------------
-		System.out.println("*****************************************saveDir" + saveDir);
 		model.addAttribute("msg", "리뷰등록을 실패했습니다.");
 		return "store/popup/close";
 		//============================================================
 	}
 	
-	// QnA작성폼으로 이동~
+	// 문의하기 작성폼
 	@GetMapping("QuestionFrom")
 	public String questionFrom(int proNum, HttpSession session, Model model) {
 		String id = (String)session.getAttribute("sId");
-		
 		if(id == null) {
 			model.addAttribute("msg", "문의하시려면 로그인해주세요.");
 			return "store/popup/close";
 		}
-		
 		return "store/popup/question_from";
 	}
 	
+	// 문의하기 작성폼 Pro
 	@PostMapping("QuestionPro")
 	public String questionPro(QnAVO question, HttpSession session, Model model) {
 		if(session.getAttribute("sId") == null) {
@@ -307,6 +255,19 @@ public class StoreController {
 			model.addAttribute("msg", "문의글 등록을 실패했습니다.");
 			return "stoer/popup/close";
 		}
-		
+	}
+	
+	// 관심상품 등록
+	@ResponseBody
+	@PostMapping("AddFavorite")
+	public void addFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
+		int insertCount = service.registFavorite(param);
+	}
+	
+	// 관심상품 삭제
+	@ResponseBody
+	@PostMapping("RemoveFavorite")
+	public void removeFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
+		int deleteCount = service.deleteFavorite(param);
 	}
 }
