@@ -233,7 +233,7 @@ function AllPayProduct(sId) {
                      </td>
                      <td style="border-left: none; border-right: none">
                      	
-                     	<img style="width: 60%" src="${pageContext.request.contextPath }/resources${productList.product_main_img_real_file }">
+                     	<img style="width: 60%" src="${productList.product_main_img_real_file }">
                      	
                      </td>   
                      

@@ -206,7 +206,7 @@ $(function() {
 <!-- 							<td style="text-align: left; text-align: center; border-right: none;"> -->
 <!-- 								<input type="checkbox" name="checkbox"> -->
 <!-- 							</td> -->
-							<td style="border-left: none; border-right: none;"><img style="width: 60%" src="${pageContext.request.contextPath }/resources${productPayList.product_main_img_real_file }"></td>
+							<td style="border-left: none; border-right: none;"><img style="width: 60%" src="${productPayList.product_main_img_real_file }"></td>
 							<td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold; width: 40%">${productPayList.product_name }</td>
 							<td><span style="padding-left: 10px;"><fmt:formatNumber value="${productPayList.product_price }" pattern="#,###" /></span>원</td> <!-- 상품가격 -->
 							<td style="width: 80px;">
