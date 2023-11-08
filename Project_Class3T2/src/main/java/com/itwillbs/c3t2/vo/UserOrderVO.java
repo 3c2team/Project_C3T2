@@ -16,5 +16,7 @@ public class UserOrderVO {
 	private int product_num;
 	private String merchant_uid;
 	private int product_price;
+	private int total_price;
+	private String product_names;
 	
 }

@@ -86,5 +86,8 @@ public interface MyPageMapper {
 	
 	// 구매 목록
 	List<UserOrderVO> getOrderList(Map<String, Object> parMap);
+	
+	// 총 가격과 상품
+	List<UserOrderVO> getOrderListWithTotalPrices(Map<String, Object> parMap);
 
 }

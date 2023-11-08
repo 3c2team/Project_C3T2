@@ -132,4 +132,8 @@ public class MyPageService {
 	public List<UserOrderVO> getOrderList(Map<String, Object> parMap) {
 		return mapper.getOrderList(parMap);
 	}
+	// 총 가격과 상품
+	public List<UserOrderVO> getTotalPriceAndProductNames(Map<String, Object> parMap) {
+		return mapper.getOrderListWithTotalPrices(parMap);
+	}
 }

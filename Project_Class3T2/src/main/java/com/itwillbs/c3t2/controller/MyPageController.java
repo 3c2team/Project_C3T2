@@ -314,10 +314,13 @@ public class MyPageController {
 		//상품 구매 내역을 가져옴
 		List<UserOrderVO> OrderList = service.getOrderList(parMap);
 		
+		// 총 가격과 결합된 상품 이름을 가져옴
+		List<UserOrderVO> orderTotals = service.getTotalPriceAndProductNames(parMap);
 		System.out.println(loginUser);
 		
 		// 가져온 구매 목록을 모델에 추가
 		model.addAttribute("OrderList", OrderList);
+		model.addAttribute("orderTotals", orderTotals); // 총 가격과 결합된 상품 이름 추가
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("pagination", pagination);
 		
@@ -364,7 +367,7 @@ public class MyPageController {
         return "productDetail";  	// 리뷰 상세 페이지의 뷰 이름
     }
 	
-	@GetMapping("MypagePoint")
+	@GetMapping("MypagePoint")		// 포인트
 	public String myPagePoint(HttpSession session ,Model model, 
 			@RequestParam(defaultValue = "1000-01-01") String startDate, 
 			@RequestParam(defaultValue = "5000-12-31") String endDate,

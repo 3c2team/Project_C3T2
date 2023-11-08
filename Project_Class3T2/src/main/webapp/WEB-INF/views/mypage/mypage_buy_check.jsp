@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+th, td {
+      word-break: break-all;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+</style>
 <%@ include file="./include/head.jsp"%>
 <title>마이페이지-상품 구매 내역</title>
 </head>
@@ -40,21 +48,23 @@
 					<table>
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
-							<th width="50px">주문일자</th>
+							<th width="80px">주문번호</th>
 							<th width="250px">배송자 주소</th>
-							<th width="200px">요청 사항</th>
-							<th width="150px">총 구매 가격</th>
-							<th width="180px">구매 시각</th>
+							<th width="100px">요청 사항</th>
+							<th width="80px">총 구매 가격</th>
+							<th width="100px">구매 일자</th>
+							<th width="250px">구매 상품목록</th>
 						</tr>
-						<!-- 리뷰 데이터 반복 출력 -->
-						<c:forEach var="OrderList" items="${OrderList}">
-							<tr>
-								<td>${OrderList.merchant_uid}</td>
-								<td>${OrderList.receiver_address}</td>
-								<td>${OrderList.receiver_request}</td>
-								<td>${OrderList.product_price}</td>
-								<td>${OrderList.order_date}</td>
-							</tr>
+						<!-- 총 가격이 포함된 주문 데이터 반복 출력 -->
+						<c:forEach var="orderTotals" items="${orderTotals}">
+						    <tr>
+						        <td>${orderTotals.merchant_uid}</td>
+						        <td>${orderTotals.receiver_address}</td>
+						        <td>${orderTotals.receiver_request}</td>
+						        <td>${orderTotals.total_price}</td> <!-- 여기서는 총 가격을 표시 -->
+						        <td><fmt:formatDate value="${orderTotals.order_date}" pattern="yyyy-MM-dd" /></td>
+						        <td>${orderTotals.product_names}</td>
+						    </tr>
 						</c:forEach>
 						<c:if test="${empty OrderList}">
 							<tr>
