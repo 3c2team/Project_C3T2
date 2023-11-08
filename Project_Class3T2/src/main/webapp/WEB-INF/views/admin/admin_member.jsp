@@ -69,8 +69,8 @@
 											<th>${memberList.member_num }</th>
 											<th>${memberList.member_name }</th>
 											<th>${memberList.member_address }</th>
-											<th>${memberList.member_address }</th>
 											<th>${memberList.member_phone_num }</th>
+											<th>${memberList.member_point }</th>
 											<th>${memberList.member_insert_date }</th>
 										</tr>
 									</c:forEach>

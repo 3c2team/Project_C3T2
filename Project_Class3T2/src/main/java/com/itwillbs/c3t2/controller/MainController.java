@@ -22,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.google.protobuf.Timestamp;
+import com.itwillbs.c3t2.service.AdminService;
 import com.itwillbs.c3t2.service.MemberService;
 import com.itwillbs.c3t2.service.ReservationService;
 import com.itwillbs.c3t2.service.SendMailService;
+import com.itwillbs.c3t2.vo.AdminVO;
 import com.itwillbs.c3t2.vo.AuthInfoVO;
 import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.NoticeVO;
@@ -204,6 +206,9 @@ public class MainController {
 			
 			MemberVO dbMember = service.getMemberLogin(member_id);
 //			System.out.println(dbMember.getMember_passwd());
+			if(member_id.equals("admin")) {
+				return "admin/admin_login";
+			}
 			if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
 				model.addAttribute("msg", "로그인 실패!");
 				return "fail_back";
@@ -240,6 +245,9 @@ public class MainController {
 		public String loginPro(
 				String member_id, MemberVO member, @RequestParam(required = false) boolean rememberId, HttpSession session, HttpServletResponse response, Model model) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			if(member_id.equals("admin")) {
+				return "admin/admin_login";
+			}
 			MemberVO dbMember = service.getMemberLogin(member_id);
 			if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
 				model.addAttribute("msg", "로그인 실패!");

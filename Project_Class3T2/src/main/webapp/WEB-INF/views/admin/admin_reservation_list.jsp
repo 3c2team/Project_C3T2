@@ -16,6 +16,14 @@ table {
 	font-size: 18px;
 }
 </style>
+<script type="text/javascript">
+function onSubmit() {
+	if(confirm("삭제하시겠습니까?")){
+		
+	}
+}
+</script>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
 	rel="stylesheet" />
@@ -39,30 +47,35 @@ table {
 						<i class="fas fa-table me-1"></i> 예약목록
 					</div>
 					<div class="card-body">
-						<table id="datatablesSimple">
-							<thead>
-								<tr>
-									<th>예약번호</th>
-									<th>예약자성함</th>
-									<th>예약시간</th>
-									<th>예약테이블</th>
-									<th>예약 번호</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="ReservationList" items="${ReservationList }">
-									<c:if test="${ReservationList.reservation_cancel eq 0 }">
-										<tr>
-											<th>${ReservationList.num }</th>
-											<th>${ReservationList.reservation_person_name }</th>
-											<th>${ReservationList.reservation_date }</th>
-											<th>${ReservationList.dinning_num }</th>
-											<th>${ReservationList.reservation_guest_num }</th>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
+						<form action="AdminReservationDeletePro" method="post">
+							<table id="datatablesSimple">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>예약번호</th>
+										<th>예약자성함</th>
+										<th>예약시간</th>
+										<th>예약테이블</th>
+										<th>예약 번호</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="ReservationList" items="${ReservationList }">
+										<c:if test="${ReservationList.reservation_cancel eq 0 }">
+											<tr>
+												<th><input type="checkbox" name="checkbox" value="${ReservationList.reservation_num }"></th>
+												<th>${ReservationList.num }</th>
+												<th>${ReservationList.reservation_person_name }</th>
+												<th>${ReservationList.reservation_date }</th>
+												<th>${ReservationList.dinning_num }</th>
+												<th>${ReservationList.reservation_guest_num }</th>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</tbody>
+							</table>
+							<input type="submit" id= "delete_btn"class="btn btn-primary" value="삭제">
+						</form>
 					</div>
 				</div>
 			</main>
