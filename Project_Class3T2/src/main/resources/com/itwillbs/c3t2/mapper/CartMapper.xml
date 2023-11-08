@@ -272,11 +272,16 @@
 			)
 	</insert>
 
-<!-- INSERT INTO -->
-<!-- 			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num) -->
-<!-- 			SELECT member_id, product_num, product_count, product_price, cart_num -->
-<!-- 			FROM CART -->
-<!-- 			WHERE member_id = #{sId} AND product_num = #{proNum} -->
-
+	<update id="updateProductCount">
+		UPDATE CART 
+		SET product_count = #{productCount}
+		WHERE member_id = #{sId} AND product_num = #{productNumber}
+	</update>
+	
+	<select id="selectCartPrice" resultType="com.itwillbs.c3t2.vo.CartVO">
+		SELECT product_count * product_price as product_price
+		FROM CART
+		WHERE member_id=#{sId} AND product_num = #{productNumber}
+	</select>
 
 </mapper>

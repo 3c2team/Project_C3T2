@@ -94,6 +94,31 @@ $(function() {
 	           location.href="productAllDelete";
 	       }
 	});
+    
+    // 선택상품 수량 변경
+    $("#countChange").on("click", function() {
+//     	alert("확인용");
+		var productCount = $("#count").val();
+		var productNumber = $("#productNumber").val();
+		
+		alert(productCount + ", " + productNumber);
+		$.ajax({
+			type:"POST",
+			url:"CountChange",
+			data:{
+				productCount,
+				productNumber
+				},
+			success:function(result){
+				console.log("수량 변경 데이터 전송");
+// 				$("#count").text(result);
+				alert("수량 변경 완료");
+				$("#resultPrice").text(result);
+			}, error:function(){
+				console.log("작업 실패");
+			}
+		});
+	});
         
  });
  
@@ -146,6 +171,14 @@ function AllPayProduct(sId) {
 	
 }
 
+// function productCount() {
+	
+// 	var proCount = $("#count").val();
+// 	alert(proCount);	
+	
+// }
+
+
    
 
 </script>
@@ -191,8 +224,10 @@ function AllPayProduct(sId) {
             </thead>
             
             <tbody> 
-               <c:forEach var="productList" items="${productList}">
-                  <tr style="height: 90px; background-color: #fff;">
+               <c:forEach var="productList" items="${productList}" varStatus="status"> 
+               <input type="hidden" id="productNumber" value="${productList.product_num}">                
+               
+               <tr style="height: 90px; background-color: #fff;">
                      <td style="text-align: left; text-align: center; border-right: none;">
                         <input type="checkbox" name="checkbox" class="checkbox" id="${productList.product_num}" value="${productList.product_num}" proNum="${productList.product_num}"/>
                      </td>
@@ -207,16 +242,17 @@ function AllPayProduct(sId) {
 <%--                      <td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 --> --%>
                      <td><span style="padding-left: 10px;"><fmt:formatNumber value="${productList.product_price }" pattern="#,###" /></span>원</td> <!-- 상품가격 -->
                      
-                     <td style="width:80px;">
-                        <input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" value="${productList.product_count }">
-                        <button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> 
+                     <td style="width:80px;" >
+<%--                         <input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" name="count" id="count" value="${productList.product_count }"> --%>
+                        ${productList.product_count }
+<!--                         <button class="btn default" style="border-radius: 3px; size: 10px; color: black;" id="countChange">변경</button>  -->
                      </td>
                      
 <!--                      <td>-</td> -->
                      <td>기본배송</td>
                      <td>고정</td>
 <%--                      <td><span>${productList.product_price  * productList.product_count }</span>원</td> --%>
-                     <td><span><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
+                     <td><span id="resultPrice"><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
                      <td>
                         <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" onclick="orderPro('${productList.product_num}')">주문하기</button><br>
                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="favorite('${productList.product_num}')">관심상품</button><br>

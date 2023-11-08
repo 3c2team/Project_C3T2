@@ -95,5 +95,11 @@ public interface CartMapper {
 		// 상품 상세 페이지에서 ORDER_DETAIL로 저장
 		public int insertOrderDetailDirect(@Param("sId") String sId,@Param("proNumber") int proNumber,@Param("proCount") int proCount,@Param("proPrice") int proPrice);
 
+		// CART에서 상품 수량 변경
+		public int updateProductCount(@Param("sId") String sId,@Param("productCount") int productCount,@Param("productNumber") int productNumber);
+
+		// 상품 수량 변경 시 금액 계산
+		public CartVO selectCartPrice(@Param("sId") String sId,@Param("productNumber") int productNumber);
+
 
 }

@@ -15,7 +15,7 @@
 	
 
 
-	function requestPay() {
+	window.onload = function requestPay() {
 	
 		IMP.init('imp68757643'); // 객체 초기화. 가맹점 식별코드 전달
 	
@@ -45,6 +45,7 @@
 						},
 					success:function(result){
 						console.log("데이터 넘어감");
+						location.href="MypageBuyList"
 					},
 					error:function(){
 						console.log("작업 실패")
@@ -76,12 +77,12 @@ function getDateTimeString() {
 </script>
 </head>
 <body>
-	<h1>payment</h1>
+<!-- 	<h1>payment</h1> -->
 	
-	<h1>${productPayList}</h1>
-	<h1>${sessionScope.paymentProduct}</h1>
+<%-- 	<h1>${productPayList}</h1> --%>
+<%-- 	<h1>${sessionScope.paymentProduct}</h1> --%>
 	
-	<input type="button" value="결제하기" onclick="requestPay()">
+<!-- 	<input type="button" value="결제하기" onclick="requestPay()"> -->
 	
 </body>
 </html>

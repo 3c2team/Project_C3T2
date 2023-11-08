@@ -116,6 +116,27 @@ public class CartController {
 		return "store/cart";
 	}
 	
+	@PostMapping("/CountChange")
+	@ResponseBody
+	public int countChange(
+					@RequestParam(value = "productCount",defaultValue = "0", required = false) int productCount
+					, @RequestParam(value = "productNumber",defaultValue = "0", required = false) int productNumber
+					, HttpSession session) {
+		
+		int result = 0;
+		String sId = (String)session.getAttribute("sId");
+		
+		System.out.println("변경된 수량 데이터 : " + productCount + ", " + productNumber + ", sId : " + sId);
+		
+		int proCount = service.updateProductCount(sId, productCount, productNumber);
+//		CartAllPriceVO cartAllPrice = service.getCartAllPrice(sId);
+		CartVO cartProductPrice = service.selectCartPrice(sId, productNumber);
+		
+		result = cartProductPrice.getProduct_price();
+		
+		return result;
+	}
+	
 	//=============================================================================================================================================
 	
 	// 상품 하나 삭제 시 해당 상품 삭제

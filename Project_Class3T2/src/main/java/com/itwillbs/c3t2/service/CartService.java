@@ -188,6 +188,18 @@ public class CartService {
 		return mapper.insertOrderDetailDirect(sId, proNumber, proCount, proPrice);
 	}
 
+	// CART에서 상품 수량 변경
+	public int updateProductCount(String sId, int productCount, int productNumber) {
+		// TODO Auto-generated method stub
+		return mapper.updateProductCount(sId, productCount, productNumber);
+	}
+
+	// 상품 수량 변경 시 금액 계산 조회
+	public CartVO selectCartPrice(String sId, int productNumber) {
+		// TODO Auto-generated method stub
+		return mapper.selectCartPrice(sId, productNumber);
+	}
+
 
 
 
