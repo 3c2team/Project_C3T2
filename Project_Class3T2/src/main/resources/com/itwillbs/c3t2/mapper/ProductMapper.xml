@@ -33,10 +33,25 @@
 		WHERE product_category_num = #{category_num}
 	</select>
 	<!-- 상품상세 조회 -->
-	<select id="selectProductDetail" resultType="com.itwillbs.c3t2.vo.ProductVO">
+	<select id="selectProductDetail" resultType="map">
+		<![CDATA[ 
 		SELECT *
+			, (SELECT COUNT(*)
+				FROM FAVORITE
+				WHERE product_num = #{proNum}) AS 'favorite_count'
+			, CASE WHEN (SELECT COUNT(*)
+						FROM USER_ORDER
+						WHERE 1=1
+						AND member_id  = #{sId}
+						AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'REPLY_YN'
+			, CASE WHEN (SELECT COUNT(*)
+		 				FROM FAVORITE
+						WHERE 1=1
+		 				AND member_id = #{sId}
+		 				AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'member_fav'
 		FROM PRODUCT
-		WHERE product_num = #{proNum}
+		WHERE product_num  = #{proNum};	
+		]]>
 	</select>
 	<!-- 상품상세 이미지 조회 -->
 	<select id="selectProductImg" resultType="com.itwillbs.c3t2.vo.ProductImgVO">
@@ -84,4 +99,17 @@
 			, NULL
 		)
 	</insert>
+	<!-- 찜하기 -->
+	<insert id="insertFavorite">
+		INSERT INTO FAVORITE VALUES (
+			NULL
+			, #{sId}
+			, #{proNum}
+		)	
+	</insert>
+	<!-- 찜취소 -->
+	<delete id="deleteFavorite">
+		DELETE FROM FAVORITE
+		WHERE member_id = #{sId} AND product_num = ${proNum}
+	</delete>
 </mapper>
