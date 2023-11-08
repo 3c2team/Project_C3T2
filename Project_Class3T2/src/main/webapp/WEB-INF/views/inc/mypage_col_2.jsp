@@ -9,7 +9,3 @@
 	<span>스토어 포인트</span><br>
 	<em>   <fmt:formatNumber  value="${loginUser.member_point}"     />  P</em>
 </li>
-<li>
-	<span>작성한 리뷰</span><br>
-	<em> 0개</em>
-</li>

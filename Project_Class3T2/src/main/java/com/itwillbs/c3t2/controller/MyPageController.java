@@ -55,7 +55,7 @@ public class MyPageController {
 		
 		// 로그인한 사용자가 세션에 존재하지 않으면 로그아웃 처리를 위해 로그아웃 경로로 리다이렉트.
 	    // 이는 로그인하지 않은 사용자가 로그인이 필요한 페이지에 접근하는 것을 방지하는 목적.
-		if(loginUser==null) return "redirect:/Logout";
+//		if(loginUser==null) return "redirect:/Logout";
 		
 		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
 		parMap.put("member_id", loginUser.getMember_id());	
@@ -303,7 +303,7 @@ public class MyPageController {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if(loginUser==null) return "redirect:/Logout";
+//		if(loginUser==null) return "redirect:/Logout";
 		
 		parMap.put("member_id", loginUser.getMember_id());
 		pageMaker.setPerPageNum(5);
@@ -331,7 +331,7 @@ public class MyPageController {
 	public String mypageGoodsReview(HttpSession session ,Model model, Map<String, Object> parMap , PageMaker pageMaker) {
 		
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		if(loginUser==null) return "redirect:/Logout";
+//		if(loginUser==null) return "redirect:/Logout";
 		
 		// 로그인한 사용자의 ID를 매개변수 맵에 추가.
 		parMap.put("member_id", loginUser.getMember_id());

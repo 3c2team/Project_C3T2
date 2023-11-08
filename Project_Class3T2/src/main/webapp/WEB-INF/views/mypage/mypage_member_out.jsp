@@ -140,19 +140,22 @@ tr td{text-align: left;}
 	<%@ include file="./include/body_bottom.jsp"%>
 	
 <script>
+// 회원 탈퇴 절차를 처리
 function goBackTwoSteps(){	
-
+	// 선택된 회원 탈퇴 사유의 값을 가져옴
 	let membershipWithdrawal =$("input[name='membershipWithdrawal']:checked").val();
+	// 만약 회원 탈퇴 사유가 선택되지 않았다면 경고창을 띄우고 함수를 종료
 	if(!membershipWithdrawal){
 		alert("회원탈퇴 사유을 선택해 주세요.");
 		return;
 	}
 	
-	
+	// 회원 탈퇴에 동의 체크박스가 선택되지 않았다면 경고창을 띄우고 함수를 종료
 	if(!$(".myAgree").is(":checked")){
 		alert("회원 탈퇴에 동의를 선택해 주세요.");
 		return;
 	}
+	// 선택된 회원 탈퇴 사유의 텍스트를 가져옴.
 	let membershipWithdrawalText =$("input[name='membershipWithdrawal']:checked").parent(".radio").text();
 	console.log(" membershipWithdrawal : ",membershipWithdrawal , membershipWithdrawalText);
 	
