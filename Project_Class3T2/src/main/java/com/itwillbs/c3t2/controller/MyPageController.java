@@ -124,32 +124,32 @@ public class MyPageController {
 	@ResponseBody
 	public boolean checkMypageConfirm(String passwd, HttpSession session) {	
 		
-		// 현재 세션에서 사용자 ID를 가져옵니다.
+		// 현재 세션에서 사용자 ID를 가져옴.
 		String member_id=(String)session.getAttribute("sId");
 		
-		// 비밀번호 암호화를 위한 BCryptPasswordEncoder 객체를 생성합니다.
+		// 비밀번호 암호화를 위한 BCryptPasswordEncoder 객체를 생성.
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		// DB에서 해당 사용자의 정보를 가져옵니다.
+		// DB에서 해당 사용자의 정보를 가져옴.
 		MemberVO dbMember = memberService.getMemberLogin(member_id);
 		
-		// 사용자 정보가 없거나 입력한 비밀번호와 DB의 비밀번호가 일치하지 않으면 false를 반환합니다.
+		// 사용자 정보가 없거나 입력한 비밀번호와 DB의 비밀번호가 일치하지 않으면 false를 반환.
 		if(dbMember == null || !passwordEncoder.matches(passwd, dbMember.getMember_passwd())) {			
 			return false;			
 		}else {	
-			// 비밀번호 확인이 성공하면 세션에 확인 플래그를 설정하고 true를 반환합니다.
+			// 비밀번호 확인이 성공하면 세션에 확인 플래그를 설정하고 true를 반환.
 			session.setAttribute("mypageChckConfirm", "ok");
 			return true;	
 		}		
 	}
 	
 	/**◆3.공통-비밀번호 확인 : 메서드 **/
-	// 개인정보 수정 전 비밀번호 확인을 위한 유틸리티 메서드입니다.
+	// 개인정보 수정 전 비밀번호 확인을 위한 유틸리티 메서드.
 	private boolean  mpCheck(HttpSession session,RedirectAttributes rttr, String redirectURL) {
-		// 세션에서 비밀번호 확인 플래그를 가져옵니다.
+		// 세션에서 비밀번호 확인 플래그를 가져옴.
 		String mypageChckConfirm=(String)session.getAttribute("mypageChckConfirm");
 		
-		// 플래그가 설정되어 있지 않으면 세션 값을 삭제하고 false를 반환합니다.
+		// 플래그가 설정되어 있지 않으면 세션 값을 삭제하고 false를 반환.
 		if(!StringUtils.hasText(mypageChckConfirm)) {
 			// 세션값 삭제
 			session.removeAttribute("mypageChckConfirm");
@@ -184,12 +184,12 @@ public class MyPageController {
 	@ResponseBody
 	public String mypageMemberModify(MemberVO memberVO, HttpSession session) {		
 		try {
-			// 현재 세션에서 사용자 ID를 가져옵니다.
+			// 현재 세션에서 사용자 ID를 가져옴.
 			String member_id=(String)session.getAttribute("sId");
-			// 가져온 사용자 ID를 MemberVO 객체에 설정합니다.
+			// 가져온 사용자 ID를 MemberVO 객체에 설정.
 			memberVO.setMember_id(member_id);
 			
-			// 회원 정보를 업데이트하고, 성공적으로 업데이트된 경우 'success'를 반환합니다.
+			// 회원 정보를 업데이트하고, 성공적으로 업데이트된 경우 'success'를 반환.
 			if( service.updateMember(memberVO)==1)return "success";
 			return "failed";
 			
@@ -487,10 +487,19 @@ public class MyPageController {
         return "redirect:/MypageReservationList";
 	}
 	
+	@GetMapping("/reservationDetail")	//예약상세 페이지 넘어가게하기
+    public String reservationDetail(@RequestParam(value ="reservation_guest_num", required = false) String reservationNum, Model model) {
+        ReviewVO reservation = service.getReservationByNum(reservationNum);
+        System.out.println(reservation);
+        model.addAttribute("reservation", reservation);
+        return "reservation/reservation_search_Info";  	// 예약 상세 페이지의 뷰 이름
+    }
+	
 	
 	@GetMapping("MypageDetail")							// 나의 상세 정보
 	public String mypagePoint(Model model, HttpSession session) {
 		String member_id=(String)session.getAttribute("sId");
+		System.out.println(member_id);
 		MemberVO memberVO = memberService.getMemberLogin(member_id);
 		model.addAttribute("Member", memberVO);
 		return "mypage/mypage_detail";

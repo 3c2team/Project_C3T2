@@ -21,6 +21,7 @@
 					<button onclick="setMonths(-1)">1개월</button> <!-- "1개월" 버튼을 클릭하면 setMonths 함수가 호출됨 -->
 					<button onclick="setMonths(-3)">3개월</button>
 					<button onclick="setMonths(-6)">6개월</button>
+					<button onclick="setAllPeriod()">전체기간</button>
 				</div>
 				<div id="reservation_confirm_term_right">
 					<div class="calanderWrap">
@@ -51,7 +52,12 @@
 							<!-- 각 테이블 행에는 'reservation-row' 클래스가 지정되어 있고, 예약 날짜를 데이터 속성으로 포함-->
 							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
-								<td>${reservation.reservation_guest_num}</td>
+								<td>
+						            <!-- 예약 인원 수에 하이퍼링크 추가 -->
+						            <a href="${pageContext.request.contextPath}/reservationDetail?reservationNum=${reservation.reservation_guest_num}">
+						                ${reservation.reservation_guest_num}
+						            </a>
+						        </td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>
 								<td>${reservation.reservation_person_count}</td>

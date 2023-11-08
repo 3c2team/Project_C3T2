@@ -244,6 +244,11 @@
         WHERE reservation_num = #{reservationNum}
     </update>
     
+    <!-- 예약 번호 누르면 예약페이지로 -->
+	<select id="getReservationByNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
+	    SELECT * FROM RESERVATION WHERE reservation_guest_num = #{reviewNum}
+	</select>
+    
 
 				
     <!-- 회원정보 수정 -->
@@ -269,9 +274,9 @@
     
     <!-- 회원 탈퇴사유 등록 -->
     <insert id="insertMbershipWithdrawal">    
-	    INSERT INTO MEMBER_WITHDRAWAL_REASON
-			( member_withdrawal_reason_num, member_withdrawal_reason_text)
-		VALUES(#{select_num},#{select_text})
+	    INSERT INTO MEMBER_OUT
+         (out_num,${membershipWithdrawal},out_date)
+     	 VALUES(null,1,now())
     </insert>
     
     

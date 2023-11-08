@@ -39,6 +39,7 @@
                     <button onclick="setMonths(-1)">1개월</button>
                     <button onclick="setMonths(-3)">3개월</button>
                     <button onclick="setMonths(-6)">6개월</button>
+                    <button onclick="setAllPeriod()">전체기간</button>
                 </div>
                 <div id="reservation_confirm_term_right">
                     <div class="calanderWrap">
@@ -57,8 +58,7 @@
                         <tr id="tr_top">
                             <th width="80px">리뷰번호</th>
                             <th width="100px">상품번호</th>
-                            <th width="150px">상품 이미지</th>
-                            <th width="250px">리뷰 내용</th>
+                            <th width="300px">리뷰 내용</th>
                             <th width="100px">별점</th>
                             <th width="130px">리뷰 날짜</th>
                         </tr>
@@ -71,12 +71,6 @@
 					                <a href="${pageContext.request.contextPath}/ProductDetail?proNum=${review.product_num}">
 					                    ${review.product_num}
 					                </a>
-						        </td>
-						        <!--  리뷰 이미지 -->
-						        <td>
-						            <c:if test="${not empty review.review_image}">
-						                <img src="${pageContext.request.contextPath}/resources${review.review_image}" alt="Review Image" style="max-width: 100px; max-height: 100px;"/>
-						            </c:if>
 						        </td>
                                 <td>${review.review_content}</td>
 								<!-- 평점 숫자를 별점으로 치환시키기 -->

@@ -51,6 +51,20 @@ function filterItemsByDate(startDateId, endDateId, itemClass, dateDataAttribute)
     });
 }
 
+// 전체 기간을 설정하고 모든 데이터를 표시하는 함수
+function setAllPeriod() {
+    // 시작 및 종료 날짜 입력 필드의 값을 비움
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+
+    // 모든 데이터를 표시하는 로직을 여기에 추가
+    // 예를 들어, 모든 리뷰, 예약, 포인트 내역 등을 표시
+    const allItems = document.querySelectorAll('.review-row, .reservation-row, .point-row, .buy-row');
+    allItems.forEach(item => {
+        item.style.display = ''; // 모든 항목을 보이게 설정
+    });
+}
+
 // 페이지 로드 시 기본값으로 3개월 전의 날짜를 시작 날짜로 설정하는 초기화 로직
 document.addEventListener('DOMContentLoaded', function() {
     setMonths(-3);

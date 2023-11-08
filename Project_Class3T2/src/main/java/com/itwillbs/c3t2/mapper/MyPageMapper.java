@@ -89,5 +89,7 @@ public interface MyPageMapper {
 	
 	// 총 가격과 상품
 	List<UserOrderVO> getOrderListWithTotalPrices(Map<String, Object> parMap);
+	// 예약 상세페이지
+	ReviewVO getReservationByNum(String reservationNum);
 
 }
