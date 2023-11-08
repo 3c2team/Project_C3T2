@@ -222,4 +222,10 @@
 		ORDER BY notice_date DESC
 		LIMIT 1;
 	</select>
+	
+	<select id="selectRestaurant" resultType="com.itwillbs.c3t2.vo.RestaurantVO">
+		SELECT *
+		FROM RESTAURANT
+		WHERE restaurant_num = 1
+	</select>
 </mapper>
