@@ -241,7 +241,12 @@ public class CartController {
 //		proNumber=61&proCount=1&proPrice=17500
 		String sId = (String)session.getAttribute("sId");
 		
-		
+		// 비회원 장바구니 이동 시 접근 불가
+		if(sId == null ) {
+			model.addAttribute("msg", "로그인 후 이용 부탁드립니다!");
+			return "fail_back";
+		}
+				
 		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNumber + ", " + proCount + ", 가격정보 : " + proPrice);
 				
 		//ORDER_DETAIL 테이블 비우기
