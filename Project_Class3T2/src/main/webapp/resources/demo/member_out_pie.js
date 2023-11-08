@@ -21,7 +21,7 @@ $.ajax({
 var myPieChart = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: ["교환/환불/반품 불만","개인정보 누출 우려","상품의 다양성/품질 불만","상품 가격 불만","배송 불만","아이디 변경을위한 탈퇴 후 재 가입"],
+    labels: ["아이디 변경을위한 탈퇴 후 재 가입","상품 가격 불만","교환/환불/반품 불만","개인정보 누출 우려","상품의 다양성/품질 불만","배송 불만"],
     datasets: [{
       data: [selectOut.reson1 , selectOut.reson2, selectOut.reson3, selectOut.reson4, selectOut.reson5,selectOut.reson6],
       backgroundColor: ['#0d6efd', '#ffc107', '#198754', '#6c757d','#6610f2','#212529'],

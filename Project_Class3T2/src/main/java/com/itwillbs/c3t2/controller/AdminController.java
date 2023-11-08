@@ -593,6 +593,7 @@ public class AdminController {
 	@PostMapping("/AdminSelectReson")
     public Map<String, Integer> selectReson() {
     	Map<String, Integer> selectMemberOut= service.selectMemberOut();
+    	System.out.println("dfdfd" + selectMemberOut);
     return selectMemberOut;
     }
     @ResponseBody

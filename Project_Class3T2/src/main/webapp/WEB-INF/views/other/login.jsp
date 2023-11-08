@@ -14,19 +14,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login_temp.css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript">
-// 	$(function() {
-// 		$("#btn_submit").on("click",function(){
-// 			let id = $("#id").val();
-// 			let passwd = $("#passwd").val();
-// 			if(id =="admin" && passwd == "1234"){
-// 				location.href="adminLogin";
-// 			}else{
-// 				location.href="./";
-// 			}
-// 		});
-// 	});
-</script>
 <body>
 	<div id="mainLayout">
 		<header>
