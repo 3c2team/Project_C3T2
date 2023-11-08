@@ -86,7 +86,9 @@
     margin-bottom: auto;
 }
 .detailTopMiniImg ul {
-	list-style:none;
+	display: flex;
+    align-items: center;
+    list-style: none;
 }
 .detailTopMiniImg li {
 	float: left;
