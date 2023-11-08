@@ -1,6 +1,5 @@
 package com.itwillbs.c3t2.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.itwillbs.c3t2.handler.GenerateRandomCode;
 import com.itwillbs.c3t2.service.ReservationService;
 import com.itwillbs.c3t2.service.SendMailService;
@@ -33,7 +30,7 @@ public class ReservationController {
 	private SendMailService mailService;
 	
 	
-	//예약 폼 페이지 이동
+	// 예약 폼 페이지 이동
 	@GetMapping("/ReservationForm")
 	public String reservationForm(Model model) {
 		List<Map<String, Integer>> dinningMax = service.getDinningMax();
@@ -41,7 +38,7 @@ public class ReservationController {
 		return "reservation/reservation_form";
 	}
 	
-	
+	// 예약가능 여부 확인
 	@ResponseBody
 	@GetMapping("/ReservationSchedule")
 	public List<Map<String, String>> reservationSchedule(@RequestParam Map<String, String> param) {
@@ -56,7 +53,6 @@ public class ReservationController {
 		
 		// 예약 번호 - 6자리 랜덤 숫자
 		reservation.setReservation_guest_num(GenerateRandomCode.getRandomNumCode(6, 6));
-//		System.out.println(reservation);
 		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
 		reservation.setReservation_member_id((String)session.getAttribute("sId"));
 		
@@ -88,12 +84,8 @@ public class ReservationController {
 			@RequestParam String reservation_email2, 
 			Model model) {
 		
-		System.out.println("!!!"+reservation_guest_num);
-		System.out.println("!!!"+reservation_email1);
-		System.out.println("!!!"+reservation_email2);
 		// 쿼리 조회
 		ReservationVO dbReservation = service.selectReservation(reservation_guest_num, reservation_email1 + "@" + reservation_email2); 
-		// 예약 조회 내역 없으면 fail back 구현해놓기!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		System.out.println("예약객체 !!!!!!"+dbReservation);
 		
 		// 조회 사항 넘겨주기
@@ -112,9 +104,6 @@ public class ReservationController {
 			@RequestParam String reservation_person_name,
 			Model model) {
 		reservation = service.selectNumName(reservation_guest_num, reservation_person_name);
-		System.out.println("delete : " + reservation_guest_num);
-		System.out.println("delete : " + reservation_person_name);
-		
 		
 		int deleteCount = service.deleteReservation(reservation_guest_num, reservation_person_name);
 		model.addAttribute("reservation", reservation);
@@ -134,11 +123,6 @@ public class ReservationController {
 			@RequestParam String reservation_person_name, Model model) {
 		
 		reservation = service.selectNumName(reservation_guest_num, reservation_person_name);
-		System.out.println("update 날짜 : "+reservation.getReservation_date());
-		
-		System.out.println("update : "+reservation_guest_num);
-		System.out.println("update : "+reservation_person_name);
-		
 		model.addAttribute("reservation", reservation);
 		return "reservation/reservation_update";
 	}
@@ -147,12 +131,9 @@ public class ReservationController {
 	@PostMapping("/ReservationUpdatePro")
 	public String reservationUpdatePro(ReservationVO reservation, Model model) {
 		
-		System.out.println("예약!!!!!!!!!!!!" + reservation);
-		System.out.println("예약날짜!!!!!!" + reservation.getReservation_date());
-		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2()); // 메서드로 빼기
-		System.out.println("이메일: " + reservation.getReservation_email());
+		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
+		
 		int updateCount = service.updateReservation(reservation);
-//		int updateCount = service.updateReservation(reservation.getReservation_guest_num(), reservation.getReservation_person_name());
 		if(updateCount < 0) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";
@@ -162,7 +143,6 @@ public class ReservationController {
 				+ "reservation_guest_num=" + reservation.getReservation_guest_num() 
 				+ "&reservation_email1=" + reservation.getReservation_email1() 
 				+ "&reservation_email2=" + reservation.getReservation_email2();
-//		return "";
 	}
 	
 	//예약 성공 이동
@@ -175,7 +155,6 @@ public class ReservationController {
 		reservation = service.selectNameEmail(reservation_person_name, reservation_email);
 		
 		model.addAttribute("reservation", reservation);
-		System.out.println("예약번호 : " + reservation.getReservation_guest_num());
 		return "reservation/reservation_success";
 	}
 		

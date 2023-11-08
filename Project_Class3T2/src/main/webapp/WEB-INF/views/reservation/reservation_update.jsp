@@ -4,8 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -23,7 +21,7 @@
 			<h1>예약 내역 변경</h1>
 			<form action="ReservationUpdatePro" method="post">
 				<div id="calendarForm"></div>
-				<table>
+				<table class="custom_reservation_form">
 					<tr>
 						<th>예약인원</th>
 						<td>

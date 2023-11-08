@@ -6,6 +6,7 @@ body {
 	text-decoration: none;	 /*하이퍼링크 밑줄 제거 */
 	color: #464646;
 	background-color: rgb(255, 255, 255);
+	
 }
 
 input.indent, .reservationInput {
@@ -223,8 +224,13 @@ tr {
     padding: 30px;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-    float: left;
-    margin-left: 15%;
+    margin-left: 18%;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	float: left;
+	margin-top: 0px;
 }
 
 .custom_reservation_form {
@@ -235,7 +241,10 @@ tr {
 	padding: 30px;
 	border-radius: 1.5em;
 	box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-	float: left;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .custom_table {
@@ -245,9 +254,9 @@ tr {
 	padding: 23px;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     margin: 10px auto;
-	margin-left: 13em;
-    float: left;
+	margin-left: 15%;
 	position: relative;
+	float: left;
 }
 .reservationForm{
     padding: 30px;
@@ -286,12 +295,6 @@ tr {
     border-radius: 20px;
 }
 
-.custom_calendar_table tbody td.nowDate {
-    background-color:  rgb(80, 80, 80);
-    color: #fff;
-    border-radius: 20px;
-}
-
 .info_table{
 	background-color: #FFFFFF;
 	width: 1000px;
@@ -304,6 +307,10 @@ tr {
 	-webkit-box-sizing: content-box;
     box-sizing: content-box;
     overflow: visible;
+    -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .success_table{
