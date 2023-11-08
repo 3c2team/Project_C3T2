@@ -283,5 +283,60 @@
 		FROM CART
 		WHERE member_id=#{sId} AND product_num = #{productNumber}
 	</select>
-
+	
+	<update id="updateMemberPoint">
+		UPDATE MEMBER
+		SET member_point = member_point - #{usePoint}
+		WHERE member_id = #{sId}
+	</update>
+	
+	<delete id="deletePaymentCart">
+		DELETE 
+		FROM CART
+		WHERE member_id = #{sId} AND product_num = #{productNum}
+	</delete>
+	
+	<!-- 사용한 포인트 POINT 테이블에 반영 -->
+	<insert id="insertUsePoint">
+		INSERT INTO
+			POINT(point_num, point_use, point_amount, point_ex, point_date, member_id)
+			VALUES(
+				null
+				, 0
+				, #{usePoint}
+				, '상품 주문 사용'
+				, now()
+				, #{sId}
+			)
+	</insert>
+	
+	<!-- 최종 결제 금액 조회 -->
+	<select id="selectUserOrderPrice">
+		SELECT SUM(product_price * product_count) as product_price
+		FROM USER_ORDER
+		WHERE merchant_uid = #{merchant_uid}
+		GROUP BY merchant_uid 
+	</select>
+	
+	<!-- 적립된 포인트 POINT 테이블에 반영 -->
+	<insert id="insertAddPoint">
+		INSERT INTO
+			POINT(point_num, point_use, point_amount, point_ex, point_date, member_id)
+			VALUES(
+				null
+				, 1
+				, #{addPoint}
+				, '상품 주문 적립'
+				, now()
+				, #{sId}
+			)
+	</insert>
+	
+	<update id="updateMemberAddPoint">
+		UPDATE MEMBER
+		SET member_point = member_point + #{addPoint}
+		WHERE member_id = #{sId}
+	</update>
+	
+	
 </mapper>

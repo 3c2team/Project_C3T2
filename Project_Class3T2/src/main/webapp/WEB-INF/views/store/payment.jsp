@@ -45,7 +45,8 @@
 						},
 					success:function(result){
 						console.log("데이터 넘어감");
-						location.href="MypageBuyList"
+						alert("결제가 완료 됐습니다.");
+						location.href="./";
 					},
 					error:function(){
 						console.log("작업 실패")

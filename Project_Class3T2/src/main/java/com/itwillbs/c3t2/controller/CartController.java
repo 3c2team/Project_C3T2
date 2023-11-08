@@ -21,6 +21,7 @@ import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Controller
 public class CartController {
@@ -464,8 +465,6 @@ public class CartController {
 			session.setAttribute("receiver_request", request);
 		}
 		
-	
-		
 //		for(int odn :order_detail_num) {
 //			System.out.println("odn : " + odn);
 //			map.get(odn);
@@ -536,8 +535,6 @@ public class CartController {
 //			int insertUserOder = service.insertUserOrder(payProduct);
 //		}
         
-        
-        
 		
 		return "store/payment";
 	}
@@ -550,18 +547,7 @@ public class CartController {
 		
 		System.out.println("결제 성공");
 		System.out.println("주문번호 : " + map.get("merchant_uid"));
-		
-//		session.setAttribute("receiver_name", map.get("receiver_name"));
-//		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
-//		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
-//		session.setAttribute("phone", map.get("phone"));
-//		session.setAttribute("eMail", map.get("eMail"));
-//		session.setAttribute("mailUrl", map.get("mailUrl"));
-//		session.setAttribute("receiver_request", map.get("receiver_request"));
-//		session.setAttribute("usePoint", map.get("usePoint"));
-//		session.setAttribute("resultPrice",resultPrice);
-		
-		
+			
 		String sId = (String)session.getAttribute("sId");
 		String receiver_name = (String)session.getAttribute("receiver_name");
 		String receiver_addr1 = (String)session.getAttribute("receiver_addr1");
@@ -570,7 +556,13 @@ public class CartController {
 		String eMail = (String)session.getAttribute("eMail");
 		String mailUrl = (String)session.getAttribute("mailUrl");
 		String receiver_request = (String)session.getAttribute("receiver_request");
-		
+		System.out.println("여기까지는 나옴?????");
+//		String resultPrice = (String)session.getAttribute("resultPrice");
+//		System.out.println("마지막 확인용 결제 금액 :" + resultPrice);
+//		int resultAllPrice = Integer.parseInt(resultPrice);
+//		int resultAddPoint = (int) ((resultAllPrice * 0.1) / 100) ;
+//		System.out.println("마지막 확인용 결제 금액 : " + resultAllPrice + ", 적립 포인트 : " + resultAddPoint);
+				
 		String usePoint = (String)session.getAttribute("usePoint");
 		if(usePoint.equals("")) {
 			int resultPoint = 0;
@@ -595,9 +587,6 @@ public class CartController {
 		String paymentProduct = (String)session.getAttribute("paymentProduct");
 		String[] arrPaymentProduct = paymentProduct.split("|");
 		System.out.println("상품 이름 : " + paymentProduct);
-//		for(String name :arrPaymentProduct) {
-//			System.out.println("name : " + name);
-//		}
 			
 		// 상품 정보 가져 오기
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -617,26 +606,47 @@ public class CartController {
 			map.put("productCount", payProduct.getProduct_count());
 			map.put("ProductPrice", payProduct.getProduct_price());
 			
-			//데이터 저장
+			// USER_ORDER 데이터 저장
 			int insertUserOrder = service.insertUserOrder(map);
 			
+			// 주문 상품 CART에서 삭제 
+			int deletePaymentCart = service.deletePaymentCart(map);
 					
 		}
 		
 		// 포인트 사용 시 배송지에 정보 저장
 		if(!map.get("usePoint").equals("")) {
+			
+			// 배송 정보 저장
 			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			
+			// MEMBER 테이블에서 포인트 차감
+			int updateMemberPoint = service.updateMemberPoint(map);
+			
+			// 사용 포인트 POINT 테이블에 반영 
+			int insertUsePoint = service.insertUsePoint(map);
+			
 		}
 		
 		// 포인트 미사용 시 배송지에 정보 저장
 		if(map.get("usePoint").equals("")) {
 			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			
 		}
 		
-//		System.out.println("숫자 확인 용 : " + orderDetail.getProduct_num());
-//		int insertUserOder = service.insertUserOrder(payProduct);
+		// 적립금 포인트 POINT 테이블에 반영 
+		UserOrderVO getResultPrice = service.getUserOrderPrice(map);
+		int resultPrice = getResultPrice.getProduct_price(); 
+		System.out.println("진짜 최종 결제 금액 : " + resultPrice);
+		int addPoint = (int) ((resultPrice * 0.01) / 10);
+		System.out.println("적립할 포인트 : " + addPoint);
+		map.put("addPoint", addPoint);
+		int updateAddPoint = service.updateAddPoint(map);
 		
-		return "store/pay_result";
+		// 적립금 포인트 MEMBER 테이블에 저장
+		int updateMembeAddrPoint = service.updateMemberAddPoint(map);
+		
+		return "other/main";
 	}
 
 	
