@@ -11,7 +11,6 @@
     outline: none;
 }
 .detailContainer {
-    
 	justify-content: space-between;
 	align-items: center;
 	width: auto;
@@ -22,7 +21,6 @@
     height: auto;
     margin-bottom: 50px;
 }
-
 .detailTopLeft {
 	display: inline;
 	width: 50%;
@@ -30,24 +28,20 @@
 	align-items: center;
 	text-align: center;
 }
-/* 아래위 추가요소 없으면 합치기 */
 .detailTopRigth {
 	display: inline;
 	width: 50%;
 	float: right;
 }
-
 .productNum p {
     margin: 0;
     font-size: 16px;
 }
-
 .detailTopTitle p {
     font-size: xx-large;
     font-weight: bold;
     margin: 0;
 }
-
 .detailTopTitle {
 	margin-bottom: 10px;
 }
@@ -63,14 +57,13 @@
 	padding-bottom: 30px;
 	border-bottom: 1px solid #e0e0e0;
 }
-/*======= 이미지 css =======*/
 
+/*======= 이미지 css =======*/
 .detailTopMainImg {
 	position: relative;
     width: auto;
     height: 500px;
 }
-
 .detailTopMainImg img{
 	display: block;
     position: absolute;
@@ -81,7 +74,6 @@
     object-fit: cover;
     margin: auto;
 }
-
 .detailTopMiniImg{
 	display: flex;
 	justify-content: center;
@@ -93,15 +85,12 @@
     margin-top: 20px;
     margin-bottom: auto;
 }
-
 .detailTopMiniImg ul {
 	list-style:none;
 }
-
 .detailTopMiniImg li {
 	float: left;
 }
-
 .detailTopMiniImg img{
 	display: block;
 	margin:auto;
@@ -112,6 +101,7 @@
     margin: auto;
 }
 /*==========================*/
+
 .detailTopMainImgReview {
     position: absolute;
     top: 0;
@@ -184,14 +174,24 @@
 }
 
 /*======== TopRight ========*/
-
-
+/*관심상품*/
+.favorite_on {
+	background-repeat: no-repeat;
+	background-image: url("../store_img/favorite_on.png");
+	width: 40px;
+	height: 40px;
+}
+.favorite_off {
+	background-repeat: no-repeat;
+	background-image: url("../store_img/favorite_off.png");
+	width: 40px;
+	height: 40px;	
+}
 .detailTopLikeShare {
     text-align: left;
     display: flex;
     justify-content: flex-end;
 }
-
 .detailTopInfo th {
     width: 20%;
     font-size: 18px;
@@ -204,7 +204,6 @@
     background: none;
     height: auto;
 }
-
 .detailTopInfo td {
     width: 50%;
     font-size: 18px;
@@ -217,7 +216,6 @@
     background: none;
     height: auto;
 }
-
 .btn_black {
 	font-size: 20px;
     font-weight: bold;
@@ -238,7 +236,6 @@
 	background-color: white;
 	border: 1px solid #464646;
 }
-
 .detailTopSumTitle {
 	font-size: 18px;
     font-weight: bold;
@@ -261,7 +258,6 @@
     border-top: 1px solid #464646;
     margin-top: 30px
 }
-
 .formAmount {
 	align-items: center;
 	display: flex;
@@ -297,7 +293,6 @@ input[type='number']::-webkit-inner-spin-button {
 	position:sticky;
 	top:0px;
 }
-
 .detailBottomTab {
     display: flex;
     justify-content: space-around;
@@ -305,14 +300,12 @@ input[type='number']::-webkit-inner-spin-button {
     height: 68px;
     border-bottom: 1px solid #e0e0e0;
 }
-
 .detailBottomTabItem {
 	height: 68px;
 	width: 25%;
 	margin: 0 auto;
 	text-align: center;
 }
-
 .detailBottomTab a{	
 	font-size: 20px;
 	color: #464646;
@@ -322,7 +315,6 @@ input[type='number']::-webkit-inner-spin-button {
 	line-height: 68px;
 	text-align: center;
 }
-
 .detailInfoImgArea {
     display: flex;
     justify-content: center;
@@ -333,36 +325,26 @@ input[type='number']::-webkit-inner-spin-button {
 .reviewTatle, .qnaTatle, .returnTatle {
     margin: 15px;
 }
-
 .reviewTatle a, .qnaTatle a, .returnTatle a {
     font-size: 30px;
     font-weight: bold;
 }
-
 .reviewAve, .qnaAve {
     margin: 20px;
 }
-
 strong.reviewAveStr {
     font-size: 18px;
 }
-
 .reviewAveDashboard {
     display: flex;
     font-size: 30px;
     gap: 20px;
     justify-content: space-between;
 }
-
-/* .reviewAveStar a { */
-/*     color: #FE2E2E; */
-/* } */
-
 .reviewContent {
     display: flex;
     align-items: center;
 }
-
 .reviewStar {
     display: flex;
     font-size: 17px;
@@ -370,7 +352,6 @@ strong.reviewAveStr {
     width: 15%;
     align-items: center;
 }
-
 .reviewStarMax {
 	position: relative;
     display: inline-block;
@@ -380,14 +361,12 @@ strong.reviewAveStr {
     background-repeat: no-repeat;
 	background-image: url("../store_img/bg_star_max.png");
 }
-
 .bg_star{
 	position: absolute;
     top: 0;
     left: 0;
     overflow: hidden;
 }
-
 .reviewStarMax .bg_star{
 	width: 175px;
     height: 30px;
@@ -395,7 +374,6 @@ strong.reviewAveStr {
     background-repeat: no-repeat;
 	background-image: url("../store_img/bg_star_max_on.png");
 }
-
 .reviewStarMin {
 	position: relative;
     display: inline-block;
@@ -405,7 +383,6 @@ strong.reviewAveStr {
     background-repeat: no-repeat;
     background-image: url("../store_img/bg_star_min.png");
 }
-
 .reviewStarMin .bg_star {
 	width: 90px;
     height: 15px;
@@ -413,20 +390,15 @@ strong.reviewAveStr {
     background-repeat: no-repeat;
     background-image: url("../store_img/bg_star_min_on.png");
 }
-
-
 span.reviewAveScore {
     font-weight: bold;
 }
-
 .reviewMaxScore, .reviewCount {
     color: #BDBDBD;
 }
-
 .reviewCount {
     font-size: 20px;
 }
-
 .reviewBox {
     display: flex;
     align-items: center;
@@ -436,40 +408,33 @@ span.reviewAveScore {
     height: 200px;
     border-bottom: 1px solid #e0e0e0;
 }
-
 .reviewStar {
     font-size: 19px;
     text-align: center;
     width: 15%;
 }
-
 .reviewInfo {
     display: flex;
     text-align: left;
     width: 65%;
 }
-
 .reviewImg {
     padding: 10px;
     width: 20%;
     height: auto;
     text-align: center;
 }
-
 .mainLayout img {
     max-width: 100%;
     height: auto;
 }
-
 .reviewIdDate {
     text-align: right;
     width: 20%;
 }
-
 .qnaContainer, .returnContainer {
     margin-block: 50px;
 }
-
 .qnaItem, .returnItem {
     display: flex;
     align-items: center;
@@ -484,11 +449,9 @@ span.reviewAveScore {
     height: 150px;
     border-bottom: 1px solid #e0e0e0;
 }
-
 .qnaAnswer {
 	width:15%;
 }
-
 .qnaAnswer span{
     display: inline-block;
     vertical-align: middle;
@@ -499,27 +462,22 @@ span.reviewAveScore {
     background-color: #bbbec2;
     padding: 0 15px;
 }
-
 .questionInfo {
     width: 65%;
 }
-
 .questionIdDate {
     text-align: right;
     width: 20%;
 }
-
 .answerBox {
     background-color: #f6f6f6;
     display: flex;
     justify-content: flex-start;
     padding-left: 350px;
 }
-
 .answerInfo {
     text-align: left;
 }
-
 .returnBox {
 	display: flex;
     width: 100%;
@@ -529,7 +487,6 @@ span.reviewAveScore {
     flex-direction: column;
     align-items: center;
 }
-
 .returnInfo {
     margin-top: 20px;
     padding: 19px 0;
@@ -539,27 +496,22 @@ span.reviewAveScore {
     text-align: center;
     width: 80%;
 }
-
 .returnTable {
     width: 80%;
 }
-
 .returnSub {
 	background-color: #fafafa;
     font-weight: normal;
     text-align: left;
 }
-
 .answerIdDate {
     text-align: right;
     width: 20%;
 }
-
 .answerInfo {
     text-align: left;
     width: 80%;
 }
-
 th, td {
     padding: 9px 17px 11px 20px;
 /*     border-top: 1px solid #ededed; */
@@ -569,4 +521,3 @@ th, td {
     color: #000;
     word-break: keep-all;
 }
-
