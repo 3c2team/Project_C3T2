@@ -50,14 +50,14 @@ th, td {
 						<tr id="tr_top">
 							<th width="80px">주문번호</th>
 							<th width="250px">배송자 주소</th>
-							<th width="100px">요청 사항</th>
+							<th width="200px">요청 사항</th>
 							<th width="80px">총 구매 가격</th>
 							<th width="100px">구매 일자</th>
 							<th width="250px">구매 상품목록</th>
 						</tr>
 						<!-- 총 가격이 포함된 주문 데이터 반복 출력 -->
 						<c:forEach var="orderTotals" items="${orderTotals}">
-						    <tr>
+						    <tr class="buy-row" data-buy-date="${orderTotals.order_date}">
 						        <td>${orderTotals.merchant_uid}</td>
 						        <td>${orderTotals.receiver_address}</td>
 						        <td>${orderTotals.receiver_request}</td>

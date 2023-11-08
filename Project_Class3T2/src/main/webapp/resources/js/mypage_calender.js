@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // 포인트 내역이 있는 경우 해당 항복을 날짜별로 필터링
             } else if (document.querySelector('.point-row')) {
 		        filterItemsByDate('startDate', 'endDate', '.point-row', 'data-point-date');
+		    } else if (document.querySelector('.buy-row')) {
+		        filterItemsByDate('startDate', 'endDate', '.buy-row', 'data-buy-date');
 		    }
         });
     }

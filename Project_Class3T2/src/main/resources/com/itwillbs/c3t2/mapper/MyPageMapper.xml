@@ -63,6 +63,8 @@
             o.member_id = #{member_id}
         ORDER BY
             o.order_date DESC
+        
+        limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
     </select>
     
     <!-- 구매 전체 개수 -->
@@ -82,8 +84,10 @@
 		    MAX(r.receiver_phone) AS receiver_phone,
 		    MAX(r.receiver_request) AS receiver_request,
 		    GROUP_CONCAT(o.product_num) AS product_nums,
+		    <!-- 주문된 모든 제품 이름을 쉼표로 구분하여 연결 -->
 		    GROUP_CONCAT(o.product_name) AS product_names,
 		    GROUP_CONCAT(o.product_count) AS product_counts,
+		    <!-- 모든 주문에 대한 총 가격을 계산 (각 제품 가격에 수량을 곱한 후 합) -->
 		    SUM(o.product_price * o.product_count) AS total_price
 		FROM
 		    USER_ORDER o
@@ -92,10 +96,12 @@
 		WHERE
 		    o.member_id = #{member_id}
 		GROUP BY
-		    o.merchant_uid;
+		    o.merchant_uid
+		    
+		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum};
     </select>
 	
-	<!-- 장바구니 검색 SQL -->
+	<!-- 장바구니 검색 SQL (저장용)-->
 	<!-- 장바구니 데이터를 검색할 때 여러 조건에 따라 필터링하는 데 사용될 수 있는 SQL 조각을 정의 -->
 	<!-- 다른 SQL 쿼리에서 재사용될 수 있으며, 검색 유형(searchType)과 키워드(keyword)에 따라 동적으로 WHERE 조건을 생성 -->
 	<sql id="cartSearchSql">
