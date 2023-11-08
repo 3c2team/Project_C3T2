@@ -13,6 +13,6 @@ public class QnAVO {
 	Date question_date;
 	int secret;
 	int answer_num;
-	String answer_content;
+	String question_answer;
 	Date answer_date;
 }

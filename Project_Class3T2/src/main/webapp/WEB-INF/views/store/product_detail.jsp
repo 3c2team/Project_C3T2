@@ -155,7 +155,7 @@
 						<tbody>
 							<tr>
 								<th>적립예정 포인트</th>
-								<td>0.5%()</td>
+								<td>0.1%  (${productDetail.product_price * 0.1 / 100}원)</td>
 							</tr>
 							<tr>
 								<th>배송비</th>
