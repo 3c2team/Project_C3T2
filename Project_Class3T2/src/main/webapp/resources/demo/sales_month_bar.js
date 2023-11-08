@@ -14,12 +14,13 @@ $.ajax({
 		success: function(AdminSelectMonthDate) {
 			mons = AdminSelectMonthDate.map(row => row.rnum);
 			sales = AdminSelectMonthDate.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
 		},
 		error:function(){
 			alert("실패");
 		}
 	});
-var myLineChart = new Chart(ctx, {
+var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
     labels: mons,
@@ -45,8 +46,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 10000000,
-          max: 50000000,
+          min: 0,
+          max: max,
           maxTicksLimit: 12
         },
         gridLines: {

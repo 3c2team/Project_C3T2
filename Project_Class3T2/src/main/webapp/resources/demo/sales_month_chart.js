@@ -14,32 +14,37 @@ var ctx = document.getElementById("myAreaChart");
 		success: function(AdminSelectMonthDate) {
 			mons = AdminSelectMonthDate.map(row => row.rnum);
 			sales = AdminSelectMonthDate.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+			
 		},
 		error:function(){
 			alert("실패");
 		}
 	});
-//$("#sales_btn").on("click",function(){
-//	let year = $("#year").val();
-//	alert(year);
-//	$.ajax({
-//		type: "POST",
-//		url: "AdminSelectMonthDate",
-//		async: false,
-//		data: {
-//			year : $("#year").val()
-//		},
-//		success: function(AdminSelectMonthDate) {
-//			mons = AdminSelectMonthDate.map(row => row.rnum);
-//			sales = AdminSelectMonthDate.map(row => row.sales);
-//		},
-//		error:function(){
-//			alert("실패");
-//		}
-//	});
-//	myChart.update();
-//	
-//});
+$("#sales_btn").on("click",function(){
+	$.ajax({
+		type: "POST",
+		url: "AdminSelectMonthDate",
+		async: false,
+		data: {
+			year : $("#year").val()
+		},
+		success: function(AdminSelectMonthDate) {
+			sales = AdminSelectMonthDate.map(row => row.sales);
+			myLineChart.data.datasets[0].data = sales
+			myBarChart.data.datasets[0].data = sales
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+			myLineChart.options.scales.yAxes[0].ticks.max = max
+			myBarChart.options.scales.yAxes[0].ticks.max = max
+			myLineChart.update();
+			myBarChart.update();
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
+	
+});
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -75,7 +80,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 500000,
+          max: max,
           maxTicksLimit: 5
         },
         gridLines: {

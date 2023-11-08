@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -283,6 +284,26 @@ public class AdminController {
     	return "admin/admin_reservation_list";
     }
     
+
+  
+//  예약 삭제 처리(관리자)
+  @PostMapping("AdminReservationDeletePro")
+  public String adminReservationDeletePro(Model model,@RequestParam int[] checkbox) {
+	  for(int check : checkbox) {
+		  System.out.println("dfdfdf" + check);
+	  }
+	  
+	  for(int check : checkbox) {
+		int updateReservationCount = service.updateReservation(check);
+		if(updateReservationCount == 0) {
+			model.addAttribute("msg","삭제 실패하였습니다.");
+			return "fail_back";
+					
+		}
+	}
+	return "redirect:/AdminReservationList";
+  }
+  
     
     //리뷰 삭제 페이지 이동(관리자)
     @GetMapping("AdminReviewDelete")
@@ -596,5 +617,24 @@ public class AdminController {
     	List<Map<String, Integer>> adminSelectMonthDate= service.selectMonthDate(year);
     	System.out.println("결과값 : " + adminSelectMonthDate);
     	return adminSelectMonthDate;	
+    }
+    @ResponseBody
+    @PostMapping("/AdminSelectHourDate")
+    public List<Map<String, Integer>> adminSelectHourDate(int day) {
+    	System.out.println("dfsf" + day);
+    	
+    	List<Map<String, Integer>> adminSelectHourDate= service.selectHourDate(day);
+    	System.out.println("결과값 : " + adminSelectHourDate);
+    	return adminSelectHourDate;	
+    }
+    @ResponseBody
+    @PostMapping("/AdminSelectProductSales")
+    public List<Map<String, Integer>> adminSelectProductSales() {
+    	
+    	List<Map<String, Integer>> adminSelectProductSales= service.selectProductSales();
+    	System.out.println("결과값 : " + adminSelectProductSales);
+//    	List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+//    	System.out.println("fdfdfdfdfdfdfdfdfd");
+    	return adminSelectProductSales;	
     }
 }

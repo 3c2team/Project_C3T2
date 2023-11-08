@@ -74,12 +74,12 @@ tr td{text-align: left;}
 			<table>
 				<tr>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="1"><span>아이디 변경을 위해 탈퇴 후 재가입</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result1"><span>아이디 변경을 위해 탈퇴 후 재가입</span>
 						</label>
 					</td>
 					<td width="40px"></td>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="2"><span>상품 가격 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result2"><span>상품 가격 불만</span>
 						</label>
 					</td>
 				</tr>
@@ -90,24 +90,24 @@ tr td{text-align: left;}
 <!-- 						</label> -->
 <!-- 					</td> -->
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="3"><span>교환/환불/반품 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="result3"><span>교환/환불/반품 불만</span>
 						</label>
 					</td>
 					<td></td>
 					<td>
 						<label class="radio"> 
-							<input type="radio" name="membershipWithdrawal" value="4"><span>개인정보 누출 우려</span>
+							<input type="radio" name="membershipWithdrawal" value="result4"><span>개인정보 누출 우려</span>
 						</label>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="5"><span>상품의 다양성/품질 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result5"><span>상품의 다양성/품질 불만</span>
 						</label>
 					</td>
 					<td></td>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="4"><span>배송 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result6"><span>배송 불만</span>
 						</label>
 					</td>
 <!-- 					<td> -->

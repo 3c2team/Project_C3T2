@@ -12,6 +12,7 @@ $.ajax({
 	success: function(AdminSelectOutDate) {
 		years = AdminSelectOutDate.map(row => row.rnum);
 		sales = AdminSelectOutDate.map(row => row.salary);
+		max = sales.reduce((max, curr) => max < curr ? curr : max );
 	},
 	error:function(){
 		alert("실패");
@@ -44,7 +45,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 1000000,
+          max: max,
           maxTicksLimit: 5
         },
         gridLines: {

@@ -4,15 +4,30 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+$.ajax({
+		type: "POST",
+		url: "AdminSelectProductSales",
+		async: false,
+		data: {
+		},
+		success: function(adminSelectProductSales) {
+			product_category = adminSelectProductSales.map(row => row.category);
+			sales = adminSelectProductSales.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+		},
+		error:function(){
+			alert("들고오기 실패");
+		}
+	});
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["stake", "pasta", "soup", "etc"],//밑에 설명
+    labels: product_category,//밑에 설명
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data:  [3385000, 2315000, 4645000,3450000],//데이터 값
+      data:  sales,//데이터 값
     }],
   },
   options: {
@@ -30,8 +45,8 @@ var myLineChart = new Chart(ctx, {
       }],
       yAxes: [{
         ticks: {
-          min: 1000000,
-          max: 5000000,
+          min: 0,
+          max: max,
           maxTicksLimit: 5
         },
         gridLines: {

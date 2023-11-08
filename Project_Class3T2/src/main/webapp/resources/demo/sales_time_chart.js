@@ -4,10 +4,51 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+
+$.ajax({
+		type: "POST",
+		url: "AdminSelectHourDate",
+		async: false,
+		data: {
+			day : 0
+		},
+		success: function(adminSelectHourDate) {
+			hours = adminSelectHourDate.map(row => row.rnum);
+			sales = adminSelectHourDate.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
+	$("#sales_btn").on("click",function(){
+	$.ajax({
+		type: "POST",
+		url: "AdminSelectHourDate",
+		async: false,
+		data: {
+			day : $("#day").val()
+		},
+		success: function(adminSelectHourDate) {
+			sales = adminSelectHourDate.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+			myLineChart.data.datasets[0].data = sales
+			myBarChart.data.datasets[0].data = sales
+			myLineChart.options.scales.yAxes[0].ticks.max = max
+			myBarChart.options.scales.yAxes[0].ticks.max = max
+			myLineChart.update();
+			myBarChart.update();
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
+	
+});
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-   labels: ["11시","12시", "13시", "14시","15시","16시","17시","18시","19시","20시"],
+   labels: hours,
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,7 +61,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data:[33500, 151500, 156000,154000,23500, 25500, 116000,154000,123000,235000],
+      data:sales,
     }],
   },
   options: {
@@ -39,7 +80,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 300000,
+          max: max,
           maxTicksLimit: 10
         },
         gridLines: {

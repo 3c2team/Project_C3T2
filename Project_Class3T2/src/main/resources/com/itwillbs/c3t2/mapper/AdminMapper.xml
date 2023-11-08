@@ -31,7 +31,8 @@
 			FROM RESERVATION rm JOIN ( SELECT reservation_num,reservation_date
 										FROM RESERVATION
 										WHERE reservation_date > date_format(now(),'%Y-%m-%d')) rs
-			ON rm.reservation_num = rs.reservation_num;
+			ON rm.reservation_num = rs.reservation_num
+		  	WHERE reservation_cancel = 0
 		</select>
 		<select id="selectAdmin" resultType="com.itwillbs.c3t2.vo.AdminVO">
 			SELECT *
@@ -166,39 +167,10 @@
 			ON r.product_num = p.product_num
 			WHERE review_num = #{review_num}
 		</select>
-		<select id="selectEventList" resultType="map">
-			SELECT event_num
-				, ROW_NUMBER() OVER(order by event_num) as num
-				, DATE_FORMAT(event_date, '%Y년 %m월%d일 %H:%i') as event_date
-				, event_subject
-				, event_content
-				, event_image
-				, event_image_real_file
-			FROM EVENT
-		</select>
-		<select id="selectEvent" resultType="map">
-			SELECT event_image
-			FROM EVENT
-			WHERE event_num = #{event_num}
-		</select>
-		<delete id="deleteEvent">
-				DELETE FROM EVENT
-				WHERE event_num = #{event_num}
-		</delete>
 		<delete id="deleteReview">
 				DELETE FROM REVIEW
 				WHERE review_num = #{review_num} 
 		</delete>
-		<insert id="insertEvent">
-			INSERT INTO EVENT
-			VALUES(null
-				, #{event_subject}
-				, #{event_content}
-				, now()
-				, #{event_img}
-				, #{event_image_real_file}
-				)
-		</insert>
 		<select id="selectQnaBoardList" resultType="map">
 			SELECT question_num
 				,ROW_NUMBER() OVER(order by question_num) as num
@@ -329,6 +301,34 @@
 											GROUP BY MONTH(order_date)) y
 			on r.rnum = y.mons;
 		</select>
+		<select id="selectHourDate" resultType="map">
+			WITH RECURSIVE result_hour AS (
+			SELECT 1 AS rnum
+		    UNION ALL
+		    SELECT rnum + 1 FROM result_hour
+            WHERE 24 > rnum
+			)
+			
+			SELECT CONCAT(rnum,'시') AS rnum ,ifnull(sales,0) AS sales
+			FROM result_hour r LEFT JOIN (SELECT HOUR(order_date) as hours ,SUM((product_count*product_price)) as sales
+											FROM USER_ORDER
+											WHERE DAY(order_date) = IF(#{day}=0,DAY(now()),#{day})
+											GROUP BY HOUR(order_date)) y
+			on r.rnum = y.hours;
+		</select>
+		<select id="selectProductSales" resultType="map">
+            SELECT product_category_name as category,SUM(product_count*product_price) AS sales
+            FROM PRODUCT_CATEGORY c JOIN ( SELECT p.product_category_num,product_count,u.product_price
+											FROM USER_ORDER u JOIN PRODUCT p
+											ON u.product_num = p.product_num) a
+            ON c.product_category_num = a.product_category_num
+            GROUP BY product_category_name;
+		</select>
+		<update id="updateReservation">
+			UPDATE RESERVATION 
+			SET reservation_cancel = 1
+			WHERE reservation_num = #{checkbox}
+		</update>
 <!-- 		<select id="selectProductByImg" resultType="map"> -->
 <!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
 <!-- 				, p.product_name -->
