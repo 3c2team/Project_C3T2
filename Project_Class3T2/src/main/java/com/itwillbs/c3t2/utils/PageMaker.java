@@ -26,7 +26,7 @@ public class PageMaker {
    private boolean prev;   // 이전 여부 
    private boolean next;   // 다음 여부
     
-   private int displayPageNum=5;
+   private int displayPageNum=5;  // 개수를 정의하는 변수로, 페이지네이션에서 표시할 페이지 수를 지정
     
    private int tempEndPage; //마지막 페이지
     
@@ -37,7 +37,7 @@ public class PageMaker {
     
    public PageMaker() {
        this.page=1;          //현재 페이지 번호를 설정, 초기 페이지는 1 
-       this.perPageNum=10;   //한 페이지에 표시될 데이터의 개수, limit 10 개씩 보여준다.
+       this.perPageNum=5;   //한 페이지에 표시될 데이터의 개수, limit 5 개씩 보여준다.
    }
     
     
@@ -56,7 +56,7 @@ public class PageMaker {
        //몇개 씩 보여줄것인가 이다. 최대 100개씩 보여 줄것으로 설정한다.
        //만약 0보다 작거나 100 보다 크면 10으로 초기화 시킨다.
        if(perPageNum <=0 || perPageNum >100){
-           this.perPageNum=10;
+           this.perPageNum=5;
            return;
        }
        this.perPageNum = perPageNum;

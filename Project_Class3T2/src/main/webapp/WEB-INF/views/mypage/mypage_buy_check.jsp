@@ -78,11 +78,11 @@ th, td {
 				</section>
 			</article>
 		</div>
+		<br>
+		<br>
 		<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
       		${pagination}
     	</div>
-		<br>
-		<br>
 	</div>
 
 

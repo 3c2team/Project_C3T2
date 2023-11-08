@@ -27,12 +27,15 @@
 	
 	<!-- 리뷰 전체 개수 -->
 	<select id="getReviewTotalCount" resultType="int">
-	    SELECT  count(*) FROM 
-            REVIEW R      
-		JOIN 
-            PRODUCT P ON R.review_num = R.review_num
-        WHERE 
-            R.member_id = #{member_id}
+<!-- 	    SELECT  count(*) FROM  -->
+<!--             REVIEW R       -->
+<!-- 		JOIN  -->
+<!--             PRODUCT P ON R.review_num = R.review_num -->
+<!--         WHERE  -->
+<!--             R.member_id = #{member_id} -->
+		SELECT count(*) FROM REVIEW R
+		JOIN PRODUCT P ON R.product_num = P.product_num
+		WHERE R.member_id = 'ceh0218';
      </select> 
 	
 	<!-- 리뷰 상품번호 누르면 상품페이지로 -->
@@ -63,14 +66,19 @@
             o.member_id = #{member_id}
         ORDER BY
             o.order_date DESC
-        
-        limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
+        	limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
     </select>
     
     <!-- 구매 전체 개수 -->
     <select id="getBuyTotalCount" resultType="int">
-	    SELECT COUNT(*) FROM USER_ORDER U
-	    WHERE U.member_id = #{member_id}
+<!-- 	    SELECT COUNT(*) FROM USER_ORDER U -->
+<!-- 	    WHERE U.member_id = #{member_id} -->
+		SELECT
+        	COUNT(DISTINCT o.merchant_uid)
+	    FROM
+	        USER_ORDER o
+	    WHERE
+	        o.member_id = #{member_id};
 	</select>
 	
 	<!-- 각 merchant_uid에 대한 상품 이름의 결합과 총 가격을 계산하는 쿼리 -->

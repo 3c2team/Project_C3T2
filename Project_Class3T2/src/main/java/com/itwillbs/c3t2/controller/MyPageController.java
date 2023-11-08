@@ -316,7 +316,6 @@ public class MyPageController {
 		
 		// 총 가격과 결합된 상품 이름을 가져옴
 		List<UserOrderVO> orderTotals = service.getTotalPriceAndProductNames(parMap);
-		System.out.println(loginUser);
 		
 		// 가져온 구매 목록을 모델에 추가
 		model.addAttribute("OrderList", OrderList);
