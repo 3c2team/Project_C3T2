@@ -31,6 +31,7 @@ th, td {
 					<button onclick="setMonths(-1)">1개월</button>
 					<button onclick="setMonths(-3)">3개월</button>
 					<button onclick="setMonths(-6)">6개월</button>
+					<button onclick="setAllPeriod()">전체기간</button>
 				</div>
 				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 				<div id="reservation_confirm_term_right">
