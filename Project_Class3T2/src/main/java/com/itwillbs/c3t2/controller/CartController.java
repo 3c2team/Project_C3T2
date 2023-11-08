@@ -534,12 +534,9 @@ public class CartController {
 //		for(OrderDetailVO payProduct:orderDetailList) {
 //			int insertUserOder = service.insertUserOrder(payProduct);
 //		}
-        
 		
 		return "store/payment";
 	}
-	
-	
 	
 	@PostMapping("PaymentResult")
 	@ResponseBody
