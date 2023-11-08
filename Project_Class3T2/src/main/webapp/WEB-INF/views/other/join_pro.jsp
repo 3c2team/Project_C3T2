@@ -25,10 +25,9 @@
 		<table>
 			<tr>
 				<td align="left">
-					<font size="2">★ 이미 가입한 회원입니다.(카카오 로그인)</font>
+					<a href="KakaoConnect" style="font-size: 0.8em;">★ 카카오 로그인 중 이미 가입하신 분은 이 문장을 눌러주세요. ★</a>
 					<input type="hidden" name="kakao_id" id="kakao_id" value="${sessionScope.kakao_id}">
 				</td>
-				<td><input type="checkbox" name="kakao_id" id="kakao_id" style="margin-left: -1170%" onclick="location.href='KakaoConnect'"></td>
 			</tr>
 			<tr>
 				<td align="left">

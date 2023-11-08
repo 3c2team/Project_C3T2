@@ -32,6 +32,3 @@ function setMonths(monthsAgo) {
 function formatDate(date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
-
-// Initialize with default values
-//setMonths(-3);

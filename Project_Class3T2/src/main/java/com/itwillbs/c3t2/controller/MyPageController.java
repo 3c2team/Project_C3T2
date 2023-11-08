@@ -367,10 +367,10 @@ public class MyPageController {
         return "productDetail";  	// 리뷰 상세 페이지의 뷰 이름
     }
 	
-	@GetMapping("MypagePoint")		// 포인트
+	@GetMapping("MypagePoint")
 	public String myPagePoint(HttpSession session ,Model model, 
-			@RequestParam(defaultValue = "1000-01-01") String startDate, 
-			@RequestParam(defaultValue = "5000-12-31") String endDate,
+			@RequestParam(defaultValue = "1970-01-01") String startDate, 
+			@RequestParam(defaultValue = "") String endDate,
 			@RequestParam(defaultValue = "1") int pageNum) {
 		String memberId = (String)session.getAttribute("sId");
 		
@@ -391,10 +391,12 @@ public class MyPageController {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
 		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
 		model.addAttribute("points", points);
-		
 		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 		return "mypage/mypage_point";
 	}
 	

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/login_temp.css">
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-2.0.2.js" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <body>
@@ -26,7 +27,6 @@
 			<form action="LoginPro" method="post" class="form1">
 				<input class="user" type="text" name="member_id" id="id" value="${cookie.cookieId.value }" style="align-content: center" placeholder="아이디">
 				<input class="pass" type="password" name="member_passwd" id="passwd"style="align-content: center" placeholder="비밀번호">
-<!-- 				<p class="submit" id="btn_submit"align="center">로그인</p> -->
 				<div class="privateCheck">
 					<input type="checkbox" name="rememberId"
 						<c:if test="${not empty cookie.cookieId.value }">
@@ -47,6 +47,23 @@
 					            		Kakao 로그인
 					        </a>
 						</div>
+						<div class="naverLogin" id="naver_id_login">
+							<a href="https://nid.naver.com/oauth2.0/authorize?
+									response_type=code
+									&client_id=O9St1pC9EAPKQRlsYeWN
+									&state=state
+									&redirect_uri=http://localhost:8081/c3t2/Naver" id="naverLogin">
+				            		Naver 로그인
+					        </a>
+						</div>
+						<script type="text/javascript">
+							var naver_id_login = new naver_id_login("O9St1pC9EAPKQRlsYeWN", "http://localhost:8081/c3t2/Naver");
+							var state = naver_id_login.getUniqState();
+							naver_id_login.setDomain("http://localhost:8081/c3t2");
+							naver_id_login.setState(state);
+							naver_id_login.setPopup();
+							naver_id_login.init_naver_id_login();
+						</script>
 					</div>
 					<div class="aTag" align="center">
 						<a href="JoinAgree" class="join" style="align-content: center">회원가입</a>

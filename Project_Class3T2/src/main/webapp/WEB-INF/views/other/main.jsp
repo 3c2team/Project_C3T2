@@ -60,7 +60,7 @@ img {
 						</div>
 						
 						<div class="slide">
-							<img src="./resources/main_img/platter2.jpg" alt="" style="height: 550px;">
+							<img src="./resources/main_img/platter3.jpg" alt="" style="height: 550px;">
 						</div>
 						
 						<div class="navigationAuto" style="margin-top : 510px;">

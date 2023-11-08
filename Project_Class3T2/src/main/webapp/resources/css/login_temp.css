@@ -75,8 +75,8 @@ form.form1 {
 	color: #fff;
 	background: linear-gradient(to right, rgb(115, 115, 115), rgb(115, 115, 115));
 	border: 0;
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 34px;
+	padding-right: 34px;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	font-family: 'Noto Serif KR', serif;
@@ -90,8 +90,22 @@ form.form1 {
 	color: #fff;
 	background: linear-gradient(to right, rgb(1255, 204, 000), rgb(255, 204, 000));
 	border: 0;
-	padding-left: 21px;
-	padding-right: 22px;
+	padding-left: 15px;
+	padding-right: 16px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Noto Serif KR', serif;
+	font-size: 13px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+#naverLogin {
+	cursor: pointer;
+	border-radius: 5em;
+	color: #fff;
+	background: linear-gradient(to right, rgb(53, 199, 90), rgb(3, 199, 90));
+	border: 0;
+	padding-left: 15px;
+	padding-right: 16px;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	font-family: 'Noto Serif KR', serif;
