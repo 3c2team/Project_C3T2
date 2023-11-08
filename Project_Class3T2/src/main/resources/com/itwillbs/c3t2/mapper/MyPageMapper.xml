@@ -244,10 +244,6 @@
         WHERE reservation_num = #{reservationNum}
     </update>
     
-    <!-- 예약 번호 누르면 예약페이지로 -->
-	<select id="getReservationByNum" resultType="com.itwillbs.c3t2.vo.ReservationVO">
-	    SELECT * FROM RESERVATION WHERE reservation_guest_num = #{reviewNum}
-	</select>
     
 
 				

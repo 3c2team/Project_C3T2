@@ -487,13 +487,6 @@ public class MyPageController {
         return "redirect:/MypageReservationList";
 	}
 	
-	@GetMapping("/reservationDetail")	//예약상세 페이지 넘어가게하기
-    public String reservationDetail(@RequestParam(value ="reservation_guest_num", required = false) String reservationNum, Model model) {
-        ReviewVO reservation = service.getReservationByNum(reservationNum);
-        System.out.println(reservation);
-        model.addAttribute("reservation", reservation);
-        return "reservation/reservation_search_Info";  	// 예약 상세 페이지의 뷰 이름
-    }
 	
 	
 	@GetMapping("MypageDetail")							// 나의 상세 정보

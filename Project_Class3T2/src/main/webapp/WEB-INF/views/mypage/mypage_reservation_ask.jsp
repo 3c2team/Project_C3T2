@@ -53,10 +53,7 @@
 							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
 								<td>
-						            <!-- 예약 인원 수에 하이퍼링크 추가 -->
-						            <a href="${pageContext.request.contextPath}/reservationDetail?reservationNum=${reservation.reservation_guest_num}">
 						                ${reservation.reservation_guest_num}
-						            </a>
 						        </td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>

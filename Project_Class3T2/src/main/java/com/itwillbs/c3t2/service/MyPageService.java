@@ -136,8 +136,4 @@ public class MyPageService {
 	public List<UserOrderVO> getTotalPriceAndProductNames(Map<String, Object> parMap) {
 		return mapper.getOrderListWithTotalPrices(parMap);
 	}
-	// 예약 상세페이지
-	public ReviewVO getReservationByNum(String reservationNum) {
-		return mapper.getReservationByNum(reservationNum);
-	}
 }
