@@ -291,37 +291,44 @@
       DELETE FROM `MEMBER` WHERE member_id=#{member_id} 
     </delete>
     
+	<!-- 포인트 전체 개수 -->
+	<select id="selectPointTotalCount" resultType="int">
+	    SELECT COUNT(*)
+		FROM POINT
+		WHERE member_id = #{member_id}
+		<if test="!startDate.equals('')">
+			AND
+				point_date BETWEEN #{startDate} 
+			<choose>
+				<when test="endDate.equals('')">
+					AND date_format(date(now()) + 1, '%Y-%m-%d')
+				</when>
+				<otherwise>
+					AND date_format(date(#{endDate}) + 1, '%Y-%m-%d')
+				</otherwise>
+			</choose>
+		</if>
+     </select> 
+	
 	<!-- 포인트 목록 -->
-	<select id="selectPoints" resultType="com.itwillbs.c3t2.vo.PointVO">
-	    SELECT *
-	    FROM POINT
-        WHERE member_id = #{memberId}
+	<select id="selectPointList" resultType="com.itwillbs.c3t2.vo.PointVO">
+		SELECT *
+        FROM POINT
+        WHERE member_id = #{member_id}
         <if test="!startDate.equals('')">
 			AND
 				point_date BETWEEN #{startDate} 
 			<choose>
-			<when test="endDate.equals('')">
-				AND date_format(date(now()) + 1, '%Y-%m-%d')
-			</when>
-			<otherwise>
+				<when test="endDate.equals('')">
+					AND date_format(date(now()) + 1, '%Y-%m-%d')
+				</when>
+				<otherwise>
 					AND date_format(date(#{endDate}) + 1, '%Y-%m-%d')
-			</otherwise>
+				</otherwise>
 			</choose>
 		</if>
         ORDER BY 
 		    point_date DESC
-	    LIMIT
-			#{startRow}
-			, #{listLimit}
-     </select>
-     
-     <select id="selectPointsCount" resultType="int">
-		SELECT COUNT(*)
-		FROM POINT
-		WHERE member_id = #{memberId}
-		<if test="!startDate.equals('') and !endDate.equals('')">
-			AND
-				point_date BETWEEN #{startDate} AND date_format(date(#{endDate}) + 1, '%Y-%m-%d') -- 테이블 칼럼명에 맞춰 바꾸기!!
-		</if>
+		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
 </mapper>

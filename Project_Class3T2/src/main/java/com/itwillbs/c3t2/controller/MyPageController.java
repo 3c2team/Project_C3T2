@@ -367,35 +367,30 @@ public class MyPageController {
     }
 	
 	@GetMapping("MypagePoint")
-	public String myPagePoint(HttpSession session ,Model model, 
-			@RequestParam(defaultValue = "1970-01-01") String startDate, 
-			@RequestParam(defaultValue = "") String endDate,
-			@RequestParam(defaultValue = "1") int pageNum) {
+	public String myPagePoint(HttpSession session ,Model model, PageMaker pageMaker, Map<String, Object> parMap,
+			@RequestParam(defaultValue = "1990-01-01") String startDate, 
+			@RequestParam(defaultValue = "") String endDate) {
 		String memberId = (String)session.getAttribute("sId");
 		
 		if(memberId == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
-			return "fail_back";
+			model.addAttribute("targetURL", "Login");
+			return "forward";
 		}
 		
 		// 페이징 처리
-		int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
-		int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
-		List<PointVO> points = service.getPoints(startDate, endDate, memberId, startRow, listLimit);
-		int listCount = service.getPointsCount(startDate, endDate, memberId);
-		int pageListLimit = 5;
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
+		parMap.put("member_id", memberId);
+		parMap.put("startDate", startDate);	
+		parMap.put("endDate", endDate);	
+		pageMaker.setPerPageNum(5);
+		pageMaker.setTotalCount(service.getPointsCount(parMap));
+		String pagination=pageMaker.paginationHTML("MypagePoint");
+		List<PointVO> points = service.getPointList(parMap);
 		
-		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
 		model.addAttribute("points", points);
-		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
+		
 		return "mypage/mypage_point";
 	}
 	

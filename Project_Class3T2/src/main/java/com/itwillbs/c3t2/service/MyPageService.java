@@ -109,13 +109,6 @@ public class MyPageService {
 		return mapper.getReviewByNum(reviewNum);
 	}
 	
-	public List<PointVO> getPoints(String startDate, String endDate, String memberId, int startRow, int listLimit) {
-		return mapper.selectPoints(startDate, endDate, memberId, startRow, listLimit);
-	}
-
-	public int getPointsCount(String startDate, String endDate, String memberId) {
-		return mapper.selectPointsCount(startDate, endDate, memberId);
-	}
 	// 리뷰 전체 갯수
 	public int getReviewTotalCount(Map<String, Object> paraMap) {
 		return mapper.getReviewTotalCount(paraMap);
@@ -135,5 +128,13 @@ public class MyPageService {
 	// 총 가격과 상품
 	public List<UserOrderVO> getTotalPriceAndProductNames(Map<String, Object> parMap) {
 		return mapper.getOrderListWithTotalPrices(parMap);
+	}
+	
+	public int getPointsCount(Map<String, Object> parMap) {
+		return mapper.selectPointTotalCount(parMap);
+	}
+
+	public List<PointVO> getPointList(Map<String, Object> parMap) {
+		return mapper.selectPointList(parMap);
 	}
 }

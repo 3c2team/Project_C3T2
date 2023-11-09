@@ -64,6 +64,16 @@ public class MainController {
 	// 메인 화면(최근 공지 팝업)
 	@GetMapping("Main")
 	public String main(Model model, HttpSession session) {
+		String id = (String)session.getAttribute("sId");
+		if(id != null) {
+			MemberVO dbMember = service.getMemberLogin(id);
+			if(dbMember == null) {
+				model.addAttribute("msg", "존재하지 않는 아이디입니다. 다시 로그인해주세요."); // 출력할 메세지
+				model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+				return "forward";
+			}
+		}
+		
 		NoticeVO notice_recent = service.getNoticeRecent();
 		model.addAttribute("noticeRecent", notice_recent);
 		return "other/main";

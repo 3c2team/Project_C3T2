@@ -6,8 +6,6 @@ function calculateDates() {
         alert('시작 날짜는 종료 날짜보다 이후일수 없습니다.');
         return;
     }
-
-    // Do any desired calculation or display logic here
 }
 
 function setToday() {
