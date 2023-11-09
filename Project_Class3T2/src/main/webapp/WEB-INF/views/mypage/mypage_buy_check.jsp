@@ -33,7 +33,6 @@ th, td {
 					<button onclick="setMonths(-6)">6개월</button>
 					<button onclick="setAllPeriod()">전체기간</button>
 				</div>
-				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 				<div id="reservation_confirm_term_right">
 					<div class="calanderWrap">
 						<input type="date" id="startDate"> - <input type="date" id="endDate">
@@ -52,7 +51,7 @@ th, td {
 							<th width="80px">주문번호</th>
 							<th width="250px">배송자 주소</th>
 							<th width="200px">요청 사항</th>
-							<th width="80px">총 구매 가격</th>
+							<th width="180px">총 구매 가격</th>
 							<th width="100px">구매 일자</th>
 							<th width="250px">구매 상품목록</th>
 						</tr>
@@ -83,6 +82,7 @@ th, td {
 		<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
       		${pagination}
     	</div>
+		<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 	</div>
 
 

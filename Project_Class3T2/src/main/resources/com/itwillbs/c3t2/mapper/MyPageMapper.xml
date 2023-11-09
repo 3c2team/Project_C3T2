@@ -105,6 +105,8 @@
 		    o.member_id = #{member_id}
 		GROUP BY
 		    o.merchant_uid
+		ORDER BY
+    		MAX(o.order_date) DESC
 		    
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum};
     </select>
