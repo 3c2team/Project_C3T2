@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* 테이블 이쁘게 만들기 */
 th, td {word-break: break-all;word-wrap: break-word;white-space: normal;padding: 5px;}
 .buy-row td{ height: 60px;}   
 #tr_top {background: #ccc;}

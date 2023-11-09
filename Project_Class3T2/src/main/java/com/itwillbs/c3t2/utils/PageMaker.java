@@ -30,11 +30,11 @@ public class PageMaker {
     
    private int tempEndPage; //마지막 페이지
     
-   private String startDate;
+   private String startDate;	// 날짜검색
    private String endDate;
    
-   //검색처리 추가
-   private String searchType;
+   //검색처리 추가 (파라미터 를 넘겨 주는 변수)
+   private String searchType;	//searchType 은 1개월 3개월 6개월에서 선택시 값들변 jsp 변경 해주는 처리 (진한 검정색 처리)
    private String keyword;
     
     
