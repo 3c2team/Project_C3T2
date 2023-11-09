@@ -282,6 +282,17 @@ tr {
 	cursor: pointer;
 }
 
+.noClick {
+	color: lightgrey; 
+}
+.noClick :nth-child(1){
+	color: lightgrey; 
+}
+.noClick :nth-child(7){
+	color: lightgrey; 
+}
+
+
 .custom_calendar_table tbody td:nth-child(1) { 
 	color: red; 
 } 

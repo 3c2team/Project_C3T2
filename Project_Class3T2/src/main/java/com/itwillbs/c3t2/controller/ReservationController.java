@@ -3,6 +3,7 @@ package com.itwillbs.c3t2.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,7 @@ public class ReservationController {
 		reservation.setReservation_guest_num(GenerateRandomCode.getRandomNumCode(6, 6));
 		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
 		reservation.setReservation_member_id((String)session.getAttribute("sId"));
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!:" + reservation.getCal_count());
 		
 		int insertCount = service.insertReservation(reservation);
 		
@@ -63,13 +65,18 @@ public class ReservationController {
 			mailService.sendReservationMail(reservation);
 			model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
 			model.addAttribute("reservation", reservation);
-			return "reservation/reservation_success";
+			return "ReservationLoad";
 		} else { // => 실패 시 "fail_back.jsp" 포워딩
 			model.addAttribute("msg", "예약 실패!");
 			return "fail_back";
 		}
 	}
 	
+	@GetMapping("/ReservationLoad")
+	public String ReservationLoad(Model model) {
+		return "reservation/reservation_success";
+	}
+
 	//비회원 예약 검색 페이지 이동
 	@GetMapping("/ReservationSearch")
 	public String reservationSearch() {
@@ -123,26 +130,33 @@ public class ReservationController {
 			@RequestParam String reservation_person_name, Model model) {
 		
 		reservation = service.selectNumName(reservation_guest_num, reservation_person_name);
+		reservation.setReservation_email1(reservation.getReservation_email().split("@")[0]);
+		reservation.setReservation_email2(reservation.getReservation_email().split("@")[1]);
+		System.out.println("!!@@!@!#!@#" + reservation);
 		model.addAttribute("reservation", reservation);
 		return "reservation/reservation_update";
 	}
 	
 	// 비회원 예약 정보 수정
 	@PostMapping("/ReservationUpdatePro")
-	public String reservationUpdatePro(ReservationVO reservation, Model model) {
+	public String reservationUpdatePro(ReservationVO reservation, Model model, HttpServletRequest request) {
 		
-		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
-		
+		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2()); //나눠주기 합치기
 		int updateCount = service.updateReservation(reservation);
 		if(updateCount < 0) {
 			model.addAttribute("msg", "잘못된 접근입니다!");
 			return "fail_back";
 		}
+		mailService.sendReservationMail(reservation);
 		// 회원 상세정보를 Model 객체에 저장
-		return "redirect:/ReservationSearchInfo?"
-				+ "reservation_guest_num=" + reservation.getReservation_guest_num() 
-				+ "&reservation_email1=" + reservation.getReservation_email1() 
-				+ "&reservation_email2=" + reservation.getReservation_email2();
+		model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
+		model.addAttribute("targetURL", request.getContextPath() + "/ReservationSearchInfo"
+//				);
+												+ "?"
+												+ "reservation_guest_num=" + reservation.getReservation_guest_num()
+												+ "&reservation_email1=" + reservation.getReservation_email1()
+												+ "&reservation_email2=" + reservation.getReservation_email2());
+		return "forward";
 	}
 	
 	//예약 성공 이동

@@ -18,9 +18,7 @@
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</header>
 	<main>
-		<%-- 조회된 회원 정보를 테이블에 출력 --%>
-		<%-- EL 을 사용하여 member 객체에 저장된 각 항목을 테이블에 출력 --%>
-		<h1>Reservation</h1>
+		<h1>예약 하기</h1>
 		<form action="ReservationPro" method="post" id="custom_submit">
 			<div id="calendarForm"></div>
 			<table class="custom_reservation_form">
@@ -28,7 +26,7 @@
 					<th>예약인원</th>
 					<td>
 						<input type="hidden" id="reservation_date" name="reservation_date">
-						<input type="hidden" id="dinning_num" name="dinning_num">
+						<input type="hidden" id="cal_count" name="cal_count">
 						<input type="hidden" id="member_id" name="member_id" <c:if test='${not empty sessionScope.sId }'>value="${sessionScope.sId }"</c:if>>
 						<div class="form_radio_btn1">
 							<input id="radio1" type="radio" name="reservation_person_count" value="1" checked>

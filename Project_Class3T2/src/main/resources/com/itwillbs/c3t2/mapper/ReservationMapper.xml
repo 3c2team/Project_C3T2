@@ -8,7 +8,7 @@
 	
 	<!-- 예약 등록 -->
 	<insert id="insertReservation">
-		INSERT INTO RESERVATION
+		 INSERT INTO RESERVATION
 			VALUES (
 				null <!-- reservation_num -->
 				, #{reservation_date}
@@ -19,7 +19,15 @@
 				, 0 <!-- cancel -->
 				, #{reservation_member_id} <!-- #{reservation_member_id} -->
 				, #{reservation_guest_num} <!-- guest_num -->
-				, #{dinning_num} <!-- 컨트롤러에서 지정 -->
+				,  (SELECT IFNULL(MAX(r.DINNING_NUM) + 1, MIN(d.DINNING_NUM)) as num
+   					  FROM (SELECT *
+				              FROM DINNING 
+				             WHERE DINNING_MAX = #{cal_count}) d
+			     LEFT JOIN (SELECT *
+			                  FROM RESERVATION 
+			                 WHERE reservation_date = #{reservation_date}
+			                   AND reservation_time = #{reservation_time}) r
+			            ON d.DINNING_NUM = r.DINNING_NUM)
 				, 1 <!-- restaurant_num -->
 		)
 	</insert>
@@ -45,21 +53,25 @@
 			   , reservation_time = #{reservation_time}
 			   , reservation_person_count = #{reservation_person_count}
 			   , reservation_email = #{reservation_email}
-		 WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
 	<!-- 예약 삭제 -->
 	<update id="deleteReservation">
 		UPDATE RESERVATION 
 		   SET reservation_cancel = 1
-		 WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
 	<!-- 예약내역 불러오기 / 예약번호, 이름 -->
 	<select id="selectNumName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT *
 		  FROM RESERVATION
-		 WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name} AND reservation_cancel = 0
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name} 
+		   AND reservation_cancel = 0
 	</select>
 
 	<!-- 예약 가능 시간 조회 -->

@@ -11,8 +11,6 @@ let nowDate = new Date();
 function calendarMaker(target, date) {
 	let thisMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), 1);
 	let thisLastDay = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0);
-//	console.log("target : " + target);
-//	console.log("date : " + date);
 	if (date == null || date == undefined) {
 	    date = new Date();
 	}
@@ -37,11 +35,28 @@ function calendarMaker(target, date) {
 	
 	//날짜 채우기
 	for (i = 1; i <= thisLastDay.getDate(); i++) {
+		
+		
 	    if (cnt % 7 == 0) { tag += "<tr>"; }
-		if(i == nowDate.getDate()){
+		if(i == nowDate.getDate() + 1){ // 1일전까지만 예약가능
 		    tag += "<td class='select_day'>" + i + "</td>";
 		} else {
-		    tag += "<td>" + i + "</td>";
+			let thisId = thisMonth.getFullYear() + "-" + (thisMonth.getMonth() + 1) + "-" + (i < 10 ? "0" + i : i);
+			let thisDay = new Date(thisId);
+			let today = new Date();
+			today.setHours(9);
+			today.setMinutes(0);
+			today.setSeconds(0);
+			
+			let diferrenceDay = parseInt((thisDay - today) / 1000) * 1000;
+			console.log(thisDay + ", " + today + ", " + diferrenceDay);
+			
+			if(diferrenceDay < 0) {
+				tag += "<td id=" + thisId + " class='noClick'>" + i + "</td>";
+			} else {
+				tag += "<td id=" + thisId + ">" + i + "</td>";
+			}
+		   
 		}
 	    cnt++;
 	    if (cnt % 7 == 0) {
@@ -70,8 +85,11 @@ function calMoveEvtFn() {
     });
     // 일자 선택 클릭
     $(".custom_calendar_table").on("click", "td", function () {
-        $(".custom_calendar_table .select_day").removeClass("select_day");
-        $(this).removeClass("select_day").addClass("select_day");
+		if(!$(this).hasClass("noClick")) {
+	        $(".custom_calendar_table .select_day").removeClass("select_day");
+	        $(this).removeClass("select_day").addClass("select_day");
+		}
+		$("noClick").readOnly=true;
         
         validationCheck();
     });
@@ -133,6 +151,7 @@ function validationCheck(){
             }
         }        
 	}
+	$("#cal_count").val(count);
 	
     // 인원수 받아서 disable 걸기
 	$.ajax({
