@@ -281,7 +281,7 @@
     <!-- 회원 탈퇴사유 등록 -->
     <insert id="insertMbershipWithdrawal">    
 	    INSERT INTO MEMBER_OUT
-         (out_num,${membershipWithdrawal},out_date)
+         (out_num,${select_num},out_date)
      	 VALUES(null,1,now())
     </insert>
     
