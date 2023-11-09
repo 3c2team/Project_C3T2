@@ -11,7 +11,10 @@ $(function() {
 				if(!regex.exec(id)) { // 아이디 입력값 검증 실패 시 
 					$("#checkIdResult").html("아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
 					$("#checkIdResult").css("color", "red");
-				} else { // 아이디 입력값 검증 성공 시 
+				}else if(id.indexOf("admin") != -1){
+					$("#checkIdResult").html(id + "사용하실수 없는 아이디입니다.");
+					$("#checkIdResult").css("color", "red");
+				}else { // 아이디 입력값 검증 성공 시 
 					$.ajax({
 						url: "MemberCheckDupId",
 						data: {

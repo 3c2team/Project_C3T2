@@ -58,14 +58,15 @@
 					,ifnull(favorite_count,0) AS favorite_count
 					,ROW_NUMBER() OVER(ORDER BY product_num) AS num
 			FROM PRODUCT_CATEGORY c JOIN (SELECT p.product_num
-										,product_name
-										,product_price
-										,product_info
-										,product_release
-										,product_category_num
-										,favorite_count
-										FROM PRODUCT p 
-										LEFT JOIN (SELECT product_num,count(favorite_num) as favorite_count
+												,product_name
+												,product_price
+												,product_info
+												,product_release
+												,product_category_num
+												,favorite_count
+										   FROM PRODUCT p 
+									  LEFT JOIN ( SELECT product_num
+														 ,count(favorite_num) as favorite_count
 													FROM FAVORITE
 													GROUP BY product_num) f
 										ON p.product_num = f.product_num) a
@@ -126,17 +127,17 @@
 			WHERE product_num = #{product_num};
 		</delete>
 		<insert id="insertNotice">
-		INSERT INTO NOTICE
-		VALUES(	null
-				, #{notice_subject}
-				, #{notice_content}
-				,now()
-				,0
-		)
+			INSERT INTO NOTICE
+			VALUES(	null
+					, #{notice_subject}
+					, #{notice_content}
+					,now()
+					,0
+			)
 		</insert>
 		<delete id="deleteNotice">
-		DELETE FROM NOTICE
-		WHERE notice_num = #{notice_num}
+			DELETE FROM NOTICE
+			WHERE notice_num = #{notice_num}
 		</delete>
 		<select id="selectReviewList" resultType="map">
 			SELECT review_num
@@ -205,33 +206,33 @@
 		</select>
 		<update id="updateQnaBoard">
 			UPDATE QUESTION
-			SET question_answer = #{question_answer},
-            question_answer_date = now()
-			where question_num = #{question_num};
+			SET question_answer = #{question_answer}
+            	,question_answer_date = now()
+			WHERE question_num = #{question_num};
 		</update>
 		<select id="selectOutDate" resultType="map">
 			WITH RECURSIVE result_mon AS (
-			SELECT 1 AS rnum
-		    UNION ALL
-		    SELECT rnum + 1 FROM result_mon
-		    WHERE  12 > rnum
+				SELECT 1 AS rnum
+			    UNION ALL
+			    SELECT rnum + 1 FROM result_mon
+			    WHERE  12 > rnum
 			)   
 			SELECT CONCAT(r.rnum, '월') as mon
 				 , ifnull(m.cnt, 0) as cnt
 			FROM result_mon r 
 			LEFT JOIN (SELECT MONTH(out_date) AS mon
-							, count(out_num) as cnt
-						FROM MEMBER_OUT
+							, COUNT(out_num) as cnt
+						 FROM MEMBER_OUT
 						WHERE out_date LIKE CONCAT(year(now()),'%')
-						GROUP BY out_date) m
+						GROUP BY MONTH(out_date)) m
 			ON r.rnum = m.mon;
 		</select>
 		<select id="selectRestaurant" resultType="map">
 			SELECT *
 			FROM RESTAURANT
 			WHERE restaurant_num = (SELECT restaurant_num
-									FROM ADMIN
-			                        WHERE admin_id = #{sId}) 
+									  FROM ADMIN
+			                         WHERE admin_id = #{sId}) 
 		</select>
 		<update id="updateRestaurant">
 		
@@ -283,44 +284,44 @@
 			FROM result_year r left join (SELECT YEAR(order_date) AS year
 												,SUM((product_count*product_price)) AS salary
 											FROM USER_ORDER
-											GROUP BY YEAR(order_date)) y
+										GROUP BY YEAR(order_date)) y
 			ON r.rnum = y.year;
 		</select>
 		<select id="selectMonthDate" resultType="map">
 			WITH RECURSIVE result_mons AS (
-			SELECT 1 AS rnum
-		    UNION ALL
-		    SELECT rnum + 1 FROM result_mons
-            WHERE 12 > rnum
+				SELECT 1 AS rnum
+			    UNION ALL
+			    SELECT rnum + 1 FROM result_mons
+	            WHERE 12 > rnum
 			)
 
 			SELECT CONCAT(rnum,'월') AS rnum ,ifnull(sales,0) AS sales
-			FROM result_mons r LEFT JOIN (SELECT MONTH(order_date) as mons ,SUM((product_count*product_price)) as sales
-											FROM USER_ORDER
+			  FROM result_mons r LEFT JOIN (SELECT MONTH(order_date) as mons ,SUM((product_count*product_price)) as sales
+											 FROM USER_ORDER
 											WHERE YEAR(order_date) = IF(#{year}=0,YEAR(now()),#{year})
-											GROUP BY MONTH(order_date)) y
+										 GROUP BY MONTH(order_date)) y
 			on r.rnum = y.mons;
 		</select>
 		<select id="selectHourDate" resultType="map">
 			WITH RECURSIVE result_hour AS (
-			SELECT 1 AS rnum
-		    UNION ALL
-		    SELECT rnum + 1 FROM result_hour
-            WHERE 24 > rnum
+				SELECT 1 AS rnum
+			    UNION ALL
+			    SELECT rnum + 1 FROM result_hour
+	            WHERE 24 > rnum
 			)
 			
 			SELECT CONCAT(rnum,'시') AS rnum ,ifnull(sales,0) AS sales
-			FROM result_hour r LEFT JOIN (SELECT HOUR(order_date) as hours ,SUM((product_count*product_price)) as sales
-											FROM USER_ORDER
+			FROM result_hour r LEFT JOIN ( SELECT HOUR(order_date) as hours ,SUM((product_count*product_price)) as sales
+											 FROM USER_ORDER
 											WHERE DAY(order_date) = IF(#{day}=0,DAY(now()),#{day})
-											GROUP BY HOUR(order_date)) y
+									 	 GROUP BY HOUR(order_date)) y
 			on r.rnum = y.hours;
 		</select>
 		<select id="selectProductSales" resultType="map">
             SELECT product_category_name as category,SUM(product_count*product_price) AS sales
-            FROM PRODUCT_CATEGORY c JOIN ( SELECT p.product_category_num,product_count,u.product_price
-											FROM USER_ORDER u JOIN PRODUCT p
-											ON u.product_num = p.product_num) a
+              FROM PRODUCT_CATEGORY c JOIN (SELECT p.product_category_num,product_count,u.product_price
+											 FROM USER_ORDER u JOIN PRODUCT p
+											   ON u.product_num = p.product_num) a
             ON c.product_category_num = a.product_category_num
             GROUP BY product_category_name;
 		</select>
@@ -329,21 +330,4 @@
 			SET reservation_cancel = 1
 			WHERE reservation_num = #{checkbox}
 		</update>
-<!-- 		<select id="selectProductByImg" resultType="map"> -->
-<!-- 			SELECT cast(p.product_num as CHAR(10)) as  product_num -->
-<!-- 				, p.product_name -->
-<!-- 				, p.product_price -->
-<!-- 				, p.product_info -->
-<!-- 				, p.product_release -->
-<!-- 				, p.product_category_num -->
-<!-- 				, p.product_main_img -->
-<!-- 				, p.product_main_img_real_file -->
-<!-- 				 , i.product_image_num -->
-<!-- 			     , i.product_image -->
-<!-- 			     , i.product_image_real_file -->
-<!-- 			  FROM PRODUCT p -->
-<!-- 			  JOIN PRODUCT_IMG i -->
-<!-- 				ON p.product_num = i.product_num -->
-<!-- 			 WHERE p.product_num = ${product_num} -->
-<!-- 		</select> -->
     </mapper>

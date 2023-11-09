@@ -7,7 +7,7 @@
 
 <meta charset="utf-8" />
 
-<title>공지 관리</title>
+<title>회원 관리</title>
 <style type="text/css">
 .body_gray {
 	background-color: #f8f8f8;
