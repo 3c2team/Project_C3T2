@@ -71,9 +71,9 @@ public interface MyPageMapper {
 	ReviewVO getReviewByNum(int reviewNum);
 	
 	// 포인트 목록
-	List<PointVO> selectPoints(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	int selectPointTotalCount(Map<String, Object> parMap);
 	
-	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
+	List<PointVO> selectPointList(Map<String, Object> parMap);
 	
 	// 리뷰 개수
 	int getReviewTotalCount(Map<String, Object> paraMap);
