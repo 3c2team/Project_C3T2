@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/id_forgot.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <body>
 	<div id="mainLayout">
 		<header>

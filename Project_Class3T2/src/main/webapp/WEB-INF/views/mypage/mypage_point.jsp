@@ -33,7 +33,7 @@ td {
 				<form action="MypagePoint">
 					<div id="reservation_confirm_term_right">
 						<div class="calanderWrap">
-							<input type="date" name="startDate" id="startDate"> - <input type="date" name="endDate" id="endDate">
+							<input type="date" name="startDate" id="startDate" value=${startDate }> - <input type="date" name="endDate" id="endDate" value=${endDate }>
 							<button type="submit" id="search_btn">조회</button>
 						</div>
 					</div>

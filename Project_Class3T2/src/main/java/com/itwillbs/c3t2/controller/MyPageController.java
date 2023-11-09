@@ -387,6 +387,8 @@ public class MyPageController {
 		String pagination=pageMaker.paginationHTML("MypagePoint");
 		List<PointVO> points = service.getPointList(parMap);
 		
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 		model.addAttribute("points", points);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("pagination", pagination);
