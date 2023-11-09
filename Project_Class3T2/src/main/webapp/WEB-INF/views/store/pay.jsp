@@ -12,7 +12,6 @@
 <head>
 <meta charset="UTF-8">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/pay_phone_num.js"></script>
@@ -171,7 +170,7 @@ $(function() {
 							<td>
 	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
 								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" name="receiver_addr1" value="${Member.member_address1}">&nbsp;
-								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " onclick="search_address_window()">주소 검색</button> <br>
+								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " id="btnSearchAddress" >주소 검색</button> <br>
 								<input type="text" id="addr2" size="40" name="receiver_addr2"  value="${Member.member_address2}"/>
 							</td>
 						</tr>
@@ -183,7 +182,6 @@ $(function() {
 								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" placeholder="000-0000-0000">
 								<span id="checkPhoneResult"></span><br>
 							</td>
-						
 						</tr>
 						
 						<tr>
@@ -201,13 +199,10 @@ $(function() {
 									<option value="daum.net">daum.net</option>
 									<option value="nate.com">nate.com</option>
 								</select>
-								<span style="font-size: 10pt; color:gray;">
-<!-- 									<p> 이메일을 통해 주문 처리과정을 보내드립니다.<br> -->
-<!-- 										이메일 주소란에는 반드시 수신가능한 이메일 주소를 입력해 주세요 -->
-<!-- 									</p> -->
-								</span>
+								<span style="font-size: 10pt; color:gray;"></span>
 							</td>
 						</tr>
+						
 						<tr>
 							<td class="deliverytd">포인트</td>
 							<td><input type="text" id="usePoint" name="usePoint">&nbsp;&nbsp;사용 가능 포인트 (${Member.member_point})&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="pointCheck" value="${Member.member_point}">포인트 사용하기&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -274,9 +269,7 @@ $(function() {
 			<footer id="footer">
 				<jsp:include page="../inc/bottom.jsp"></jsp:include>
 			</footer>
-		
 		</div>
-
 	</form>	
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 </body>
