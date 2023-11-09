@@ -22,17 +22,14 @@
    </header>
 
    <div class="cartBody" id="frame" >
-      
-      
          <div id="frame2">
             <span style="font-size: 18pt;, font-weight: bold; text-align: left;" >장바구니</span>
             <span class="home"> 홈 > 장바구니</span>
             <span></span>
          </div>
+         
          <br>
-                           
          <!-- 상품 정보 테이블 -->
-      
          <div >
             <table class="calculation1"  style="width: 100%; border-collapse : collapse;">
             
@@ -91,13 +88,10 @@
 						<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="deleteCart('${productList.product_num}')">삭제</button><br>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br> --%>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete(${productList.product_num})">삭제</button><br> --%>
-
                      </td>
                   </tr>
                </c:forEach>
-               
             </tbody>
-            
             <tfoot> <!-- 상품 총 금액 -->
                <tr style="height: 60px;">
                   <td colspan="5" style="border-right: none; text-align: left; padding-left: 10ox;">

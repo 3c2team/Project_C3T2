@@ -104,4 +104,20 @@
 			$("#checkedResult").text($(".allPrice").val() + "원");
 	    }
 	});
+	
+	
+	$("#btnSearchAddress").click(function() {
+		new daum.Postcode({
+	    	oncomplete: function(data) {
+	        	let address = data.address; // 기본 주소 저장
+	            if(data.buildingName != '') { // 건물명이 있을 경우
+	            	address += " (" + data.buildingName + ")";
+	        }
+	            
+	        $("#addr1").val(address);
+	            
+	        $("#addr2").focus();
+	    	}
+	    }).open();
+	});
  });
