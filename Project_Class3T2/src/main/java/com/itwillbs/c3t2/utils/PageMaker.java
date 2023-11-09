@@ -30,9 +30,12 @@ public class PageMaker {
     
    private int tempEndPage; //마지막 페이지
     
-   //검색처리 추가
    private String startDate;
    private String endDate;
+   
+   //검색처리 추가
+   private String searchType;
+   private String keyword;
     
     
    public PageMaker() {
@@ -117,9 +120,12 @@ public class PageMaker {
                UriComponentsBuilder.newInstance()
                .queryParam("page", page)				// 현재 페이지 번호를 'page' 파라미터로 추가
                .queryParam("perPageNum", perPageNum)	// 페이지당 데이터 수를 'perPageNum' 파라미터로 추가
-               .queryParam("startDate", startDate)	// 검색 유형을 'searchType' 파라미터로 추가
-               .queryParam("endDate", endDate)			// 검색 키워드를 'keyword' 파라미터로 추가
+               .queryParam("searchType", searchType)	// 검색 유형을 'searchType' 파라미터로 추가
+               .queryParam("keyword", keyword)			// 검색 키워드를 'keyword' 파라미터로 추가
+               .queryParam("startDate", startDate)
+               .queryParam("endDate", endDate)
                .build();								// URI 쿼리 문자열을 구성
+       
        
        // 구성된 URI 쿼리 문자열을 문자열 형태로 반환
        return uriComponents.toUriString();

@@ -10,7 +10,8 @@ td {
 	padding-left: 10px;
 }
 #pageList {
-    margin-left: -10%;
+    margin-left: 40%;
+    margin-top: 3%;
 }
 </style>
 </head>
@@ -33,7 +34,7 @@ td {
 				<form action="MypagePoint">
 					<div id="reservation_confirm_term_right">
 						<div class="calanderWrap">
-							<input type="date" name="startDate" id="startDate" value=${startDate }> - <input type="date" name="endDate" id="endDate" value=${endDate }>
+							<input type="date" name="startDate" id="startDate"> - <input type="date" name="endDate" id="endDate">
 							<button type="submit" id="search_btn">조회</button>
 						</div>
 					</div>
@@ -75,15 +76,24 @@ td {
 							</tr>
 						</c:forEach>
 					</table>
-					<c:if test="${empty points }">                        	
-                    	<h3 class="text-center mt50" style="width: 100%">포인트 내역이 없습니다.</h3>
-                    </c:if>
 				</section>
 				<section id="pageList">
-					<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
-         				${pagination}
-       				</div>
-     			</section>
+				<%-- <c:if test="${{pageInfo.pageNum <= 1 }">disabled</c:if> --%>
+					<input type="button" value="이전" onclick="location.href='MypagePoint?pageNum=${pageInfo.pageNum - 1 }&startDate=${startDate }&endDate=${endDate }'">
+					<a href="MypagePoint?pageNum=${i }">${i }</a>
+					<c:forEach var="i" begin="${pageInfo.startPage }" end="${pageInfo.endPage }">
+						<c:choose>
+							<c:when test="${pageInfo.pageNum eq i }"> <%-- 현재 페이지일 경우(하이퍼링크 미표시 및 굵게) --%>
+								<b>${i }</b>
+							</c:when>
+							<c:otherwise> <%-- 현재 페이지가 아닐 경우(하이퍼링크 표시) --%>
+								<a href="MypagePoint?pageNum=${i }">${i }</a> 
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<%-- <c:if test="${pageInfo.pageNum >= pageInfo.maxPage }">disabled</c:if> --%>
+					<input type="button" value="다음" onclick="location.href='MypagePoint?pageNum=${pageInfo.pageNum + 1 }&startDate=${startDate }&endDate=2${endDate }'" >
+				</section>
 			</article>
 		</div>
 		<br>

@@ -22,6 +22,7 @@
 	    });
 	};
     </script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage-search.css">
 </head>
 <body>
     <%@ include file="./include/body_top.jsp"%>
@@ -30,43 +31,51 @@
         <div class="text-center mt50 mb50">
             <h1>상품 리뷰</h1>
         </div>
-        <h2 class="mb100"> 총 ${pageMaker.totalCount}개 상품</h2>
+        
         <h2>기간 조회</h2>
+        <div class="totalCount">전체 ${pageMaker.totalCount}건 </div>
         <div class="reservationConfirmContainer">
+            <form  id="frm">
             <div class="reservationConfirmTerm">
-                <div class="calendarContainer">
-                    <button onclick="setToday()">오늘</button>
-                    <button onclick="setMonths(-1)">1개월</button>
-                    <button onclick="setMonths(-3)">3개월</button>
-                    <button onclick="setMonths(-6)">6개월</button>
-                    <button onclick="setAllPeriod()">전체기간</button>
-                </div>
+				<div class="calendarContainer">
+					<button type="button"   onclick="setToday(this)"  class="calendarContainer  ${pageMaker.searchType eq '1' ? 'active':''}">오늘</button>
+					<button type="button"  onclick="setMonths(this, -1)" class="calendarContainer ${pageMaker.searchType eq '-1' ? 'active':''} "  >1개월</button>
+					<button type="button"  onclick="setMonths(this, -3)" class="calendarContainer ${pageMaker.searchType eq '-3' ? 'active':''} ">3개월</button>
+					<button type="button"  onclick="setMonths(this,-6)"  class="calendarContainer ${pageMaker.searchType eq '-6' ? 'active':''} ">6개월</button>
+					<button type="button"  onclick="setAllPeriod(this)" class="calendarContainer ${ (empty pageMaker.searchType) or (pageMaker.searchType eq 'NaN') ? 'active':''}"  >전체기간</button>
+				</div>
+				<input type="hidden" id="searchType" name="searchType">
                 <div id="reservation_confirm_term_right">
-                    <div class="calanderWrap">
-                        <input type="date" id="startDate"> - <input type="date" id="endDate">
-                        <button id="search_btn">조회</button>
-                    </div>
+                   <div class="calanderWrap">
+						<input type="date" id="startDate" name="startDate" value="${pageMaker.startDate}"> - <input type="date" id="endDate" name="endDate" 
+						value="${pageMaker.endDate}">
+						<button type="submit"  id="search_btn">조회</button>
+					</div>
                 </div>
             </div>
+            </form>
+            
             <br>
             <br>
             <!-- 리뷰 목록 테이블 -->
             <article>
                 <section id="list_Form">
-                    <table>
+                    <table style="width: 100%">
                         <!-- 테이블 헤더 -->
                         <tr id="tr_top">
                             <th width="80px">리뷰번호</th>
-                            <th width="100px">상품번호</th>
-                            <th width="300px">리뷰 내용</th>
+                            <th width="65px">상품번호</th>
+                            <th width="150px">상품명</th>
+                            <th width="auto">리뷰 내용</th>
                             <th width="100px">별점</th>
                             <th width="130px">리뷰 날짜</th>
                         </tr>
                         <!-- 리뷰 데이터 반복 출력 -->
                         <c:forEach var="review" items="${reviews}">
-                            <tr class="review-row" data-review-date="${review.review_date}">
+                            <tr class="review-row text-center" data-review-date="${review.review_date}">
                                 <td>${review.review_num}</td>
                                     <!-- 상품명을 클릭하면 productDetail 페이지로 이동 -->
+                                <td>${review.product_num}</td>
                                 <td>
 					                <a href="${pageContext.request.contextPath}/ProductDetail?proNum=${review.product_num}">
 					                    ${review.product_name}
@@ -85,7 +94,7 @@
                         
                         <c:if test="${empty reviews}">
                             <tr>
-                                <td colspan="5" class="text-center">
+                                <td colspan="6" class="text-center">
                                     <div style="height:50px; line-height: 50px">등록된 리뷰가 없습니다.</div>
                                 </td>
                             </tr>
@@ -101,7 +110,31 @@
         <br>
     </div>
 
+
+
+
     <script src="${pageContext.request.contextPath}/resources/js/mypage_calender.js"></script>
     <%@ include file="./include/body_bottom.jsp"%>
+
+
+<script>
+$(function(){
+	
+	console.log("dddd");
+	var pageMakerStartDate='${pageMaker.startDate}';
+	var pageMakerEndDate='${pageMaker.endDate}';
+
+	console.log(pageMakerStartDate, pageMakerEndDate);
+	if(!pageMakerStartDate && pageMakerStartDate!="" && pageMakerStartDate="NaN"){
+		$("#startDate").val(pageMakerStartDate);
+	}
+	if(!pageMakerEndDate && pageMakerEndDate!="" && pageMakerEndDate="NaN"){
+		$("#endDate").val(pageMakerEndDate);
+	}
+});
+
+
+
+</script>    
 </body>
 </html>

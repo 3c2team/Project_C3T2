@@ -307,19 +307,24 @@ public class MyPageController {
 		
 		parMap.put("member_id", loginUser.getMember_id());
 		pageMaker.setPerPageNum(5);
-		pageMaker.setTotalCount(service.getBuyTotalCount(parMap));
-		String pagination=pageMaker.paginationHTML("MypageBuyList");
+		//pageMaker.setTotalCount(service.getBuyTotalCount(parMap));		
 		parMap.put("pageMaker", pageMaker);
+		
 		
 		//상품 구매 내역을 가져옴
 		List<UserOrderVO> OrderList = service.getOrderList(parMap);
 		
 		// 총 가격과 결합된 상품 이름을 가져옴
+		int totalCount=service.getTotalPriceAndProductNamesTotCount(parMap);
+		pageMaker.setTotalCount(totalCount);
 		List<UserOrderVO> orderTotals = service.getTotalPriceAndProductNames(parMap);
+		String pagination=pageMaker.paginationHTML("MypageBuyList");
+		
 		
 		// 가져온 구매 목록을 모델에 추가
 		model.addAttribute("OrderList", OrderList);
 		model.addAttribute("orderTotals", orderTotals); // 총 가격과 결합된 상품 이름 추가
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("pagination", pagination);
 		
@@ -358,6 +363,8 @@ public class MyPageController {
 		return "mypage/mypage_goods_review";
 	}
 	
+	
+	
 	@GetMapping("/productDetail")	//상품 리뷰 페이지 넘어가게하기
     public String reviewDetail(@RequestParam("review_num") int reviewNum, Model model) {
         ReviewVO review = service.getReviewByNum(reviewNum);
@@ -367,32 +374,35 @@ public class MyPageController {
     }
 	
 	@GetMapping("MypagePoint")
-	public String myPagePoint(HttpSession session ,Model model, PageMaker pageMaker, Map<String, Object> parMap,
-			@RequestParam(defaultValue = "1990-01-01") String startDate, 
-			@RequestParam(defaultValue = "") String endDate) {
+	public String myPagePoint(HttpSession session ,Model model, 
+			@RequestParam(defaultValue = "1970-01-01") String startDate, 
+			@RequestParam(defaultValue = "") String endDate,
+			@RequestParam(defaultValue = "1") int pageNum) {
 		String memberId = (String)session.getAttribute("sId");
 		
 		if(memberId == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
-			model.addAttribute("targetURL", "Login");
-			return "forward";
+			return "fail_back";
 		}
 		
 		// 페이징 처리
-		parMap.put("member_id", memberId);
-		parMap.put("startDate", startDate);	
-		parMap.put("endDate", endDate);	
-		pageMaker.setPerPageNum(5);
-		pageMaker.setTotalCount(service.getPointsCount(parMap));
-		String pagination=pageMaker.paginationHTML("MypagePoint");
-		List<PointVO> points = service.getPointList(parMap);
+		int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
+		int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
+		List<PointVO> points = service.getPoints(startDate, endDate, memberId, startRow, listLimit);
+		int listCount = service.getPointsCount(startDate, endDate, memberId);
+		int pageListLimit = 5;
+		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
+		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
+		int endPage = startPage + pageListLimit - 1;
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
 		
+		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
+		model.addAttribute("points", points);
+		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("points", points);
-		model.addAttribute("pageMaker", pageMaker);
-		model.addAttribute("pagination", pagination);
-		
 		return "mypage/mypage_point";
 	}
 	
@@ -463,20 +473,37 @@ public class MyPageController {
 	
 	
 	@GetMapping("MypageReservationList")				// 예약 내역
-	public String mypageReservationList(HttpSession session, Model model) {
+	public String mypageReservationList(HttpSession session, Model model ,  Map<String, Object> parMap , PageMaker pageMaker) {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		String member_id = (String) session.getAttribute("sId");
 		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_id);
 		
+		parMap.put("member_id", member_id);
+		pageMaker.setPerPageNum(5);
+		pageMaker.setTotalCount(service.getReservationDetailTotalCount(parMap));				
+		parMap.put("pageMaker", pageMaker);
+		
+		
 		// 현재 로그인한 회원의 모든 리뷰 가져오기
-		List<ReservationVO> reviews = service.getReservationDetail(member_id);
+		List<ReservationVO> reviews = service.getReservationDetail(parMap);
 		System.out.println(reviews);
 		
+		// 페이지네이션 HTML을 생성.
+		String pagination=pageMaker.paginationHTML("MypageReservationList");		
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
 		
 		return "mypage/mypage_reservation_ask";
 	}
+	
+
+	
+	
+	
+	
+	
 	
 	@PostMapping("cancelReservation")		// 예약취소
 	public String cancelReservation(@RequestParam("reservation_num") int reservationNum) {
