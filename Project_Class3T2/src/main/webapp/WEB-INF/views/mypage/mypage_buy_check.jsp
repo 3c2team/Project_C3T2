@@ -82,8 +82,8 @@ th, td {
 		<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
       		${pagination}
     	</div>
-		<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 	</div>
+		<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script>
 
 
 

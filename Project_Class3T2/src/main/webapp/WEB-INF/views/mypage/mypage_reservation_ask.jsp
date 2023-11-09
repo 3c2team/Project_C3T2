@@ -44,7 +44,7 @@
 							<th width="100px">예약 날짜</th>
 							<th width="130px">예약 시간</th>
 							<th width="80px">예약 인원</th>
-							<th width="80px">예약 테이블</th>
+							<th width="100px">예약 테이블</th>
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">

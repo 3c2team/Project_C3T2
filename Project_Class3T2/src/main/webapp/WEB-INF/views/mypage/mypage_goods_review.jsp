@@ -69,7 +69,7 @@
                                     <!-- 상품명을 클릭하면 productDetail 페이지로 이동 -->
                                 <td>
 					                <a href="${pageContext.request.contextPath}/ProductDetail?proNum=${review.product_num}">
-					                    ${review.product_num}
+					                    ${review.product_name}
 					                </a>
 						        </td>
                                 <td>${review.review_content}</td>
