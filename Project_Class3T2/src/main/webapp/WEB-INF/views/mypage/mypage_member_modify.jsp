@@ -120,7 +120,7 @@ input[readonly]{background: #eee;}
 						<th>전화번호</th>
 						<td>	
 							<input type="text" name="member_phone_num" id="member_phone_num" 
-							oninput="oninputPhone(this)" maxlength="14"
+							oninput="oninputPhone(this)" maxlength="13"
 							placeholder="숫자만 입력" size="20" value="${Member.member_phone_num}">
 							<br>
 							<span id="checkIdResult1"></span>
@@ -178,7 +178,16 @@ function memberModify(){
 	var member_address2=$("#member_address2").val();
 	var email1=$("#email1").val();
 	var email2=$("#email2").val();
+	/////////////////////////////////////
+	var fullEmail = email1 + "@" + email2;
 
+    // 이메일 유효성 검사
+    if (!validateEmail(fullEmail)) {
+        alert("유효하지 않은 이메일 주소입니다.");
+        $("#email1").focus();
+        return;
+    }
+	/////////////////////////////////////
 	console.log("member_name ", member_name);
 	
 	// 이름이 비어있는지 확인.
@@ -259,6 +268,12 @@ function oninputPhone(target) {
         .replace(/[^0-9]/g, '')		// 숫자가 아닌 문자를 제거
         .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 }
+////////////////////////////////////////
+function validateEmail(email) {
+    var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+}
+
 
 </script>	
 

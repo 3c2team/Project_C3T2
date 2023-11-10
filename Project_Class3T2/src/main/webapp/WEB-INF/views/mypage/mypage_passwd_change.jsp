@@ -28,6 +28,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		$(document).ready(function() {
+		    // 비밀번호 입력 필드에 키보드 이벤트 리스너 추가
+		    $(".passwd").keypress(function(event) {
+		        // 엔터 키의 키 코드는 13
+		        if (event.which == 13) {
+		            passwordChange(); // 엔터 키가 눌렸을 때 함수 호출
+		        }
+		    });
+		});
 		function passwordChange() {
 		    var passwd = $("#passwd").val();
 		    var passwdConfirm = $("#passwdConfirm").val();

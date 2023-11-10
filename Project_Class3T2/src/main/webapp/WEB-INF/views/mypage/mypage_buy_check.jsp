@@ -7,6 +7,28 @@
 <%@ include file="./include/head.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage-search.css">
 <title>마이페이지-상품 구매 내역</title>
+<style>
+    .product-names {
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 두 줄까지만 표시 */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        text-overflow: ellipsis; /* 넘친 내용을 ...으로 표시 */
+        max-height: 2em; /* 두 줄의 높이에 맞춤 (글꼴 크기에 따라 조정 필요) */
+        line-height: 1.5em;
+	    padding-top: 1em; /* 상단 패딩 추가 */
+	    padding-bottom: 1em; /* 하단 패딩 추가 */
+    }
+    
+    .receiver-request {
+	    display: -webkit-box;
+        -webkit-line-clamp: 2; /* 두 줄까지만 표시 */
+        -webkit-box-orient: vertical;
+        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        text-overflow: ellipsis; /* 넘친 내용을 ...으로 표시 */
+        max-height: 2.5em; /* 두 줄의 높이에 맞춤 (글꼴 크기에 따라 조정 필요) */
+	}
+</style>
 </head>
 <body>
 	<%@ include file="./include/body_top.jsp"%>
@@ -61,12 +83,12 @@
 						    <tr class="buy-row text-center" data-buy-date="${orderTotals.order_date}">
 						        <td>${orderTotals.merchant_uid}</td>
 						        <td>${orderTotals.receiver_address}</td>
-						        <td>${orderTotals.receiver_request}</td>
+						        <td class="receiver-request">${orderTotals.receiver_request}</td>
 						        <td class="text-right">
 						          <fmt:formatNumber value="${orderTotals.total_price}" />						        
 						        </td> <!-- 여기서는 총 가격을 표시 -->
 						        <td><fmt:formatDate value="${orderTotals.order_date}" pattern="yyyy-MM-dd" /></td>
-						        <td>${orderTotals.product_names}</td>
+						        <td class="product-names">${orderTotals.product_names}</td>
 						    </tr>
 						</c:forEach>
 						<c:if test="${totalCount ==0}">

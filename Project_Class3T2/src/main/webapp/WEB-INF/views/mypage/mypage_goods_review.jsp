@@ -5,6 +5,14 @@
 <head>
     <%@ include file="./include/head.jsp"%>
     <title>마이페이지-상품 리뷰</title>
+    <style>
+    .review-content {
+        white-space: nowrap; /* 줄바꿈 없이 한 줄로 표시 */
+        overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+        text-overflow: ellipsis; /* 넘친 내용을 ...으로 표시 */
+        max-width: 150px; /* 최대 너비 설정 */
+	    }
+	</style>
     <script>
     // 이미지 경로에서 날짜 부분을 제거하는 함수
     function removeDynamicPartFromImagePath(imagePath) {
@@ -81,7 +89,7 @@
 					                    ${review.product_name}
 					                </a>
 						        </td>
-                                <td>${review.review_content}</td>
+                                <td class="review-content">${review.review_content}</td>
 								<!-- 평점 숫자를 별점으로 치환시키기 -->
 								<td>
                                     <c:forEach begin="1" end="${review.review_star}" var="star">

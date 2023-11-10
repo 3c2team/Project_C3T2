@@ -26,11 +26,21 @@
 	<%@ include file="./include/body_bottom.jsp"%>
 	
 <script>
+$(document).ready(function() {
+    // 비밀번호 입력 필드에 키보드 이벤트 리스너 추가
+    $("#passwd").keypress(function(event) {
+        // 엔터 키의 키 코드는 13
+        if (event.which == 13) {
+            mypageChckConfirm(); // 엔터 키가 눌렸을 때 함수 호출
+        }
+    });
+});
+////////////////////////////////////////////////
 function mypageChckConfirm(){	
 	var redirectURL=$("#redirectURL").val();
 	if(!redirectURL){
 		//redirectURL 값이 없으면  MypageDashboard 페이지로 이동
-		location.href="MypageDashboard";
+		location.href="MypageMemberDetail";
 	}
 	var passwd=$("#passwd").val();
 	
