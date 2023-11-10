@@ -65,16 +65,11 @@ public class ReservationController {
 			mailService.sendReservationMail(reservation);
 			model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
 			model.addAttribute("reservation", reservation);
-			return "ReservationLoad";
+			return "reservation/reservation_success";
 		} else { // => 실패 시 "fail_back.jsp" 포워딩
 			model.addAttribute("msg", "예약 실패!");
 			return "fail_back";
 		}
-	}
-	
-	@GetMapping("/ReservationLoad")
-	public String ReservationLoad(Model model) {
-		return "reservation/reservation_success";
 	}
 
 	//비회원 예약 검색 페이지 이동

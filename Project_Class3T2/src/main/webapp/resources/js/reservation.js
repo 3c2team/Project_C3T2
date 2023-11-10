@@ -51,7 +51,7 @@ function calendarMaker(target, date) {
 			let diferrenceDay = parseInt((thisDay - today) / 1000) * 1000;
 			console.log(thisDay + ", " + today + ", " + diferrenceDay);
 			
-			if(diferrenceDay < 0) {
+			if(diferrenceDay < 1) {
 				tag += "<td id=" + thisId + " class='noClick'>" + i + "</td>";
 			} else {
 				tag += "<td id=" + thisId + ">" + i + "</td>";

@@ -64,6 +64,9 @@
 					<tr>
 						<th>예약시간</th>
 						<td>
+						
+						
+						
 							<div class="form_radio_btn">
 								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>>
 								<label for="radio-0">10:00</label>

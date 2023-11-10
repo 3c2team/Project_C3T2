@@ -19,15 +19,15 @@
 				, 0 <!-- cancel -->
 				, #{reservation_member_id} <!-- #{reservation_member_id} -->
 				, #{reservation_guest_num} <!-- guest_num -->
-				,  (SELECT IFNULL(MAX(r.DINNING_NUM) + 1, MIN(d.DINNING_NUM)) as num
-   					  FROM (SELECT *
-				              FROM DINNING 
-				             WHERE DINNING_MAX = #{cal_count}) d
-			     LEFT JOIN (SELECT *
-			                  FROM RESERVATION 
-			                 WHERE reservation_date = #{reservation_date}
-			                   AND reservation_time = #{reservation_time}) r
-			            ON d.DINNING_NUM = r.DINNING_NUM)
+				, (SELECT * 
+					 FROM (SELECT *
+							 FROM DINNING D
+							WHERE dinning_max = #{cal_count}) D
+				LEFT JOIN (SELECT *
+							 FROM RESERVATION
+							WHERE reservation_date = #{reservation_date}
+							  AND reservation_time = #{reservation_time}) R
+					   ON D.dinning_num = R.dinning_num)
 				, 1 <!-- restaurant_num -->
 		)
 	</insert>
