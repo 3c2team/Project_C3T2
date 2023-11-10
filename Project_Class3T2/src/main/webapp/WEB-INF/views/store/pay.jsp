@@ -8,7 +8,6 @@
 <link href="${pageContext.request.contextPath }/resources/css/pay.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
-
 <head>
 <meta charset="UTF-8">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
