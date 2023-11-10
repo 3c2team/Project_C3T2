@@ -14,6 +14,7 @@ import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Service
 public class CartService {
@@ -198,6 +199,42 @@ public class CartService {
 	public CartVO selectCartPrice(String sId, int productNumber) {
 		// TODO Auto-generated method stub
 		return mapper.selectCartPrice(sId, productNumber);
+	}
+
+	// MEMBER 테이블에서 포인트 차감
+	public int updateMemberPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateMemberPoint(map);
+	}
+
+	// 주문 상품 CART에서 삭제 
+	public int deletePaymentCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.deletePaymentCart(map);
+	}
+
+	// 사용한 포인트 POINT 테이블에 저장
+	public int insertUsePoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertUsePoint(map);
+	}
+
+	// 최종 결제 금액 조회
+	public UserOrderVO getUserOrderPrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.selectUserOrderPrice(map);
+	}
+
+	// 적립 포인트 POINT 테이블에 저장
+	public int updateAddPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertAddPoint(map);
+	}
+
+	// 적립 포인트 MEMBER 테이블에 저장
+	public int updateMemberAddPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateMemberAddPoint(map);
 	}
 
 

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <style>
 main {
 	font-size: 1.1em;

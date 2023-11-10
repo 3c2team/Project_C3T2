@@ -14,6 +14,11 @@
 		WHERE member_id = #{member_id}
 	</select>
 	
+	<sql id="whereSearchReview">
+	   <if test='pageMaker.startDate!=null and pageMaker.startDate!=""   and pageMaker.endDate!=null and pageMaker.endDate!="" '>
+	   		and   r.review_date between   #{pageMaker.startDate} and  concat(#{pageMaker.endDate} , ' 23:59:59')
+	   </if> 	   
+	</sql>	
 	
 	<!-- 특정 회원의 모든 리뷰를 조회 -->
 	<select id="getReviewList" resultType="com.itwillbs.c3t2.vo.ReviewVO">
@@ -21,24 +26,43 @@
 	    FROM REVIEW r
 	    JOIN PRODUCT p ON r.product_num = p.product_num
 	    WHERE r.member_id = #{member_id}
+	    
+	    <include refid="whereSearchReview"/>
+	    
 	    ORDER BY r.review_date DESC
 	    limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
 	
+	
 	<!-- 리뷰 전체 개수 -->
 	<select id="getReviewTotalCount" resultType="int">
-	    SELECT  count(*) FROM 
-            REVIEW R      
-		JOIN 
-            PRODUCT P ON R.review_num = R.review_num
-        WHERE 
-            R.member_id = #{member_id}
+<!-- 	    SELECT  count(*) FROM  -->
+<!--             REVIEW R       -->
+<!-- 		JOIN  -->
+<!--             PRODUCT P ON R.review_num = R.review_num -->
+<!--         WHERE  -->
+<!--             R.member_id = #{member_id} -->
+		SELECT count(*) FROM REVIEW r
+		JOIN PRODUCT P ON r.product_num = P.product_num
+		WHERE r.member_id = #{member_id}
+		<include refid="whereSearchReview"/>
      </select> 
+     
+<!-- 	WHERE R.member_id = 'ceh0218'; -->
+	
 	
 	<!-- 리뷰 상품번호 누르면 상품페이지로 -->
 	<select id="getReviewByNum" resultType="com.itwillbs.c3t2.vo.ReviewVO">
 	    SELECT * FROM REVIEW WHERE review_num = #{reviewNum}
 	</select>
+	
+	
+	<sql id="whereSearch">
+	   <if test='pageMaker.startDate!=null and pageMaker.startDate!=""   and pageMaker.endDate!=null and pageMaker.endDate!="" '>
+	   		and   o.order_date between   #{pageMaker.startDate} and  concat(#{pageMaker.endDate} , ' 23:59:59')
+	   </if> 
+	   
+	</sql>
 	
 	 <!--  상품 구매 내역 -->
 	<select id="getOrderList" resultType="com.itwillbs.c3t2.vo.UserOrderVO">
@@ -61,16 +85,45 @@
             RECEIVER_INFO r ON o.merchant_uid = r.merchant_uid
         WHERE
             o.member_id = #{member_id}
+         
+            
         ORDER BY
             o.order_date DESC
-        
-        limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
+        	limit #{pageMaker.pageStart}, #{pageMaker.perPageNum}
     </select>
+    
+    
+    
     
     <!-- 구매 전체 개수 -->
     <select id="getBuyTotalCount" resultType="int">
-	    SELECT COUNT(*) FROM USER_ORDER U
-	    WHERE U.member_id = #{member_id}
+<!-- 	    SELECT COUNT(*) FROM USER_ORDER U -->
+<!-- 	    WHERE U.member_id = #{member_id} -->
+		SELECT
+        	COUNT(DISTINCT o.merchant_uid)
+	    FROM
+	        USER_ORDER o
+	    WHERE
+	        o.member_id = #{member_id};
+	</select>
+	
+	
+	<select id="getTotalPriceAndProductNamesTotCount" resultType="int">
+	SELECT count(order_num) FROM (
+			     SELECT
+					MAX(o.order_num) AS order_num
+				FROM
+				    USER_ORDER o
+				INNER JOIN
+				    RECEIVER_INFO r ON o.merchant_uid = r.merchant_uid
+				WHERE
+				    o.member_id = #{member_id}
+				    		        
+		          	<include refid="whereSearch"/>           
+		          
+				GROUP BY
+				    o.merchant_uid	
+	 )	RR	   		    
 	</select>
 	
 	<!-- 각 merchant_uid에 대한 상품 이름의 결합과 총 가격을 계산하는 쿼리 -->
@@ -95,8 +148,14 @@
 		    RECEIVER_INFO r ON o.merchant_uid = r.merchant_uid
 		WHERE
 		    o.member_id = #{member_id}
+		    		        
+          	<include refid="whereSearch"/> 
+          
+          
 		GROUP BY
 		    o.merchant_uid
+		ORDER BY
+    		MAX(o.order_date) DESC
 		    
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum};
     </select>
@@ -214,6 +273,41 @@
     <delete id="deleteFavorite">
        DELETE FROM FAVORITE WHERE favorite_num = #{favoriteNum}
     </delete>
+ 
+ 
+ 
+   <sql id="whereSearchReservation">
+	   <if test='pageMaker.startDate!=null and pageMaker.startDate!=""   and pageMaker.endDate!=null and pageMaker.endDate!="" '>
+	   		and  R.reservation_date between   #{pageMaker.startDate} and concat(#{pageMaker.endDate} , ' 23:59:59')
+	   </if> 	   
+	</sql>
+ 
+ 	<!-- 예약 내역 전체 갯수 -->
+ 	<select id="getReservationDetailTotalCount" resultType="int">
+ 	 select count(*) FROM (
+ 	
+ 		  SELECT 
+        	R.reservation_num,
+            R.reservation_date,
+            R.reservation_time,
+            R.reservation_person_name,
+            R.reservation_guest_num,
+            R.reservation_person_count,
+            R.reservation_cancel,
+            R.dinning_num,
+            R.restaurant_num
+        FROM 
+            RESERVATION R
+        JOIN 
+            MEMBER M ON R.reservation_email = M.member_e_mail
+        WHERE 
+            M.member_id = #{member_id}
+            
+            <include refid="whereSearchReservation"/>
+        
+       ) RR 
+ 	</select>
+ 
     
     <!-- 예약 내역 -->
     <select id="getReservation" resultType="com.itwillbs.c3t2.vo.ReservationVO">
@@ -233,8 +327,13 @@
             MEMBER M ON R.reservation_email = M.member_e_mail
         WHERE 
             M.member_id = #{member_id}
+            
+           <include refid="whereSearchReservation"/>
+                     
         ORDER BY 
         	R.reservation_date DESC, R.reservation_time DESC
+        	
+		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
     </select>
     
     <!-- 예약 취소 -->
@@ -243,6 +342,7 @@
         SET reservation_cancel = 1
         WHERE reservation_num = #{reservationNum}
     </update>
+    
     
 
 				
@@ -269,9 +369,9 @@
     
     <!-- 회원 탈퇴사유 등록 -->
     <insert id="insertMbershipWithdrawal">    
-	    INSERT INTO MEMBER_WITHDRAWAL_REASON
-			( member_withdrawal_reason_num, member_withdrawal_reason_text)
-		VALUES(#{select_num},#{select_text})
+	    INSERT INTO MEMBER_OUT
+         (out_num,${select_num},out_date)
+     	 VALUES(null,1,now())
     </insert>
     
     
@@ -280,43 +380,44 @@
       DELETE FROM `MEMBER` WHERE member_id=#{member_id} 
     </delete>
     
-	<!-- 포인트 목록 -->
-	<select id="selectPoints" resultType="com.itwillbs.c3t2.vo.PointVO">
-		WITH TMP AS (
-		    SELECT *
-		    FROM POINT
-	        WHERE member_id = #{memberId}
-	        <if test="!startDate.equals('') and !endDate.equals('')">
-				AND
-					point_date BETWEEN #{startDate} AND date_format(date('2023-11-06') + 1, '%Y-%m-%d') -- 테이블 칼럼명에 맞춰 바꾸기!!
-			</if>
-	        ORDER BY 
-			    point_date DESC
-		    LIMIT
-				#{startRow}
-				, #{listLimit}
-		)
-		SELECT * FROM TMP
-<!-- 		<if test=""> -->
-		     UNION ALL
-		     SELECT ''
-				  , '1'
-		          , member_point
-		          , '회원가입 축하 포인트'
-		          , member_insert_date
-		          , member_id
-			FROM MEMBER
-		  where member_id = #{memberId}
-<!-- 		</if> -->
-     </select>
-     
-     <select id="selectPointsCount" resultType="int">
-		SELECT COUNT(*)
+    <!-- 포인트 전체 개수 -->
+	<select id="selectPointTotalCount" resultType="int">
+	    SELECT COUNT(*)
 		FROM POINT
-		WHERE member_id = #{memberId}
-		<if test="!startDate.equals('') and !endDate.equals('')">
+		WHERE member_id = #{member_id}
+		<if test="!startDate.equals('')">
 			AND
-				point_date BETWEEN #{startDate} AND date_format(date('2023-11-06') + 1, '%Y-%m-%d') -- 테이블 칼럼명에 맞춰 바꾸기!!
+				point_date BETWEEN #{startDate} 
+			<choose>
+				<when test="endDate.equals('')">
+					AND date_format(date(now()) + 1, '%Y-%m-%d')
+				</when>
+				<otherwise>
+					AND date_format(date(#{endDate}) + 1, '%Y-%m-%d')
+				</otherwise>
+			</choose>
 		</if>
+     </select> 
+    
+	<!-- 포인트 목록 -->
+	<select id="selectPointList" resultType="com.itwillbs.c3t2.vo.PointVO">
+	    SELECT *
+	    FROM POINT
+        WHERE member_id = #{member_id}
+        <if test="!startDate.equals('')">
+			AND
+				point_date BETWEEN #{startDate} 
+			<choose>
+			<when test="endDate.equals('')">
+				AND date_format(date(now()) + 1, '%Y-%m-%d')
+			</when>
+			<otherwise>
+					AND date_format(date(#{endDate}) + 1, '%Y-%m-%d')
+			</otherwise>
+			</choose>
+		</if>
+        ORDER BY 
+		    point_date DESC
+		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 
 	</select>
 </mapper>

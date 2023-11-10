@@ -35,7 +35,7 @@ public interface MyPageMapper {
 	int deleteFavorite(Integer favoriteNum);
 	
 	// 예약 내역
-	List<ReservationVO> getReservation(String member_id);
+	List<ReservationVO> getReservation(Map<String, Object> parMap);
 
 	//비밀번호 업데이트
 	int updatePassword(Map<String, Object> param);
@@ -71,9 +71,9 @@ public interface MyPageMapper {
 	ReviewVO getReviewByNum(int reviewNum);
 	
 	// 포인트 목록
-	List<PointVO> selectPoints(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	int selectPointTotalCount(Map<String, Object> parMap);
 	
-	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
+	List<PointVO> selectPointList(Map<String, Object> parMap);
 	
 	// 리뷰 개수
 	int getReviewTotalCount(Map<String, Object> paraMap);
@@ -89,5 +89,9 @@ public interface MyPageMapper {
 	
 	// 총 가격과 상품
 	List<UserOrderVO> getOrderListWithTotalPrices(Map<String, Object> parMap);
+
+	int getTotalPriceAndProductNamesTotCount(Map<String, Object> parMap);
+
+	int getReservationDetailTotalCount(Map<String, Object> parMap);
 
 }

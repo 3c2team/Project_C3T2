@@ -200,19 +200,19 @@ function success_passwd() {
 						</div>
 						<div class="card mb-4">
 							<div class="card-header">
-								<i class="fas fa-chart-area me-1"></i> 가계 정보<input type="button" value="초기화" class="btn btn-primary" id ="reset">
+								<i class="fas fa-chart-area me-1"></i> 가게 정보<input type="button" value="초기화" class="btn btn-primary" id ="reset">
 							</div>
 							<div class="card-body">
 								<form action="AdminRestaurantUpdatePro" onsubmit="return onSubmit()" method="POST">
 									<table class="fs-5">
 										<tr>
 											<input type="hidden"  name ="restaurant_num" value="${selectRestaurant.restaurant_num }">
-											<th width="150px">가계 이름/지점</th>
+											<th width="150px">가게 이름/지점</th>
 											<th><input type="text" style="float: left; width: 42%" required name="restaurant_name" value="${selectRestaurant.restaurant_name }" aria-label="Disabled input example" disabled readonly class="custom_not custom_input form-control-sm form-control">
 												<input type="text" style="float: right; width: 42%" required name="restaurant_aim" value="${selectRestaurant.restaurant_aim }" aria-label="Disabled input example" disabled readonly class="custom_input form-control-sm form-control">
 											</th>
 										<tr>
-											<th>가계 주소</th>
+											<th>가게 주소</th>
 											<th><input type="text"  name="restaurant_address" required value="${selectRestaurant.restaurant_address }" aria-label="Disabled input example" disabled readonly class="custom_input form-control-sm form-control"></th>
 										</tr>
 										<tr>
@@ -227,7 +227,7 @@ function success_passwd() {
 											</th>
 										</tr>
 										<tr>
-											<th>가계 영업시간</th>
+											<th>가게 영업시간</th>
 											<th><input style="float:left;width: 40%;" id="open" value="${selectRestaurant.restaurant_open_time }" name="restaurant_open_time"disabled type="text" aria-label="Disabled input example" readonly class="custom_not custom_input form-control-sm form-control">
 												<span style="margin: auto;">~</span>
 												<input style="float:right; width: 40%;" id="close" value="${selectRestaurant.restaurant_close_time }" name="restaurant_close_time"disabled type="text" aria-label="Disabled input example" readonly class="custom_not custom_input form-control-sm form-control">
@@ -254,7 +254,7 @@ function success_passwd() {
 											</select></th>
 										</tr>
 										<tr id="append_id">
-											<th>가계 전화번호</th>
+											<th>가게 전화번호</th>
 											<th>
 												<input type="number" name="phon0" required value="${selectRestaurant.phon0 }" aria-label="Disabled input example" disabled readonly style="float:left; width: 25%;" class="custom_input form-control-sm form-control">
 												<input type="number" name="phon1" required value="${selectRestaurant.phon1 }" aria-label="Disabled input example" disabled readonly style="float:left; width: 29%;" class="custom_input form-control-sm form-control">

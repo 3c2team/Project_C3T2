@@ -144,8 +144,9 @@ tr {
 }
 
 .form_radio_btn input[type=radio]:disabled + label {
-	background-color: white;
-    color: white;
+	background: white;
+	color: #fff;
+	
 }
 
 .form_radio_btn label {
@@ -224,7 +225,7 @@ tr {
     padding: 30px;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-    margin-left: 18%;
+    margin-left: 15%;
     -webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -280,6 +281,17 @@ tr {
 .custom_calendar_table tbody td {
 	cursor: pointer;
 }
+
+.noClick {
+	color: lightgrey; 
+}
+.noClick :nth-child(1){
+	color: lightgrey; 
+}
+.noClick :nth-child(7){
+	color: lightgrey; 
+}
+
 
 .custom_calendar_table tbody td:nth-child(1) { 
 	color: red; 

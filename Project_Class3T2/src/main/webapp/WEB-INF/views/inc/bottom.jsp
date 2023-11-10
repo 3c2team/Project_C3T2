@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link href="${pageContext.request.contextPath }/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
 <script>
 $(document).ready(function(){
    $.ajax({
@@ -12,6 +14,7 @@ $(document).ready(function(){
         	$('#address').append(response.restaurant_address);
         	$('#ceo').append(response.ceo_name);
         	$('#call').append(response.restaurant_call);
+        	console.log("!!!!!!!!!!!!" + response);
         }
     })
 });

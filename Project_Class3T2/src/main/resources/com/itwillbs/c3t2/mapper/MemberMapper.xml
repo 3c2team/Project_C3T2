@@ -228,4 +228,30 @@
 		FROM RESTAURANT
 		WHERE restaurant_num = 1
 	</select>
+	
+	<insert id="insertJoinPoint">
+		INSERT
+			INTO POINT
+			(point_use, point_amount, point_ex, point_date, member_id)
+			VALUES (
+				  1
+		  		, 3000
+		  		, '회원가입 축하 포인트'
+		  		, now()
+		  		, #{member_id}
+			)
+	</insert>
+	
+	<select id="selectMemberDup" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="selectMemberDupPhone" resultType="com.itwillbs.c3t2.vo.MemberVO">
+		SELECT *
+		FROM MEMBER
+		WHERE member_phone_num = #{member_phone_num}
+	</select>
+	
 </mapper>

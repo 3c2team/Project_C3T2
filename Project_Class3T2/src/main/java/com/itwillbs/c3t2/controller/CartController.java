@@ -21,6 +21,7 @@ import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Controller
 public class CartController {
@@ -159,7 +160,6 @@ public class CartController {
 			}
 		}
 		
-		
 		// 선택 상품 삭제 작업
 		if(proNums[0] != 0) {
 			for( int proNum1 : proNums) {
@@ -181,36 +181,7 @@ public class CartController {
 		
 		return "store/cart";
 	}
-	
-	// 선택 상품 삭제
-//	@GetMapping("SelectDeleteCart")
-//	public String selectDeleteCart(HttpSession session, int[] proNums, Model model) {
-//		System.out.println("선택 삭제 시 넘어온 값 : " + proNums);
-//		String sId = (String)session.getAttribute("sId");
-//		
-//		System.out.println(proNums);
-//		
-//		// 선택 상품 삭제 작업
-//		for( int proNum1 : proNums) {
-//			
-//			int deleteProduct = service.selectDeleteCartProduct(proNum1);
-//			if(deleteProduct > 0) {
-//				System.out.println(proNum1 + " : 삭제 완료");
-//			}
-//		}
-//		 
-//		// 메인 페이지에서 카트 등록 상품 목록 조회
-//		List<ProductVO> productList = service.getMainCartList(sId);
-//		model.addAttribute("productList", productList);
-//	
-//		// 카트 상품 총액
-//		CartAllPriceVO cartAllPrice = service.getCartAllPrice(sId);
-//		model.addAttribute("cartAllPrice", cartAllPrice);
-//		System.out.println("결과값 뭐임? :" + cartAllPrice);
-//		
-//		return "store/cart";
-//	}
-	
+		
 	//--------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	// 장바구니 비우기
@@ -240,7 +211,12 @@ public class CartController {
 //		proNumber=61&proCount=1&proPrice=17500
 		String sId = (String)session.getAttribute("sId");
 		
-		
+		// 비회원 장바구니 이동 시 접근 불가
+		if(sId == null ) {
+			model.addAttribute("msg", "로그인 후 이용 부탁드립니다!");
+			return "fail_back";
+		}
+				
 		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNumber + ", " + proCount + ", 가격정보 : " + proPrice);
 				
 		//ORDER_DETAIL 테이블 비우기
@@ -273,7 +249,6 @@ public class CartController {
 			int insertProduct = service.insertProduct(sId, proNumber, proCount, proPrice);
 		}
 		
-		
 		// 결제 상품 삭제 
 		if(deleteProNum[0] != 0) {
 			for(int proNum:deleteProNum) {
@@ -281,7 +256,6 @@ public class CartController {
 			}
 			
 		}
-		
 		
 		// 메인 페이지에서 카트 등록 상품 목록 조회
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -329,13 +303,6 @@ public class CartController {
 
 		// 포인트 조회
 		System.out.println("usePoint의 memberPoint : " + memberPoint);
-
-		
-		// 포인트 사용 -> 결제 넘어갈 때 작업 (여기서 안함)
-//		if(memberPoint > 0) {
-//			MemberVO usePoint = service.updateMemberPoint(sId, memberPoint);
-//			
-//		}
 		
 		member = service.getMember(sId);
 		
@@ -348,78 +315,12 @@ public class CartController {
 		result = allPay - memberPoint;
 		
 		System.out.println("포인트 계산 후 금액 : " + result);
-		
 		System.out.println("상품 총 금액" + allPay);
 		System.out.println("해당 회원의 포인트 : " +  member.getMember_point());
 	
 		return result;
 	}
-	
-//	@PostMapping("PayProductDelete")
-//	@ResponseBody
-//	public List<OrderDetailVO> payProductDelete(int deleteProNum, Model model, HttpSession session) {
-//		
-//		String sId = (String)session.getAttribute("sId");
-//		
-//		System.out.println("PayProductDelete 넘어옴");
-//		System.out.println("deleteProNum : " + deleteProNum);
-//		
-//		
-//		int deletePayProduct = service.deletePayProduct(deleteProNum);
-//		if(deletePayProduct > 0) {
-//			System.out.println("deletePayProduct 삭제 성공");
-//		}
-//		
-//		List<OrderDetailVO> productPayList = service.selectPay(sId);
-//		model.addAttribute("productPayList", productPayList);
-//		System.out.println("선택 삭제 후 결제 상품 목록 조회 : " + productPayList);
-//		
-//		return productPayList;
-//	}
-	
-	@GetMapping("/ResultPay")
-	public String resultPay(
-						int[] deleteProNum
-						, MemberVO member
-						, HttpSession session
-						, Model model) {
-		String sId = (String)session.getAttribute("sId");
 		
-//		if(deleteProNum[0] != 0) {
-			for(int proNum:deleteProNum) {
-				int deletePayProduct = service.deletePayProduct(proNum);
-				if(deletePayProduct > 0) {
-					System.out.println("deletePayProduct 삭제 성공");
-				}
-			}
-//		}
-		
-//		List<OrderDetailVO> productPayList = service.selectPay(sId);
-//		model.addAttribute("productPayList", productPayList);
-		List<ProductVO> productPayList = service.selectPayProduct(sId);
-		
-		model.addAttribute("productPayList", productPayList);
-		System.out.println("productPayList : " + productPayList);
-		
-		PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
-		model.addAttribute("payAllPrice", payAllPrice);
-		
-		// 회원정보 조회
-		member = service.getMember(sId);
-        String Email = member.getMember_e_mail();
-        String[] ArraysEmail = Email.split("@");
-        session.setAttribute("Email1", ArraysEmail[0]);
-        session.setAttribute("Email2", ArraysEmail[1]);
-        model.addAttribute("Member", member); 
-        
-        if(productPayList.isEmpty()) {
-        	model.addAttribute("msg", "장바구니 창으로 이동합니다.");
-			model.addAttribute("targetURL", "MainCart");
-			return "forward";
-		}
-		
-		return "store/pay";
-	}
 	
 	@PostMapping("PaymentPro")
 	public String paymentPro(
@@ -464,21 +365,9 @@ public class CartController {
 			session.setAttribute("receiver_request", request);
 		}
 		
-	
-		
-//		for(int odn :order_detail_num) {
-//			System.out.println("odn : " + odn);
-//			map.get(odn);
-//			map.put("order_detail_num", odn[index]);
-//			System.out.println("odn2 : " + map.get("odn"));
-//		}
-		
 		for(int i = 0; i < order_detail_num.length; i++) {
-//			map.put("order_detail_num", order_detail_num[i]);
 			System.out.println(map.put("order_detail_num", order_detail_num[i]));
 		}
-		
-		
 		
 		// 포인트 사용 시 배송지에 정보 저장
 		if(!map.get("usePoint").equals("")) {
@@ -503,10 +392,12 @@ public class CartController {
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
 		if(map.get("usePoint").equals("")){// 포인트 없을 때
+			
 //			for(int i = 0; i < order_detail_num.length; i++) {
 //				map.put("order_detail_num", order_detail_num[i]);
 //				int insertReceiverInfo = service.insertReceiverInfo(map);
 //			}
+			
 			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
 			model.addAttribute("payAllPrice", payAllPrice);
 			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
@@ -527,22 +418,11 @@ public class CartController {
 		System.out.println(productNames.getProduct_name());
 		model.addAttribute("paymentProduct",productNames.getProduct_name());
 		
-		
 		session.setAttribute("usePoint", map.get("usePoint"));
         session.setAttribute("paymentProduct", productNames.getProduct_name());
 		
-		// 결제 상품 저장
-//		for(OrderDetailVO payProduct:orderDetailList) {
-//			int insertUserOder = service.insertUserOrder(payProduct);
-//		}
-        
-        
-        
-		
 		return "store/payment";
 	}
-	
-	
 	
 	@PostMapping("PaymentResult")
 	@ResponseBody
@@ -550,18 +430,7 @@ public class CartController {
 		
 		System.out.println("결제 성공");
 		System.out.println("주문번호 : " + map.get("merchant_uid"));
-		
-//		session.setAttribute("receiver_name", map.get("receiver_name"));
-//		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
-//		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
-//		session.setAttribute("phone", map.get("phone"));
-//		session.setAttribute("eMail", map.get("eMail"));
-//		session.setAttribute("mailUrl", map.get("mailUrl"));
-//		session.setAttribute("receiver_request", map.get("receiver_request"));
-//		session.setAttribute("usePoint", map.get("usePoint"));
-//		session.setAttribute("resultPrice",resultPrice);
-		
-		
+			
 		String sId = (String)session.getAttribute("sId");
 		String receiver_name = (String)session.getAttribute("receiver_name");
 		String receiver_addr1 = (String)session.getAttribute("receiver_addr1");
@@ -570,7 +439,8 @@ public class CartController {
 		String eMail = (String)session.getAttribute("eMail");
 		String mailUrl = (String)session.getAttribute("mailUrl");
 		String receiver_request = (String)session.getAttribute("receiver_request");
-		
+//		System.out.println("출력 확인");
+				
 		String usePoint = (String)session.getAttribute("usePoint");
 		if(usePoint.equals("")) {
 			int resultPoint = 0;
@@ -588,16 +458,12 @@ public class CartController {
 		map.put("eMail", eMail);
 		map.put("mailUrl", mailUrl);
 		map.put("receiver_request", receiver_request);
-
 		
 		System.out.println("sId : " + sId);
 		System.out.println("회원 ID : " + map.get("sId"));
 		String paymentProduct = (String)session.getAttribute("paymentProduct");
 		String[] arrPaymentProduct = paymentProduct.split("|");
 		System.out.println("상품 이름 : " + paymentProduct);
-//		for(String name :arrPaymentProduct) {
-//			System.out.println("name : " + name);
-//		}
 			
 		// 상품 정보 가져 오기
 		List<ProductVO> productPayList = service.selectPayProduct(sId);
@@ -605,43 +471,303 @@ public class CartController {
 		
 		for(ProductVO payProduct:productPayList) {
 			System.out.println( "상품 이름 :  " + payProduct.getProduct_name());
-//			productName = payProduct.getProduct_name();
 			System.out.println( "상품 번호 : " + payProduct.getProduct_num());
 			System.out.println( "상품 수량 : " + payProduct.getProduct_count());
 			
-//			productNum = payProduct.getProduct_num();
 			map.put("productName", payProduct.getProduct_name());
 			map.put("productNum", payProduct.getProduct_num()); 
-//			String productNum = (String)map.get("product_num");
-//			map.put("productNum", productNum);
 			map.put("productCount", payProduct.getProduct_count());
 			map.put("ProductPrice", payProduct.getProduct_price());
 			
-			//데이터 저장
+			// USER_ORDER 데이터 저장
 			int insertUserOrder = service.insertUserOrder(map);
 			
+			// 주문 상품 CART에서 삭제 
+			int deletePaymentCart = service.deletePaymentCart(map);
 					
 		}
 		
 		// 포인트 사용 시 배송지에 정보 저장
 		if(!map.get("usePoint").equals("")) {
+			
+			// 배송 정보 저장
 			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			
+			// MEMBER 테이블에서 포인트 차감
+			int updateMemberPoint = service.updateMemberPoint(map);
+			
+			// 사용 포인트 POINT 테이블에 반영 
+			int insertUsePoint = service.insertUsePoint(map);
+			
 		}
 		
 		// 포인트 미사용 시 배송지에 정보 저장
 		if(map.get("usePoint").equals("")) {
 			int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+			
 		}
 		
-//		System.out.println("숫자 확인 용 : " + orderDetail.getProduct_num());
-//		int insertUserOder = service.insertUserOrder(payProduct);
+		// 적립금 포인트 POINT 테이블에 반영 
+		UserOrderVO getResultPrice = service.getUserOrderPrice(map);
+		int resultPrice = getResultPrice.getProduct_price(); 
+		System.out.println("진짜 최종 결제 금액 : " + resultPrice);
+		int addPoint = (int) ((resultPrice * 0.01) / 10);
+		System.out.println("적립할 포인트 : " + addPoint);
+		map.put("addPoint", addPoint);
+		int updateAddPoint = service.updateAddPoint(map);
 		
-		return "store/pay_result";
+		// 적립금 포인트 MEMBER 테이블에 저장
+		int updateMembeAddrPoint = service.updateMemberAddPoint(map);
+		
+		return "other/main";
 	}
-
-	
-
 	
 	
+	
+	@PostMapping("PaymentCardPro")
+	public String paymentCardPro(
+					@RequestParam Map<String, Object> map
+					, MemberVO member
+					, OrderDetailVO orderDetail
+					, HttpSession session
+					, Model model, 
+					int[] order_detail_num) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		// 메인 페이지에서 카트 등록 상품 목록 조회
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		model.addAttribute("productPayList", productPayList);
+		
+		member = service.getMember(sId);
+		model.addAttribute("Member", member); 
+		 
+		System.out.println("PaymentPro : " + sId);
+		System.out.println("PaymentPro : " + productPayList);
+		System.out.println("PaymentPro : " + member);
+		System.out.println("PaymentPro : " + orderDetail);
+		
+		// 배송지 정보 저장
+		map.put("sId", sId);
+		System.out.println("사용할 포인트 : " + map.get("usePoint"));
+		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
+		 
+		session.setAttribute("receiver_name", map.get("receiver_name"));
+		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
+		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
+		session.setAttribute("phone", map.get("phone"));
+		session.setAttribute("eMail", map.get("eMail"));
+		session.setAttribute("mailUrl", map.get("mailUrl"));
+		session.setAttribute("usePoint", map.get("usePoint"));
+		
+		if(!map.get("receiver_request").equals("")) {
+			session.setAttribute("receiver_request", map.get("receiver_request"));
+		}else if(map.get("receiver_request").equals("")){
+			String request = "-";
+			session.setAttribute("receiver_request", request);
+		}
+		
+		for(int i = 0; i < order_detail_num.length; i++) {
+			System.out.println(map.put("order_detail_num", order_detail_num[i]));
+		}
+		
+		// 포인트 사용 시 배송지에 정보 저장
+		if(!map.get("usePoint").equals("")) {
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+//			}
+			
+			String usePoint = (String)map.get("usePoint");
+			int resultPoint = Integer.parseInt(usePoint);
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000) - resultPoint;
+			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
+			
+			session.setAttribute("usePoint", map.get("usePoint"));
+		}
+		
+		// 포인트 미 사용 시 배송지에 정보 저장
+		if(map.get("usePoint").equals("")){// 포인트 없을 때
+			
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverInfo = service.insertReceiverInfo(map);
+//			}
+			
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000);
+			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
+			
+			int resultPoint = 0;
+			session.setAttribute("usePoint", resultPoint);
+		}
+		
+		// 결제 상품 이름 조회
+		
+		ProductVO productNames = service.selectProductNames(sId);
+		System.out.println("결제 상품 명 : " + productNames);
+		System.out.println(productNames.getProduct_name());
+		model.addAttribute("paymentProduct",productNames.getProduct_name());
+		
+		session.setAttribute("usePoint", map.get("usePoint"));
+        session.setAttribute("paymentProduct", productNames.getProduct_name());
+		
+		return "store/paymentCard";
+	}
+	
+	
+	
+	@PostMapping("PaymentTossPro")
+	public String paymentTossPro(
+					@RequestParam Map<String, Object> map
+					, MemberVO member
+					, OrderDetailVO orderDetail
+					, HttpSession session
+					, Model model, 
+					int[] order_detail_num) {
+		
+		String sId = (String)session.getAttribute("sId");
+		
+		// 메인 페이지에서 카트 등록 상품 목록 조회
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		model.addAttribute("productPayList", productPayList);
+		
+		member = service.getMember(sId);
+		model.addAttribute("Member", member); 
+		 
+		System.out.println("PaymentPro : " + sId);
+		System.out.println("PaymentPro : " + productPayList);
+		System.out.println("PaymentPro : " + member);
+		System.out.println("PaymentPro : " + orderDetail);
+		
+		// 배송지 정보 저장
+		map.put("sId", sId);
+		System.out.println("사용할 포인트 : " + map.get("usePoint"));
+		System.out.println("Order_detail_num : " + map.get("order_detail_num"));
+		 
+		session.setAttribute("receiver_name", map.get("receiver_name"));
+		session.setAttribute("receiver_addr1", map.get("receiver_addr1"));
+		session.setAttribute("receiver_addr2", map.get("receiver_addr2"));
+		session.setAttribute("phone", map.get("phone"));
+		session.setAttribute("eMail", map.get("eMail"));
+		session.setAttribute("mailUrl", map.get("mailUrl"));
+		session.setAttribute("usePoint", map.get("usePoint"));
+		
+		if(!map.get("receiver_request").equals("")) {
+			session.setAttribute("receiver_request", map.get("receiver_request"));
+		}else if(map.get("receiver_request").equals("")){
+			String request = "-";
+			session.setAttribute("receiver_request", request);
+		}
+		
+		for(int i = 0; i < order_detail_num.length; i++) {
+			System.out.println(map.put("order_detail_num", order_detail_num[i]));
+		}
+		
+		// 포인트 사용 시 배송지에 정보 저장
+		if(!map.get("usePoint").equals("")) {
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverUsePoint = service.insertReceiverUsePoint(map); 
+//			}
+			
+			String usePoint = (String)map.get("usePoint");
+			int resultPoint = Integer.parseInt(usePoint);
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000) - resultPoint;
+			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
+			
+			session.setAttribute("usePoint", map.get("usePoint"));
+		}
+		
+		// 포인트 미 사용 시 배송지에 정보 저장
+		if(map.get("usePoint").equals("")){// 포인트 없을 때
+			
+//			for(int i = 0; i < order_detail_num.length; i++) {
+//				map.put("order_detail_num", order_detail_num[i]);
+//				int insertReceiverInfo = service.insertReceiverInfo(map);
+//			}
+			
+			PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+			model.addAttribute("payAllPrice", payAllPrice);
+			System.out.println("PaymentPro 결제 상품 갯수랑 총액 :" + payAllPrice);
+			
+			int resultPrice = (payAllPrice.getAllPrice() + 3000);
+			System.out.println("최종 결제 금액 : " + resultPrice);
+			model.addAttribute("resultPrice",resultPrice);
+			session.setAttribute("resultPrice",resultPrice);
+			
+			int resultPoint = 0;
+			session.setAttribute("usePoint", resultPoint);
+		}
+		
+		// 결제 상품 이름 조회
+		
+		ProductVO productNames = service.selectProductNames(sId);
+		System.out.println("결제 상품 명 : " + productNames);
+		System.out.println(productNames.getProduct_name());
+		model.addAttribute("paymentProduct",productNames.getProduct_name());
+		
+		session.setAttribute("usePoint", map.get("usePoint"));
+        session.setAttribute("paymentProduct", productNames.getProduct_name());
+		
+		return "store/paymentPaycoCard";
+	}
+	
+	@GetMapping("/ResultPay")
+	public String resultPay(
+						int[] deleteProNum
+						, MemberVO member
+						, HttpSession session
+						, Model model) {
+		String sId = (String)session.getAttribute("sId");
+		
+		for(int proNum:deleteProNum) {
+			int deletePayProduct = service.deletePayProduct(proNum);
+			if(deletePayProduct > 0) {
+				System.out.println("deletePayProduct 삭제 성공");
+			}
+		}
+		
+		List<ProductVO> productPayList = service.selectPayProduct(sId);
+		
+		model.addAttribute("productPayList", productPayList);
+		System.out.println("productPayList : " + productPayList);
+		
+		PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
+		model.addAttribute("payAllPrice", payAllPrice);
+		
+		// 회원정보 조회
+		member = service.getMember(sId);
+        String Email = member.getMember_e_mail();
+        String[] ArraysEmail = Email.split("@");
+        session.setAttribute("Email1", ArraysEmail[0]);
+        session.setAttribute("Email2", ArraysEmail[1]);
+        model.addAttribute("Member", member); 
+        
+        if(productPayList.isEmpty()) {
+        	model.addAttribute("msg", "장바구니 창으로 이동합니다.");
+			model.addAttribute("targetURL", "MainCart");
+			return "forward";
+		}
+		
+		return "store/pay";
+	}
 	
 }

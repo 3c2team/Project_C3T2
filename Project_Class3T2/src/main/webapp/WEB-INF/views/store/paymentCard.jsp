@@ -11,33 +11,32 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript">
-//카카오페이 연동
+//카드 결제 연동
 
 	window.onload = function requestPay() {
 	
 		IMP.init('imp32558036'); // 객체 초기화. 가맹점 식별코드 전달
-	
-		IMP.request_pay({
-	    	pg: "kakaopay.TC0ONETIME",
-	    	pay_method: "card",
-	    	merchant_uid: "ORD" + getDateTimeString(),   // 주문번호
-	    	name: "${paymentProduct}",
-	    	amount: ${resultPrice },                         // 숫자 타입
-	    	buyer_email: "${Member.member_e_mail}",
-	    	buyer_name: "${Member.member_name}",
-	    	buyer_tel: "${Member.member_phone_num}",
-	    	buyer_addr: "${Member.member_address}",
-	    	buyer_postcode: "01181"
-	    }, function (rsp) { // callback
+	    
+	    IMP.request_pay({
+		  pg: "html5_inicis.INIBillTst",
+		  pay_method: "card",
+		  merchant_uid: "ORD" + getDateTimeString(), // 상점에서 관리하는 주문 번호
+		  name: "${paymentProduct}",
+		  amount: 1004,
+		  buyer_email: "test@portone.io",
+		  buyer_name: "구매자이름",
+		  buyer_tel: "010-1234-5678",
+		  buyer_addr: "서울특별시 강남구 삼성동",
+		  buyer_postcode: "123-456"
+		  
+		},function (rsp) { // callback
 	     	if(rsp.success) { // 결제 성공 시
-	 			console.log("rsp.imp_uid : " + rsp.imp_uid);
 	 			console.log("rsp.merchant_uid : " + rsp.merchant_uid);
 	//  		location.href = "PaymentResult";		
 	 			$.ajax({
 					type:"POST",
 					url:"PaymentResult",
 					data:{
-						imp_uid: rsp.imp_uid,
 	                    merchant_uid: rsp.merchant_uid,
 	                    sId : "${sessionScope.sId}"
 						},
@@ -50,11 +49,16 @@
 						console.log("작업 실패");
 						alert("오류가 발생 했습니다.");
 						location.href = "${pageContext.request.contextPath}/PayPro";
+						
 					}
 				});
 	     	}else{
+	     		console.log("rsp.merchant_uid : " + rsp.merchant_uid);
+	     		console.log(rsp);
 	     		alert("결제에 실패하였습니다.");
+// 	     		location.href = "${pageContext.request.contextPath}/store/pay;
 	     		location.href = "${pageContext.request.contextPath}/PayPro";
+
 	     	}
 	    });
 	}
@@ -79,12 +83,10 @@ function getDateTimeString() {
 </script>
 </head>
 <body>
-<!-- 	<h1>payment</h1> -->
-	
-<%-- 	<h1>${productPayList}</h1> --%>
-<%-- 	<h1>${sessionScope.paymentProduct}</h1> --%>
-	
-<!-- 	<input type="button" value="결제하기" onclick="requestPay()"> -->
-	
+
 </body>
 </html>
+
+
+
+

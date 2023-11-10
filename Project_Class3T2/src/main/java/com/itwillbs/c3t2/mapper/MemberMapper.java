@@ -79,4 +79,5 @@ public interface MemberMapper {
 
 	RestaurantVO selectRestaurant();
 
+	int insertJoinPoint(String member_id);
 }

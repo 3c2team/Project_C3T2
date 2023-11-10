@@ -4,6 +4,7 @@
 <html>
 <head>
 <%@ include file="./include/head.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage-search.css">
 <title>마이페이지-예약 내역</title>
 </head>
 <body>
@@ -14,22 +15,33 @@
 			<h1>예약 내역</h1>
 		</div>
 		<h2>기간 조회</h2>
+		<div class="totalCount">전체 ${pageMaker.totalCount}건</div>
+		
+		
 		<div class="reservationConfirmContainer">
+		<form  id="frm">
 			<div class="reservationConfirmTerm">
 				<div class="calendarContainer">
-					<button onclick="setToday()">오늘</button>
-					<button onclick="setMonths(-1)">1개월</button> <!-- "1개월" 버튼을 클릭하면 setMonths 함수가 호출됨 -->
-					<button onclick="setMonths(-3)">3개월</button>
-					<button onclick="setMonths(-6)">6개월</button>
+					<button type="button"   onclick="setToday(this)"  class="calendarContainer  ${pageMaker.searchType eq '1' ? 'active':''}">오늘</button>
+					<button type="button"  onclick="setMonths(this, '-1')" class="calendarContainer ${pageMaker.searchType eq '-1' ? 'active':''} "  >1개월</button>
+					<button type="button"  onclick="setMonths(this, '-3')" class="calendarContainer ${pageMaker.searchType eq '-3' ? 'active':''} ">3개월</button>
+					<button type="button"  onclick="setMonths(this,'-6')"  class="calendarContainer ${pageMaker.searchType eq '-6' ? 'active':''} ">6개월</button>
+					<button type="button"  onclick="setAllPeriod(this)" class="calendarContainer ${ (empty pageMaker.searchType) or (pageMaker.searchType eq 'NaN') ? 'active':''}"  >전체기간</button>
 				</div>
+				<input type="hidden" id="searchType" name="searchType">
 				<div id="reservation_confirm_term_right">
 					<div class="calanderWrap">
-						<input type="date" id="startDate"> - <input type="date" id="endDate">
-						<button id="search_btn">조회</button> <!--  "조회" 버튼을 클릭하면, filterReservationsByDate 함수가 호출 -->
+						<input type="date" id="startDate" name="startDate" value="${pageMaker.startDate}"> - <input type="date" id="endDate" name="endDate" 
+						value="${pageMaker.endDate}">
+						<button type="submit"  id="search_btn">조회</button>
 					</div>
 				</div>
 <%-- 				<script src="${pageContext.request.contextPath }/resources/js/mypage_calender.js"></script> --%>
 			</div>
+			</form>
+		
+		
+			
 			<br>
 			<br>
 			<!-- 리뷰 목록 테이블 -->
@@ -43,15 +55,18 @@
 							<th width="100px">예약 날짜</th>
 							<th width="130px">예약 시간</th>
 							<th width="80px">예약 인원</th>
-							<th width="80px">예약 테이블</th>
+							<th width="100px">예약 테이블</th>
+							<th width="100px"></th>
 						</tr>
 						<!-- 예약 내역 데이터 반복 출력 -->
 						<c:forEach var="reservation" items="${reviews}">
 							
 							<!-- 각 테이블 행에는 'reservation-row' 클래스가 지정되어 있고, 예약 날짜를 데이터 속성으로 포함-->
-							<tr class="reservation-row" data-reservation-date="${reservation.reservation_date}">
+							<tr class="reservation-row text-center" data-reservation-date="${reservation.reservation_date}">
 								<td>${reservation.reservation_person_name}</td>
-								<td>${reservation.reservation_guest_num}</td>
+								<td>
+						                ${reservation.reservation_guest_num}
+						        </td>
 								<td>${reservation.reservation_date}</td>
 								<td>${reservation.reservation_time}</td>
 								<td>${reservation.reservation_person_count}</td>
@@ -71,12 +86,33 @@
 								</td>
 							</tr>
 						</c:forEach>
+						
+						<c:if test="${pageMaker.totalCount ==0}">
+							<tr>
+								<td colspan="7" class="text-center">
+									<div style="height:50px; line-height: 50px">등록된 예약 내역이 없습니다.</div>
+								</td>
+							</tr>
+						</c:if>
+						
 					</table>
 				</section>
 			</article>
+			
+			
+			<div class="text-center mt50" style=" display: flex;justify-content: space-around;">
+	      		${pagination}
+	    	</div>
+	    	
 		</div>
 		<br>
 		<br>
+		
+		
+		
+	
+	    	
+	    	
 	</div>
 	<script>
         window.onload = function() {

@@ -124,32 +124,32 @@ public class MyPageController {
 	@ResponseBody
 	public boolean checkMypageConfirm(String passwd, HttpSession session) {	
 		
-		// 현재 세션에서 사용자 ID를 가져옵니다.
+		// 현재 세션에서 사용자 ID를 가져옴.
 		String member_id=(String)session.getAttribute("sId");
 		
-		// 비밀번호 암호화를 위한 BCryptPasswordEncoder 객체를 생성합니다.
+		// 비밀번호 암호화를 위한 BCryptPasswordEncoder 객체를 생성.
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		// DB에서 해당 사용자의 정보를 가져옵니다.
+		// DB에서 해당 사용자의 정보를 가져옴.
 		MemberVO dbMember = memberService.getMemberLogin(member_id);
 		
-		// 사용자 정보가 없거나 입력한 비밀번호와 DB의 비밀번호가 일치하지 않으면 false를 반환합니다.
+		// 사용자 정보가 없거나 입력한 비밀번호와 DB의 비밀번호가 일치하지 않으면 false를 반환.
 		if(dbMember == null || !passwordEncoder.matches(passwd, dbMember.getMember_passwd())) {			
 			return false;			
 		}else {	
-			// 비밀번호 확인이 성공하면 세션에 확인 플래그를 설정하고 true를 반환합니다.
+			// 비밀번호 확인이 성공하면 세션에 확인 플래그를 설정하고 true를 반환.
 			session.setAttribute("mypageChckConfirm", "ok");
 			return true;	
 		}		
 	}
 	
 	/**◆3.공통-비밀번호 확인 : 메서드 **/
-	// 개인정보 수정 전 비밀번호 확인을 위한 유틸리티 메서드입니다.
+	// 개인정보 수정 전 비밀번호 확인을 위한 유틸리티 메서드.
 	private boolean  mpCheck(HttpSession session,RedirectAttributes rttr, String redirectURL) {
-		// 세션에서 비밀번호 확인 플래그를 가져옵니다.
+		// 세션에서 비밀번호 확인 플래그를 가져옴.
 		String mypageChckConfirm=(String)session.getAttribute("mypageChckConfirm");
 		
-		// 플래그가 설정되어 있지 않으면 세션 값을 삭제하고 false를 반환합니다.
+		// 플래그가 설정되어 있지 않으면 세션 값을 삭제하고 false를 반환.
 		if(!StringUtils.hasText(mypageChckConfirm)) {
 			// 세션값 삭제
 			session.removeAttribute("mypageChckConfirm");
@@ -184,12 +184,12 @@ public class MyPageController {
 	@ResponseBody
 	public String mypageMemberModify(MemberVO memberVO, HttpSession session) {		
 		try {
-			// 현재 세션에서 사용자 ID를 가져옵니다.
+			// 현재 세션에서 사용자 ID를 가져옴.
 			String member_id=(String)session.getAttribute("sId");
-			// 가져온 사용자 ID를 MemberVO 객체에 설정합니다.
+			// 가져온 사용자 ID를 MemberVO 객체에 설정.
 			memberVO.setMember_id(member_id);
 			
-			// 회원 정보를 업데이트하고, 성공적으로 업데이트된 경우 'success'를 반환합니다.
+			// 회원 정보를 업데이트하고, 성공적으로 업데이트된 경우 'success'를 반환.
 			if( service.updateMember(memberVO)==1)return "success";
 			return "failed";
 			
@@ -307,20 +307,24 @@ public class MyPageController {
 		
 		parMap.put("member_id", loginUser.getMember_id());
 		pageMaker.setPerPageNum(5);
-		pageMaker.setTotalCount(service.getBuyTotalCount(parMap));
-		String pagination=pageMaker.paginationHTML("MypageBuyList");
+		//pageMaker.setTotalCount(service.getBuyTotalCount(parMap));		
 		parMap.put("pageMaker", pageMaker);
+		
 		
 		//상품 구매 내역을 가져옴
 		List<UserOrderVO> OrderList = service.getOrderList(parMap);
 		
 		// 총 가격과 결합된 상품 이름을 가져옴
+		int totalCount=service.getTotalPriceAndProductNamesTotCount(parMap);
+		pageMaker.setTotalCount(totalCount);
 		List<UserOrderVO> orderTotals = service.getTotalPriceAndProductNames(parMap);
-		System.out.println(loginUser);
+		String pagination=pageMaker.paginationHTML("MypageBuyList");
+		
 		
 		// 가져온 구매 목록을 모델에 추가
 		model.addAttribute("OrderList", OrderList);
 		model.addAttribute("orderTotals", orderTotals); // 총 가격과 결합된 상품 이름 추가
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("pagination", pagination);
 		
@@ -359,6 +363,8 @@ public class MyPageController {
 		return "mypage/mypage_goods_review";
 	}
 	
+	
+	
 	@GetMapping("/productDetail")	//상품 리뷰 페이지 넘어가게하기
     public String reviewDetail(@RequestParam("review_num") int reviewNum, Model model) {
         ReviewVO review = service.getReviewByNum(reviewNum);
@@ -367,34 +373,30 @@ public class MyPageController {
         return "productDetail";  	// 리뷰 상세 페이지의 뷰 이름
     }
 	
-	@GetMapping("MypagePoint")		// 포인트
-	public String myPagePoint(HttpSession session ,Model model, 
-			@RequestParam(defaultValue = "1000-01-01") String startDate, 
-			@RequestParam(defaultValue = "5000-12-31") String endDate,
-			@RequestParam(defaultValue = "1") int pageNum) {
+	@GetMapping("MypagePoint")
+	public String myPagePoint(HttpSession session ,Model model, PageMaker pageMaker, Map<String, Object> parMap,  
+			@RequestParam(defaultValue = "1990-01-01") String startDate, 
+			@RequestParam(defaultValue = "") String endDate) {
 		String memberId = (String)session.getAttribute("sId");
 		
 		if(memberId == null) {
 			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
-			return "fail_back";
+			model.addAttribute("targetURL", "Login");
+			return "forward";
 		}
 		
 		// 페이징 처리
-		int listLimit = 5; // 한 페이지에서 표시할 글 목록 갯수
-		int startRow = (pageNum - 1) * listLimit; // 조회 시작 행(레코드) 번호
-		List<PointVO> points = service.getPoints(startDate, endDate, memberId, startRow, listLimit);
-		int listCount = service.getPointsCount(startDate, endDate, memberId);
-		int pageListLimit = 5;
-		int maxPage = listCount / listLimit + (listCount % listLimit > 0 ? 1 : 0);
-		int startPage = (pageNum - 1) / pageListLimit * pageListLimit + 1;
-		int endPage = startPage + pageListLimit - 1;
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		PageInfoVO pageInfo = new PageInfoVO(listCount, pageListLimit, maxPage, startPage, endPage, pageNum);
-		model.addAttribute("points", points);
+		parMap.put("member_id", memberId);
+		parMap.put("startDate", startDate);	
+		parMap.put("endDate", endDate);	
+		pageMaker.setPerPageNum(5);
+		pageMaker.setTotalCount(service.getPointsCount(parMap));
+		String pagination=pageMaker.paginationHTML("MypagePoint");
+		List<PointVO> points = service.getPointList(parMap);
 		
-		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("points", points);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
 		return "mypage/mypage_point";
 	}
 	
@@ -465,20 +467,37 @@ public class MyPageController {
 	
 	
 	@GetMapping("MypageReservationList")				// 예약 내역
-	public String mypageReservationList(HttpSession session, Model model) {
+	public String mypageReservationList(HttpSession session, Model model ,  Map<String, Object> parMap , PageMaker pageMaker) {
 		
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		String member_id = (String) session.getAttribute("sId");
 		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_id);
 		
+		parMap.put("member_id", member_id);
+		pageMaker.setPerPageNum(5);
+		pageMaker.setTotalCount(service.getReservationDetailTotalCount(parMap));				
+		parMap.put("pageMaker", pageMaker);
+		
+		
 		// 현재 로그인한 회원의 모든 리뷰 가져오기
-		List<ReservationVO> reviews = service.getReservationDetail(member_id);
+		List<ReservationVO> reviews = service.getReservationDetail(parMap);
 		System.out.println(reviews);
 		
+		// 페이지네이션 HTML을 생성.
+		String pagination=pageMaker.paginationHTML("MypageReservationList");		
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("pagination", pagination);
 		
 		return "mypage/mypage_reservation_ask";
 	}
+	
+
+	
+	
+	
+	
+	
 	
 	@PostMapping("cancelReservation")		// 예약취소
 	public String cancelReservation(@RequestParam("reservation_num") int reservationNum) {
@@ -488,9 +507,11 @@ public class MyPageController {
 	}
 	
 	
+	
 	@GetMapping("MypageDetail")							// 나의 상세 정보
 	public String mypagePoint(Model model, HttpSession session) {
 		String member_id=(String)session.getAttribute("sId");
+		System.out.println(member_id);
 		MemberVO memberVO = memberService.getMemberLogin(member_id);
 		model.addAttribute("Member", memberVO);
 		return "mypage/mypage_detail";

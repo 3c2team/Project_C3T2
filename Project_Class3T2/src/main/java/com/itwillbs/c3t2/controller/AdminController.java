@@ -37,16 +37,6 @@ public class AdminController {
 	@Autowired
 	private CartService cartService;
 	
-//		model.addAttribute("msg","로그인 하십시오");
-//		return "fail_back";
-//	public void isLogin(HttpSession session, Model model) throws Exception {
-//		String sId = (String)session.getAttribute("sId");
-//		if(sId == null||sId.equals("")) {
-//			System.out.println("들어오나???");
-//			failLogin(model);
-//		}
-//	}
-//	
 //	로그인관리(관리자)
 	@GetMapping("AdminFailLogin")
 	public String failLogin(Model model) {
@@ -69,6 +59,7 @@ public class AdminController {
     public String adminSalesMonth(HttpSession session) {
     	String sId = (String)session.getAttribute("sId");
     	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
+    	
     	return "admin/admin_sales_month";
     }
     
@@ -77,6 +68,7 @@ public class AdminController {
     public String adminSalesDay(HttpSession session) {
     	String sId = (String)session.getAttribute("sId");
     	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
+    	
     	return "admin/admin_sales_day";
     }
     
@@ -87,8 +79,9 @@ public class AdminController {
     	if(sId == null || sId.equals("")) return "redirect:/AdminFailLogin";
     	
     	List<Map<String, Object>> productList = service.getproductList();
-    	System.out.println(productList);
+    	
     	model.addAttribute("productList",productList);
+    	
     	return "admin/admin_sales_product";
     }
     
@@ -122,48 +115,49 @@ public class AdminController {
     	
     	String id = (String)session.getAttribute("sId");
     	if(id == null || id.equals("")) return "redirect:/AdminFailLogin";
+    	
+    	int deleteProductImgCount = 0;
+		int deleteCartCount = 0;
+		int deleteProductCount = 0;
+		
     	if(mainFile.getOriginalFilename().equals("")||infoFile.getOriginalFilename().equals("")) {
     		model.addAttribute("msg","파일을 등록하시오");
+    		
     		return "fail_back";
     	}
-    	System.out.println(mainFile + " , " + infoFile + "  , " + subFiles);
-    	if(map.get("product_num")!=null) {
+    	
+    	if(map.get("product_num")!=null) { // 상품 수정
     		Path path = null;
     		String item = (String)map.get("product_num");
     		String uploadDir = "/store_img/";//가상 업로드 경로
         	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); //실제 업로드 경로
     		int product_num = Integer.parseInt(item); 
+    		
     		List<Map<String, Object>> selecteProductImg = service.getproductImg(product_num);
-    		System.out.println("저장경로 테스트 : " + saveDir);
+    		
     		ProductVO product = service.getproduct(product_num);
+    		
 			try {
-				for(Map<String, Object> imgMap : selecteProductImg) {
-//				System.out.println(imgMap);
-				System.out.println("등록된 파일명 : " + imgMap.get("product_image"));
+				for(Map<String, Object> imgMap : selecteProductImg) { // 서브 이미지 삭제
 			
-	    		path = Paths.get(saveDir + "/" +imgMap.get("product_image"));//실제 업로드 경로
+	    		path = Paths.get(saveDir + "/" +imgMap.get("product_image"));
 	    		Files.deleteIfExists(path);
 	    		
-//	    		System.out.println(saveDir);
 				}
-				path = Paths.get(saveDir + "/" +product.getProduct_main_img());//실제 업로드 경로
+				//메인 이미지 삭제
+				path = Paths.get(saveDir + "/" +product.getProduct_main_img());
 				Files.deleteIfExists(path);
 				
-				int deleteProductImgCount = service.deleteProductImg(product_num);
-				int deleteCartCount = cartService.deleteCartProduct(product_num);
-				int deleteProductCount = service.deleteProduct(product_num);
-	    		//업로드 진행 (메인 이미지 끝)
-	    	} catch (IllegalStateException e) {
-	    		// TODO Auto-generated catch block
-	    		e.printStackTrace();
-	    	} catch (IOException e) {
+				deleteProductImgCount = service.deleteProductImg(product_num);
+				deleteCartCount = cartService.deleteCartProduct(product_num);
+				deleteProductCount = service.deleteProduct(product_num);
+
+			} catch (Exception e) {
 	    		// TODO Auto-generated catch block
 	    		e.printStackTrace();
 	    	}
 			
     	}
-//    	System.out.println(map);
-//    	System.out.println(subFiles);
     	
     	String uploadDir = "/store_img/";//가상 업로드 경로
     	String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", "");//실제 업로드 경로
@@ -172,41 +166,34 @@ public class AdminController {
 			
 			String uuid = UUID.randomUUID().toString(); //겹치지 않게 랜덤 선언
 			String mainFileName = uuid.substring(0, 3) + "_" + mainFile.getOriginalFilename();
+			// 맵에 이름과 경로 전달
 			//실제 파일 이름과 uuid랜덤합쳐서 겹치는걸 방지
 			map.put("main_file_name", mainFileName);
 			map.put("upload_dir", uploadDir +mainFileName);
-			// 맵에 이름과 경로 전달
-			//실제로는 saveDir을 넣어야하지만 차피 파일을 서버에 못올리고 있기때문에 내용이라도 맞추는용도
-		
-			System.out.println("실제 업로드 파일명 : " + mainFile.getOriginalFilename());
-			
-//			System.out.println(map);
 			
 			int insertProductCount = service.registProduct(map);
-			if(insertProductCount == 0) {
-				model.addAttribute("msg","전체 실패");
+			if(insertProductCount == 0) {// 상품 등록 실패시
+				model.addAttribute("msg","상품등록 실패");
 				return "fail_back";
 			}
-			System.out.println("여기까지안오나?");
-			//db등록
-			Path path = Paths.get(saveDir);//실제 업로드 경로
+			
+			Path path = Paths.get(saveDir);//경로 저장
 			Files.createDirectories(path);//중간 경로 생성
-			System.out.println(saveDir);
+			
 			mainFile.transferTo(new File(saveDir, mainFileName));
 			//업로드 진행 (메인 이미지 끝)
 			
 			//인포 이미지 업로드 시작
 			String infoFileName = uuid.substring(0, 3) + "_info" + infoFile.getOriginalFilename();
 			//겹치지않게 이름 생성
-			int insertProductImgCount = 0;
+			
 			map.put("info_file_name", infoFileName);
 			map.put("upload_dir", uploadDir +infoFileName);
-			insertProductImgCount = service.registProductImg(map);
+			//상품 내용 이미지 저장
+			int insertProductImgCount = service.registProductImg(map);
 			//맵에 경로 및 이름 추가
 
-//			System.out.println(map);//확인작업
 			
-//			service.registProductImg(map);
 
 			infoFile.transferTo(new File(saveDir, infoFileName));
 			//업로드 진행 (인포 이미지 끝)
@@ -215,7 +202,7 @@ public class AdminController {
 			
 			for(MultipartFile subFile : subFiles) {
 				String subFileName = uuid.substring(0, 3) + "_" + subFile.getOriginalFilename();
-//				System.out.println("실제 업로드 파일명 : " + subFile.getOriginalFilename());
+				
 				map.put("info_file_name", subFileName);
 				map.put("upload_dir", uploadDir +subFileName);
 				insertProductImgCount = service.registProductImg(map);
@@ -231,8 +218,7 @@ public class AdminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("마지막 : "+ saveDir);
-//		System.out.println(uploadDir);
+		
 		model.addAttribute("msg","등록 완료되었습니다!");
 		return "success_close";//전체 성공시
 			
@@ -409,8 +395,9 @@ public class AdminController {
     
     //문의 답변 페이지 이동(관리자)
     @GetMapping("AdminQnaAnswer")
-    public String adminQnaAnswer(Model model,int qna_num) {
-    	Map<String, Object> QnaBoardDetail = service.selectQnaBoard(qna_num);
+    public String adminQnaAnswer(Model model,int question_num) {
+    	System.out.println(question_num);
+    	Map<String, Object> QnaBoardDetail = service.selectQnaBoard(question_num);
     	model.addAttribute("QnaBoardDetail",QnaBoardDetail);
     	return "admin/admin_qna_answer";
     }
@@ -593,6 +580,7 @@ public class AdminController {
 	@PostMapping("/AdminSelectReson")
     public Map<String, Integer> selectReson() {
     	Map<String, Integer> selectMemberOut= service.selectMemberOut();
+    	System.out.println("dfdfd" + selectMemberOut);
     return selectMemberOut;
     }
     @ResponseBody

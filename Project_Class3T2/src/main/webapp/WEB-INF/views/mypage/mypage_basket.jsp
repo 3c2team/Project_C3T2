@@ -73,7 +73,7 @@ function deleteCartItem(cartNum) {
 
                   <c:forEach var="item" items="${cartList}">
                       <div class="item">
-                          <img src="${pageContext.request.contextPath}/resources${item.product_main_img_real_file}" width="200" height="200">
+                          <img src="${item.product_main_img_real_file}" width="200" height="200">
                           <p class="itemDesc bold text-center" style="padding: 5px 10px">${item.product_name}</p>
                           <button onclick="location.href='${pageContext.request.contextPath}/PayPro?proNums=${item.product_num}'">상품페이지로 이동</button>
                    <form action="${pageContext.request.contextPath}/deleteBasket" method="post" style="display: inline;">

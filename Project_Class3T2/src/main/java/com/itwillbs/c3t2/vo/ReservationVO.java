@@ -1,7 +1,5 @@
 package com.itwillbs.c3t2.vo;
 
-import java.sql.Date; 
-
 import lombok.Data;
 
 /*
@@ -40,4 +38,5 @@ public class ReservationVO {
 	private String reservation_guest_num;
 	private int dinning_num;
 	private int restaurant_num;
+	private String cal_count;
 }

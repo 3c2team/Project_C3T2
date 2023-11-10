@@ -55,5 +55,4 @@ public class ReservationService {
 			return mapper.selectDinningMax();
 		}
 
-		
 }

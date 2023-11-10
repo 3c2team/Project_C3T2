@@ -26,18 +26,21 @@ public class PageMaker {
    private boolean prev;   // 이전 여부 
    private boolean next;   // 다음 여부
     
-   private int displayPageNum=5;
+   private int displayPageNum=5;  // 개수를 정의하는 변수로, 페이지네이션에서 표시할 페이지 수를 지정
     
    private int tempEndPage; //마지막 페이지
     
-   //검색처리 추가
-   private String searchType;
+   private String startDate;	// 날짜검색
+   private String endDate;
+   
+   //검색처리 추가 (파라미터 를 넘겨 주는 변수)
+   private String searchType;	//searchType 은 1개월 3개월 6개월에서 선택시 값들변 jsp 변경 해주는 처리 (진한 검정색 처리)
    private String keyword;
     
     
    public PageMaker() {
        this.page=1;          //현재 페이지 번호를 설정, 초기 페이지는 1 
-       this.perPageNum=10;   //한 페이지에 표시될 데이터의 개수, limit 10 개씩 보여준다.
+       this.perPageNum=5;   //한 페이지에 표시될 데이터의 개수, limit 5 개씩 보여준다.
    }
     
     
@@ -56,7 +59,7 @@ public class PageMaker {
        //몇개 씩 보여줄것인가 이다. 최대 100개씩 보여 줄것으로 설정한다.
        //만약 0보다 작거나 100 보다 크면 10으로 초기화 시킨다.
        if(perPageNum <=0 || perPageNum >100){
-           this.perPageNum=10;
+           this.perPageNum=5;
            return;
        }
        this.perPageNum = perPageNum;
@@ -119,7 +122,10 @@ public class PageMaker {
                .queryParam("perPageNum", perPageNum)	// 페이지당 데이터 수를 'perPageNum' 파라미터로 추가
                .queryParam("searchType", searchType)	// 검색 유형을 'searchType' 파라미터로 추가
                .queryParam("keyword", keyword)			// 검색 키워드를 'keyword' 파라미터로 추가
+               .queryParam("startDate", startDate)
+               .queryParam("endDate", endDate)
                .build();								// URI 쿼리 문자열을 구성
+       
        
        // 구성된 URI 쿼리 문자열을 문자열 형태로 반환
        return uriComponents.toUriString();
