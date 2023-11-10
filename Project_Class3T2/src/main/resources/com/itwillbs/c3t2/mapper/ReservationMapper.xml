@@ -10,26 +10,26 @@
 	<insert id="insertReservation">
 		 INSERT INTO RESERVATION
 			VALUES (
-				null <!-- reservation_num -->
-				, #{reservation_date}
-				, #{reservation_time}
-				, #{reservation_person_name}
-				, #{reservation_person_count}
-				, #{reservation_email}
-				, 0 <!-- cancel -->
-				, #{reservation_member_id} <!-- #{reservation_member_id} -->
-				, #{reservation_guest_num} <!-- guest_num -->
-				, (SELECT * 
-					 FROM (SELECT *
-							 FROM DINNING D
-							WHERE dinning_max = #{cal_count}) D
-				LEFT JOIN (SELECT *
-							 FROM RESERVATION
-							WHERE reservation_date = #{reservation_date}
-							  AND reservation_time = #{reservation_time}) R
-					   ON D.dinning_num = R.dinning_num)
-				, 1 <!-- restaurant_num -->
-		)
+						null <!-- reservation_num -->
+						, #{reservation_date}
+						, #{reservation_time}
+						, #{reservation_person_name}
+						, #{reservation_person_count}
+						, #{reservation_email}
+						, 0 <!-- cancel -->
+						, #{reservation_member_id} <!-- #{reservation_member_id} -->
+						, #{reservation_guest_num} <!-- guest_num -->
+						, (SELECT IFNULL(MAX(R.DINNING_NUM) + 1 , MIN(D.DINNING_NUM))
+							 FROM (SELECT *
+						       		 FROM DINNING D
+									WHERE D.dinning_max = #{cal_count}) D
+						     LEFT JOIN (SELECT *
+										  FROM RESERVATION
+										 WHERE reservation_date = #{reservation_date}
+										   AND reservation_time = #{reservation_time}) R
+							  ON D.dinning_num = R.dinning_num)
+						, 1 <!-- restaurant_num -->
+					)
 	</insert>
 	
 	<!-- 예약번호 불러오기 -->

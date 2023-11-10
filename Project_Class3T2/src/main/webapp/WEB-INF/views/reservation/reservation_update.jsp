@@ -64,8 +64,14 @@
 					<tr>
 						<th>예약시간</th>
 						<td>
-						
-						
+<!-- 						<포문 $레스토랑 오픈~ 마감> -->
+<!-- 						<div class="form_radio_btn"> -->
+<%-- 							<c:if test="${레스토랑 시간 }"> --%>
+<!-- 								체크드 -->
+<%-- 								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>> --%>
+<!-- 								<label for="radio-0">10:00</label> -->
+<%-- 							</c:if> --%>
+<!-- 							</div> -->
 						
 							<div class="form_radio_btn">
 								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>>
