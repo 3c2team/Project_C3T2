@@ -33,7 +33,7 @@ $(document).ready(function(){
 				<a href="https://cafe.naver.com/learntimes">
 					<img src="${pageContext.request.contextPath }/resources/main_img/twitter.png" title="트위터 아이콘" width="40" height="40" align="right">
 				</a>
-			<a id="logo"></a>
+			<a id="logo" class="logo"></a>
 			</div>
 		</div>
 		<div id="company">
