@@ -170,7 +170,7 @@ public class StoreController {
 							, HttpSession session, Model model) {
 		String sId = (String)session.getAttribute("sId");
 		String uploadDir = "/review_img/"; //가상 경로
-		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Bakc_Project_Class3T2/", ""); //실제 경로
+		String saveDir = session.getServletContext().getRealPath(uploadDir).replace("Project_Class3T2/", ""); //실제 경로
 		
 		// 로그인X 처리
 		if(session.getAttribute("sId") == null) {

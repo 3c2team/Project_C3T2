@@ -397,6 +397,7 @@
 				</otherwise>
 			</choose>
 		</if>
+		AND point_amount > 0
      </select> 
     
 	<!-- 포인트 목록 -->
@@ -416,6 +417,7 @@
 			</otherwise>
 			</choose>
 		</if>
+		AND point_amount > 0
         ORDER BY 
 		    point_date DESC
 		limit #{pageMaker.pageStart}, #{pageMaker.perPageNum} 

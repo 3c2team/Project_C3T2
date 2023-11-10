@@ -14,5 +14,5 @@ public class QnAVO {
 	int secret;
 	int answer_num;
 	String question_answer;
-	Date answer_date;
+	Date question_answer_date;
 }

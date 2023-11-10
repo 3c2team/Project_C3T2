@@ -18,13 +18,10 @@ $(function(){
 	});
 	
 	var popToday = getCookie("popToday");
-    console.log(popToday);
 
     if (popToday == "close") {
         document.getElementById("popup_layer").style.display = "none";
-    } else {
-//		document.getElementById("popup_layer").style.display = "block";
-	}
+    }
 });
 
 // 쿠키 값 세팅하기

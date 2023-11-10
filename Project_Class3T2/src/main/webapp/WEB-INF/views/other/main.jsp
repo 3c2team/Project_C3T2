@@ -25,7 +25,7 @@ img {
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main>
-			<div style="display: none;" id="popup_layer">
+			<div id="popup_layer">
 			  <div class="popupBox">
 			      <div class="popupCont">
 			          <h2><a href="NoticeDetail?notice_num=${noticeRecent.notice_num }&pageNum=1">${noticeRecent.notice_subject }</a></h2>

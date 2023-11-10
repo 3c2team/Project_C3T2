@@ -14,6 +14,7 @@ td {
     margin-left: -10%;
 }
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage-search.css">
 </head>
 <body>
 	<%@ include file="./include/body_top.jsp"%>
@@ -29,12 +30,18 @@ td {
 					<button onclick="setMonths(-1)">1개월</button>
 					<button onclick="setMonths(-3)">3개월</button>
 					<button onclick="setMonths(-6)">6개월</button>
+					<button type="button"  onclick="setAllPeriod(this)" class="calendarContainer ${ (empty pageMaker.searchType) or (pageMaker.searchType eq 'NaN') ? 'active':''}"  >전체기간</button>
 				</div>
 				<script src="${pageContext.request.contextPath }/resources/js/mypage_point_calender.js"></script>
 				<form action="MypagePoint">
 					<div id="reservation_confirm_term_right">
 						<div class="calanderWrap">
-							<input type="date" name="startDate" id="startDate"> - <input type="date" name="endDate" id="endDate">
+							<c:if test="${startDate eq '1990-01-01'}">
+							<input type="date" name="startDate" id="startDate"> - <input type="date" name="endDate" id="endDate" value="${endDate }">
+							</c:if>
+							<c:if test="${startDate ne '1990-01-01'}">
+							<input type="date" name="startDate" id="startDate" value="${startDate }"> - <input type="date" name="endDate" id="endDate" value="${endDate }">
+							</c:if>
 							<button type="submit" id="search_btn">조회</button>
 						</div>
 					</div>
@@ -55,7 +62,7 @@ td {
 						</tr>
 						<!-- 포인트 데이터 반복 출력 -->
 						<c:forEach var="point" items="${points}">
-							<tr>
+							<tr class="point-row text-center">
 								<c:choose>
 									<c:when test="${point.point_use eq 1}">
 										<td id="use">적립</td>

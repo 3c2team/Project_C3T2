@@ -35,22 +35,22 @@
 	<!-- 상품상세 조회 -->
 	<select id="selectProductDetail" resultType="map">
 		<![CDATA[ 
-		SELECT *
-			, (SELECT COUNT(*)
-				FROM FAVORITE
-				WHERE product_num = #{proNum}) AS 'favorite_count'
-			, CASE WHEN (SELECT COUNT(*)
-						FROM USER_ORDER
-						WHERE 1=1
-						AND member_id  = #{sId}
-						AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'REPLY_YN'
-			, CASE WHEN (SELECT COUNT(*)
-		 				FROM FAVORITE
-						WHERE 1=1
-		 				AND member_id = #{sId}
-		 				AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'member_fav'
-		FROM PRODUCT
-		WHERE product_num  = #{proNum};	
+			SELECT *
+				, (SELECT COUNT(*)
+					FROM FAVORITE
+					WHERE product_num = #{proNum}) AS 'favorite_count'
+				, CASE WHEN (SELECT COUNT(*)
+							FROM USER_ORDER
+							WHERE 1=1
+							AND member_id  = #{sId}
+							AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'REPLY_YN'
+				, CASE WHEN (SELECT COUNT(*)
+			 				FROM FAVORITE
+							WHERE 1=1
+			 				AND member_id = #{sId}
+			 				AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'member_fav'
+			FROM PRODUCT
+			WHERE product_num  = #{proNum};	
 		]]>
 	</select>
 	<!-- 상품상세 이미지 조회 -->

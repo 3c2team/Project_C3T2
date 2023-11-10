@@ -28,10 +28,10 @@ h2 {
 h1 {
 	font-size: 1.5em;
 	text-align: center;
-	margin-right: 18%;
+	margin-right: 19%;
 }
 p {
-	margin-left: 34%;
+	margin-left: 32.3%;
 }
 #articleContentArea{
 	text-align: center;
