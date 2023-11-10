@@ -126,15 +126,7 @@
 				<%-- 오른쪽 --%>
 				<div class="detailTopRigth">
 					<div class="detailTopLikeShare">
-						<span id="favorite-btn" class="<c:choose>
-							<c:when test="${productDetail.member_fav eq 1 }">
-								favorite_on
-							</c:when>
-							<c:otherwise>
-								favorite_off
-							</c:otherwise>
-						</c:choose>">
-						</span>
+						<span id="favorite-btn" class="favorite_${productDetail.member_fav }"></span>
 					</div>
 					<div class="productNum">
 						<p>온라인상품코드 ${productDetail.product_num }</p>
