@@ -187,7 +187,7 @@ $(function() {
 						
 						<tr>
 							<td class="deliverytd">받으시는 분&nbsp;<span style="color:red">*</span></td>
-							<td id="memberName"><input type="text" id="member_name" name="receiver_name" value="${Member.member_name}"></td>
+							<td id="memberName"><input type="text" id="member_name" name="receiver_name" required="required" value="${Member.member_name}"></td>
 						</tr>
 						
 						<tr>
@@ -196,9 +196,9 @@ $(function() {
 							
 							<td>
 	<!-- 							<input type="text" id="postnum1" size="10" maxlength="5" />&nbsp; -->
-								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" name="receiver_addr1" value="${Member.member_address1}">&nbsp;
+								<input style="margin-bottom: 10px;" type="text" id="addr1" size="40" name="receiver_addr1" required="required" value="${Member.member_address1}">&nbsp;
 								<button type="button" style="cursor: pointer; margin-bottom: 10px; background-color: #fff " id="btnSearchAddress" >주소 검색</button> <br>
-								<input type="text" id="addr2" size="40" name="receiver_addr2"  value="${Member.member_address2}"/>
+								<input type="text" id="addr2" size="40" name="receiver_addr2"  required="required" value="${Member.member_address2}"/>
 							</td>
 						</tr>
 						
@@ -206,7 +206,7 @@ $(function() {
 							<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
 							<td>
 	<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
-								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" placeholder="000-0000-0000">
+								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" required="required" placeholder="000-0000-0000">
 								<span id="checkPhoneResult"></span><br>
 							</td>
 						</tr>
@@ -217,7 +217,7 @@ $(function() {
 <%-- 								<c:set value="${fn:split(Member.member_e_mail, '@') }" var="mail"  />	 --%>
 								
 <%-- 								<input type="text" id="eMail" value="${mail[0]}" >@<input id="domainName" type="text" name="mailUrl" value="${mail[1]}" />&nbsp; --%>
-								<input type="text" id="eMail" name="eMail" value="${sessionScope.Email1 }" >@<input id="domainName" type="text" name="mailUrl" value="${sessionScope.Email2}" />&nbsp;
+								<input type="text" id="eMail" name="eMail" required="required" value="${sessionScope.Email1 }" >@<input id="domainName" type="text" name="mailUrl" required="required" value="${sessionScope.Email2}" />&nbsp;
 	<%-- 							<input type="text" id="eMail" value="${Member.member_email1}" >@<input id="domainName" type="text" name="mailUrl" value="${Member.member_email2}" />&nbsp; --%>
 								<select name="emailChoice" style="height: 20px;" onchange="siteSelect(this.value)">
 									<option value="">-직접 입력-</option>
