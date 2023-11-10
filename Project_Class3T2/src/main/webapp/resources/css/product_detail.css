@@ -180,14 +180,16 @@
 .favorite_on {
 	background-repeat: no-repeat;
 	background-image: url("../store_img/favorite_on.png");
-	width: 40px;
-	height: 40px;
+	width: 45px;
+    height: 40px;
+    background-size: cover;
 }
 .favorite_off {
 	background-repeat: no-repeat;
 	background-image: url("../store_img/favorite_off.png");
-	width: 40px;
-	height: 40px;	
+	width: 45px;
+    height: 40px;
+    background-size: cover;	
 }
 .detailTopLikeShare {
     text-align: left;

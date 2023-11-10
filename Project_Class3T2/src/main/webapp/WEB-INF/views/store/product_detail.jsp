@@ -13,44 +13,39 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/product_detail.js"></script>
 <script type="text/javascript">
-	//찜하기 버튼 
+
+	//찜하기 
 	$(document).ready(function(){
+		let isRun = false;
+
 		$("#favorite-btn").on('click', function() {
+			if(isRun) {
+				return;
+			}
+			
+			isRun = true;
+			
 			let proNum = ${param.proNum};
 			let sId = "${sessionScope.sId}";
 			let favBtnClass = $("#favorite-btn").attr("class");
+			let url = favBtnClass == "favorite_on" ? "RemoveFavorite" : "AddFavorite";
 			
-			if(favBtnClass == "favorite_on") {
-				$.ajax({
-					url: "RemoveFavorite",
-					method: 'POST',
-					data: { proNum: proNum, sId: sId },
-					success: function() {
-						alert("관심상품에서 삭제")
-						$("#favorite-btn").removeClass();
-						$("#favorite-btn").addClass('favorite_off');
-					},
-					error: function(error) {
-						alert("압 큰일");
-						location.reload();
+			$.ajax({
+				url: url,
+				method: 'POST',
+				data: { proNum: proNum, sId: sId },
+				success: function(data) {
+					$("#favorite-btn").removeClass();
+					$("#favorite-btn").addClass('favorite_' + data);
+					isRun = false;
+				},
+				error: function(error) {
+					if(${empty sessionScope.sId }) {
+						alert("로그인이 필요합니다.");
 					}
-				});
-			} else {
-				$.ajax({
-					url: "AddFavorite",
-					method: 'POST',
-					data: { proNum: proNum, sId: sId },
-					success: function() {
-						alert("관심상품에 등록")
-						$("#favorite-btn").removeClass();
-						$("#favorite-btn").addClass('favorite_on');
-					},
-					error: function(error) {
-						alert("압 큰일");
-						location.reload();
-					}
-				});
-			}
+					location.reload();
+				}
+			});
 		});
 	});
 </script>
