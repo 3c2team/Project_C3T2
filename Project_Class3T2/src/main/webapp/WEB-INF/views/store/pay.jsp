@@ -40,6 +40,33 @@ $(function() {
 	         $("input[type=text]").val("");
 	   }
     });
+    
+    
+    // 기본 결제 -> 카카오페이로 이동
+    $("#paymentCheck").click(function () {
+	    $("form").attr("action", "PaymentPro");
+	});
+    
+ 	// 결제방법 선택
+    $("input[name=cardradio]").change(function() {
+    	
+    	var paymentConfirm = $("input[name=cardradio]:checked").val();
+    	
+		if($("input[name=cardradio]:checked").val()==1){
+			$("#paymentCheck").click(function () {
+			    $("form").attr("action", "PaymentPro");
+			});
+		}else if($("input[name=cardradio]:checked").val()==2){
+			$("#paymentCheck").click(function () {
+				$("form").attr("action", "PaymentCardPro");
+			});
+		}
+		else if($("input[name=cardradio]:checked").val()==3){
+			$("#paymentCheck").click(function () {
+				$("form").attr("action", "PaymentTossPro");
+			});
+		}
+	});
       	
  });
 
@@ -49,7 +76,8 @@ $(function() {
 
 <body>
 	
-	<form name="fr" action="PaymentPro" method="post">
+<!-- 	<form name="fr" action="PaymentPro" method="post"> -->
+	<form name="fr" method="post">
 		<div id="frame">
 		<header>
 					<jsp:include page="../inc/store_top.jsp"></jsp:include>
@@ -240,9 +268,9 @@ $(function() {
 			<div class="payArea">
 				<div class="payment">
 					<div style="padding: 18px 10px; font-size: 10pt; border-bottom: solid 1px #e0e0eb;">
-						<input type="radio" name="cardradio" checked/><label>카카오페이</label>&nbsp;&nbsp;
-<!-- 						<input type="radio" name="cardradio"/><label>카드결제</label>&nbsp;&nbsp; -->
-<!-- 						<input type="radio" name="cardradio"/><label>휴대폰 결제</label>&nbsp;&nbsp; -->
+						<input type="radio" name="cardradio" id="kakaoPay" value="1" checked/><label>카카오페이</label>&nbsp;&nbsp;
+						<input type="radio" name="cardradio" id="cardPay" value="2"/><label>카드 결제</label>&nbsp;&nbsp;
+						<input type="radio" name="cardradio" value="3"/><label>토스 결제</label>&nbsp;&nbsp;
 <!-- 						<input type="radio" name="cardradio"/><label>무통장 입금</label>&nbsp;&nbsp; -->
 <!-- 						<input type="radio" name="cardradio"/><label>에스크로(가장계좌)</label>&nbsp; -->
 					</div>
@@ -259,7 +287,15 @@ $(function() {
 					<span style="display:inline-block; padding: 20px 10px;">최종결제 금액</span><br>
 					<span id="checkedResult" style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">${payAllPrice.allPrice + 3000}원</span><br><br>
 <%-- 					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="requestPay('${Member}')">결제하기</button> --%>
-					<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
+					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test="${1 eq 1}"> --%>
+<!-- 							<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" formaction="PaymentPro">결제하기</button> -->
+<%-- 						</c:when> --%>
+<%-- 						<c:when test=""> --%>
+<!-- 							<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" formaction="PaymentCardPro" >결제하기2</button> -->
+<%-- 						</c:when>						 --%>
+<%-- 					</c:choose> --%>
 				</div>
 			</div>
 			<br><br>
