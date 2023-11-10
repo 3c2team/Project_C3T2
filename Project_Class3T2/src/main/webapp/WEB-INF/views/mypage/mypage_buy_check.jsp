@@ -50,9 +50,9 @@
 						<!-- 테이블 헤더 -->
 						<tr id="tr_top">
 							<th width="80px">주문번호</th>
-							<th width="250px">배송자 주소</th>
+							<th width="300px">배송자 주소</th>
 							<th width="200px">요청 사항</th>
-							<th width="180px">총 구매 가격</th>
+							<th width="120px">총 구매 가격</th>
 							<th width="100px">구매 일자</th>
 							<th width="250px">구매 상품목록</th>
 						</tr>

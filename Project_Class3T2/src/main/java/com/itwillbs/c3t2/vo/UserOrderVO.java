@@ -14,5 +14,9 @@ public class UserOrderVO {
 	private int product_price;
 	private String merchant_uid;
 	private Timestamp order_date;
+	private String receiver_address;
+	private String receiver_request;
+	private int total_price;
+	private String product_names;
 	
 }
