@@ -8,14 +8,14 @@ th, td {word-break: break-all;word-wrap: break-word;white-space: normal;padding:
 .buy-row:nth-child(odd) {background: #f1f1f1;	}
 .reservation-row:nth-child(odd) {background: #f1f1f1;	}
 .review-row:nth-child(odd) {background: #f1f1f1;	}
-
+.point-row:nth-child(odd) {background: #f1f1f1;	}
 
 .text-right{text-align: right;}
 .text-center{text-align: center;}
 tr.buy-row:hover{background: #ddd;cursor: pointer;}
 tr.reservation-row:hover{background: #ddd;cursor: pointer;}
 tr.review-row:hover{background: #ddd;cursor: pointer;}
-
+tr.point-row:hover{background: #ddd;cursor: pointer;}
 
 
 .pagination li.active a {background-color: rgba(169, 169, 169, 0.9);color: #ffffff;}

@@ -25,12 +25,6 @@
 		<table>
 			<tr>
 				<td align="left">
-					<a href="KakaoConnect" style="font-size: 0.8em;">★ 카카오 로그인 중 이미 가입하신 분은 이 문장을 눌러주세요. ★</a>
-					<input type="hidden" name="kakao_id" id="kakao_id" value="${sessionScope.kakao_id}">
-				</td>
-			</tr>
-			<tr>
-				<td align="left">
 					<font size="2">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택), 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</font>
 				</td>
 				

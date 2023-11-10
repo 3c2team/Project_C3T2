@@ -1,13 +1,9 @@
 package com.itwillbs.c3t2.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -188,21 +184,8 @@ public class MainController {
     	
 		session.setAttribute("kakao_id", (String)userInfo.get("id"));
         session.setAttribute("access_Token", access_Token);
-        model.addAttribute("msg", "입력된 정보가 없습니다. 회원가입 페이지로 이동합니다."); // 출력할 메세지
-		model.addAttribute("targetURL", "JoinAgree"); // 이동시킬 페이지
-		return "forward";
-	}
-	
-	// 카카오 로그인 연동
-	@GetMapping("KakaoConnect")
-	public String kakaoConnect(Model model, HttpSession session) {
-		String kakao_id = (String)session.getAttribute("kakao_id");
-		if(kakao_id == null) {
-			model.addAttribute("msg", "카카오 로그인부터 진행합니다."); // 출력할 메세지
-			model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
-			return "forward";
-		}
-		model.addAttribute("msg", "카카오 연동을 위해 로그인이 필요합니다."); // 출력할 메세지
+        model.addAttribute("msg", "입력된 정보가 없습니다.\r\n"
+        					+ "이미 회원가입 하신 분이라면 카카오 연동을 위해 로그인 해주세요."); // 출력할 메세지
 		model.addAttribute("targetURL", "KakaoConnectLogin"); // 이동시킬 페이지
 		return "forward";
 	}
@@ -220,13 +203,14 @@ public class MainController {
 		
 		MemberVO dbMember = service.getMemberLogin(member_id);
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
-			model.addAttribute("msg", "로그인 실패!");
+			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\r\n"
+					+ "입력하신 내용을 다시 확인해주세요.");
 			return "fail_back";
 		}
 		
 		// 로그인 성공
 		if(dbMember.getMail_auth_status().equals("N")) { // 이메일 미인증 회원
-			model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다!");
+			model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다.");
 			return "fail_back";
 		}
 		
@@ -271,13 +255,14 @@ public class MainController {
          }
 		
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
-			model.addAttribute("msg", "로그인 실패!");
+			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\r\n"
+					+ "입력하신 내용을 다시 확인해주세요.");
 			return "fail_back";
 		}
 		
 		// 로그인 성공
 		if(dbMember.getMail_auth_status().equals("N")) { // 이메일 미인증 회원
-			model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다!");
+			model.addAttribute("msg", "이메일 인증 후 로그인이 가능합니다.");
 			return "fail_back";
 		}
 		
@@ -348,7 +333,8 @@ public class MainController {
 			return "fail_back";
 		}
 		
-		model.addAttribute("msg", "입력한 메일로 변경 비밀번호 전송했습니다. 로그인 페이지로 이동합니다."); // 출력할 메세지
+		model.addAttribute("msg", "입력한 메일로 변경 비밀번호 전송했습니다.\r\n"
+					+ "로그인 페이지로 이동합니다."); // 출력할 메세지
 		model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 		return "forward";
 	}
@@ -409,7 +395,7 @@ public class MainController {
 		int insertCount = service.registMember(member);
 		
 		if(insertCount <= 0) {
-			model.addAttribute("msg", "회원 가입 실패!");
+			model.addAttribute("msg", "오류가 생겼습니다. 다시 시도해주세요.");
 			return "fail_back";
 		}
 		
@@ -424,7 +410,8 @@ public class MainController {
 			return "fail_back";
 		}
 		
-		model.addAttribute("msg", "인증 메일을 전송했습니다. 인증 확인 후 회원가입이 완료됩니다."); // 출력할 메세지
+		model.addAttribute("msg", "인증 메일을 전송했습니다.\r\n"
+						+ "인증 확인 후 회원가입이 완료됩니다."); // 출력할 메세지
 		model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 		return "forward";
 	}
@@ -435,11 +422,12 @@ public class MainController {
 		boolean isAuthSuccess = service.emailAuth(authInfo);
 		
 		if(isAuthSuccess) { // 성공
-			model.addAttribute("msg", "인증 성공! 로그인 페이지로 이동합니다!"); // 출력할 메세지
+			model.addAttribute("msg", "인증이 완료되었습니다.\r\n" 
+					+ "로그인 페이지로 이동합니다."); // 출력할 메세지
 			model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 			return "forward";
 		} else { // 실패
-			model.addAttribute("msg", "인증 실패!");
+			model.addAttribute("msg", "오류가 생겼습니다. 다시 시도해주세요.");
 			return "fail_back";
 		}
 	}

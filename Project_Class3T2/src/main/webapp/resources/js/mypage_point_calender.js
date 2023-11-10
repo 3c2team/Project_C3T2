@@ -27,6 +27,12 @@ function setMonths(monthsAgo) {
     document.getElementById('endDate').value = endDate;
 }
 
+function setAllPeriod(event) {
+    // 시작 및 종료 날짜 입력 필드의 값을 비움
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+}
+
 function formatDate(date) {
     return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }

@@ -14,7 +14,6 @@ $(document).ready(function(){
         	$('#address').append(response.restaurant_address);
         	$('#ceo').append(response.ceo_name);
         	$('#call').append(response.restaurant_call);
-        	console.log("!!!!!!!!!!!!" + response);
         }
     })
 });
