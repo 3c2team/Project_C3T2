@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/resources/css/about.css" rel="stylesheet" type="text/css">
+<%-- <link href="${pageContext.request.contextPath }/resources/css/about.css" rel="stylesheet" type="text/css"> --%>
 <%-- <link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/pay_result.css">
 <body>
@@ -25,39 +25,45 @@
 <!-- 	<div id="mainLayout"> -->
 
 		<main>
-				<h2 class="sign" align="center">구매 내역(수정중)</h2>
-				<table class="custom_table" >
+				<h2 class="sign" align="center">구매 내역</h2>
+				<c:forEach var="userOrderList" items="${userOrderList }">
+					<table class="custom_table" >
+						<tr>
+							<th id="paymentInfo" align="center">구매 상세 내역</th>
+						</tr>
+						<tr>
+							<th class="">구매일자</th>
+							<td>${userOrderList.order_date }</td>
+						</tr>
+						<tr>
+							<th>상품명</th>
+							<td>${userOrderList.product_name }</td>
+						</tr>
+						<tr>
+							<th>상품 수량</th>
+							<td>${userOrderList.product_count }</td>
+						</tr>
+						<tr>
+							<th>상품 총 가격</th>
+							<td>${userOrderList.product_price * userOrderList.product_count }</td>
+						</tr>
+						</table>
+				</c:forEach>
+				<table class="custom_table">
 					<tr>
-						<th id="searchInfo" align="center">구매 상세 내역</th>
+						<th>사용 포인트(수정 중)</th>
+						<td>1000</td>
 					</tr>
 					<tr>
-						<th>구매일자</th>
-<%-- 						<td>${ }</td> --%>
-					</tr>
-					<tr>
-						<th>상품명</th>
-<%-- 						<td>${ }</td> --%>
-					</tr>
-					<tr>
-						<th>상품 수량</th>
-<%-- 						<td>${ }</td> --%>
-					</tr>
-					<tr>
-						<th>상품 가격</th>
-<%-- 						<td>${ }</td> --%>
-					</tr>
-					<tr>
-						<td colspan="2" align="center">
-							<input type="button" value="메인화면" onclick="location.href='./'">
-							<input type="button" value="마이페이지" onclick="MypageDashboard">
-						</td> <!-- ?reservation_guest_num=${reservation.reservation_guest_num} -->
+						<th>총 결제 금액(수정 중)</th>
+						<td>100000</td>
 					</tr>
 				</table>
-				
-<%-- 				<h3>${userOrderList }</h3> --%>
+				<div align="center">
+					<input type="button" value="메인화면" onclick="location.href='./'">
+					<input type="button" value="마이페이지" onclick="location.href='MypageDashboard'">
+				</div>
 
-<!-- 	<h3><a href="./">메인 화면으로 가기</a></h3> -->
-<!-- 	<h3><a href="MypageDashboard">마이페이지로 가기</a></h3> -->
 		</main>
 			<footer id="footer">
 				<jsp:include page="../inc/bottom.jsp"></jsp:include>

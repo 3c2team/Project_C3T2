@@ -2,12 +2,38 @@
 
 .custom_table {
     background-color: #FFFFFF;
-    width: 650px;
-    height: 615px;
+    width: 500px;
+/*     height: 615px; */
 	padding: 23px;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
     margin: 10px auto;
 /* 	margin-left: 15%; */
 	position: relative;
 /* 	float: left; */
+}
+
+th{
+	height: 15px;
+}
+
+#paymentInfo{
+	font-size: 20px;
+/* 	text-align: center; */
+/* 	margin: 50p	x; */
+	height: 20px;
+}
+
+input[type=button] {
+	cursor: pointer;
+	border-radius: 5em;
+	color: #fff;
+	background: linear-gradient(to right, rgb(128, 128, 128), rgb(128, 128, 128));
+	border: 0;
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	font-family: 'Noto Serif KR', serif;
+	font-size: 13px;
+	box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
