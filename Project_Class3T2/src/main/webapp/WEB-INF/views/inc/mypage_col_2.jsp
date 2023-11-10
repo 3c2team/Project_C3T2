@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <li>
 	<span>회원 등급</span><br>
-	<em> SILVER</em>
+	<em> GOLD</em>
 </li>
 <li>
 	<span>스토어 포인트</span><br>
