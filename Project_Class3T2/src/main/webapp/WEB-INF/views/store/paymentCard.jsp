@@ -43,7 +43,7 @@
 					success:function(result){
 						console.log("데이터 넘어감");
 						alert("결제가 완료 됐습니다.");
-						location.href="./";
+						location.href="OrderResult";
 					},
 					error:function(){
 						console.log("작업 실패");

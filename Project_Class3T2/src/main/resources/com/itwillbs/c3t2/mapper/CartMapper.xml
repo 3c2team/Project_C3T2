@@ -324,4 +324,11 @@
 		WHERE member_id = #{sId}
 	</update>
 	
+	<!-- 결제 내역 확인 -->
+	<select id="selectUserOrder">
+		SELECT product_name, product_count, product_price, order_date
+		FROM USER_ORDER
+		WHERE member_id = #{sId} AND merchant_uid = #{merchantUid}
+	</select>
+	
 </mapper>

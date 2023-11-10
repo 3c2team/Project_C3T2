@@ -236,6 +236,12 @@ public class CartService {
 		// TODO Auto-generated method stub
 		return mapper.updateMemberAddPoint(map);
 	}
+	
+	// 결제 내역 확인
+	public List<UserOrderVO> getUserOrder(String sId, String merchantUid) {
+		// TODO Auto-generated method stub
+		return mapper.selectUserOrder(sId, merchantUid);
+	}
 
 
 

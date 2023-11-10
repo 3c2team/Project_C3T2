@@ -119,6 +119,9 @@ public interface CartMapper {
 
 		// 적립 포인트 MEMBER 테이블에 저장
 		public int updateMemberAddPoint(Map<String, Object> map);
+		
+		// 결제 내역 확인
+		public List<UserOrderVO> selectUserOrder(@Param("sId") String sId,@Param("merchantUid") String merchantUid);
 
 
 }
