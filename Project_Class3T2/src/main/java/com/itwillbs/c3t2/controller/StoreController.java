@@ -260,14 +260,16 @@ public class StoreController {
 	// 관심상품 등록
 	@ResponseBody
 	@PostMapping("AddFavorite")
-	public void addFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
+	public String addFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
 		int insertCount = service.registFavorite(param);
+		return "on";
 	}
 	
 	// 관심상품 삭제
 	@ResponseBody
 	@PostMapping("RemoveFavorite")
-	public void removeFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
+	public String removeFavorite(@RequestParam Map<String, Object> param, HttpSession session) {
 		int deleteCount = service.deleteFavorite(param);
+		return "off";
 	}
 }
