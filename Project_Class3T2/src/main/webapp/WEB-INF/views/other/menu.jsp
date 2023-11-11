@@ -40,8 +40,8 @@ main {
 			<jsp:include page="../inc/top.jsp"></jsp:include>
 		</header>
 		<main style="margin-top: 5%; text-align: center;">
-				<img src="./resources/menu_img/lunch.jpg" style="max-width: 45%; height: auto; ">
-				<img src="./resources/menu_img/dinner.jpg" style="max-width: 45%; height: auto; ">
+				<img src="./resources/menu_img/lunch.jpg" style="max-width: 45%; height: auto;">
+				<img src="./resources/menu_img/dinner.jpg" style="max-width: 45%; height: auto;">
 <!-- 			<div class='left-box'> -->
 <!-- 				<p style="font-weight: bold; font-size: 1.5em">런치</p> -->
 <!-- 				<p style="margin-top: -3%; font-size: 1em">Lunch</p> -->
