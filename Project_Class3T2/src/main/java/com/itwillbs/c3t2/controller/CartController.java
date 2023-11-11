@@ -438,9 +438,11 @@ public class CartController {
 			int resultPrice = (payAllPrice.getAllPrice() + 3000) - resultPoint;
 			System.out.println("최종 결제 금액 : " + resultPrice);
 			model.addAttribute("resultPrice",resultPrice);
-			session.setAttribute("resultPrice",resultPrice);
 			
-			session.setAttribute("usePoint", map.get("usePoint"));
+			String resultPaymentprice = Integer.toString(resultPrice);
+			session.setAttribute("resultPrice",resultPaymentprice);
+			
+			session.setAttribute("usePoint", usePoint);
 		}
 		
 		// 포인트 미 사용 시 배송지에 정보 저장
@@ -458,10 +460,13 @@ public class CartController {
 			int resultPrice = (payAllPrice.getAllPrice() + 3000);
 			System.out.println("최종 결제 금액 : " + resultPrice);
 			model.addAttribute("resultPrice",resultPrice);
-			session.setAttribute("resultPrice",resultPrice);
+			
+			String resultPaymentprice = Integer.toString(resultPrice);
+			session.setAttribute("resultPrice",resultPaymentprice);
 			
 			int resultPoint = 0;
-			session.setAttribute("usePoint", resultPoint);
+			String resultUsePoint = Integer.toString(resultPoint);
+			session.setAttribute("usePoint", resultUsePoint);
 		}
 		
 		// 결제 상품 이름 조회
@@ -793,6 +798,23 @@ public class CartController {
 		String sId = (String)session.getAttribute("sId");
 		String merchantUid = (String)session.getAttribute("merchant_uid");
 		
+//		(Integer)session.getAttribute(name)).intValue();
+		
+//		Integer resultPrice = (Integer)session.getAttribute("resultPrice");
+//		Integer usePoint = (Integer)session.getAttribute("usePoint");
+		
+		String resultPrice = (String)session.getAttribute("resultPrice");
+		String usePoint = (String)session.getAttribute("usePoint");
+		
+		System.out.println("resultPrice String 값 : " +  resultPrice);
+		System.out.println("usePoint String 값 : " + usePoint);
+		
+//		int resultAllPrice = Integer.parseInt(resultPrice);
+//		int useAllPoint = Integer.parseInt(usePoint);
+//		
+//		System.out.println(resultAllPrice);
+//		System.out.println(useAllPoint);
+		
 		System.out.println(sId + ", uid 확인 : " + merchantUid);
 		
 		List<UserOrderVO> userOrderList = service.getUserOrder(sId, merchantUid);
@@ -800,6 +822,9 @@ public class CartController {
 		System.out.println("결제 내역 확인" + userOrderList);
 		
 		model.addAttribute("userOrderList", userOrderList); 
+		model.addAttribute("usePoint", usePoint); 
+		model.addAttribute("resultPrice", resultPrice); 
+
 		
 		return "store/pay_result";
 	}

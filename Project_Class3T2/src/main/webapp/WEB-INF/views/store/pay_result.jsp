@@ -51,12 +51,12 @@
 				</c:forEach>
 				<table class="custom_table">
 					<tr>
-						<th>사용 포인트(수정 중)</th>
-						<td>1000</td>
+						<th>사용 포인트</th>
+						<td>${usePoint }</td>
 					</tr>
 					<tr>
-						<th>총 결제 금액(수정 중)</th>
-						<td>100000</td>
+						<th>총 결제 금액</th>
+						<td>${resultPrice }</td>
 					</tr>
 				</table>
 				<div align="center">
