@@ -141,11 +141,12 @@
 		    GROUP_CONCAT(o.product_name) AS product_names,
 		    GROUP_CONCAT(o.product_count) AS product_counts,
 		    <!-- 모든 주문에 대한 총 가격을 계산 (각 제품 가격에 수량을 곱한 후 합) -->
-		    SUM(o.product_price * o.product_count) AS total_price
+ 		    SUM(o.product_price * o.product_count) AS total_price
 		FROM
 		    USER_ORDER o
 		INNER JOIN
 		    RECEIVER_INFO r ON o.merchant_uid = r.merchant_uid
+		
 		WHERE
 		    o.member_id = #{member_id}
 		    		        

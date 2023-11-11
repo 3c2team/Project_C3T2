@@ -85,7 +85,7 @@
 						        <td>${orderTotals.receiver_address}</td>
 						        <td class="receiver-request">${orderTotals.receiver_request}</td>
 						        <td class="text-right">
-						          <fmt:formatNumber value="${orderTotals.total_price}" />						        
+						          <fmt:formatNumber value="${orderTotals.total_price + 3000}" />						        
 						        </td> <!-- 여기서는 총 가격을 표시 -->
 						        <td><fmt:formatDate value="${orderTotals.order_date}" pattern="yyyy-MM-dd" /></td>
 						        <td class="product-names">${orderTotals.product_names}</td>
