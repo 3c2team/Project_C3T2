@@ -74,12 +74,12 @@ tr td{text-align: left;}
 			<table>
 				<tr>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="1"><span>아이디 변경을 위해 탈퇴 후 재가입</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result1"><span>아이디 변경을 위해 탈퇴 후 재가입</span>
 						</label>
 					</td>
 					<td width="40px"></td>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="2"><span>상품 가격 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result2"><span>상품 가격 불만</span>
 						</label>
 					</td>
 				</tr>
@@ -90,24 +90,24 @@ tr td{text-align: left;}
 <!-- 						</label> -->
 <!-- 					</td> -->
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="3"><span>교환/환불/반품 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal"  value="result3"><span>교환/환불/반품 불만</span>
 						</label>
 					</td>
 					<td></td>
 					<td>
 						<label class="radio"> 
-							<input type="radio" name="membershipWithdrawal" value="4"><span>개인정보 누출 우려</span>
+							<input type="radio" name="membershipWithdrawal" value="result4"><span>개인정보 누출 우려</span>
 						</label>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="5"><span>상품의 다양성/품질 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result5"><span>상품의 다양성/품질 불만</span>
 						</label>
 					</td>
 					<td></td>
 					<td>
-						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="4"><span>배송 불만</span>
+						<label class="radio"> <input type="radio" name="membershipWithdrawal" value="result6"><span>배송 불만</span>
 						</label>
 					</td>
 <!-- 					<td> -->
@@ -140,19 +140,22 @@ tr td{text-align: left;}
 	<%@ include file="./include/body_bottom.jsp"%>
 	
 <script>
+// 회원 탈퇴 절차를 처리
 function goBackTwoSteps(){	
-
+	// 선택된 회원 탈퇴 사유의 값을 가져옴
 	let membershipWithdrawal =$("input[name='membershipWithdrawal']:checked").val();
+	// 만약 회원 탈퇴 사유가 선택되지 않았다면 경고창을 띄우고 함수를 종료
 	if(!membershipWithdrawal){
 		alert("회원탈퇴 사유을 선택해 주세요.");
 		return;
 	}
 	
-	
+	// 회원 탈퇴에 동의 체크박스가 선택되지 않았다면 경고창을 띄우고 함수를 종료
 	if(!$(".myAgree").is(":checked")){
 		alert("회원 탈퇴에 동의를 선택해 주세요.");
 		return;
 	}
+	// 선택된 회원 탈퇴 사유의 텍스트를 가져옴.
 	let membershipWithdrawalText =$("input[name='membershipWithdrawal']:checked").parent(".radio").text();
 	console.log(" membershipWithdrawal : ",membershipWithdrawal , membershipWithdrawalText);
 	

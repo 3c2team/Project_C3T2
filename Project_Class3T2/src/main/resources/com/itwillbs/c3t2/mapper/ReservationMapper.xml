@@ -8,58 +8,70 @@
 	
 	<!-- 예약 등록 -->
 	<insert id="insertReservation">
-		INSERT INTO RESERVATION
+		 INSERT INTO RESERVATION
 			VALUES (
-				null <!-- reservation_num -->
-				, #{reservation_date}
-				, #{reservation_time}
-				, #{reservation_person_name}
-				, #{reservation_person_count}
-				, #{reservation_email}
-				, 0 <!-- cancel -->
-				, #{reservation_member_id} <!-- #{reservation_member_id} -->
-				, #{reservation_guest_num} <!-- guest_num -->
-				, #{dinning_num} <!-- 컨트롤러에서 지정 -->
-				, 1 <!-- restaurant_num -->
-		)
+						null <!-- reservation_num -->
+						, #{reservation_date}
+						, #{reservation_time}
+						, #{reservation_person_name}
+						, #{reservation_person_count}
+						, #{reservation_email}
+						, 0 <!-- cancel -->
+						, #{reservation_member_id} <!-- #{reservation_member_id} -->
+						, #{reservation_guest_num} <!-- guest_num -->
+						, (SELECT IFNULL(MAX(R.DINNING_NUM) + 1 , MIN(D.DINNING_NUM))
+							 FROM (SELECT *
+						       		 FROM DINNING D
+									WHERE D.dinning_max = #{cal_count}) D
+						     LEFT JOIN (SELECT *
+										  FROM RESERVATION
+										 WHERE reservation_date = #{reservation_date}
+										   AND reservation_time = #{reservation_time}) R
+							  ON D.dinning_num = R.dinning_num)
+						, 1 <!-- restaurant_num -->
+					)
 	</insert>
 	
 	<!-- 예약번호 불러오기 -->
 	<select id="selectNameEmail" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT reservation_guest_num 
-		FROM RESERVATION 
-		WHERE reservation_person_name = #{reservation_person_name} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
+		  FROM RESERVATION 
+		 WHERE reservation_person_name = #{reservation_person_name} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
 	</select>
 	
 	<!-- 예약내역 불러오기 / 예약번호, 예약이메일 -->
 	<select id="selectNumEmail" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT * 
-		FROM RESERVATION 
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
+		  FROM RESERVATION 
+		 WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_email = #{reservation_email} AND reservation_cancel = 0
 	</select>
 	
 	<!-- 예약 수정 -->
 	<update id="updateReservation">
 		UPDATE RESERVATION 
-		SET reservation_date = #{reservation_date}
-			, reservation_time = #{reservation_time}
-			, reservation_person_count = #{reservation_person_count}
-			, reservation_email = #{reservation_email}
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+		   SET reservation_date = #{reservation_date}
+			   , reservation_time = #{reservation_time}
+			   , reservation_person_count = #{reservation_person_count}
+			   , reservation_email = #{reservation_email}
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
 	<!-- 예약 삭제 -->
 	<update id="deleteReservation">
 		UPDATE RESERVATION 
-		SET reservation_cancel = 1
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name}
+		   SET reservation_cancel = 1
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name}
 	</update>
 	
 	<!-- 예약내역 불러오기 / 예약번호, 이름 -->
 	<select id="selectNumName" resultType="com.itwillbs.c3t2.vo.ReservationVO">
 		SELECT *
-		FROM RESERVATION
-		WHERE reservation_guest_num = #{reservation_guest_num} AND reservation_person_name = #{reservation_person_name} AND reservation_cancel = 0
+		  FROM RESERVATION
+		 WHERE reservation_guest_num = #{reservation_guest_num} 
+		   AND reservation_person_name = #{reservation_person_name} 
+		   AND reservation_cancel = 0
 	</select>
 
 	<!-- 예약 가능 시간 조회 -->

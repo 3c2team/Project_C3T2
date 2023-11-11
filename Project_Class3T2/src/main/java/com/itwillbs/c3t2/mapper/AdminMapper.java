@@ -104,4 +104,10 @@ public interface AdminMapper {
 
 	List<Map<String, Integer>> selectMonthDate(int year);
 
+	List<Map<String, Integer>> selectHourDate(int day);
+
+	List<Map<String, Integer>> selectProductSales();
+
+	int updateReservation(int checkbox);
+
 }

@@ -32,15 +32,6 @@ public class MyPageService {
 		return mapper.selectReviewDetail(member_num);
 		
 	}
-	// 상품 구매 내역
-	public List<UserOrderVO> getOrderList(String member_num) {
-		return mapper.getOrderList(member_num);
-	}
-
-//	// 찜 목록
-//	public List<FavoriteVO> getFavorite(String member_id) {
-//		return mapper.getFavorite(member_id);
-//	}
 	// 찜 목록 삭제
 	public boolean deleteFavorite(Integer favoriteNum) {
         int result = mapper.deleteFavorite(favoriteNum);
@@ -48,9 +39,14 @@ public class MyPageService {
     }
 	
 	// 예약 내역
-	public List<ReservationVO> getReservationDetail(String member_id) {
-		return mapper.getReservation(member_id);
+	public List<ReservationVO> getReservationDetail(Map<String, Object> parMap) {
+		return mapper.getReservation(parMap);
 	}
+	
+	public int getReservationDetailTotalCount(Map<String, Object> parMap) {
+		return mapper.getReservationDetailTotalCount(parMap);
+	}
+	
 
 	//비밀번호 업데이트
 	public Integer updatePassword(Map<String, Object> param) {
@@ -118,13 +114,7 @@ public class MyPageService {
 		return mapper.getReviewByNum(reviewNum);
 	}
 	
-	public List<PointVO> getPoints(String startDate, String endDate, String memberId, int startRow, int listLimit) {
-		return mapper.selectPoints(startDate, endDate, memberId, startRow, listLimit);
-	}
 
-	public int getPointsCount(String startDate, String endDate, String memberId) {
-		return mapper.selectPointsCount(startDate, endDate, memberId);
-	}
 	// 리뷰 전체 갯수
 	public int getReviewTotalCount(Map<String, Object> paraMap) {
 		return mapper.getReviewTotalCount(paraMap);
@@ -133,4 +123,30 @@ public class MyPageService {
 	public List<ReviewVO> getReviewList(Map<String, Object> parMap) {
 		return mapper.getReviewList(parMap);
 	}
+	// 구매 전체 개수
+	public int getBuyTotalCount(Map<String, Object> paraMap) {
+		return mapper.getBuyTotalCount(paraMap);
+	}
+	
+	public int getPointsCount(Map<String, Object> parMap) {
+		return mapper.selectPointTotalCount(parMap);
+	}
+	
+	public List<PointVO> getPointList(Map<String, Object> parMap) {
+		return mapper.selectPointList(parMap);
+	}
+	// 구매 목록
+	public List<UserOrderVO> getOrderList(Map<String, Object> parMap) {
+		return mapper.getOrderList(parMap);
+	}
+	// 총 가격과 상품
+	public List<UserOrderVO> getTotalPriceAndProductNames(Map<String, Object> parMap) {
+		return mapper.getOrderListWithTotalPrices(parMap);
+	}
+
+	public int getTotalPriceAndProductNamesTotCount(Map<String, Object> parMap) {
+		return mapper.getTotalPriceAndProductNamesTotCount(parMap);
+	}
+
+
 }

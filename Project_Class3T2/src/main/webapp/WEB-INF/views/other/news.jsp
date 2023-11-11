@@ -14,7 +14,9 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/news.js"></script>
 <style>
-
+img {
+	 -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 2% 98%, transparent 100%);
+}
 </style>
 </head>
 <body>
@@ -44,7 +46,7 @@
                         </div>
                         
                         <div class="slide">      
-                            <img src="${pageContext.request.contextPath }/resources/main_img/steak1.jpg" alt="">
+                            <img src="${pageContext.request.contextPath }/resources/main_img/platter3.jpg" alt="">
                         </div>
           
                         <div class="navigationAuto">
@@ -123,9 +125,9 @@
 	<footer id="footer">
 		<jsp:include page="../inc/bottom.jsp"></jsp:include>
 		<a id="topBtn" style="display:scroll; position:fixed; bottom:50px; right:15px;" href="#" title="맨 위로">
-		<img src="./img/arrow_top.png" style="width: 20px; height: 20px"></a>
+		<img src="${pageContext.request.contextPath }/resources/main_img/arrow_top.png" style="width: 20px; height: 20px"></a>
 		<a style="display:scroll; position:fixed; bottom:20px; right:15px;" href="#footer" title="맨 아래로">
-		<img src="./img/arrow_bottom.png" style="width: 20px; height: 20px"></a>
+		<img src="${pageContext.request.contextPath }/resources/main_img/arrow_bottom.png" style="width: 20px; height: 20px"></a>
 	</footer>
 </body>
 </html>

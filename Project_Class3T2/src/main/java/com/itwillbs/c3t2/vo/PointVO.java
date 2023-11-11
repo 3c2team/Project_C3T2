@@ -24,6 +24,6 @@ public class PointVO {
 	private int point_amount;
 	private String point_ex;
 	private Timestamp point_date;
-	private int member_num;
+	private String member_id;
 	private int order_detail_num;
 }

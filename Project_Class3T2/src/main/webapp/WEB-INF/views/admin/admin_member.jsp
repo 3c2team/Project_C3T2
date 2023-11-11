@@ -7,7 +7,7 @@
 
 <meta charset="utf-8" />
 
-<title>공지 관리</title>
+<title>회원 관리</title>
 <style type="text/css">
 .body_gray {
 	background-color: #f8f8f8;
@@ -69,8 +69,8 @@
 											<th>${memberList.member_num }</th>
 											<th>${memberList.member_name }</th>
 											<th>${memberList.member_address }</th>
-											<th>${memberList.member_address }</th>
 											<th>${memberList.member_phone_num }</th>
+											<th>${memberList.member_point }</th>
 											<th>${memberList.member_insert_date }</th>
 										</tr>
 									</c:forEach>

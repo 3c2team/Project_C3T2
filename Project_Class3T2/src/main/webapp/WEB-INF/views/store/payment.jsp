@@ -12,12 +12,10 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script type="text/javascript">
 //카카오페이 연동
-	
 
-
-	function requestPay() {
+	window.onload = function requestPay() {
 	
-		IMP.init('imp68757643'); // 객체 초기화. 가맹점 식별코드 전달
+		IMP.init('imp32558036'); // 객체 초기화. 가맹점 식별코드 전달
 	
 		IMP.request_pay({
 	    	pg: "kakaopay.TC0ONETIME",
@@ -45,13 +43,18 @@
 						},
 					success:function(result){
 						console.log("데이터 넘어감");
+						alert("결제가 완료 됐습니다.");
+						location.href="OrderResult";
 					},
 					error:function(){
-						console.log("작업 실패")
+						console.log("작업 실패");
+						alert("오류가 발생 했습니다.");
+						location.href = "${pageContext.request.contextPath}/PayPro";
 					}
 				});
 	     	}else{
 	     		alert("결제에 실패하였습니다.");
+	     		location.href = "${pageContext.request.contextPath}/PayPro";
 	     	}
 	    });
 	}
@@ -76,12 +79,12 @@ function getDateTimeString() {
 </script>
 </head>
 <body>
-	<h1>payment</h1>
+<!-- 	<h1>payment</h1> -->
 	
-	<h1>${productPayList}</h1>
-	<h1>${sessionScope.paymentProduct}</h1>
+<%-- 	<h1>${productPayList}</h1> --%>
+<%-- 	<h1>${sessionScope.paymentProduct}</h1> --%>
 	
-	<input type="button" value="결제하기" onclick="requestPay()">
+<!-- 	<input type="button" value="결제하기" onclick="requestPay()"> -->
 	
 </body>
 </html>

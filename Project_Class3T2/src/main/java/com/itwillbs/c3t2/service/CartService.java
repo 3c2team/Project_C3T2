@@ -14,6 +14,7 @@ import com.itwillbs.c3t2.vo.MemberVO;
 import com.itwillbs.c3t2.vo.OrderDetailVO;
 import com.itwillbs.c3t2.vo.PayAllPriceVO;
 import com.itwillbs.c3t2.vo.ProductVO;
+import com.itwillbs.c3t2.vo.UserOrderVO;
 
 @Service
 public class CartService {
@@ -186,6 +187,60 @@ public class CartService {
 	public int insertProduct(String sId, int proNumber, int proCount, int proPrice) {
 		// TODO Auto-generated method stub
 		return mapper.insertOrderDetailDirect(sId, proNumber, proCount, proPrice);
+	}
+
+	// CART에서 상품 수량 변경
+	public int updateProductCount(String sId, int productCount, int productNumber) {
+		// TODO Auto-generated method stub
+		return mapper.updateProductCount(sId, productCount, productNumber);
+	}
+
+	// 상품 수량 변경 시 금액 계산 조회
+	public CartVO selectCartPrice(String sId, int productNumber) {
+		// TODO Auto-generated method stub
+		return mapper.selectCartPrice(sId, productNumber);
+	}
+
+	// MEMBER 테이블에서 포인트 차감
+	public int updateMemberPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateMemberPoint(map);
+	}
+
+	// 주문 상품 CART에서 삭제 
+	public int deletePaymentCart(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.deletePaymentCart(map);
+	}
+
+	// 사용한 포인트 POINT 테이블에 저장
+	public int insertUsePoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertUsePoint(map);
+	}
+
+	// 최종 결제 금액 조회
+	public UserOrderVO getUserOrderPrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.selectUserOrderPrice(map);
+	}
+
+	// 적립 포인트 POINT 테이블에 저장
+	public int updateAddPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.insertAddPoint(map);
+	}
+
+	// 적립 포인트 MEMBER 테이블에 저장
+	public int updateMemberAddPoint(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.updateMemberAddPoint(map);
+	}
+	
+	// 결제 내역 확인
+	public List<UserOrderVO> getUserOrder(String sId, String merchantUid) {
+		// TODO Auto-generated method stub
+		return mapper.selectUserOrder(sId, merchantUid);
 	}
 
 

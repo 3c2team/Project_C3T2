@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath }/css/bottom.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script>
 $(document).ready(function(){
    $.ajax({
@@ -34,7 +33,7 @@ $(document).ready(function(){
 				<a href="https://cafe.naver.com/learntimes">
 					<img src="${pageContext.request.contextPath }/resources/main_img/twitter.png" title="트위터 아이콘" width="40" height="40" align="right">
 				</a>
-			<a id="logo"></a>
+			<a id="logo" class="logo"></a>
 			</div>
 		</div>
 		<div id="company">

@@ -22,16 +22,6 @@
 
 	</select>
 	
-	<!-- CART상품 조회 -->
-<!-- 	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO"> -->
-
-<!-- 		SELECT P.* -->
-<!-- 		FROM PRODUCT P  -->
-<!-- 		JOIN CART C -->
-<!-- 		ON P.product_num = C.product_num -->
-
-<!-- 	</select> -->
-	
 	<!-- 카트페이지에서 회원아이디 Cart 테이블에 저장 -->
 	<insert id="insertCart">
 
@@ -86,20 +76,6 @@
 		WHERE member_id = #{sId}
 	</delete>
 	
-		<!-- 삭제 후 남은 상품 보기 -->
-<!-- 	<select id="selectMainCartList" resultType="com.itwillbs.c3t2.vo.ProductVO"> -->
-
-<!-- 		SELECT  -->
-<!-- 			P.product_num -->
-<!-- 			, P.product_main_img_real_file -->
-<!-- 			, P.product_name -->
-<!-- 			, P.product_price -->
-<!-- 			, C.product_count -->
-<!-- 		FROM  -->
-<!-- 			PRODUCT P JOIN CART C -->
-<!-- 			ON P.product_num = C.product_num -->
-<!-- 	</select> -->
-
 	<!-- 선택 상품 주문 목록 조회 -->
 	<select id="selectPayProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
 			SELECT 
@@ -123,6 +99,7 @@
 		WHERE member_id = #{sId}
 	</select> 
 	
+	<!-- 관심 상품 등록 -->
 	<insert id="insertFavoriteProduct">
 		INSERT INTO 
 			FAVORITE (favorite_num, member_id, product_num)
@@ -131,7 +108,6 @@
 			, #{sId}
 			, #{favoriteProNum}
 			)
-	
 	</insert>
 	
 	<select id="selectFavoriteProduct" resultType="com.itwillbs.c3t2.vo.FavoriteVO">
@@ -238,12 +214,16 @@
 		)		
 	
 	</insert>
+	
+	<!-- 결제 상품명 조회 -->
 	<select id="selectProductNames" resultType="com.itwillbs.c3t2.vo.ProductVO">
 		SELECT GROUP_CONCAT(P.product_name SEPARATOR ' | ') AS product_name
 		FROM PRODUCT P LEFT JOIN ORDER_DETAIL O
 		ON P.product_num = O.product_num
 		WHERE O.member_id = #{sId}
 	</select>
+	
+	<!-- 결제 후 상품 UserOrder 저장 -->
 	<insert id="insertUserOrder">
 		INSERT INTO
 			USER_ORDER(order_num, member_id, product_num, product_name, product_count, product_price, merchant_uid, order_date)
@@ -259,6 +239,7 @@
 			)
 	</insert>
 	
+	<!-- 상품 상세 페이지에서 ORDER_DETAIL로 저장 -->
 	<insert id="insertOrderDetailDirect">
 		INSERT INTO 
 			ORDER_DETAIL(order_detail_num, member_id, product_num, product_count, product_price, cart_num)
@@ -272,11 +253,82 @@
 			)
 	</insert>
 
-<!-- INSERT INTO -->
-<!-- 			ORDER_DETAIL(member_id, product_num, product_count, product_price, cart_num) -->
-<!-- 			SELECT member_id, product_num, product_count, product_price, cart_num -->
-<!-- 			FROM CART -->
-<!-- 			WHERE member_id = #{sId} AND product_num = #{proNum} -->
-
-
+	<!-- CART에서 상품 수량 변경 -->
+	<update id="updateProductCount">
+		UPDATE CART 
+		SET product_count = #{productCount}
+		WHERE member_id = #{sId} AND product_num = #{productNumber}
+	</update>
+	
+	<!-- 상품 수량 변경 시 금액 계산 -->
+	<select id="selectCartPrice" resultType="com.itwillbs.c3t2.vo.CartVO">
+		SELECT product_count * product_price as product_price
+		FROM CART
+		WHERE member_id=#{sId} AND product_num = #{productNumber}
+	</select>
+	
+	<!-- MEMBER 테이블에서 포인트 차감 -->
+	<update id="updateMemberPoint">
+		UPDATE MEMBER
+		SET member_point = member_point - #{usePoint}
+		WHERE member_id = #{sId}
+	</update>
+	
+	<!-- 주문 상품 CART에서 삭제 -->
+	<delete id="deletePaymentCart">
+		DELETE 
+		FROM CART
+		WHERE member_id = #{sId} AND product_num = #{productNum}
+	</delete>
+	
+	<!-- 사용한 포인트 POINT 테이블에 반영 -->
+	<insert id="insertUsePoint">
+		INSERT INTO
+			POINT(point_num, point_use, point_amount, point_ex, point_date, member_id)
+			VALUES(
+				null
+				, 0
+				, #{usePoint}
+				, '상품 주문 사용'
+				, now()
+				, #{sId}
+			)
+	</insert>
+	
+	<!-- 최종 결제 금액 조회 -->
+	<select id="selectUserOrderPrice">
+		SELECT SUM(product_price * product_count) as product_price
+		FROM USER_ORDER
+		WHERE merchant_uid = #{merchant_uid}
+		GROUP BY merchant_uid 
+	</select>
+	
+	<!-- 적립된 포인트 POINT 테이블에 반영 -->
+	<insert id="insertAddPoint">
+		INSERT INTO
+			POINT(point_num, point_use, point_amount, point_ex, point_date, member_id)
+			VALUES(
+				null
+				, 1
+				, #{addPoint}
+				, '상품 주문 적립'
+				, now()
+				, #{sId}
+			)
+	</insert>
+	
+	<!-- 적립 포인트 MEMBER 테이블에 저장 -->
+	<update id="updateMemberAddPoint">
+		UPDATE MEMBER
+		SET member_point = member_point + #{addPoint}
+		WHERE member_id = #{sId}
+	</update>
+	
+	<!-- 결제 내역 확인 -->
+	<select id="selectUserOrder">
+		SELECT product_name, product_count, product_price, order_date
+		FROM USER_ORDER
+		WHERE member_id = #{sId} AND merchant_uid = #{merchantUid}
+	</select>
+	
 </mapper>

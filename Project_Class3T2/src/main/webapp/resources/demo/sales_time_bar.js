@@ -4,15 +4,31 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
-var myLineChart = new Chart(ctx, {
+$.ajax({
+		type: "POST",
+		url: "AdminSelectHourDate",
+		async: false,
+		data: {
+			day : 0
+		},
+		success: function(AdminSelectMonthDate) {
+			hours = AdminSelectMonthDate.map(row => row.rnum);
+			sales = AdminSelectMonthDate.map(row => row.sales);
+			max = sales.reduce((max, curr) => max < curr ? curr : max );
+		},
+		error:function(){
+			alert("실패");
+		}
+	});
+var myBarChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["11시","12시", "13시", "14시","15시","16시","17시","18시","19시","20시"],
+    labels: hours,
     datasets: [{
       label: "Revenue",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
-      data:[33500, 151500, 156000,154000,23500, 25500, 116000,154000,123000,235000],
+      data:sales,
     }],
   },
   options: {
@@ -31,7 +47,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 300000,
+          max: max,
           maxTicksLimit: 10
         },
         gridLines: {

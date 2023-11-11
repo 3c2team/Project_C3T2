@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Tables - SB Admin</title>
+<title>상품 리스트</title>
 <style type="text/css">
 .btn-right{
 	float: right;

@@ -93,6 +93,8 @@
 						<div class="card mb-4">
 							<div class="card-header">
 								<i class="fas fa-chart-area me-1"></i> 시간별 매출
+								<input type="number" maxlength="4" id="day" placeholder="일자입력" style="float: right;" class="form-control-sm">
+								<input type="button" value="조회" id="sales_btn" style="float: right; height: 32px; margin-right: 10px;" class="btn btn-primary">
 							</div>
 							<div class="card-body">
 								<canvas id="myAreaChart" width="100%" height="40"></canvas>

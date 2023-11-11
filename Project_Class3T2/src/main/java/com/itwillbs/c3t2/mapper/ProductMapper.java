@@ -17,27 +17,28 @@ import com.itwillbs.c3t2.vo.ReviewVO;
 
 @Mapper
 public interface ProductMapper {
+	// Best 조회
 	public List<ProductVO> selectProductBestList();
-	
+	// Hot 조회
 	List<ProductVO> selectProductHotList();
-
+	// New 조회
 	public List<ProductVO> selectProductNewList();
-	
-//	public List<ProductVO> selectCategoryList(String category); // 오류 수정중
-	
-	public ProductVO selectProductDetail(int proNum);
-
-	public List<ProductImgVO> selectProductImg(int proNum);
-
-	public int insertReview(Map<String, Object> map);
-
-	public List<ReviewVO> selectReviewList(int proNum);
-
-	public List<QnAVO> selectQnAList(int proNum);
-
-	public int insertQuestion(QnAVO question);
-
-	public int insertFavorite(FavoriteVO favorite);
-
+	// Category 조회
 	public List<ProductVO> selectProductCategoryList(int category_num);
+	// 상품상세 조회
+	public Map<String, Object> selectProductDetail(Map<String, Object> param);
+	// 상품상세 이미지 조회
+	public List<ProductImgVO> selectProductImg(int proNum);
+	// 리뷰 리스트 조회
+	public List<ReviewVO> selectReviewList(int proNum);
+	// 리뷰 등록
+	public int insertReview(Map<String, Object> map);
+	// 문의하기 리스트 조회
+	public List<QnAVO> selectQnAList(int proNum);
+	// 문의하기 등록
+	public int insertQuestion(QnAVO question);
+	// 관심상품 등록
+	public int insertFavorite(Map<String, Object> param);
+	// 관심상품 삭제
+	public int deleteFavorite(Map<String, Object> param);
 }

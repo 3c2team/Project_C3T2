@@ -141,6 +141,18 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.selectMonthDate(year);
 	}
+	public List<Map<String, Integer>> selectHourDate(int day) {
+		// TODO Auto-generated method stub
+		return mapper.selectHourDate(day);
+	}
+	public List<Map<String, Integer>> selectProductSales() {
+		// TODO Auto-generated method stub
+		return mapper.selectProductSales();
+	}
+	public int updateReservation(int checkbox) {
+		// TODO Auto-generated method stub
+		return mapper.updateReservation(checkbox);
+	}
 	
 
 }

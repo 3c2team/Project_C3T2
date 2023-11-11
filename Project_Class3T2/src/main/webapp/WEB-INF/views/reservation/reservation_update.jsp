@@ -4,8 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -21,12 +19,14 @@
 		</header>
 		<main>
 			<h1>예약 내역 변경</h1>
-			<form action="ReservationUpdatePro" method="post">
+			<form action="ReservationUpdatePro" method="post" id="custom_submit">
 				<div id="calendarForm"></div>
-				<table>
+				<table class="custom_reservation_form">
 					<tr>
 						<th>예약인원</th>
 						<td>
+							<input type="hidden" id="reservation_date" name="reservation_date">
+							<input type="hidden" id="cal_count" name="cal_count">
 							<div class="form_radio_btn">
 								<input id="radio1" type="radio" name="reservation_person_count" value="1" <c:if test="${reservation.reservation_person_count eq '1' }">checked</c:if>>
 								<label for="radio1">1</label>
@@ -64,7 +64,15 @@
 					<tr>
 						<th>예약시간</th>
 						<td>
-							<input type="hidden" id="reservation_date" name="reservation_date">
+<!-- 						<포문 $레스토랑 오픈~ 마감> -->
+<!-- 						<div class="form_radio_btn"> -->
+<%-- 							<c:if test="${레스토랑 시간 }"> --%>
+<!-- 								체크드 -->
+<%-- 								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>> --%>
+<!-- 								<label for="radio-0">10:00</label> -->
+<%-- 							</c:if> --%>
+<!-- 							</div> -->
+						
 							<div class="form_radio_btn">
 								<input id="radio-0" type="radio" name="reservation_time" value="10:00" <c:if test="${reservation.reservation_time eq '10:00' }">checked</c:if>>
 								<label for="radio-0">10:00</label>
@@ -114,22 +122,22 @@
 					<tr>
 						<th>예약자 성함</th>
 						<td>
-							<input type="text" class="input" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" readonly required>
+							<input type="text" class="input" name="reservation_person_name" id="reservation_person_name" value="${reservation.reservation_person_name }" required>
 						</td>
 					</tr>
 					<tr>
 						<th>예약번호</th>
 						<td>
-							<input type="text" class="input" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" readonly required />
+							<input type="text" class="input" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" required />
 						</td>
 					</tr>
 					<tr>
 						<th>예약내역 받으실 이메일</th>
 						<td>
 							<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
-							<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
+							value="${reservation.reservation_email1}">@
 							<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
-							<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
+							value="${reservation.reservation_email2}">
 							<select id="emailDomain" class="input">
 								<option value="">직접입력</option>
 								<option value="naver.com">naver.com</option>
@@ -152,10 +160,13 @@
 		</footer>
 	</div>
 	<script type="text/javascript">
+		let dinningMax = '${dinningMax}';
+		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
+		dinningMax = dinningMax.map(e => e.DINNING_MAX);
+		
 		function updateCheck() {
 			let result = confirm("예약 변경 하시겠습니까?");
 			if(result){
-// 				location.href='./';
 				$("form").submit();
 			}
 		}

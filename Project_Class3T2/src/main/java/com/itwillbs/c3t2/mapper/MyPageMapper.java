@@ -28,9 +28,6 @@ public interface MyPageMapper {
 	//리뷰 상세내역 조회
 	List<ReviewVO> selectReviewDetail(String member_num);
 	
-	//상품 구매내역
-	List<UserOrderVO> getOrderList(String member_num);
-	
 	// 찜 목록
 	List<FavoriteVO> getFavorite(String member_id);
 	
@@ -38,7 +35,7 @@ public interface MyPageMapper {
 	int deleteFavorite(Integer favoriteNum);
 	
 	// 예약 내역
-	List<ReservationVO> getReservation(String member_id);
+	List<ReservationVO> getReservation(Map<String, Object> parMap);
 
 	//비밀번호 업데이트
 	int updatePassword(Map<String, Object> param);
@@ -74,12 +71,27 @@ public interface MyPageMapper {
 	ReviewVO getReviewByNum(int reviewNum);
 	
 	// 포인트 목록
-	List<PointVO> selectPoints(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId, @Param("startRow") int startRow, @Param("listLimit") int listLimit);
+	int selectPointTotalCount(Map<String, Object> parMap);
 	
-	int selectPointsCount(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("memberId") String memberId);
-
+	List<PointVO> selectPointList(Map<String, Object> parMap);
+	
+	// 리뷰 개수
 	int getReviewTotalCount(Map<String, Object> paraMap);
-
+	
+	// 리뷰 목록
 	List<ReviewVO> getReviewList(Map<String, Object> parMap);
+	
+	// 구매 개수
+	int getBuyTotalCount(Map<String, Object> paraMap);
+	
+	// 구매 목록
+	List<UserOrderVO> getOrderList(Map<String, Object> parMap);
+	
+	// 총 가격과 상품
+	List<UserOrderVO> getOrderListWithTotalPrices(Map<String, Object> parMap);
+
+	int getTotalPriceAndProductNamesTotCount(Map<String, Object> parMap);
+
+	int getReservationDetailTotalCount(Map<String, Object> parMap);
 
 }

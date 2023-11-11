@@ -11,144 +11,9 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cart_checkbox.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cart_function.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript">
-
-$(function() {
-	
-    var product_num = [];
-    $("#check_all").click(function() {
-       
-       if($("#check_all").is(":checked")) { // 전체선택 체크박스 체크 시
-          // 체크박스 모두 체크
-          $(":checkbox").prop("checked", true);
-       } else { // 전체선택 체크박스 체크해제 시
-          // 체크박스 모두 체크해제
-          $(":checkbox").prop("checked", false);
-       }
-       
-       //체크값 얻기
-       var chk = $(this).is(":checked");
-       console.log(chk);
-       
-       if($("input[name=checkbox]:checked").is(":checked")){
-           $("input[name=checkbox]:checked").each(function() {
-              product_num.push($(this).val());
-           });
-        }else{
-        product_num = [];
-           
-        }
-       
-       //전체를 각 글앞의 체크에 일괄 전달
-          //prop()을 통해서는 element가 가지는 실제적인 상태(활성화, 체크, 선택여부)를 제어하는 업무에 적절하고 
-          //attr()는 속성값이나 정보를 조회하는 업무에 적절하다
-       $(".checkbox").prop("checked",chk);
-    });
-
-    $(".checkbox").on("click",function(){
-       if($(this).is(":checked")){
-          product_num.push($(this).val());
-          return;
-       }
-       for(let i = 0; i < product_num.length; i++){
-          if(product_num[i] == $(this).val()){
-             product_num.splice(i, 1);
-             i--;
-          }
-       }
-    });
-    
-    
-    // 선택 상품 삭제
-    $("#btnmemberdel").on("click",function(){
-//        alert(product_num);
-    	if(product_num == ""){
-    		alert("선택한 상품이 없습니다.");
-    	}else if(confirm("선택 상품을 삭제하시겠습니까?")){
-           location.href="DeleteCartProduct?proNums=" + product_num;
-       	}else{
-          alert("삭제를 취소 하셨습니다.");
-       	}
-    });
-    
-    // 선택 상품 결제 페이지 이동
-    $("#productClear").on("click", function() {
-    	
-    	if(product_num == ""){
-    		alert("선택한 상품이 없습니다.");
-    	}else if(confirm("결제창으로 이동 하시겠습니까?")){
-//              location.href="SelectDeleteCart?proNum=" + product_num;
-             location.href="PayPro?proNums=" + product_num;	
-         }
-//     	 else{
-//             alert("삭제를 취소 하셨습니다.");
-//          }
-	});
-        
-    // 장바구니 비우기
-    $("#productAllDelete").on("click", function() {
-	// alert("장바구니를 비우시겠습니까?")
-
-		if(confirm("장바구니를 비우시겠습니까?")){
-	           location.href="productAllDelete";
-	       }
-	});
-        
- });
- 
-//상품 개별 삭제
-function deleteCart(proNum) {
-	
-	let result = confirm("해당 상품을 삭제 하시겠습니까?");
-	
-	if(result){
-        location.href="DeleteCartProduct?proNum=" + proNum;
-//         location.href="CartPro?proNum=" + proNum;
-    }else{
-    	alert("삭제를 취소 하셨습니다.");
-    }
-}
-
-// 관심 상품 등록
-function favorite(favoriteProNum) {
-	
-// 	alert(favoriteProNum);
-    location.href="MainCart?favoriteProNum=" + favoriteProNum;
-//         location.href="CartPro?proNum=" + proNum;
-  
-//     alert("관심상품 등록이 완료 됐습니다.");
-    
-}
-
-
-// 개별 상품 결제 페이지 이동
-function orderPro(proNums){
-
-	let result = confirm("결제창으로 이동 하시겠습니까?");
-	
-	if(result){
-				
-		location.href="PayPro?proNums=" + proNums;
-	}
-	
-}
-
-// 전체 상품 결제 페이지 이동
-function AllPayProduct(sId) {
-	
-	let result = confirm("결제창으로 이동 하시겠습니까?")
-	
-	if(result){
-// 		location.href="AllPayPro?sId=" + sId;
-		location.href="PayPro?sId=" + sId;
-	}
-	
-}
-
-   
-
-</script>
 </head>
       
 <body >
@@ -157,17 +22,14 @@ function AllPayProduct(sId) {
    </header>
 
    <div class="cartBody" id="frame" >
-      
-      
          <div id="frame2">
             <span style="font-size: 18pt;, font-weight: bold; text-align: left;" >장바구니</span>
             <span class="home"> 홈 > 장바구니</span>
             <span></span>
          </div>
+         
          <br>
-                           
          <!-- 상품 정보 테이블 -->
-      
          <div >
             <table class="calculation1"  style="width: 100%; border-collapse : collapse;">
             
@@ -191,14 +53,16 @@ function AllPayProduct(sId) {
             </thead>
             
             <tbody> 
-               <c:forEach var="productList" items="${productList}">
-                  <tr style="height: 90px; background-color: #fff;">
+               <c:forEach var="productList" items="${productList}" varStatus="status"> 
+               <input type="hidden" id="productNumber" value="${productList.product_num}">                
+               
+               <tr style="height: 90px; background-color: #fff;">
                      <td style="text-align: left; text-align: center; border-right: none;">
                         <input type="checkbox" name="checkbox" class="checkbox" id="${productList.product_num}" value="${productList.product_num}" proNum="${productList.product_num}"/>
                      </td>
                      <td style="border-left: none; border-right: none">
                      	
-                     	<img style="width: 60%" src="${pageContext.request.contextPath }/resources${productList.product_main_img_real_file }">
+                     	<img style="width: 60%" src="${productList.product_main_img_real_file }">
                      	
                      </td>   
                      
@@ -207,16 +71,16 @@ function AllPayProduct(sId) {
 <%--                      <td><span style="padding-left: 10px;">${productList.product_price }</span>원</td> <!-- 상품가격 --> --%>
                      <td><span style="padding-left: 10px;"><fmt:formatNumber value="${productList.product_price }" pattern="#,###" /></span>원</td> <!-- 상품가격 -->
                      
-                     <td style="width:80px;">
-                        <input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" value="${productList.product_count }">
-                        <button class="btn default" style="border-radius: 3px; size: 10px; color: black;">변경</button> 
+                     <td style="width:80px;" >
+<%--                         <input type="number" class="cnt" style="text-align: right; width: 43px; margin-bottom: 5px;" min="1" max="30" step="1" name="count" id="count" value="${productList.product_count }"> --%>
+                        ${productList.product_count }
+<!--                         <button class="btn default" style="border-radius: 3px; size: 10px; color: black;" id="countChange">변경</button>  -->
                      </td>
-                     
 <!--                      <td>-</td> -->
                      <td>기본배송</td>
                      <td>고정</td>
 <%--                      <td><span>${productList.product_price  * productList.product_count }</span>원</td> --%>
-                     <td><span><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
+                     <td><span id="resultPrice"><fmt:formatNumber value="${productList.product_price  * productList.product_count }" pattern="#,###" /></span>원</td>
                      <td>
                         <button type="submit" class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: #fff; background: gray;" onclick="orderPro('${productList.product_num}')">주문하기</button><br>
                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="favorite('${productList.product_num}')">관심상품</button><br>
@@ -224,13 +88,10 @@ function AllPayProduct(sId) {
 						<button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="deleteCart('${productList.product_num}')">삭제</button><br>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="location.href='DeleteCartProduct?proNum=${productList.product_num}'">삭제</button><br> --%>
 <%--                         <button class="btn default" style="border-radius: 3px; width:90px; margin-bottom: 3px; font-size: 11px; color: black;" onclick="confirmDelete(${productList.product_num})">삭제</button><br> --%>
-
                      </td>
                   </tr>
                </c:forEach>
-               
             </tbody>
-            
             <tfoot> <!-- 상품 총 금액 -->
                <tr style="height: 60px;">
                   <td colspan="5" style="border-right: none; text-align: left; padding-left: 10ox;">

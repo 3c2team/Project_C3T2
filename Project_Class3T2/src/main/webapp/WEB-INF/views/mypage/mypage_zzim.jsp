@@ -72,7 +72,7 @@
                         <!-- 찜 목록 동적 표시 -->
                         <c:forEach var="favorite" items="${favorites}">
                             <div class="item">
-                                <img src="${pageContext.request.contextPath }/resources/${favorite.product_main_img_real_file}" width="200" height="200">
+                                <img src="${favorite.product_main_img_real_file}" width="200" height="200">
                                 <p class="itemDesc bold">${favorite.product_name}</p>
                                 <button onclick="location.href='${pageContext.request.contextPath}/ProductDetail?proNum=${favorite.product_num}'">상품페이지로 이동</button>
                                 <form action="${pageContext.request.contextPath}/deleteFavorite" method="post">
