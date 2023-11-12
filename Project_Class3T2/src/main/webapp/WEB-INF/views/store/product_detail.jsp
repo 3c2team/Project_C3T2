@@ -126,7 +126,7 @@
 				<%-- 오른쪽 --%>
 				<div class="detailTopRigth">
 					<div class="detailTopLikeShare">
-						<span id="favorite-btn" class="favorite_"></span>
+						<span id="favorite-btn" class="favorite_${productDetail.member_fav }"></span>
 					</div>
 					<div class="productNum">
 						<p>온라인상품코드 ${productDetail.product_num }</p>
@@ -315,7 +315,7 @@
 										</c:choose>
 									</div>
 									<c:choose>
-										<c:when test="${QnA.secret eq 0}">
+										<c:when test="${QnA.secret eq 0 or QnA.member_id eq sessionScope.sId}">
 											<div class="questionInfo" id="question_${QnA.question_num}">
 												${QnA.question_content }
 											</div>

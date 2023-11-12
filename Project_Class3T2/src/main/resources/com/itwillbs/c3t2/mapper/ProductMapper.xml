@@ -48,7 +48,7 @@
 			 				FROM FAVORITE
 							WHERE 1=1
 			 				AND member_id = #{sId}
-			 				AND product_num = #{proNum}) > 0 THEN 1 ELSE 0 END AS 'member_fav'
+			 				AND product_num = #{proNum}) > 0 THEN 'on' ELSE 'off' END AS 'member_fav'
 			FROM PRODUCT
 			WHERE product_num  = #{proNum};	
 		]]>
