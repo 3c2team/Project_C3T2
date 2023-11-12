@@ -4,13 +4,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Jai Faim</title>
 </head>
 <body>
 	<div id="mainLayout">
@@ -18,7 +20,7 @@
 		<jsp:include page="../inc/top.jsp"></jsp:include>
 	</header>
 	<main>
-		<h1>예약 하기</h1>
+		<h1>Reservation</h1>
 		<form action="ReservationPro" method="post" id="custom_submit">
 			<div id="calendarForm"></div>
 			<table class="custom_reservation_form">
@@ -120,13 +122,13 @@
 					</td> <!-- value= --> 
 				</tr>
 				<tr>
-					<th>예약내역 받으실 이메일</th>
+					<th>이메일</th>
 					<td>
 						<input type="text" class="input1" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
 						<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[0]}"</c:if>>@
 						<input type="text" class="input1" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
 						<c:if test="${not empty sessionScope.sEmail}">value="${sessionScope.sEmail.split('@')[1]}"</c:if>>
-						<select id="emailDomain" class="input1"> <!--   -->
+						<select id="emailDomain"> <!--   -->
 							<option value="">직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="nate.com">nate.com</option>

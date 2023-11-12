@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
+<link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/reservation.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Jai Faim</title>
 </head>
 <body>
 	<div id="mainLayout">

@@ -56,7 +56,6 @@ public class ReservationController {
 		reservation.setReservation_guest_num(GenerateRandomCode.getRandomNumCode(6, 6));
 		reservation.setReservation_email(reservation.getReservation_email1() + "@" + reservation.getReservation_email2());
 		reservation.setReservation_member_id((String)session.getAttribute("sId"));
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!:" + reservation.getCal_count());
 		
 		int insertCount = service.insertReservation(reservation);
 		
@@ -127,7 +126,6 @@ public class ReservationController {
 		reservation = service.selectNumName(reservation_guest_num, reservation_person_name);
 		reservation.setReservation_email1(reservation.getReservation_email().split("@")[0]);
 		reservation.setReservation_email2(reservation.getReservation_email().split("@")[1]);
-		System.out.println("!!@@!@!#!@#" + reservation);
 		model.addAttribute("reservation", reservation);
 		return "reservation/reservation_update";
 	}
