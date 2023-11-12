@@ -10,8 +10,6 @@
 <link href="${pageContext.request.contextPath }/resources/css/top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css">
-<%-- <link href="${pageContext.request.contextPath }/resources/css/about.css" rel="stylesheet" type="text/css"> --%>
-<%-- <link href="${pageContext.request.contextPath }/resources/css/buttom.css" rel="stylesheet" type="text/css"> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/pay_result.css">
 <body>
 <!-- 	<h1>결제 완료</h1> -->
@@ -65,9 +63,9 @@
 				</div>
 
 		</main>
-			<footer id="footer">
-				<jsp:include page="../inc/bottom.jsp"></jsp:include>
-			</footer>
+	  	<footer id="footer">
+	  		<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	 	</footer>
 <!-- 	</div> -->
 </body>
 </html>

@@ -7,6 +7,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/cart.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/store_top.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
@@ -173,9 +174,9 @@
       
       <br>   
       
-      <footer id="footer">
-         <jsp:include page="../inc/bottom.jsp"></jsp:include>
-      </footer>
+	  <footer id="footer">
+	  		<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	  </footer>
    </div>
 </body>
 </html>
