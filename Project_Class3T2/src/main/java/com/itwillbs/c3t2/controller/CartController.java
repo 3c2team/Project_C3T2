@@ -40,7 +40,6 @@ public class CartController {
 		
 		// 로그인 회원 정보 저장
 		String sId = (String)session.getAttribute("sId");
-		System.out.println("장바구니 아이디 : " + sId);
 		
 		// 비회원 장바구니 이동 시 접근 불가
 		if(sId == null ) {
@@ -57,7 +56,6 @@ public class CartController {
 			}
 		}
 		
-
 		// PRODUCT_DETAIL 페이지에서 넘어 온 상품 수량 
 		if(proCount > 0) {
 			System.out.println("상품 갯수 : " + proCount);
@@ -221,9 +219,7 @@ public class CartController {
 			return "fail_back";
 		}
 		
-		
-				
-		System.out.println("결제 회원 : " + sId  + ", 상품 정보 : " + proNumber + ", " + proCount + ", 가격정보 : " + proPrice);
+		System.out.println("결제 회원 : " + sId  + ", 상품 번호 : " + proNumber + ", " + proCount + ", 가격정보 : " + proPrice);
 				
 		//ORDER_DETAIL 테이블 비우기
 		int deleteOrderDetail = service.deleteOrderDetail(sId);
@@ -232,7 +228,6 @@ public class CartController {
 		}
 		
 		// 선택 상품 ORDER_DETAIL에 저장
-		
 		if(proNums[0] != 0) {
 			for( int proNum : proNums) {
 				// 저장 작업
@@ -275,12 +270,8 @@ public class CartController {
 			return "forward";
 		}
 		
-		System.out.println("선택 결제 상품 조회 성공");
-		
 		// 페이 상품 총액
-		System.out.println("나옴??");
 		PayAllPriceVO payAllPrice = service.getPaytAllPrice(sId);
-		System.out.println("나옴2??");
 		model.addAttribute("payAllPrice", payAllPrice);
 		System.out.println("결제 상품 갯수랑 총액 :" + payAllPrice);
 		
@@ -288,7 +279,7 @@ public class CartController {
 		// 회원정보 조회
 		member = service.getMember(sId);
 		
-        System.out.println("멤버 이메일 주소1 : " + member.getMember_e_mail());
+//        System.out.println("멤버 이메일 주소1 : " + member.getMember_e_mail());
         
         String Email = member.getMember_e_mail();
         String[] ArraysEmail = Email.split("@");

@@ -32,7 +32,6 @@
 	     	if(rsp.success) { // 결제 성공 시
 	 			console.log("rsp.imp_uid : " + rsp.imp_uid);
 	 			console.log("rsp.merchant_uid : " + rsp.merchant_uid);
-	//  		location.href = "PaymentResult";		
 	 			$.ajax({
 					type:"POST",
 					url:"PaymentResult",
@@ -42,7 +41,7 @@
 	                    sId : "${sessionScope.sId}"
 						},
 					success:function(result){
-						console.log("데이터 넘어감");
+						console.log("데이터 전송 성공");
 						alert("결제가 완료 됐습니다.");
 						location.href="OrderResult";
 					},
