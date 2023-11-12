@@ -126,7 +126,7 @@
 				<%-- 오른쪽 --%>
 				<div class="detailTopRigth">
 					<div class="detailTopLikeShare">
-						<span id="favorite-btn" class="favorite_${productDetail.member_fav }"></span>
+						<span id="favorite-btn" class="favorite_"></span>
 					</div>
 					<div class="productNum">
 						<p>온라인상품코드 ${productDetail.product_num }</p>
