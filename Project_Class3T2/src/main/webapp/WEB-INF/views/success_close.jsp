@@ -9,6 +9,7 @@
 <body>
 <script type="text/javascript">
 	alert("${msg}");
+	opener.location.reload();
 	window.close();
 </script>
 </body>

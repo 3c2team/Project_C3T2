@@ -116,9 +116,9 @@ public class AdminController {
     	String id = (String)session.getAttribute("sId");
     	if(id == null || id.equals("")) return "redirect:/AdminFailLogin";
     	
-    	int deleteProductImgCount = 0;
-		int deleteCartCount = 0;
-		int deleteProductCount = 0;
+	    	int deleteProductImgCount = 0;
+			int deleteCartCount = 0;
+			int deleteProductCount = 0;
 		
     	if(mainFile.getOriginalFilename().equals("")||infoFile.getOriginalFilename().equals("")) {
     		model.addAttribute("msg","파일을 등록하시오");
@@ -362,11 +362,13 @@ public class AdminController {
     }
     //공지사항 등록 처리(관리자)
     @PostMapping("AdminNoticeRegistPro")
-    public String adminNoticeRegist(@RequestParam Map<String, String> map) {
+    public String adminNoticeRegist(@RequestParam Map<String, String> map
+    											,Model model) {
     	System.out.println(map);
     	int insertNoticeCount = service.insertNotice(map);
     	if(insertNoticeCount == 0) return "fail_back";
-    	return "/";
+    	model.addAttribute("msg","등록 완료되었습니다.");
+    	return "success_close";
     }
     //공지사항 삭제 처리(관리자)
     @PostMapping("AdminNoticeDelete")

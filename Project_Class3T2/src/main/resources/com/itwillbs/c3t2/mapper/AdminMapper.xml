@@ -18,21 +18,22 @@
 		</select>
 		<select id="selectReservationList" resultType="map">
 			SELECT rm.reservation_num
-			,CONCAT(rm.reservation_date,' ',reservation_time) AS reservation_date
-			,ROW_NUMBER() OVER(order by reservation_num) AS num
-			,reservation_person_name
-			,reservation_person_count
-			,reservation_cancel
-			,reservation_member_id
-			,reservation_guest_num
-            ,reservation_email
-			,CONCAT(dinning_num,' 번 테이블') AS dinning_num
-			,restaurant_num
-			FROM RESERVATION rm JOIN ( SELECT reservation_num,reservation_date
-										FROM RESERVATION
-										WHERE reservation_date > date_format(now(),'%Y-%m-%d')) rs
-			ON rm.reservation_num = rs.reservation_num
-		  	WHERE reservation_cancel = 0
+					,CONCAT(rm.reservation_date,' ',reservation_time) AS reservation_date
+					,ROW_NUMBER() OVER(order by reservation_num) AS num
+					,reservation_person_name
+					,reservation_person_count
+					,reservation_cancel
+					,reservation_member_id
+					,reservation_guest_num
+		            ,reservation_email
+					,CONCAT(dinning_num,' 번 테이블') AS dinning_num
+					,restaurant_num
+			FROM RESERVATION rm 
+			  JOIN ( SELECT reservation_num,reservation_date
+						  FROM RESERVATION
+						WHERE reservation_date > date_format(now(),'%Y-%m-%d')) rs
+				ON rm.reservation_num = rs.reservation_num
+		  WHERE reservation_cancel = 0
 		</select>
 		<select id="selectAdmin" resultType="com.itwillbs.c3t2.vo.AdminVO">
 			SELECT *
@@ -49,7 +50,7 @@
 			FROM NOTICE
 		</select>
 		<select id="selectProductList" resultType="map">
-			SELECT 	product_num
+			SELECT product_num
 					,product_name
 					,product_price
 					,product_info
@@ -57,20 +58,21 @@
 					,product_category_name
 					,ifnull(favorite_count,0) AS favorite_count
 					,ROW_NUMBER() OVER(ORDER BY product_num) AS num
-			FROM PRODUCT_CATEGORY c JOIN (SELECT p.product_num
-												,product_name
-												,product_price
-												,product_info
-												,product_release
-												,product_category_num
-												,favorite_count
-										   FROM PRODUCT p 
-									  LEFT JOIN ( SELECT product_num
-														 ,count(favorite_num) as favorite_count
-													FROM FAVORITE
-													GROUP BY product_num) f
-										ON p.product_num = f.product_num) a
-			ON c.product_category_num =a.product_category_num
+			FROM PRODUCT_CATEGORY c 
+			  JOIN (SELECT p.product_num
+								,product_name
+								,product_price
+								,product_info
+								,product_release
+								,product_category_num
+								,favorite_count
+				     FROM PRODUCT p 
+			   LEFT JOIN ( SELECT product_num
+								 			,count(favorite_num) as favorite_count
+								   FROM FAVORITE
+								 GROUP BY product_num) f
+					     ON p.product_num = f.product_num) a
+			ON c.product_category_num = a.product_category_num
 		</select>
 		<select id="selectProduct" resultType="com.itwillbs.c3t2.vo.ProductVO">
 			SELECT  product_num
@@ -164,9 +166,9 @@
 				, DATE_FORMAT(review_date, '%Y년 %m월%d일 %H:%i') as review_date
 				, member_id
 				, review_image
-			FROM REVIEW r JOIN PRODUCT p
-			ON r.product_num = p.product_num
-			WHERE review_num = #{review_num}
+				FROM REVIEW r JOIN PRODUCT p
+					ON r.product_num = p.product_num
+			  WHERE review_num = #{review_num}
 		</select>
 		<delete id="deleteReview">
 				DELETE FROM REVIEW
@@ -199,10 +201,10 @@
 				,question_content
 				,IF(ISNULL(question_answer_date),'',DATE_FORMAT(question_answer_date, '%Y년 %m월%d일 %H:%i')) as question_answer_date
 			FROM QUESTION  q JOIN MEMBER m
-			ON q.member_id = m.member_id 
-			JOIN PRODUCT p
-			ON p.product_num = q.product_num
-			WHERE question_num= #{question_num}
+				ON q.member_id = m.member_id 
+			  JOIN PRODUCT p
+				ON p.product_num = q.product_num
+		  WHERE question_num= #{question_num}
 		</select>
 		<update id="updateQnaBoard">
 			UPDATE QUESTION
