@@ -287,7 +287,8 @@ $(function() {
 					<span style="display:inline-block; padding: 20px 10px;">최종결제 금액</span><br>
 					<span id="checkedResult" style="font-size: 25pt; font-weight: bold; padding: 0px 10px;">${payAllPrice.allPrice + 3000}원</span><br><br>
 <%-- 					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="requestPay('${Member}')">결제하기</button> --%>
-					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button>
+<!-- 					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button> -->
+					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="checks()">결제하기</button>
 <%-- 					<c:choose> --%>
 <%-- 						<c:when test="${1 eq 1}"> --%>
 <!-- 							<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" formaction="PaymentPro">결제하기</button> -->
