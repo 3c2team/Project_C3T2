@@ -456,7 +456,7 @@ span.reviewAveScore {
 .qnaAnswer {
 	width:15%;
 }
-.qnaAnswer span{
+.waiting{
     display: inline-block;
     vertical-align: middle;
     font-size: 13px;
@@ -464,6 +464,16 @@ span.reviewAveScore {
     color: #fff;
     border-radius: 2px;
     background-color: #bbbec2;
+    padding: 0 15px;
+}
+.complete {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    line-height: 29px;
+    color: #fff;
+    border-radius: 2px;
+    background-color: rgb(255, 87, 87);
     padding: 0 15px;
 }
 .questionInfo {

@@ -207,6 +207,19 @@ function checks() {
         return false;
       }
 
+	$.ajax({
+		url: "MemberCheckDupId",
+		data: {
+			id: id
+		},
+		success: function(result) {
+			if($.trim(result) == "true") { // 아이디 중복
+			alert("중복되는 아이디입니다.");
+			return false;
+			}
+		}
+	});
+
 	// 비밀번호 공백 확인
     if($("#member_passwd").val() == "") {
 		alert("비밀번호를 입력해주세요.");
@@ -298,4 +311,16 @@ function checks() {
         $("#member_phone_num").focus();
         return false;
     }
+    
+    $.ajax({
+		url: "MemberCheckDupPhone",
+		data: {
+			phone_num: phone_num
+		},
+		success: function(result) {
+			if($.trim(result) == "true") { // 아이디 중복
+				return false;
+			}
+		}
+	});
 };
