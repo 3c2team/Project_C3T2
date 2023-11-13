@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="${pageContext.request.contextPath }/css/bottom.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <script>
 $(document).ready(function(){
    $.ajax({
@@ -9,6 +9,7 @@ $(document).ready(function(){
         url: "Bottom",
         data: {},
         success: function (response) {
+        	console.log(response);
         	$('#logo').append(response.restaurant_name);
         	$('#name').append(response.restaurant_name);
         	$('#address').append(response.restaurant_address);

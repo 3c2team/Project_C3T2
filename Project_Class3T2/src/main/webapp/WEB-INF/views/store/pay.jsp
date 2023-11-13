@@ -289,25 +289,15 @@ $(function() {
 <%-- 					<button type="button" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="requestPay('${Member}')">결제하기</button> --%>
 <!-- 					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;">결제하기</button> -->
 					<button type="submit" class="btn default" id="paymentCheck" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" onclick="checks()">결제하기</button>
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${1 eq 1}"> --%>
-<!-- 							<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" formaction="PaymentPro">결제하기</button> -->
-<%-- 						</c:when> --%>
-<%-- 						<c:when test=""> --%>
-<!-- 							<button type="submit" class="btn default" style="width:90%; height: 60px; margin-right: 10px; font-size: 12pt;" formaction="PaymentCardPro" >결제하기2</button> -->
-<%-- 						</c:when>						 --%>
-<%-- 					</c:choose> --%>
 				</div>
 			</div>
 			<br><br>
 			
-			<%--이용안내 --%>
-			
-			<footer id="footer">
-				<jsp:include page="../inc/bottom.jsp"></jsp:include>
-			</footer>
 		</div>
 	</form>	
 	<script src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
+	<footer id="footer">
+		<jsp:include page="../inc/bottom.jsp"></jsp:include>
+	</footer>
 </body>
 </html>	

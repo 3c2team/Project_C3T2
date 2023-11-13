@@ -173,10 +173,9 @@
          </div>
       
       <br>   
-      
-	  <footer id="footer">
+   </div>
+    <footer id="footer">
 	  		<jsp:include page="../inc/bottom.jsp"></jsp:include>
 	  </footer>
-   </div>
 </body>
 </html>
