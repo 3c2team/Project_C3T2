@@ -50,7 +50,7 @@ public class ReservationController {
 	
 	// 예약 폼 전송, 예약 확인 페이지 이동
 	@PostMapping("/ReservationPro")
-	public String reservationPro(ReservationVO reservation, HttpSession session, Model model) {
+	public String reservationPro(ReservationVO reservation, HttpSession session, Model model, HttpServletRequest request) {
 		
 		// 예약 번호 - 6자리 랜덤 숫자
 		reservation.setReservation_guest_num(GenerateRandomCode.getRandomNumCode(6, 6));
@@ -59,18 +59,29 @@ public class ReservationController {
 		
 		int insertCount = service.insertReservation(reservation);
 		
-		if(insertCount > 0) { // 성공 시 success로 이동
-			System.out.println(reservation);
-			mailService.sendReservationMail(reservation);
-			model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
-			model.addAttribute("reservation", reservation);
-			return "reservation/reservation_success";
-		} else { // => 실패 시 "fail_back.jsp" 포워딩
+		if(insertCount < 0) {
 			model.addAttribute("msg", "예약 실패!");
 			return "fail_back";
 		}
+		mailService.sendReservationMail(reservation);
+		// 회원 상세정보를 Model 객체에 저장
+		model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
+		model.addAttribute("targetURL", request.getContextPath() + "/ReservationSuccess" 
+																 + "?"
+																 + "reservation_guest_num=" + reservation.getReservation_guest_num());
+		return "forward";
 	}
-
+	
+	//예약 성공 이동
+	@RequestMapping(value = "/ReservationSuccess", method = {RequestMethod.GET, RequestMethod.POST})
+	public String reservationSuccess(ReservationVO reservation, 
+			@RequestParam int reservation_guest_num,
+			Model model) {
+		
+		model.addAttribute("reservation", reservation);
+		return "reservation/reservation_success";
+	}
+	
 	//비회원 예약 검색 페이지 이동
 	@GetMapping("/ReservationSearch")
 	public String reservationSearch() {
@@ -144,25 +155,10 @@ public class ReservationController {
 		// 회원 상세정보를 Model 객체에 저장
 		model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
 		model.addAttribute("targetURL", request.getContextPath() + "/ReservationSearchInfo"
-//				);
 												+ "?"
 												+ "reservation_guest_num=" + reservation.getReservation_guest_num()
 												+ "&reservation_email1=" + reservation.getReservation_email1()
 												+ "&reservation_email2=" + reservation.getReservation_email2());
 		return "forward";
 	}
-	
-	//예약 성공 이동
-	@GetMapping("/ReservationSuccess")
-	public String reservationSuccess(ReservationVO reservation, 
-			@RequestParam String reservation_person_name, 
-			@RequestParam String reservation_email, 
-			Model model) {
-		
-		reservation = service.selectNameEmail(reservation_person_name, reservation_email);
-		
-		model.addAttribute("reservation", reservation);
-		return "reservation/reservation_success";
-	}
-		
 }

@@ -124,6 +124,8 @@ function assembly(year, month) {
 //- ------------------------------------------------
 // ---------- 날짜, 인원수 ajax로 체크 -----------
 function validationCheck(){
+	
+	
         
         // 연, 월, 일 저장
     let selectYear = $("#select_year").text();
@@ -139,7 +141,7 @@ function validationCheck(){
 	$("#reservation_person_count").val(count);        
 	
 	let time = $('input[name=reservation_time]:checked').val();
-	$("#reservation_time").val(time);        
+	$("#reservation_time").val(time);
 	
 	let arr = dinningMax;
 	
@@ -166,9 +168,9 @@ function validationCheck(){
 		
 			// 전부 diabled 해제
 			$.each($("input[name=reservation_time]"), (i, e) => {
-			        $(e).attr('disabled', false);        
+				$(e).attr('disabled', false);        
 			})
-			$('input:radio[name=reservation_time]').eq(0).attr("checked", true);
+//			$('input:radio[name=reservation_time]').eq(0).attr("checked", true);
 			
 			if(data.length < 1) return;
 			

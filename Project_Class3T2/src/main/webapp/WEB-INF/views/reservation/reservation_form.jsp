@@ -68,7 +68,7 @@
 					<th>예약시간</th>
 					<td>
 						<div class="form_radio_btn">
-							<input id="radio_0" type="radio" name="reservation_time" value="10:00" checked>
+							<input id="radio_0" type="radio" name="reservation_time" value="10:00">
 							<label for="radio_0">10:00</label>
 						</div>
 						<div class="form_radio_btn">
@@ -116,10 +116,10 @@
 				<tr>
 					<th>예약자 성함</th>
 					<td>
-						<input type="text" class="input" name="reservation_person_name" placeholder="성함" size="20" required
+						<input type="text" class="input" name="reservation_person_name" id="reservation_person_name" placeholder="성함" size="20" required
 							<c:if test="${not empty sessionScope.sId}">value="${sessionScope.sName }"</c:if>> <span id="checkIdResult"></span>
 						
-					</td> <!-- value= --> 
+					</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
@@ -138,7 +138,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="button" value="예약하기" onclick="insertCheck()">
+						<input type="button" id="insert" value="예약하기" onclick="insertCheck()">
 						<input type="button" value="돌아가기" onclick="history.back()">
 					</td>
 				</tr>
@@ -154,11 +154,17 @@
 		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
-		function insertCheck() {
-			let result = confirm("예약 하시겠습니까?");
-			if(result){
-				$("form").submit();
+		function insertCheck(){
+			if ($("#reservation_person_name").val() == "") {
+			  alert("성함을 입력해주세요");
+			  return false;
+			}s
+			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
+			  alert("이메일을 입력해주세요");
+			  return false;
 			}
+			alert("예약 하시겠습니까?");
+			$("form").submit();
 		}
 	</script>
 </body>

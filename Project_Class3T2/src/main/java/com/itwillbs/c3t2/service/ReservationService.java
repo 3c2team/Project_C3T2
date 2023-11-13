@@ -43,8 +43,8 @@ public class ReservationService {
 		}
 		
 		// 예약 번호를 조회
-		public ReservationVO selectNameEmail(String reservation_person_name, String reservation_email) {
-			return mapper.selectNameEmail(reservation_person_name, reservation_email);
+		public ReservationVO selectNumEmail(int reservation_guest_num, String reservation_email) {
+			return mapper.selectNumEmail(reservation_guest_num, reservation_email);
 		}
 
 		public List<Map<String, String>> selectDateCount(Map<String, String> param) {
