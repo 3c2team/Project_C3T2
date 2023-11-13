@@ -77,14 +77,6 @@ public class ReservationController {
 		model.addAttribute("reservation", reservation);
 		return "redirect:/ReservationSuccessPro?reservation_guest_num="+reservation_guest_num;
 	}
-	//예약 성공 이동
-//	@RequestMapping(value = "/ReservationSuccess", method = {RequestMethod.GET, RequestMethod.POST})
-//	public String reservationSuccess(ReservationVO reservation, 
-//			@RequestParam int reservation_guest_num,
-//			Model model , HttpServletRequest request) {
-//		model.addAttribute("reservation", reservation);
-//		return "reservation/reservation_success_pro";
-//	}
 	
 	//예약 성공 페이지 이동
 	@RequestMapping(value = "/ReservationSuccessPro", method = {RequestMethod.GET, RequestMethod.POST})

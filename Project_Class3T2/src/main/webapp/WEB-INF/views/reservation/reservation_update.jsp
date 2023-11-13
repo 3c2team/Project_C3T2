@@ -166,11 +166,22 @@
 		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
-		function updateCheck() {
-			let result = confirm("예약 변경 하시겠습니까?");
-			if(result){
-				$("form").submit();
+		function updateCheck(){
+			if($('input[name=reservation_time]:checked').val() == "undefined" || $('input[name=reservation_time]:checked').val() == "" || $('input[name=reservation_time]:checked').val() == null){
+				debugger;
+				alert("예약 시간을 선택해주세요.");
+				return false;
 			}
+			if ($("#reservation_person_name").val() == "") {
+				alert("성함을 입력해주세요.");
+				return false;
+			}
+			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
+				alert("이메일을 입력해주세요.");
+				return false;
+			}
+			alert("예약 하시겠습니까?");
+			$("form").submit();
 		}
 	</script>
 </body>
