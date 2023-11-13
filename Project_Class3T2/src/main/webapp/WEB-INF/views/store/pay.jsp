@@ -21,7 +21,7 @@
 <title>상품결제</title>
 <script type="text/javascript">
 $(function() {
-	
+ 
 	// 배송정보 라디오버튼 선택
 	
 	$("input[name=memberInfo]:checked").focus();

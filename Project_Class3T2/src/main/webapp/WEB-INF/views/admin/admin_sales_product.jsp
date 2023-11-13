@@ -19,6 +19,7 @@
 		<jsp:include page="../inc/admin_laout_bottom.jsp"></jsp:include>
 		<div id="layoutSidenav_content">
 			<main>
+				<h1 class="mt-4">상품별 매출</h1>
 				<jsp:include page="../inc/admin_sales.jsp"></jsp:include>
 				<div class="row">
 					<div class="col-xl-6">
