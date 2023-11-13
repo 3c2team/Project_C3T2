@@ -56,20 +56,6 @@
 //          location.href="PayPro?deleteProNum=" + product_num;
 // 			alert("상품 번호 : " + product_num);
 			location.href="ResultPay?deleteProNum=" + product_num;
-			
-// 			$.ajax({
-// 				url:"PayProductDelete?deleteProNum=" + product_num,
-// 				type:"POST",
-// 				data:{product_num},
-// 				success:function(result){
-// 					console.log("접근 성공");
-// 					console.log(result);
-// 					location.href="ResultPay";
-// 				},
-// 				error:function(error){
-// 					alert("삭제 실패")
-// 				}
-// 			});
        }else{
           	alert("삭제를 취소 하셨습니다.");
        }
@@ -79,10 +65,13 @@
     $("#pointCheck").click(function() {
     	
 		if($(this).is(":checked")){
-			let memberPoint = $("#usePoint").val();
+			
+			
+			$("#usePoint").on("keyup", function(){
+//				alert("확인");
+				
+				let memberPoint = $("#usePoint").val();
 			let maxPoint = $("#pointCheck").val();
-// 			alert(parseInt(memberPoint) + ", max : " + parseInt(maxPoint));
-// 			console.log(typeof memberPoint <= typeof maxPoint)
 
 			if(parseInt(memberPoint) <= parseInt(maxPoint)){
 				$.ajax({
@@ -100,6 +89,15 @@
 			}else{
 				alert("보유한 포인트만큼 사용 가능합니다.");
 			}
+				
+			});
+			
+			
+			
+			
+			
+			
+			
 	    }else{			
 			$("#checkedResult").text($(".allPrice").val() + "원");
 	    }
