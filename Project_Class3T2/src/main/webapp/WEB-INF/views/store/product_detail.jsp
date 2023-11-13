@@ -307,10 +307,10 @@
 									<div class="qnaAnswer">
 										<c:choose>
 											<c:when test="${not empty QnA.question_answer }">
-												<span>답변완료</span>
+												<span class="complete">답변완료</span>
 											</c:when>
 											<c:otherwise>
-												<span>답변대기</span>
+												<span class="waiting">답변대기</span>
 											</c:otherwise>
 										</c:choose>
 									</div>
