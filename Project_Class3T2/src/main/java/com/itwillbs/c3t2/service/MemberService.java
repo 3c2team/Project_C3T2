@@ -59,6 +59,11 @@ public class MemberService {
 		return notice; 
 	}
 	
+	public NoticeVO getNoticeOther(int notice_num) {
+		NoticeVO notice = mapper.selectNotice(notice_num);
+		return notice; 
+	}
+	
 	// 카카오 로그인(access token) 가져오기
 	public String getKaKaoAccessToken(String code){
         String access_Token="";

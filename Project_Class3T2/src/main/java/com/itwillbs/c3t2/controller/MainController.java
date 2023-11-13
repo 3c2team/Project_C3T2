@@ -118,11 +118,11 @@ public class MainController {
 	public String noticeDetail(@RequestParam int notice_num, Model model, NoticeVO notice) {
 		notice = service.getNotice(notice_num);
 		if(notice.getNotice_num_pre() != 0) {
-			NoticeVO notice_pre = service.getNotice(notice.getNotice_num_pre());
+			NoticeVO notice_pre = service.getNoticeOther(notice.getNotice_num_pre());
 			model.addAttribute("noticePre", notice_pre);
 		}
 		if(notice.getNotice_num_next() != 0) {
-			NoticeVO notice_next = service.getNotice(notice.getNotice_num_next());
+			NoticeVO notice_next = service.getNoticeOther(notice.getNotice_num_next());
 			model.addAttribute("noticeNext", notice_next);
 		}
 		model.addAttribute("notice", notice);
@@ -203,8 +203,7 @@ public class MainController {
 		
 		MemberVO dbMember = service.getMemberLogin(member_id);
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
-			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\r\n"
-					+ "입력하신 내용을 다시 확인해주세요.");
+			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.");
 			return "fail_back";
 		}
 		
@@ -255,8 +254,7 @@ public class MainController {
          }
 		
 		if(dbMember == null || !passwordEncoder.matches(member.getMember_passwd(), dbMember.getMember_passwd())) {
-			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.\r\n"
-					+ "입력하신 내용을 다시 확인해주세요.");
+			model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.");
 			return "fail_back";
 		}
 		
@@ -333,8 +331,7 @@ public class MainController {
 			return "fail_back";
 		}
 		
-		model.addAttribute("msg", "입력한 메일로 변경 비밀번호 전송했습니다.\r\n"
-					+ "로그인 페이지로 이동합니다."); // 출력할 메세지
+		model.addAttribute("msg", "입력한 메일로 변경 비밀번호 전송했습니다. 로그인 페이지로 이동합니다."); // 출력할 메세지
 		model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 		return "forward";
 	}
@@ -410,8 +407,7 @@ public class MainController {
 			return "fail_back";
 		}
 		
-		model.addAttribute("msg", "인증 메일을 전송했습니다.\r\n"
-						+ "인증 확인 후 회원가입이 완료됩니다."); // 출력할 메세지
+		model.addAttribute("msg", "인증 메일을 전송했습니다. 인증 확인 후 회원가입이 완료됩니다."); // 출력할 메세지
 		model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 		return "forward";
 	}
