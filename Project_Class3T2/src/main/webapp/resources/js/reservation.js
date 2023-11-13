@@ -49,7 +49,6 @@ function calendarMaker(target, date) {
 			today.setSeconds(0);
 			
 			let diferrenceDay = parseInt((thisDay - today) / 1000) * 1000;
-			console.log(thisDay + ", " + today + ", " + diferrenceDay);
 			
 			if(diferrenceDay < 1) {
 				tag += "<td id=" + thisId + " class='noClick'>" + i + "</td>";
@@ -76,7 +75,10 @@ function calMoveEvtFn() {
     $(".custom_calendar_table").on("click", ".prev", function () {
         nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
 		calendarMaker($("#calendarForm"), nowDate);
-                
+		$(".custom_calendar_table .select_day").removeClass("select_day");
+		$(".custom_calendar_table > td").addClass("noClick");
+		$("noClick").readOnly=true;
+		$("noClick").disable=true;
     });
     // 다음날 클릭
     $(".custom_calendar_table").on("click", ".next", function () {
@@ -142,6 +144,7 @@ function validationCheck(){
 	
 	let time = $('input[name=reservation_time]:checked').val();
 	$("#reservation_time").val(time);
+	$("#reservation_time").text(time);
 	
 	let arr = dinningMax;
 	
