@@ -207,7 +207,7 @@ $(function() {
 							<td class="deliverytd">전화번호&nbsp;<span style="color:red">*</span></td>
 							<td>
 	<!-- 							<input name="phoneNum1" id ="phoneNum1" type="text" size="10" maxlength="3" >-<input name="phoneNum2" id ="phoneNum2" type="text" size="10" maxlength="4">-<input name="phoneNum3" id ="phoneNum3" type="text" size="10" maxlength="4"> -->
-								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" required="required" placeholder="000-0000-0000">
+								<input type="text" name="phone" id="phone" value="${Member.member_phone_num}" required="required" maxlength="13" placeholder="000-0000-0000">
 								<span id="checkPhoneResult"></span><br>
 							</td>
 						</tr>
