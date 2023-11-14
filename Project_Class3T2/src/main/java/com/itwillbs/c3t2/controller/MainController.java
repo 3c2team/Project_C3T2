@@ -437,8 +437,7 @@ public class MainController {
 		boolean isAuthSuccess = service.emailAuth(authInfo);
 		
 		if(isAuthSuccess) { // 성공
-			model.addAttribute("msg", "인증이 완료되었습니다.\r\n" 
-					+ "로그인 페이지로 이동합니다."); // 출력할 메세지
+			model.addAttribute("msg", "인증이 완료되었습니다. 로그인 페이지로 이동합니다."); // 출력할 메세지
 			model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
 			return "forward";
 		} else { // 실패
