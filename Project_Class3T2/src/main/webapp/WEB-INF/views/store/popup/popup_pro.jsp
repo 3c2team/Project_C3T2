@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>J'ai Faim</title>
 <script type="text/javascript">
 	window.opener.location.reload();
 	window.close();
