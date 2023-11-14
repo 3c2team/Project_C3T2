@@ -41,7 +41,15 @@ public class MyPageController {
 	@Autowired
 	private MemberService memberService;
 	 
-	
+	@ResponseBody
+	@PostMapping("/MemberPoint")
+	public int adminSelectProductSales(HttpSession session) {
+		String sId = (String)session.getAttribute("sId");
+		MemberVO memberPoint = service.selectPoint(sId);
+		
+		return memberPoint.getMember_point();	
+	}
+
 	//mypageMapping
 	@GetMapping("MypageDashboard")				//마이페이지 홈
 	public String mypageDashboard(HttpSession session, Model model) {
@@ -292,7 +300,7 @@ public class MyPageController {
 	}
 
 	
-	@PostMapping("MypageMemberOut")			
+	@PostMapping("MypageMemberOut")
 	@ResponseBody
 	public boolean mypageMemberOut(@RequestParam Map<String, Object> paraMap, HttpSession session) {
 		try {

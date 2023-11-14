@@ -94,4 +94,6 @@ public interface MyPageMapper {
 
 	int getReservationDetailTotalCount(Map<String, Object> parMap);
 
+	MemberVO selectPoint(String sId);
+
 }
