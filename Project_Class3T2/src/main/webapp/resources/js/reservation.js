@@ -240,6 +240,7 @@ function emailEvtFn() {
         $("#reservation_email2").focus();
         return false;
     }
+    return true;
 }
  // -------------------------------------
  
