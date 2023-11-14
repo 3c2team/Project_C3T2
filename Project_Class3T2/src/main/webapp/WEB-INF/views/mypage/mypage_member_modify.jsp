@@ -120,7 +120,7 @@ input[readonly]{background: #eee;}
 						<th>전화번호</th>
 						<td>	
 							<input type="text" name="member_phone_num" id="member_phone_num" 
-							oninput="oninputPhone(this)" maxlength="13"
+							maxlength="13"  onblur="oninputPhone(this)"
 							placeholder="숫자만 입력" size="20" value="${Member.member_phone_num}">
 							<br>
 							<span id="checkIdResult1"></span>
@@ -235,8 +235,8 @@ function memberModify(){
 		success:function(res){	// 요청이 성공하면 실행될 함수
 			console.log(" success : ", res);
 			if(res=="success"){				
-				alert("회원 수정 완료 됬습니다요");		
-				window.location.href="MypageDashboard";	
+				alert("회원 수정 완료 됬습니다요. 다시 로그인 하십숑!");		
+				location.href =  "${pageContext.request.contextPath}/"+"Logout";
 				return;
 				
 			}else if(res=="error_member_phone_num"){
