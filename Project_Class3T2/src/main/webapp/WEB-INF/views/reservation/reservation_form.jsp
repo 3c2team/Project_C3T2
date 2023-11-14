@@ -155,8 +155,11 @@
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
 		function insertCheck(){
+			if($('.select_day').length <= 0){
+				alert("예약은 당일 기준 다음날부터 가능합니다.");
+				return false;
+			}
 			if($('input[name=reservation_time]:checked').val() == "undefined" || $('input[name=reservation_time]:checked').val() == "" || $('input[name=reservation_time]:checked').val() == null){
-				debugger;
 				alert("예약 시간을 선택해주세요.");
 				return false;
 			}
@@ -164,8 +167,11 @@
 				alert("성함을 입력해주세요.");
 				return false;
 			}
-			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
-				alert("이메일을 입력해주세요.");
+// 			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
+// 				alert("이메일을 입력해주세요.");
+// 				return false;
+// 			}
+			if(!emailEvtFn()){
 				return false;
 			}
 			alert("예약 하시겠습니까?");

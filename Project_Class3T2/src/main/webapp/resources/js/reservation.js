@@ -71,7 +71,7 @@ function calendarMaker(target, date) {
 
 
 function calMoveEvtFn() {
-    // 전달 클릭
+    // 이전달 클릭
     $(".custom_calendar_table").on("click", ".prev", function () {
         nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
 		calendarMaker($("#calendarForm"), nowDate);
@@ -80,7 +80,7 @@ function calMoveEvtFn() {
 		$(".custom_calendar_table .noClick").readOnly=true;
 		$(".custom_calendar_table .noClick").disable=true;
     });
-    // 다음날 클릭
+    // 다음달 클릭
     $(".custom_calendar_table").on("click", ".next", function () {
         nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
         calendarMaker($("#calendarForm"), nowDate);
@@ -97,7 +97,6 @@ function calMoveEvtFn() {
     });
     $("input:radio[name='reservation_person_count']").on("click", function(){
         validationCheck();
-		debugger;
 	});
    
 }
@@ -203,6 +202,9 @@ function validationCheck(){
 
 function emailEvtFn() {
                         
+    var getMail = RegExp(/^[A-Za-z0-9_.-]+/);
+    var getMailDomain = RegExp(/^[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
+    
 	$("#reservation_email2").val($("#emailDomain").val());
 	
 	if($("#emailDomain").val() == "") { // 직접입력 선택 시
@@ -214,6 +216,30 @@ function emailEvtFn() {
 		$("#reservation_email2").css("background", "lightgray"); // 배경색 초기화
 		$("#reservation_email2").attr("readonly", true); // 읽기 전용으로 변경
 	}
+	
+	// 이메일 공백 확인
+    if($("#reservation_email1").val() == ""){
+        alert("이메일을 입력해주세요.");
+        $("#reservation_email1").focus();
+        return false;
+    }
+           
+           
+	// 이메일 유효성 검사
+    if(!getMail.test($("#reservation_email1").val())){
+        alert("이메일 형식에 맞게 입력해주세요.")
+        $("#reservation_email1").val("");
+        $("#reservation_email1").focus();
+        return false;
+      }
+      
+	// 이메일 유효성 검사
+    if(!getMailDomain.test($("#reservation_email2").val())){
+        alert("이메일 형식에 맞게 입력해주세요.")
+        $("#reservation_email2").val("");
+        $("#reservation_email2").focus();
+        return false;
+    }
 }
  // -------------------------------------
  
