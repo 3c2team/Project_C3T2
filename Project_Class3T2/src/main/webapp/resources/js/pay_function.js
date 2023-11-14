@@ -87,6 +87,7 @@
 			
 			}else{
 				alert("보유한 포인트만큼 사용 가능합니다.");
+				$("#usePoint").val("");
 				$(":checkbox").prop("checked", false);
 			}			
 	    }else{			
