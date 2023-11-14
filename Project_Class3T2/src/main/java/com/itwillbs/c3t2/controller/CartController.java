@@ -194,7 +194,8 @@ public class CartController {
 		//장바구니 비우기
 		int cartDel = service.productAllDelete(sId);
 		
-		return "store/store_main";
+//		return "store/store_main";
+		return "redirect:/OnlineStore";
 	}	
 	
 	
