@@ -49,12 +49,20 @@
 			</c:forEach>
 			<table class="custom_table">
 				<tr>
-					<th>사용 포인트</th>
-					<td>${usePoint }</td>
+					<th>총 금액</th>
+					<td> ${resultPrice + usePoint }</td>
 				</tr>
 				<tr>
-					<th>총 결제 금액</th>
-					<td>${resultPrice }</td>
+					<th>사용 포인트</th>
+					<td>-${usePoint }</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<th style="font-size: 13pt;"><b>총 결제 금액</b></th>
+					<td> ${resultPrice }</td>
 				</tr>
 			</table>
 			<div align="center">

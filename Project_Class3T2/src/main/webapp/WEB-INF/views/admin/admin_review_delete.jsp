@@ -49,6 +49,7 @@ table {
 										<th>상품이름</th>
 										<th>작성자</th>
 										<th>리뷰내용</th>
+										<th>별점</th>
 										<th>구매일자</th>
 									</tr>
 								</thead>
@@ -57,10 +58,9 @@ table {
 									<tr>	
 										<th><input type="checkbox" name="checkbox" value="${selectReviewList.review_num }"></th>
 										<th>${selectReviewList.product_name }</th>
-										<th>
-											${selectReviewList.member_id }
-										</th>
+										<th>${selectReviewList.member_id }</th>
 										<th>${selectReviewList.review_content }</th>
+										<th>${selectReviewList.review_star }</th>
 										<th>${selectReviewList.review_date }</th>
 									</tr>
 								</c:forEach>

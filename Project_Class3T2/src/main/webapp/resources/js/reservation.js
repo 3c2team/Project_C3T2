@@ -49,7 +49,6 @@ function calendarMaker(target, date) {
 			today.setSeconds(0);
 			
 			let diferrenceDay = parseInt((thisDay - today) / 1000) * 1000;
-			console.log(thisDay + ", " + today + ", " + diferrenceDay);
 			
 			if(diferrenceDay < 1) {
 				tag += "<td id=" + thisId + " class='noClick'>" + i + "</td>";
@@ -72,13 +71,16 @@ function calendarMaker(target, date) {
 
 
 function calMoveEvtFn() {
-    // 전달 클릭
+    // 이전달 클릭
     $(".custom_calendar_table").on("click", ".prev", function () {
         nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
 		calendarMaker($("#calendarForm"), nowDate);
-                
+		$(".custom_calendar_table .select_day").addClass("noClick");
+		$(".custom_calendar_table .noClick").removeClass("select_day");
+		$(".custom_calendar_table .noClick").readOnly=true;
+		$(".custom_calendar_table .noClick").disable=true;
     });
-    // 다음날 클릭
+    // 다음달 클릭
     $(".custom_calendar_table").on("click", ".next", function () {
         nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
         calendarMaker($("#calendarForm"), nowDate);
@@ -93,6 +95,10 @@ function calMoveEvtFn() {
         
         validationCheck();
     });
+    $("input:radio[name='reservation_person_count']").on("click", function(){
+        validationCheck();
+	});
+   
 }
 
 function assembly(year, month) {
@@ -135,13 +141,16 @@ function validationCheck(){
     // 연월일 합쳐서 저장
 	let selectedDay = selectYear + "-" +(("00" + selectMonth.toString()).slice(-2))+"-"+(("00" + selectDay.toString()).slice(-2)); // 연월일 불러오기
 	$("#reservation_date").val(selectedDay);
+	$("#reservation_date").text(selectedDay);
 	
 	// 인원수 저장
 	let count = $('input[name=reservation_person_count]:checked').val();
 	$("#reservation_person_count").val(count);        
+	$("#reservation_person_count").text(count);        
 	
 	let time = $('input[name=reservation_time]:checked').val();
 	$("#reservation_time").val(time);
+	$("#reservation_time").text(time);
 	
 	let arr = dinningMax;
 	
@@ -171,6 +180,7 @@ function validationCheck(){
 				$(e).attr('disabled', false);        
 			})
 //			$('input:radio[name=reservation_time]').eq(0).attr("checked", true);
+
 			
 			if(data.length < 1) return;
 			
@@ -178,9 +188,11 @@ function validationCheck(){
 			data.forEach((e, i) => {
 		        let time = e.RESERVATION_TIME;
 		        $.each($("input[name=reservation_time]"), (i2, e2) => {
-		                if(time === e2.value){
-		                        $(e2).attr('disabled', true);
-		                }
+	                if(time === e2.value){
+                        $(e2).attr('disabled', true);
+	                }
+//					$("input:radio[name='reservation_time']").attr('checked', false);
+//					$("input:radio[name='reservation_person_count']").attr('checked', false);
 		        });
 			});
 		}
@@ -190,6 +202,9 @@ function validationCheck(){
 
 function emailEvtFn() {
                         
+    var getMail = RegExp(/^[A-Za-z0-9_.-]+/);
+    var getMailDomain = RegExp(/^[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
+    
 	$("#reservation_email2").val($("#emailDomain").val());
 	
 	if($("#emailDomain").val() == "") { // 직접입력 선택 시
@@ -201,6 +216,30 @@ function emailEvtFn() {
 		$("#reservation_email2").css("background", "lightgray"); // 배경색 초기화
 		$("#reservation_email2").attr("readonly", true); // 읽기 전용으로 변경
 	}
+	
+	// 이메일 공백 확인
+    if($("#reservation_email1").val() == ""){
+        alert("이메일을 입력해주세요.");
+        $("#reservation_email1").focus();
+        return false;
+    }
+           
+           
+	// 이메일 유효성 검사
+    if(!getMail.test($("#reservation_email1").val())){
+        alert("이메일 형식에 맞게 입력해주세요.")
+        $("#reservation_email1").val("");
+        $("#reservation_email1").focus();
+        return false;
+      }
+      
+	// 이메일 유효성 검사
+    if(!getMailDomain.test($("#reservation_email2").val())){
+        alert("이메일 형식에 맞게 입력해주세요.")
+        $("#reservation_email2").val("");
+        $("#reservation_email2").focus();
+        return false;
+    }
 }
  // -------------------------------------
  

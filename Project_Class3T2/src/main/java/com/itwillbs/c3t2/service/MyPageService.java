@@ -148,5 +148,10 @@ public class MyPageService {
 		return mapper.getTotalPriceAndProductNamesTotCount(parMap);
 	}
 
+	public MemberVO selectPoint(String sId) {
+		// TODO Auto-generated method stub
+		return mapper.selectPoint(sId);
+	}
+
 
 }

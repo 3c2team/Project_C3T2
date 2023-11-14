@@ -175,19 +175,28 @@
 				WHERE review_num = #{review_num} 
 		</delete>
 		<select id="selectQnaBoardList" resultType="map">
-			SELECT question_num
-				,ROW_NUMBER() OVER(order by question_num) as num
-				,product_num
-				,q.member_id as member_id
-				,member_name
+			SELECT product_name
+                ,ROW_NUMBER() OVER(order by question_num) as num
+                ,question_num
+				,member_id
 				,question_answer
-				,IF(ISNULL(question_answer),'답변대기','답변완료') as question_is_answer
-				,DATE_FORMAT(question_date, '%Y년 %m월%d일 %H:%i') as question_date
+				,question_is_answer
+				,question_date
 				,question_content
-				,secret
-			FROM QUESTION q join MEMBER m
-			ON q.member_id = m.member_id
-			WHERE question_date > CONCAT(YEAR(now())-1,'-',DATE_FORMAT(question_date, '%m-%d %H:%i'))
+				,IF(secret = 0,'일반글','비밀글') as secret
+           	 FROM PRODUCT p JOIN ( SELECT question_num
+										,product_num
+										,q.member_id
+										,member_name
+										,question_answer
+										,IF(ISNULL(question_answer),'답변대기','답변완료') as question_is_answer
+										,DATE_FORMAT(question_date, '%Y년 %m월%d일 %H:%i') as question_date
+										,question_content
+										,secret
+									 FROM QUESTION q join MEMBER m
+									   ON q.member_id = m.member_id
+									WHERE question_date > CONCAT(YEAR(now())-1,'-',DATE_FORMAT(question_date, '%m-%d %H:%i'))) a
+              ON a.product_num = p.product_num;
 		</select>
 		<select id="selectQnaBoard" resultType="map">
 			SELECT question_num

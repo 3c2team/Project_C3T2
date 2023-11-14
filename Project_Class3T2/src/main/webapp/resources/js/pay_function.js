@@ -65,12 +65,9 @@
     $("#pointCheck").click(function() {
     	
 		if($(this).is(":checked")){
-			
-			
-			$("#usePoint").on("keyup", function(){
 //				alert("확인");
 				
-				let memberPoint = $("#usePoint").val();
+			let memberPoint = $("#usePoint").val();
 			let maxPoint = $("#pointCheck").val();
 
 			if(parseInt(memberPoint) <= parseInt(maxPoint)){
@@ -81,25 +78,21 @@
 					success:function(result){
 						console.log("포인트 넘어감");
 						$("#checkedResult").text(result + "원");
+						$("#usePoint").attr("readonly",true);
 					},
 					error:function(){
 						console.log("작업 실패")
 					}
 				});
+			
 			}else{
 				alert("보유한 포인트만큼 사용 가능합니다.");
-			}
-				
-			});
-			
-			
-			
-			
-			
-			
-			
+				$("#usePoint").val("");
+				$(":checkbox").prop("checked", false);
+			}			
 	    }else{			
 			$("#checkedResult").text($(".allPrice").val() + "원");
+			$("#usePoint").attr("readonly",false);
 	    }
 	});
 	

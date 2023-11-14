@@ -41,7 +41,15 @@ public class MyPageController {
 	@Autowired
 	private MemberService memberService;
 	 
-	
+	@ResponseBody
+	@PostMapping("/MemberPoint")
+	public int adminSelectProductSales(HttpSession session) {
+		String sId = (String)session.getAttribute("sId");
+		MemberVO memberPoint = service.selectPoint(sId);
+		
+		return memberPoint.getMember_point();	
+	}
+
 	//mypageMapping
 	@GetMapping("MypageDashboard")				//마이페이지 홈
 	public String mypageDashboard(HttpSession session, Model model) {
@@ -159,6 +167,7 @@ public class MyPageController {
 	/**◆3.공통-비밀번호 확인 : 메서드 **/
 	// 개인정보 수정 전 비밀번호 확인을 위한 유틸리티 메서드.
 	private boolean  mpCheck(HttpSession session,RedirectAttributes rttr, String redirectURL) {
+		
 		// 세션에서 비밀번호 확인 플래그를 가져옴.
 		String mypageChckConfirm=(String)session.getAttribute("mypageChckConfirm");
 		
@@ -184,6 +193,12 @@ public class MyPageController {
     */
 	@GetMapping("MypageMemberModify")			
 	public String mypageMemberModify(Model model, Map<String, Object> param, HttpSession session, RedirectAttributes rttr) {		
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+            model.addAttribute("msg", "세션만료, 로그인 페이지로 이동합니다."); // 출력할 메시지
+            model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+            return "forward";
+        }
 		if(!this.mpCheck(session, rttr, "MypageMemberModify")) return "redirect:CheckMypageConfirm";
 		String member_id=(String)session.getAttribute("sId");
 		MemberVO memberVO = memberService.getMemberLogin(member_id);
@@ -241,6 +256,12 @@ public class MyPageController {
 	@GetMapping("MypagePasswdChange")		   
 	public String mypagePasswdChange(Model model, HttpSession session, RedirectAttributes rttr) {
 		if(!this.mpCheck(session, rttr, "MypagePasswdChange")) return "redirect:CheckMypageConfirm";
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+            model.addAttribute("msg", "세션만료, 로그인 페이지로 이동합니다."); // 출력할 메시지
+            model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+            return "forward";
+        }
 		return "mypage/mypage_passwd_change";
 	}
 	
@@ -274,11 +295,12 @@ public class MyPageController {
 	@GetMapping("MypageMemberOut")			
 	public String mypageMemberOut(HttpSession session, RedirectAttributes rttr) {
 		if(!this.mpCheck(session, rttr, "MypageMemberOut")) return "redirect:CheckMypageConfirm";
+		
 		return "mypage/mypage_member_out";
 	}
 
 	
-	@PostMapping("MypageMemberOut")			
+	@PostMapping("MypageMemberOut")
 	@ResponseBody
 	public boolean mypageMemberOut(@RequestParam Map<String, Object> paraMap, HttpSession session) {
 		try {
@@ -303,6 +325,12 @@ public class MyPageController {
 	//============================================================================
 	@GetMapping("MypageMemberDetail")				//회원 상새내역
 	public String mypageMemberDetail(MemberVO member, Model model, HttpSession session) {
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+            model.addAttribute("msg", "세션만료, 로그인 페이지로 이동합니다."); // 출력할 메시지
+            model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+            return "forward";
+        }
 		String member_id = (String)session.getAttribute("sId");
 		MemberVO dbMember = service.getMemberDetails(member_id);
 		model.addAttribute("Member", dbMember);
@@ -497,7 +525,12 @@ public class MyPageController {
 	
 	@GetMapping("MypageReservationList")				// 예약 내역
 	public String mypageReservationList(HttpSession session, Model model ,  Map<String, Object> parMap , PageMaker pageMaker) {
-		
+		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+            model.addAttribute("msg", "세션만료, 로그인 페이지로 이동합니다."); // 출력할 메시지
+            model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+            return "forward";
+        }
 		// 세션에서 현재 로그인한 회원의 번호 가져오기
 		String member_id = (String) session.getAttribute("sId");
 		System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ" + member_id);

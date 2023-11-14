@@ -397,9 +397,11 @@ public class AdminController {
     
     //문의 답변 페이지 이동(관리자)
     @GetMapping("AdminQnaAnswer")
-    public String adminQnaAnswer(Model model,int question_num) {
+    public String adminQnaAnswer(Model model,String question_num) {
+    	Integer.parseInt(question_num);
     	System.out.println(question_num);
-    	Map<String, Object> QnaBoardDetail = service.selectQnaBoard(question_num);
+    	
+    	Map<String, Object> QnaBoardDetail = service.selectQnaBoard(Integer.parseInt(question_num));
     	model.addAttribute("QnaBoardDetail",QnaBoardDetail);
     	return "admin/admin_qna_answer";
     }
@@ -448,8 +450,8 @@ public class AdminController {
     
     //로그인 페이지 이동(관리자)
     @GetMapping("AdminLogin")
-    public String adminLogin() {
-//    	System.out.println("에이설마..");
+    public String adminLogin(HttpSession session) {
+    	session.invalidate();
     	return "admin/admin_login";
     }
     

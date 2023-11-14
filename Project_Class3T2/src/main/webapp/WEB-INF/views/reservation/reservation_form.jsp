@@ -85,7 +85,7 @@
 						</div>
 						<div class="form_radio_btn">
 							<input id="radio_4" type="radio" name="reservation_time" value="14:00">
-							<label for="radio_4" >14:00</label>
+							<label for="radio_4">14:00</label>
 						</div>
 						<div class="form_radio_btn">
 							<input id="radio_5" type="radio" name="reservation_time" value="15:00">
@@ -155,13 +155,24 @@
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
 		function insertCheck(){
+			if($('.select_day').length <= 0){
+				alert("예약은 당일 기준 다음날부터 가능합니다.");
+				return false;
+			}
+			if($('input[name=reservation_time]:checked').val() == "undefined" || $('input[name=reservation_time]:checked').val() == "" || $('input[name=reservation_time]:checked').val() == null){
+				alert("예약 시간을 선택해주세요.");
+				return false;
+			}
 			if ($("#reservation_person_name").val() == "") {
-			  alert("성함을 입력해주세요");
-			  return false;
-			}s
-			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
-			  alert("이메일을 입력해주세요");
-			  return false;
+				alert("성함을 입력해주세요.");
+				return false;
+			}
+// 			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
+// 				alert("이메일을 입력해주세요.");
+// 				return false;
+// 			}
+			if(!emailEvtFn()){
+				return false;
 			}
 			alert("예약 하시겠습니까?");
 			$("form").submit();

@@ -46,10 +46,8 @@ public class ReservationController {
 		return service.selectDateCount(param);
 	}
 	
-	
-	
 	// 예약 폼 전송, 예약 확인 페이지 이동
-	@PostMapping("/ReservationPro")
+	@RequestMapping(value = "/ReservationPro", method = {RequestMethod.GET, RequestMethod.POST})
 	public String reservationPro(ReservationVO reservation, HttpSession session, Model model, HttpServletRequest request) {
 		
 		// 예약 번호 - 6자리 랜덤 숫자
@@ -65,21 +63,29 @@ public class ReservationController {
 		}
 		mailService.sendReservationMail(reservation);
 		// 회원 상세정보를 Model 객체에 저장
+		model.addAttribute("reservation", reservation);
 		model.addAttribute("msg", "예약내역 이메일을 전송했습니다."); // 출력할 메세지
-		model.addAttribute("targetURL", request.getContextPath() + "/ReservationSuccess" 
-																 + "?"
-																 + "reservation_guest_num=" + reservation.getReservation_guest_num());
+		model.addAttribute("targetURL", request.getContextPath() + "/ReservationSuccess?reservation_guest_num=" + reservation.getReservation_guest_num());
 		return "forward";
 	}
 	
 	//예약 성공 이동
 	@RequestMapping(value = "/ReservationSuccess", method = {RequestMethod.GET, RequestMethod.POST})
 	public String reservationSuccess(ReservationVO reservation, 
-			@RequestParam int reservation_guest_num,
+			@RequestParam String reservation_guest_num,
 			Model model) {
+		model.addAttribute("reservation", reservation);
+		return "redirect:/ReservationSuccessPro?reservation_guest_num="+reservation_guest_num;
+	}
+	
+	//예약 성공 페이지 이동
+	@RequestMapping(value = "/ReservationSuccessPro", method = {RequestMethod.GET, RequestMethod.POST})
+	public String reservationSuccessPro(ReservationVO reservation, 
+			@RequestParam String reservation_guest_num,
+			Model model, HttpServletRequest request) {
 		
 		model.addAttribute("reservation", reservation);
-		return "reservation/reservation_success";
+		return "reservation/reservation_success_pro" ;
 	}
 	
 	//비회원 예약 검색 페이지 이동
