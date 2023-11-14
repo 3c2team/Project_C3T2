@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>J'ai Faim</title></title>
 <script type="text/javascript">
 	alert("${msg}");
 	window.close();

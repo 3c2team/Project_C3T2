@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -240,5 +241,9 @@ public class MemberService {
 
 	public int registPoint(String member_id) {
 		return mapper.insertJoinPoint(member_id);
+	}
+
+	public MemberVO getMemberDupMail(Map<String, String> param) {
+		return mapper.selectMemberDupMail(param);
 	}
 }

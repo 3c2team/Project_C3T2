@@ -9,7 +9,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/product_detail.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>J'ai Faim</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/product_detail.js"></script>
 <script type="text/javascript">

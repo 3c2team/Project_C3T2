@@ -254,4 +254,10 @@
 		WHERE member_phone_num = #{member_phone_num}
 	</select>
 	
+	<select id="selectMemberDupMail" resultType="com.itwillbs.c3t2.vo.MemberVO" parameterType="map">
+		SELECT *
+		FROM MEMBER
+		WHERE member_e_mail = concat(#{mail1} , "@" , #{mail2})
+	</select>
+	
 </mapper>

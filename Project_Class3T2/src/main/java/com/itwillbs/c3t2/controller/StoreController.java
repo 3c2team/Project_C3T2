@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -134,8 +135,9 @@ public class StoreController {
 		if(Double.isNaN(AveReviewStar)) {
 			AveReviewStar = 0;
 		}
+		DecimalFormat df = new DecimalFormat("#.#");
 		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("AveReviewStar", AveReviewStar);
+		model.addAttribute("AveReviewStar", df.format(AveReviewStar));
 		model.addAttribute("reviewCount", (int)reviewCount);
 
 		//=========================================================================
@@ -211,6 +213,9 @@ public class StoreController {
 			if(insertCount > 0) { //성공
 				if(file != null && !(file.getOriginalFilename().equals(""))) {
 					file.transferTo(new File(saveDir, fileName));
+					
+					System.out.println("***************************************saveDir: " + saveDir);
+					System.out.println("***************************************fileName: " + fileName);
 				}
 				model.addAttribute("msg", "리뷰를 등록했습니다.");
 

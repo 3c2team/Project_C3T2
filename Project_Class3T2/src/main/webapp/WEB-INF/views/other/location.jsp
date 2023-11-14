@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>J'ai Faim</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/top.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bottom.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/default.css">
