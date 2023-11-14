@@ -11,7 +11,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <title>Jai Faim</title>
 </head>
 <body>
@@ -166,16 +166,18 @@
 			if ($("#reservation_person_name").val() == "") {
 				alert("성함을 입력해주세요.");
 				return false;
+				
 			}
 // 			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
 // 				alert("이메일을 입력해주세요.");
 // 				return false;
 // 			}
-			if(!emailEvtFn()){
-				return false;
+			if(emailEvtFn()){
+	 			alert("예약 하시겠습니까?");
+					$("form").submit();
 			}
-			alert("예약 하시겠습니까?");
-			$("form").submit();
+			return false;
+			
 		}
 	</script>
 </body>
