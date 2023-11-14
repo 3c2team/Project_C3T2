@@ -14,7 +14,7 @@ public class SendMailService {
 		String authCode = GenerateRandomCode.getRandomCode(50);
 		String subject = "[J'ai Faim] 가입 인증 메일입니다.";
 		String content = "J'ai Faim 가입을 환영합니다. 아래 링크를 클릭하여 이메일 인증을 완료해주세요." 
-							+ "<a href='http://localhost:8081/c3t2/MemberEmailAuth?id=" + id + "&auth_code=" + authCode + "'>"
+							+ "<a href='http://c3d2306t2.itwillbs.com/Project_Class3T2/MemberEmailAuth?id=" + id + "&auth_code=" + authCode + "'>"
 							+ "이메일 인증확인 링크</a>";
 		new Thread(new Runnable() {
 			@Override
