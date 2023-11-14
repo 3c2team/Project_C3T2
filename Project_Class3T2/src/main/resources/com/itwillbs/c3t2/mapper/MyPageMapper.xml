@@ -382,7 +382,9 @@
     
      <!-- 회원 탈퇴-->
     <delete id="deleteMemberOut">
+      SET FOREIGN_KEY_CHECKS=0;
       DELETE FROM `MEMBER` WHERE member_id=#{member_id} 
+      SET FOREIGN_KEY_CHECKS=1;
     </delete>
     
     <!-- 포인트 전체 개수 -->
