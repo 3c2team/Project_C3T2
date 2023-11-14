@@ -11,7 +11,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/reservation.js"></script>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <title>Jai Faim</title>
 </head>
 <body>

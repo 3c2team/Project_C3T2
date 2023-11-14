@@ -13,7 +13,7 @@ function calendarMaker(target, date) {
 	let thisLastDay = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0);
 	if (date == null || date == undefined) {
 	    date = new Date();
-	}
+	} 
 	nowDate = date;
 	
 	if ($(target).length > 0) {
