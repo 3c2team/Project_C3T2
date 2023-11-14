@@ -130,17 +130,17 @@
 					<tr>
 						<th>예약번호</th>
 						<td>
-							<input type="text" class="input" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" required />
+							<input type="text" class="input1" name="reservation_guest_num" id="reservation_guest_num" value="${reservation.reservation_guest_num }" required />
 						</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
 						<td>
-							<input type="text" class="input" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
+							<input type="text" class="input1" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
 							value="${reservation.reservation_email1}">@
-							<input type="text" class="input" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
+							<input type="text" class="input1" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
 							value="${reservation.reservation_email2}">
-							<select id="emailDomain" class="input">
+							<select id="emailDomain" class="input1">
 								<option value="">직접입력</option>
 								<option value="naver.com">naver.com</option>
 								<option value="nate.com">nate.com</option>
@@ -166,9 +166,12 @@
 		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
-		function updateCheck(){
+		function insertCheck(){
+			if($('.select_day').length <= 0){
+				alert("예약은 당일 기준 다음날부터 가능합니다.");
+				return false;
+			}
 			if($('input[name=reservation_time]:checked').val() == "undefined" || $('input[name=reservation_time]:checked').val() == "" || $('input[name=reservation_time]:checked').val() == null){
-				debugger;
 				alert("예약 시간을 선택해주세요.");
 				return false;
 			}
@@ -176,12 +179,13 @@
 				alert("성함을 입력해주세요.");
 				return false;
 			}
-			if($("#reservation_email1").val() == "" || $("#reservation_email2").val() == ""){
-				alert("이메일을 입력해주세요.");
-				return false;
+			if(emailEvtFn()){
+				var result = confirm("예약 하시겠습니까?");
+				if(result){
+					$("form").submit();
+				}
 			}
-			alert("예약 하시겠습니까?");
-			$("form").submit();
+			return false;
 		}
 	</script>
 </body>

@@ -58,7 +58,7 @@ public class SendMailService {
 				+ "예약 일자 : " + reservation.getReservation_date() + " " + reservation.getReservation_time() +"<br>"
 				+ "예약 인원 : " + reservation.getReservation_person_count() +"<br>"
 				+ "아래 링크를 클릭하여 예약 정보를 확인해주세요.<br>"
-				+ "<a href='http://localhost:8081/c3t2/ReservationSearchInfo?reservation_guest_num=" + reservation.getReservation_guest_num() 
+				+ "<a href='http://c3d2306t2.itwillbs.com/Project_Class3T2/ReservationSearchInfo?reservation_guest_num=" + reservation.getReservation_guest_num() 
 				+ "&reservation_email1=" + reservation.getReservation_email1()
 				+ "&reservation_email2=" + reservation.getReservation_email2()
 				+ "'>"
