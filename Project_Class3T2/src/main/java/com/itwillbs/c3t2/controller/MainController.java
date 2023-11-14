@@ -2,6 +2,7 @@ package com.itwillbs.c3t2.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +67,7 @@ public class MainController {
 			if(dbMember == null) {
 				model.addAttribute("msg", "존재하지 않는 아이디입니다. 다시 로그인해주세요."); // 출력할 메세지
 				model.addAttribute("targetURL", "Login"); // 이동시킬 페이지
+				session.invalidate();
 				return "forward";
 			}
 		}
@@ -184,8 +186,7 @@ public class MainController {
     	
 		session.setAttribute("kakao_id", (String)userInfo.get("id"));
         session.setAttribute("access_Token", access_Token);
-        model.addAttribute("msg", "입력된 정보가 없습니다.\r\n"
-        					+ "이미 회원가입 하신 분이라면 카카오 연동을 위해 로그인 해주세요."); // 출력할 메세지
+        model.addAttribute("msg", "입력된 정보가 없습니다. 이미 회원가입 하신 분이라면 카카오 연동을 위해 로그인 해주세요."); // 출력할 메세지
 		model.addAttribute("targetURL", "KakaoConnectLogin"); // 이동시킬 페이지
 		return "forward";
 	}
@@ -375,6 +376,24 @@ public class MainController {
 	public String checkDupPhone(String phone_num) {
 		MemberVO returnMember = service.getMemberDupPhone(phone_num);
 		
+		if(returnMember != null) { // 아이디 중복
+			return "true"; // 리턴타입 String일 때 응답 데이터로 String 타입 "true" 문자열 리턴
+		} else {
+			return "false";
+		}
+	}
+	
+	// 메일 중복 판별 처리
+	@ResponseBody
+	@GetMapping("MemberCheckDupMail")
+	public String checkDupMail(@RequestParam Map<String, String> param) {
+		
+		System.out.println("!@#!@#");
+		System.out.println(param);
+		
+		MemberVO returnMember = service.getMemberDupMail(param);
+		
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + returnMember);
 		if(returnMember != null) { // 아이디 중복
 			return "true"; // 리턴타입 String일 때 응답 데이터로 String 타입 "true" 문자열 리턴
 		} else {

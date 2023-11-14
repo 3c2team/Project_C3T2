@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="./include/head.jsp"%>
-<title>마이페이지-포인트 조회</title>
+<title>J'ai Faim</title>
 <style>
 td {
 	padding-left: 10px;

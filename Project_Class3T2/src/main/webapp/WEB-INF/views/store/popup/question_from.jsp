@@ -6,7 +6,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/question_from.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>J'ai Faim</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 </head>
 <body>
