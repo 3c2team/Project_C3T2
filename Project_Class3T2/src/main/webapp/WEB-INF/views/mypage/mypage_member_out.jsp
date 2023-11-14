@@ -182,10 +182,7 @@ function goBackTwoSteps(){
 			console.error(" 에러 : ", err);
 		}
 	});
-		
 }
-
-
 </script>
 	
 </body>
