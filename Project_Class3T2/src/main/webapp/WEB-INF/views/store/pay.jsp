@@ -18,7 +18,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/pay_function.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<title>상품결제</title>
+<title>J'ai Faim</title>
 <script type="text/javascript">
 $(function() {
  

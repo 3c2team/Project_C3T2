@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath }/resources/css/bottom.css" rel="stylesheet" type="text/css">
 <head>
 <meta charset="UTF-8">
-<title>장바구니</title>
+<title>J'ai Faim</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.7.0.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cart_checkbox.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/cart_function.js"></script>
