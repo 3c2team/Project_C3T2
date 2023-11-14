@@ -177,11 +177,11 @@ $(function() {
 						<tr>
 							<td class="deliverytd">배송지 선택</td>
 							<td>
-								<input type="radio" name="memberInfo" id="member1" value="1" checked >
-								<label>회원정보와 동일</label>
+								<label><input type="radio" name="memberInfo" id="member1" value="1" checked >
+								회원정보와 동일</label>
 								
-								<input type="radio" name="memberInfo" id="member2" value="2" >
-								<label>새로운 배송지</label>&nbsp;
+								<label><input type="radio" name="memberInfo" id="member2" value="2" >
+								새로운 배송지</label>&nbsp;
 			<!-- 					<button type="button" style="background-color: #fff; cursor: pointer; border-left-width: 0px;"></button> -->
 							</td>
 						</tr>
