@@ -139,7 +139,7 @@
 							<input type="text" class="input1" name="reservation_email1" id="reservation_email1" placeholder="아이디" size="20" required 
 							value="${reservation.reservation_email1}">@
 							<input type="text" class="input1" name="reservation_email2" id="reservation_email2" placeholder="주소" size="20" required 
-							value="${reservation.reservation_email2}">
+							<c:if test="${not empty reservation.reservation_email2}">value="${reservation.reservation_email2}"</c:if>>
 							<select id="emailDomain" class="input1">
 								<option value="">직접입력</option>
 								<option value="naver.com">naver.com</option>
@@ -166,7 +166,7 @@
 		dinningMax = JSON.parse(dinningMax.replaceAll('=', ':').replaceAll('DINNING_MAX', '"DINNING_MAX"'));
 		dinningMax = dinningMax.map(e => e.DINNING_MAX);
 		
-		function insertCheck(){
+		function updateCheck(){
 			if($('.select_day').length <= 0){
 				alert("예약은 당일 기준 다음날부터 가능합니다.");
 				return false;

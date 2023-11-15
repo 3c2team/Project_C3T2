@@ -131,9 +131,7 @@ function assembly(year, month) {
 // ---------- 날짜, 인원수 ajax로 체크 -----------
 function validationCheck(){
 	
-	
-        
-        // 연, 월, 일 저장
+    // 연, 월, 일 저장
     let selectYear = $("#select_year").text();
     let selectMonth = $("#select_month").text();
     let selectDay = $(".select_day").text();
