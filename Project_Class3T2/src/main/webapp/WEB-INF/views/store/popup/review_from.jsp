@@ -50,7 +50,7 @@
 			<div class="reviewContent">
 				<p>어떤 점이 좋았나요?</p>
 				<div class="reviewBox">
-					<textarea name="review_content" id="review_content"></textarea>
+					<textarea name="review_content" id="review_content" required="required"></textarea>
 				</div>
 <!-- 				<div> -->
 				<label for="file">

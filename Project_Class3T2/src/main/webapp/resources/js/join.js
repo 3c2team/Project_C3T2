@@ -1,4 +1,5 @@
 $(function() {
+	
 	// 1. 아이디 입력창 체크
 	$("#member_id").blur(function() {
 			let id = $("#member_id").val();
@@ -24,6 +25,7 @@ $(function() {
 							if($.trim(result) == "true") { // 아이디 중복
 								$("#checkIdResult").html("이미 사용중인 아이디입니다.");
 								$("#checkIdResult").css("color", "red");
+								$("#member_id").val("다시 입력해주세요");
 							} else {
 								$("#checkIdResult").html(id + "는 사용 가능한 아이디입니다.");
 								$("#checkIdResult").css("color", "gray");
@@ -135,9 +137,22 @@ $(function() {
 			$("#member_email2").css("background", "lightgray"); // 배경색 초기화
 			$("#member_email2").attr("readonly", true); // 읽기 전용으로 변경
 		}
+	});
+	
+	$("#member_birth").blur(function() {
+		let today = new Date();   
+
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
 		
-		
-		
+		var dateString = year + '-' + month  + '-' + day;
+
+		if($("#member_birth").val() >= dateString){
+			alert("날짜가 오늘 날짜보다 이후입니다.")
+			$("#member_birth").val("");
+			$("#member_birth").focus();
+		};
 	});
 
 	$("#member_phone_num").blur(function() {
@@ -162,6 +177,7 @@ $(function() {
 						if($.trim(result) == "true") {
 							$("#checkPhoneResult").html("이미 사용중인 전화번호입니다.");
 							$("#checkPhoneResult").css("color", "red");
+							$("#member_phone_num").val("다시 입력해주세요");
 						} else {
 							$("#checkPhoneResult").html(phone_num + "는 사용 가능한 전화번호입니다.");
 							$("#checkPhoneResult").css("color", "gray");
@@ -180,52 +196,92 @@ $(function() {
 			$(":checkbox").prop("checked", false);
 		}
 	});
-	
-});
-function checks() {
-        var getMail = RegExp(/^[A-Za-z0-9_.-]+/);
-        var getMailDomain = RegExp(/^[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
-    	var getId= RegExp(/^[A-Za-z0-9]{4,16}$/);
-    	var getPw= RegExp(/^[A-Za-z0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{8,16}$/);
-    	var getName= RegExp(/^[가-힣]+$/);
-    	var getPhone= RegExp(/^[0-9]{3}[-][0-9]{4}[-][0-9]{4}$/);
 
+//	$('#btnCheck').on('click', checks);
+//	
+//	$('#btnTest').on('click', function(){
+//		$.ajax({
+//		url: "MemberCheckDupId",
+//		data: {id: $("#member_id").val()},
+//		async: false,
+//		success: function(result) {
+//			if($.trim(result) == "true") { // 아이디 중복
+//				alert("중복되는 아이디입니다.");
+//					return;	
+//				}
+//			}
+//		});
+//		
+//		alert('asd');
+//	});
+});
+
+function mail() {
+	var flag = true;
+	$.ajax({
+		url: "MemberCheckDupMail",
+		data: {
+			mail1: $("#member_email1").val(),
+			mail2: $("#member_email2").val(),
+			},
+		async: false,
+		success: function(result) {
+			if($.trim(result) == "true") { // 아이디 중복
+				alert("이 메일로 회원가입한 정보가 이미 있습니다.");
+				flag = false;	
+			}
+		}
+	});	
+	debugger;
+	return flag;
+}
+
+function checks() {
+	
+	var flag = false;
+	
+	var getMail = RegExp(/^[A-Za-z0-9_.-]+/);
+    var getMailDomain = RegExp(/^[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
+	var getId= RegExp(/^[A-Za-z0-9]{4,16}$/);
+	var getPw= RegExp(/^[A-Za-z0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{8,16}$/);
+	var getName= RegExp(/^[가-힣]+$/);
+	var getPhone= RegExp(/^[0-9]{3}[-][0-9]{4}[-][0-9]{4}$/);
 
 	// 아이디 공백 확인
 	if($("#member_id").val() == "") {
 		alert("아이디를 입력해주세요.");
         $("#member_id").focus();
-        return false;
-      }
+        return flag;
+    }
            
            
 	// 아이디 유효성검사
 	if(!getId.test($("#member_id").val())) {
-        alert("아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
-        $("#member_id").val("");
-        $("#member_id").focus();
-        return false;
-      }
-
-	$.ajax({
-		url: "MemberCheckDupId",
-		data: {
-			id: id
-		},
-		success: function(result) {
-			if($.trim(result) == "true") { // 아이디 중복
-			alert("중복되는 아이디입니다.");
-			return false;
-			}
-		}
-	});
+		alert("아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
+		$("#member_id").val("");
+		$("#member_id").focus();
+		return flag;
+	} 
+	
+	// ^^
+//	$.ajax({
+//		url: "MemberCheckDupId",
+//		data: {id: $("#member_id").val()},
+//		async: false,
+//		success: function(result) {
+//			if($.trim(result) == "true") { // 아이디 중복
+//			alert("중복되는 아이디입니다.");
+//				return;	
+//			}
+//		}
+//	});	
 
 	// 비밀번호 공백 확인
     if($("#member_passwd").val() == "") {
 		alert("비밀번호를 입력해주세요.");
 		$("#member_passwd").focus();
-        return false;
-      }
+        return flag;
+    }
            
 
 	// 아이디 비밀번호 같음 확인
@@ -234,7 +290,7 @@ function checks() {
         $("#inputPassword").val("");
         $("#inputPassword").focus();
         return false;
-      }
+    }
       
       
 	// 비밀번호 유효성검사
@@ -243,14 +299,14 @@ function checks() {
         $("#member_passwd").val("");
         $("#member_passwd").focus();
         return false;
-      }
+    }
            
 	// 비밀번호 확인란 공백 확인
     if($("#member_passwd2").val() == ""){
         alert("비밀번호를 다시 입력해주세요.");
         $("#member_passwd2").focus();
         return false;
-      }
+    }
            
            
 	// 비밀번호 확인
@@ -260,7 +316,7 @@ function checks() {
           $("#member_passwd2").val("");
           $("#member_passwd").focus();
           return false;
-      }
+    }
           
           
 	// 이름 공백 검사
@@ -268,7 +324,7 @@ function checks() {
         alert("이름을 입력해주세요.");
         $("#member_name").focus();
         return false;
-      }
+    }
 
 
 	// 이름 유효성 검사
@@ -277,7 +333,7 @@ function checks() {
         $("#member_name").val("");
         $("#member_name").focus();
         return false;
-      }
+    }
       
       
 	// 이메일 공백 확인
@@ -285,7 +341,7 @@ function checks() {
         alert("이메일을 입력해주세요.");
         $("#member_email1").focus();
         return false;
-      }
+    }
            
            
 	// 이메일 유효성 검사
@@ -294,7 +350,7 @@ function checks() {
         $("#member_email1").val("");
         $("#member_email1").focus();
         return false;
-      }
+    }
       
 	// 이메일 유효성 검사
     if(!getMailDomain.test($("#member_email2").val())){
@@ -304,6 +360,9 @@ function checks() {
         return false;
     }
     
+    // ^^
+	
+    
 	// 이메일 유효성 검사
     if(!getPhone.test($("#member_phone_num").val())){
         alert("전화번호 형식에 맞게 입력해주세요.")
@@ -312,15 +371,20 @@ function checks() {
         return false;
     }
     
-    $.ajax({
-		url: "MemberCheckDupPhone",
-		data: {
-			phone_num: phone_num
-		},
-		success: function(result) {
-			if($.trim(result) == "true") { // 아이디 중복
-				return false;
-			}
-		}
-	});
+    flag = true;
+    flag = mail();
+    return flag;
+    
+//    $.ajax({
+//		url: "MemberCheckDupPhone",
+//		data: {phone_num: phone_num},
+//		async: false,
+//		success: function(result) {
+//			if($.trim(result) == "true") { // 아이디 중복
+//				return false;
+//			}
+//		}
+//	});
+	
+//	$('#btnCheck').submit();
 };

@@ -20,7 +20,7 @@
 			<div class="questionContent">
 				<p>문의하실 내용을 입력하세요.</p>
 				<div class="questionBox">
-					<textarea id="question_content" name="question_content"></textarea>
+					<textarea id="question_content" name="question_content" required="required"></textarea>
 				</div>
 				<div class="privateCheck">
 					<input type="checkbox" id="secret" name="secret" value="1"><a>비공개</a>
