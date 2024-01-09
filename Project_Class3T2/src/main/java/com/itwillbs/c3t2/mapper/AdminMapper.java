@@ -110,4 +110,6 @@ public interface AdminMapper {
 
 	int updateReservation(int checkbox);
 
+	int deleteFavorite(int product_num);
+
 }

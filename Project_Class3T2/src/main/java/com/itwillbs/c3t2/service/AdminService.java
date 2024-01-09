@@ -153,6 +153,10 @@ public class AdminService {
 		// TODO Auto-generated method stub
 		return mapper.updateReservation(checkbox);
 	}
+	public int deleteFavorite(int product_num) {
+		// TODO Auto-generated method stub
+		return mapper.deleteFavorite(product_num);
+	}
 	
 
 }

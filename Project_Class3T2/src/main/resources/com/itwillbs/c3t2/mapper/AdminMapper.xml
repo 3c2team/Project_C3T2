@@ -341,4 +341,8 @@
 			SET reservation_cancel = 1
 			WHERE reservation_num = #{checkbox}
 		</update>
+		<delete id="deleteFavorite">
+			DELETE FROM FAVORITE
+			WHERE product_num = #{product_num}
+		</delete>
     </mapper>

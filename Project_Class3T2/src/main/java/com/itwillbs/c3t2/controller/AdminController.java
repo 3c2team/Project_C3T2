@@ -247,8 +247,13 @@ public class AdminController {
 				path = Paths.get(saveDir + "/" +product.getProduct_main_img());//실제 업로드 경로
 				Files.deleteIfExists(path);
 				int deleteProductImgCount = service.deleteProductImg(product_num);
+				System.out.println("성공1");
 				int deleteCartCount = cartService.deleteCartProduct(product_num);
+				System.out.println("성공2");
+				int deleteFavorite = service.deleteFavorite(product_num);
+				System.out.println("성공3");
 				int deleteProductCount = service.deleteProduct(product_num);
+				System.out.println("성공4");
 			}
     	} catch (IllegalStateException e) {
     		// TODO Auto-generated catch block
